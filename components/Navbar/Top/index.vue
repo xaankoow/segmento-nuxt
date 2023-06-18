@@ -48,23 +48,42 @@
         </label>
       </div>
     </div>
-    <div class="navbar-end gap-20 flex items-center">
+    <div class="navbar-end flex items-center">
       <!-- Profile section -->
       <div
         class="dropdown dropdown-hover w-[16.375rem] hover:border-b hover:boredr-base-200 mt-[0.25rem]"
       >
+        <!-- user detail section -->
         <div>
-          <label
-            tabindex="0"
-            class="w-[2.5rem] h-[2.5rem] mt-[0.438rem] mr-[0.625rem] btn-square avatar"
-          >
-            <div class="w-[2.5rem]">
-              <img
-                src="https://sb.kaleidousercontent.com/67418/1672x1018/6463a5af0d/screenshot-2022-05-24-at-15-22-28.png"
-                class="mask mask-squircle"
-              />
+          <div class="flex flex-row">
+            <div
+              tabindex="0"
+              class="w-[2.5rem] h-[2.5rem] mt-[0.438rem] mr-[0.625rem] btn-square avatar"
+            >
+              <div class="w-[2.5rem]">
+                <img
+                  src="https://sb.kaleidousercontent.com/67418/1672x1018/6463a5af0d/screenshot-2022-05-24-at-15-22-28.png"
+                  class="mask mask-squircle"
+                />
+              </div>
             </div>
-          </label>
+            <div class="mr-[0.688rem]">
+              <div>
+                {{ profile.name }}
+              </div>
+              <div>
+                <span>
+                  <radial-progress
+                    :value="80"
+                    style="--size: 0.875rem; --thickness: 2px"
+                  />
+                </span>
+                <span class="text-xs">
+                  {{ profile.subscription }}
+                </span>
+              </div>
+            </div>
+          </div>
           <ul
             tabindex="0"
             class="dropdown-content text-sm menu p-2 shadow-md bg-base-100 rounded-box w-[16.375rem]"
@@ -179,7 +198,7 @@
                 </span>
               </a>
             </li>
-            <hr class="bg-base-200 mx-[0.625rem]"/>
+            <hr class="bg-base-200 mx-[0.625rem]" />
             <li class="text-error">
               <a class="flex flex-row justify-between items-center">
                 <span>
@@ -204,93 +223,8 @@
           </ul>
         </div>
       </div>
-      <div class="flex flex-row items-center w-[16.375rem] border">
-        <div class="dropdown dropdown-hover flex items-center">
-          <label tabindex="0" class="w-[2.5rem] h-[2.5rem] btn-square avatar">
-            <div class="w-[2.5rem]">
-              <img
-                src="https://sb.kaleidousercontent.com/67418/1672x1018/6463a5af0d/screenshot-2022-05-24-at-15-22-28.png"
-                class="mask mask-squircle"
-              />
-            </div>
-          </label>
-          <ul
-            tabindex="0"
-            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-[17rem]"
-          >
-            <li
-              class="btn border border-base-300 rounded-md justify-center px-1 py-2"
-            >
-              <a>
-                <!-- Wallet -->
-                <label class="flex gap-1 h-fit">
-                  <span class="border-l"
-                    ><svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13 10.5C13.4333 10.5 13.7917 10.3583 14.075 10.075C14.3583 9.79167 14.5 9.43333 14.5 9C14.5 8.56667 14.3583 8.20833 14.075 7.925C13.7917 7.64167 13.4333 7.5 13 7.5C12.5667 7.5 12.2083 7.64167 11.925 7.925C11.6417 8.20833 11.5 8.56667 11.5 9C11.5 9.43333 11.6417 9.79167 11.925 10.075C12.2083 10.3583 12.5667 10.5 13 10.5ZM2.3 17.5C1.8 17.5 1.375 17.325 1.025 16.975C0.675 16.625 0.5 16.2 0.5 15.7V2.3C0.5 1.8 0.675 1.375 1.025 1.025C1.375 0.675 1.8 0.5 2.3 0.5H15.7C16.2 0.5 16.625 0.675 16.975 1.025C17.325 1.375 17.5 1.8 17.5 2.3V5.025H16V2.3C16 2.21667 15.971 2.146 15.913 2.088C15.8543 2.02933 15.7833 2 15.7 2H2.3C2.21667 2 2.146 2.02933 2.088 2.088C2.02933 2.146 2 2.21667 2 2.3V15.7C2 15.7833 2.02933 15.8543 2.088 15.913C2.146 15.971 2.21667 16 2.3 16H15.7C15.7833 16 15.8543 15.971 15.913 15.913C15.971 15.8543 16 15.7833 16 15.7V12.975H17.5V15.7C17.5 16.2 17.325 16.625 16.975 16.975C16.625 17.325 16.2 17.5 15.7 17.5H2.3ZM10.3 13.5C9.8 13.5 9.375 13.325 9.025 12.975C8.675 12.625 8.5 12.2 8.5 11.7V6.3C8.5 5.8 8.675 5.375 9.025 5.025C9.375 4.675 9.8 4.5 10.3 4.5H16.7C17.2 4.5 17.625 4.675 17.975 5.025C18.325 5.375 18.5 5.8 18.5 6.3V11.7C18.5 12.2 18.325 12.625 17.975 12.975C17.625 13.325 17.2 13.5 16.7 13.5H10.3Z"
-                        fill="#002145"
-                      />
-                    </svg>
-                  </span>
-                  <span>
-                    {{ wallet.text }}
-                  </span>
-                  <span> {{ wallet.price }} تومان </span>
-                </label>
-              </a>
-            </li>
-            <li class="flex rounded-md justify-center px-1 py-2">
-              <a>
-                <!-- Wallet -->
-                <label class="flex gap-1 h-fit">
-                  <span class="border-l-2 border-secondary"
-                    ><svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13 10.5C13.4333 10.5 13.7917 10.3583 14.075 10.075C14.3583 9.79167 14.5 9.43333 14.5 9C14.5 8.56667 14.3583 8.20833 14.075 7.925C13.7917 7.64167 13.4333 7.5 13 7.5C12.5667 7.5 12.2083 7.64167 11.925 7.925C11.6417 8.20833 11.5 8.56667 11.5 9C11.5 9.43333 11.6417 9.79167 11.925 10.075C12.2083 10.3583 12.5667 10.5 13 10.5ZM2.3 17.5C1.8 17.5 1.375 17.325 1.025 16.975C0.675 16.625 0.5 16.2 0.5 15.7V2.3C0.5 1.8 0.675 1.375 1.025 1.025C1.375 0.675 1.8 0.5 2.3 0.5H15.7C16.2 0.5 16.625 0.675 16.975 1.025C17.325 1.375 17.5 1.8 17.5 2.3V5.025H16V2.3C16 2.21667 15.971 2.146 15.913 2.088C15.8543 2.02933 15.7833 2 15.7 2H2.3C2.21667 2 2.146 2.02933 2.088 2.088C2.02933 2.146 2 2.21667 2 2.3V15.7C2 15.7833 2.02933 15.8543 2.088 15.913C2.146 15.971 2.21667 16 2.3 16H15.7C15.7833 16 15.8543 15.971 15.913 15.913C15.971 15.8543 16 15.7833 16 15.7V12.975H17.5V15.7C17.5 16.2 17.325 16.625 16.975 16.975C16.625 17.325 16.2 17.5 15.7 17.5H2.3ZM10.3 13.5C9.8 13.5 9.375 13.325 9.025 12.975C8.675 12.625 8.5 12.2 8.5 11.7V6.3C8.5 5.8 8.675 5.375 9.025 5.025C9.375 4.675 9.8 4.5 10.3 4.5H16.7C17.2 4.5 17.625 4.675 17.975 5.025C18.325 5.375 18.5 5.8 18.5 6.3V11.7C18.5 12.2 18.325 12.625 17.975 12.975C17.625 13.325 17.2 13.5 16.7 13.5H10.3Z"
-                        fill="#002145"
-                      />
-                    </svg>
-                  </span>
-                  <span>
-                    {{ wallet.text }}
-                  </span>
-                  <span> {{ wallet.price }} تومان </span>
-                </label>
-              </a>
-            </li>
-            <li><a>Logout</a></li>
-          </ul>
-        </div>
-        <div class="flex flex-col gap-2">
-          <div class="text-lg">{{ profile.name }}</div>
-          <div class="flex flex-row gap-2 align-baseline">
-            <span>
-              <radial-progress
-                class="w-5 h-5"
-                style="--thickness: 4px"
-                :value="80"
-              />
-            </span>
-            <span class="text-sm">
-              {{ profile.subscription }}
-            </span>
-          </div>
-        </div>
-      </div>
       <!-- Other option-->
-      <div class="ml-14 flex justify-between w-16">
+      <div class="mx-[2.329rem] flex justify-between w-[4.094rem]">
         <button class="cursor-pointer">
           <svg
             width="23"
