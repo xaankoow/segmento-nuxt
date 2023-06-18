@@ -8,7 +8,11 @@ module.exports = {
     "./nuxt.config.{js,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        iranyekan: ['iranyekan']
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
