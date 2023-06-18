@@ -1,9 +1,9 @@
 <template>
   <div class="navbar bg-base-100 border-b h-[56px]">
     <div class="navbar-start">
-      <div>
+      <div class="flex flex-row gap-5 align-middle">
         <!-- Dashboard icon -->
-        <label tabindex="0" class="btn hover">
+        <label tabindex="0" class="flex h-fit my-auto">
           <svg
             width="24"
             height="24"
@@ -42,7 +42,7 @@
           </svg>
         </label>
         <!-- Segmento platfrom -->
-        <label tabindex="0" class="btn">
+        <label tabindex="0" class="flex h-fit my-auto">
           <svg
             width="31"
             height="31"
