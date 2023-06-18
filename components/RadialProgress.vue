@@ -1,5 +1,5 @@
 <template>
-    <div class="radial-progress text-primary" :style="`--value:${value};`"></div>
+    <div class="radial-progress text-info" :style="`--value:${value};`"></div>
 </template>
 
 <script setup>
