@@ -43,7 +43,7 @@
         </label>
         <!-- Segmento platfrom -->
         <label tabindex="0" class="flex h-fit my-auto gap-2 items-center">
-          <span><img src="~/assets/Svg/Segmento.svg" /></span>
+          <span><SvgSegmento /></span>
           <span> {{ platform }} </span>
         </label>
       </div>
@@ -86,10 +86,11 @@
           </div>
           <ul
             tabindex="0"
-            class="dropdown-content [&>*>*]:rounded-none  [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
+            class="dropdown-content [&>*>*]:rounded-none [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
           >
             <li class="mx-auto text-xs mb-[0.625rem] !rounded-md">
-              <NuxtLink to="#"
+              <NuxtLink
+                to="#"
                 class="flex justify-between items-center border bg-base-250 border-base-350 w-[13.625rem] h-[2.5rem] p-0 !rounded-md"
               >
                 <label
@@ -202,7 +203,10 @@
             <li
               class="text-error hover:[&>*]:!bg-error/20 my-[0.313rem] hover:[&>*]:!text-error"
             >
-              <NuxtLink to="#" class="flex flex-row justify-between items-center">
+              <NuxtLink
+                to="#"
+                class="flex flex-row justify-between items-center"
+              >
                 <span>
                   {{ setting.exit }}
                 </span>
