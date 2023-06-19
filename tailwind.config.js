@@ -42,34 +42,7 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: {
-      segmento: {
-        base: {
-          "100": "#FFFFFF",
-          "200": "#FCFCFB",
-          "300": "#F2F5F7",
-          "350": "#D7D7D7",
-          "400": "#D9D9D9",
-          "500": "#7D7D7D",
-          "content": "#002145"
-        },
-        icon: "#002145",
-        success: "#10CCAE",
-        warning: "#FFCE47",
-        error: "#F35242",
-        primary: {
-          DEFAULT: "#0A65CD",
-          focus: "#0AC7E2",
-          active: "#009FB9",
-        },
-        scondary: {
-          default: "#F2F5F7",
-          focus: "#0A65CD",
-          active: "#0B4B94",
-        },
-        disable: "#D9D9D9",
-      }
-    },
+    themes: [],
   },
 }
 
