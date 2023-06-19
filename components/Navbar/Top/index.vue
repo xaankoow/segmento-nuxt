@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar h-[4rem] flex bg-base-100 items-center">
+  <div class="navbar h-16 flex bg-base-100 items-center">
     <div class="navbar-start">
       <div class="flex flex-row gap-5 align-middle">
         <!-- Dashboard icon -->
