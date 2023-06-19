@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar border-b h-[4rem] flex bg-base-100 items-center">
+  <div class="navbar h-[4rem] flex bg-base-100 items-center">
     <div class="navbar-start">
       <div class="flex flex-row gap-5 align-middle">
         <!-- Dashboard icon -->
@@ -51,7 +51,7 @@
     <div class="navbar-end flex items-center">
       <!-- Profile section -->
       <div
-        class="dropdown dropdown-hover w-[16.375rem] hover:border-b hover:boredr-base-200 mt-[0.25rem]"
+        class="dropdown dropdown-hover dropdown-bottom w-[16.375rem] hover:border hover:border-base-200 h-[3.313rem] mt-[0.75rem]"
       >
         <!-- user detail section -->
         <div>
@@ -86,14 +86,16 @@
           </div>
           <ul
             tabindex="0"
-            class="dropdown-content text-sm menu p-2 shadow-md bg-base-100 rounded-box w-[16.375rem]"
+            class="dropdown-content [&>*>*]:rounded-none p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
           >
-            <li class="px-[1.375rem] items-center flex">
-              <a
-                class="felx place-items-center border border-base-300 py-[0.25rem] px-[0.313rem] h-[2.5rem] w-[13.625rem]"
+            <li class="mx-auto text-xs mb-[0.625rem] !rounded-md">
+              <NuxtLink to="#"
+                class="flex justify-between items-center border bg-base-250 border-base-350 w-[13.625rem] h-[2.5rem] p-0 !rounded-md"
               >
-                <div class="flex flex-row h-fit">
-                  <label class="border-l border-l-base-200 pl-[0.313rem]">
+                <label
+                  class="h-3/4 flex items-center w-[2.125rem] border-l border-base-100"
+                >
+                  <span class="mr-[0.469rem]">
                     <svg
                       width="14"
                       height="15"
@@ -106,16 +108,14 @@
                         fill="#002145"
                       />
                     </svg>
-                  </label>
-                  <div class="text-xs mr-[0.625rem]">{{ wallet.text }}</div>
-                  <div class="text-xs mr-[0.625rem]">
-                    {{ wallet.price }} تومان
-                  </div>
-                </div>
-              </a>
+                  </span>
+                </label>
+                <span>{{ wallet.text }}</span>
+                <span class="ml-[1px]"> {{ wallet.price }} تومان </span>
+              </NuxtLink>
             </li>
             <li>
-              <a class="flex flex-row">
+              <NuxtLink to="#" class="flex flex-row">
                 <span>
                   <svg
                     width="13"
@@ -133,10 +133,10 @@
                 <span>
                   {{ setting.config }}
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li>
-              <a class="flex flex-row">
+              <NuxtLink to="#" class="flex flex-row">
                 <span>
                   <svg
                     width="15"
@@ -154,10 +154,10 @@
                 <span>
                   {{ setting.buy }}
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li>
-              <a class="flex flex-row">
+              <NuxtLink to="#" class="flex flex-row">
                 <span
                   ><svg
                     width="14"
@@ -175,10 +175,10 @@
                 <span>
                   {{ setting.state }}
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li>
-              <a class="flex flex-row mb-[0.625rem]">
+              <NuxtLink to="#" class="flex flex-row">
                 <span>
                   <svg
                     width="14"
@@ -196,11 +196,13 @@
                 <span>
                   {{ setting.reports }}
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <hr class="bg-base-200 mx-[0.625rem]" />
-            <li class="text-error">
-              <a class="flex flex-row justify-between items-center">
+            <li
+              class="text-error hover:[&>*]:!bg-error/20 my-[0.313rem] hover:[&>*]:!text-error"
+            >
+              <NuxtLink to="#" class="flex flex-row justify-between items-center">
                 <span>
                   {{ setting.exit }}
                 </span>
@@ -218,7 +220,7 @@
                     />
                   </svg>
                 </span>
-              </a>
+              </NuxtLink>
             </li>
           </ul>
         </div>
