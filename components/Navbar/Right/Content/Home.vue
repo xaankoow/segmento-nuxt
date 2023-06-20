@@ -1,5 +1,5 @@
 <template>
-  <ul class="flex w-full flex-col gap-1 pt-5 [&>li>svg]:fill-base-content [&>li]:cursor-pointer [&>li:hover]:bg-base-300">
+  <ul class="flex w-full flex-col gap-1 pt-5 [&>li>svg]:fill-base-content [&>li]:cursor-pointer [&>li:hover]:bg-base-200">
     <li
       class="flex flex-row gap-3 py-2 px-6"
       @click="actived_item = 'best_reports'"
