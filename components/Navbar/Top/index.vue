@@ -271,26 +271,32 @@ const props = defineProps({
   },
   wallet: {
     type: Object,
-    default: {
-      text: "موجودی کیف پول:",
-      price: 250000,
+    default: function () {
+      return {
+        text: "موجودی کیف پول:",
+        price: 250000,
+      };
     },
   },
   profile: {
     type: Object,
-    default: {
-      name: "محمد مهدی نورانی",
-      subscription: "اشتراک الماسی",
+    default: function () {
+      return {
+        name: "محمد مهدی نورانی",
+        subscription: "اشتراک الماسی",
+      };
     },
   },
   setting: {
     type: Object,
-    default: {
-      config: "تنظیمات حساب کاربری",
-      buy: "خرید اشتراک",
-      state: "وضعیت اشتراک",
-      reports: "گزارش های مالی",
-      exit: "خروج",
+    default: function () {
+      return {
+        config: "تنظیمات حساب کاربری",
+        buy: "خرید اشتراک",
+        state: "وضعیت اشتراک",
+        reports: "گزارش های مالی",
+        exit: "خروج",
+      };
     },
   },
 });
