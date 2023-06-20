@@ -161,7 +161,8 @@
         </NavbarRight>
         <!-- Right navbar content -->
         <div class="w-64 bg-base-100 h-full rounded-l-md border-l">
-          <NavbarRightContentHome />
+          <!--<NavbarRightContentHome v-if="actived_navbar === 'home'" />-->
+          <NavbarRightContentDepartment />
         </div>
       </div>
       <div class="w-full h-full bg-red-200 rounded-t-md">
