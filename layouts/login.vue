@@ -164,13 +164,13 @@
           </SvgLabeled>
         </li>
       </ul>
-      <button class="bg-primary border-none w-24 h-10 rounded-md">{{ content.signup }}</button>
+      <button class="bg-base-100 text-base-content border-none w-24 h-10 rounded-md hover:bg-base-250">{{ content.signup }}</button>
     </div>
-    <div class="flex h-full">
+    <div class="flex h-full w-full">
       <div class="flex w-1/2 h-full items-center">
         <img src="/images/AuthBackground.png" class="mx-auto w-2/3" />
       </div>
-      <div>
+      <div class="flex w-1/2" style="direction: rtl;">
         <NuxtPage />
       </div>
     </div>
