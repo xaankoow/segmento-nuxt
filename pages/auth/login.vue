@@ -60,8 +60,4 @@ const content = ref({
   open: "ورود",
   forget: "گذرواژه خود را فراموش کرده‌اید؟"
 })
-
-onMounted(() => {
-  console.log(emialBox.transitionStyle());
-});
 </script>
