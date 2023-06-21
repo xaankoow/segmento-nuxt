@@ -1,9 +1,8 @@
 <template>
-  <Tutorial/>
+  <div class="flex w-full">
+    صفحه اصلی
+  </div>
 </template>
 
 <script>
-export default {
-  name: 'IndexPage'
-}
 </script>
