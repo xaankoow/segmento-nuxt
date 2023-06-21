@@ -165,14 +165,13 @@
           <NavbarRightContentDepartment v-else/>
         </div>
       </div>
-      <div class="w-full h-full bg-red-200 rounded-t-md">
-        <Nuxt />
+      <div class="w-full h-full rounded-t-md">
+        <NuxtPage />
       </div>
     </div>
   </div>
 </template>
-<script setup>
-import { ref } from "vue";
+<script setup>  
 import __ from "../composables/Config";
 const actived_navbar = ref("home");
 const actived_navbar_content = ref({});
