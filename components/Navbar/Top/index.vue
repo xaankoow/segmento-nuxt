@@ -88,13 +88,13 @@
             tabindex="0"
             class="dropdown-content [&>*>*]:rounded-none [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
           >
-            <li class="mx-auto text-xs mb-[0.625rem] !rounded-md">
+            <li class="mx-auto mb-[0.625rem] !rounded-md" style="font-size: 10px;">
               <NuxtLink
                 to="#"
                 class="flex justify-between items-center border bg-base-250 border-base-350 w-[13.625rem] h-[2.5rem] p-0 !rounded-md"
               >
                 <label
-                  class="h-3/4 flex items-center w-[2.125rem] border-l border-l-base-100"
+                  class="h-3/4 flex items-center font-semibold w-[2.125rem] border-l border-l-base-100"
                 >
                   <span class="mr-[0.469rem]">
                     <svg
@@ -112,7 +112,7 @@
                   </span>
                 </label>
                 <span>{{ wallet.text }}</span>
-                <span class="ml-[1px]"> {{ wallet.price }} تومان </span>
+                <span class="mx-[12px]"> {{ wallet.price }} تومان </span>
               </NuxtLink>
             </li>
             <li>
