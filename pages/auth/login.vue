@@ -31,7 +31,7 @@
             {{ content.open }}
           </button>
           <label class="text-xs">
-            <NuxtLink to="/auth/signup">
+            <NuxtLink to="/auth/forget">
               {{ content.forget }}
             </NuxtLink></label
           >
