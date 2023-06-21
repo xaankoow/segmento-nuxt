@@ -25,21 +25,15 @@ const props = defineProps({
   },
   type: {
     type: String,
-    default: 'text'
-  }
+    default: "text",
+  },
 });
 const text = ref("");
 const move_out = ref(false);
 const placeholder_style = () => {
-  let styles = [];
-  if (move_out.value || text.value !== "") {
-    styles.push("-translate-y-8 text-base-100");
-  }
-  else {
-    styles.push('text-base-500')
-  }
-
-  return styles.join(" ");
+  return move_out.value || text.value !== ""
+    ? "-translate-y-8 text-base-100"
+    : "text-base-500";
 };
 const focus = () => {
   move_out.value = true;
