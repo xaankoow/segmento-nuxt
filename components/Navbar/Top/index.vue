@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar h-[4rem] flex bg-base-100 items-center">
+  <div class="navbar h-16 flex bg-base-100 items-center">
     <div class="navbar-start">
       <div class="flex flex-row gap-5 align-middle">
         <!-- Dashboard icon -->
@@ -43,7 +43,7 @@
         </label>
         <!-- Segmento platfrom -->
         <label tabindex="0" class="flex h-fit my-auto gap-2 items-center">
-          <span><img src="~/assets/Svg/Segmento.svg" /></span>
+          <span><SvgSegmento /></span>
           <span> {{ platform }} </span>
         </label>
       </div>
@@ -86,14 +86,15 @@
           </div>
           <ul
             tabindex="0"
-            class="dropdown-content [&>*>*]:rounded-none  [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
+            class="dropdown-content [&>*>*]:rounded-none [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
           >
-            <li class="mx-auto text-xs mb-[0.625rem] !rounded-md">
-              <NuxtLink to="#"
+            <li class="mx-auto mb-[0.625rem] !rounded-md" style="font-size: 10px;">
+              <NuxtLink
+                to="#"
                 class="flex justify-between items-center border bg-base-250 border-base-350 w-[13.625rem] h-[2.5rem] p-0 !rounded-md"
               >
                 <label
-                  class="h-3/4 flex items-center w-[2.125rem] border-l border-l-base-100"
+                  class="h-3/4 flex items-center font-semibold w-[2.125rem] border-l border-l-base-100"
                 >
                   <span class="mr-[0.469rem]">
                     <svg
@@ -111,7 +112,7 @@
                   </span>
                 </label>
                 <span>{{ wallet.text }}</span>
-                <span class="ml-[1px]"> {{ wallet.price }} تومان </span>
+                <span class="mx-[12px]"> {{ wallet.price }} تومان </span>
               </NuxtLink>
             </li>
             <li>
@@ -202,7 +203,10 @@
             <li
               class="text-error hover:[&>*]:!bg-error/20 my-[0.313rem] hover:[&>*]:!text-error"
             >
-              <NuxtLink to="#" class="flex flex-row justify-between items-center">
+              <NuxtLink
+                to="#"
+                class="flex flex-row justify-between items-center"
+              >
                 <span>
                   {{ setting.exit }}
                 </span>
@@ -267,26 +271,32 @@ const props = defineProps({
   },
   wallet: {
     type: Object,
-    default: {
-      text: "موجودی کیف پول:",
-      price: 250000,
+    default: function () {
+      return {
+        text: "موجودی کیف پول:",
+        price: 250000,
+      };
     },
   },
   profile: {
     type: Object,
-    default: {
-      name: "محمد مهدی نورانی",
-      subscription: "اشتراک الماسی",
+    default: function () {
+      return {
+        name: "محمد مهدی نورانی",
+        subscription: "اشتراک الماسی",
+      };
     },
   },
   setting: {
     type: Object,
-    default: {
-      config: "تنظیمات حساب کاربری",
-      buy: "خرید اشتراک",
-      state: "وضعیت اشتراک",
-      reports: "گزارش های مالی",
-      exit: "خروج",
+    default: function () {
+      return {
+        config: "تنظیمات حساب کاربری",
+        buy: "خرید اشتراک",
+        state: "وضعیت اشتراک",
+        reports: "گزارش های مالی",
+        exit: "خروج",
+      };
     },
   },
 });
