@@ -36,7 +36,11 @@ module.exports = {
           DEFAULT: "#F2F5F7",
           focus: "#0A65CD",
           active: "#0B4B94",
-        }
+        },
+        bronze: "#BF8970",
+        silver: "#7D7D7D",
+        gold: "#FFCE47",
+        dimound: "#0A65CD"
       }
     },
   },
