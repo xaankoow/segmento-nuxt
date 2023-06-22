@@ -59,6 +59,7 @@
         </div>
         <div class="flex justify-between w-full items-center">
           <button
+          @click="send_active_code_to_email"
             class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md"
           >
             {{ content.signup }}
@@ -75,7 +76,7 @@
 </template>
   
   <script setup>
-import { CustomTextBox } from "../../composables/CustomTextBox";
+import { CustomTextBox } from "../../../composables/CustomTextBox";
 definePageMeta({
   layout: "login",
 });
@@ -83,6 +84,12 @@ const fullname = new CustomTextBox();
 const email = new CustomTextBox();
 const password = new CustomTextBox();
 const confirmPassword = new CustomTextBox();
+
+const send_active_code_to_email = () => {
+  // TODO : API for send email 
+
+  navigateTo('/auth/signup/verify')
+}
 
 const form = ref({
   fullname: "",

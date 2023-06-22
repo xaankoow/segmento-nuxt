@@ -118,7 +118,7 @@ definePageMeta({
 const timer_check = () => {
   if (minuteTimer.duration() > 0) {
     if (secondTimer.duration() === 0) {
-      secondTimer.setDuration(5);
+      secondTimer.setDuration(59);
       minuteTimer.setDuration(minuteTimer.duration() - 1);
     }
   }
