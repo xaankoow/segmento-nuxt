@@ -20,12 +20,17 @@
         </div>
         <div class="flex flex-row-reverse items-center gap-2">
           <button
-            @click="step++"
+            @click="sendActiveCode()"
             class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md"
           >
-            {{ content.recive_code }}
-          </button>
-          <span> timer:tick </span>
+            {{ content.recive_code }}</button
+          ><span class="countdown font-mono text-2xl">
+            <span
+              :style="`--value:  ${secondTimer.duration()}`"
+            ></span
+            >:
+            <span :style="`--value: ${minuteTimer.duration()}`"></span>
+          </span>
         </div>
       </div>
       <!-- step 2 => confirm email code -->
@@ -39,7 +44,7 @@
           </span>
           <div
             class="flex flex-row gap-5 text-base-content [&>input]:w-1/4 [&>input]:p-2 [&>input]:text-center [&>input]:rounded-md"
-            style="direction: ltr;"
+            style="direction: ltr"
           >
             <input type="text" maxlength="1" minlength="1" />
             <input type="text" maxlength="1" minlength="1" />
@@ -104,16 +109,37 @@
   </div>
 </template>
     
-    <script setup>
+<script setup>
 import { CustomTextBox } from "../../composables/CustomTextBox";
+import { Timer } from "../../composables/Timer";
 definePageMeta({
   layout: "login",
 });
+const timer_check = () => {
+  if (minuteTimer.duration() > 0) {
+    if (secondTimer.duration() === 0) {
+      secondTimer.setDuration(5);
+      minuteTimer.setDuration(minuteTimer.duration() - 1);
+    }
+  }
+  else {
+    if (! secondTimer.enable()) {
+      step.value--;
+    }
+  }
+};
+const sendActiveCode = () => {
+  secondTimer.start();
+  timer_check();
+  step.value++;
+  // TODO : Send email to backend to recive code
+};
 const step = ref(1);
 const email = new CustomTextBox();
 const password = new CustomTextBox();
 const confirmPassword = new CustomTextBox();
-
+const secondTimer = new Timer(0);
+const minuteTimer = new Timer(2);
 const form = ref({
   email: "",
   code: "",
@@ -133,7 +159,7 @@ const content = ref({
   active_code: "کد فعال سازی",
   btn_accept_code: "تایید کد",
   btn_accept_password: "ذخیره گذرواژه",
-  signup_link_text: "حساب کاربری ندارم!"
+  signup_link_text: "حساب کاربری ندارم!",
 });
 </script>
     
