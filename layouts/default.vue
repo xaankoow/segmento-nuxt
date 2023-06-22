@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col w-full h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
+    class="flex flex-col w-full bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
     style="direction: rtl"
   >
     <!-- Header section -->
@@ -165,7 +165,7 @@
           <NavbarRightContentDepartment v-else/>
         </div>
       </div>
-      <div class="w-full h-full rounded-t-md bg-base-100">
+      <div class="w-full h-full rounded-t-md bg-base-100 overflow-y-auto">
         <NuxtPage />
       </div>
     </div>
