@@ -6,7 +6,7 @@
     <!-- Header section -->
     <NavbarTop :platform="__('platform')" class="shadow-md mx-auto"></NavbarTop>
 
-    <div class="flex flex-row h-full flex-grow mt-2 gap-2">
+    <div class="flex flex-row h-full flex-grow mt-2 ml-2 gap-2">
       <div class="flex flex-row">
         <!-- Right navbar -->
         <NavbarRight class="justify-between py-2">
@@ -165,7 +165,7 @@
           <NavbarRightContentDepartment v-else/>
         </div>
       </div>
-      <div class="w-full h-full rounded-t-md">
+      <div class="w-full h-full rounded-t-md bg-base-100">
         <NuxtPage />
       </div>
     </div>
