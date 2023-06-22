@@ -90,7 +90,7 @@
           >
             <li class="!mx-auto mb-[0.625rem] !rounded-md [&>*>label>span>svg]:fill-base-content hover:text-primary hover:[&>*>label>span>svg]:fill-primary" style="font-size: 10px;">
               <NuxtLink
-                to="#"
+                to="/"
                 class="flex justify-between items-center border bg-base-250 border-base-350 w-[13.625rem] h-[2.5rem] p-0 !rounded-md"
               >
                 <label
@@ -115,7 +115,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="flex flex-row">
+              <NuxtLink to="/" class="flex flex-row">
                 <span>
                   <svg
                     width="13"
@@ -136,7 +136,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="flex flex-row">
+              <NuxtLink to="/buy-subscription" class="flex flex-row">
                 <span>
                   <svg
                     width="15"
@@ -157,7 +157,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="flex flex-row">
+              <NuxtLink to="/" class="flex flex-row">
                 <span
                   ><svg
                     width="14"
@@ -178,7 +178,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="flex flex-row">
+              <NuxtLink to="/" class="flex flex-row">
                 <span>
                   <svg
                     width="14"
@@ -203,7 +203,7 @@
               class="text-error mb-1 !rounded-sm hover:[&>*]:!bg-error/20 hover:[&>*]:!text-error"
             >
               <NuxtLink
-                to="#"
+                to="/"
                 class="flex flex-row justify-between items-center"
               >
                 <span>
