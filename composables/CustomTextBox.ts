@@ -13,9 +13,17 @@ export class CustomTextBox {
         this.focused.value = false;
     }
 
-    public transitionStyle(text) {
+    public isFocus() {
+        return this.focused.value;
+    }
+
+    public fullTextBox(text) {
+        return (this.focused.value || text !== '');
+    }
+
+    public transitionStyle(text, textColor = 'text-base-100') {
         return this.focused.value || text !== ""
-            ? "-translate-y-8 text-base-100"
+            ? "-translate-y-8 " + textColor
             : "text-base-content";
     }
 }
