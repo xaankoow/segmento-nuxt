@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col w-full bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
+    class="flex flex-col w-full min-h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
     style="direction: rtl"
   >
     <!-- Header section -->
@@ -162,7 +162,7 @@
         <!-- Right navbar content -->
         <div class="w-64 bg-base-100 h-full rounded-l-md border-l">
           <NavbarRightContentHome v-if="actived_navbar === 'home'" />
-          <NavbarRightContentDepartment v-else/>
+          <NavbarRightContentDepartment v-else />
         </div>
       </div>
       <div class="w-full h-full rounded-t-md bg-base-100 overflow-y-auto">
@@ -171,7 +171,7 @@
     </div>
   </div>
 </template>
-<script setup>  
+<script setup>
 import __ from "../composables/Config";
 const actived_navbar = ref("home");
 const actived_navbar_content = ref({});
