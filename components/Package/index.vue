@@ -1,21 +1,36 @@
 <template>
-  <div class="flex flex-col gap-7 items-center border rounded-md w-56 px-2 shadow-md">
+  <div
+    class="flex flex-col gap-7 items-center border rounded-md w-56 px-2 shadow-md"
+  >
     <div
-      class="h-20 flex items-center align-middle text-lg w-full border-b" :class="color"
+      class="h-20 flex items-center align-middle text-lg w-full border-b"
+      :class="color"
     >
       <span class="mx-auto">
-        {{ package }}
+        {{ name }}
       </span>
     </div>
     <div class="flex flex-col gap-3 w-full text-base-500">
-      <PackageOption text="1 ماهه" :id="1" />
-      <PackageOption text="3 ماهه" :id="2" discount="15 درصد تخفیف" />
-      <PackageOption text="6 ماهه" :id="3" discount="فقط پرداخت 5 ماه" />
-      <PackageOption text="12 ماهه" :id="4" discount="فقط پرداخت 10 ماه" />
+      <div
+        class="flex flex-row justify-between items-center border border-base-200 rounded-sm p-2"
+      >
+        <slot name="options"></slot>
+      </div>
     </div>
-    <span class="text-base-500" style="font-size: 0.875rem">
-      <span class="font-semibold font-serif">{{ price }}</span> هزار تومان
-      ماهانه
+    <span
+      class="flex flex-col items-center gap-2 font-semibold font-serif text-base-500"
+      style="font-size: 0.7rem"
+    >
+      <span class="h-6"
+        ><del :class="validate_discount ? 'block' : 'hidden'"
+          >{{ price }} هزار تومان ماهانه</del
+        ></span
+      >
+      <span
+        :class="validate_discount ? 'text-primary' : ''"
+        :style="validate_discount ? `font-size: 0.875rem` : ''"
+        >{{ price }} هزار تومان ماهانه</span
+      >
     </span>
     <div>
       <div class="custom_input_box my-2">
@@ -24,8 +39,8 @@
           type="text"
           @focus="discountBox.focus()"
           @blur="discountBox.leave()"
-          class="focus:outline-none"
-          :class="discountBox.isFocus() ? 'border-b border-b-primary' : ''"
+          class="!border-2"
+          :class="validate_discount ? '!border-b-2 !border-b-success' : ''"
         />
         <label
           class="text-base-content"
@@ -36,7 +51,8 @@
           کد تخفیف</label
         >
         <button
-        :class="discountBox.fullTextBox(discountText) ? 'absolute': 'hidden'"
+          @click="validate_discount = thePackage.check_discount(discountText)"
+          :class="discountBox.fullTextBox(discountText) ? 'absolute' : 'hidden'"
           class="left-2 top-2 transition-all duration-300 transform text-sm"
         >
           <svg
@@ -72,6 +88,13 @@
             </g>
           </svg>
         </button>
+        <span
+          class="text-error text-xs left-0 -translate-y-5"
+          style="font-size: 0.625rem"
+          :class="validate_discount === false ? 'absolute' : 'hidden'"
+        >
+          کد تخفیف نادرست است
+        </span>
       </div>
     </div>
   </div>
@@ -79,11 +102,14 @@
 
 <script setup>
 import { CustomTextBox } from "../../composables/CustomTextBox";
+import { Package } from "../../composables/Package";
 
+const validate_discount = ref(null);
+const thePackage = new Package();
 const discountBox = new CustomTextBox();
 const discountText = ref("");
 const props = defineProps({
-  package: {
+  name: {
     type: String,
     required: true,
   },

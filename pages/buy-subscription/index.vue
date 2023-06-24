@@ -31,29 +31,257 @@
     <!-- package -->
     <div class="flex flex-row items-center justify-between">
       <Package
-        package="برنزی"
+        name="برنزی"
         class="text-bronze"
         color="border-b-bronze"
         :price="79"
-      />
+      >
+        <template v-slot:options>
+          <div class="flex flex-col gap-2 w-full">
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">1 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">3 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> 15 درصد تخفیف </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">6 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> فقط پرداخت 5 ماه </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">12 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> فقط پرداخت 10 ماه </label>
+            </div>
+          </div>
+        </template>
+      </Package>
       <Package
-        package="نقره ای"
+        name="نقره ای"
         class="text-silver"
         color="border-b-silver"
         :price="189"
-      />
+      >
+        <template v-slot:options>
+          <div class="flex flex-col gap-2 w-full">
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">1 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">3 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> 15 درصد تخفیف </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">6 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> فقط پرداخت 5 ماه </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">12 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> فقط پرداخت 10 ماه </label>
+            </div>
+          </div>
+        </template>
+      </Package>
       <Package
-        package="طلایی"
+        name="طلایی"
         class="text-gold"
         color="border-b-gold"
         :price="249"
-      />
+      >
+        <template v-slot:options>
+          <div class="flex flex-col gap-2 w-full">
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">1 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">3 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> 15 درصد تخفیف </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">6 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> فقط پرداخت 5 ماه </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">12 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> فقط پرداخت 10 ماه </label>
+            </div>
+          </div>
+        </template>
+      </Package>
       <Package
-        package="الماسی"
+        name="الماسی"
         class="text-dimound"
         color="border-b-dimound"
         :price="889"
-      />
+      >
+        <template v-slot:options>
+          <div class="flex flex-col gap-2 w-full">
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">1 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">3 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> 15 درصد تخفیف </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">6 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> فقط پرداخت 5 ماه </label>
+            </div>
+            <div
+              class="flex flex-row justify-between border border-base-250 rounded-sm p-2 items-center gap-2"
+            >
+              <div class="flex flex-row items-center gap-2">
+                <input
+                  type="radio"
+                  name="radio-1-1"
+                  class="accent-primary w-4 h-4 cursor-pointer"
+                />
+                <label for="radio-1-1">12 ماهه</label>
+              </div>
+              <label style="font-size: 0.5rem"> فقط پرداخت 10 ماه </label>
+            </div>
+          </div>
+        </template>
+      </Package>
     </div>
     <div class="flex flex-col gap-5 items-center">
       <!-- navigation -->
@@ -136,9 +364,15 @@
         ></span>
       </button>
       <!-- footer -->
-      <div class="flex flex-row items-center w-full justify-between border rounded-md px-7 py-3">
-        <span class="text-lg">اگر بیزینس هستید یا به امکانات و منابع بیشتری نیاز دارید: </span>
-        <button class="rounded-md text-secondary py-2 px-5 bg-base-250 hover:bg-base-300 transition-all duration-100">
+      <div
+        class="flex flex-row items-center w-full justify-between border rounded-md px-7 py-3"
+      >
+        <span class="text-lg"
+          >اگر بیزینس هستید یا به امکانات و منابع بیشتری نیاز دارید:
+        </span>
+        <button
+          class="rounded-md text-secondary py-2 px-5 bg-base-250 hover:bg-base-300 transition-all duration-100"
+        >
           توضیحات بیشتر
         </button>
       </div>
