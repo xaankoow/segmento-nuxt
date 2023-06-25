@@ -1,12 +1,12 @@
 <template>
   <div
-    class="flex flex-col w-full h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
+    class="flex flex-col w-full min-h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
     style="direction: rtl"
   >
     <!-- Header section -->
     <NavbarTop :platform="__('platform')" class="shadow-md mx-auto"></NavbarTop>
 
-    <div class="flex flex-row h-full flex-grow mt-2 gap-2">
+    <div class="flex flex-row h-full flex-grow mt-2 ml-2 gap-2">
       <div class="flex flex-row">
         <!-- Right navbar -->
         <NavbarRight class="justify-between py-2">
@@ -162,16 +162,16 @@
         <!-- Right navbar content -->
         <div class="w-64 bg-base-100 h-full rounded-l-md border-l">
           <NavbarRightContentHome v-if="actived_navbar === 'home'" />
-          <NavbarRightContentDepartment v-else/>
+          <NavbarRightContentDepartment v-else />
         </div>
       </div>
-      <div class="w-full h-full rounded-t-md">
+      <div class="w-full h-full rounded-t-md bg-base-100 overflow-y-auto">
         <NuxtPage />
       </div>
     </div>
   </div>
 </template>
-<script setup>  
+<script setup>
 import __ from "../composables/Config";
 const actived_navbar = ref("home");
 const actived_navbar_content = ref({});

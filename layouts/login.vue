@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col w-screen h-screen bg-gradient-to-bl from-[#1E2C5B] via-[#263B77] to-[#4F90C1] text-base-100 font-iranyekan"
+    class="flex flex-col w-screen min-h-screen bg-gradient-to-bl from-[#1E2C5B] via-[#263B77] to-[#4F90C1] text-base-100 font-iranyekan"
   >
     <div
       class="flex w-full h-28 items-center px-11 justify-between"

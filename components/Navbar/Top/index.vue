@@ -86,11 +86,11 @@
           </div>
           <ul
             tabindex="0"
-            class="dropdown-content [&>*>*]:rounded-none [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
+            class="dropdown-content gap-0 [&>*>*]:rounded-none [&>li]:mx-1 [&>li]:rounded-sm  [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
           >
-            <li class="mx-auto mb-[0.625rem] !rounded-md" style="font-size: 10px;">
+            <li class="!mx-auto mb-[0.625rem] !rounded-md [&>*>label>span>svg]:fill-base-content hover:text-primary hover:[&>*>label>span>svg]:fill-primary" style="font-size: 10px;">
               <NuxtLink
-                to="#"
+                to="/"
                 class="flex justify-between items-center border bg-base-250 border-base-350 w-[13.625rem] h-[2.5rem] p-0 !rounded-md"
               >
                 <label
@@ -106,7 +106,6 @@
                     >
                       <path
                         d="M13 10.5C13.4333 10.5 13.7917 10.3583 14.075 10.075C14.3583 9.79167 14.5 9.43333 14.5 9C14.5 8.56667 14.3583 8.20833 14.075 7.925C13.7917 7.64167 13.4333 7.5 13 7.5C12.5667 7.5 12.2083 7.64167 11.925 7.925C11.6417 8.20833 11.5 8.56667 11.5 9C11.5 9.43333 11.6417 9.79167 11.925 10.075C12.2083 10.3583 12.5667 10.5 13 10.5ZM2.3 17.5C1.8 17.5 1.375 17.325 1.025 16.975C0.675 16.625 0.5 16.2 0.5 15.7V2.3C0.5 1.8 0.675 1.375 1.025 1.025C1.375 0.675 1.8 0.5 2.3 0.5H15.7C16.2 0.5 16.625 0.675 16.975 1.025C17.325 1.375 17.5 1.8 17.5 2.3V5.025H16V2.3C16 2.21667 15.971 2.146 15.913 2.088C15.8543 2.02933 15.7833 2 15.7 2H2.3C2.21667 2 2.146 2.02933 2.088 2.088C2.02933 2.146 2 2.21667 2 2.3V15.7C2 15.7833 2.02933 15.8543 2.088 15.913C2.146 15.971 2.21667 16 2.3 16H15.7C15.7833 16 15.8543 15.971 15.913 15.913C15.971 15.8543 16 15.7833 16 15.7V12.975H17.5V15.7C17.5 16.2 17.325 16.625 16.975 16.975C16.625 17.325 16.2 17.5 15.7 17.5H2.3ZM10.3 13.5C9.8 13.5 9.375 13.325 9.025 12.975C8.675 12.625 8.5 12.2 8.5 11.7V6.3C8.5 5.8 8.675 5.375 9.025 5.025C9.375 4.675 9.8 4.5 10.3 4.5H16.7C17.2 4.5 17.625 4.675 17.975 5.025C18.325 5.375 18.5 5.8 18.5 6.3V11.7C18.5 12.2 18.325 12.625 17.975 12.975C17.625 13.325 17.2 13.5 16.7 13.5H10.3Z"
-                        fill="#002145"
                       />
                     </svg>
                   </span>
@@ -116,7 +115,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="flex flex-row">
+              <NuxtLink to="/" class="flex flex-row">
                 <span>
                   <svg
                     width="13"
@@ -137,7 +136,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="flex flex-row">
+              <NuxtLink to="/buy-subscription" class="flex flex-row">
                 <span>
                   <svg
                     width="15"
@@ -158,7 +157,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="flex flex-row">
+              <NuxtLink to="/" class="flex flex-row">
                 <span
                   ><svg
                     width="14"
@@ -179,7 +178,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="flex flex-row">
+              <NuxtLink to="/" class="flex flex-row">
                 <span>
                   <svg
                     width="14"
@@ -199,12 +198,12 @@
                 </span>
               </NuxtLink>
             </li>
-            <hr class="bg-base-200 mx-[0.625rem]" />
+            <hr class="bg-base-200 mx-[0.625rem] my-1" />
             <li
-              class="text-error hover:[&>*]:!bg-error/20 my-[0.313rem] hover:[&>*]:!text-error"
+              class="text-error mb-1 !rounded-sm hover:[&>*]:!bg-error/20 hover:[&>*]:!text-error"
             >
               <NuxtLink
-                to="#"
+                to="/"
                 class="flex flex-row justify-between items-center"
               >
                 <span>

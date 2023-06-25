@@ -6,4 +6,11 @@
     ul {
         @apply flex flex-col gap-3
     }
+
+    .custom_input_box {
+        @apply relative [&>input]:py-2 [&>input]:pl-2 [&>input]:pr-8 [&>input]:border [&>input]:text-base-content 
+        [&>input]:w-full [&>input]:border-gray-300 [&>input]:rounded [&>input:focus]:outline-none [&>input:focus]:border-blue-500
+        [&>label]:absolute [&>label]:right-2 [&>label]:top-2 [&>label]:transition-all [&>label]:duration-300 [&>label]:transform [&>label]:text-sm
+        [&>label]:cursor-text [&>label]:pointer-events-none
+    }
 }
