@@ -15,6 +15,7 @@
     "nuxt": "^3.3.1"
   },
   "dependencies": {
+    "apexcharts": "^3.41.0",
     "vue3-persian-datetime-picker": "^1.2.2"
   }
 }
