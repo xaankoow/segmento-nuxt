@@ -26,6 +26,6 @@ export class PolylineChart {
     }
 
     public height() {
-        return this.height;
+        return this._height;
     }
 }
