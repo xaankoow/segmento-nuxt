@@ -165,7 +165,7 @@
           <NavbarRightContentDepartment v-else />
         </div>
       </div>
-      <div class="w-full h-full rounded-t-md bg-base-100 overflow-y-auto">
+      <div class="flex w-full rounded-t-md bg-base-100 overflow-y-auto">
         <NuxtPage />
       </div>
     </div>
