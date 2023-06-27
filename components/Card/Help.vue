@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col justify-between border rounded-md" :class="active ? 'shadow-md' : ''">
     <!-- title -->
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col">
       <span
-        class="tooltip flex flex-row justify-end tooltip-left cursor-pointer"
+        class="tooltip flex flex-row justify-end tooltip-left cursor-pointer pt-1 pl-1"
         :data-tip="tooltip"
         ><svg
           width="14"
@@ -31,11 +31,11 @@
           </g>
         </svg>
       </span>
-      <span>{{ title }} </span>
+      <span class="flex w-full justify-center items-center">{{ title }} </span>
     </div>
     <!-- content -->
     <slot></slot>
-    <button class="rounded-b-md w-full flex justify-center" :class="active ? 'bg-primary [&>svg]:fill-base-100' : 'bg-base-250 [&>svg]:fill-base-content'">
+    <button class="rounded-b-md w-full flex justify-center mt-1" :class="active ? 'bg-primary [&>svg]:fill-base-100' : 'bg-base-250 [&>svg]:fill-base-content'">
       <svg
         width="24"
         height="24"
