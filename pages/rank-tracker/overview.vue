@@ -669,7 +669,7 @@
           <!-- header -->
           <div class="flex flex-row items-center justify-between">
             <!-- compaire week -->
-            <Dropdown class="w-52" style="font-size: 0.75rem;">
+            <Dropdown class="w-52" style="font-size: 0.75rem">
               <template v-slot:title>
                 <div
                   class="border border-base-300 flex flex-row items-center justify-between border-b-base-500 w-full rounded-sm px-2 py-1 hover:border-base-500"
@@ -805,7 +805,15 @@
           </div>
 
           <!-- the chart -->
-          <div></div>
+          <div>
+            <VueApexCharts :series="series" :options="options"></VueApexCharts>
+          </div>
+        </div>
+        <!-- report section -->
+        <div class="flex flex-col gap-2 mt-2">
+          <div class="flex flex-row items-center">
+            {{ config.__(['pages', 'rank-tracker', 'overview', "reports"]) }}
+          </div>
         </div>
       </div>
     </div>
@@ -813,16 +821,72 @@
 </template>
 
 <script setup>
-import { PolylineChart } from "../../composables/Component/PolylineChart";
 import Vue3PersianDatetimePicker from "vue3-persian-datetime-picker";
-
+import VueApexCharts from "vue3-apexcharts";
+import Config from "../../composables/Config"
+const config = new Config()
 const date = ref("1402/03/25");
-const points = new PolylineChart(
-  ["10,25", "15,25", "20,15", "30,25", "40,35"],
-  50,
-  35
-);
 
+const series = [
+  {
+    name: "Series 1",
+    data: [1, 10, 7, 5, 12, 1, 10, 14],
+  },
+];
+const options = {
+  chart: {
+    height: 130,
+    type: "line",
+    brush: {
+      target: "chart2",
+      enabled: false,
+    },
+    selection: {
+      xaxis: {
+        min: new Date("19 Jun 2017").getTime(),
+        max: new Date("14 Aug 2017").getTime(),
+      },
+    },
+  },
+  stroke: {
+    show: true,
+    curve: "smooth",
+    lineCap: "butt",
+    colors: undefined,
+    width: 2,
+    dashArray: 0,
+  },
+  grid: {
+    show: true,
+    borderColor: "#90A4AE",
+    strokeDashArray: 1,
+    position: "back",
+    xaxis: {
+      lines: {
+        show: true,
+      },
+    },
+    yaxis: {
+      lines: {
+        show: false,
+      },
+    },
+    row: {
+      colors: undefined,
+      opacity: 0.5,
+    },
+    column: {
+      colors: undefined,
+      opacity: 0.5,
+    },
+    padding: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
 const content = ref({
   title: "ابزار رتبه سنج (رنک ترکینگ)",
   tabs: [
