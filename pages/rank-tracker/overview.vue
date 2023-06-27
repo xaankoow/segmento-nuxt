@@ -43,9 +43,47 @@
       <div class="flex flex-row gap-2 w-full p-5">
         <CardHelp
           tooltip="hello I am tooltip"
-          title="I am title"
+          :title="
+            config.__(`${current_page}/header/cards/average/title`.split('/'))
+          "
           :active="true"
-        />
+        >
+          <div class="flex flex-col">
+            <div>
+              <VueApexCharts
+                :series="header_area_chart.series"
+                :options="header_area_chart"
+              ></VueApexCharts>
+            </div>
+            <div
+              class="flex flex-row justify-between gap-2 px-2 text-base-500"
+              style="font-size: 0.625rem"
+            >
+              <span class="flex flex-col gap-2">
+                <span>{{
+                  config.__(
+                    `${current_page}/header/cards/average/prev`.split("/")
+                  )
+                }}</span>
+                <span
+                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
+                  >3.1 رتبه</span
+                >
+              </span>
+              <span class="flex flex-col gap-2">
+                <span>{{
+                  config.__(
+                    `${current_page}/header/cards/average/current`.split("/")
+                  )
+                }}</span>
+                <span
+                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
+                  >3.1 رتبه</span
+                >
+              </span>
+            </div>
+          </div>
+        </CardHelp>
         <CardHelp
           tooltip="hello I am tooltip"
           title="I am title"
@@ -814,7 +852,9 @@
         <div class="flex flex-col gap-2 mt-2">
           <!-- header -->
           <div class="flex flex-row items-center">
-            {{ config.__(["pages", "rank-tracker", "overview", "reports"]) }}
+            {{
+              config.__(`${current_page}/header/cards/average/title`.split("/"))
+            }}
           </div>
 
           <!-- spliter -->
@@ -931,10 +971,11 @@
               <div class="flex flex-col items-center border rounded-md py-2">
                 <!-- header -->
                 <div class="flex flex-col w-full">
-                  <span
-                    class="flex w-full justify-end p-1"
-                  >
-                    <span class="tooltip tooltip-left cursor-pointer" data-tip="tooltip">
+                  <span class="flex w-full justify-end p-1">
+                    <span
+                      class="tooltip tooltip-left cursor-pointer"
+                      data-tip="tooltip"
+                    >
                       <svg
                         width="14"
                         height="14"
@@ -979,10 +1020,11 @@
               <div class="flex flex-col items-center border rounded-md py-2">
                 <!-- header -->
                 <div class="flex flex-col w-full">
-                  <span
-                    class="flex w-full justify-end p-1"
-                  >
-                    <span class="tooltip tooltip-left cursor-pointer" data-tip="tooltip">
+                  <span class="flex w-full justify-end p-1">
+                    <span
+                      class="tooltip tooltip-left cursor-pointer"
+                      data-tip="tooltip"
+                    >
                       <svg
                         width="14"
                         height="14"
@@ -1027,10 +1069,11 @@
               <div class="flex flex-col items-center border rounded-md py-2">
                 <!-- header -->
                 <div class="flex flex-col w-full">
-                  <span
-                    class="flex w-full justify-end p-1"
-                  >
-                    <span class="tooltip tooltip-left cursor-pointer" data-tip="tooltip">
+                  <span class="flex w-full justify-end p-1">
+                    <span
+                      class="tooltip tooltip-left cursor-pointer"
+                      data-tip="tooltip"
+                    >
                       <svg
                         width="14"
                         height="14"
@@ -1075,10 +1118,11 @@
               <div class="flex flex-col items-center border rounded-md py-2">
                 <!-- header -->
                 <div class="flex flex-col w-full">
-                  <span
-                    class="flex w-full justify-end p-1"
-                  >
-                    <span class="tooltip tooltip-left cursor-pointer" data-tip="tooltip">
+                  <span class="flex w-full justify-end p-1">
+                    <span
+                      class="tooltip tooltip-left cursor-pointer"
+                      data-tip="tooltip"
+                    >
                       <svg
                         width="14"
                         height="14"
@@ -1132,6 +1176,7 @@
 import Vue3PersianDatetimePicker from "vue3-persian-datetime-picker";
 import VueApexCharts from "vue3-apexcharts";
 import Config from "../../composables/Config";
+const current_page = "pages/rank-tracker/overview";
 const config = new Config();
 const date = ref("1402/03/25");
 
@@ -1174,6 +1219,26 @@ const pie1 = {
       },
     },
   ],
+};
+const header_area_chart = {
+  series: [
+    {
+      name: "South",
+      data: [5, 10, 5, 25, 15],
+    },
+  ],
+  chart: {
+    type: "area",
+    height: 350,
+    stacked: true,
+  },
+  colors: ["#10CCAE"],
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: "smooth",
+  },
 };
 const series = [
   {
