@@ -86,9 +86,12 @@
           </div>
           <ul
             tabindex="0"
-            class="dropdown-content gap-0 [&>*>*]:rounded-none [&>li]:mx-1 [&>li]:rounded-sm  [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
+            class="dropdown-content gap-0 [&>*>*]:rounded-none [&>li]:mx-1 [&>li]:rounded-sm [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
           >
-            <li class="!mx-auto mb-[0.625rem] !rounded-md [&>*>label>span>svg]:fill-base-content hover:text-primary hover:[&>*>label>span>svg]:fill-primary" style="font-size: 10px;">
+            <li
+              class="!mx-auto mb-[0.625rem] !rounded-md [&>*>label>span>svg]:fill-base-content hover:text-primary hover:[&>*>label>span>svg]:fill-primary"
+              style="font-size: 10px"
+            >
               <NuxtLink
                 to="/"
                 class="flex justify-between items-center border bg-base-250 border-base-350 w-[13.625rem] h-[2.5rem] p-0 !rounded-md"
@@ -110,8 +113,8 @@
                     </svg>
                   </span>
                 </label>
-                <span>{{ wallet.text }}</span>
-                <span class="mx-[12px]"> {{ wallet.price }} تومان </span>
+                <span>{{ setting.wallet.text }} :</span>
+                <span class="mx-[12px]"> {{ setting.wallet.price }} تومان </span>
               </NuxtLink>
             </li>
             <li>
@@ -268,15 +271,6 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  wallet: {
-    type: Object,
-    default: function () {
-      return {
-        text: "موجودی کیف پول:",
-        price: 250000,
-      };
-    },
-  },
   profile: {
     type: Object,
     default: function () {
@@ -288,6 +282,8 @@ const props = defineProps({
   },
   setting: {
     type: Object,
+    required: true
+    /*
     default: function () {
       return {
         config: "تنظیمات حساب کاربری",
@@ -295,8 +291,18 @@ const props = defineProps({
         state: "وضعیت اشتراک",
         reports: "گزارش های مالی",
         exit: "خروج",
+        wallet: {
+          type: Object,
+          default: function () {
+            return {
+              text: "موجودی کیف پول:",
+              price: 250000,
+            };
+          },
+        },
       };
     },
+    */
   },
 });
 </script>

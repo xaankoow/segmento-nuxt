@@ -3,12 +3,25 @@
         "config": {
             "dir": "rtl"
         },
-        "words": {
-            "dashboard": "داشبورد",
-            "platform": "پلتفرم سگمنتو",
-            "reports": "آمار و گزارش نسبی"
+        "layouts": {
+            "default": {
+                "header": {
+                    "platform": "پلتفرم سگمنتو",
+                    "profile": {
+                        "wallet":{
+                            "text": "موجودی کیف پول",
+                            "price": 250000
+                        },
+                        "config": "تنظیمات حساب کاربری",
+                        "buy": "خرید اشتراک",
+                        "state": "وضعیت اشتراک",
+                        "reports": "گزارش های مالی",
+                        "exit": "خروج"
+                    }
+                }
+            }
         },
-        "pages" : {
+        "pages": {
             "rank-tracker": {
                 "overview": {
                     "reports": "آمار و گزارش نسبی"

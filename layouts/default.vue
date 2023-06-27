@@ -4,7 +4,7 @@
     style="direction: rtl"
   >
     <!-- Header section -->
-    <NavbarTop :platform="__('platform')" class="shadow-md mx-auto"></NavbarTop>
+    <NavbarTop :platform="cn.__(['layouts', 'default', 'header', 'platform'])" :setting="cn.__(['layouts', 'default', 'header', 'profile'])" class="shadow-md mx-auto"></NavbarTop>
 
     <div class="flex flex-row h-full flex-grow mt-2 ml-2 gap-2">
       <div class="flex flex-row">
@@ -172,7 +172,8 @@
   </div>
 </template>
 <script setup>
-import __ from "../composables/Config";
+import Config from "../composables/Config";
+const cn = new Config()
 const actived_navbar = ref("home");
 const actived_navbar_content = ref({});
 </script>
