@@ -52,6 +52,25 @@
                                 "count": "تعداد افت کلمات"
                             }
                         }
+                    },
+                    "footer": {
+                        "charts": {
+                            "proportion-all-to-words": {
+                                "title": "نسبت کل کلمات"
+                            },
+                            "proportion-all-to-progress": {
+                                "title": "نسبت رشد به کل"
+                            },
+                            "proportion-all-to-fall": {
+                                "title": "نسبت افت به کل"
+                            },
+                            "chart-count-progress": {
+                                "title": "نمودار تعداد رشد و افت"
+                            },
+                            "chart-progress": {
+                                "title": "نمودار میانگین رشد و افت"
+                            }
+                        }
                     }
                 }
             }

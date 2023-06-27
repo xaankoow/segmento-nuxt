@@ -41,8 +41,9 @@
     <div class="flex flex-col gap-2">
       <!-- Top charts -->
       <div class="flex flex-row gap-2 w-full p-5">
+        <!-- average -->
         <CardHelp
-          class="w-1/4"
+          class="w-1/5"
           tooltip="hello I am tooltip"
           :title="
             config.__(`${current_page}/header/cards/average/title`.split('/'))
@@ -60,33 +61,35 @@
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
               style="font-size: 0.625rem"
             >
-              <span class="flex flex-col gap-2">
-                <span>{{
+              <span class="flex flex-col gap-1">
+                <span class="w-20 justify-center flex flex-row items-center">{{
                   config.__(
                     `${current_page}/header/cards/average/prev`.split("/")
                   )
                 }}</span>
                 <span
-                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
+                  class="rounded-md justify-center py-2 bg-base-250 flex flex-row items-center w-20"
                   >3.1 رتبه</span
                 >
               </span>
-              <span class="flex flex-col gap-2">
-                <span>{{
+              <span class="flex flex-col gap-1">
+                <span class="w-20 justify-center flex flex-row items-center">{{
                   config.__(
                     `${current_page}/header/cards/average/current`.split("/")
                   )
                 }}</span>
                 <span
-                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
+                  class="rounded-md justify-center py-2 bg-base-250 flex flex-row items-center w-20"
                   >3.1 رتبه</span
                 >
               </span>
             </div>
           </div>
         </CardHelp>
+
+        <!-- keyword distribution -->
         <CardHelp
-          class="w-1/4"
+          class="w-1/5"
           tooltip="hello I am tooltip"
           :title="
             config.__(
@@ -122,9 +125,7 @@
                   <span class="w-12 flex justify-center">10</span>
                   <span class="w-12 flex justify-center">10</span>
                 </div>
-                <span class="w-12 flex justify-center">
-                  # 1 - 3
-                </span>
+                <span class="w-12 flex justify-center"> # 1 - 3 </span>
               </div>
               <div
                 class="flex flex-row gap-2 border-t justify-between border-t-base-300 items-center pt-1"
@@ -133,9 +134,7 @@
                   <span class="w-12 flex justify-center">10</span>
                   <span class="w-12 flex justify-center">10</span>
                 </div>
-                <span class="w-12 flex justify-center">
-                  # 1 - 3
-                </span>
+                <span class="w-12 flex justify-center"> # 1 - 3 </span>
               </div>
               <div
                 class="flex flex-row gap-2 border-t justify-between border-t-base-300 items-center pt-1"
@@ -144,9 +143,7 @@
                   <span class="w-12 flex justify-center">10</span>
                   <span class="w-12 flex justify-center">10</span>
                 </div>
-                <span class="w-12 flex justify-center">
-                  # 1 - 3
-                </span>
+                <span class="w-12 flex justify-center"> # 1 - 3 </span>
               </div>
               <div
                 class="flex flex-row gap-2 border-t justify-between border-t-base-300 items-center pt-1"
@@ -155,21 +152,49 @@
                   <span class="w-12 flex justify-center">10</span>
                   <span class="w-12 flex justify-center">10</span>
                 </div>
-                <span class="w-12 flex justify-center">
-                  # 1 - 3
-                </span>
+                <span class="w-12 flex justify-center"> # 1 - 3 </span>
               </div>
             </div>
-          </div> </CardHelp
-        ><CardHelp
-          class="w-1/4"
+          </div>
+        </CardHelp>
+
+        <!-- chart progress -->
+        <CardHelp
+          class="w-1/5"
+          tooltip="hello I am tooltip"
+          :title="
+            config.__(
+              `${current_page}/header/cards/chart-progress/title`.split('/')
+            )
+          "
+          :active="false"
+        >
+          <div class="flex flex-col" style="font-size: 0.625rem">
+            <div class="flex flex-col gap-1 px-1">
+              <!-- the line -->
+              <div class="border-b border-blue"></div>
+
+              <!-- chart -->
+              <div>
+                <VueApexCharts
+                  :series="stacked_chart.series"
+                  :options="stacked_chart"
+                ></VueApexCharts>
+              </div>
+            </div>
+          </div>
+        </CardHelp>
+
+        <!-- progressed keyword -->
+        <CardHelp
+          class="w-1/5"
           tooltip="hello I am tooltip"
           :title="
             config.__(
               `${current_page}/header/cards/progressed-keyword/title`.split('/')
             )
           "
-          :active="true"
+          :active="false"
         >
           <div class="flex flex-col">
             <div>
@@ -182,53 +207,59 @@
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
               style="font-size: 0.625rem"
             >
-              <span class="flex flex-col gap-2">
-                <span>{{
+              <span class="flex flex-col gap-1">
+                <span class="w-20 justify-center flex flex-row items-center">{{
                   config.__(
-                    `${current_page}/header/cards/average/prev`.split("/")
+                    `${current_page}/header/cards/progressed-keyword/total`.split(
+                      "/"
+                    )
                   )
                 }}</span>
                 <span
-                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
-                  >3.1 رتبه</span
+                  class="rounded-md justify-center py-2 bg-base-250 flex flex-row items-center w-20"
+                  >20</span
                 >
               </span>
-              <span class="flex flex-col gap-2">
-                <span>{{
+              <span class="flex flex-col gap-1">
+                <span class="w-20 justify-center flex flex-row items-center">{{
                   config.__(
-                    `${current_page}/header/cards/average/current`.split("/")
+                    `${current_page}/header/cards/progressed-keyword/count`.split(
+                      "/"
+                    )
                   )
                 }}</span>
                 <span
-                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
-                  >3.1 رتبه</span
+                  class="rounded-md justify-center py-2 bg-base-250 flex flex-row items-center w-20"
+                  >15</span
                 >
               </span>
             </div>
-          </div> </CardHelp
-        ><CardHelp
-          class="w-1/4"
+          </div>
+        </CardHelp>
+        <!-- fallen keyword -->
+        <CardHelp
+          class="w-1/5"
           tooltip="hello I am tooltip"
           :title="
             config.__(
               `${current_page}/header/cards/fallen-keyword/title`.split('/')
             )
           "
-          :active="true"
+          :active="false"
         >
           <div class="flex flex-col">
             <div>
               <VueApexCharts
-                :series="header_area_chart.series"
-                :options="header_area_chart"
+                :series="header_area_chart3.series"
+                :options="header_area_chart3"
               ></VueApexCharts>
             </div>
             <div
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
               style="font-size: 0.625rem"
             >
-              <span class="flex flex-col gap-2">
-                <span>{{
+              <span class="flex flex-col gap-1">
+                <span class="w-20 justify-center flex flex-row items-center">{{
                   config.__(
                     `${current_page}/header/cards/fallen-keyword/total`.split(
                       "/"
@@ -236,12 +267,12 @@
                   )
                 }}</span>
                 <span
-                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
-                  >3.1 رتبه</span
+                  class="rounded-md justify-center py-2 bg-base-250 flex flex-row items-center w-20"
+                  >20</span
                 >
               </span>
-              <span class="flex flex-col gap-2">
-                <span>{{
+              <span class="flex flex-col gap-1">
+                <span class="w-20 justify-center flex flex-row items-center">{{
                   config.__(
                     `${current_page}/header/cards/fallen-keyword/count`.split(
                       "/"
@@ -249,8 +280,8 @@
                   )
                 }}</span>
                 <span
-                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
-                  >3.1 رتبه</span
+                  class="rounded-md justify-center py-2 bg-base-250 flex flex-row items-center w-20"
+                  >5</span
                 >
               </span>
             </div>
@@ -290,7 +321,7 @@
             class="flex flex-row items-center text-base-500 gap-2 w-10/12 justify-between"
           >
             <!-- filter hour -->
-            <Dropdown class="w-1/4">
+            <Dropdown class="w-1/5">
               <template v-slot:title>
                 <div
                   class="border border-base-300 flex flex-row items-center justify-between border-b-base-500 w-full rounded-sm px-2 py-1 hover:border-base-500"
@@ -1125,7 +1156,10 @@
 
             <!-- charts -->
             <div class="flex flex-row items-center gap-2 mt-2">
-              <div class="flex flex-col items-center border rounded-md py-2">
+              <!-- all to word -->
+              <div
+                class="flex flex-col items-center border rounded-md py-2 w-1/5"
+              >
                 <!-- header -->
                 <div class="flex flex-col w-full">
                   <span class="flex w-full justify-end p-1">
@@ -1162,7 +1196,13 @@
                   </span>
                   <span
                     class="flex flex-row items-center justify-center text-lg w-full"
-                    >title</span
+                    >{{
+                      config.__(
+                        `${current_page}/footer/charts/proportion-all-to-words/title`.split(
+                          "/"
+                        )
+                      )
+                    }}</span
                   >
                 </div>
 
@@ -1174,7 +1214,11 @@
                   ></VueApexCharts>
                 </div>
               </div>
-              <div class="flex flex-col items-center border rounded-md py-2">
+
+              <!-- all to progress -->
+              <div
+                class="flex flex-col items-center border rounded-md py-2 w-1/5"
+              >
                 <!-- header -->
                 <div class="flex flex-col w-full">
                   <span class="flex w-full justify-end p-1">
@@ -1211,7 +1255,13 @@
                   </span>
                   <span
                     class="flex flex-row items-center justify-center text-lg w-full"
-                    >title</span
+                    >{{
+                      config.__(
+                        `${current_page}/footer/charts/proportion-all-to-progress/title`.split(
+                          "/"
+                        )
+                      )
+                    }}</span
                   >
                 </div>
 
@@ -1223,7 +1273,11 @@
                   ></VueApexCharts>
                 </div>
               </div>
-              <div class="flex flex-col items-center border rounded-md py-2">
+
+              <!-- all to fall -->
+              <div
+                class="flex flex-col items-center border rounded-md py-2 w-1/5"
+              >
                 <!-- header -->
                 <div class="flex flex-col w-full">
                   <span class="flex w-full justify-end p-1">
@@ -1260,7 +1314,13 @@
                   </span>
                   <span
                     class="flex flex-row items-center justify-center text-lg w-full"
-                    >title</span
+                    >{{
+                      config.__(
+                        `${current_page}/footer/charts/proportion-all-to-fall/title`.split(
+                          "/"
+                        )
+                      )
+                    }}</span
                   >
                 </div>
 
@@ -1272,7 +1332,11 @@
                   ></VueApexCharts>
                 </div>
               </div>
-              <div class="flex flex-col items-center border rounded-md py-2">
+
+              <!-- chart count progress -->
+              <div
+                class="flex flex-col items-center border rounded-md py-2 w-1/5"
+              >
                 <!-- header -->
                 <div class="flex flex-col w-full">
                   <span class="flex w-full justify-end p-1">
@@ -1309,7 +1373,72 @@
                   </span>
                   <span
                     class="flex flex-row items-center justify-center text-lg w-full"
-                    >title</span
+                    >{{
+                      config.__(
+                        `${current_page}/footer/charts/chart-count-progress/title`.split(
+                          "/"
+                        )
+                      )
+                    }}</span
+                  >
+                </div>
+
+                <!-- content -->
+                <div>
+                  <VueApexCharts
+                    :series="pie1.series"
+                    :options="pie1"
+                  ></VueApexCharts>
+                </div>
+              </div>
+
+              <!-- chart progress -->
+              <div
+                class="flex flex-col items-center border rounded-md py-2 w-1/5"
+              >
+                <!-- header -->
+                <div class="flex flex-col w-full">
+                  <span class="flex w-full justify-end p-1">
+                    <span
+                      class="tooltip tooltip-left cursor-pointer"
+                      data-tip="tooltip"
+                    >
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <mask
+                          id="mask0_2_710"
+                          style="mask-type: alpha"
+                          maskUnits="userSpaceOnUse"
+                          x="0"
+                          y="0"
+                          width="14"
+                          height="14"
+                        >
+                          <rect width="14" height="14" fill="#D9D9D9" />
+                        </mask>
+                        <g mask="url(#mask0_2_710)">
+                          <path
+                            d="M7.00016 10.2812C7.16544 10.2812 7.30408 10.2229 7.41608 10.1062C7.52769 9.98956 7.5835 9.84859 7.5835 9.68331C7.5835 9.51803 7.52769 9.37706 7.41608 9.2604C7.30408 9.14373 7.16544 9.0854 7.00016 9.0854C6.82516 9.0854 6.68186 9.14373 6.57025 9.2604C6.45825 9.37706 6.40225 9.51803 6.40225 9.68331C6.40225 9.84859 6.45825 9.98956 6.57025 10.1062C6.68186 10.2229 6.82516 10.2812 7.00016 10.2812ZM7.04391 4.50623C7.3453 4.50623 7.58583 4.58634 7.7655 4.74656C7.94555 4.90717 8.03558 5.12359 8.03558 5.39581C8.03558 5.57081 7.98444 5.74329 7.88216 5.91323C7.78027 6.08356 7.62725 6.26109 7.42308 6.44581C7.14114 6.68887 6.93697 6.91967 6.81058 7.13823C6.68419 7.35717 6.61613 7.58331 6.60641 7.81665C6.59669 7.91387 6.63072 7.99884 6.7085 8.07156C6.78627 8.14467 6.87863 8.18123 6.98558 8.18123C7.09252 8.18123 7.18741 8.14467 7.27025 8.07156C7.35269 7.99884 7.40364 7.90901 7.42308 7.80206C7.45225 7.63679 7.51544 7.48356 7.61266 7.3424C7.70989 7.20162 7.86544 7.02429 8.07933 6.8104C8.38072 6.52845 8.58975 6.27567 8.70641 6.05206C8.82308 5.82845 8.88141 5.5854 8.88141 5.3229C8.88141 4.85623 8.71127 4.47454 8.371 4.17781C8.03072 3.88148 7.59322 3.73331 7.0585 3.73331C6.69877 3.73331 6.36822 3.80856 6.06683 3.95906C5.76544 4.10995 5.52725 4.33609 5.35225 4.63748C5.30363 4.7347 5.28672 4.82959 5.3015 4.92215C5.31589 5.01431 5.37169 5.08956 5.46891 5.1479C5.55641 5.20623 5.66102 5.22567 5.78275 5.20623C5.90408 5.18679 6.00363 5.12359 6.08141 5.01665C6.19808 4.86109 6.33186 4.73704 6.48275 4.64448C6.63325 4.55231 6.8203 4.50623 7.04391 4.50623ZM7.00016 12.5416C6.23211 12.5416 5.51266 12.3958 4.84183 12.1041C4.171 11.8125 3.58513 11.4187 3.08425 10.9229C2.58375 10.4271 2.18766 9.8412 1.896 9.16531C1.60433 8.48981 1.4585 7.76803 1.4585 6.99998C1.4585 6.23192 1.60433 5.50995 1.896 4.83406C2.18766 4.15856 2.58375 3.5729 3.08425 3.07706C3.58513 2.58123 4.171 2.18748 4.84183 1.89581C5.51266 1.60415 6.23211 1.45831 7.00016 1.45831C7.77794 1.45831 8.50225 1.60415 9.17308 1.89581C9.84391 2.18748 10.4298 2.58123 10.9307 3.07706C11.4312 3.5729 11.8249 4.15856 12.1119 4.83406C12.3985 5.50995 12.5418 6.23192 12.5418 6.99998C12.5418 7.76803 12.3985 8.48981 12.1119 9.16531C11.8249 9.8412 11.4312 10.4271 10.9307 10.9229C10.4298 11.4187 9.84391 11.8125 9.17308 12.1041C8.50225 12.3958 7.77794 12.5416 7.00016 12.5416ZM7.00016 11.6666C8.30294 11.6666 9.40641 11.2122 10.3106 10.3034C11.2147 9.39417 11.6668 8.29304 11.6668 6.99998C11.6668 5.70692 11.2147 4.60579 10.3106 3.69656C9.40641 2.78773 8.30294 2.33331 7.00016 2.33331C5.71683 2.33331 4.61822 2.78773 3.70433 3.69656C2.79044 4.60579 2.3335 5.70692 2.3335 6.99998C2.3335 8.29304 2.79044 9.39417 3.70433 10.3034C4.61822 11.2122 5.71683 11.6666 7.00016 11.6666Z"
+                            fill="#002145"
+                          />
+                        </g>
+                      </svg>
+                    </span>
+                  </span>
+                  <span
+                    class="flex flex-row items-center justify-center text-lg w-full"
+                    >{{
+                      config.__(
+                        `${current_page}/footer/charts/chart-progress/title`.split(
+                          "/"
+                        )
+                      )
+                    }}</span
                   >
                 </div>
 
@@ -1338,7 +1467,7 @@ const config = new Config();
 const date = ref("1402/03/25");
 
 const pie1 = {
-  series: [44, 55, 41, 17, 15],
+  series: [44, 55, 41],
   chart: {
     width: 380,
     type: "donut",
@@ -1355,27 +1484,6 @@ const pie1 = {
   fill: {
     type: "gradient",
   },
-  legend: {
-    formatter: function (val, opts) {
-      return val + " - " + opts.w.globals.series[opts.seriesIndex];
-    },
-  },
-  title: {
-    text: "Gradient Donut with custom Start-angle",
-  },
-  responsive: [
-    {
-      breakpoint: 480,
-      options: {
-        chart: {
-          width: 200,
-        },
-        legend: {
-          position: "bottom",
-        },
-      },
-    },
-  ],
 };
 const header_area_chart = {
   series: [
@@ -1397,10 +1505,82 @@ const header_area_chart = {
     curve: "smooth",
   },
 };
+
+const stacked_chart = {
+  series: [
+    {
+      name: "PRODUCT A",
+      data: [44, 55, 41, 67, 22, 43, 21, 49],
+    },
+    {
+      name: "PRODUCT B",
+      data: [13, 23, 20, 8, 13, 27, 33, 12],
+    },
+  ],
+  chart: {
+    type: "bar",
+    height: 350,
+    stacked: true,
+    stackType: "100%",
+  },
+  responsive: [
+    {
+      breakpoint: 480,
+      options: {
+        legend: {
+          position: "bottom",
+          offsetX: -10,
+          offsetY: 0,
+        },
+      },
+    },
+  ],
+  xaxis: {
+    categories: [
+      "2011 Q1",
+      "2011 Q2",
+      "2011 Q3",
+      "2011 Q4",
+      "2012 Q1",
+      "2012 Q2",
+      "2012 Q3",
+      "2012 Q4",
+    ],
+  },
+  fill: {
+    opacity: 1,
+  },
+  legend: {
+    position: "right",
+    offsetX: 0,
+    offsetY: 50,
+  },
+};
+const header_area_chart3 = {
+  series: [
+    {
+      name: "South",
+      data: [5, 10, 5, 25, 15],
+    },
+  ],
+  chart: {
+    type: "area",
+    height: 350,
+    stacked: true,
+  },
+  colors: ["#F35242"],
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: "smooth",
+  },
+};
+
 const series = [
   {
     name: "Series 1",
-    data: [1, 10, 7, 5, 12, 1, 10, 14],
+    data: [7, 10, 13, 11, 14, 9, 10],
   },
 ];
 const options = {
@@ -1422,7 +1602,7 @@ const options = {
     show: true,
     curve: "smooth",
     lineCap: "butt",
-    colors: undefined,
+    colors: "#0AC7E2",
     width: 2,
     dashArray: 0,
   },
