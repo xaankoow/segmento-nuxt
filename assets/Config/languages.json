@@ -24,7 +24,8 @@
         "pages": {
             "rank-tracker": {
                 "overview": {
-                    "reports": "آمار و گزارش نسبی"
+                    "reports": "آمار و گزارش نسبی",
+                    "show_reports": "نمایش آمار"
                 }
             }
         }
