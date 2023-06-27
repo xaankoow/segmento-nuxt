@@ -5,7 +5,15 @@
         },
         "words": {
             "dashboard": "داشبورد",
-            "platform": "پلتفرم سگمنتو"
+            "platform": "پلتفرم سگمنتو",
+            "reports": "آمار و گزارش نسبی"
+        },
+        "pages" : {
+            "rank-tracker": {
+                "overview": {
+                    "reports": "آمار و گزارش نسبی"
+                }
+            }
         }
     }
 }
