@@ -15,7 +15,6 @@ export default class Config {
             let result = data
             key.forEach(item => {
                 result = this.get_data(result, item)
-                console.log(result)
             });
 
             return result
