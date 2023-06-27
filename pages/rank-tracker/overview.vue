@@ -42,6 +42,7 @@
       <!-- Top charts -->
       <div class="flex flex-row gap-2 w-full p-5">
         <CardHelp
+          class="w-1/4"
           tooltip="hello I am tooltip"
           :title="
             config.__(`${current_page}/header/cards/average/title`.split('/'))
@@ -85,20 +86,176 @@
           </div>
         </CardHelp>
         <CardHelp
+          class="w-1/4"
           tooltip="hello I am tooltip"
-          title="I am title"
-          :active="true"
-        />
-        <CardHelp
+          :title="
+            config.__(
+              `${current_page}/header/cards/keyword-distribution/title`.split(
+                '/'
+              )
+            )
+          "
+          :active="false"
+        >
+          <div class="flex flex-col">
+            <div class="flex flex-col gap-1 px-1" style="font-size: 0.625rem">
+              <div class="flex flex-row gap-2 items-center text-base-500">
+                <span class="w-12 flex justify-center">{{
+                  config.__(
+                    `${current_page}/header/cards/keyword-distribution/prev`.split(
+                      "/"
+                    )
+                  )
+                }}</span>
+                <span class="w-12 flex justify-center">{{
+                  config.__(
+                    `${current_page}/header/cards/keyword-distribution/current`.split(
+                      "/"
+                    )
+                  )
+                }}</span>
+              </div>
+              <div
+                class="flex flex-row gap-2 border-t justify-between border-t-base-300 items-center pt-1"
+              >
+                <div class="flex flex-row">
+                  <span class="w-12 flex justify-center">10</span>
+                  <span class="w-12 flex justify-center">10</span>
+                </div>
+                <span class="w-12 flex justify-center">
+                  # 1 - 3
+                </span>
+              </div>
+              <div
+                class="flex flex-row gap-2 border-t justify-between border-t-base-300 items-center pt-1"
+              >
+                <div class="flex flex-row">
+                  <span class="w-12 flex justify-center">10</span>
+                  <span class="w-12 flex justify-center">10</span>
+                </div>
+                <span class="w-12 flex justify-center">
+                  # 1 - 3
+                </span>
+              </div>
+              <div
+                class="flex flex-row gap-2 border-t justify-between border-t-base-300 items-center pt-1"
+              >
+                <div class="flex flex-row">
+                  <span class="w-12 flex justify-center">10</span>
+                  <span class="w-12 flex justify-center">10</span>
+                </div>
+                <span class="w-12 flex justify-center">
+                  # 1 - 3
+                </span>
+              </div>
+              <div
+                class="flex flex-row gap-2 border-t justify-between border-t-base-300 items-center pt-1"
+              >
+                <div class="flex flex-row">
+                  <span class="w-12 flex justify-center">10</span>
+                  <span class="w-12 flex justify-center">10</span>
+                </div>
+                <span class="w-12 flex justify-center">
+                  # 1 - 3
+                </span>
+              </div>
+            </div>
+          </div> </CardHelp
+        ><CardHelp
+          class="w-1/4"
           tooltip="hello I am tooltip"
-          title="I am title"
+          :title="
+            config.__(
+              `${current_page}/header/cards/progressed-keyword/title`.split('/')
+            )
+          "
           :active="true"
-        />
-        <CardHelp
+        >
+          <div class="flex flex-col">
+            <div>
+              <VueApexCharts
+                :series="header_area_chart.series"
+                :options="header_area_chart"
+              ></VueApexCharts>
+            </div>
+            <div
+              class="flex flex-row justify-between gap-2 px-2 text-base-500"
+              style="font-size: 0.625rem"
+            >
+              <span class="flex flex-col gap-2">
+                <span>{{
+                  config.__(
+                    `${current_page}/header/cards/average/prev`.split("/")
+                  )
+                }}</span>
+                <span
+                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
+                  >3.1 رتبه</span
+                >
+              </span>
+              <span class="flex flex-col gap-2">
+                <span>{{
+                  config.__(
+                    `${current_page}/header/cards/average/current`.split("/")
+                  )
+                }}</span>
+                <span
+                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
+                  >3.1 رتبه</span
+                >
+              </span>
+            </div>
+          </div> </CardHelp
+        ><CardHelp
+          class="w-1/4"
           tooltip="hello I am tooltip"
-          title="I am title"
+          :title="
+            config.__(
+              `${current_page}/header/cards/fallen-keyword/title`.split('/')
+            )
+          "
           :active="true"
-        />
+        >
+          <div class="flex flex-col">
+            <div>
+              <VueApexCharts
+                :series="header_area_chart.series"
+                :options="header_area_chart"
+              ></VueApexCharts>
+            </div>
+            <div
+              class="flex flex-row justify-between gap-2 px-2 text-base-500"
+              style="font-size: 0.625rem"
+            >
+              <span class="flex flex-col gap-2">
+                <span>{{
+                  config.__(
+                    `${current_page}/header/cards/fallen-keyword/total`.split(
+                      "/"
+                    )
+                  )
+                }}</span>
+                <span
+                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
+                  >3.1 رتبه</span
+                >
+              </span>
+              <span class="flex flex-col gap-2">
+                <span>{{
+                  config.__(
+                    `${current_page}/header/cards/fallen-keyword/count`.split(
+                      "/"
+                    )
+                  )
+                }}</span>
+                <span
+                  class="rounded-md justify-center py-1 bg-base-250 flex flex-row items-center"
+                  >3.1 رتبه</span
+                >
+              </span>
+            </div>
+          </div>
+        </CardHelp>
       </div>
 
       <hr class="border-base-350 mx-4" />
