@@ -23,7 +23,7 @@ export class CustomTextBox {
 
     public transitionStyle(text, textColor = 'text-base-100') {
         return this.focused.value || text !== ""
-            ? "-translate-y-8 " + textColor
+            ? "-translate-y-9 " + textColor
             : "text-base-content";
     }
 }
