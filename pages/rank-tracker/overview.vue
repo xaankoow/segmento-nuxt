@@ -331,7 +331,7 @@
             class="flex flex-row items-center text-base-500 gap-2 w-10/12 justify-between"
           >
             <!-- filter hour -->
-            <Dropdown class="w-1/5">
+            <Dropdown class="w-1/4">
               <template v-slot:title>
                 <div
                   class="border border-base-300 flex flex-row items-center justify-between border-b-base-500 w-full rounded-sm px-2 py-1 hover:border-base-500"
