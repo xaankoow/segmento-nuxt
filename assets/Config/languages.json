@@ -3,9 +3,77 @@
         "config": {
             "dir": "rtl"
         },
-        "words": {
-            "dashboard": "داشبورد",
-            "platform": "پلتفرم سگمنتو"
+        "layouts": {
+            "default": {
+                "header": {
+                    "platform": "پلتفرم سگمنتو",
+                    "profile": {
+                        "wallet": {
+                            "text": "موجودی کیف پول",
+                            "price": 250000
+                        },
+                        "config": "تنظیمات حساب کاربری",
+                        "buy": "خرید اشتراک",
+                        "state": "وضعیت اشتراک",
+                        "reports": "گزارش های مالی",
+                        "exit": "خروج"
+                    }
+                }
+            }
+        },
+        "pages": {
+            "rank-tracker": {
+                "overview": {
+                    "reports": "آمار و گزارش نسبی",
+                    "show_reports": "نمایش آمار",
+                    "header": {
+                        "cards": {
+                            "average": {
+                                "title": "میانگین رتبه کل کلمات",
+                                "prev": "میانگین رتبه قبل",
+                                "current": "میانگین رتبه فعلی"
+                            },
+                            "keyword-distribution": {
+                                "title": "توزیع رتبه کلمات کلیدی",
+                                "prev": "دوره قبل",
+                                "current": "دوره فعلی"
+                            },
+                            "chart-progress": {
+                                "title": "نمودار پیشرفت و افت کلمات"
+                            },
+                            "progressed-keyword": {
+                                "title": "کلمات رشد کرده",
+                                "total": "کل کلمات",
+                                "count": "تعداد رشد کلمات"
+                            },
+                            "fallen-keyword": {
+                                "title": "کلمات افت کرده",
+                                "total": "کل کلمات",
+                                "count": "تعداد افت کلمات"
+                            }
+                        }
+                    },
+                    "footer": {
+                        "charts": {
+                            "proportion-all-to-words": {
+                                "title": "نسبت کل کلمات"
+                            },
+                            "proportion-all-to-progress": {
+                                "title": "نسبت رشد به کل"
+                            },
+                            "proportion-all-to-fall": {
+                                "title": "نسبت افت به کل"
+                            },
+                            "chart-count-progress": {
+                                "title": "نمودار تعداد رشد و افت"
+                            },
+                            "chart-progress": {
+                                "title": "نمودار میانگین رشد و افت"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

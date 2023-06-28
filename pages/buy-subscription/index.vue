@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center pb-5 gap-10 [&>div]:w-[64.875rem]">
+  <div class="flex flex-col items-center w-full pb-5 gap-10 [&>div]:w-[64.875rem]">
     <!-- title -->
     <div class="flex items-center h-11 !w-full">
       <span>

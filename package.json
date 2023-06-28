@@ -13,5 +13,10 @@
     "@nuxtjs/tailwindcss": "^6.6.0",
     "daisyui": "^3.1.0",
     "nuxt": "^3.3.1"
+  },
+  "dependencies": {
+    "apexcharts": "^3.41.0",
+    "vue3-apexcharts": "^1.4.1",
+    "vue3-persian-datetime-picker": "^1.2.2"
   }
 }
