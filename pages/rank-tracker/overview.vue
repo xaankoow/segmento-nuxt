@@ -23,11 +23,19 @@
         </div>
         <!-- Tabs -->
         <div class="flex flex-row items-center gap-3 px-2 py-1">
-          <TabItem :title="tabs[0]" :active="actived_tab === 0" @click="actived_tab = 0"/>
+          <NuxtLink to="/rank-tracker/overview"
+            ><TabItem :title="tabs[0]" :active="true"
+          /></NuxtLink>
+
           <span class="border-r h-full">&nbsp;</span>
-          <TabItem :title="tabs[1]" :active="actived_tab === 1" @click="actived_tab = 1"/>
+          <NuxtLink to="/rank-tracker/keyword"
+            ><TabItem :title="tabs[1]" :active="false"
+          /></NuxtLink>
+
           <span class="border-l h-full">&nbsp;</span>
-          <TabItem :title="tabs[2]" :active="actived_tab === 2" @click="actived_tab = 2" />
+          <NuxtLink to="/">
+            <TabItem :title="tabs[2]" :active="false" />
+          </NuxtLink>
         </div>
       </div>
       <!-- update title -->
@@ -1464,7 +1472,6 @@ const pie1 = {
   series: [44, 55, 41],
 };
 const tabs = config.__("pages/rank-tracker/header/tabs".split("/"));
-const actived_tab = ref(0)
 
 const header_area_chart = {
   series: [
