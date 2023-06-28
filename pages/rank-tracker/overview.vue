@@ -18,23 +18,42 @@
             </svg>
           </span>
           <span class="mx-5">
-            {{ content.title }}
+            {{ config.__(`pages/rank-tracker/header/title`.split("/")) }}
           </span>
         </div>
         <!-- Tabs -->
-        <Tab class="px-3">
-          <TabItem
-            v-for="tab in content.tabs"
-            :key="tab.title"
-            :title="tab.title"
-            :active="tab.active"
-          />
-        </Tab>
+        <div class="flex flex-row items-center gap-3 px-2 py-1">
+          <TabItem :title="tabs[0]" :active="actived_tab === 0" @click="actived_tab = 0"/>
+          <span class="border-r h-full">&nbsp;</span>
+          <TabItem :title="tabs[1]" :active="actived_tab === 1" @click="actived_tab = 1"/>
+          <span class="border-l h-full">&nbsp;</span>
+          <TabItem :title="tabs[2]" :active="actived_tab === 2" @click="actived_tab = 2" />
+        </div>
       </div>
       <!-- update title -->
       <div class="flex flex-col gap-2 px-3 items-center text-base-500">
-        <span>آخرین بروزرسانی: 1401/03/25</span>
-        <span>دوره بروزرسانی: هر 48 ساعت</span>
+        <span class="flex flex-row items-center gap-2">
+          <label
+            >{{
+              config.__("pages/rank-tracker/header/update/latest".split("/"))
+            }}:</label
+          >
+          <span>1402/03/25</span>
+        </span>
+        <span class="flex flex-row items-center gap-2">
+          <label
+            >{{
+              config.__(
+                "pages/rank-tracker/header/update/period/title".split("/")
+              )
+            }}:</label
+          >
+          <span>{{
+            config.__(
+              "pages/rank-tracker/header/update/period/default".split("/")
+            )
+          }}</span>
+        </span>
       </div>
     </div>
     <!-- page content -->
@@ -1444,6 +1463,9 @@ const date = ref("1402/03/25");
 const pie1 = {
   series: [44, 55, 41],
 };
+const tabs = config.__("pages/rank-tracker/header/tabs".split("/"));
+const actived_tab = ref(0)
+
 const header_area_chart = {
   series: [
     {
