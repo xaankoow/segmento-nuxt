@@ -1208,10 +1208,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
 
@@ -1267,10 +1264,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series"/>
                 </div>
               </div>
 
@@ -1326,10 +1320,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
 
@@ -1385,10 +1376,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
 
@@ -1444,10 +1432,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
             </div>
@@ -1465,7 +1450,6 @@ import Config from "../../composables/Config";
 const current_page = "pages/rank-tracker/overview";
 const config = new Config();
 const date = ref("1402/03/25");
-
 const pie1 = {
   series: [44, 55, 41],
   chart: {
