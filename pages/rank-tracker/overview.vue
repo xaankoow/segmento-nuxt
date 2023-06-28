@@ -52,10 +52,7 @@
         >
           <div class="flex flex-col">
             <div>
-              <VueApexCharts
-                :series="header_area_chart.series"
-                :options="header_area_chart"
-              ></VueApexCharts>
+              <ChartArea :series="header_area_chart.series" />
             </div>
             <div
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
@@ -198,10 +195,7 @@
         >
           <div class="flex flex-col">
             <div>
-              <VueApexCharts
-                :series="header_area_chart.series"
-                :options="header_area_chart"
-              ></VueApexCharts>
+              <ChartArea :series="header_area_chart.series" />
             </div>
             <div
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
@@ -249,10 +243,10 @@
         >
           <div class="flex flex-col">
             <div>
-              <VueApexCharts
-                :series="header_area_chart3.series"
-                :options="header_area_chart3"
-              ></VueApexCharts>
+              <ChartArea
+                :series="header_area_chart.series"
+                :colors="['#F35242']"
+              />
             </div>
             <div
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
@@ -1264,7 +1258,7 @@
 
                 <!-- content -->
                 <div>
-                  <ChartPie :series="pie1.series"/>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
 
@@ -1452,22 +1446,6 @@ const config = new Config();
 const date = ref("1402/03/25");
 const pie1 = {
   series: [44, 55, 41],
-  chart: {
-    width: 380,
-    type: "donut",
-  },
-  plotOptions: {
-    pie: {
-      startAngle: -90,
-      endAngle: 270,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  fill: {
-    type: "gradient",
-  },
 };
 const header_area_chart = {
   series: [
@@ -1476,18 +1454,6 @@ const header_area_chart = {
       data: [5, 10, 5, 25, 15],
     },
   ],
-  chart: {
-    type: "area",
-    height: 350,
-    stacked: true,
-  },
-  colors: ["#10CCAE"],
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-  },
 };
 
 const stacked_chart = {
@@ -1547,18 +1513,6 @@ const header_area_chart3 = {
       data: [5, 10, 5, 25, 15],
     },
   ],
-  chart: {
-    type: "area",
-    height: 350,
-    stacked: true,
-  },
-  colors: ["#F35242"],
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-  },
 };
 
 const series = [
