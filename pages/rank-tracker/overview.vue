@@ -1463,8 +1463,8 @@
 
 <script setup>
 import Vue3PersianDatetimePicker from "vue3-persian-datetime-picker";
-import VueApexCharts from "vue3-apexcharts";
 import Config from "../../composables/Config";
+
 const current_page = "pages/rank-tracker/overview";
 const config = new Config();
 const date = ref("1402/03/25");
