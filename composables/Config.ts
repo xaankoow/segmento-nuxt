@@ -7,6 +7,11 @@ export default class Config {
         this._lang = lang;
     }
 
+    public by_route(route: string, splitor = '/')
+    {
+        return this.__(route.split(splitor))
+    }
+
     public __(key: any, data = null) {
         if (data === null) {
             data = dictinary[this._lang]
