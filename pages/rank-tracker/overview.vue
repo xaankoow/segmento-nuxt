@@ -33,7 +33,7 @@
           /></NuxtLink>
 
           <span class="border-l h-full">&nbsp;</span>
-          <NuxtLink to="/">
+          <NuxtLink to="/rank-tracker/competitors">
             <TabItem :title="tabs[2]" :active="false" />
           </NuxtLink>
         </div>
