@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-col gap-1 px-2 py-1 rounded-md hover:bg-base-250" :class="active ? 'text-primary' : 'text-base-content'">
-        <span class="cursor-pointer">{{ title }}</span>
-        <hr class="w-2/3 mx-auto" :class="active ? 'border-primary' : 'border-transparent'"/>
+    <div class="flex flex-col gap-1 px-2 py-1 cursor-pointer rounded-sm hover:shadow-sm" :class="active ? 'text-primary' : 'text-base-content'">
+        <span>{{ title }}</span>
+        <hr class="w-2/5 mx-auto" :class="active ? 'border-primary' : 'border-transparent'"/>
     </div>
 </template>
 

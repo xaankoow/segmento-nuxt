@@ -13,4 +13,12 @@
         [&>label]:absolute [&>label]:right-2 [&>label]:top-3 [&>label]:transition-all [&>label]:duration-300 [&>label]:transform [&>label]:text-sm
         [&>label]:cursor-text [&>label]:pointer-events-none
     }
+
+    .btn {
+        @apply rounded-lg py-1 px-2 transition-all duration-100
+    }
+
+    .btn-primary {
+        @apply btn bg-primary text-base-100  hover:bg-primary-active  
+    }
 }

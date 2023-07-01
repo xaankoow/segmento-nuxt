@@ -18,23 +18,50 @@
             </svg>
           </span>
           <span class="mx-5">
-            {{ content.title }}
+            {{ config.__(`pages/rank-tracker/header/title`.split("/")) }}
           </span>
         </div>
         <!-- Tabs -->
-        <Tab class="px-3">
-          <TabItem
-            v-for="tab in content.tabs"
-            :key="tab.title"
-            :title="tab.title"
-            :active="tab.active"
-          />
-        </Tab>
+        <div class="flex flex-row items-center gap-3 px-2 py-1">
+          <NuxtLink to="/rank-tracker/overview"
+            ><TabItem :title="tabs[0]" :active="true"
+          /></NuxtLink>
+
+          <span class="border-r h-full">&nbsp;</span>
+          <NuxtLink to="/rank-tracker/keyword"
+            ><TabItem :title="tabs[1]" :active="false"
+          /></NuxtLink>
+
+          <span class="border-l h-full">&nbsp;</span>
+          <NuxtLink to="/">
+            <TabItem :title="tabs[2]" :active="false" />
+          </NuxtLink>
+        </div>
       </div>
       <!-- update title -->
       <div class="flex flex-col gap-2 px-3 items-center text-base-500">
-        <span>آخرین بروزرسانی: 1401/03/25</span>
-        <span>دوره بروزرسانی: هر 48 ساعت</span>
+        <span class="flex flex-row items-center gap-2">
+          <label
+            >{{
+              config.__("pages/rank-tracker/header/update/latest".split("/"))
+            }}:</label
+          >
+          <span>1402/03/25</span>
+        </span>
+        <span class="flex flex-row items-center gap-2">
+          <label
+            >{{
+              config.__(
+                "pages/rank-tracker/header/update/period/title".split("/")
+              )
+            }}:</label
+          >
+          <span>{{
+            config.__(
+              "pages/rank-tracker/header/update/period/default".split("/")
+            )
+          }}</span>
+        </span>
       </div>
     </div>
     <!-- page content -->
@@ -52,10 +79,7 @@
         >
           <div class="flex flex-col">
             <div>
-              <VueApexCharts
-                :series="header_area_chart.series"
-                :options="header_area_chart"
-              ></VueApexCharts>
+              <ChartArea :series="header_area_chart.series" />
             </div>
             <div
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
@@ -176,10 +200,7 @@
 
               <!-- chart -->
               <div>
-                <VueApexCharts
-                  :series="stacked_chart.series"
-                  :options="stacked_chart"
-                ></VueApexCharts>
+                <ChartStack :series="stacked_chart.series" />
               </div>
             </div>
           </div>
@@ -198,10 +219,7 @@
         >
           <div class="flex flex-col">
             <div>
-              <VueApexCharts
-                :series="header_area_chart.series"
-                :options="header_area_chart"
-              ></VueApexCharts>
+              <ChartArea :series="header_area_chart.series" />
             </div>
             <div
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
@@ -249,10 +267,10 @@
         >
           <div class="flex flex-col">
             <div>
-              <VueApexCharts
-                :series="header_area_chart3.series"
-                :options="header_area_chart3"
-              ></VueApexCharts>
+              <ChartArea
+                :series="header_area_chart.series"
+                :colors="['#F35242']"
+              />
             </div>
             <div
               class="flex flex-row justify-between gap-2 px-2 text-base-500"
@@ -321,7 +339,7 @@
             class="flex flex-row items-center text-base-500 gap-2 w-10/12 justify-between"
           >
             <!-- filter hour -->
-            <Dropdown class="w-1/5">
+            <Dropdown class="w-1/4">
               <template v-slot:title>
                 <div
                   class="border border-base-300 flex flex-row items-center justify-between border-b-base-500 w-full rounded-sm px-2 py-1 hover:border-base-500"
@@ -1032,7 +1050,7 @@
 
           <!-- the chart -->
           <div>
-            <VueApexCharts :series="series" :options="options"></VueApexCharts>
+            <ChartLine :series="series" />
           </div>
         </div>
 
@@ -1208,10 +1226,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
 
@@ -1267,10 +1282,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
 
@@ -1326,10 +1338,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
 
@@ -1385,10 +1394,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
 
@@ -1444,10 +1450,7 @@
 
                 <!-- content -->
                 <div>
-                  <VueApexCharts
-                    :series="pie1.series"
-                    :options="pie1"
-                  ></VueApexCharts>
+                  <ChartPie :series="pie1.series" />
                 </div>
               </div>
             </div>
@@ -1460,31 +1463,16 @@
 
 <script setup>
 import Vue3PersianDatetimePicker from "vue3-persian-datetime-picker";
-import VueApexCharts from "vue3-apexcharts";
 import Config from "../../composables/Config";
+
 const current_page = "pages/rank-tracker/overview";
 const config = new Config();
 const date = ref("1402/03/25");
-
 const pie1 = {
   series: [44, 55, 41],
-  chart: {
-    width: 380,
-    type: "donut",
-  },
-  plotOptions: {
-    pie: {
-      startAngle: -90,
-      endAngle: 270,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  fill: {
-    type: "gradient",
-  },
 };
+const tabs = config.__("pages/rank-tracker/header/tabs".split("/"));
+
 const header_area_chart = {
   series: [
     {
@@ -1492,69 +1480,17 @@ const header_area_chart = {
       data: [5, 10, 5, 25, 15],
     },
   ],
-  chart: {
-    type: "area",
-    height: 350,
-    stacked: true,
-  },
-  colors: ["#10CCAE"],
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-  },
 };
 
 const stacked_chart = {
   series: [
     {
-      name: "PRODUCT A",
-      data: [44, 55, 41, 67, 22, 43, 21, 49],
+      data: [44, 55, 41],
     },
     {
-      name: "PRODUCT B",
-      data: [13, 23, 20, 8, 13, 27, 33, 12],
+      data: [13, 23, 20],
     },
   ],
-  chart: {
-    type: "bar",
-    height: 350,
-    stacked: true,
-    stackType: "100%",
-  },
-  responsive: [
-    {
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: "bottom",
-          offsetX: -10,
-          offsetY: 0,
-        },
-      },
-    },
-  ],
-  xaxis: {
-    categories: [
-      "2011 Q1",
-      "2011 Q2",
-      "2011 Q3",
-      "2011 Q4",
-      "2012 Q1",
-      "2012 Q2",
-      "2012 Q3",
-      "2012 Q4",
-    ],
-  },
-  fill: {
-    opacity: 1,
-  },
-  legend: {
-    position: "right",
-    offsetX: 0,
-    offsetY: 50,
-  },
 };
 const header_area_chart3 = {
   series: [
@@ -1563,18 +1499,6 @@ const header_area_chart3 = {
       data: [5, 10, 5, 25, 15],
     },
   ],
-  chart: {
-    type: "area",
-    height: 350,
-    stacked: true,
-  },
-  colors: ["#F35242"],
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-  },
 };
 
 const series = [
@@ -1583,60 +1507,6 @@ const series = [
     data: [7, 10, 13, 11, 14, 9, 10],
   },
 ];
-const options = {
-  chart: {
-    height: 130,
-    type: "line",
-    brush: {
-      target: "chart2",
-      enabled: false,
-    },
-    selection: {
-      xaxis: {
-        min: new Date("19 Jun 2017").getTime(),
-        max: new Date("14 Aug 2017").getTime(),
-      },
-    },
-  },
-  stroke: {
-    show: true,
-    curve: "smooth",
-    lineCap: "butt",
-    colors: "#0AC7E2",
-    width: 2,
-    dashArray: 0,
-  },
-  grid: {
-    show: true,
-    borderColor: "#90A4AE",
-    strokeDashArray: 1,
-    position: "back",
-    xaxis: {
-      lines: {
-        show: true,
-      },
-    },
-    yaxis: {
-      lines: {
-        show: false,
-      },
-    },
-    row: {
-      colors: undefined,
-      opacity: 0.5,
-    },
-    column: {
-      colors: undefined,
-      opacity: 0.5,
-    },
-    padding: {
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-    },
-  },
-};
 const content = ref({
   title: "ابزار رتبه سنج (رنک ترکینگ)",
   tabs: [
