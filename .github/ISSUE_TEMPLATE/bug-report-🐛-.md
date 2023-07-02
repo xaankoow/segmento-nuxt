@@ -25,3 +25,7 @@ Steps to reproduce the behavior:
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
+
+### Necessary file 📁
+
+- Attached screenshots are placed here
