@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col justify-between items-center rounded-md shadow-lg min-w-[24rem] min-h-[18rem]">
+  <div
+    class="flex flex-col justify-between items-center rounded-md shadow-lg min-w-[24rem] min-h-[18rem]"
+  >
     <div class="flex flex-col gap-2 w-full">
       <!-- header -->
       <div
@@ -10,7 +12,8 @@
       </div>
 
       <!-- main -->
-      <div class="flex w-full flex-col items-center">
+      <div class="flex w-full flex-col items-center gap-2">
+        <h2 class="card-title">{{ title }}</h2>
         <slot name="main"></slot>
       </div>
     </div>
@@ -29,6 +32,10 @@ const props = defineProps({
   headerBgColor: {
     type: String,
     default: "bg-success",
+  },
+  title: {
+    type: String,
+    required: true,
   },
 });
 </script>
