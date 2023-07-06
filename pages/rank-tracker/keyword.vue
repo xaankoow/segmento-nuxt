@@ -34,7 +34,7 @@
           /></NuxtLink>
 
           <span class="border-l h-full">&nbsp;</span>
-          <NuxtLink to="/">
+          <NuxtLink to="/rank-tracker/competitors">
             <TabItem :title="tabs[2]" :active="false" />
           </NuxtLink>
         </div>
@@ -442,7 +442,7 @@
                     >
                       <input
                         type="radio"
-                        name="id-2"
+                        name="id-1"
                         class="accent-primary w-4 h-4 cursor-pointer"
                       />
                       <span>2 رتبه</span>
@@ -452,7 +452,7 @@
                     >
                       <input
                         type="radio"
-                        name="id-3"
+                        name="id-1"
                         class="accent-primary w-4 h-4 cursor-pointer"
                       />
                       <span>4 رتبه</span>
@@ -462,7 +462,7 @@
                     >
                       <input
                         type="radio"
-                        name="id-4"
+                        name="id-1"
                         class="accent-primary w-4 h-4 cursor-pointer"
                       />
                       <span>8 رتبه</span>
