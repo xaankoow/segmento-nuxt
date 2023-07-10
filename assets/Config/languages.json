@@ -115,11 +115,11 @@
                         "competitor_counter": "رقیب شماره [number]"
                     },
                     "table": {
-                        "columns_1": [
-                            "رتبه فعلی",
-                            "میزان تغییر رتبه",
-                            "میانگین 7 دوره"
-                        ],
+                        "cells": {
+                            "current_rank": "رتبه فعلی",
+                            "change_rate": "میزان تغییر رتبه",
+                            "average": "میانگین 7 دوره"
+                        },
                         "site_domain_title": "آدرس سایت"
                     },
                     "compare": "مقایسه بر اساس",

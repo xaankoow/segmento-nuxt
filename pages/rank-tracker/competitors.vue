@@ -171,7 +171,7 @@
                   <tr>
                     <td>
                       {{
-                        config.by_route(`${current_page}/table/columns_1`)[0]
+                        config.by_route(`${current_page}/table/cells/current_rank`)
                       }}
                     </td>
                     <td>5</td>
@@ -180,7 +180,7 @@
                   <tr>
                     <td>
                       {{
-                        config.by_route(`${current_page}/table/columns_1`)[1]
+                        config.by_route(`${current_page}/table/cells/change_rate`)
                       }}
                     </td>
                     <td>
@@ -201,7 +201,7 @@
                   <tr>
                     <td>
                       {{
-                        config.by_route(`${current_page}/table/columns_1`)[2]
+                        config.by_route(`${current_page}/table/cells/average`)
                       }}
                     </td>
                     <td>
