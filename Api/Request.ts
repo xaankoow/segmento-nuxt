@@ -1,11 +1,11 @@
 import axios from "axios";
+import Model from "./Model"
 
 export default class Request {
     private request = useNuxtApp().$axios;
     protected _pending = ref(false);
 
-    constructor()
-    {
+    constructor() {
         return this;
     }
 
@@ -22,7 +22,7 @@ export default class Request {
     }
 
     protected send_request = async (method: string, url: string, body: any, params: any) => {
-        let response = null;
+        let result: any;
         this._pending.value = true;
 
         await axios.request({
@@ -36,14 +36,15 @@ export default class Request {
             params: params,
             data: body
         }).then((res) => {
-            response = res.data
+            let response = res.data
+            result = new Model(response.message ?? '', response.status, response.errors, response.data, res.status);
         }).catch((res) => {
-            console.log('error')
-            // TODO : do something with exception
+            let response = res.response.data;
+            result = new Model(res.message, response.status, response.specific_error, response.data, res.status);
         }).finally(() => {
             this._pending.value = false;
         })
 
-        return response;
+        return result;
     }
 }
