@@ -1,5 +1,5 @@
 import axios from "axios";
-import Model from "./Model"
+import ResponseModel from "./ResponseModel"
 
 export default class Request {
     private request = useNuxtApp().$axios;
@@ -17,11 +17,11 @@ export default class Request {
         return await this.send_request('POST', `${version}/${url}`, body, null);
     }
 
-    public pending() {
+    public pending() : Boolean {
         return this._pending.value;
     }
 
-    protected send_request = async (method: string, url: string, body: any, params: any) => {
+    protected send_request = async (method: string, url: string, body: any, params: any): Promise<ResponseModel> => {
         let result: any;
         this._pending.value = true;
 
@@ -37,10 +37,10 @@ export default class Request {
             data: body
         }).then((res) => {
             let response = res.data
-            result = new Model(response.message ?? '', response.status, response.errors, response.data, res.status);
+            result = new ResponseModel(response.message ?? '', response.status, response.errors, response.data, res.status);
         }).catch((res) => {
             let response = res.response.data;
-            result = new Model(res.message, response.status, response.specific_error, response.data, res.status);
+            result = new ResponseModel(res.message, response.status, response.specific_error, response.data, res.status);
         }).finally(() => {
             this._pending.value = false;
         })

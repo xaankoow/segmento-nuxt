@@ -1,4 +1,4 @@
-export default class Response {
+export default class ResponseModel {
     private _message: string;
     private _status: boolean;
     private _errors: any;
