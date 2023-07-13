@@ -132,6 +132,14 @@
                     "password": "گذرواژه",
                     "open": "ورود",
                     "forget": "گذرواژه خود را فراموش کرده‌اید؟"
+                },
+                "sign-up": {
+                    "fullname": "نام و نام‌خانوادگی",
+                    "email": "ایمیل",
+                    "password": "گذرواژه",
+                    "confirmPassword": "تکرار گذرواژه",
+                    "signup": "عضویت",
+                    "currently_signed": "حساب کاربری دارم!"
                 }
             }
         }
