@@ -8,33 +8,62 @@ const props = defineProps({
   series: {
     required: true,
   },
+  colors: {
+    default: ["#D9D9D9", "#10CCAE", "#F35242"],
+  },
 });
 const options = {
   chart: {
     type: "bar",
-    height: 350,
     stacked: true,
-    stackType: "100%",
+    color: "#000000",
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
   },
-  responsive: [
-    {
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: "bottom",
-          offsetX: -10,
-          offsetY: 0,
+  colors: props.colors,
+  plotOptions: {
+    bar: {
+      horizontal: true,
+      dataLabels: {
+        total: {
+          enabled: false,
+          offsetX: 0,
+          style: {
+            fontSize: "13px",
+            fontWeight: 900,
+          },
         },
       },
     },
-  ],
-  fill: {
-    opacity: 1,
+  },
+  xaxis: {
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+    labels: {
+      show: false,
+    },
+  },
+  yaxis: {
+    labels: {
+      show: false,
+    },
   },
   legend: {
-    position: "right",
-    offsetX: 0,
-    offsetY: 50,
+    show: false,
+  },
+  grid: {
+    show: false,
+  },
+  dataLabels: {
+    enabled: false,
   },
 };
 </script>

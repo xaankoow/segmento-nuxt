@@ -10,18 +10,18 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        iranyekan: ['iranyekan']
+        iranyekan: ["iranyekan"],
       },
       colors: {
         base: {
-          "100": "#FFFFFF",
-          "200": "#FCFCFB",
-          "250": "#F2F5F7",
-          "300": "#D3D5E2",
-          "350": "#D7D7D7",
-          "400": "#D9D9D9",
-          "500": "#7D7D7D",
-          "content": "#002145"
+          100: "#FFFFFF",
+          200: "#FCFCFB",
+          250: "#F2F5F7",
+          300: "#D3D5E2",
+          350: "#D7D7D7",
+          400: "#D9D9D9",
+          500: "#7D7D7D",
+          content: "#002145",
         },
         icon: "#002145",
         success: "#10CCAE",
@@ -40,13 +40,12 @@ module.exports = {
         bronze: "#BF8970",
         silver: "#7D7D7D",
         gold: "#FFCE47",
-        dimound: "#0A65CD"
-      }
+        dimound: "#0A65CD",
+      },
     },
   },
   plugins: [require("daisyui")],
   daisyui: {
     themes: [],
   },
-}
-
+};

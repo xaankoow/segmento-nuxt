@@ -15,16 +15,46 @@ const props = defineProps({
 });
 const options = {
   chart: {
-    type: "area",
-    height: 350,
-    stacked: true,
-  },
-  colors: props.colors,
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-  },
+      type: "area",
+      zoom: {
+        enabled: false,
+      },
+      toolbar: {
+        show: false,
+      },
+    },
+    colors: props.colors,
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        inverseColors: false,
+        opacityFrom: 0.7,
+        opacityTo: 0.4,
+        stops: [20, 100, 100, 100],
+      },
+    },
+    xaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        show: false,
+      },
+    },
+    yaxis: {
+      labels: {
+        show: false,
+      },
+    },
+    grid: {
+      show: false,
+    },
+    dataLabels: {
+      enabled: false,
+    },
 };
 </script>
