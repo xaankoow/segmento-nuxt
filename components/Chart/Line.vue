@@ -16,21 +16,14 @@ const options = {
     height: 130,
     type: "line",
     brush: {
-      target: "chart2",
-      enabled: false,
-    },
-    selection: {
-      xaxis: {
-        min: new Date("19 Jun 2017").getTime(),
-        max: new Date("14 Aug 2017").getTime(),
-      },
+      enabled: true,
     },
   },
   stroke: {
     show: true,
     curve: "smooth",
     lineCap: "butt",
-    colors: "#0AC7E2",
+    colors: ["#0AC7E2", "#F35242"],
     width: 2,
     dashArray: 0,
   },

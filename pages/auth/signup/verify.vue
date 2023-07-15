@@ -1,20 +1,30 @@
 <template>
   <div class="flex flex-col w-full items-center">
-    <div class="flex flex-col w-full gap-6 my-auto font-medium items-center">
-      <span class="text-justify w-[39rem]" v-html="content.description"></span>
+    <form
+      @submit.prevent="verify_email()"
+      class="flex flex-col w-full gap-6 my-auto font-medium items-center"
+    >
+      <span
+        class="text-justify w-[39rem]"
+        v-html="config.by_route(`${current_page}/description`)"
+      ></span>
       <div class="flex flex-col justify-between items-center">
         <div class="flex flex-col gap-3 items-center mx-auto w-full">
           <span>
-            {{ content.active_code }}
+            {{ config.by_route(`${current_page}/active_code`) }}
           </span>
           <div
             class="flex flex-row gap-5 mx-auto text-base-content w-[16.25rem] [&>input]:w-14 [&>input]:h-14 [&>input]:p-1 [&>input]:text-center [&>input]:rounded-sm"
             style="direction: ltr"
           >
-            <input type="text" maxlength="1" minlength="1" />
-            <input type="text" maxlength="1" minlength="1" />
-            <input type="text" maxlength="1" minlength="1" />
-            <input type="text" maxlength="1" minlength="1" />
+            <input id="number_1" type="number" :max="9" :min="0" />
+            <!-- TODO : change focus when keypress for ones -->
+            <input id="number_2" type="number" :max="9" :min="0" />
+            <!-- TODO : change focus when keypress for ones -->
+            <input id="number_3" type="number" :max="9" :min="0" />
+            <!-- TODO : change focus when keypress for ones -->
+            <input id="number_4" type="number" :max="9" :min="0" />
+            <!-- TODO : change focus when keypress for ones -->
           </div>
         </div>
       </div>
@@ -38,16 +48,16 @@
           </svg>
         </NuxtLink>
         <button
-          @click="step++"
+          type="submit"
           class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md"
         >
-          {{ content.confirm_email }}
+          {{ config.by_route(`${current_page}/confirm_email`) }}
         </button>
         <button
           @click="step++"
           class="text-base-100 hover:text-base-250 underline underline-offset-4 border-none w-fit h-10 rounded-md"
         >
-          {{ content.resend_email }}
+          {{ config.by_route(`${current_page}/resend_email`) }}
         </button>
       </div>
       <div
@@ -104,35 +114,67 @@
           </svg>
         </span>
       </div>
-    </div>
+    </form>
   </div>
 </template>
-    
-    <script setup>
-import { CustomTextBox } from "../../../composables/CustomTextBox";
+
+<style scope>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+</style>
+
+<script setup>
+import Request from "../../../Api/Request";
+import Config from "../../../composables/Config";
+import { useConfigStore } from "../../../store/Config";
+
 definePageMeta({
   layout: "login",
 });
-const fullname = new CustomTextBox();
-const email = new CustomTextBox();
-const password = new CustomTextBox();
-const confirmPassword = new CustomTextBox();
 
+const current_page = "pages/auth/verify";
+const config = new Config();
+const configStore = useConfigStore();
+const request = new Request();
 const form = ref({
-  fullname: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  email: null,
+  code: null,
 });
 
-const content = ref({
-  description:
-    "مطمعن باشین این یه متن از پیش آماده شده نیست، ما خیلی خوشحالیم که شما از امروز همراه ما هستی، قطعا قول میدیم هر روز شما هم اینطوری خوب و خوش باشه چون تلاشمون اینه کنار خلق ارزش، حس خوبی هم از کار با محصولات ما دریافت کنید و از اون گذشته، ما دوست داریم شما در کسب و کارتون به اوج برسید. زود باشین برین از ایمیل تون کد فعال سازی حساب رو بردارین و ماجراجویی هاتون رو در سگمنتو شروع کنید.<br /> اگرم دیدین ایمیلی نیومده، مجددا درخواست بدین، کامپیوترها خیلی هم باهوش نیستن و ممکنه اشتباه کرده باشن :) ",
-  active_code: "کد فعال سازی",
-  confirm_email: "تایید ایمیل",
-  resend_email: "دریافت مجدد کد",
-  signup: "عضویت",
-  currently_signed: "حساب کاربری دارم!",
+async function verify_email() {
+  let number_1 = document.getElementById("number_1").value;
+  let number_2 = document.getElementById("number_2").value;
+  let number_3 = document.getElementById("number_3").value;
+  let number_4 = document.getElementById("number_4").value;
+
+  form.value.code = Number(`${number_1}${number_2}${number_3}${number_4}`);
+  let response = await request.post("auth/verifyEmail", form.value, "v1");
+
+  if (response.status()) {
+    configStore.setConfig(response.data());
+    // TODO : TOAST success message
+    navigateTo("/");
+  } else {
+    // TODO : TOAST error message
+    console.log(response);
+  }
+}
+
+onMounted(() => {
+  form.value.email = useRoute().query.email ?? null;
+
+  if (form.value.email === null) {
+    // TODO : TOAST for error
+    navigateTo("/auth/signup");
+  }
 });
 </script>
     
