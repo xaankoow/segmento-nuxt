@@ -1,5 +1,5 @@
 <template>
-  <VueApexCharts :options="options" :series="series"></VueApexCharts>
+  <VueApexCharts :options="chartOptions" :series="series"></VueApexCharts>
 </template>
 <script setup>
 import VueApexCharts from "vue3-apexcharts";
@@ -9,32 +9,51 @@ const props = defineProps({
     required: true,
   },
 });
-const options = {
-  chart: {
-    type: "bar",
-    height: 350,
-    stacked: true,
-    stackType: "100%",
-  },
-  responsive: [
+const series = [
     {
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: "bottom",
-          offsetX: -10,
-          offsetY: 0,
-        },
+      data: [44, 55, 41, 67, 22, 43, 21, 49],
+    },
+    {
+      data: [-13, -23, -20, -8, -13, -27, -33, -12],
+    },
+  ];
+  
+  const chartOptions = {
+    chart: {
+      type: "bar",
+      stacked: true,
+      zoom: {
+        enabled: false,
+      },
+      toolbar: {
+        show: false,
       },
     },
-  ],
-  fill: {
-    opacity: 1,
-  },
-  legend: {
-    position: "right",
-    offsetX: 0,
-    offsetY: 50,
-  },
-};
+    xaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        show: false,
+      },
+    },
+    colors: ["#10CCAE", "#F35242"],
+    yaxis: {
+      labels: {
+        show: false,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    grid: {
+      show: false,
+    },
+    dataLabels: {
+      enabled: false,
+    },
+  };
 </script>
