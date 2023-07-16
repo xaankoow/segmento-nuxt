@@ -1,12 +1,12 @@
 <template>
   <div
     class="w-[1038px] h-40 rounded-md flex text-white"
-    :class="{ 'bg-success': check, 'bg-error': !check }"
+    :class="`${check === true ? 'bg-success' : 'bg-error'}`"
   >
     <div class="w-3/4 h-full flex flex-col justify-evenly px-5">
-      <p>{{ successMessage1 }}</p>
-      <p>{{ successMessage2 }}</p>
-      <p>{{ successMessage3 }}</p>
+      <p>{{ check === true ? "موفقیت آمیز!" : "خطایی رخ داده!" }}</p>
+      <p>{{ message }}</p>
+      <slot name="message"></slot>
     </div>
     <div class="w-1/4 h-full flex items-center justify-end px-10">
       <svg
@@ -45,8 +45,6 @@
 </template>
 
 <script setup>
-let check = true;
-let successMessage1 = "موفقیت آمیز";
-let successMessage2 = "کاربر عزیز اشتراک 12 ماهه طلایی برای شما فعال شد :)";
-let successMessage3 = "از امکانات سگمنتو لذت ببرید.";
+import { defineProps } from "vue";
+const props = defineProps(["message", "check"]);
 </script>
