@@ -8,6 +8,9 @@ const props = defineProps({
   series: {
     required: true,
   },
+  colors: {
+    default: ["#D9D9D9", "#10CCAE", "#F35242"],
+  },
 });
 const series = [
     {
@@ -18,42 +21,42 @@ const series = [
     },
   ];
   
-  const chartOptions = {
-    chart: {
-      type: "bar",
-      stacked: true,
-      zoom: {
-        enabled: false,
-      },
-      toolbar: {
-        show: false,
-      },
-    },
-    xaxis: {
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
-        show: false,
-      },
-      labels: {
-        show: false,
-      },
-    },
-    colors: ["#10CCAE", "#F35242"],
-    yaxis: {
-      labels: {
-        show: false,
-      },
-    },
-    legend: {
-      show: false,
-    },
-    grid: {
-      show: false,
-    },
-    dataLabels: {
+const chartOptions = {
+  chart: {
+    type: "bar",
+    stacked: true,
+    zoom: {
       enabled: false,
     },
-  };
+    toolbar: {
+      show: false,
+    },
+  },
+  xaxis: {
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+    labels: {
+      show: false,
+    },
+  },
+  colors: ["#10CCAE", "#F35242"],
+  yaxis: {
+    labels: {
+      show: false,
+    },
+  },
+  legend: {
+    show: false,
+  },
+  grid: {
+    show: false,
+  },
+  dataLabels: {
+    enabled: false,
+  },
+};
 </script>
