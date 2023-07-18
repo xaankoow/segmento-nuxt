@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[1020px] h-[115px] rounded-[3px] text-[10px] border flex">
+  <div class="w-full h-fit rounded-xs text-xs border flex">
     <td class="w-[132px] text-sm flex items-center justify-center">
       {{ data.address1 }}
     </td>
@@ -25,12 +25,12 @@
         {{ data.address1 }}
       </div>
       <div
-        class="w-full h-[25%] flex items-center justify-center border-b text-xs"
+        class="w-full h-[25%] flex items-center justify-center border-b"
       >
         {{ data.rank1 }}
       </div>
       <div
-        class="w-full h-[25%] flex items-center justify-center border-b text-xs"
+        class="w-full h-[25%] flex items-center justify-center border-b"
       >
         {{ data.rankChange1 }} رتبه
         <svg
@@ -87,7 +87,7 @@
           </g>
         </svg>
       </div>
-      <div class="w-full h-[25%] flex items-center justify-center text-xs">
+      <div class="w-full h-[25%] flex items-center justify-center">
         {{ data.average1 }} رتبه
         <svg
           v-if="data.average1 > 0"
@@ -149,12 +149,12 @@
         {{ data.address2 }}
       </div>
       <div
-        class="w-full h-[25%] flex items-center justify-center border-b text-xs"
+        class="w-full h-[25%] flex items-center justify-center border-b"
       >
         {{ data.rank2 }}
       </div>
       <div
-        class="w-full h-[25%] flex items-center justify-center border-b text-xs"
+        class="w-full h-[25%] flex items-center justify-center border-b"
       >
         {{ data.rankChange2 }} رتبه
         <svg
@@ -211,7 +211,7 @@
           </g>
         </svg>
       </div>
-      <div class="w-full h-[25%] flex items-center justify-center text-xs">
+      <div class="w-full h-[25%] flex items-center justify-center">
         {{ data.average2 }} رتبه
         <svg
           v-if="data.average2 > 0"
@@ -271,11 +271,11 @@
     <td class="w-[443px] px-3 py-2">
       <div class="w-2/6 h-[115px]">
         <div class="w-full h-8 flex items-center justify-start">
-          <div class="w-4 h-4 rounded-[3px] bg-primary-focus ml-2"></div>
+          <div class="w-4 h-4 bg-primary-focus ml-2"></div>
           <p>{{ data.address2 }}</p>
         </div>
         <div class="w-full h-8 flex items-center justify-start">
-          <div class="w-4 h-4 rounded-[3px] bg-error ml-2"></div>
+          <div class="w-4 h-4 bg-error ml-2"></div>
           <p>{{ data.address1 }}</p>
         </div>
       </div>
