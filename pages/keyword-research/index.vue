@@ -270,7 +270,7 @@ function toggle_active_alphabet(id) {
   element.classList.toggle("active");
 }
 async function search_keywords_request() {
-  let res = await request.get("keyword/suggest", form.value, "v2");
+  let res = await request.get("keyword-research/generate", form.value, "v2");
 
   data.value = res.data();
 }
