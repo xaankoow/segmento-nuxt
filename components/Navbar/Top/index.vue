@@ -71,7 +71,7 @@
               <div>
                 {{ profile.name }}
               </div>
-              <div>
+              <div class="flex flex-row items-center gap-2">
                 <span>
                   <radial-progress
                     :value="80"
@@ -86,7 +86,7 @@
           </div>
           <ul
             tabindex="0"
-            class="dropdown-content gap-0 [&>*>*]:rounded-none [&>li]:mx-1 [&>li]:rounded-sm [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
+            class="dropdown-content gap-0 z-50 [&>*>*]:rounded-none [&>li]:mx-1 [&>li]:rounded-sm [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]"
           >
             <li
               class="!mx-auto mb-[0.625rem] !rounded-md [&>*>label>span>svg]:fill-base-content hover:text-primary hover:[&>*>label>span>svg]:fill-primary"
