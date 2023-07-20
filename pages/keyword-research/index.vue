@@ -1,5 +1,16 @@
 <template>
   <div class="flex flex-col gap-5 w-full h-full">
+    <!-- loading -->
+    <div
+    style="direction: ltr;"
+      v-if="request.pending()"
+      class="absolute top-0 left-0 w-full h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
+    >
+      <span class="loading loading-ball loading-xs"></span>
+      <span class="loading loading-ball loading-sm"></span>
+      <span class="loading loading-ball loading-md"></span>
+      <span class="loading loading-ball loading-lg"></span>
+    </div>
     <!-- header section -->
     <section
       class="flex items-center border-r-2 gap-4 border-base-content my-2 px-4"
@@ -73,7 +84,10 @@
       <span>{{
         config
           .by_route(`${current_page}/search/sentence`)
-          [Number(data !== null)].replace("[count]", Object.keys(data ?? []).length)
+          [Number(data !== null)].replace(
+            "[count]",
+            Object.keys(data ?? []).length
+          )
       }}</span>
 
       <!-- page content -->
@@ -241,9 +255,7 @@ import { CustomTextBox } from "../../composables/CustomTextBox";
 const current_page = "pages/search-keyword";
 const config = new Config();
 const search_class = new CustomTextBox();
-const content_count = ref(10);
 const data = ref(null);
-
 const request = new Request();
 const form = ref({
   keyword: "",
