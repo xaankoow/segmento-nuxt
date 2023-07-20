@@ -35,22 +35,25 @@
     <!-- page content -->
     <div class="flex flex-col gap-2 mx-2 w-full h-full">
       <!-- search box -->
-      <div class="flex flex-row items-center w-full gap-2 my-3">
+      <form
+        @submit.prevent="search_keywords_request()"
+        class="flex flex-row items-center w-full gap-2 my-3"
+      >
         <div class="custom_input_box w-11/12 text-base-500">
           <input
-            v-model="search"
+            v-model="form.keyword"
             type="text"
             @focus="search_class.focus()"
             @blur="search_class.leave()"
           />
           <label
             class="!text-base-400"
-            :class="search_class.transitionStyle(search, 'text-base-400')"
+            :class="search_class.transitionStyle(form.keyword, 'text-base-400')"
             >{{ config.by_route(`${current_page}/place-holder`) }}</label
           >
         </div>
 
-        <button class="btn-primary rounded-lg w-16">
+        <button type="submit" class="btn-primary rounded-lg w-16">
           <svg
             width="18"
             height="18"
@@ -64,13 +67,13 @@
             />
           </svg>
         </button>
-      </div>
+      </form>
 
       <!-- page content label -->
       <span>{{
         config
           .by_route(`${current_page}/search/sentence`)
-          [Number(content_count !== 0)].replace("[count]", content_count)
+          [Number(data !== null)].replace("[count]", Object.keys(data ?? []).length)
       }}</span>
 
       <!-- page content -->
@@ -81,7 +84,7 @@
           <div
             class="flex flex-row justify-between px-2"
             :class="
-              content_count === 0
+              data?.length === 0
                 ? 'text-base-350 pointer-events-none opacity-70'
                 : ''
             "
@@ -120,7 +123,7 @@
           <!-- when we haven't content this div will show -->
           <div
             class="flex flex-col items-center justify-center h-full"
-            v-if="content_count === 0"
+            v-if="data === null"
           >
             <svg
               width="109"
@@ -142,12 +145,16 @@
           <!-- when have content this div will show -->
           <div class="flex flex-col" v-else>
             <!-- this must be component -->
-            <div class="flex flex-col gap-1 px-2 mt-3 text-sm">
+            <div
+              v-for="(item, index) in data"
+              :key="index"
+              class="flex flex-col gap-1 px-2 mt-3 text-sm"
+            >
               <!-- header -->
               <div class="flex flex-row w-full items-center">
-                <span class="bg-base-500 text-base-100 rounded-md px-4"
-                  >الف</span
-                >
+                <span class="bg-base-500 text-base-100 rounded-md px-4">{{
+                  index
+                }}</span>
                 <hr class="w-full border-base-500" />
               </div>
 
@@ -155,6 +162,8 @@
               <div class="flex flex-col gap-2">
                 <!-- row -->
                 <div
+                  v-for="(letter, index) in item"
+                  :key="index"
                   class="border-b flex flex-row gap-12 px-4 py-1 items-center"
                 >
                   <span>
@@ -162,152 +171,8 @@
                       <input type="checkbox" class="w-5 h-5" />
                     </label>
                   </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-              </div>
-            </div>
-            <!-- this must be component -->
-            <div class="flex flex-col gap-1 px-2 mt-3 text-sm">
-              <!-- header -->
-              <div class="flex flex-row w-full items-center">
-                <span class="bg-base-500 text-base-100 rounded-md px-4">ب</span>
-                <hr class="w-full border-base-500" />
-              </div>
-
-              <!-- table content -->
-              <div class="flex flex-col gap-2">
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
-                </div>
-                <!-- row -->
-                <div
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center"
-                >
-                  <span>
-                    <label>
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
-                  <span> 1 </span>
-                  <span> word </span>
+                  <span> {{ index + 1 }} </span>
+                  <span> {{ letter }} </span>
                 </div>
               </div>
             </div>
@@ -348,28 +213,18 @@
 
             <!-- word list -->
             <div
-              class="border rounded-sm grid grid-cols-4 text-primary-active w-full gap-5 px-4 py-4"
+              v-if="data !== null"
+              class="sticky top-20 left-10 border rounded-sm grid grid-cols-4 text-primary-active w-full gap-5 px-4 py-4"
             >
-              <button class="alphabet" id="alpha-1" @click="toggle_active_alphabet('alpha-1')">الف</button>
-              <button class="alphabet" id="alpha-2" @click="toggle_active_alphabet('alpha-2')">ب</button>
-              <button class="alphabet" id="alpha-3" @click="toggle_active_alphabet('alpha-3')">پ</button>
-              <button class="alphabet" id="alpha-4" @click="toggle_active_alphabet('alpha-4')">ت</button>
-              <button class="alphabet" id="alpha-5" @click="toggle_active_alphabet('alpha-5')">ث</button>
-              <button class="alphabet" id="alpha-6" @click="toggle_active_alphabet('alpha-6')">ج</button>
-              <button class="alphabet" id="alpha-7" @click="toggle_active_alphabet('alpha-7')">چ</button>
-              <button class="alphabet" id="alpha-8" @click="toggle_active_alphabet('alpha-8')">ح</button>
-              <button class="alphabet" id="alpha-9" @click="toggle_active_alphabet('alpha-9')">خ</button>
-              <button class="alphabet" id="alpha-10" @click="toggle_active_alphabet('alpha-10')">د</button>
-              <button class="alphabet" id="alpha-11" @click="toggle_active_alphabet('alpha-11')">ذ</button>
-              <button class="alphabet" id="alpha-12" @click="toggle_active_alphabet('alpha-12')">ر</button>
-              <button class="alphabet" id="alpha-13" @click="toggle_active_alphabet('alpha-13')">ز</button>
-              <button class="alphabet" id="alpha-14" @click="toggle_active_alphabet('alpha-14')">ژ</button>
-              <button class="alphabet" id="alpha-15" @click="toggle_active_alphabet('alpha-15')">س</button>
-              <button class="alphabet" id="alpha-16" @click="toggle_active_alphabet('alpha-16')">ش</button>
-              <button class="alphabet" id="alpha-17" @click="toggle_active_alphabet('alpha-17')">ص</button>
-              <button class="alphabet" id="alpha-18" @click="toggle_active_alphabet('alpha-18')">ض</button>
-              <button class="alphabet" id="alpha-19" @click="toggle_active_alphabet('alpha-19')">ط</button>
-              <button class="alphabet" id="alpha-20" @click="toggle_active_alphabet('alpha-20')">ظ</button>
+              <button
+                class="alphabet"
+                v-for="(data, index) in data"
+                :key="index"
+                :id="`alpha-${index}`"
+                @click="toggle_active_alphabet(`alpha-${index}`)"
+              >
+                {{ index }}
+              </button>
             </div>
           </div>
         </div>
@@ -379,17 +234,32 @@
 </template>
 
 <script setup>
+import Request from "../../Api/Request";
 import Config from "../../composables/Config";
 import { CustomTextBox } from "../../composables/CustomTextBox";
 
 const current_page = "pages/search-keyword";
 const config = new Config();
-const search = ref("");
 const search_class = new CustomTextBox();
 const content_count = ref(10);
+const data = ref(null);
 
+const request = new Request();
+const form = ref({
+  keyword: "",
+  lang: "fa",
+});
+
+function select_alphabet(alpha) {
+  form.value.lang = alpha;
+}
 function toggle_active_alphabet(id) {
   let element = document.getElementById(id);
   element.classList.toggle("active");
+}
+async function search_keywords_request() {
+  let res = await request.get("keyword/suggest", form.value, "v2");
+
+  data.value = res.data();
 }
 </script>
