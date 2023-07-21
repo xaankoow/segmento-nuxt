@@ -182,12 +182,11 @@ import { useConfigStore } from "../store/Config";
 const cn = new Config();
 const actived_navbar = ref("department");
 const actived_navbar_content = ref({});
-console.log(useCookie("package").value);
 function profile() {
   return {
-    name: useCookie("user").value.name,
-    wallet: useCookie("user").value.wallet,
-    subscription: useCookie("package").value.type.label,
+    name: useCookie("user").value?.name ?? 'user',
+    wallet: useCookie("user").value?.wallet ?? 0,
+    subscription: useCookie("package").value?.type.label ?? 'اشتراک عادی',
   };
 }
 </script>

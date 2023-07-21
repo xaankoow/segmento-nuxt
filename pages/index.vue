@@ -3,7 +3,14 @@
 </template>
 
 <script setup>
-onBeforeMount(() => {
-  navigateTo("/auth/login");
+definePageMeta({
+  middleware: defineNuxtRouteMiddleware((to, from) => {
+    let token = useCookie("token").value;
+    if (token === null || token === "" || token === undefined) {
+      return navigateTo("/auth/login");
+    } else {
+      return navigateTo("/keyword-research");
+    }
+  }),
 });
 </script>

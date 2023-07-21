@@ -114,9 +114,7 @@
                   </span>
                 </label>
                 <span>{{ setting.wallet.text }} :</span>
-                <span class="mx-[12px]">
-                  {{ profile.wallet }} تومان
-                </span>
+                <span class="mx-[12px]"> {{ profile.wallet }} تومان </span>
               </NuxtLink>
             </li>
             <li>
@@ -207,8 +205,8 @@
             <li
               class="text-error mb-1 !rounded-sm hover:[&>*]:!bg-error/20 hover:[&>*]:!text-error"
             >
-              <NuxtLink
-                to="/"
+              <button
+                @click="logout()"
                 class="flex flex-row justify-between items-center"
               >
                 <span>
@@ -228,7 +226,7 @@
                     />
                   </svg>
                 </span>
-              </NuxtLink>
+              </button>
             </li>
           </ul>
         </div>
@@ -288,4 +286,11 @@ const props = defineProps({
   },
 });
 
+function logout() {
+  useCookie("user").value = null;
+  useCookie("token").value = null;
+  useCookie("package").value = null;
+
+  navigateTo("/auth/login");
+}
 </script>

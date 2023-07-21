@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-5 w-full h-full">
     <!-- loading -->
     <div
-    style="direction: ltr;"
+      style="direction: ltr"
       v-if="request.pending()"
       class="absolute top-0 left-0 w-full h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
     >
@@ -260,6 +260,15 @@ const request = new Request();
 const form = ref({
   keyword: "",
   lang: "fa",
+});
+
+definePageMeta({
+  middleware: defineNuxtRouteMiddleware((to, from) => {
+    let token = useCookie("token").value;
+    if (token === null || token === "" || token === undefined) {
+      return navigateTo("/auth/login");
+    }
+  }),
 });
 
 function select_alphabet(alpha) {
