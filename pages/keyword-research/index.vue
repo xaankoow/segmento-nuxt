@@ -262,13 +262,11 @@ const form = ref({
   lang: "fa",
 });
 
-definePageMeta({
-  middleware: defineNuxtRouteMiddleware((to, from) => {
-    let token = useCookie("token").value;
-    if (token === null || token === "" || token === undefined) {
-      return navigateTo("/auth/login");
-    }
-  }),
+onBeforeMount(() => {
+  let token = useCookie("token").value;
+  if (token === null || token === "" || token === undefined) {
+    return navigateTo("/auth/login");
+  }
 });
 
 function select_alphabet(alpha) {

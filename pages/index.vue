@@ -3,14 +3,14 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: defineNuxtRouteMiddleware((to, from) => {
-    let token = useCookie("token").value;
-    if (token === null || token === "" || token === undefined) {
-      return navigateTo("/auth/login");
-    } else {
-      return navigateTo("/keyword-research");
-    }
-  }),
+
+onMounted(() => {
+  let token = useCookie("token").value;
+  if (token === null || token === "" || token === undefined) {
+    navigateTo("/auth/login");
+  } else {
+    navigateTo("/keyword-research");
+  }
 });
+
 </script>
