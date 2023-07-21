@@ -79,7 +79,7 @@ async function requestToLogin() {
     let config = await request.post("core/config", null, "v1");
 
     configStore.setConfig(config.data());
-    navigateTo("/");
+    navigateTo("/keyword-research");
   } else {
     // TODO : Message to user name or password is incorrect
     console.log(response.errors());
