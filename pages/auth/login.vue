@@ -76,9 +76,13 @@ async function requestToLogin() {
   let response = await request.post("auth/login", form.value, "v1");
   if (response.status()) {
     configStore.setConfig(response.data());
+    let config = await request.post("core/config", null, "v1");
+
+    configStore.setConfig(config.data());
     navigateTo("/");
+  } else {
+    // TODO : Message to user name or password is incorrect
+    console.log(response.errors());
   }
-  // TODO : Message to user name or password is incorrect
-  console.log(response.errors());
 }
 </script>
