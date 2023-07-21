@@ -114,7 +114,9 @@
                   </span>
                 </label>
                 <span>{{ setting.wallet.text }} :</span>
-                <span class="mx-[12px]"> {{ setting.wallet.price }} تومان </span>
+                <span class="mx-[12px]">
+                  {{ profile.wallet }} تومان
+                </span>
               </NuxtLink>
             </li>
             <li>
@@ -282,27 +284,9 @@ const props = defineProps({
   },
   setting: {
     type: Object,
-    required: true
-    /*
-    default: function () {
-      return {
-        config: "تنظیمات حساب کاربری",
-        buy: "خرید اشتراک",
-        state: "وضعیت اشتراک",
-        reports: "گزارش های مالی",
-        exit: "خروج",
-        wallet: {
-          type: Object,
-          default: function () {
-            return {
-              text: "موجودی کیف پول:",
-              price: 250000,
-            };
-          },
-        },
-      };
-    },
-    */
+    required: true,
   },
 });
+
+console.log(props.profile);
 </script>
