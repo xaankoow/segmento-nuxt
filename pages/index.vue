@@ -3,7 +3,8 @@
 </template>
 
 <script setup>
-onMounted(() => {
-  navigateTo("/keyword-research");
+onBeforeMount(() => {
+  if (useCookie("token").value !== '') navigateTo("/keyword-research");
+  else navigateTo("/auth/login");
 });
 </script>
