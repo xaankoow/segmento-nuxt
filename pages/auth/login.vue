@@ -56,7 +56,6 @@ import Config from "../../composables/Config";
 import { CustomTextBox } from "../../composables/CustomTextBox";
 import Request from "../../Api/Request";
 import { useConfigStore } from "../../store/Config";
-
 definePageMeta({
   layout: "login",
 });
@@ -66,7 +65,6 @@ const current_page = "pages/auth/login";
 const emailBox = new CustomTextBox();
 const passwordBox = new CustomTextBox();
 const request = new Request();
-
 const form = ref({
   email: "",
   password: "",
@@ -75,10 +73,19 @@ const form = ref({
 async function requestToLogin() {
   let response = await request.post("auth/login", form.value, "v1");
   if (response.status()) {
+    useCookie("token", { secure: true, default: () => "" });
+    useCookie("user", { default: () => null });
+    useCookie("package", { default: () => null });
+
+    useCookie("token").value = response.data().token;
+    useCookie("user").value = JSON.stringify(response.data().user);
+
     configStore.setConfig(response.data());
     let config = await request.post("core/config", null, "v1");
 
-    configStore.setConfig(config.data());
+    configStore.setPackage(config.data().package);
+    useCookie("package").value = JSON.stringify(config.data().package);
+
     navigateTo("/keyword-research");
   } else {
     // TODO : Message to user name or password is incorrect

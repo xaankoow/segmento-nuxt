@@ -288,5 +288,4 @@ const props = defineProps({
   },
 });
 
-console.log(props.profile);
 </script>

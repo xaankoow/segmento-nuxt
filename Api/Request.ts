@@ -1,11 +1,11 @@
 import axios from "axios";
 import ResponseModel from "./ResponseModel"
-import { useConfigStore } from "../store/Config";
+import { useAuth } from "../store/Auth";
 
 export default class Request {
     private request = useNuxtApp().$axios;
     protected _pending = ref(false);
-    protected storeConfig = useConfigStore();
+
 
     constructor() {
         return this;
@@ -26,7 +26,7 @@ export default class Request {
     protected send_request = async (method: string, url: string, body: any, params: any): Promise<ResponseModel> => {
         let result: any;
         this._pending.value = true;
-        let token = this.storeConfig.token;
+        let token = useCookie('token').value;
 
         await axios.request({
             baseURL: 'https://core.segmento.ir/api/',

@@ -1,8 +1,9 @@
 <template>
-  <div class="flex w-full">
-    صفحه اصلی
-  </div>
+  <div class="flex w-full">صفحه اصلی</div>
 </template>
 
-<script>
+<script setup>
+onMounted(() => {
+  navigateTo("/keyword-research");
+});
 </script>

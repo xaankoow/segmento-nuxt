@@ -4,7 +4,12 @@
     style="direction: rtl"
   >
     <!-- Header section -->
-    <NavbarTop :platform="cn.__(['layouts', 'default', 'header', 'platform'])" :setting="cn.__(['layouts', 'default', 'header', 'profile'])" class="shadow-md mx-auto"></NavbarTop>
+    <NavbarTop
+      :platform="cn.__(['layouts', 'default', 'header', 'platform'])"
+      :setting="cn.__(['layouts', 'default', 'header', 'profile'])"
+      :profile="profile()"
+      class="shadow-md mx-auto"
+    ></NavbarTop>
 
     <div class="flex flex-row h-full flex-grow mt-2 ml-2 gap-2">
       <div class="flex flex-row">
@@ -173,7 +178,16 @@
 </template>
 <script setup>
 import Config from "../composables/Config";
-const cn = new Config()
-const actived_navbar = ref("home");
+import { useConfigStore } from "../store/Config";
+const cn = new Config();
+const actived_navbar = ref("department");
 const actived_navbar_content = ref({});
+console.log(useCookie("package").value);
+function profile() {
+  return {
+    name: useCookie("user").value.name,
+    wallet: useCookie("user").value.wallet,
+    subscription: useCookie("package").value.type.label,
+  };
+}
 </script>
