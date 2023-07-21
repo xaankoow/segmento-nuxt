@@ -161,7 +161,7 @@ async function verify_email() {
   if (response.status()) {
     configStore.setConfig(response.data());
     // TODO : TOAST success message
-    navigateTo("/");
+    navigateTo("/keyword-research");
   } else {
     // TODO : TOAST error message
     console.log(response);
