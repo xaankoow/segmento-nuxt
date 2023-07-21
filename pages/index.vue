@@ -4,7 +4,6 @@
 
 <script setup>
 onBeforeMount(() => {
-  if (useCookie("token").value !== '') navigateTo("/keyword-research");
-  else navigateTo("/auth/login");
+  navigateTo("/auth/login");
 });
 </script>
