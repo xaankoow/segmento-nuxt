@@ -8,7 +8,7 @@
       id="popup-content"
     >
       <!-- header content -->
-      <div class="flex justify-end items-center w-full" v-if="!bubble_bursting">
+      <div class="flex justify-end items-center w-full" v-if="!can_close">
         <button
           class="cursor-pointer text-error opacity-80 hover:opacity-100"
           @click="close()"
@@ -35,17 +35,28 @@ const props = defineProps({
     default: true,
   },
 });
-onMounted(() => {
+const can_close = ref(props.bubble_bursting);
+
+onBeforeMount(() => {
+  let popup = document.getElementById("popup");
+  let popup_content = document.getElementById("popup-content");
+
+  // Add event listener for base document
   if (props.bubble_bursting) {
     document.addEventListener("click", function (e) {
-      let popup = document.getElementById("popup");
-      let popup_content = document.getElementById("popup-content");
+      popup = document.getElementById("popup");
+      popup_content = document.getElementById("popup-content");
       if (e.target === popup && e.target !== popup_content) {
         popup.classList.toggle("active");
       }
     });
+  } else {
+    // If you didn't define anything to close the popup default close section will appear !
+    let close_contents = popup_content.getElementsByClassName("close");
+    can_close.value = close_contents.length > 0;
   }
 });
+
 function close() {
   let popup = document.getElementById("popup");
   popup.classList.remove("active");
