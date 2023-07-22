@@ -1,12 +1,9 @@
 <template>
-  <div
-    class="w-full h-40 rounded-md flex text-white"
-    :style="{ backgroundColor: color }"
-  >
+  <div class="w-full h-40 rounded-md flex text-white" :class="color">
     <div class="w-3/4 h-full flex flex-col justify-evenly px-5">
-      <p>{{ title }}</p>
-      <p>{{ meta_title }}</p>
-      <slot name="paragraph"></slot>
+      <p><slot name="header">موفقیت آمیز</slot></p>
+      <p><slot name="main">کاربر عزیز اشتراک 12 ماهه طلایی با موفقیت برای شما فعال شد</slot></p>
+      <p><slot name="footer"></slot></p>
     </div>
     <div class="w-1/4 h-full flex items-center justify-end px-10">
       <slot name="icon"></slot>
@@ -20,15 +17,7 @@ import { defineProps } from "vue";
 const props = defineProps({
   color: {
     type: String,
-    default: "#10CCAE",
-  },
-  title: {
-    type: String,
-    default: "موفقیت آمیز!",
-  },
-  meta_title: {
-    type: String,
-    required: true,
+    default: "bg-success",
   },
 });
 </script>
