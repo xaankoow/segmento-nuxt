@@ -50,11 +50,11 @@ onBeforeMount(() => {
         popup.classList.toggle("active");
       }
     });
-  } else {
+  } /* else {
     // If you didn't define anything to close the popup default close section will appear !
     let close_contents = popup_content.getElementsByClassName("close");
     can_close.value = close_contents.length > 0;
-  }
+  }*/
 });
 
 function close() {
