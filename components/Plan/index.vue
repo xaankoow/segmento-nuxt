@@ -2,6 +2,12 @@
   <div
     class="flex flex-col justify-between items-center border-2 rounded-md shadow transition-all duration-300 hover:shadow-lg"
   >
+  <div class="hidden">
+    text-bronze border-b-bronze
+    text-silver border-b-silver
+    text-gold border-b-gold
+    text-diamond border-b-diamond
+  </div>
     <!-- plan content -->
     <div class="flex flex-col gap-12 items-center w-full pb-8">
       <!-- header and title -->
@@ -42,15 +48,22 @@
       <!-- price view -->
       <div class="flex flex-col w-full items-center gap-1">
         <del class="text-xs" v-if="discount_result.status">
-          <span
-            :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`"
-          >
+          <span :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
             {{ plan.selected_plan()?.price.final }}
             {{ plan.selected_plan() !== undefined ? currency.title : "" }}
           </span>
         </del>
-        <span :class="discount_result.status ? 'font-semibold text-primary' : ''" :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
-          {{ plan.calculate_discount(plan.selected_plan(), discount_result.discount?.value ?? null, 2) }}
+        <span
+          :class="discount_result.status ? 'font-semibold text-primary' : ''"
+          :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`"
+        >
+          {{
+            plan.calculate_discount(
+              plan.selected_plan(),
+              discount_result.discount?.value ?? null,
+              2
+            )
+          }}
           {{ plan.selected_plan() !== undefined ? currency.title : "" }}
         </span>
       </div>
@@ -108,7 +121,8 @@
             </g>
           </svg>
         </button>
-        <span v-if="discount_result.status !== null"
+        <span
+          v-if="discount_result.status !== null"
           class="text-error text-xs left-0 -translate-y-5"
           style="font-size: 0.625rem"
           :class="!discount_result.status ? 'absolute' : 'hidden'"
