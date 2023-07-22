@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-between items-center border-2 rounded-md shadow hover:shadow-lg"
+    class="flex flex-col justify-between items-center border-2 rounded-md shadow transition-all duration-300 hover:shadow-lg"
   >
     <!-- plan content -->
     <div class="flex flex-col gap-12 items-center w-full pb-8">
