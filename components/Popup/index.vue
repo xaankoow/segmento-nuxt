@@ -8,6 +8,7 @@
 </template>
 
 <script setup>
+/*
 function click(e) {
     let popup_content_element = this.document.getElementById('popup-content');
     let popup_element = this.document.getElementById('popup');
@@ -17,5 +18,5 @@ function click(e) {
     }
 }
 window.addEventListener('click', click);
-
+*/
 </script>
