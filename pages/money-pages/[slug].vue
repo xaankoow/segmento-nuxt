@@ -426,8 +426,320 @@
               config.by_route(`${current_page}/sections/page-speed/order`)
             }}</span>
             <div class="flex flex-row items-center justify-evenly">
-                <div class="w-28 h-40 border rounded-sm" v-for="i in 8" :key="i"></div>
+              <div
+                class="w-28 h-40 border rounded-sm"
+                v-for="i in 8"
+                :key="i"
+              ></div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- technical analysis section -->
+      <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
+        <!-- title -->
+        <label class="p-3">{{
+          config.by_route(`${technical_section}/title`)
+        }}</label>
+
+        <!-- content section -->
+
+        <div class="flex flex-col w-full gap-7 px-3">
+          <!-- this must designed as widget -->
+          <div class="grid grid-cols-8 items-start gap-5 w-full">
+            <!-- title -->
+            <div class="flex flex-row items-center gap-4 col-span-2">
+              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+              <span>{{
+                config.by_route(`${technical_section}/tag-title`)
+              }}</span>
+            </div>
+            <!-- description -->
+            <div class="flex flex-col col-span-5 gap-2 w-8/12 font-thin">
+              <p>آنالیز کامل سایت - آنالیز سئو - بررسی سایت - بررسی سئو سایت</p>
+              <span class="flex flex-row items-center gap-5">
+                <label class="font-semibold">طول: </label>
+                <span>255 حرف</span>
+              </span>
+            </div>
+            <!-- spinner -->
+            <span class="h-full flex items-center justify-end">
+              <svg
+                width="20"
+                height="12"
+                viewBox="0 0 20 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
+                  fill="#002145"
+                />
+              </svg>
+            </span>
+            <!-- paragraph -->
+            <p class="text-base-500 col-span-8 mx-auto w-10/12">
+              تگ عنوان عنصر HTML است که عنوان صفحه وب را مشخص می کند. تگ عنوان
+              در بالای مرورگر شما، در نتایج جستجو و همچنین در نوار نشانک ها
+              نمایش داده می شود.
+            </p>
+          </div>
+
+          <hr />
+          <!-- this must designed as widget -->
+          <div class="grid grid-cols-8 items-start gap-5 w-full">
+            <!-- title -->
+            <div class="flex flex-row items-center gap-4 col-span-2">
+              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+              <span>{{
+                config.by_route(`${technical_section}/meta-description`)
+              }}</span>
+            </div>
+
+            <!-- description -->
+            <div class="flex flex-col gap-2 font-thin col-span-5">
+              <p>
+                چکاپ تولز یک سایت جامع برای آنالیز سئو و سرعت سایت شما می باشد
+                که با بیش از 60 ابزار مختلف سایت شما را بررسی میکند و نیاز اصلی
+                هر وبمستر می باشد .
+              </p>
+              <span class="flex flex-row items-center gap-5">
+                <label class="font-semibold">طول: </label>
+                <span>255 حرف</span>
+              </span>
+            </div>
+
+            <!-- spinner -->
+            <span class="h-full flex items-center justify-end">
+              <svg
+                width="20"
+                height="12"
+                viewBox="0 0 20 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
+                  fill="#002145"
+                />
+              </svg>
+            </span>
+            <!-- paragraph -->
+            <p class="text-base-500 col-span-8 w-10/12 mx-auto">
+              توضیحات متا یک تگ HTML است که خلاصه ای کوتاه و دقیق از صفحه وب
+              ارائه می دهد. توضیحات متا توسط موتورهای جستجو برای شناسایی موضوع
+              صفحه وب و ارائه نتایج جستجوی مرتبط استفاده می شود.
+            </p>
+          </div>
+
+          <hr />
+
+          <!-- this must designed as widget -->
+          <div class="grid grid-cols-8 items-start gap-5 w-full">
+            <!-- title -->
+            <div class="flex flex-row items-center gap-4 col-span-2">
+              <span class="mask mask-triangle w-6 h-6 bg-error">&nbsp;</span>
+              <span>{{
+                config.by_route(`${technical_section}/headings`)
+              }}</span>
+            </div>
+
+            <!-- description -->
+            <div class="flex flex-col gap-5 col-span-5 font-thin">
+              <p>فقط یک تگ h1 باید در صفحه وب وجود داشته باشد.</p>
+
+              <!-- table  -->
+              <div class="border rounded-sm flex flex-col w-10/12">
+                <div
+                  class="flex flex-row items-center justify-between px-3 py-2"
+                >
+                  <!-- tag -->
+                  <span>h1</span>
+
+                  <span class="flex flex-row items-center gap-2">
+                    <span
+                      class="bg-base-350 text-base-500 rounded-full px-3 py-1 text-sm"
+                      >9 مورد</span
+                    >
+                    <span>
+                      <svg
+                        width="12"
+                        height="7"
+                        viewBox="0 0 12 7"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.796355 5.94739L5.63802 1.09115C5.68663 1.04253 5.74263 1.00617 5.80602 0.982062C5.86902 0.957562 5.93455 0.945312 6.0026 0.945312C6.07066 0.945312 6.13638 0.957562 6.19977 0.982062C6.26277 1.00617 6.31858 1.04253 6.36719 1.09115L11.2234 5.9474C11.3401 6.06406 11.3984 6.20017 11.3984 6.35573C11.3984 6.51128 11.3352 6.65226 11.2089 6.77865C11.1019 6.89531 10.9683 6.95365 10.8081 6.95365C10.6475 6.95365 10.5089 6.89531 10.3922 6.77865L6.0026 2.37448L1.59844 6.77865C1.49149 6.88559 1.36024 6.93906 1.20469 6.93906C1.04913 6.93906 0.913022 6.88073 0.796355 6.76406C0.679688 6.64739 0.621354 6.51128 0.621354 6.35573C0.621354 6.20017 0.679688 6.06406 0.796355 5.94739Z"
+                          fill="#002145"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+                <hr />
+                <div
+                  class="flex flex-row items-center justify-between px-3 py-2"
+                >
+                  <!-- tag -->
+                  <span>h1</span>
+
+                  <span class="flex flex-row items-center gap-2">
+                    <span
+                      class="bg-base-350 text-base-500 rounded-full px-3 py-1 text-sm"
+                      >9 مورد</span
+                    >
+                    <span>
+                      <svg
+                        width="12"
+                        height="7"
+                        viewBox="0 0 12 7"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.796355 5.94739L5.63802 1.09115C5.68663 1.04253 5.74263 1.00617 5.80602 0.982062C5.86902 0.957562 5.93455 0.945312 6.0026 0.945312C6.07066 0.945312 6.13638 0.957562 6.19977 0.982062C6.26277 1.00617 6.31858 1.04253 6.36719 1.09115L11.2234 5.9474C11.3401 6.06406 11.3984 6.20017 11.3984 6.35573C11.3984 6.51128 11.3352 6.65226 11.2089 6.77865C11.1019 6.89531 10.9683 6.95365 10.8081 6.95365C10.6475 6.95365 10.5089 6.89531 10.3922 6.77865L6.0026 2.37448L1.59844 6.77865C1.49149 6.88559 1.36024 6.93906 1.20469 6.93906C1.04913 6.93906 0.913022 6.88073 0.796355 6.76406C0.679688 6.64739 0.621354 6.51128 0.621354 6.35573C0.621354 6.20017 0.679688 6.06406 0.796355 5.94739Z"
+                          fill="#002145"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+                <hr />
+                <div
+                  class="flex flex-row items-center justify-between px-3 py-2"
+                >
+                  <!-- tag -->
+                  <span>h1</span>
+
+                  <span class="flex flex-row items-center gap-2">
+                    <span
+                      class="bg-base-350 text-base-500 rounded-full px-3 py-1 text-sm"
+                      >9 مورد</span
+                    >
+                    <span>
+                      <svg
+                        width="12"
+                        height="7"
+                        viewBox="0 0 12 7"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.796355 5.94739L5.63802 1.09115C5.68663 1.04253 5.74263 1.00617 5.80602 0.982062C5.86902 0.957562 5.93455 0.945312 6.0026 0.945312C6.07066 0.945312 6.13638 0.957562 6.19977 0.982062C6.26277 1.00617 6.31858 1.04253 6.36719 1.09115L11.2234 5.9474C11.3401 6.06406 11.3984 6.20017 11.3984 6.35573C11.3984 6.51128 11.3352 6.65226 11.2089 6.77865C11.1019 6.89531 10.9683 6.95365 10.8081 6.95365C10.6475 6.95365 10.5089 6.89531 10.3922 6.77865L6.0026 2.37448L1.59844 6.77865C1.49149 6.88559 1.36024 6.93906 1.20469 6.93906C1.04913 6.93906 0.913022 6.88073 0.796355 6.76406C0.679688 6.64739 0.621354 6.51128 0.621354 6.35573C0.621354 6.20017 0.679688 6.06406 0.796355 5.94739Z"
+                          fill="#002145"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+                <hr />
+                <div
+                  class="flex flex-row items-center justify-between px-3 py-2"
+                >
+                  <!-- tag -->
+                  <span>h1</span>
+
+                  <span class="flex flex-row items-center gap-2">
+                    <span
+                      class="bg-base-350 text-base-500 rounded-full px-3 py-1 text-sm"
+                      >9 مورد</span
+                    >
+                    <span>
+                      <svg
+                        width="12"
+                        height="7"
+                        viewBox="0 0 12 7"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.796355 5.94739L5.63802 1.09115C5.68663 1.04253 5.74263 1.00617 5.80602 0.982062C5.86902 0.957562 5.93455 0.945312 6.0026 0.945312C6.07066 0.945312 6.13638 0.957562 6.19977 0.982062C6.26277 1.00617 6.31858 1.04253 6.36719 1.09115L11.2234 5.9474C11.3401 6.06406 11.3984 6.20017 11.3984 6.35573C11.3984 6.51128 11.3352 6.65226 11.2089 6.77865C11.1019 6.89531 10.9683 6.95365 10.8081 6.95365C10.6475 6.95365 10.5089 6.89531 10.3922 6.77865L6.0026 2.37448L1.59844 6.77865C1.49149 6.88559 1.36024 6.93906 1.20469 6.93906C1.04913 6.93906 0.913022 6.88073 0.796355 6.76406C0.679688 6.64739 0.621354 6.51128 0.621354 6.35573C0.621354 6.20017 0.679688 6.06406 0.796355 5.94739Z"
+                          fill="#002145"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- spinner -->
+            <span class="h-full flex items-center justify-end">
+              <svg
+                width="20"
+                height="12"
+                viewBox="0 0 20 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
+                  fill="#002145"
+                />
+              </svg>
+            </span>
+
+            <!-- paragraph -->
+            <p class="text-base-500 col-span-8 mx-auto w-10/12">
+              تگ h نشان دهنده سرفصل های صفحه وب است. تگ h1 مهمترین تگ h است و
+              موضوع اصلی صفحه را توصیف می کند، در حالی که بقیه تگ ها موضوعات
+              فرعی صفحه وب را توصیف می کنند.
+            </p>
+          </div>
+
+          <hr />
+
+          <!-- this must designed as widget -->
+          <div class="grid grid-cols-8 items-start gap-5 w-full">
+            <!-- title -->
+            <div class="flex flex-row items-center gap-4 col-span-2">
+              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+              <span>{{
+                config.by_route(`${technical_section}/content-keywords`)
+              }}</span>
+            </div>
+
+            <!-- description -->
+            <div class="flex flex-col gap-2 font-thin col-span-5">
+              <p>محتوا دارای کلمات کلیدی مرتبط است.</p>
+              <div class="flex flex-row items-center gap-2">
+                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20">
+                  سئو
+                </span>
+                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20">
+                  آموزش سئو
+                </span>
+                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20">
+                  سگمنتو
+                </span>
+                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20">
+                  آموزش سئو مشهد
+                </span>
+              </div>
+            </div>
+
+            <!-- spinner -->
+            <span class="h-full flex items-center justify-end">
+              <svg
+                width="20"
+                height="12"
+                viewBox="0 0 20 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
+                  fill="#002145"
+                />
+              </svg>
+            </span>
+            <!-- paragraph -->
+            <p class="text-base-500 col-span-8 w-10/12 mx-auto">
+              محتوای صفحه وب باید حاوی کلمات کلیدی مرتبط باشد که در عنوان صفحه
+              وب نیز یافت می شود.
+            </p>
           </div>
         </div>
       </section>
@@ -439,5 +751,6 @@
 import Config from "../../composables/Config";
 
 const current_page = "pages/money-pages/single";
+const technical_section = `${current_page}/sections/technical-analysis`;
 const config = new Config();
 </script>

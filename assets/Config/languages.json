@@ -211,6 +211,13 @@
                             "available": "دسترس پذیری",
                             "important_criterion": "معیار های مهم",
                             "seo": "سئو"
+                        },
+                        "technical-analysis": {
+                            "title": "تحلیل تکنیکال",
+                            "tag-title": " (Tag Title) عنوان سایت",
+                            "meta-description": " (Meta Description) توضیحات سایت",
+                            "headings": "(Headings) عناوین",
+                            "content-keywords": "کلمات کلیدی هدف (Content keywords)"
                         }
                     }
                 }
