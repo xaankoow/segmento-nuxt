@@ -227,8 +227,20 @@
                         "filter": {
                             "option": "لطفا یک گزینه را انتخاب کنید:",
                             "order": "مرتب سازی بر اساس"
+                        },
+                        "table": {
+                            "select": "انتخاب",
+                            "updated_at": "تاریخ بروزرسانی",
+                            "keyword": "کلمه کلیدی",
+                            "google-rank": "رتبه گوگل",
+                            "function": "عملکرد اجرایی",
+                            "available": "دسترس پذیری",
+                            "important_criterion": "معیار های مهم",
+                            "seo": "سئو",
+                            "page-status": "وضعیت کلی صفحه"
                         }
-                    }
+                    },
+                    "export": "خروجی"
                 }
             }
         }

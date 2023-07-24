@@ -918,6 +918,83 @@
           </svg>
         </button>
       </section>
+
+      <!-- table section -->
+      <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
+        <!-- this is the row -->
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {{ config.by_route(`${table_section}/select`) }}
+              </th>
+              <th>
+                {{ config.by_route(`${table_section}/updated_at`) }}
+              </th>
+              <th>
+                {{ config.by_route(`${table_section}/keyword`) }}
+              </th>
+              <th>
+                {{ config.by_route(`${table_section}/google-rank`) }}
+              </th>
+              <th>
+                {{ config.by_route(`${table_section}/function`) }}
+              </th>
+              <th>
+                {{ config.by_route(`${table_section}/available`) }}
+              </th>
+              <th>
+                {{ config.by_route(`${table_section}/important_criterion`) }}
+              </th>
+              <th>
+                {{ config.by_route(`${table_section}/seo`) }}
+              </th>
+              <th>
+                {{ config.by_route(`${table_section}/page-status`) }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="text-sm">
+            <tr
+              class="[&>td]:text-center [&>td]:p-4 items-baseline"
+              v-for="i in 8"
+              :key="i"
+            >
+              <td>
+                <input type="checkbox" class="w-5 h-5" />
+              </td>
+              <td>1402/11/25</td>
+              <td>کلمه کلیدی</td>
+              <td :class="i % 2 === 0 ? 'text-success' : 'text-amber-400'">
+                8
+              </td>
+              <td :class="i % 2 === 0 ? 'text-error' : 'text-success'">23</td>
+              <td :class="i % 2 === 0 ? 'text-amber-400' : 'text-error'">70</td>
+              <td :class="i % 4 === 0 ? 'text-success' : 'text-amber-400'">
+                92
+              </td>
+              <td :class="i % 3 === 0 ? 'text-success' : 'text-amber-400'">
+                99
+              </td>
+              <td class="px-4">
+                <span
+                  class="flex rounded-full w-full h-1"
+                  :class="i % 3 !== 0 ? 'bg-success' : 'bg-error'"
+                  >&nbsp;</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- export button -->
+      <div class="flex flex-row items-center justify-end">
+        <button class="bg-primary/5 px-5 py-2 rounded-lg text-primary hover:bg-primary/10 transition-all duration-150">
+          {{ config.by_route(`${current_page}/export`) }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -929,6 +1006,7 @@ const current_page = "pages/money-pages/single";
 const technical_section = `${current_page}/sections/technical-analysis`;
 const chart_section = `${current_page}/sections/chart`;
 const filter_section = `${current_page}/sections/filter`;
+const table_section = `${current_page}/sections/table`;
 
 const config = new Config();
 </script>
