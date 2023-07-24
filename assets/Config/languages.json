@@ -218,6 +218,11 @@
                             "meta-description": " (Meta Description) توضیحات سایت",
                             "headings": "(Headings) عناوین",
                             "content-keywords": "کلمات کلیدی هدف (Content keywords)"
+                        },
+                        "chart": {
+                            "title": "نمودار رتبه کلمه کلیدی",
+                            "empty": "اطلاعاتی برای نمایش وجود ندارد!",
+                            "button": "افزودن کلمه کلیدی"
                         }
                     }
                 }
