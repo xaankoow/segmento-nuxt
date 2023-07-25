@@ -187,6 +187,61 @@
                     },
                     "empty": "اطلاعاتی برای نمایش وجود ندارد!"
                 }
+            },
+            "money-pages": {
+                "single": {
+                    "title": "صفحات تجاری",
+                    "tabs": {
+                        "business": "صفحات تجاری",
+                        "reports": "آمار و گزارش"
+                    },
+                    "back": "بازگشت",
+                    "sections": {
+                        "page-speed": {
+                            "title": "سرعت صفحه وبسایت",
+                            "problems": {
+                                "high": "مشکلات با اولویت بالا",
+                                "middle": "مشکلات با اولویت متوسط",
+                                "low": "مشکلات با اولویت پایین",
+                                "solved": "مشکلات حل شده و درست"
+                            },
+                            "criterion": "معیار های سرعت صفحه",
+                            "order": "ترتیب لود شدن صفحات",
+                            "function": "عملکرد اجرایی",
+                            "available": "دسترس پذیری",
+                            "important_criterion": "معیار های مهم",
+                            "seo": "سئو"
+                        },
+                        "technical-analysis": {
+                            "title": "تحلیل تکنیکال",
+                            "tag-title": " (Tag Title) عنوان سایت",
+                            "meta-description": " (Meta Description) توضیحات سایت",
+                            "headings": "(Headings) عناوین",
+                            "content-keywords": "کلمات کلیدی هدف (Content keywords)"
+                        },
+                        "chart": {
+                            "title": "نمودار رتبه کلمه کلیدی",
+                            "empty": "اطلاعاتی برای نمایش وجود ندارد!",
+                            "button": "افزودن کلمه کلیدی"
+                        },
+                        "filter": {
+                            "option": "لطفا یک گزینه را انتخاب کنید:",
+                            "order": "مرتب سازی بر اساس"
+                        },
+                        "table": {
+                            "select": "انتخاب",
+                            "updated_at": "تاریخ بروزرسانی",
+                            "keyword": "کلمه کلیدی",
+                            "google-rank": "رتبه گوگل",
+                            "function": "عملکرد اجرایی",
+                            "available": "دسترس پذیری",
+                            "important_criterion": "معیار های مهم",
+                            "seo": "سئو",
+                            "page-status": "وضعیت کلی صفحه"
+                        }
+                    },
+                    "export": "خروجی"
+                }
             }
         },
         "components": {
