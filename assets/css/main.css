@@ -15,11 +15,15 @@
   }
 
   .btn {
-    @apply rounded-lg py-1 px-2 transition-all duration-100;
+    @apply rounded-lg py-2 px-3 transition-all duration-200;
   }
 
   .btn-primary {
-    @apply btn bg-primary text-base-100  hover:bg-primary-active;
+    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-base-100  hover:bg-primary-active;
+  }
+
+  .btn-secondary {
+    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary/5 text-primary hover:bg-primary/10
   }
 
   .alphabet {
