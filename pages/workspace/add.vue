@@ -104,6 +104,7 @@
               class="w-full border-2 border-base-350 rounded-sm py-2 pl-16 focus:border-b-primary outline-none"
               placeholder="example.ir"
               v-model="form.website"
+              @blur="check_workspace()"
             />
             <label class="absolute left-[0.6rem] top-[0.6rem]">https://</label>
           </div>
@@ -131,7 +132,9 @@
         </div>
         <hr />
         <div class="flex flex-row items-center justify-end mb-5">
-          <button class="btn-primary flex flex-row items-center gap-4 w-28 justify-center">
+          <button
+            class="btn-primary flex flex-row items-center gap-4 w-28 justify-center"
+          >
             <span>{{ config.by_route(`${current_page}/buttons/next`) }}</span>
             <span>
               <svg
@@ -166,4 +169,13 @@ const form = ref({
   website: "",
   pages: [],
 });
+
+function check_workspace() {
+  let website = form.value.website;
+  // TODO : add regex to check url
+  if (website.startsWith("http://") || website.startsWith("https://")) {
+    website = website.replace("http://", "").replace("https://", "");
+    form.value.website = website;
+  }
+}
 </script>
