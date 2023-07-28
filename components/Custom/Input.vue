@@ -1,7 +1,7 @@
 <template>
     <div class="custom_input_box text-base-content w-[22.625rem]">
         <input v-model="value" :type="type" :minlength="min" :maxlength="max" :min="min" :max="max" :required="required"
-            @focus="box.focus()" @blur="leave()" />
+            :style="`direction: ${direction};`" @focus="box.focus()" @blur="leave()" />
         <label :class="box.transitionStyle(value, 'text-base-content')">
             {{ placeholder }}
         </label>
@@ -31,6 +31,10 @@ const props = defineProps({
     },
     required: {
         type: Boolean,
+    },
+    direction: {
+        type: String,
+        default: 'rtl'
     }
 })
 const value = ref("");
