@@ -1,6 +1,6 @@
 <template>
   <div :id="id" class="flex flex-row items-center gap-4">
-    <CustomInput type="text" :placeholder="placeholder" :direction="direction" @value="setValue" />
+    <CustomInput type="text" :name="name" :placeholder="placeholder" :direction="direction" @value="setValue" />
     <button class="bg-error/10 p-1 rounded-sm hover:bg-error/25 transition-all duration-200" @click="dispose()">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -21,8 +21,14 @@ const props = defineProps({
   direction: {
     type: String,
     default: 'rtl'
+  },
+  name: {
+    type: String,
+    required: true,
   }
-})
+});
+
+
 const id = ref(0);
 const emit = defineEmits(['value', 'name']);
 

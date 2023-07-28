@@ -1,8 +1,8 @@
 <template>
     <div class="custom_input_box text-base-content w-[22.625rem]">
-        <input v-model="value" :type="type" :minlength="min" :maxlength="max" :min="min" :max="max" :required="required"
+        <input v-model="value" :name="name" :type="type" :minlength="min" :maxlength="max" :min="min" :max="max" :required="required"
             :style="`direction: ${direction};`" @focus="box.focus()" @blur="leave()" />
-        <label :class="box.transitionStyle(value, 'text-base-content')">
+        <label :for="name" :class="box.transitionStyle(value, 'text-base-content')">
             {{ placeholder }}
         </label>
     </div>
@@ -15,6 +15,10 @@ const box = new CustomTextBox();
 
 const props = defineProps({
     placeholder: {
+        type: String,
+        required: true
+    },
+    name: {
         type: String,
         required: true
     },
