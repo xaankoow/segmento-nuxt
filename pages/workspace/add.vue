@@ -169,7 +169,7 @@
             <span>
               {{ config.by_route(`${current_page}/steps`)[1].meta_description }}
             </span>
-            <button class="btn-secondary flex flex-row items-center justify-center gap-4 px-4">
+            <button class="btn-secondary flex flex-row items-center justify-center gap-4 px-4" @click="add_page_panel()">
               <span>
                 <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -184,51 +184,21 @@
           </div>
           <hr />
           <!-- page and keywords -->
-          <div class="flex flex-row gap-4 justify-between items-start">
-            <!-- keyword section -->
-            <div class="flex flex-col-reverse gap-5 w-1/2" id="keyword-section">
-              <button class="btn-secondary w-11/12 flex flex-row items-center justify-center gap-5"
-                @click="add_keyword()">
-                <span>
-                  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7.5 13.75C7.28333 13.75 7.10433 13.6793 6.963 13.538C6.821 13.396 6.75 13.2167 6.75 13V7.75H1.5C1.28333 7.75 1.10433 7.679 0.963 7.537C0.821 7.39567 0.75 7.21667 0.75 7C0.75 6.78333 0.821 6.604 0.963 6.462C1.10433 6.32067 1.28333 6.25 1.5 6.25H6.75V1C6.75 0.783333 6.821 0.604333 6.963 0.463C7.10433 0.321 7.28333 0.25 7.5 0.25C7.71667 0.25 7.896 0.321 8.038 0.463C8.17933 0.604333 8.25 0.783333 8.25 1V6.25H13.5C13.7167 6.25 13.896 6.32067 14.038 6.462C14.1793 6.604 14.25 6.78333 14.25 7C14.25 7.21667 14.1793 7.39567 14.038 7.537C13.896 7.679 13.7167 7.75 13.5 7.75H8.25V13C8.25 13.2167 8.17933 13.396 8.038 13.538C7.896 13.6793 7.71667 13.75 7.5 13.75Z"
-                      fill="#488CDA" />
-                  </svg>
-                </span>
-                <span>
-                  {{ config.by_route(`${current_page}/steps`)[1].button.add_keyword }}
-                </span>
-              </button>
-              <InputDisposable name="keyword" :placeholder="config.by_route(`${current_page}/steps`)[1].placeholder.keyword"
-                direction="ltr" @value="pushValue" @name="setName" />
-            </div>
-
-            <!-- pages section -->
-            <div class="flex flex-row items-center gap-2 w-1/2" id="panel-1">
-              <span class="w-fit">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M1.28349 11.3171L15.6201 11.3171L9.35665 17.7445C8.85609 18.2582 8.85609 19.1011 9.35665 19.6148C9.85721 20.1284 10.6658 20.1284 11.1664 19.6148L19.6246 10.9351C20.1251 10.4215 20.1251 9.5917 19.6246 9.07804L11.1792 0.385249C10.6786 -0.128416 9.87005 -0.128416 9.36949 0.385249C8.86892 0.898914 8.86892 1.72868 9.36949 2.24235L15.6201 8.68291L1.28349 8.68291C0.577572 8.68291 1.1061e-07 9.2756 1.19249e-07 10C1.27887e-07 10.7244 0.577572 11.3171 1.28349 11.3171Z"
-                    fill="#D9D9D9" />
-                </svg>
-              </span>
-              <InputDisposable name="page" class="w-10/12" :placeholder="config.by_route(`${current_page}/steps`)[1].placeholder.page"
-                direction="ltr" @value="pushValue" @name="setName" />
-            </div>
+          <div class="flex flex-col gap-5 justify-between items-start" id="page-section">
+            
           </div>
         </div>
         <hr />
         <!-- continue button -->
         <div class="flex flex-row items-center justify-between mb-5">
-          <button class="w-20">
+          <button class="w-20" @click="keywordsList()">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M8.9 0.899867L15.35 7.37487C15.45 7.4582 15.5207 7.5542 15.562 7.66287C15.604 7.77087 15.625 7.8832 15.625 7.99987C15.625 8.11654 15.604 8.2292 15.562 8.33787C15.5207 8.44587 15.45 8.54154 15.35 8.62487L8.9 15.0999C8.75 15.2332 8.575 15.3042 8.375 15.3129C8.175 15.3209 8 15.2499 7.85 15.0999C7.7 14.9499 7.621 14.7749 7.613 14.5749C7.60433 14.3749 7.675 14.1915 7.825 14.0249L13.125 8.74987L1.5 8.74987C1.3 8.74987 1.125 8.6792 0.975001 8.53787C0.825001 8.39587 0.750001 8.21653 0.750001 7.99987C0.750001 7.7832 0.825001 7.6042 0.975001 7.46287C1.125 7.32087 1.3 7.24987 1.5 7.24987L13.125 7.24987L7.825 1.94987C7.69167 1.81654 7.621 1.64587 7.613 1.43787C7.60433 1.2292 7.675 1.04987 7.825 0.899867C7.975 0.749868 8.154 0.674867 8.362 0.674867C8.57067 0.674867 8.75 0.749868 8.9 0.899867Z"
                 fill="#0A65CD" />
             </svg>
           </button>
-          <button class="btn-secondary flex flex-row items-center gap-4 w-28 justify-center" @click="step++">
+          <button class="btn-secondary flex flex-row items-center gap-4 w-28 justify-center" @click="store_data()">
             {{ config.by_route(`${current_page}/buttons/finish`) }}
           </button>
           <button class="btn-primary flex flex-row items-center self-center gap-4 w-28 justify-center" @click="step++">
@@ -249,30 +219,39 @@
 
 <script setup>
 import Config from "../../composables/Config";
+import PagePanel from "../../widget/Workspace/Add/PagePanel";
+import { ref } from "vue";
 
 const current_page = "pages/workspace/add";
 const steps_section = `${current_page}/steps`;
 const config = new Config();
 const step = ref(2);
-
 const form = ref({
   website: "",
   pages: [],
 });
 
+const page_panel = ref(null);
 
-function add_keyword() {
-  // TODO : add InputDisposable component to keyword section 
-  console.log("add keyword will add later")
+function store_data() {
+  page_panel.value.forEach(p => form.value.pages.push(p.value()));
+
+  console.log(form.value);
 }
 
-function setName(name) {
+function add_page_panel() {
+  let panel = new PagePanel();
+  let page_section = document.getElementById('page-section');
+  page_section.appendChild(panel.generate_html());
+  
+  page_panel.value.push(panel);
 }
 
-function pushValue(value, id) {
-  let el = document.getElementById(id);
-  console.log(el.attributes);
-}
+onMounted(() => {
+  page_panel.value = [];
+  add_page_panel();
+
+})
 
 function check_workspace() {
   let website = form.value.website;
