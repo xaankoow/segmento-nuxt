@@ -266,9 +266,11 @@ async function store_website() {
   let response = await request.post("workspaces/add", { workspace: form.value }, 'v1');
 
   if (response.status()) {
+    // TODO : send to correct page
     console.log(response.data());
   }
   else {
+    // TODO: send to message
     console.log(response.errors());
   }
 }
