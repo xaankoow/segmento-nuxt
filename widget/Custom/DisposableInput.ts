@@ -26,6 +26,7 @@ export default class DisposableInput {
 
     private make_button() {
         let button = document.createElement('button');
+        button.id = `${this._id}-button`;
         button.classList.add('bg-error/10', 'p-1', 'rounded-sm', 'hover:bg-error/25', 'transition-all', 'duration-200');
         button.innerHTML = `
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
