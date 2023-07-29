@@ -263,7 +263,7 @@ function store_data() {
 
 async function store_website() {
   let request = new Request();
-  let response = await request.post("workspaces/add", { workspace: form.value }, 'v1');
+  let response = await request.post("workspaces/add", { workspace: form.value });
 
   if (response.status()) {
     // TODO : send to correct page
