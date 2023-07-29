@@ -65,7 +65,7 @@
             config.by_route(`${steps_section}`)[0].placeholder
           }}</span>
           <div class="relative" style="direction: ltr">
-            <input type="text"
+            <input type="text" id="website_text_box"
               class="w-full border-2 border-base-350 rounded-sm py-2 pl-16 focus:border-b-primary outline-none"
               placeholder="example.ir" v-model="form.website" @blur="check_workspace()" />
             <label class="absolute left-[0.6rem] top-[0.6rem]">https://</label>
@@ -88,7 +88,8 @@
         <hr />
         <!-- continue button -->
         <div class="flex flex-row items-center justify-end mb-5">
-          <button class="btn-primary flex flex-row items-center gap-4 w-28 justify-center" @click="step++">
+          <button class="btn-primary flex flex-row items-center gap-4 w-28 justify-center"
+            @click="nextStep(check_workspace())">
             <span>{{ config.by_route(`${current_page}/buttons/next`) }}</span>
             <span>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,7 +186,7 @@
           <hr />
           <!-- page and keywords -->
           <div class="flex flex-col gap-5 justify-between items-start" id="page-section">
-            
+
           </div>
         </div>
         <hr />
@@ -220,12 +221,13 @@
 <script setup>
 import Config from "../../composables/Config";
 import PagePanel from "../../widget/Workspace/Add/PagePanel";
+import Request from "../../Api/Request";
 import { ref } from "vue";
 
 const current_page = "pages/workspace/add";
 const steps_section = `${current_page}/steps`;
 const config = new Config();
-const step = ref(2);
+const step = ref(1);
 const form = ref({
   website: "",
   pages: [],
@@ -234,31 +236,82 @@ const form = ref({
 const page_panel = ref(null);
 
 function store_data() {
-  page_panel.value.forEach(p => form.value.pages.push(p.value()));
+  let data = page_panel.value.map(item => {
+    let value = item.value();
+    let keywords = value.keywords;
 
+    // TODO : add competitors and is_money_page section
+
+    return {
+      slug: value.page,
+      is_money_page: false,
+      keywords: keywords.map(keyword => {
+        return {
+          text: keyword,
+          competitors: []
+        }
+      })
+    }
+  });
+
+  form.value.pages = data;
+  form.value.website = `https://${form.value.website}`;
   console.log(form.value);
+
+  store_website();
+}
+
+async function store_website() {
+  let request = new Request();
+  let response = await request.post("workspaces/add", { workspace: form.value }, 'v1');
+
+  if (response.status()) {
+    console.log(response.data());
+  }
+  else {
+    console.log(response.errors());
+  }
 }
 
 function add_page_panel() {
   let panel = new PagePanel();
   let page_section = document.getElementById('page-section');
   page_section.appendChild(panel.generate_html());
-  
+
   page_panel.value.push(panel);
 }
 
-onMounted(() => {
-  page_panel.value = [];
-  add_page_panel();
-
+onUpdated(() => {
+  if (page_panel.value === null) {
+    page_panel.value = [];
+    add_page_panel();
+  }
 })
 
 function check_workspace() {
   let website = form.value.website;
+  let element = document.getElementById("website_text_box");
+  let re = new RegExp("^((http|https)://)?[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$");
+  let result = false;
   // TODO : add regex to check url
-  if (website.startsWith("http://") || website.startsWith("https://")) {
+  if (re.test(website)) {
     website = website.replace("http://", "").replace("https://", "");
     form.value.website = website;
+    element.classList.remove("border-error");
+    element.classList.add("border-success");
+    result = true;
+  }
+  else {
+    element.classList.remove("border-success");
+    element.classList.add("border-error");
+  }
+
+  return result;
+}
+
+function nextStep(validation_check = false) {
+  if (validation_check) {
+    step.value += 1;
   }
 }
 </script>
