@@ -32,7 +32,7 @@ export default class Input {
 
     private make_custom_input_div() {
         let main_div = document.createElement("div");
-        main_div.classList.add("custom_input_box", "text-base-content", "w-[22.625rem]");
+        main_div.classList.add("custom_input_box", "text-base-content", "w-[22.625rem]", "z-10");
         main_div.id = this._id;
 
         return main_div;

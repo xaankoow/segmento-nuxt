@@ -71,7 +71,7 @@ export default class KeywordPanel implements IHtml {
         return button;
     }
 
-    public keyword_list() {
+    public values() {
         let result = Array<string>();
         let panel = this.html();
         let children = panel.childNodes;
@@ -89,7 +89,7 @@ export default class KeywordPanel implements IHtml {
         let input = this.get_input(input_section)!;
 
         return input.value;
-    }
+    }   
 
     private get_input(element: HTMLElement | ChildNode) {
         return document.getElementById(`${element.id}-input`)
