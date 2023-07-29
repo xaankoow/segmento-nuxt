@@ -1,15 +1,10 @@
-import { ref } from "vue";
 import UuidGenerator from "../../UuidGenerator";
 
 export default class Input {
     private _direction = 'rtl';
     private _name: string;
     private _id: string;
-    private _value = ref('');
     private _placeholder: string;
-
-    private _focused = ref(false);
-
 
     constructor(name: string, placeholder: string, direction = 'rtl') {
         this._id = UuidGenerator.generate();
@@ -31,6 +26,10 @@ export default class Input {
         return custom_div;
     }
 
+    public input_id() {
+        return `${this._id}-input`;
+    }
+
     private make_custom_input_div() {
         let main_div = document.createElement("div");
         main_div.classList.add("custom_input_box", "text-base-content", "w-[22.625rem]");
@@ -47,7 +46,6 @@ export default class Input {
         input.style.direction = this._direction;
         input.onfocus = this.focus;
         input.onblur = this.leave;
-        input.onchange = this.change;
 
         return input;
     }
@@ -59,10 +57,6 @@ export default class Input {
         label.innerText = this._placeholder;
 
         return label;
-    }
-
-    private change(e) {
-        this._value.value = e.target.value;
     }
 
     public focus(e) {
@@ -79,7 +73,8 @@ export default class Input {
         }
     }
 
-    public isFocus() {
-        return this._focused.value;
+    public value() {
+        let input = document.getElementById(this.input_id()) as HTMLInputElement;
+        return input!.value;
     }
 }
