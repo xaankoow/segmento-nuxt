@@ -23,12 +23,23 @@ export default class KeywordPanel implements IHtml {
     public generate_html(): HTMLElement {
         let panel = document.createElement("div");
         let button = this.make_button();
+        let input = this.make_input();
         panel.id = this._id;
         // TODO : fix w-1/2 to get from parameter
         panel.classList.add("flex", "flex-col-reverse", "gap-8", "w-1/2");
         panel.appendChild(button);
+        panel.appendChild(input);   
 
         return panel;
+    }
+
+    private make_input() {
+        let config = new Config();
+        let placeholder = config.by_route('pages/workspace/add/steps')[1].placeholder.keyword;
+        let inp = new DisposableInput('keyword', placeholder, 'ltr');
+        let html = inp.generate_html();
+
+        return html;
     }
 
     private make_button() {
@@ -64,16 +75,16 @@ export default class KeywordPanel implements IHtml {
         let result = Array<string>();
         let panel = this.html();
         let children = panel.childNodes;
-        for(let i = 1; i < children.length; i++) {
+        for (let i = 1; i < children.length; i++) {
             let value = this.get_input_value(children[i]);
             result.push(value);
         }
 
         return result;
     }
-    
 
-    private get_input_value(element: HTMLElement| ChildNode) {
+
+    private get_input_value(element: HTMLElement | ChildNode) {
         let input_section = element.childNodes[0];
         let input = this.get_input(input_section)!;
 
