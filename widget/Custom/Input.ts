@@ -1,4 +1,4 @@
-import UuidGenerator from "../../UuidGenerator";
+import UuidGenerator from "../../composables/UuidGenerator";;
 
 export default class Input {
     private _direction = 'rtl';

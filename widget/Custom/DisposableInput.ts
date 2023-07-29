@@ -1,5 +1,5 @@
 import Input from "./Input";
-import UuidGenerator from "../../UuidGenerator";
+import UuidGenerator from "../../composables/UuidGenerator";
 
 export default class DisposableInput {
     private _name: string;
