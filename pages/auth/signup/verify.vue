@@ -134,7 +134,8 @@ input[type="number"] {
 <script setup>
 import Request from "../../../Api/Request";
 import Config from "../../../composables/Config";
-import { useConfigStore } from "../../../store/Config";
+import ConfigStore from "../../../store/ConfigStore";
+
 
 definePageMeta({
   layout: "login",
@@ -142,7 +143,6 @@ definePageMeta({
 
 const current_page = "pages/auth/verify";
 const config = new Config();
-const configStore = useConfigStore();
 const request = new Request();
 const form = ref({
   email: null,
@@ -157,6 +157,7 @@ async function verify_email() {
 
   form.value.code = Number(`${number_1}${number_2}${number_3}${number_4}`);
   let response = await request.post("auth/verifyEmail", form.value, "v1");
+  console.log(response);
 
   if (response.status()) {
     configStore.setConfig(response.data());

@@ -55,11 +55,12 @@
 import Config from "../../composables/Config";
 import { CustomTextBox } from "../../composables/CustomTextBox";
 import Request from "../../Api/Request";
-import { useConfigStore } from "../../store/Config";
+import ConfigStore from "../../store/ConfigStore";
+
 definePageMeta({
   layout: "login",
 });
-const configStore = useConfigStore();
+
 const config = new Config();
 const current_page = "pages/auth/login";
 const emailBox = new CustomTextBox();
@@ -73,18 +74,13 @@ const form = ref({
 async function requestToLogin() {
   let response = await request.post("auth/login", form.value, "v1");
   if (response.status()) {
-    useCookie("token", { secure: true, default: () => "" });
-    useCookie("user", { default: () => null });
-    useCookie("package", { default: () => null });
 
-    useCookie("token").value = response.data().token;
-    useCookie("user").value = JSON.stringify(response.data().user);
+    ConfigStore.set_token(response.data().token);
+    ConfigStore.set_user(JSON.stringify(response.data().user));
 
-    configStore.setConfig(response.data());
     let config = await request.post("core/config", null, "v1");
 
-    configStore.setPackage(config.data().package);
-    useCookie("package").value = JSON.stringify(config.data().package);
+    ConfigStore.set_package(JSON.stringify(config.data().package));
 
     navigateTo("/keyword-research");
   } else {
