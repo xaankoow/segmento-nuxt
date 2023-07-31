@@ -105,6 +105,7 @@ async function send_active_code_to_email() {
     document.getElementById("confirm").focus();
   } else {
     let response = await request.post("auth/register", form.value, "v1");
+    console.log(response);
 
     if (response.status()) {
       // TODO: TOAST active code sended to email then after 3 second redirect to verify page

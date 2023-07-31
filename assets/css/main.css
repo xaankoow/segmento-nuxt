@@ -8,18 +8,24 @@
   }
 
   .custom_input_box {
-    @apply relative [&>input]:py-2 [&>input]:pl-2 [&>input]:pr-8 [&>input]:border [&>input]:text-base-content 
-        [&>input]:w-full [&>input]:border-gray-300 [&>input]:rounded [&>input:focus]:outline-none [&>input:focus]:border-blue-500
-        [&>label]:absolute [&>label]:right-2 [&>label]:top-3 [&>label]:transition-all [&>label]:duration-300 [&>label]:transform [&>label]:text-sm
+    @apply relative text-base-content [&>input]:w-full [&>label]:absolute [&>label]:right-2 [&>label]:top-3 [&>label]:transition-all [&>label]:duration-300 [&>label]:transform [&>label]:text-xs
         [&>label]:cursor-text [&>label]:pointer-events-none;
   }
 
+  input {
+    @apply border-2 border-base-350 rounded-sm py-2 px-4 focus:border-b-primary outline-none
+  }
+
   .btn {
-    @apply rounded-lg py-1 px-2 transition-all duration-100;
+    @apply rounded-lg py-2 px-3 transition-all duration-200;
   }
 
   .btn-primary {
-    @apply btn bg-primary text-base-100  hover:bg-primary-active;
+    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-base-100  hover:bg-primary-active;
+  }
+
+  .btn-secondary {
+    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary/5 text-primary hover:bg-primary/10
   }
 
   .alphabet {
