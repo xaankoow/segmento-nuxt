@@ -99,7 +99,6 @@
             </button>
           </div>
           <!-- Timer and get the code again  -->
-
         </div>
       </div>
     </div>
