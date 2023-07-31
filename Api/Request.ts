@@ -1,9 +1,11 @@
 import axios from "axios";
 import ResponseModel from "./ResponseModel"
+import ConfigStore from "../store/ConfigStore";
 
 export default class Request {
     private request = useNuxtApp().$axios;
     protected _pending = ref(false);
+
 
     constructor() {
         return this;
@@ -17,19 +19,21 @@ export default class Request {
         return await this.send_request('POST', `${version}/${url}`, body, null);
     }
 
-    public pending() : Boolean {
+    public pending(): Boolean {
         return this._pending.value;
     }
 
     protected send_request = async (method: string, url: string, body: any, params: any): Promise<ResponseModel> => {
         let result: any;
         this._pending.value = true;
+        let token = ConfigStore.token();
 
         await axios.request({
             baseURL: 'https://core.segmento.ir/api/',
             headers: {
                 'accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                "Authorization": `Bearer ${token}`
             },
             method: method,
             url: url,
@@ -41,6 +45,7 @@ export default class Request {
         }).catch((res) => {
             let response = res.response.data;
             result = new ResponseModel(res.message, response.status, response.specific_error, response.data, res.status);
+            console.log(res);
         }).finally(() => {
             this._pending.value = false;
         })
