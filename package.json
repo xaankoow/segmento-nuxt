@@ -18,6 +18,7 @@
     "@pinia/nuxt": "^0.4.11",
     "apexcharts": "^3.41.0",
     "axios": "^1.4.0",
+    "konva": "^9.2.0",
     "pinia": "^2.1.4",
     "vue3-apexcharts": "^1.4.1",
     "vue3-persian-datetime-picker": "^1.2.2"
