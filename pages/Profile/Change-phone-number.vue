@@ -60,7 +60,7 @@
           class="w-full h-auto px-10 flex flex-col items-center justify-center"
         >
           <p class="text-sm">کد فعال سازی</p>
-          <div class="flex justify-center">
+          <div class="flex justify-center flex-row-reverse">
             <input
               class="w-[50px] h-[50px] m-3 text-center border rounded border-base-300 p-2 focus:border-b-dimound focus:border-b-2"
               type="text"
