@@ -42,7 +42,7 @@
         type="file"
         name=""
         id=""
-        class="w-full h-full absolute opacity-0"
+        class="w-full h-full absolute opacity-0 cursor-pointer"
         @change="typeCheck"
         :multiple="isMultiple"
       />
