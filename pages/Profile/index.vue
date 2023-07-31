@@ -16,14 +16,7 @@
                 class="rounded-full w-[84px] h-[84px] overflow-hidden flex items-center justify-center"
               >
                 <img
-                  v-if="image"
                   :src="image"
-                  alt="profile image"
-                  class="w-full h-full"
-                />
-                <img
-                  v-else
-                  src="./profileDefaultImage.png"
                   alt="profile image"
                   class="w-full h-full"
                 />
@@ -279,6 +272,7 @@ import Editor from "@tinymce/tinymce-vue";
 const props = defineProps({
   image: {
     type: String,
+    default: "/images/profileDefaultImg.png"
   },
 });
 </script>
