@@ -164,7 +164,7 @@
           </SvgLabeled>
         </li>
       </ul>
-      <button class="bg-base-100 text-base-content border-none w-24 h-10 rounded-md hover:bg-base-250">{{ content.signup }}</button>
+      <NuxtLink to="/auth/signup" class="flex items-center  justify-center bg-base-100 text-base-content border-none w-24 h-10 rounded-md hover:bg-base-250">{{ content.signup }}</NuxtLink>
     </div>
     <div class="flex h-full w-full">
       <div class="flex w-1/2 h-full items-center">
