@@ -62,7 +62,7 @@
             >
               <div class="w-[2.5rem]">
                 <img
-                  src="https://sb.kaleidousercontent.com/67418/1672x1018/6463a5af0d/screenshot-2022-05-24-at-15-22-28.png"
+                  src="/images/profileDefaultImg.png"
                   class="mask mask-squircle"
                 />
               </div>
