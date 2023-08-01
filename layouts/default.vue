@@ -109,6 +109,7 @@
 </template>
 <script setup>
 import Config from "../composables/Config";
+import ConfigStore from "../store/ConfigStore";
 
 const cn = new Config();
 const actived_navbar = ref("department");
@@ -119,10 +120,11 @@ const auth = ref({
 });
 
 onBeforeMount(() => {
+
   auth.value = {
-    name: useCookie("user").value?.name ?? 'user',
-    wallet: useCookie("user").value?.wallet ?? 0,
-    subscription: useCookie("package").value?.type.label ?? 'اشتراک عادی',
+    name: ConfigStore.user().name,
+    wallet: ConfigStore.wallets()[0].balance ?? 0,
+    subscription: ConfigStore.plan().name,
   }
 })
 
