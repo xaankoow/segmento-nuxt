@@ -88,7 +88,7 @@
         <div class="w-full h-4/6 flex flex-col items-center justify-evenly">
           <div class="w-full flex items-center justify-between">
             <p>اطلاعات شخصی</p>
-            <p class="text-dimound cursor-pointer">تغییر شماره همراه</p>
+            <p class="text-primary cursor-pointer">تغییر شماره همراه</p>
           </div>
           <div class="w-full">
             <div class="w-full flex justify-between">
@@ -110,7 +110,7 @@
             />
           </div>
           <div class="w-full flex justify-end text-dimound">
-            <p class="cursor-pointer">تغییر گذرواژه</p>
+            <p class="cursor-pointer text-primary">تغییر گذرواژه</p>
           </div>
         </div>
       </div>
@@ -258,7 +258,7 @@
           />
         </div>
         <div class="w-full flex justify-end">
-          <button class="w-24 h-10 rounded-lg bg-dimound text-white ml-0 my-4">
+          <button class="w-24 h-10 rounded-lg btn-primary text-white ml-0 my-4">
             ارسال پیام
           </button>
         </div>
