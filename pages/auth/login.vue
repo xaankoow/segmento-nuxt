@@ -71,8 +71,6 @@ async function requestToLogin() {
   let response = await request.post("auth/login", form.value);
   if (response.status()) {
 
-    console.log(response.data());
-
     ConfigStore.set_token(response.data().token);
     ConfigStore.set_user(JSON.stringify(response.data().user));
     ConfigStore.set_plan(JSON.stringify(response.data().plan));
