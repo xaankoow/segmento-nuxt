@@ -22,7 +22,7 @@
                 />
                 <img
                   v-else
-                  src="./profileDefaultImage.png"
+                  src="/images/profileDefaultImg.png"
                   alt="profile image"
                   class="w-full h-full"
                 />
@@ -44,7 +44,7 @@
                 </svg>
               </button>
             </div>
-            <div class="h-24 flex items-center justify-around mr-4 flex-col">
+            <div class="h-24 flex items-center justify-around mr-4 flex-col" style="font-size: 1.25rem;">
               <p>سجاد قدرتی</p>
               <p
                 class="w-28 h-5 rounded-[30px] bg-base-200 text-xs text-base-500 flex items-center justify-center"
@@ -116,7 +116,7 @@
             <button class="w-[89px] h-10 rounded-lg bg-scondary text-[#488CDA]">
               انصراف
             </button>
-            <button class="w-32 h-10 rounded-lg bg-dimound text-white mr-7">
+            <button class="w-32 h-10 rounded-lg btn-primary text-white mr-7">
               تغییر گذرواژه
             </button>
           </div>
