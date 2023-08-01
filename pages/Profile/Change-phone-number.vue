@@ -31,7 +31,7 @@
         </div>
         <button
           @click="changeStep"
-          class="w-[137px] h-10 rounded-lg bg-dimound text-white"
+          class="w-[137px] h-10 rounded-lg btn-primary"
         >
           دریافت کد تایید
         </button>
@@ -76,7 +76,7 @@
         <div class="w-full flex items-center justify-between px-4">
           <button
             @click="changeStep"
-            class="w-[137px] h-10 rounded-lg bg-dimound text-white"
+            class="w-[137px] h-10 rounded-lg btn-primary"
           >
             تایید شماره همراه
           </button>
@@ -147,7 +147,7 @@
           <p class="text-xl">موفقیت آمیز</p>
           <p>شماره همراه شما با موفقیت در سگمنتو تغییر داده شد !</p>
         </div>
-        <p class="text-dimound cursor-pointer">باشه، فهمیدم!</p>
+        <p class="text-primary cursor-pointer">باشه، فهمیدم!</p>
       </div>
     </div>
   </div>
