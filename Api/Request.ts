@@ -29,7 +29,7 @@ export default class Request {
         let token = ConfigStore.token();
 
         await axios.request({
-            baseURL: 'https://core.segmento.ir/api/',
+            baseURL: 'http://localhost:8000/api/',
             headers: {
                 'accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded',
