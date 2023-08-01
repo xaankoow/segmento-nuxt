@@ -1,4 +1,5 @@
 import Plan from "../interfaces/Models/Config/Plan";
+import Workspace from "../interfaces/Models/Config/Workspace";
 import Wallet from "../interfaces/Models/Wallet";
 import Package from "../interfaces/Package";
 import User from "../interfaces/User";
@@ -9,7 +10,8 @@ export default class ConfigStore {
     private _user: User | null;
     private _plan: Plan | null;
     private _roles: String[] | [];
-    private _wallets: Array<Wallet>
+    private _wallets: Array<Wallet>;
+    private _workspaces: Array<Workspace>;
 
     public static set_token(token: string) {
         useCookie("token").value = token;
@@ -27,6 +29,14 @@ export default class ConfigStore {
         useCookie("wallets").value = wallets;
     }
 
+    public static set_workspaces(workspaces) {
+        useCookie("workspaces").value = workspaces;
+    }
+
+    public static set_roles(roles) {
+        useCookie("rolse").value = roles;
+    }
+
     public static wallets(): Array<Wallet> {
         return useCookie("wallets").value;
     }
@@ -42,7 +52,14 @@ export default class ConfigStore {
     public static plan(): Plan {
         return useCookie("plan").value;
     }
-    
+
+    public static workspaces(): Array<Workspace> {
+        return useCookie("workspaces").value;
+    }
+
+    public static roles(): Array<string> {
+        return useCookie("roles").value;
+    }
 }
 
 export const useConfigStore = defineStore('config', {

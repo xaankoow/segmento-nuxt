@@ -72,15 +72,19 @@ const form = ref({
 });
 
 async function requestToLogin() {
-  let response = await request.post("auth/login", form.value, "v1");
+  let response = await request.post("auth/login", form.value);
   if (response.status()) {
 
     ConfigStore.set_token(response.data().token);
     ConfigStore.set_user(JSON.stringify(response.data().user));
 
-    let config = await request.post("core/config", null, "v1");
+    let config = await request.get("core/config", null);
 
-    ConfigStore.set_package(JSON.stringify(config.data().package));
+
+    ConfigStore.set_plan(JSON.stringify(config.data().plan));
+    ConfigStore.set_wallets(JSON.stringify(config.data().wallets));
+    ConfigStore.set_workspaces(JSON.stringify(config.data().workspaces));
+    ConfigStore.set_roles(JSON.stringify(config.data().workspaces));
 
     navigateTo("/keyword-research");
   } else {
