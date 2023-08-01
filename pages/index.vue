@@ -4,13 +4,11 @@
 
 <script setup>
 
-// onMounted(() => {
-//   let token = useCookie("token").value;
-//   if (token === null || token === "" || token === undefined) {
-//     navigateTo("/auth/login");
-//   } else {
-//     navigateTo("/keyword-research");
-//   }
-// });
+onMounted(() => {
+  let token = useCookie("token").value;
+  if (token === null || token === "" || token === undefined) {
+    navigateTo("/auth/login");
+  }
+});
 
 </script>
