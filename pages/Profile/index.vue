@@ -38,7 +38,7 @@
                 </svg>
               </button>
             </div>
-            <div class="h-24 flex items-center justify-around mr-4 flex-col">
+            <div class="h-24 flex items-center justify-around mr-4 flex-col" style="font-size: 1.25rem;">
               <p>سجاد قدرتی</p>
               <p
                 class="w-28 h-5 rounded-[30px] bg-base-200 text-xs text-base-500 flex items-center justify-center"
