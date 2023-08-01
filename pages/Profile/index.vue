@@ -210,7 +210,7 @@
           <button class="w-[89px] h-10 rounded-lg bg-scondary text-[#488CDA]">
             انصراف
           </button>
-          <button class="w-32 h-10 rounded-lg bg-dimound text-white mr-7">
+          <button class="w-32 h-10 rounded-lg btn-primary text-white mr-7">
             ذخیره تغییرات
           </button>
         </div>
