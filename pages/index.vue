@@ -3,12 +3,17 @@
 </template>
 
 <script setup>
+import ConfigStore from "../store/ConfigStore";
 
-onMounted(() => {
-  let token = useCookie("token").value;
-  if (token === null || token === "" || token === undefined) {
-    navigateTo("/auth/login");
-  }
+definePageMeta({
+  middleware: defineNuxtRouteMiddleware((to, from) => {
+
+    let token = ConfigStore.token();
+    console.log(token);
+    if (token === null || token === "" || token === undefined) {
+      return navigateTo("/auth/login");
+    }
+  }),
 });
 
 </script>
