@@ -7,6 +7,7 @@
       >
         <div class="custom_input_box text-base-content w-[22.625rem]">
           <input
+            dir="ltr"
             v-model="form.email"
             type="email"
             required
@@ -19,6 +20,7 @@
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
           <input
+            dir="ltr"
             v-model="form.password"
             type="password"
             minlength="8"

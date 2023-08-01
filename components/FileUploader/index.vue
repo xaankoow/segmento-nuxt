@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-[358px] h-[165px] rounded-lg bg-base-250 relative border-dashed border-2 border-dimound flex items-center justify-evenly flex-col text-xs text-base-500">
+    class="w-[358px] h-[165px] rounded-lg bg-base-250 relative border-dashed border-2 border-primary flex items-center justify-evenly flex-col text-xs text-base-500">
     <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
       <mask id="mask0_6013_9500" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="33">
         <rect width="33" height="33" fill="#D9D9D9" />
