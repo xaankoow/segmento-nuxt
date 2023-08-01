@@ -40,7 +40,7 @@ module.exports = {
         bronze: "#BF8970",
         silver: "#7D7D7D",
         gold: "#FFCE47",
-        dimound: "#0A65CD",
+        diamond: "#0A65CD",
       },
     },
   },
