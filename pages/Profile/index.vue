@@ -207,7 +207,7 @@
           </template>
         </DropdownIndexTwo>
         <div class="w-full h-auto flex justify-end mt-5">
-          <button class="w-[89px] h-10 rounded-lg bg-scondary text-[#488CDA]">
+          <button class="w-[89px] h-10 rounded-lg bg-scondary text-primary" disabled>
             انصراف
           </button>
           <button class="w-32 h-10 rounded-lg btn-primary text-white mr-7">
