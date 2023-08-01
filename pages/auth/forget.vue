@@ -10,6 +10,7 @@
       >
         <div class="custom_input_box w-[16.25rem]">
           <input
+            dir="ltr"
             v-model="form.email"
             type="email"
             required
@@ -74,6 +75,7 @@
         <div class="flex flex-row gap-5 w-full items-center">
           <div class="custom_input_box w-1/2">
             <input
+              dir="ltr"
               v-model="form.password"
               type="password"
               @focus="password.focus()"
@@ -85,6 +87,7 @@
           </div>
           <div class="custom_input_box w-1/2">
             <input
+              dir="ltr"
               v-model="form.password_confirmation"
               type="password"
               @focus="confirmPassword.focus()"

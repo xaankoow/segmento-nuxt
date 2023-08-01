@@ -19,6 +19,7 @@
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
           <input
+            dir="ltr"
             v-model="form.email"
             type="email"
             required
@@ -32,6 +33,7 @@
         <div class="flex flex-row gap-1 w-[22.625rem]">
           <div class="custom_input_box text-base-content w-[22.625rem]">
             <input
+              dir="ltr"
               v-model="form.password"
               type="password"
               minlength="8"
@@ -48,6 +50,7 @@
           </div>
           <div class="custom_input_box text-base-content w-[22.625rem]">
             <input
+              dir="ltr"
               v-model="form.password_confirmation"
               id="confirm"
               type="password"
