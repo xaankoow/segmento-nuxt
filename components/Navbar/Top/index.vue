@@ -266,6 +266,8 @@
   </div>
 </template>
 <script setup>
+import ConfigStore from '../../../store/ConfigStore';
+
 const props = defineProps({
   platform: {
     type: String,
@@ -287,10 +289,7 @@ const props = defineProps({
 });
 
 function logout() {
-  useCookie("user").value = null;
-  useCookie("token").value = null;
-  useCookie("package").value = null;
-
+  ConfigStore.logout();
   navigateTo("/auth/login");
 }
 </script>

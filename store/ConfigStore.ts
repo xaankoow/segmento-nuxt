@@ -13,7 +13,7 @@ export default class ConfigStore {
     private _wallets: Array<Wallet>;
     private _workspaces: Array<Workspace>;
 
-    public static set_token(token: string) {
+    public static set_token(token) {
         useCookie("token").value = token;
     }
 
@@ -60,35 +60,13 @@ export default class ConfigStore {
     public static roles(): Array<string> {
         return useCookie("roles").value;
     }
-}
 
-export const useConfigStore = defineStore('config', {
-    state: () => {
-        return {
-            _token: null as String | null,
-            _user: null as User | null,
-            _package: null as Package | null
-        }
-    },
-    getters: {
-        user: (state): User | null => state._user,
-        token: (state): String | null => state._token,
-        package: (state): Package | null => state._package
-    },
-    actions: {
-        setUser(user) {
-            this._user = user;
-        },
-        setToken(token) {
-            this._token = token;
-        },
-        setPackage(pack) {
-            this._package = pack;
-        },
-        setConfig(data) {
-            this.setToken(data.token);
-            this.setUser(data.user);
-            this.setPackage(data.package ?? null);
-        }
+    public static logout() {
+        this.set_plan(null);
+        this.set_token(null);
+        this.set_user(null);
+        this.set_workspaces(null);
+        this.set_wallets(null);
+        this.set_roles(null);
     }
-})
+}
