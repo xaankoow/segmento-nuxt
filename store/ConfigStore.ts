@@ -1,3 +1,5 @@
+import Plan from "../interfaces/Models/Config/Plan";
+import Wallet from "../interfaces/Models/Wallet";
 import Package from "../interfaces/Package";
 import User from "../interfaces/User";
 import { defineStore } from "pinia";
@@ -5,7 +7,9 @@ import { defineStore } from "pinia";
 export default class ConfigStore {
     private _token: string;
     private _user: User | null;
-    private _package: Package | null;
+    private _plan: Plan | null;
+    private _roles: String[] | [];
+    private _wallets: Array<Wallet>
 
     public static set_token(token: string) {
         useCookie("token").value = token;
@@ -15,21 +19,30 @@ export default class ConfigStore {
         useCookie("user").value = user; 
     }
 
-    public static set_package(pack) {
-        useCookie("package").value = pack; 
+    public static set_plan(plan) {
+        useCookie("plan").value = plan; 
     }
 
-    public static token() {
+    public static set_wallets(wallets) {
+        useCookie("wallets").value = wallets;
+    }
+
+    public static wallets(): Array<Wallet> {
+        return useCookie("wallets").value;
+    }
+
+    public static token(): String {
         return useCookie("token").value;
     }
     
-    public static user() {
+    public static user(): User {
         return useCookie("user").value;
     }
     
-    public static package() {
-        return useCookie("package").value;
+    public static plan(): Plan {
+        return useCookie("plan").value;
     }
+    
 }
 
 export const useConfigStore = defineStore('config', {
