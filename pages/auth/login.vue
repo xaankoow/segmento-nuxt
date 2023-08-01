@@ -3,15 +3,32 @@
     <div class="mx-auto">
       <form @submit.prevent="requestToLogin()" class="flex flex-col gap-11 w-full items-center">
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input v-model="form.email" type="email" required @focus="emailBox.focus()" @blur="emailBox.leave()" />
+          <input
+            dir="ltr"
+            v-model="form.email"
+            type="email"
+            required
+            @focus="emailBox.focus()"
+            @blur="emailBox.leave()"
+          />
           <label for="email" :class="emailBox.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
           </label>
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input v-model="form.password" type="password" minlength="8" @focus="passwordBox.focus()"
-            @blur="passwordBox.leave()" required />
-          <label for="email" :class="passwordBox.transitionStyle(form.password)">
+          <input
+            dir="ltr"
+            v-model="form.password"
+            type="password"
+            minlength="8"
+            @focus="passwordBox.focus()"
+            @blur="passwordBox.leave()"
+            required
+          />
+          <label
+            for="email"
+            :class="passwordBox.transitionStyle(form.password)"
+          >
             {{ config.by_route(`${current_page}/password`) }}
           </label>
         </div>
