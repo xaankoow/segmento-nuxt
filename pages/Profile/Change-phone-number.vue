@@ -156,6 +156,13 @@
 <script setup>
 import { ref, watch } from "vue";
 
+
+definePageMeta({
+  middleware: defineNuxtRouteMiddleware((to, from) => {
+    return navigateTo('/');
+  })
+})
+
 //timer
 const remainingTime = ref(1 * 60); // زمان باقی‌مانده به ثانیه
 const isTimerActive = ref(false);

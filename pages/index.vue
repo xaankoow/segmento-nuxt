@@ -4,16 +4,9 @@
 
 <script setup>
 import ConfigStore from "../store/ConfigStore";
-
+import Auth from "../middlewares/Auth";
 definePageMeta({
-  middleware: defineNuxtRouteMiddleware((to, from) => {
-
-    let token = ConfigStore.token();
-    console.log(token);
-    if (token === null || token === "" || token === undefined) {
-      return navigateTo("/auth/login");
-    }
-  }),
+  middleware: [Auth],
 });
 
 </script>
