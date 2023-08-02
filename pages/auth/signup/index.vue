@@ -111,7 +111,7 @@ async function send_active_code_to_email() {
 
     if (response.status()) {
       // TODO: TOAST active code sended to email then after 3 second redirect to verify page
-      navigateTo({ path: "/auth/signup/verify", query: {email: form.value.email}} );
+      return navigateTo({ path: "/auth/signup/verify", query: {email: form.value.email}} );
     }
     // TODO: TOAST message for failed
     console.log(response.errors());

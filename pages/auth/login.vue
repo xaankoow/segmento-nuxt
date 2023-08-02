@@ -57,7 +57,9 @@ async function requestToLogin() {
 
     // TODO : Fix this section later
     let user = response.data().user;
-    user.img = "/images/profileDefaultImg.png";
+    if (! user.img) {
+      user.img = "/images/profileDefaultImg.png";
+    }
 
     ConfigStore.set_token(response.data().token);
     ConfigStore.set_user(JSON.stringify(user));
