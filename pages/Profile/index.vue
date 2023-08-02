@@ -65,7 +65,7 @@
               placeholder="آدرس ایمیل" type="email" />
           </div>
           <div class="w-full flex justify-end text-diamond">
-            <p class="cursor-pointer text-primary">تغییر گذرواژه</p>
+            <NuxtLink to="/profile/change-password" class="cursor-pointer text-primary">تغییر گذرواژه</NuxtLink>
           </div>
         </div>
       </div>
