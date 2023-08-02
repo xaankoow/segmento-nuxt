@@ -3,32 +3,16 @@
     <div class="mx-auto">
       <form @submit.prevent="requestToLogin()" class="flex flex-col gap-11 w-full items-center">
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input
-            dir="ltr"
-            v-model="form.email"
-            type="email"
-            required
-            @focus="emailBox.focus()"
-            @blur="emailBox.leave()"
-          />
+          <input dir="ltr" v-model="form.email" type="email" required @focus="emailBox.focus()"
+            @blur="emailBox.leave()" />
           <label for="email" :class="emailBox.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
           </label>
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input
-            dir="ltr"
-            v-model="form.password"
-            type="password"
-            minlength="8"
-            @focus="passwordBox.focus()"
-            @blur="passwordBox.leave()"
-            required
-          />
-          <label
-            for="email"
-            :class="passwordBox.transitionStyle(form.password)"
-          >
+          <input dir="ltr" v-model="form.password" type="password" minlength="8" @focus="passwordBox.focus()"
+            @blur="passwordBox.leave()" required />
+          <label for="email" :class="passwordBox.transitionStyle(form.password)">
             {{ config.by_route(`${current_page}/password`) }}
           </label>
         </div>
@@ -71,8 +55,12 @@ async function requestToLogin() {
   let response = await request.post("auth/login", form.value);
   if (response.status()) {
 
+    // TODO : Fix this section later
+    let user = response.data().user;
+    user.img = "/images/profileDefaultImg.png";
+
     ConfigStore.set_token(response.data().token);
-    ConfigStore.set_user(JSON.stringify(response.data().user));
+    ConfigStore.set_user(JSON.stringify(user));
     ConfigStore.set_plan(JSON.stringify(response.data().plan));
     ConfigStore.set_wallets(JSON.stringify(response.data().wallets));
     ConfigStore.set_workspaces(JSON.stringify(response.data().workspaces));
