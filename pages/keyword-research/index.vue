@@ -158,7 +158,7 @@
             <div v-if="data !== null"
               class="sticky top-20 left-10 border rounded-sm grid grid-cols-4 text-primary-active w-full gap-5 px-4 py-4">
               <button class="alphabet" v-for="(data, index) in cache" :key="index" :id="`alpha-${index}`"
-                @click="update_list_by_alphabet(data, `alpha-${index}`)">
+                @click="update_list_by_alphabet(index, `alpha-${index}`)">
                 {{ index }}
               </button>
             </div>
@@ -212,8 +212,23 @@ function toggle_active_alphabet(id) {
 }
 
 function update_list_by_alphabet(item, id) {
-  data.value = [];
-  data.value[item] = cache.value[item];
+  // TODO : Fix this ugly section later :))
+  let cacheToArray = Object.entries(cache.value);
+  let custom_array = cacheToArray.filter(itm => {
+    return itm[0] === item
+  })
+  if (custom_array !== null && custom_array.length > 0) {
+    custom_array = custom_array.map(item => {
+      return Object.values(item[1]) ?? []
+    })
+  }
+  else {
+    custom_array = [[]]
+  }
+
+  data.value = {
+    [item]: custom_array[0]
+  }
   toggle_active_alphabet(id);
 }
 
