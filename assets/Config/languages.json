@@ -37,6 +37,14 @@
                         }
                     }
                 }
+            },
+            "login": {
+                "tools": "امکانات",
+                "videos": "ویدیو آموزشی",
+                "pricing": "قیمت گذاری",
+                "affiliate_agency": "همکاری با آژانس",
+                "affiliate": "همکاری در فروش",
+                "sign-up": "ثبت نام"
             }
         },
         "pages": {
