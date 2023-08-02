@@ -1,10 +1,7 @@
 <template>
   <div class="flex w-full items-center">
     <div class="mx-auto">
-      <form
-        @submit.prevent="requestToLogin()"
-        class="flex flex-col gap-11 w-full items-center"
-      >
+      <form @submit.prevent="requestToLogin()" class="flex flex-col gap-11 w-full items-center">
         <div class="custom_input_box text-base-content w-[22.625rem]">
           <input
             dir="ltr"
@@ -36,17 +33,14 @@
           </label>
         </div>
         <div class="flex justify-between w-full items-center">
-          <button
-            type="submit"
-            class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md"
-          >
+          <button type="submit" class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md">
             {{ config.by_route(`${current_page}/open`) }}
           </button>
           <label class="text-xs">
             <NuxtLink to="/auth/forget">
               {{ config.by_route(`${current_page}/forget`) }}
-            </NuxtLink></label
-          >
+            </NuxtLink>
+          </label>
         </div>
       </form>
     </div>
@@ -74,15 +68,15 @@ const form = ref({
 });
 
 async function requestToLogin() {
-  let response = await request.post("auth/login", form.value, "v1");
+  let response = await request.post("auth/login", form.value);
   if (response.status()) {
 
     ConfigStore.set_token(response.data().token);
     ConfigStore.set_user(JSON.stringify(response.data().user));
-
-    let config = await request.post("core/config", null, "v1");
-
-    ConfigStore.set_package(JSON.stringify(config.data().package));
+    ConfigStore.set_plan(JSON.stringify(response.data().plan));
+    ConfigStore.set_wallets(JSON.stringify(response.data().wallets));
+    ConfigStore.set_workspaces(JSON.stringify(response.data().workspaces));
+    ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
 
     navigateTo("/keyword-research");
   } else {

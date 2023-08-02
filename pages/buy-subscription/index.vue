@@ -135,6 +135,13 @@
 </template>
 
 <script setup>
+
+definePageMeta({
+  middleware: defineNuxtRouteMiddleware((to, from) => {
+    return navigateTo('/');
+  })
+})
+
 import PlanModel from "../../Models/PlanModel";
 const pack1 = { title: "برنزی", color: "bronze" };
 const pack2 = { title: "نقره ای", color: "silver" };

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- step 1 -->
-    <Popup class="active" :bubble_bursting="false" v-if="step === 1">
+    <Popup class="active" :bubble_bursting="false" v-show="step === 1">
       <template v-slot:header>
         <div class="flex flex-row gap-2 items-center">
           <span>
@@ -104,7 +104,7 @@
     </Popup>
 
     <!-- step 2 -->
-    <Popup class="active" :bubble_bursting="false" v-if="step === 2">
+    <Popup class="active" :bubble_bursting="false" v-show="step === 2">
       <template v-slot:header>
         <div class="flex flex-row gap-2 items-center">
           <span>
@@ -224,6 +224,16 @@ import PagePanel from "../../widget/Workspace/Add/PagePanel";
 import Request from "../../Api/Request";
 import { ref } from "vue";
 
+
+definePageMeta({
+  middleware: defineNuxtRouteMiddleware((to, from) => {
+    if (true) {
+      return navigateTo(from)
+    }
+  }),
+});
+
+
 const current_page = "pages/workspace/add";
 const steps_section = `${current_page}/steps`;
 const config = new Config();
@@ -240,17 +250,10 @@ function store_data() {
     let value = item.value();
     let keywords = value.keywords;
 
-    // TODO : add competitors and is_money_page section
-
     return {
       slug: value.page,
       is_money_page: false,
-      keywords: keywords.map(keyword => {
-        return {
-          text: keyword,
-          competitors: []
-        }
-      })
+      keywords: keywords
     }
   });
 
@@ -263,11 +266,13 @@ function store_data() {
 
 async function store_website() {
   let request = new Request();
-  let response = await request.post("workspaces/add", {
-    workspace: form.value.workspace,
+  let body = {
+    workspace: form.value.website,
     pages: form.value.pages,
-    competitors: []
-  });
+    competitors: [],
+  };
+
+  let response = await request.post("workspaces/add", body);
 
   if (response.status()) {
     // TODO : send to correct page
@@ -275,7 +280,7 @@ async function store_website() {
   }
   else {
     // TODO: send to message
-    console.log(response.errors());
+    console.log(response);
   }
 }
 
@@ -286,6 +291,13 @@ function add_page_panel() {
 
   page_panel.value.push(panel);
 }
+
+onMounted(() => {
+  if (page_panel.value === null) {
+    page_panel.value = [];
+    add_page_panel();
+  }
+})
 
 onUpdated(() => {
   if (page_panel.value === null) {

@@ -10,7 +10,7 @@
       <!-- header content -->
       <div
         class="flex justify-between items-center w-full p-4"
-        v-if="!can_close"
+        v-show="!can_close"
       >
         <slot name="header"> </slot>
         <button

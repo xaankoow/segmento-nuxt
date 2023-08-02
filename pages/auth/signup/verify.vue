@@ -156,8 +156,7 @@ async function verify_email() {
   let number_4 = document.getElementById("number_4").value;
 
   form.value.code = Number(`${number_1}${number_2}${number_3}${number_4}`);
-  let response = await request.post("auth/verifyEmail", form.value, "v1");
-  console.log(response);
+  let response = await request.post("auth/verifyEmail", form.value);
 
   if (response.status()) {
     configStore.setConfig(response.data());
