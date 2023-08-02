@@ -1,22 +1,16 @@
 <template>
-  <VueApexCharts
-    class=""
-    height="350"
-    width="700"
-    :options="chartOptions"
-    :series="series"
-  ></VueApexCharts>
+  <VueApexCharts class="" height="350" width="700" :options="chartOptions" :series="series"></VueApexCharts>
 </template>
 
 <script setup>
 import VueApexCharts from "vue3-apexcharts";
-const series = [
-  {
-    name: "series1",
-    data: [51, 60, 78, 51, 42, 109, 100, 50, 40, 70],
-    color: "#28CFE4",
-  },
-];
+const props = defineProps({
+  series: {
+    type: Array,
+    required: true
+  }
+})
+
 const chartOptions = {
   chart: {
     type: "line",
