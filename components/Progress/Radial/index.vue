@@ -1,5 +1,5 @@
 <template>
-    <div :class="`h-${size} bg-[#10CCAE33] rounded-full flex items-center justify-center text-white`"
+    <div :class="`h-${size} bg-[#10CCAE33] rounded-full flex items-center justify-center text-white relative`"
         :style="`background-color: ${bg}; --value:${value}; width:${size};height:${size};`">
         <p class="text-4xl" :style="{ color: color }">{{ value }}</p>
         <div class="absolute">
