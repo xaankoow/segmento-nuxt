@@ -1,3 +1,3 @@
 <template>
-    <span class="loading loading-infinity loading-lg"></span>
+    <span class="loading loading-ring"></span>
 </template>
