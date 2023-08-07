@@ -1,12 +1,9 @@
 <template>
   <div class="flex flex-col gap-5 w-full h-full">
     <!-- loading -->
-    <div style="direction: ltr" v-if="request.pending()"
+    <div v-if="! request.pending()"
       class="absolute top-0 left-0 w-full h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center">
-      <span class="loading loading-ball loading-xs"></span>
-      <span class="loading loading-ball loading-sm"></span>
-      <span class="loading loading-ball loading-md"></span>
-      <span class="loading loading-ball loading-lg"></span>
+      <ToolsLoading class="w-32 h-32"/>
     </div>
     <!-- header section -->
     <section class="flex items-center border-r-2 gap-4 border-base-content my-2 px-4">
