@@ -6,7 +6,6 @@
         <p class="mr-3">وضعیت اشتراک</p>
       </div>
     </div>
-
     <div class="w-full h-auto p-10 bg-white">
       <div class="flex items-center justify-between w-full h-[40%]">
         <div
@@ -35,14 +34,12 @@
               <p>250 روز</p>
             </div>
           </div>
-
           <button
             class="w-[117px] h-8 rounded-lg bg-primary text-white text-sm"
           >
             تمدید اشتراک
           </button>
         </div>
-
         <div
           class="w-[28%] h-[275px] flex flex-col items-center justify-between bg-base-200 border border-base-400 rounded py-6 px-4"
         >
@@ -59,19 +56,27 @@
                 fill="#002145"
               />
             </svg>
-
             <p class="mr-3">روز‌‌های باقی مانده</p>
           </div>
-
           <div
             class="w-full h-36 px-4 flex flex-col items-center justify-center"
           >
-          <ProgressRadial :value="69" color="#0A65CD" bg="#D9D9D9" size="8rem" :sizeCircle="66"></ProgressRadial>
-        </div>
-
+            <ProgressRadial
+              :value="360"
+              :valueText="250"
+              color="#0A65CD"
+              bg="transparent"
+              size="8rem"
+              fontSize="18px"
+              fontSizeText="10px"
+              textValue="روز باقی مانده"
+              textColor="#000000"
+              :sizeCircle="62"
+            ></ProgressRadial>
+          </div>
           <div class="w-full flex items-center justify-evenly text-[10px]">
             <div class="w-20 flex items-center justify-around">
-              <div class="w-2 h-2 rounded-[2px] bg-diamond"></div>
+              <div class="w-2 h-2 rounded-[2px] bg-primary"></div>
               <p>مصرف شده</p>
             </div>
             <div class="w-20 flex items-center justify-around">
@@ -83,209 +88,335 @@
         <div
           class="w-[38%] h-[275px] flex flex-col items-center justify-between bg-base-200 border border-base-400 rounded py-3 px-4"
         >
-          <img src="../../public/images/Rectangle.png" alt="Rectangle" class="w-[220px] h-[205px]" />
+          <img
+            src="../../public/images/Rectangle.png"
+            alt="Rectangle"
+            class="w-[220px] h-[205px]"
+          />
           <button
             class="w-[168px] h-8 rounded-lg bg-primary text-white text-sm"
           >
-          خرید اشتراک با تخفیف
+            خرید اشتراک با تخفیف
           </button>
         </div>
       </div>
       <hr class="w-full h-[1px] bg-base-400 my-7" />
       <div class="flex flex-col w-full h-[92%]">
         <p class="text-lg">وضعیت ابزار ها</p>
-        
-        <div class="w-full h-auto flex flex-wrap justify-between items-center ">
-          
-          <div class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]">
-            
+        <div class="w-full h-auto flex flex-wrap justify-between items-center">
+          <div
+            class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]"
+          >
             <div class="w-[70%]">
               <div class="flex text-sm items-center">
-                <div class="w-[2px] h-5 rounded-[1px] bg-diamond ml-3"></div>
+                <div class="w-[2px] h-5 rounded-[1px] bg-primary ml-3"></div>
                 <p>ابزار تحقیق کلمه کلیدی</p>
               </div>
-              
-              <div class="w-full text-[10px] h-full flex items-center justify-around">
-                
+              <div
+                class="w-full text-[10px] h-full flex items-center justify-around"
+              >
                 <div>
                   <p>تعداد کل کلمات</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3600</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3600</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات مصرف شده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>500</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>500</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات باقی مانده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3100</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3100</p>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            <div class="w-[30%] flex items-center justify-center">
-              <ProgressRadial :value="85" color="#10CCAE" bg="#10CCAE33" size="5rem" :sizeCircle="39"></ProgressRadial>
+            <div class="w-[30%] h-full flex items-center justify-center pt-4">
+              <ProgressRadial
+                :value="3600"
+                :valueText="3100"
+                color="#10CCAE"
+                bg="transparent"
+                size="5.2rem"
+                fontSize="10px"
+                fontSizeText="8px"
+                textValue="کلمه باقی مانده"
+                textColor="#000000"
+                :sizeCircle="40"
+              ></ProgressRadial>
             </div>
           </div>
-
-          <div class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]">
-            
+          <div
+            class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]"
+          >
             <div class="w-[70%]">
               <div class="flex text-sm items-center">
-                <div class="w-[2px] h-5 rounded-[1px] bg-diamond ml-3"></div>
+                <div class="w-[2px] h-5 rounded-[1px] bg-primary ml-3"></div>
                 <p>ابزار عنوان ساز محتوا</p>
               </div>
-              
-              <div class="w-full text-[10px] h-full flex items-center justify-around">
-                
+              <div
+                class="w-full text-[10px] h-full flex items-center justify-around"
+              >
                 <div>
                   <p>تعداد کل کلمات</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3600</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3600</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات مصرف شده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>500</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>500</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات باقی مانده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3100</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3100</p>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            <div class="w-[30%] flex items-center justify-center">
-              <ProgressRadial :value="85" color="#10CCAE" bg="#10CCAE33" size="5rem" :sizeCircle="39"></ProgressRadial>
+            <div class="w-[30%] h-full flex items-center justify-center pt-4">
+              <ProgressRadial
+                :value="3600"
+                :valueText="2750"
+                color="#10CCAE"
+                bg="transparent"
+                size="5.2rem"
+                fontSize="10px"
+                fontSizeText="8px"
+                textValue="کلمه باقی مانده"
+                textColor="#000000"
+                :sizeCircle="40"
+              ></ProgressRadial>
             </div>
           </div>
-          <div class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]">
-            
+          <div
+            class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]"
+          >
             <div class="w-[70%]">
               <div class="flex text-sm items-center">
-                <div class="w-[2px] h-5 rounded-[1px] bg-diamond ml-3"></div>
+                <div class="w-[2px] h-5 rounded-[1px] bg-primary ml-3"></div>
                 <p>تعداد کلمات کلیدی</p>
               </div>
-              
-              <div class="w-full text-[10px] h-full flex items-center justify-around">
-                
+              <div
+                class="w-full text-[10px] h-full flex items-center justify-around"
+              >
                 <div>
                   <p>تعداد کل کلمات</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3600</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3600</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات مصرف شده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>500</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>500</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات باقی مانده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3100</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3100</p>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            <div class="w-[30%] flex items-center justify-center">
-              <ProgressRadial :value="85" color="#10CCAE" bg="#10CCAE33" size="5rem" :sizeCircle="39"></ProgressRadial>
+            <div class="w-[30%] h-full flex items-center justify-center pt-4">
+              <ProgressRadial
+                :value="3600"
+                :valueText="500"
+                color="#F35242"
+                bg="transparent"
+                size="5.2rem"
+                fontSize="10px"
+                fontSizeText="8px"
+                textValue="کلمه باقی مانده"
+                textColor="#000000"
+                :sizeCircle="40"
+              ></ProgressRadial>
             </div>
           </div>
-          <div class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]">
-            
+          <div
+            class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]"
+          >
             <div class="w-[70%]">
               <div class="flex text-sm items-center">
-                <div class="w-[2px] h-5 rounded-[1px] bg-diamond ml-3"></div>
+                <div class="w-[2px] h-5 rounded-[1px] bg-primary ml-3"></div>
                 <p>تعداد وبسایت رقبا</p>
               </div>
-              
-              <div class="w-full text-[10px] h-full flex items-center justify-around">
-                
+              <div
+                class="w-full text-[10px] h-full flex items-center justify-around"
+              >
                 <div>
                   <p>تعداد کل کلمات</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3600</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3600</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات مصرف شده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>500</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>500</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات باقی مانده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3100</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3100</p>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            <div class="w-[30%] flex items-center justify-center">
-              <ProgressRadial :value="85" color="#10CCAE" bg="#10CCAE33" size="5rem" :sizeCircle="39"></ProgressRadial>
+            <div class="w-[30%] h-full flex items-center justify-center pt-4">
+              <ProgressRadial
+                :value="3600"
+                :valueText="1000"
+                color="#FFCE47"
+                bg="transparent"
+                size="5.2rem"
+                fontSize="10px"
+                fontSizeText="8px"
+                textValue="کلمه باقی مانده"
+                textColor="#000000"
+                :sizeCircle="40"
+              ></ProgressRadial>
             </div>
           </div>
-          <div class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]">
-            
+          <div
+            class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]"
+          >
             <div class="w-[70%]">
               <div class="flex text-sm items-center">
-                <div class="w-[2px] h-5 rounded-[1px] bg-diamond ml-3"></div>
+                <div class="w-[2px] h-5 rounded-[1px] bg-primary ml-3"></div>
                 <p>ابزار ایندکسر گوگل</p>
               </div>
-              
-              <div class="w-full text-[10px] h-full flex items-center justify-around">
-                
+              <div
+                class="w-full text-[10px] h-full flex items-center justify-around"
+              >
                 <div>
                   <p>تعداد کل کلمات</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3600</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3600</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات مصرف شده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>500</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>500</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات باقی مانده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3100</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3100</p>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            <div class="w-[30%] flex items-center justify-center">
-              <ProgressRadial :value="85" color="#10CCAE" bg="#10CCAE33" size="5rem" :sizeCircle="39"></ProgressRadial>
+            <div class="w-[30%] h-full flex items-center justify-center pt-4">
+              <ProgressRadial
+                :value="3600"
+                :valueText="2000"
+                color="#10CCAE"
+                bg="transparent"
+                size="5.2rem"
+                fontSize="10px"
+                fontSizeText="8px"
+                textValue="کلمه باقی مانده"
+                textColor="#000000"
+                :sizeCircle="40"
+              ></ProgressRadial>
             </div>
           </div>
-          <div class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]">
-            
+          <div
+            class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]"
+          >
             <div class="w-[70%]">
               <div class="flex text-sm items-center">
-                <div class="w-[2px] h-5 rounded-[1px] bg-diamond ml-3"></div>
+                <div class="w-[2px] h-5 rounded-[1px] bg-primary ml-3"></div>
                 <p>ورک‌اسپیس</p>
               </div>
-              
-              <div class="w-full text-[10px] h-full flex items-center justify-around">
-                
+              <div
+                class="w-full text-[10px] h-full flex items-center justify-around"
+              >
                 <div>
                   <p>تعداد کل کلمات</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3600</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3600</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات مصرف شده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>500</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>500</p>
+                  </div>
                 </div>
-
                 <div>
                   <p>کلمات باقی مانده</p>
-                  <div class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"><p>3100</p></div>
+                  <div
+                    class="bg-base-250 flex items-center justify-center text-xs w-[50px] h-5 rounded mt-1"
+                  >
+                    <p>3100</p>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            <div class="w-[30%] flex items-center justify-center">
-              <ProgressRadial :value="85" color="#10CCAE" bg="#10CCAE33" size="5rem" :sizeCircle="39"></ProgressRadial>
+            <div class="w-[30%] h-full flex items-center justify-center pt-4">
+              <ProgressRadial
+                :value="3600"
+                :valueText="700"
+                color="#F35242"
+                bg="transparent"
+                size="5.2rem"
+                fontSize="10px"
+                fontSizeText="8px"
+                textValue="کلمه باقی مانده"
+                textColor="#000000"
+                :sizeCircle="40"
+              ></ProgressRadial>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
