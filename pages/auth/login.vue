@@ -18,7 +18,7 @@
           </label>
         </div>
         <div class="flex justify-between w-full items-center">
-          <button type="submit" class="btn-primary w-24">
+          <button type="submit" class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md">
             {{ config.by_route(`${current_page}/open`) }}
           </button>
           <label class="text-xs">
