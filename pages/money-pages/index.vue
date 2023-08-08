@@ -16,9 +16,7 @@
 
       <div class="w-72 h-1/2 text-sm flex items-end justify-between">
         <div class="h-3/4 w-1/2 flex items-center justify-between flex-col">
-          <p class="cursor-pointer text-primary">
-            صفحات تجاری
-          </p>
+          <p class="cursor-pointer text-primary">صفحات تجاری</p>
           <div class="h-[2px] w-7 rounded-sm bg-primary"></div>
         </div>
         <div class="w-[1px] h-7 bg-base-400 mb-3"></div>
@@ -48,7 +46,7 @@
         <p class="text-lg">لیست صفحات تجاری من</p>
         <button
           class="w-40 h-10 rounded-[9px] btn-primary text-white flex items-center justify-evenly"
-          style="min-height: 2.5rem;"
+          style="min-height: 2.5rem"
         >
           <svg
             width="24"
@@ -110,1555 +108,159 @@
         <div
           class="w-full h-full rounded-lg border border-base-400 overflow-hidden text-sm"
         >
-          <div class="w-full h-[60px] bg-base-200 flex overflow-y-scroll">
-            <div
-              class="w-[8%] h-full flex items-center justify-center border-l border-base-400"
-            >
-              انتخاب
-            </div>
-            <div
-              class="w-[5%] h-full flex items-center justify-center border-l border-base-400"
-            >
-              ردیف
-            </div>
-            <div
-              class="w-[25%] h-full flex items-center justify-center border-l border-base-400"
-            >
-              آدرس صفحات URLs
-            </div>
-            <div
-              class="w-[20%] h-full flex items-center justify-center border-l border-base-400"
-            >
-              میانگین رتبه کلمات کلیدی
-            </div>
-            <div
-              class="w-[15%] h-full flex items-center justify-center border-l border-base-400"
-            >
-              آخرین بروزرسانی
-            </div>
-            <div
-              class="w-[20%] h-full flex items-center justify-center border-l border-base-400"
-            >
-              وضعیت صفحه
-            </div>
-            <div class="w-[7%] h-full flex items-center justify-center">
-              جزییات
-            </div>
-          </div>
-          <div class="w-full h-auto max-h-[672px] overflow-y-scroll">
-            <!-- Map on data -->
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
+          <!-- Guide bar -->
+          <table class="w-full h-auto bg-base-200 overflow-y-scroll" dir="rtl">
+            <tr class="w-full h-[61px]">
+              <td
+                class="h-[60px] w-[78px] text-center border-l border-base-400"
               >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
+                انتخاب
+              </td>
+              <td
+                class="h-[60px] w-[49px] text-center border-l border-base-400"
               >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
+                ردیف
+              </td>
+              <td
+                class="h-[60px] w-[246px] text-center border-l border-base-400"
               >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
+                آدرس صفحات URLs
+              </td>
+              <td
+                class="h-[60px] w-[197px] text-center border-l border-base-400"
               >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
+                میانگین رتبه کلمات کلیدی
+              </td>
+              <td
+                class="h-[60px] w-[147px] text-center border-l border-base-400"
+              >
+                آخرین بروزرسانی
+              </td>
+              <td
+                class="h-[60px] w-[197px] text-center border-l border-base-400"
+              >
+                وضعیت صفحه
+              </td>
+              <td class="h-[60px] w-[76px] text-center border-base-400">
+                جزییات
+              </td>
+            </tr>
+          </table>
+          <!-- Map on data -->
+          <div dir="ltr" class="w-full h-auto max-h-[672px] overflow-y-scroll">
+            <table class="w-full h-auto overflow-auto" dir="rtl">
+              <tr v-for="index in 12" :key="index" class="w-full h-[61px]">
+                <td
+                  class="h-[60px] w-[72px] text-center border-l border-base-400 border-b"
                 >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
+                  <input class="w-[18px] h-[18px]" type="checkbox" />
+                </td>
+                <td
+                  class="h-[60px] w-[49px] text-center border-l border-base-400 border-b"
                 >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
+                  1
+                </td>
+                <td
+                  class="h-[60px] w-[246px] text-center border-l border-base-400 border-b"
                 >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
+                  https://segmento.ir/google-indexer/
+                </td>
+                <td
+                  class="h-[60px] w-[197px] text-center border-l border-base-400 border-b"
                 >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
+                  <div class="w-full h-full flex items-center justify-center">
+                    <button
+                      class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
                     >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <mask
+                          id="mask0_6223_2719"
+                          style="mask-type: alpha"
+                          maskUnits="userSpaceOnUse"
+                          x="0"
+                          y="0"
+                          width="24"
+                          height="24"
+                        >
+                          <rect width="24" height="24" fill="#D9D9D9" />
+                        </mask>
+                        <g mask="url(#mask0_6223_2719)">
+                          <path
+                            d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
+                            fill="#488CDA"
+                          />
+                        </g>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+                <td
+                  class="h-[60px] w-[147px] text-center border-l border-base-400 border-b"
                 >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
+                  1401/02/20
+                </td>
+                <td
+                  class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6"
                 >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
+                  <p>12 درصد</p>
+                  <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
+                    <div
+                      class="h-[10px] rounded-xl"
+                      :style="{
+                        width: progress + '%',
+                        backgroundColor:
+                          progress <= 25
+                            ? '#F35242'
+                            : progress <= 50
+                            ? '#FFCE47'
+                            : '#10CCAE',
+                      }"
+                    ></div>
+                  </div>
+                </td>
+                <td
+                  class="h-[60px] w-[76px] text-center border-base-400 border-b"
                 >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
+                  <div class="w-full h-full flex items-center justify-center">
+                    <button
+                      class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
                     >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-[60px] flex">
-              <div
-                class="w-[8%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <input class="w-[18px] h-[18px]" type="checkbox" />
-              </div>
-              <div
-                class="w-[5%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1
-              </div>
-              <div
-                class="w-[25%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                https://segmento.ir/google-indexer
-              </div>
-              <div
-                class="w-[20%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_2719"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_2719)">
-                      <path
-                        d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="w-[15%] h-full flex items-center justify-center border-l border-b border-base-400"
-              >
-                1401/02/20
-              </div>
-              <div
-                class="w-[20%] h-full flex flex-col items-end px-5 text-xs justify-center border-l border-b border-base-400"
-              >
-                <p>12 درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <!-- The progress percentage must come from the backend and is temporary in the form of props -->
-                  <div
-                    class="h-[10px] rounded-xl"
-                    :style="{
-                      width: progress + '%',
-                      backgroundColor:
-                      progress <= 25
-                          ? '#F35242'
-                          : progress <= 50
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                    }"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="w-[7%] h-full flex items-center justify-center border-b border-base-400"
-              >
-                <button
-                  class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_6223_5077"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                    >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_6223_5077)">
-                      <path
-                        d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
-                        fill="#488CDA"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <mask
+                          id="mask0_6223_5077"
+                          style="mask-type: alpha"
+                          maskUnits="userSpaceOnUse"
+                          x="0"
+                          y="0"
+                          width="24"
+                          height="24"
+                        >
+                          <rect width="24" height="24" fill="#D9D9D9" />
+                        </mask>
+                        <g mask="url(#mask0_6223_5077)">
+                          <path
+                            d="M11.0943 19.0896L4.63856 12.6339C4.54498 12.5403 4.47895 12.4416 4.44049 12.3377C4.40204 12.2339 4.38281 12.1217 4.38281 12.0012C4.38281 11.8807 4.40204 11.7685 4.44049 11.6647C4.47895 11.5608 4.54498 11.4621 4.63856 11.3685L11.1039 4.90315C11.2424 4.76468 11.4123 4.69288 11.6136 4.68775C11.8148 4.68263 11.993 4.75763 12.1482 4.91275C12.3033 5.05761 12.3834 5.23069 12.3885 5.43197C12.3937 5.63324 12.3187 5.81144 12.1635 5.96657L6.87889 11.2512H18.4866C18.6994 11.2512 18.8776 11.323 19.0212 11.4666C19.1648 11.6102 19.2366 11.7884 19.2366 12.0012C19.2366 12.214 19.1648 12.3922 19.0212 12.5358C18.8776 12.6794 18.6994 12.7512 18.4866 12.7512H6.87889L12.1732 18.0454C12.3116 18.1839 12.3834 18.3563 12.3885 18.5627C12.3937 18.7691 12.3187 18.9448 12.1635 19.0896C12.0187 19.2448 11.843 19.3223 11.6366 19.3223C11.4302 19.3223 11.2495 19.2448 11.0943 19.0896Z"
+                            fill="#488CDA"
+                          />
+                        </g>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
@@ -1690,6 +292,6 @@
 
 <script setup>
 const props = defineProps({
-    progress: String,
+  progress: String,
 });
 </script>
