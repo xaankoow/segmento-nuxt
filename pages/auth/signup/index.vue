@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full items-center">
-    <div class="absolute w-screen h-screen flex items-center justify-center bg-base-100/10 pointer-events-none"
+    <div class="absolute w-screen h-screen top-0 left-0 flex items-center justify-center bg-base-100/10 pointer-events-none"
       v-show="request.pending()">
       <ToolsLoading class="w-56 h-56" />
     </div>
