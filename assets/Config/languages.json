@@ -189,7 +189,10 @@
                     "btn_accept_code": "تایید کد",
                     "btn_accept_password": "ذخیره گذرواژه",
                     "signup_link_text": "حساب کاربری ندارم!",
-                    "email_error": "ایمیل وارد شده اشتباه است."
+                    "email_error": "ایمیل وارد شده اشتباه است.",
+                    "code_error": "کد وارد شده اشتباه است.",
+                    "password_confirm": "گذرواژه با تکرار آن مطابقت ندارید!",
+                    "password_length": "گذرواژه باید حداقل 8 کاراکتر باشد"
                 }
             },
             "search-keyword": {
