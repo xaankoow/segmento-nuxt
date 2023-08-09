@@ -45,7 +45,7 @@
       <div class="w-full h-16 flex items-end justify-between px-5">
         <p class="text-lg">لیست صفحات تجاری من</p>
         <button
-          class="w-40 h-10 rounded-[9px] btn-primary text-white flex items-center justify-evenly"
+          class="w-40 h-10 rounded-[9px] btn-primary flex items-center justify-evenly"
           style="min-height: 2.5rem"
         >
           <svg
