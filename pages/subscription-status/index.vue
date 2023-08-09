@@ -24,18 +24,18 @@
               <p>1401/03/02</p>
             </div>
             <hr class="w-full h-[1px] bg-base-400" />
-            <div class="w-full flex items-center justify-between">
+            <div class="w-full flex items-center text-sm justify-between">
               <p class="text-[10px]">تاریخ اتمام اشتراک</p>
               <p>1402/03/02</p>
             </div>
             <hr class="w-full h-[1px] bg-base-400" />
-            <div class="w-full flex items-center justify-between">
+            <div class="w-full flex items-center text-sm justify-between">
               <p class="text-[10px]">روز های باقی مانده</p>
               <p>250 روز</p>
             </div>
           </div>
           <button
-            class="w-[117px] h-8 rounded-lg bg-primary text-white text-sm"
+            class="w-[117px] h-8 rounded-lg btn-primary p-1 text-sm"
           >
             تمدید اشتراک
           </button>
@@ -94,7 +94,7 @@
             class="w-[220px] h-[205px]"
           />
           <button
-            class="w-[168px] h-8 rounded-lg bg-primary text-white text-sm"
+            class="w-[168px] h-8 rounded-lg btn-primary text-sm p-1"
           >
             خرید اشتراک با تخفیف
           </button>
