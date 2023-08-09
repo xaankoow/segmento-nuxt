@@ -158,10 +158,11 @@
                 <td
                   class="h-[60px] w-[49px] text-center border-l border-base-400 border-b"
                 >
-                  1
+                  {{ index }}
                 </td>
                 <td
                   class="h-[60px] w-[246px] text-center border-l border-base-400 border-b"
+                  dir="ltr"
                 >
                   https://segmento.ir/google-indexer/
                 </td>
@@ -208,7 +209,7 @@
                 <td
                   class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6"
                 >
-                  <p>12 درصد</p>
+                  <p>{{progress}} درصد</p>
                   <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
                     <div
                       class="h-[10px] rounded-xl"
@@ -292,6 +293,9 @@
 
 <script setup>
 const props = defineProps({
-  progress: String,
+  progress:{
+    type: String,
+    default: 80
+  } 
 });
 </script>

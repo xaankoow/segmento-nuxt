@@ -91,3 +91,7 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# npm files
+package-lock.json
+.output/
