@@ -94,3 +94,4 @@ sw.*
 
 # npm files
 package-lock.json
+.output/
