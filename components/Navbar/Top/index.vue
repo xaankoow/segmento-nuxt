@@ -62,7 +62,7 @@
             >
               <div class="w-[2.5rem]">
                 <img
-                  src="https://sb.kaleidousercontent.com/67418/1672x1018/6463a5af0d/screenshot-2022-05-24-at-15-22-28.png"
+                  src="/images/profileDefaultImg.png"
                   class="mask mask-squircle"
                 />
               </div>
@@ -117,8 +117,9 @@
                 <span class="mx-[12px]"> {{ profile.wallet }} تومان </span>
               </NuxtLink>
             </li>
+            <!-- profile -->
             <li>
-              <NuxtLink to="/" class="flex flex-row">
+              <NuxtLink to="/profile" class="flex flex-row">
                 <span>
                   <svg
                     width="13"
@@ -139,7 +140,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/buy-subscription" class="flex flex-row">
+              <NuxtLink class="flex flex-row !cursor-not-allowed">
                 <span>
                   <svg
                     width="15"
@@ -160,7 +161,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/" class="flex flex-row">
+              <NuxtLink class="flex flex-row !cursor-not-allowed">
                 <span
                   ><svg
                     width="14"
@@ -181,7 +182,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/" class="flex flex-row">
+              <NuxtLink class="flex flex-row !cursor-not-allowed">
                 <span>
                   <svg
                     width="14"
@@ -266,6 +267,8 @@
   </div>
 </template>
 <script setup>
+import ConfigStore from '../../../store/ConfigStore';
+
 const props = defineProps({
   platform: {
     type: String,
@@ -287,10 +290,7 @@ const props = defineProps({
 });
 
 function logout() {
-  useCookie("user").value = null;
-  useCookie("token").value = null;
-  useCookie("package").value = null;
-
+  ConfigStore.logout();
   navigateTo("/auth/login");
 }
 </script>

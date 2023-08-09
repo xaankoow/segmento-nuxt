@@ -24,9 +24,9 @@
 
         <!-- Tabs -->
         <div class="flex flex-row items-center gap-3 px-2 py-1">
-          <NuxtLink to="/rank-tracker/overview"
+          <span class="cursor-pointer opacity-70" to="/rank-tracker/overview"
             ><TabItem :title="tabs[0]" :active="false"
-          /></NuxtLink>
+          /></span>
 
           <span class="border-r h-full">&nbsp;</span>
           <NuxtLink to="/rank-tracker/keyword"
@@ -34,9 +34,9 @@
           /></NuxtLink>
 
           <span class="border-l h-full">&nbsp;</span>
-          <NuxtLink to="/rank-tracker/competitors">
+          <span class="cursor-pointer opacity-70" to="/rank-tracker/competitors">
             <TabItem :title="tabs[2]" :active="true" />
-          </NuxtLink>
+          </span>
         </div>
       </div>
 
@@ -606,6 +606,10 @@
 
 <script setup>
 import Config from "../../composables/Config";
+
+onBeforeMount(() => {
+  navigateTo('/rank-tracker/keyword');
+})
 
 const current_page = "pages/rank-tracker/competitors";
 const series = [

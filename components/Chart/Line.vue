@@ -13,49 +13,55 @@ const porps = defineProps({
 
 const options = {
   chart: {
-    height: 130,
     type: "line",
-    brush: {
-      enabled: true,
+    zoom: {
+      enabled: false,
     },
+    toolbar: {
+      show: false,
+    },
+  },
+
+  dataLabels: {
+    enabled: false,
   },
   stroke: {
-    show: true,
     curve: "smooth",
-    lineCap: "butt",
-    colors: ["#0AC7E2", "#F35242"],
-    width: 2,
-    dashArray: 0,
+    width: 2, // اضافه کردن عرض لاین‌ها به مقدار دلخواه (اینجا مثلاً 2)
+  },
+  markers: {
+    size: 4,
+    colors: ["#063468"], // تغییر رنگ مارکر‌ها به مشکی
+    strokeColors: ["transparent"],
+  },
+  xaxis: {
+    axisBorder: {
+      show: true,
+    },
+    axisTicks: {
+      show: true,
+    },
+    labels: {
+      show: true,
+    },
+  },
+  yaxis: {
+    axisBorder: {
+      show: true,
+    },
+    axisTicks: {
+      show: true,
+    },
+    labels: {
+      show: true,
+    },
   },
   grid: {
-    show: true,
-    borderColor: "#90A4AE",
-    strokeDashArray: 1,
-    position: "back",
-    xaxis: {
-      lines: {
-        show: true,
-      },
-    },
-    yaxis: {
-      lines: {
-        show: false,
-      },
-    },
-    row: {
-      colors: undefined,
-      opacity: 0.5,
-    },
-    column: {
-      colors: undefined,
-      opacity: 0.5,
-    },
-    padding: {
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-    },
+    show: false,
+  },
+  dataLabels: {
+    enabled: false,
   },
 };
+
 </script>

@@ -19,6 +19,7 @@
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
           <input
+            dir="ltr"
             v-model="form.email"
             type="email"
             required
@@ -32,6 +33,7 @@
         <div class="flex flex-row gap-1 w-[22.625rem]">
           <div class="custom_input_box text-base-content w-[22.625rem]">
             <input
+              dir="ltr"
               v-model="form.password"
               type="password"
               minlength="8"
@@ -48,6 +50,7 @@
           </div>
           <div class="custom_input_box text-base-content w-[22.625rem]">
             <input
+              dir="ltr"
               v-model="form.password_confirmation"
               id="confirm"
               type="password"
@@ -104,11 +107,11 @@ async function send_active_code_to_email() {
     // TODO: TOAST message to confirm password
     document.getElementById("confirm").focus();
   } else {
-    let response = await request.post("auth/register", form.value, "v1");
+    let response = await request.post("auth/register", form.value);
 
     if (response.status()) {
       // TODO: TOAST active code sended to email then after 3 second redirect to verify page
-      navigateTo({ path: "/auth/signup/verify", query: {email: form.value.email}} );
+      return navigateTo({ path: "/auth/signup/verify", query: {email: form.value.email}} );
     }
     // TODO: TOAST message for failed
     console.log(response.errors());

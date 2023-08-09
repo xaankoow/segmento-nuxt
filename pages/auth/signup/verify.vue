@@ -134,7 +134,8 @@ input[type="number"] {
 <script setup>
 import Request from "../../../Api/Request";
 import Config from "../../../composables/Config";
-import { useConfigStore } from "../../../store/Config";
+import ConfigStore from "../../../store/ConfigStore";
+
 
 definePageMeta({
   layout: "login",
@@ -142,7 +143,6 @@ definePageMeta({
 
 const current_page = "pages/auth/verify";
 const config = new Config();
-const configStore = useConfigStore();
 const request = new Request();
 const form = ref({
   email: null,
@@ -156,11 +156,23 @@ async function verify_email() {
   let number_4 = document.getElementById("number_4").value;
 
   form.value.code = Number(`${number_1}${number_2}${number_3}${number_4}`);
-  let response = await request.post("auth/verifyEmail", form.value, "v1");
+  let response = await request.post("auth/verifyEmail", form.value);
 
   if (response.status()) {
-    configStore.setConfig(response.data());
-    // TODO : TOAST success message
+    console.log(response.data());
+    // TODO : Fix this section later
+    let user = response.data().user;
+    if (! user.img) {
+      user.img = "/images/profileDefaultImg.png";
+    }
+
+    ConfigStore.set_token(response.data().token);
+    ConfigStore.set_user(JSON.stringify(user));
+    ConfigStore.set_plan(JSON.stringify(response.data().plan));
+    ConfigStore.set_wallets(JSON.stringify(response.data().wallets));
+    ConfigStore.set_workspaces(JSON.stringify(response.data().workspaces));
+    ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
+
     navigateTo("/keyword-research");
   } else {
     // TODO : TOAST error message
