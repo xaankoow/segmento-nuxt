@@ -32,13 +32,7 @@
     </div>
     <!-- package -->
     <div class="flex flex-row items-center justify-between gap-1">
-      <Plan v-for="pack in packages" :key="pack.uuid" :_package="pack" />
-      <!-- 
-      <Plan class="w-1/4 h-[35rem]" :plan="pln1"></Plan>
-      <Plan class="w-1/4 h-[35rem]" :plan="pln2"></Plan>
-      <Plan class="w-1/4 h-[35rem]" :plan="pln3"></Plan>
-      <Plan class="w-1/4 h-[35rem]" :plan="pln4"></Plan>
-      -->
+      <Plan class="w-1/4 h-[35rem]" v-for="pack in packages" :key="pack.uuid" :_package="pack" />
     </div>
     <div class="flex flex-col gap-5 items-center">
       <!-- navigation -->

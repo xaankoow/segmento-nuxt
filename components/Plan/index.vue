@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-between items-center border-2 h-[35rem] rounded-md shadow transition-all duration-300 hover:shadow-lg">
+    class="flex flex-col justify-between items-center border-2 rounded-md shadow transition-all duration-300 hover:shadow-lg">
     <div class="hidden">
       text-[#BF8970] border-b-[#BF8970]
       text-[#7D7D7D] border-b-[#7D7D7D]
