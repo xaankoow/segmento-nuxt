@@ -1,5 +1,10 @@
 <template>
   <div class="flex w-full items-center">
+    <div
+      class="absolute w-screen h-screen flex items-center justify-center top-0 left-0 bg-base-100/10 pointer-events-none"
+      v-show="request.pending()">
+      <ToolsLoading class="w-56 h-56" />
+    </div>
     <div class="mx-auto">
       <form @submit.prevent="requestToLogin()" class="flex flex-col gap-8 w-full items-center">
         <div class="custom_input_box text-base-content w-[22.625rem]">
