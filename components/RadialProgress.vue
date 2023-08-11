@@ -1,6 +1,6 @@
 <template>
     <div
-      class="text-info w-5 h-5 bg-white border-[90%] border-2 rounded-full"
+      class="text-info w-5 h-5 bg-white border-[90%] border-2 rounded-full pointer-events-none"
       :style="`--value:${value};`"
     >
       <div class="relative w-10 h-10">
