@@ -49,7 +49,7 @@
         </div>
 
         <div class="flex flex-row items-center justify-center w-2/5">
-          <select class="w-full rounded-sm border-2 border-base-300 px-2 py-2" v-model="form.lang">
+          <select class="w-10/12 rounded-md border-2 border-base-300 px-2 py-2" v-model="form.lang">
             <option value="FA">فارسی</option>
             <option value="EN">انگلیسی</option>
           </select>
@@ -69,7 +69,7 @@
       <!-- page content -->
       <div class="flex flex-row justify-between w-full h-full">
         <!-- form -->
-        <div class="flex flex-col w-3/5 border rounded-md py-2">
+        <div class="flex flex-col w-3/5 h-[26.1rem] border rounded-md py-2">
           <!-- header -->
           <div class="flex flex-row justify-between px-2" :class="data?.length === 0
                 ? 'text-base-350 pointer-events-none opacity-70'
