@@ -33,6 +33,19 @@
                                 "fields": {
                                     "keyword-research": "تحقیق کلمه کلیدی"
                                 }
+                            },
+                            "technical_seo": {
+                                "title": "سئو تکنیکال",
+                                "fields": {
+                                    "rank-tracker": {
+                                        "title": "رتبه سنج",
+                                        "fields": {
+                                            "overview": "بازبینی",
+                                            "keywords": "کلمات کلیدی",
+                                            "competitors": "رقبا"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
