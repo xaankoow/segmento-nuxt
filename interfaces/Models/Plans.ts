@@ -1,12 +1,12 @@
 export default interface Plans {
-    id: number,
-    title: string,
+    uuid: string,
+    name: string,
     price: Price,
     tooltip: string,
     discount_title: string
 }
 
 interface Price {
-    base: number,
+    price: number,
     final: number,
 }

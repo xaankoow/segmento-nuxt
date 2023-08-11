@@ -24,7 +24,7 @@
 
         <!-- Tabs -->
         <div class="flex flex-row items-center gap-3 px-2 py-1">
-          <span class="cursor-not-allowed" to="/rank-tracker/overview"
+          <span class="pointer-events-none" to="/rank-tracker/overview"
             ><TabItem :title="tabs[0]" :active="false"
           /></span>
 
@@ -34,7 +34,7 @@
           /></NuxtLink>
 
           <span class="border-l h-full">&nbsp;</span>
-          <span class="cursor-not-allowed" to="/rank-tracker/competitors">
+          <span class="pointer-events-none" to="/rank-tracker/competitors">
             <TabItem :title="tabs[2]" :active="false" />
           </span>
         </div>

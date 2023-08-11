@@ -33,7 +33,7 @@
   }
 
   .alphabet {
-    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-16 h-12;
+    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-10 h-10;
   }
   .alphabet.active {
     @apply bg-primary text-base-100;
@@ -47,6 +47,7 @@
 /* width */
 ::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
 
 /* Track */

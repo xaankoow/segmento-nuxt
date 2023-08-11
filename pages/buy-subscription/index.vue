@@ -32,10 +32,7 @@
     </div>
     <!-- package -->
     <div class="flex flex-row items-center justify-between gap-1">
-      <Plan class="w-1/4 h-[35rem]" :plan="pln1"></Plan>
-      <Plan class="w-1/4 h-[35rem]" :plan="pln2"></Plan>
-      <Plan class="w-1/4 h-[35rem]" :plan="pln3"></Plan>
-      <Plan class="w-1/4 h-[35rem]" :plan="pln4"></Plan>
+      <Plan class="w-1/4 h-[35rem]" v-for="pack in packages" :key="pack.uuid" :_package="pack" />
     </div>
     <div class="flex flex-col gap-5 items-center">
       <!-- navigation -->
@@ -135,65 +132,26 @@
 </template>
 
 <script setup>
+import Request from "../../Api/Request";
+import Package from "../../Models/Package";
 
-definePageMeta({
-  middleware: defineNuxtRouteMiddleware((to, from) => {
-    return navigateTo('/');
-  })
-})
+const request = new Request();
+const packages = ref([]);
 
-import PlanModel from "../../Models/PlanModel";
-const pack1 = { title: "برنزی", color: "bronze" };
-const pack2 = { title: "نقره ای", color: "silver" };
-const pack3 = { title: "طلایی", color: "gold" };
-const pack4 = { title: "الماسی", color: "diamond" };
-const plans = [
-  {
-    id: 1,
-    title: "یک ماهه",
-    price: {
-      base: 20000,
-      final: 19000,
-    },
-    tooltip: "این پیام مناسب است",
-    discount_title: "",
-  },
-  {
-    id: 2,
-    title: "سه ماهه",
-    price: {
-      base: 92000,
-      final: 85000,
-    },
-    tooltip: "پیام مربوطه به پلن",
-    discount_title: "5 درصد تخفیف",
-  },
-  {
-    id: 3,
-    title: "شیش ماهه",
-    price: {
-      base: 160000,
-      final: 140000,
-    },
-    tooltip: "پیام مربوطه به پلن",
-    discount_title: "پرداخت 5 ماه",
-  },
-  {
-    id: 4,
-    title: "دوازده ماهه",
-    price: {
-      base: 280000,
-      final: 230000,
-    },
-    tooltip: "پیام مربوطه به پلن",
-    discount_title: "پرداخت 10 ماه",
-  },
-];
+onBeforeMount(() => {
+  collect_packages();
+});
 
-const pln1 = new PlanModel(pack1, plans);
-const pln2 = new PlanModel(pack2, plans);
-const pln3 = new PlanModel(pack3, plans);
-const pln4 = new PlanModel(pack4, plans);
+async function collect_packages() {
+  let response = await request.get('package');
+  if (response.status_code() < 300) {
+    packages.value = response.data().map(pack => new Package(pack))
+  }
+  else {
+    // TODO: send error message
+    console.log(response);
+  }
+}
 
 const content = ref({
   title: "خرید اشتراک سگمنتو",

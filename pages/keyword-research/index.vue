@@ -3,7 +3,7 @@
     <!-- loading -->
     <div v-if="request.pending()"
       class="absolute top-0 left-0 w-full h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center">
-      <ToolsLoading class="w-32 h-32"/>
+      <ToolsLoading class="w-32 h-32" />
     </div>
     <!-- header section -->
     <section class="flex items-center border-r-2 gap-4 border-base-content my-2 px-4">
@@ -31,19 +31,29 @@
     <div class="flex flex-col gap-2 mx-2 w-full h-full">
       <!-- search box -->
       <form @submit.prevent="search_keywords_request()" class="flex flex-row items-center w-full gap-2 my-3">
-        <div class="custom_input_box w-11/12 text-base-500">
-          <input v-model="form.keyword" type="text" @focus="search_class.focus()" @blur="search_class.leave()" />
-          <label class="!text-base-400" :class="search_class.transitionStyle(form.keyword, 'text-base-400')">{{
-            config.by_route(`${current_page}/place-holder`) }}</label>
+        <div class="flex flex-row items-center w-3/5 justify-between gap-2">
+          <div class="custom_input_box w-11/12 text-base-500">
+            <input v-model="form.keyword" type="text" @focus="search_class.focus()" @blur="search_class.leave()" />
+            <label class="!text-base-400" :class="search_class.transitionStyle(form.keyword, 'text-base-400')">{{
+              config.by_route(`${current_page}/place-holder`) }}</label>
+          </div>
+
+          <button type="submit" class="btn-primary rounded-lg w-1/12 flex flex-row items-center justify-center h-11">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z"
+                fill="white" />
+            </svg>
+          </button>
+
         </div>
 
-        <button type="submit" class="btn-primary rounded-lg w-16 flex flex-row items-center justify-center h-11">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z"
-              fill="white" />
-          </svg>
-        </button>
+        <div class="flex flex-row items-center justify-center w-2/5">
+          <select class="w-10/12 rounded-md border-2 border-base-300 px-2 py-2" v-model="form.lang">
+            <option value="FA">فارسی</option>
+            <option value="EN">انگلیسی</option>
+          </select>
+        </div>
       </form>
 
       <!-- page content label -->
@@ -59,7 +69,7 @@
       <!-- page content -->
       <div class="flex flex-row justify-between w-full h-full">
         <!-- form -->
-        <div class="flex flex-col w-3/5 border rounded-md py-2">
+        <div class="flex flex-col w-3/5 h-[26.1rem] rounded-md py-2" :class="data !== null ? '' : 'border'">
           <!-- header -->
           <div class="flex flex-row justify-between px-2" :class="data?.length === 0
                 ? 'text-base-350 pointer-events-none opacity-70'
@@ -153,7 +163,7 @@
 
             <!-- word list -->
             <div v-if="data !== null"
-              class="sticky top-20 left-10 border rounded-sm grid grid-cols-4 text-primary-active w-full gap-5 px-4 py-4">
+              class="sticky top-20 left-10 rounded-sm grid grid-cols-8 text-primary-active w-full gap-2">
               <button class="alphabet" v-for="(data, index) in cache" :key="index" :id="`alpha-${index}`"
                 @click="update_list_by_alphabet(index, `alpha-${index}`)">
                 {{ index }}
@@ -182,7 +192,7 @@ const old_alphabet_id = ref(null);
 const request = new Request();
 const form = ref({
   keyword: "",
-  lang: "fa",
+  lang: "FA",
 });
 
 definePageMeta({
@@ -195,9 +205,6 @@ onBeforeMount(() => {
   }
 });
 
-function select_alphabet(alpha) {
-  form.value.lang = alpha;
-}
 function toggle_active_alphabet(id) {
   if (old_alphabet_id.value !== null) {
     let old_alphabet = document.getElementById(old_alphabet_id.value);
@@ -209,24 +216,32 @@ function toggle_active_alphabet(id) {
 }
 
 function update_list_by_alphabet(item, id) {
-  // TODO : Fix this ugly section later :))
-  let cacheToArray = Object.entries(cache.value);
-  let custom_array = cacheToArray.filter(itm => {
-    return itm[0] === item
-  })
-  if (custom_array !== null && custom_array.length > 0) {
-    custom_array = custom_array.map(item => {
-      return Object.values(item[1]) ?? []
-    })
+  if (id === old_alphabet_id.value) {
+    let old_alphabet = document.getElementById(old_alphabet_id.value);
+    old_alphabet.classList.toggle("active");
+    data.value = cache.value
+    old_alphabet_id.value = null;
   }
   else {
-    custom_array = [[]]
-  }
+    // TODO : Fix this ugly section later :))
+    let cacheToArray = Object.entries(cache.value);
+    let custom_array = cacheToArray.filter(itm => {
+      return itm[0] === item
+    })
+    if (custom_array !== null && custom_array.length > 0) {
+      custom_array = custom_array.map(item => {
+        return Object.values(item[1]) ?? []
+      })
+    }
+    else {
+      custom_array = [[]]
+    }
 
-  data.value = {
-    [item]: custom_array[0]
+    data.value = {
+      [item]: custom_array[0]
+    }
+    toggle_active_alphabet(id);
   }
-  toggle_active_alphabet(id);
 }
 
 async function search_keywords_request() {

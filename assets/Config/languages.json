@@ -33,6 +33,19 @@
                                 "fields": {
                                     "keyword-research": "تحقیق کلمه کلیدی"
                                 }
+                            },
+                            "technical_seo": {
+                                "title": "سئو تکنیکال",
+                                "fields": {
+                                    "rank-tracker": {
+                                        "title": "ابزار رتبه‌سنج",
+                                        "fields": {
+                                            "overview": "بازبینی",
+                                            "keywords": "کلمات کلیدی",
+                                            "competitors": "رقبا"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -50,7 +63,7 @@
         "pages": {
             "rank-tracker": {
                 "header": {
-                    "title": "ابزار رتبه‌سنج (رنک ترکینگ)",
+                    "title": "ابزار رتبه‌سنج",
                     "tabs": [
                         "نمای کلی",
                         "کلمات کلیدی",
