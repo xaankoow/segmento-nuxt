@@ -205,9 +205,6 @@ onBeforeMount(() => {
   }
 });
 
-function select_alphabet(alpha) {
-  form.value.lang = alpha;
-}
 function toggle_active_alphabet(id) {
   if (old_alphabet_id.value !== null) {
     let old_alphabet = document.getElementById(old_alphabet_id.value);
@@ -219,24 +216,32 @@ function toggle_active_alphabet(id) {
 }
 
 function update_list_by_alphabet(item, id) {
-  // TODO : Fix this ugly section later :))
-  let cacheToArray = Object.entries(cache.value);
-  let custom_array = cacheToArray.filter(itm => {
-    return itm[0] === item
-  })
-  if (custom_array !== null && custom_array.length > 0) {
-    custom_array = custom_array.map(item => {
-      return Object.values(item[1]) ?? []
-    })
+  if (id === old_alphabet_id.value) {
+    let old_alphabet = document.getElementById(old_alphabet_id.value);
+    old_alphabet.classList.toggle("active");
+    data.value = cache.value
+    old_alphabet_id.value = null;
   }
   else {
-    custom_array = [[]]
-  }
+    // TODO : Fix this ugly section later :))
+    let cacheToArray = Object.entries(cache.value);
+    let custom_array = cacheToArray.filter(itm => {
+      return itm[0] === item
+    })
+    if (custom_array !== null && custom_array.length > 0) {
+      custom_array = custom_array.map(item => {
+        return Object.values(item[1]) ?? []
+      })
+    }
+    else {
+      custom_array = [[]]
+    }
 
-  data.value = {
-    [item]: custom_array[0]
+    data.value = {
+      [item]: custom_array[0]
+    }
+    toggle_active_alphabet(id);
   }
-  toggle_active_alphabet(id);
 }
 
 async function search_keywords_request() {
