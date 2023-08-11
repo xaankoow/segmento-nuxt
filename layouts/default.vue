@@ -208,7 +208,7 @@
                   <!-- Content -->
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/rank-tracker/keyword">
-                      <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/fields/rank-tracker/fields/keywords`)"
+                      <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/fields/rank-tracker/title`)"
                         @click="change_active_section('keyword-rank-tracker')"
                         :active="active_section === 'keyword-rank-tracker'">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
