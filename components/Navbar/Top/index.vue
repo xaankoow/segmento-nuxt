@@ -51,7 +51,7 @@
     <div class="navbar-end flex items-center">
       <!-- Profile section -->
       <div
-        class="dropdown dropdown-hover dropdown-bottom w-[16.375rem] hover:border hover:border-base-200 h-[3.313rem] mt-[0.75rem]"
+        class="dropdown dropdown-hover dropdown-bottom w-[16.375rem] border border-transparent hover:border-base-200 h-[3.313rem] mt-[0.75rem]"
       >
         <!-- user detail section -->
         <div>
@@ -140,7 +140,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink class="flex flex-row !cursor-not-allowed">
+              <NuxtLink class="flex flex-row !pointer-events-none">
                 <span>
                   <svg
                     width="15"
@@ -161,7 +161,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink class="flex flex-row !cursor-not-allowed">
+              <NuxtLink class="flex flex-row !pointer-events-none">
                 <span
                   ><svg
                     width="14"
@@ -182,7 +182,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink class="flex flex-row !cursor-not-allowed">
+              <NuxtLink class="flex flex-row !pointer-events-none">
                 <span>
                   <svg
                     width="14"
