@@ -194,7 +194,7 @@
           </NavbarRightContentDepartment>
         </div>
       </div>
-      <div class="flex w-full rounded-t-md bg-base-100 overflow-y-auto h-[41.5rem] pb-3">
+      <div class="flex w-full rounded-t-md bg-base-100 overflow-y-auto pb-3">
         <NuxtPage />
       </div>
     </div>
