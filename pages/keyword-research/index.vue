@@ -69,7 +69,7 @@
       <!-- page content -->
       <div class="flex flex-row justify-between w-full h-full">
         <!-- form -->
-        <div class="flex flex-col w-3/5 h-[26.1rem] border rounded-md py-2">
+        <div class="flex flex-col w-3/5 h-[26.1rem] rounded-md py-2" :class="data !== null ? '' : 'border'">
           <!-- header -->
           <div class="flex flex-row justify-between px-2" :class="data?.length === 0
                 ? 'text-base-350 pointer-events-none opacity-70'
