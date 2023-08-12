@@ -4,7 +4,7 @@
       class="w-full h-auto bg-base-200 flex items-center justify-start text-lg textco"
     >
       <div class="w-[2px] h-5 rounded-sm bg-icon ml-4"></div>
-      <p>تغییر شماره همراه</p>
+      <p>ابزار کپی رایتینگ عنوان</p>
     </div>
     <div
       class="w-full h-full text-base-400 text-sm flex flex-col items-center justify-between p-7"
@@ -17,7 +17,7 @@
           id=""
           class="w-full h-11 text-black placeholder:text-base-400 border border-b-2 border-base-400 rounded text-center"
         />
-        <button class="w-[103px] h-8 rounded-lg mt-3 text-white bg-dimound">
+        <button class="w-[103px] h-8 rounded-lg mt-3 btn-primary p-1">
           تولید عنوان
         </button>
       </div>
