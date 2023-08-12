@@ -28,32 +28,32 @@
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col gap-2 mx-2 w-full h-full">
+    <div class="flex flex-col gap-2 px-2 w-full h-full">
       <!-- search box -->
       <form @submit.prevent="search_keywords_request()" class="flex flex-row items-center w-full gap-2 my-3">
-        <div class="flex flex-row items-center w-3/5 justify-between gap-2">
-          <div class="custom_input_box w-11/12 text-base-500">
+        <div class="flex flex-row items-center w-full justify-between gap-2">
+          <div class="custom_input_box w-[65%] text-base-500">
             <input v-model="form.keyword" type="text" @focus="search_class.focus()" @blur="search_class.leave()" />
             <label class="!text-base-400" :class="search_class.transitionStyle(form.keyword, 'text-base-400')">{{
               config.by_route(`${current_page}/place-holder`) }}</label>
           </div>
 
-          <button type="submit" class="btn-primary rounded-lg w-1/12 flex flex-row items-center justify-center h-11">
+          <div class="flex flex-row items-center justify-center w-[25%]">
+            <select class="w-full rounded-md border-2 border-base-300 px-2 py-2" v-model="form.lang">
+              <option value="FA">فارسی</option>
+              <option value="EN">انگلیسی</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-primary rounded-lg w-[10%] flex flex-row items-center justify-center h-11">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z"
                 fill="white" />
             </svg>
           </button>
-
         </div>
 
-        <div class="flex flex-row items-center justify-center w-2/5">
-          <select class="w-10/12 rounded-md border-2 border-base-300 px-2 py-2" v-model="form.lang">
-            <option value="FA">فارسی</option>
-            <option value="EN">انگلیسی</option>
-          </select>
-        </div>
       </form>
 
       <!-- page content label -->
@@ -67,14 +67,14 @@
       }}</span>
 
       <!-- page content -->
-      <div class="flex flex-row justify-between w-full h-full">
+      <div class="flex flex-row justify-between w-full pb-2 gap-4" :class="data !== null ? '' : 'h-full'">
         <!-- form -->
-        <div class="flex flex-col w-3/5 h-[26.1rem] rounded-md py-2" :class="data !== null ? '' : 'border'">
+        <div class="flex flex-col w-[65%] rounded-md py-2 border border-[#d9d9d9]">
           <!-- header -->
           <div class="flex flex-row justify-between px-2" :class="data?.length === 0
-                ? 'text-base-350 pointer-events-none opacity-70'
-                : ''
-              ">
+            ? 'text-base-350 pointer-events-none opacity-70'
+            : ''
+            ">
             <div class="flex flex-row gap-5 items-center">
               <span class="cursor-pointer">{{
                 config.by_route(`${current_page}/table/select`)
@@ -141,7 +141,7 @@
         </div>
 
         <!-- options -->
-        <div class="flex justify-center w-2/5">
+        <div class="flex justify-center w-[35%]" :class="data !== null ? 'h-[200vh]' : ''">
           <div class="flex flex-col gap-4 items-center w-10/12">
             <!-- drop down disabled -->
             <div class="flex flex-row items-center w-full bg-base-400 text-base-500 justify-between rounded-md">
