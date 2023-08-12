@@ -7,7 +7,7 @@
       :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()" class="shadow-md mx-auto">
     </NavbarTop>
 
-    <div class="flex flex-row h-full flex-grow mt-2 ml-2 gap-2">
+    <div class="flex flex-row flex-grow pt-2 ml-2 gap-2" style="height: 90vh;">
       <div class="flex flex-row">
         <!-- Right navbar -->
         <NavbarRight class="justify-between py-2">
