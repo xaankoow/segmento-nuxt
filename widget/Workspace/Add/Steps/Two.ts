@@ -4,6 +4,7 @@ import HTMLController from "../../../../Controllers/HTMLController";
 import Request from "../../../../Api/Request";
 import CacheStore from "../../../../store/CacheStore";
 import Popup from "../../../Component/Popup";
+import PagePanel from "../PagePanel";
 
 export default class Two {    
     public static isGenerate = false;
@@ -83,14 +84,21 @@ export default class Two {
     
     protected static content() {
         let element = document.createElement("div");
-        element.classList.add("w-full", "flex", "flex-col", "gap-4");
+        element.classList.add("w-full", "flex", "flex-col", "gap-3", "px-4");
         let describe = this.describe();
         let hr = document.createElement("hr");
-        hr.classList.add("mx-4")
-        let register = this.register();
+        let panel = document.createElement("div");
+        let panel_id = UuidGenerator.generate();
+        panel.id = panel_id;
+        panel.classList.add("flex", "flex-col", "gap-3", "text-sm", "px-3", "w-full", "max-h-56", "h-fit", "overflow-auto", "border-b");
+        panel.appendChild(PagePanel.render(panel_id));
 
+        let register = this.register();
         element.appendChild(describe);
         element.appendChild(hr);
+        element.appendChild(panel);
+        element.appendChild(this.add_page_panel(panel_id));
+        element.appendChild(document.createElement("hr"))
         element.appendChild(register);
         return element;
     }
@@ -184,6 +192,27 @@ export default class Two {
 
         element.appendChild(button);
 
+        return element;
+    }
+
+    protected static add_page_panel(panel_id: string) {
+        let element = document.createElement("div");
+        element.classList.add("flex", "flex-row","items-center","w-full", "p-3", "text-base-300", "gap-4");
+        let label = document.createElement("span");
+        label.innerText = `${this.config.by_route(this.steps_section)[1].meta_description}`;
+        let button = document.createElement("button");
+        button.classList.add("btn-secondary");
+        button.innerText = `${this.config.by_route(this.steps_section)[1].button.add_page}`;
+
+        button.onclick = function(e) {
+            let page_panel = PagePanel.render(panel_id);
+            let panel = document.getElementById(panel_id);
+
+            panel!.appendChild(page_panel);
+        }
+
+        element.appendChild(label);
+        element.appendChild(button);
         return element;
     }
 }

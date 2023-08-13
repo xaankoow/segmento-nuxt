@@ -12,7 +12,7 @@ definePageMeta({
 });
 
 onMounted(() => {
-  let popup = One.render();
+  let popup = One.render("page");;
   document.getElementById("page").appendChild(popup);
 })
 </script>
