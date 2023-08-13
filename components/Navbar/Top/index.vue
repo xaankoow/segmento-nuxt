@@ -155,7 +155,7 @@
         </div>
       </div>
       <!-- Other option-->
-      <div class="mx-[2.329rem] flex justify-between w-[4.094rem]">
+      <!-- <div class="mx-[2.329rem] flex justify-between w-[4.094rem]">
         <button class="cursor-pointer">
           <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -170,7 +170,7 @@
               fill="#063468" />
           </svg>
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
