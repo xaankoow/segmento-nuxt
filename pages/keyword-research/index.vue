@@ -8,11 +8,7 @@
     <!-- header section -->
     <section class="flex items-center border-r-2 gap-4 border-base-content my-2 px-4">
       <label>{{ config.by_route(`${current_page}/title`) }}</label>
-      <div class="join rounded-sm bg-base-300 flex flex-row items-center text-base-500 px-1 text-xs">
-        <span class="join-item">189</span>
-        <span class="join-item border-l border-l-base-500 mx-1 h-[0.7rem]"> </span>
-        <span class="join-item">20</span>
-      </div>
+      <LimitCounter :budget="189" :remained="20" />
     </section>
 
     <!-- Tabs -->
