@@ -3,7 +3,7 @@ import Config from "../../../../composables/Config";
 import HTMLController from "../../../../Controllers/HTMLController";
 import Request from "../../../../Api/Request";
 import CacheStore from "../../../../store/CacheStore";
-import Popup from "../../../Custom/Popup";
+import Popup from "../../../Component/Popup";
 import Two from "./Two";
 
 export default class AddWorkspaceStepOne {
