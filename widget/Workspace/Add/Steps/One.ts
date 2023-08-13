@@ -2,6 +2,7 @@ import UuidGenerator from "../../../../composables/UuidGenerator";
 import Config from "../../../../composables/Config";
 import HTMLController from "../../../../Controllers/HTMLController";
 import Request from "../../../../Api/Request";
+import CacheStore from "../../../../store/CacheStore";
 
 export default class AddWorkspaceStepOne {
     public static isGenerate = false;
@@ -159,6 +160,7 @@ export default class AddWorkspaceStepOne {
             class="w-full border-2 border-base-350 rounded-sm py-2 pl-16 focus:border-b-primary outline-none"
             placeholder="example.ir" id="${this.popup_id}-input" />
           <label class="absolute left-[0.6rem] top-[0.6rem]">https://</label>
+          <label class="absolute right-3 top-4 text-xs text-error hidden" id="error_label" style="direction: rtl">error</label>
         `;
 
         // Todo : create button to add textbox to set keyword for website
@@ -177,7 +179,7 @@ export default class AddWorkspaceStepOne {
         button.classList.add("btn-primary", "flex", "flex-row", "items-center", "gap-4", "w-28", "justify-center");
         button.id = `${this.popup_id}-button`;
         button.innerHTML = `
-        <span> ${this.config.by_route(this.current_page).buttons.next }</span>
+        <span> ${this.config.by_route(this.current_page).buttons.next}</span>
         <span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -186,18 +188,25 @@ export default class AddWorkspaceStepOne {
           </svg>
         </span>
         `;
-        button.onclick = async function(e) {
+        button.onclick = async function (e) {
             let input = document.getElementById("website_text_box"); // This our textbox id that created staticly
             let request = new Request();
-            let response = await request.post("workspaces/create", { website: input.value } );
+            let response = await request.post("workspaces/create", { website: input.value });
 
             if (response.status_code() < 300) {
                 if (response.status()) {
-                    // TODO : Store uuid and send to next step
-                    return;
+                    CacheStore.set_workspace_uuid(response.data().uuid);
+                    // TODO : close this popup and go to next step.
                 }
-            }
+                else {
+                    input?.classList.add("border-error");
+                    let error_label = document.getElementById("error_label");
+                    error_label!.classList.remove("hidden");
+                    error_label!.innerText = response.message();
+                }
 
+                return;
+            }
             input?.classList.add("border-error");
         }
 
