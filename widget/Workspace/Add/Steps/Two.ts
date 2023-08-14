@@ -6,44 +6,44 @@ import CacheStore from "../../../../store/CacheStore";
 import Popup from "../../../Component/Popup";
 import PagePanel from "../PagePanel";
 
-export default class Two {    
-    public static isGenerate = false;
-    protected static config = new Config();
-    protected static readonly current_page = 'pages/workspace/add';
-    protected static readonly steps_section = `${this.current_page}/steps`;
-    protected static popup_id = "";
-    protected static parent_id = "";
+export default class Two {
+  public static isGenerate = false;
+  protected static config = new Config();
+  protected static readonly current_page = 'pages/workspace/add';
+  protected static readonly steps_section = `${this.current_page}/steps`;
+  protected static popup_id = "";
+  protected static parent_id = "";
 
-    public static render(parent_id: string) {
-        this.parent_id = parent_id;
-        let popup = Popup.render();
-        this.popup_id = UuidGenerator.generate();
-        popup.id = this.popup_id;
-        let container = this.container();
-        let header = this.header();
-        let content = this.content();
+  public static render(parent_id: string) {
+    this.parent_id = parent_id;
+    let popup = Popup.render();
+    this.popup_id = UuidGenerator.generate();
+    popup.id = this.popup_id;
+    let container = this.container();
+    let header = this.header();
+    let content = this.content();
 
-        
-        container.appendChild(header);
-        container.appendChild(content);
-        popup.appendChild(container);
-        return popup;
-    }  
 
-    protected static container() {
-        let element = document.createElement("div");
-        element.classList.add("flex", "flex-col", "gap-6", "w-[53.875rem]", "rounded-md", "py-4", "shadow-md", "bg-base-100");
-        element.id = UuidGenerator.generate();
-        return element;
-    }
+    container.appendChild(header);
+    container.appendChild(content);
+    popup.appendChild(container);
+    return popup;
+  }
 
-    protected static header() {
-        let header = document.createElement("div");
-        header.classList.add("flex", "flex-row", "justify-between", "px-4");
+  protected static container() {
+    let element = document.createElement("div");
+    element.classList.add("flex", "flex-col", "gap-6", "w-[53.875rem]", "rounded-md", "py-4", "shadow-md", "bg-base-100");
+    element.id = UuidGenerator.generate();
+    return element;
+  }
 
-        let title = document.createElement("div");
-        title.classList.add("flex", "flex-row", "items-center", "gap-3");
-        title.innerHTML = `
+  protected static header() {
+    let header = document.createElement("div");
+    header.classList.add("flex", "flex-row", "justify-between", "px-4");
+
+    let title = document.createElement("div");
+    title.classList.add("flex", "flex-row", "items-center", "gap-3");
+    title.innerHTML = `
         <span>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -60,52 +60,52 @@ export default class Two {
             </svg>
         </span>`;
 
-        let button = document.createElement('button');
-        button.id = `${this.popup_id}-button`;
-        button.classList.add('bg-error/10', 'p-1', 'rounded-sm', 'hover:bg-error/25', 'transition-all', 'duration-200');
-        button.innerHTML = `
+    let button = document.createElement('button');
+    button.id = `${this.popup_id}-button`;
+    button.classList.add('bg-error/10', 'p-1', 'rounded-sm', 'hover:bg-error/25', 'transition-all', 'duration-200');
+    button.innerHTML = `
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
             <path
             d="M6.35 7.4L1.275 12.475C1.14167 12.6083 0.971 12.679 0.763 12.687C0.554333 12.6957 0.375 12.625 0.225 12.475C0.0749999 12.325 0 12.15 0 11.95C0 11.75 0.0749999 11.575 0.225 11.425L5.3 6.35L0.225 1.275C0.0916666 1.14167 0.021 0.970667 0.013 0.762C0.00433335 0.554 0.0749999 0.375 0.225 0.225C0.375 0.0749999 0.55 0 0.75 0C0.95 0 1.125 0.0749999 1.275 0.225L6.35 5.3L11.425 0.225C11.5583 0.0916666 11.7293 0.0206668 11.938 0.0120001C12.146 0.00400008 12.325 0.0749999 12.475 0.225C12.625 0.375 12.7 0.55 12.7 0.75C12.7 0.95 12.625 1.125 12.475 1.275L7.4 6.35L12.475 11.425C12.6083 11.5583 12.679 11.729 12.687 11.937C12.6957 12.1457 12.625 12.325 12.475 12.475C12.325 12.625 12.15 12.7 11.95 12.7C11.75 12.7 11.575 12.625 11.425 12.475L6.35 7.4Z"
             fill="#F35242" />
         </svg>`;
-        button.onclick = function (e) {
-            let button = e.target as HTMLElement;
-            let remove_id = button.id.split('-')[0];
-            HTMLController.remove_element(remove_id);
-        }
-
-        header.appendChild(title);
-        header.appendChild(button);
-
-        return header;
+    button.onclick = function (e) {
+      let button = e.target as HTMLElement;
+      let remove_id = button.id.split('-')[0];
+      HTMLController.remove_element(remove_id);
     }
 
-    
-    protected static content() {
-        let element = document.createElement("div");
-        element.classList.add("w-full", "flex", "flex-col", "gap-3", "px-4");
-        let describe = this.describe();
-        let hr = document.createElement("hr");
-        let panel = document.createElement("div");
-        let panel_id = UuidGenerator.generate();
-        panel.id = panel_id;
-        panel.classList.add("flex", "flex-col", "gap-3", "text-sm", "px-3", "w-full", "max-h-56", "h-fit", "overflow-auto", "border-b");
-        panel.appendChild(PagePanel.render(panel_id));
+    header.appendChild(title);
+    header.appendChild(button);
 
-        let register = this.register();
-        element.appendChild(describe);
-        element.appendChild(hr);
-        element.appendChild(panel);
-        element.appendChild(this.add_page_panel(panel_id));
-        element.appendChild(document.createElement("hr"))
-        element.appendChild(register);
-        return element;
-    }
+    return header;
+  }
 
-    protected static describe() {
-        let element = document.createElement("div");
-        element.innerHTML = `
+
+  protected static content() {
+    let element = document.createElement("div");
+    element.classList.add("w-full", "flex", "flex-col", "gap-3", "px-4");
+    let describe = this.describe();
+    let hr = document.createElement("hr");
+    let panel = document.createElement("div");
+    let panel_id = UuidGenerator.generate();
+    panel.id = panel_id;
+    panel.classList.add("flex", "flex-col", "gap-3", "text-sm", "px-3", "w-full", "max-h-56", "h-fit", "overflow-auto", "border-b");
+    panel.appendChild(PagePanel.render(panel_id));
+
+    let register = this.register(panel_id);
+    element.appendChild(describe);
+    element.appendChild(hr);
+    element.appendChild(panel);
+    element.appendChild(this.add_page_panel(panel_id));
+    element.appendChild(document.createElement("hr"))
+    element.appendChild(register);
+    return element;
+  }
+
+  protected static describe() {
+    let element = document.createElement("div");
+    element.innerHTML = `
         <div class="flex flex-row pr-3">
         <!-- content -->
         <div class="flex flex-col gap-8 w-3/5 px-2 h-full">
@@ -145,18 +145,18 @@ export default class Two {
         </div>
       </div>`
 
-        return element;
-    }
+    return element;
+  }
 
-    
-    protected static register() {
-        let element = document.createElement("div");
-        element.classList.add("flex", "flex-row", "items-center", "justify-end", "mb-2", "mx-4");
 
-        let button = document.createElement("button");
-        button.classList.add("btn-primary", "flex", "flex-row", "items-center", "gap-4", "w-28", "justify-center");
-        button.id = `${this.popup_id}-button`;
-        button.innerHTML = `
+  protected static register(panel_id) {
+    let element = document.createElement("div");
+    element.classList.add("flex", "flex-row", "items-center", "justify-end", "mb-2", "mx-4");
+
+    let button = document.createElement("button");
+    button.classList.add("btn-primary", "flex", "flex-row", "items-center", "gap-4", "w-28", "justify-center");
+    button.id = `${this.popup_id}-button`;
+    button.innerHTML = `
         <span> ${this.config.by_route(this.current_page).buttons.finish}</span>
         <!-- 
         <span>
@@ -168,51 +168,65 @@ export default class Two {
         </span>
         -->
         `;
-        button.onclick = async function (e) {
-            let input = document.getElementById("website_text_box"); // This our textbox id that created staticly
-            let request = new Request();
-            let response = await request.post("workspaces/create", { website: input.value });
+    button.onclick = async function (e) {
+      let btn = e.target as HTMLElement;
+      let popup_id = btn.id.split('-')[0];
+      let request = new Request();
+      let form = [];
 
-            if (response.status_code() < 300) {
-                if (response.status()) {
-                    CacheStore.set_workspace_uuid(response.data().uuid);
-                    // TODO : close this popup and go to next step.
-                }
-                else {
-                    input?.classList.add("border-error");
-                    let error_label = document.getElementById("error_label");
-                    error_label!.classList.remove("hidden");
-                    error_label!.innerText = response.message();
-                }
+      let pages = document.getElementsByName("input-page");
+      let keywords = document.getElementsByName("input-keyword");
 
-                return;
-            }
-            input?.classList.add("border-error");
+      pages.forEach(page => {
+        let id = page.id.split('-')[0];
+        let keys = [];
+
+        keywords.forEach(key => {
+          key = key as HTMLInputElement;
+          if (key.className.includes(id)) {
+            keys.push(key.value)
+          }
+        });
+        let the_page = {
+          slug: page.value,
+          is_money_page: false,
+          is_lighthouse: false,
+          keywords: keys
         }
+        form.push(the_page);
+      })
 
-        element.appendChild(button);
-
-        return element;
+      let response = await request.post(`workspaces/${CacheStore.workspace_uuid()}/add_page`, {pages: form});
+      if (response.status_code() < 300) {
+        if (response.status()) {
+          console.log(HTMLController.remove_element(popup_id));
+        }
+      }
     }
 
-    protected static add_page_panel(panel_id: string) {
-        let element = document.createElement("div");
-        element.classList.add("flex", "flex-row","items-center","w-full", "p-3", "text-base-300", "gap-4");
-        let label = document.createElement("span");
-        label.innerText = `${this.config.by_route(this.steps_section)[1].meta_description}`;
-        let button = document.createElement("button");
-        button.classList.add("btn-secondary");
-        button.innerText = `${this.config.by_route(this.steps_section)[1].button.add_page}`;
+    element.appendChild(button);
 
-        button.onclick = function(e) {
-            let page_panel = PagePanel.render(panel_id);
-            let panel = document.getElementById(panel_id);
+    return element;
+  }
 
-            panel!.appendChild(page_panel);
-        }
+  protected static add_page_panel(panel_id: string) {
+    let element = document.createElement("div");
+    element.classList.add("flex", "flex-row", "items-center", "w-full", "p-3", "text-base-300", "gap-4");
+    let label = document.createElement("span");
+    label.innerText = `${this.config.by_route(this.steps_section)[1].meta_description}`;
+    let button = document.createElement("button");
+    button.classList.add("btn-secondary");
+    button.innerText = `${this.config.by_route(this.steps_section)[1].button.add_page}`;
 
-        element.appendChild(label);
-        element.appendChild(button);
-        return element;
+    button.onclick = function (e) {
+      let page_panel = PagePanel.render(panel_id);
+      let panel = document.getElementById(panel_id);
+
+      panel!.appendChild(page_panel);
     }
+
+    element.appendChild(label);
+    element.appendChild(button);
+    return element;
+  }
 }

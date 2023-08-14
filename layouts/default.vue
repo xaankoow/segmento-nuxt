@@ -224,7 +224,7 @@
           </NavbarRightContentDepartment>
         </div>
       </div>
-      <div class="flex w-full rounded-t-md bg-base-100 overflow-y-auto pb-3">
+      <div class="flex w-full rounded-t-md bg-base-100 overflow-y-auto pb-3" id="page">
         <NuxtPage />
       </div>
     </div>
@@ -233,6 +233,7 @@
 <script setup>
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
+import One from "../widget/Workspace/Add/Steps/One";
 
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
@@ -259,7 +260,8 @@ onBeforeMount(() => {
 
 function add_workspace() {
   change_active_section("add_workspace");
-  navigateTo('/workspace/add');
+  let popup = One.render("page");
+  document.getElementById("page").appendChild(popup);
 }
 
 function change_selected_tools_section(title) {

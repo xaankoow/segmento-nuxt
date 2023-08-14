@@ -20,21 +20,23 @@ export default class PagePanel {
     protected static panel() {
         let element = document.createElement("div");
         element.classList.add("flex", "flex-row", "px-3", "gap-3", "py-4", "h-28");
-        element.appendChild(this.keywords());
-        element.appendChild(this.page());
+        element.id = UuidGenerator.generate()
+        element.appendChild(this.keywords(element.id));
+        element.appendChild(this.page(element.id));
         element.appendChild(document.createElement("hr"));
 
         return element;
     }
 
-    protected static page() {
+    protected static page(page_id) {
         let container = document.createElement("div");
         container.classList.add("flex", "flex-col", "w-1/2", "max-auto", "h-28", "items-start");
         let element = document.createElement("div");
         element.classList.add("flex", "flex-row", "items-center", "gap-3", "w-full", "mx-auto");
         let text_box = document.createElement("input");
         text_box.classList.add("w-11/12", "p-1", "text-sm");
-        text_box.id = `${this.parent_id}-input-page`;
+        text_box.id = `${page_id}-input-page`;
+        text_box.name = `input-page`;
         text_box.style.direction = "ltr";
 
         let button = document.createElement('button');
@@ -60,15 +62,15 @@ export default class PagePanel {
         return container;
     }
 
-    protected static keywords() {
+    protected static keywords(page_id) {
         let element = document.createElement("div");
         element.classList.add("flex", "flex-col", "gap-1", "w-1/2", "h-28", "overflow-auto");
         let container = document.createElement("div");
         container.classList.add("w-full", "flex", "flex-col", "gap-1");
         container.id = UuidGenerator.generate();
-        container.appendChild(this.keyword());
+        container.appendChild(this.keyword(page_id));
         let button = document.createElement("button");
-        button.id = `${container.id}-button`;
+        button.id = `${container.id}-button-${page_id}`;
         console.log(button.id);
         button.classList.add("flex", "flex-row", "items-center", "w-11/12", "justify-center", "gap-5");
         button.innerHTML = `
@@ -86,13 +88,16 @@ export default class PagePanel {
         button.classList.add("btn-secondary", "w-full");
         button.onclick = function (e) {
             let button = e.target as HTMLElement;
+            let page_id = button.id.split('-')[2];
             let element = document.createElement("div");
             element.classList.add("flex", "flex-row", "items-center", "gap-2");
             element.id = UuidGenerator.generate();
 
             let text_box = document.createElement("input");
             text_box.classList.add("w-11/12", "p-1", "text-sm");
-            text_box.id = `${element}-input-keyword`;
+            text_box.id = `${element.id}-input-keyword`;
+            text_box.name = "input-keyword";
+            text_box.classList.add(`${page_id}-keyword`)
             text_box.style.direction = "ltr";
 
             let btn_dispose = document.createElement('button');
@@ -124,15 +129,17 @@ export default class PagePanel {
         return element;
     }
 
-    protected static keyword() {
+    protected static keyword(page_id) {
         let element = document.createElement("div");
         element.classList.add("flex", "flex-row", "items-center", "gap-2");
         element.id = UuidGenerator.generate();
 
         let text_box = document.createElement("input");
         text_box.classList.add("w-11/12", "p-1", "text-sm");
-        text_box.id = `${element}-input-keyword`;
+        text_box.id = `${element.id}-input-keyword`;
         text_box.style.direction = "ltr";
+        text_box.name = "input-keyword";
+        text_box.classList.add(`${page_id}-keyword`);
 
         let btn_dispose = document.createElement('button');
         btn_dispose.id = `${element.id}-button`;
