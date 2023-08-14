@@ -35,6 +35,7 @@ export default class PagePanel {
         let text_box = document.createElement("input");
         text_box.classList.add("w-11/12", "p-1", "text-sm");
         text_box.id = `${this.parent_id}-input-page`;
+        text_box.name = `${this.parent_id}-page-input`;
         text_box.style.direction = "ltr";
 
         let button = document.createElement('button');
@@ -92,7 +93,7 @@ export default class PagePanel {
 
             let text_box = document.createElement("input");
             text_box.classList.add("w-11/12", "p-1", "text-sm");
-            text_box.id = `${element}-input-keyword`;
+            text_box.id = `${element.id}-input-keyword`;
             text_box.style.direction = "ltr";
 
             let btn_dispose = document.createElement('button');
@@ -131,7 +132,7 @@ export default class PagePanel {
 
         let text_box = document.createElement("input");
         text_box.classList.add("w-11/12", "p-1", "text-sm");
-        text_box.id = `${element}-input-keyword`;
+        text_box.id = `${element.id}-input-keyword`;
         text_box.style.direction = "ltr";
 
         let btn_dispose = document.createElement('button');
