@@ -20,7 +20,7 @@
           :key="pln.uuid">
           <!-- title -->
           <div class="flex flex-row items-center gap-2">
-            <input type="radio" class="w-4 h-4" name="radio" @change="_package.select_plan(pln.uuid)" />
+            <input type="radio" class="w-4 h-4" name="radio" @change="select_plan(pln.uuid)" />
             <span>{{ pln.name }}</span>
           </div>
           <!-- discount title -->
@@ -88,6 +88,9 @@ import Config from "../../composables/Config";
 import { CustomTextBox } from "../../composables/CustomTextBox";
 import Package from "../../Models/Package";
 
+const emit = defineEmits([
+  'change_plan'
+])
 const props = defineProps({
   _package: {
     type: Package,
@@ -102,6 +105,11 @@ const props = defineProps({
     },
   },
 });
+
+function select_plan(plan_uuid) {
+  props._package.select_plan(plan_uuid)
+  emit('change_plan', plan_uuid) 
+}
 
 const config = new Config();
 const discount = ref("");
