@@ -6,15 +6,16 @@
       v-if="request.pending()">
       <ToolsLoading class="w-32 h-32" />
     </div>
-    <div class="absolute top-0 left-0 !w-screen !h-screen z-50 bg-base-350/40 flex justify-center items-center" id="the_package"
-      v-if="the_package !== null">
+    <div class="absolute top-0 left-0 !w-screen !h-screen z-50 bg-base-350/40 flex justify-center items-center"
+      id="the_package" v-if="the_package !== null">
       <!-- the package and confirm to buy -->
       <div class="flex flex-col justify-between w-96 h-2/3 bg-base-100 rounded-md">
         <!-- header -->
         <div class="flex flex-row bg-base-500 h-12 rounded-t-md text-base-100 items-center justify-between px-4">
           <span class="w-6"></span>
           <div>رسید نهایی خرید اشتراک</div>
-          <button class="flex text-2xl font-thin w-6 cursor-pointer" @click="HTMLController.hide_element('the_package')">×</button>
+          <button class="flex text-2xl font-thin w-6 cursor-pointer"
+            @click="HTMLController.hide_element('the_package')">×</button>
         </div>
 
         <!-- content -->
@@ -25,24 +26,26 @@
           </div>
           <hr />
 
-          <div class="flex flex-col gap-4 p-4">
-            <div class="flex flex-row items-center justify-between">
-              <span>مدت اشتراک:</span>
-              <span> {{ the_package.name }}</span>
-            </div>
-            <div class="flex flex-row items-center justify-between">
-              <span>قیمت اشتراک:</span>
-              <span> {{ the_package.price.value }}</span>
+          <div class="flex flex-col gap-4 p-4 h-full justify-evenly">
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-row items-center justify-between">
+                <span>مدت اشتراک:</span>
+                <span> {{ the_package.name }}</span>
+              </div>
+              <div class="flex flex-row items-center justify-between">
+                <span>قیمت اشتراک:</span>
+                <span> {{ the_package.price.value }}</span>
+              </div>
             </div>
             <!-- discount section -->
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4" v-if="the_package.discount">
               <div class="flex flex-row items-center justify-between">
                 <span>تخفیف سگمنتو:</span>
                 <span> {{ the_package.discount !== null ? the_package.discount.value : '0' }}</span>
               </div>
               <div class="flex flex-row items-center justify-between">
                 <span>کد تخفیف:</span>
-                <span> {{ the_package.discount !== null ? the_package.discount.code : '0' }}</span>
+                <span> {{ the_package.discount !== null ? the_package.discount.code : '' }}</span>
               </div>
               <div class="flex flex-row items-center justify-between">
                 <span>مقدار ریالی تخفیف:</span>
@@ -61,7 +64,7 @@
 
         <!-- register -->
         <div class="flex flex-row items-center justify-center w-full py-4">
-          <button class="btn-primary w-11/12">خرید اشتراک</button>
+          <button class="btn-primary w-11/12" @click="buy_the_package()">خرید اشتراک</button>
         </div>
       </div>
     </div>
@@ -170,6 +173,26 @@ async function check_plan() {
     if (response.status()) {
       the_package.value = response.data();
       HTMLController.visible_element("the_package");
+    }
+  }
+  else {
+    console.log(response.errors()); // TODO : show errors!
+  }
+}
+
+
+async function buy_the_package() {
+  HTMLController.hide_element("the_package");
+
+  let response = await request.post("packages/buy", {
+    plan_uuid: selected_plan_uuid.value,
+    discount_code: null,
+    use_wallet: 0
+  })
+
+  if (response.status_code() < 300) {
+    if (response.status()) {
+      return navigateTo(response.data().payment_url, { external: true });
     }
   }
   else {
