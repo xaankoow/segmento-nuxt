@@ -25,11 +25,11 @@
   }
 
   .btn-primary {
-    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-base-100  hover:bg-primary-active;
+    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-base-100  hover:bg-primary-active fill-base-100
   }
 
   .btn-secondary {
-    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary/5 text-primary hover:bg-primary/10
+    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary/5 text-primary hover:bg-primary/10 fill-primary
   }
 
   .alphabet {
