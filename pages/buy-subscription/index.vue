@@ -1,6 +1,70 @@
 <template>
   <div class="flex flex-col items-center w-full pb-5 gap-10 [&>div]:w-[64.875rem]">
     <!-- title -->
+    <div
+      class="absolute top-0 left-0 !w-screen !h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
+      v-if="request.pending()">
+      <ToolsLoading class="w-32 h-32" />
+    </div>
+    <div class="absolute top-0 left-0 !w-screen !h-screen z-50 bg-base-350/40 flex justify-center items-center" id="the_package"
+      v-if="the_package !== null">
+      <!-- the package and confirm to buy -->
+      <div class="flex flex-col justify-between w-96 h-2/3 bg-base-100 rounded-md">
+        <!-- header -->
+        <div class="flex flex-row bg-base-500 h-12 rounded-t-md text-base-100 items-center justify-between px-4">
+          <span class="w-6"></span>
+          <div>رسید نهایی خرید اشتراک</div>
+          <button class="flex text-2xl font-thin w-6 cursor-pointer" @click="HTMLController.hide_element('the_package')">×</button>
+        </div>
+
+        <!-- content -->
+        <div class="flex flex-col w-full [&>*]:w-11/12 [&>*]:mx-auto h-full">
+          <div class="flex flex-col gap-2 my-2 items-center justify-center">
+            <span>نام اشتراک:</span>
+            <span class="font-semibold">{{ the_package.package }}</span>
+          </div>
+          <hr />
+
+          <div class="flex flex-col gap-4 p-4">
+            <div class="flex flex-row items-center justify-between">
+              <span>مدت اشتراک:</span>
+              <span> {{ the_package.name }}</span>
+            </div>
+            <div class="flex flex-row items-center justify-between">
+              <span>قیمت اشتراک:</span>
+              <span> {{ the_package.price.value }}</span>
+            </div>
+            <!-- discount section -->
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-row items-center justify-between">
+                <span>تخفیف سگمنتو:</span>
+                <span> {{ the_package.discount !== null ? the_package.discount.value : '0' }}</span>
+              </div>
+              <div class="flex flex-row items-center justify-between">
+                <span>کد تخفیف:</span>
+                <span> {{ the_package.discount !== null ? the_package.discount.code : '0' }}</span>
+              </div>
+              <div class="flex flex-row items-center justify-between">
+                <span>مقدار ریالی تخفیف:</span>
+                <span> {{ the_package.discount !== null ? the_package.discount.price : '0' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="flex flex-col items-center gap-3 my-4">
+            <span class="font-bold">قیمت نهایی و پرداخت</span>
+            <span>{{ the_package.price.final }} تومان</span>
+          </div>
+          <hr />
+        </div>
+
+        <!-- register -->
+        <div class="flex flex-row items-center justify-center w-full py-4">
+          <button class="btn-primary w-11/12">خرید اشتراک</button>
+        </div>
+      </div>
+    </div>
     <div class="flex items-center h-11 !w-full">
       <span>
         <svg width="2" height="20" viewBox="0 0 2 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +86,8 @@
     </div>
     <!-- package -->
     <div class="flex flex-row items-center justify-between gap-1">
-      <Plan class="w-1/4 h-[35rem]" v-for="pack in packages" :key="pack.uuid" :_package="pack" @change_plan="update_selected_plan"/>
+      <Plan class="w-1/4 h-[35rem]" v-for="pack in packages" :key="pack.uuid" :_package="pack"
+        @change_plan="update_selected_plan" />
     </div>
     <div class="flex flex-col gap-5 items-center">
       <!-- navigation -->
@@ -49,8 +114,8 @@
         </footer>
       </div>
       <!-- buy button -->
-      <button class="flex  select-none"
-      :class="selected_plan_uuid === null ? 'pointer-events-none btn-secondary' : 'btn-primary'">
+      <button class="flex  select-none" @click="check_plan()"
+        :class="selected_plan_uuid === null ? 'pointer-events-none btn-secondary' : 'btn-primary'">
         <span>فعال سازی اشتراک</span>
         <span>
           <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +124,8 @@
               <rect x="24" y="24" width="24" height="24" transform="rotate(180 24 24)" fill="white" />
             </mask>
             <g mask="url(#mask0_134_2892)">
-              <path d="M12.525 4.8998C12.675 5.0498 12.75 5.22914 12.75 5.4378C12.75 5.6458 12.6833 5.82481 12.55 5.97481L7.25 11.2498L18.875 11.2498C19.075 11.2498 19.25 11.3208 19.4 11.4628C19.55 11.6041 19.625 11.7831 19.625 11.9998C19.625 12.2165 19.55 12.3958 19.4 12.5378C19.25 12.6791 19.075 12.7498 18.875 12.7498L7.25 12.7498L12.55 18.0248C12.6833 18.1748 12.75 18.3538 12.75 18.5618C12.75 18.7705 12.675 18.9498 12.525 19.0998C12.375 19.2331 12.2 19.2998 12 19.2998C11.8 19.2998 11.625 19.2331 11.475 19.0998L5.025 12.6248C4.925 12.5415 4.854 12.4458 4.812 12.3378C4.77067 12.2291 4.75 12.1165 4.75 11.9998C4.75 11.8831 4.77067 11.7708 4.812 11.6628C4.854 11.5541 4.925 11.4581 5.025 11.3748L11.475 4.8998C11.625 4.76647 11.8 4.69981 12 4.69981C12.2 4.69981 12.375 4.76647 12.525 4.8998Z" />
+              <path
+                d="M12.525 4.8998C12.675 5.0498 12.75 5.22914 12.75 5.4378C12.75 5.6458 12.6833 5.82481 12.55 5.97481L7.25 11.2498L18.875 11.2498C19.075 11.2498 19.25 11.3208 19.4 11.4628C19.55 11.6041 19.625 11.7831 19.625 11.9998C19.625 12.2165 19.55 12.3958 19.4 12.5378C19.25 12.6791 19.075 12.7498 18.875 12.7498L7.25 12.7498L12.55 18.0248C12.6833 18.1748 12.75 18.3538 12.75 18.5618C12.75 18.7705 12.675 18.9498 12.525 19.0998C12.375 19.2331 12.2 19.2998 12 19.2998C11.8 19.2998 11.625 19.2331 11.475 19.0998L5.025 12.6248C4.925 12.5415 4.854 12.4458 4.812 12.3378C4.77067 12.2291 4.75 12.1165 4.75 11.9998C4.75 11.8831 4.77067 11.7708 4.812 11.6628C4.854 11.5541 4.925 11.4581 5.025 11.3748L11.475 4.8998C11.625 4.76647 11.8 4.69981 12 4.69981C12.2 4.69981 12.375 4.76647 12.525 4.8998Z" />
             </g>
           </svg></span>
       </button>
@@ -77,11 +143,13 @@
 
 <script setup>
 import Request from "../../Api/Request";
+import HTMLController from "../../Controllers/HTMLController";
 import Package from "../../Models/Package";
 
 const request = new Request();
 const packages = ref([]);
 const selected_plan_uuid = ref(null);
+const the_package = ref(null);
 
 onBeforeMount(() => {
   collect_packages();
@@ -89,6 +157,24 @@ onBeforeMount(() => {
 
 function update_selected_plan(plan_uuid) {
   selected_plan_uuid.value = plan_uuid;
+}
+
+async function check_plan() {
+  let response = await request.post("packages/check_plan", {
+    plan_uuid: selected_plan_uuid.value,
+    discount_code: null,
+    use_wallet: 0
+  })
+
+  if (response.status_code() < 300) {
+    if (response.status()) {
+      the_package.value = response.data();
+      HTMLController.visible_element("the_package");
+    }
+  }
+  else {
+    console.log(response.errors()); // TODO : show errors!
+  }
 }
 
 async function collect_packages() {
