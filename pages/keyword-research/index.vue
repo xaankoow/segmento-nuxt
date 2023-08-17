@@ -38,6 +38,14 @@
             <select class="w-full rounded-md border-2 border-base-300 px-2 py-2" v-model="form.lang">
               <option value="FA">فارسی</option>
               <option value="EN">انگلیسی</option>
+              <option value="AR">عربی</option>
+              <option value="DU">آلمانی</option>
+              <option value="FR">فرانسوی</option>
+              <option value="SP">اسپانیایی</option>
+              <option value="IT">ایتالیایی</option>
+              <option value="RU">روسی</option>
+              <option value="TR">ترکی</option>
+              <option value="PO">لهستانی</option>
             </select>
           </div>
 
