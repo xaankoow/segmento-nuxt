@@ -9,27 +9,29 @@
     <div class="flex flex-col gap-10 w-[36.438rem]">
       <!-- step 1 => send code to email -->
       <form @submit.prevent="sendActiveCode()" class="flex flex-row justify-between items-center"
-        :class="step !== 1 ? 'pointer-events-none opacity-80' : ''">
+            :class="step !== 1 ? 'pointer-events-none opacity-80' : ''">
         <div class="custom_input_box w-[16.25rem]">
           <input dir="ltr" v-model="form.email" type="email" id="email_box" required @focus="email.focus()"
-            @blur="email.leave()" />
+                 @blur="email.leave()" />
           <label :class="email.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
           </label>
-          <span class="text-error text-xs" v-show="email_error">{{ config.by_route(`${current_page}/email_error`)
-          }}</span>
+          <span class="text-error text-xs" v-show="email_error">{{ email_error }}</span>
         </div>
         <div class="flex flex-row-reverse items-center gap-2">
           <button type="submit" class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md">
-            {{ config.by_route(`${current_page}/receive_code`) }}</button><span class="countdown font-mono text-2xl">
+            {{ config.by_route(`${current_page}/receive_code`) }}
+          </button>
+          <span class="countdown font-mono text-2xl">
             <span :style="`--value:  ${secondTimer}`"></span>:
             <span :style="`--value: ${minuteTimer}`"></span>
           </span>
         </div>
       </form>
+
       <!-- step 2 => confirm email code -->
       <form @submit.prevent="verifyCode()" class="flex flex-row justify-between items-center"
-        :class="step !== 2 ? 'pointer-events-none opacity-80' : ''">
+            :class="step !== 2 ? 'pointer-events-none opacity-80' : ''">
         <div class="relative flex flex-col gap-3 items-center w-[16.25rem]">
           <span>
             {{ config.by_route(`${current_page}/active_code`) }}
@@ -46,8 +48,7 @@
             <input id="number_4" type="number" :max="9" :min="0" />
             <!-- TODO : change focus when keypress for ones -->
           </div>
-          <span class="absolute -bottom-5 text-error text-xs" v-show="code_error">{{
-            config.by_route(`${current_page}/code_error`) }}</span>
+          <span class="absolute -bottom-5 text-error text-xs" v-show="code_error">{{ code_error }}</span>
         </div>
         <div class="h-full flex items-end pb-1">
           <button type="submit" class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md">
@@ -55,28 +56,29 @@
           </button>
         </div>
       </form>
+
       <!-- step 3 => password and confirmed -->
-      <form @submit.prevent="changePassword()" class="flex flex-col gap-12 mt-8"
-        :class="step !== 3 ? 'pointer-events-none opacity-80' : ''">
-        <div class="relative flex flex-row gap-5 w-full items-center">
+      <form @submit.prevent="changePassword()" class="flex flex-col gap-12 mt-8">
+        <div class="relative flex flex-row gap-5 w-full items-center" :class="step !== 3 ? 'pointer-events-none opacity-80' : ''">
           <div class="custom_input_box w-1/2">
             <input dir="ltr" v-model="form.password" type="password" @focus="password.focus()" @blur="password.leave()"
-              id="password" />
-            <label :class="password.transitionStyle(form.password)">{{
-              config.by_route(`${current_page}/password`)
-            }}</label>
+                   id="password" />
+            <label :class="password.transitionStyle(form.password)">
+              {{ config.by_route(`${current_page}/password`) }}
+            </label>
           </div>
           <div class="custom_input_box w-1/2">
             <input dir="ltr" v-model="form.password_confirmation" type="password" @focus="confirmPassword.focus()"
-              id="password_confirm" @blur="confirmPassword.leave()" />
-            <label :class="confirmPassword.transitionStyle(form.password_confirmation)
-              ">{{ config.by_route(`${current_page}/confirmPassword`) }}</label>
+                   id="password_confirm" @blur="confirmPassword.leave()" />
+            <label :class="confirmPassword.transitionStyle(form.password_confirmation)">
+              {{ config.by_route(`${current_page}/confirmPassword`) }}
+            </label>
           </div>
           <span class="absolute text-error text-xs -bottom-5">{{ password_error }}</span>
         </div>
         <div class="flex flex-row justify-between items-center">
-          <button type="submit"
-            class="bg-base-100 hover:bg-base-250 text-base-content border-none w-[10.125rem] h-11 rounded-md">
+          <button type="submit" :class="step !== 3 ? 'pointer-events-none opacity-80' : ''"
+                  class="bg-base-100 hover:bg-base-250 text-base-content border-none w-[10.125rem] h-11 rounded-md">
             {{ config.by_route(`${current_page}/btn_accept_password`) }}
           </button>
           <label class="text-xs">
@@ -182,7 +184,6 @@ async function changePassword() {
   }
 }
 
-
 function password_validation() {
   let password_box = document.getElementById("password");
   let confirm_box = document.getElementById("password_confirm");
@@ -232,4 +233,3 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 </style>
-ّ

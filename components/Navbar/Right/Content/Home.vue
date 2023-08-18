@@ -139,7 +139,7 @@ const props = defineProps({
   },
   affiliate: {
     type: String,
-    default: "همکاری در فروش",
+    default: "کسب درآمد",
   },
 });
 </script>
