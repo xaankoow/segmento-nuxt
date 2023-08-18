@@ -13,15 +13,15 @@
             {{ config.by_route(`${current_page}/active_code`) }}
           </span>
           <div
-            class="flex flex-row gap-5 mx-auto text-base-content w-[16.25rem] [&>input]:w-14 [&>input]:h-14 [&>input]:p-1 [&>input]:text-center [&>input]:rounded-sm"
+            class="flex flex-row gap-5 mx-auto items-center text-base-content w-[16.25rem] [&>input]:w-14 [&>input]:h-14 [&>input]:p-1 [&>input]:text-center [&>input]:rounded-sm"
             style="direction: ltr">
-            <input id="number_1" type="number" :max="9" :min="0" />
+            <input id="number_1" type="text" maxlength="1"/>
             <!-- TODO : change focus when keypress for ones -->
-            <input id="number_2" type="number" :max="9" :min="0" />
+            <input id="number_2" type="text" maxlength="1"/>
             <!-- TODO : change focus when keypress for ones -->
-            <input id="number_3" type="number" :max="9" :min="0" />
+            <input id="number_3" type="text" maxlength="1"/>
             <!-- TODO : change focus when keypress for ones -->
-            <input id="number_4" type="number" :max="9" :min="0" />
+            <input id="number_4" type="text" maxlength="1"/>
             <!-- TODO : change focus when keypress for ones -->
           </div>
           <span class="absolute -bottom-6 text-error text-xs">{{ code_error }}</span>
@@ -81,18 +81,12 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
 </style>
 
 <script setup>
 import Request from "../../../Api/Request";
 import Config from "../../../composables/Config";
 import ConfigStore from "../../../store/ConfigStore";
-
 
 definePageMeta({
   layout: "login",
@@ -131,7 +125,7 @@ async function verify_email() {
     ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
 
     return navigateTo("/keyword-research");
-  } 
+  }
   code_error.value = config.by_route(`${current_page}/code_error`)
 }
 async function resendEmail() {

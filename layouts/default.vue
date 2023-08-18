@@ -247,12 +247,29 @@ const auth = ref({
   wallet: null,
   subscription: null,
 });
-
+let plan_type = '';
+switch (ConfigStore.plan().package_id) {
+  case 1:
+    plan_type = "رایگان"
+    break;
+  case 2:
+    plan_type = "پایه"
+    break;
+  case 3:
+    plan_type = "اقتصادی"
+    break;
+  case 4:
+    plan_type = "رشد"
+    break;
+  case 5:
+    plan_type = "پیشرفته"
+    break;
+}
 onBeforeMount(() => {
   auth.value = {
     name: ConfigStore.user().name,
     wallet: ConfigStore.wallets()[0].balance ?? 0,
-    subscription: ConfigStore.plan().name,
+    subscription: ConfigStore.plan().name + " " + plan_type,
   }
 
   workspaces.value = ConfigStore.workspaces();
