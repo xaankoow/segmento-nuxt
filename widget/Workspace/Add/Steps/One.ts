@@ -202,7 +202,7 @@ export default class AddWorkspaceStepOne {
           CacheStore.set_workspace_uuid(response.data().uuid);
           input!.classList.add("border-success");
           HTMLController.remove_element(ids[1]);
-          document.getElementById(ids[0])!.appendChild(Two.render(ids[0]));
+          document.getElementById("page")!.appendChild(Two.render("page"));
         }
         else {
           input?.classList.add("border-error");
@@ -251,6 +251,8 @@ export default class AddWorkspaceStepOne {
     element.appendChild(space);
     element.appendChild(btn_finish);
     element.appendChild(btn_next);
+
+    console.log(btn_finish.id, btn_next.id);
 
     return element;
   }

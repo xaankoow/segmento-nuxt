@@ -5,6 +5,7 @@ import Request from "../../../../Api/Request";
 import CacheStore from "../../../../store/CacheStore";
 import Popup from "../../../Component/Popup";
 import PagePanel from "../PagePanel";
+import Three from "./Three";
 
 export default class Two {
   public static isGenerate = false;
@@ -141,7 +142,7 @@ export default class Two {
 
         <!-- image -->
         <div class="w-2/5 flex items-center justify-center">
-          <img src="/images/workspace.png" class="w-40 h-44" />
+          <img src="/images/step_two_add_workspace.png" class="w-40 h-44" />
         </div>
       </div>`
 
@@ -151,10 +152,12 @@ export default class Two {
 
   protected static register(panel_id) {
     let element = document.createElement("div");
-    element.classList.add("flex", "flex-row", "items-center", "justify-end", "mb-2", "mx-4");
+    element.classList.add("flex", "flex-row", "items-center", "justify-between", "mb-2", "mx-4");
 
+    let space = document.createElement("span");
+    space.classList.add("w-28");
     let button = document.createElement("button");
-    button.classList.add("btn-primary", "flex", "flex-row", "items-center", "gap-4", "w-28", "justify-center");
+    button.classList.add("btn-secondary", "flex", "flex-row", "items-center", "gap-4", "w-28", "justify-center");
     button.id = `${this.popup_id}-button`;
     button.innerHTML = `
         <span> ${this.config.by_route(this.current_page).buttons.finish}</span>
@@ -196,7 +199,7 @@ export default class Two {
         form.push(the_page);
       })
 
-      let response = await request.post(`workspaces/${CacheStore.workspace_uuid()}/add_page`, {pages: form});
+      let response = await request.post(`workspaces/${CacheStore.workspace_uuid()}/add_page`, { pages: form });
       if (response.status_code() < 300) {
         if (response.status()) {
           console.log(HTMLController.remove_element(popup_id));
@@ -204,7 +207,65 @@ export default class Two {
       }
     }
 
+    let btn_next = document.createElement("button");
+    btn_next.classList.add("btn-primary", "flex", "flex-row", "items-center", "gap-4", "w-28", "justify-center");
+    btn_next.id = `${this.parent_id}-button-${this.popup_id}`;
+    btn_next.innerHTML = `
+        <span> ${this.config.by_route(this.current_page).buttons.next}</span>
+        <!-- 
+        <span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M7.1 15.1001L0.65 8.62513C0.55 8.5418 0.479334 8.4458 0.438 8.33713C0.396 8.22913 0.375 8.1168 0.375 8.00013C0.375 7.88346 0.396 7.7708 0.438 7.66213C0.479334 7.55413 0.55 7.45846 0.65 7.37513L7.1 0.900131C7.25 0.766798 7.425 0.695798 7.625 0.687131C7.825 0.679131 8 0.750131 8.15 0.900131C8.3 1.05013 8.379 1.22513 8.387 1.42513C8.39567 1.62513 8.325 1.80846 8.175 1.97513L2.875 7.25013H14.5C14.7 7.25013 14.875 7.3208 15.025 7.46213C15.175 7.60413 15.25 7.78346 15.25 8.00013C15.25 8.2168 15.175 8.3958 15.025 8.53713C14.875 8.67913 14.7 8.75013 14.5 8.75013H2.875L8.175 14.0501C8.30833 14.1835 8.379 14.3541 8.387 14.5621C8.39567 14.7708 8.325 14.9501 8.175 15.1001C8.025 15.2501 7.846 15.3251 7.638 15.3251C7.42933 15.3251 7.25 15.2501 7.1 15.1001Z"
+              fill="white" />
+          </svg>
+        </span>
+        -->
+    `;
+    btn_next.onclick = async function (e) {
+      let btn = e.target as HTMLElement;
+      let popup_id = btn.id.split('-')[2];
+      let request = new Request();
+      let form = [];
+      let ids = btn.id.split('-');
+      let pages = document.getElementsByName("input-page");
+      let keywords = document.getElementsByName("input-keyword");
+
+      pages.forEach(page => {
+        let id = page.id.split('-')[0];
+        let keys = [];
+
+        keywords.forEach(key => {
+          key = key as HTMLInputElement;
+          if (key.className.includes(id)) {
+            keys.push(key.value)
+          }
+        });
+        let the_page = {
+          slug: page.value,
+          is_money_page: false,
+          is_lighthouse: false,
+          keywords: keys
+        }
+        form.push(the_page);
+      })
+
+      let response = await request.post(`workspaces/${CacheStore.workspace_uuid()}/add_page`, { pages: form });
+      if (response.status_code() < 300) {
+        if (response.status()) {
+          console.log(ids, popup_id);
+          document.getElementById("page")!.appendChild(
+            Three.render("page", response.data().website.pages));
+            HTMLController.remove_element(popup_id);
+        }
+      }
+    }
+
+    console.log(btn_next.id);
+
+    element.appendChild(space);
     element.appendChild(button);
+    element.appendChild(btn_next);
 
     return element;
   }
