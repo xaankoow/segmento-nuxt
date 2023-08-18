@@ -78,9 +78,18 @@
           </a>
         </li>
       </ul>
-      <NuxtLink to="/auth/signup"
+      <NuxtLink to="/auth/signup" v-if="($route.path.split('/')[2] == 'login')"
         class="flex items-center  justify-center bg-base-100 text-base-content border-none w-24 h-10 rounded-md hover:bg-base-250">
-        {{ config.by_route(`${current_layout}/sign-up`) }}</NuxtLink>
+        {{ config.by_route(`${current_layout}/sign-up`) }}
+      </NuxtLink>
+      <NuxtLink to="/auth/login" v-if="($route.path.split('/')[2] == 'signup')"
+        class="flex items-center  justify-center bg-base-100 text-base-content border-none w-24 h-10 rounded-md hover:bg-base-250">
+        {{ config.by_route(`${current_layout}/login`) }}
+      </NuxtLink>
+      <NuxtLink to="/auth/login" v-if="($route.path.split('/')[2] == 'forget')"
+        class="flex items-center  justify-center bg-base-100 text-base-content border-none w-24 h-10 rounded-md hover:bg-base-250">
+        {{ config.by_route(`${current_layout}/login`) }}
+      </NuxtLink>
     </div>
     <div class="flex h-full w-full">
       <div class="flex w-1/2 h-full items-center">

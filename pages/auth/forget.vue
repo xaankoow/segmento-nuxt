@@ -58,9 +58,8 @@
       </form>
 
       <!-- step 3 => password and confirmed -->
-      <form @submit.prevent="changePassword()" class="flex flex-col gap-12 mt-8"
-            :class="step !== 3 ? 'pointer-events-none opacity-80' : ''">
-        <div class="relative flex flex-row gap-5 w-full items-center">
+      <form @submit.prevent="changePassword()" class="flex flex-col gap-12 mt-8">
+        <div class="relative flex flex-row gap-5 w-full items-center" :class="step !== 3 ? 'pointer-events-none opacity-80' : ''">
           <div class="custom_input_box w-1/2">
             <input dir="ltr" v-model="form.password" type="password" @focus="password.focus()" @blur="password.leave()"
                    id="password" />
@@ -78,7 +77,7 @@
           <span class="absolute text-error text-xs -bottom-5">{{ password_error }}</span>
         </div>
         <div class="flex flex-row justify-between items-center">
-          <button type="submit"
+          <button type="submit" :class="step !== 3 ? 'pointer-events-none opacity-80' : ''"
                   class="bg-base-100 hover:bg-base-250 text-base-content border-none w-[10.125rem] h-11 rounded-md">
             {{ config.by_route(`${current_page}/btn_accept_password`) }}
           </button>
