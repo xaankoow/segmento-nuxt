@@ -252,6 +252,8 @@ export default class AddWorkspaceStepOne {
     element.appendChild(btn_finish);
     element.appendChild(btn_next);
 
+    console.log(btn_finish.id, btn_next.id);
+
     return element;
   }
 }
