@@ -278,7 +278,18 @@ export default class Three {
                 }
             })
 
-            console.log(form);
+            let request = new Request();
+            let response = await request.post(`workspaces/${form.website}/add_money_page`, {selected: form.selected, added: form.added});
+            if (response.status_code() < 300) {
+                if (response.status()) {
+                    HTMLController.remove_element(ids[0]);
+                }
+            }
+            else {
+                added_pages.forEach(text => {
+                    text.classList.add("border-b", "border-b-error");
+                })
+            }
         }
 
         element.appendChild(button);

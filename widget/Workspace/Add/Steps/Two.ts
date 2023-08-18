@@ -142,7 +142,7 @@ export default class Two {
 
         <!-- image -->
         <div class="w-2/5 flex items-center justify-center">
-          <img src="/images/workspace.png" class="w-40 h-44" />
+          <img src="/images/step_two_add_workspace.png" class="w-40 h-44" />
         </div>
       </div>`
 
@@ -254,8 +254,8 @@ export default class Two {
       if (response.status_code() < 300) {
         if (response.status()) {
           console.log(ids, popup_id);
-          document.getElementById(ids[0])!.appendChild(
-            Three.render(ids[0], response.data().website.pages));
+          document.getElementById("page")!.appendChild(
+            Three.render("page", response.data().website.pages));
             HTMLController.remove_element(popup_id);
         }
       }
