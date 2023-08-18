@@ -4,7 +4,6 @@ import HTMLController from "../../../../Controllers/HTMLController";
 import Request from "../../../../Api/Request";
 import CacheStore from "../../../../store/CacheStore";
 import Popup from "../../../Component/Popup";
-import PagePanel from "../PagePanel";
 
 export default class Three {
     public static isGenerate = false;
@@ -13,8 +12,12 @@ export default class Three {
     protected static readonly steps_section = `${this.current_page}/steps`;
     protected static popup_id = "";
     protected static parent_id = "";
+    protected static pages = [];
+    protected static workspace_uuid: string | null;
 
-    public static render(parent_id: string, pages) {
+    public static render(parent_id: string, pages, workspace_uuid = null) {
+        this.workspace_uuid = workspace_uuid ?? CacheStore.workspace_uuid();
+        this.pages = pages;
         console.log(pages);
         this.parent_id = parent_id;
         let popup = Popup.render();
@@ -88,19 +91,12 @@ export default class Three {
         element.classList.add("w-full", "flex", "flex-col", "gap-3", "px-4");
         let describe = this.describe();
         let hr = document.createElement("hr");
-        let panel = document.createElement("div");
-        let panel_id = UuidGenerator.generate();
-        panel.id = panel_id;
-        panel.classList.add("flex", "flex-col", "gap-3", "text-sm", "px-3", "w-full", "max-h-56", "h-fit", "overflow-auto", "border-b");
-        panel.appendChild(PagePanel.render(panel_id));
-
         // let register = this.register(panel_id);
         element.appendChild(describe);
-        element.appendChild(hr);
-        element.appendChild(panel);
+        element.appendChild(this.panel());
         // element.appendChild(this.add_page_panel(panel_id));
         element.appendChild(document.createElement("hr"))
-        // element.appendChild(register);
+        element.appendChild(this.register_section());
         return element;
     }
 
@@ -109,11 +105,11 @@ export default class Three {
         element.innerHTML = `
           <div class="flex flex-row pr-3">
           <!-- content -->
-          <div class="flex flex-col gap-8 w-3/5 px-2 h-full">
+          <div class="flex flex-col gap-8 w-1/2 px-2 h-full">
             <!-- header -->
             <div class="flex flex-row items-center gap-4">
               <span class="border-r-2 border-r-primary px-4">
-                ${this.config.by_route(this.steps_section)[1].title}
+                ${this.config.by_route(this.steps_section)[2].title}
               </span>
               <span>
                 <svg width="45" height="19" viewBox="0 0 45 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +127,7 @@ export default class Three {
   
             <!-- description -->
             <p class="px-3 text-justify">
-              ${this.config.by_route(this.steps_section)[1].description}
+              ${this.config.by_route(this.steps_section)[2].description}
             </p>
           </div>
   
@@ -141,12 +137,151 @@ export default class Three {
           </svg>
   
           <!-- image -->
-          <div class="w-2/5 flex items-center justify-center">
-            <img src="/images/workspace.png" class="w-40 h-44" />
+          <div class="w-1/2 flex items-center justify-center">
+            <img src="/images/add_money_page.png" class="w-40 h-44" />
           </div>
         </div>`
 
         return element;
     }
 
+    protected static panel() {
+        let element = document.createElement("div");
+        element.classList.add("flex", "flex-row", "justify-between", "w-full", "px-2", "h-56", "gap-4", "text-sm");
+        element.appendChild(this.panel_select_page());
+        element.appendChild(this.panel_add_page());
+        return element;
+    }
+
+    protected static panel_add_page() {
+        let element = document.createElement("div");
+        element.classList.add("w-1/2", "border", "rounded-sm", "flex", "flex-col", "items-center", "py-2", "h-56");
+        let h2 = document.createElement("h2");
+        h2.classList.add("font-semibold");
+        h2.innerText = `${this.config.by_route(this.steps_section)[2].panels.add}`;
+
+        let panel = document.createElement("div");
+        panel.classList.add("flex", "flex-col", "w-full", "px-2", "items-center", "gap-2", "h-full", "justify-between");
+
+        let section = document.createElement("section");
+        section.classList.add("flex", "flex-col", "gap-1", "mt-2", "w-full", "overflow-auto", "h-32");
+        section.id = UuidGenerator.generate();
+
+        let button = document.createElement("button");
+        button.classList.add("btn-secondary", "w-full")
+        button.id = `${section.id}-button-add`;
+        button.innerText = `${this.config.by_route(this.steps_section)[2].button.add_page}`;
+        button.onclick = function (e) {
+            let button = e.target as HTMLElement;
+            let section_id = button.id.split('-')[0];
+
+            let input_panel = document.createElement("div");
+            input_panel.classList.add("flex", "flex-row", "items-center", "gap-2", "w-11/12", "mx-auto");
+            input_panel.id = UuidGenerator.generate();
+
+            let remove_btn = document.createElement("button");
+            remove_btn.classList.add('bg-error/10', 'p-1', 'rounded-sm', 'hover:bg-error/25', 'w-6', 'h-6','transition-all', 'duration-200');
+            remove_btn.innerHTML = `
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
+                    <path
+                    d="M6.35 7.4L1.275 12.475C1.14167 12.6083 0.971 12.679 0.763 12.687C0.554333 12.6957 0.375 12.625 0.225 12.475C0.0749999 12.325 0 12.15 0 11.95C0 11.75 0.0749999 11.575 0.225 11.425L5.3 6.35L0.225 1.275C0.0916666 1.14167 0.021 0.970667 0.013 0.762C0.00433335 0.554 0.0749999 0.375 0.225 0.225C0.375 0.0749999 0.55 0 0.75 0C0.95 0 1.125 0.0749999 1.275 0.225L6.35 5.3L11.425 0.225C11.5583 0.0916666 11.7293 0.0206668 11.938 0.0120001C12.146 0.00400008 12.325 0.0749999 12.475 0.225C12.625 0.375 12.7 0.55 12.7 0.75C12.7 0.95 12.625 1.125 12.475 1.275L7.4 6.35L12.475 11.425C12.6083 11.5583 12.679 11.729 12.687 11.937C12.6957 12.1457 12.625 12.325 12.475 12.475C12.325 12.625 12.15 12.7 11.95 12.7C11.75 12.7 11.575 12.625 11.425 12.475L6.35 7.4Z"
+                    fill="#F35242" />
+                </svg>`;
+            remove_btn.id = `${input_panel.id}-remove-id`;
+            remove_btn.onclick = function(e) {
+                let btn = e.target as HTMLElement;
+                let id = btn.id.split('-')[0];
+
+                HTMLController.remove_element(id);
+            }
+
+            let textbox = document.createElement("input");
+            textbox.classList.add("p-1", "text-sm", "w-11/12");
+            textbox.name = "textbox-add-page";
+            textbox.style.direction = "ltr";
+
+            input_panel.appendChild(textbox);
+            input_panel.appendChild(remove_btn);
+
+            document.getElementById(section_id)!.appendChild(input_panel);
+        }
+
+        panel.appendChild(section);
+        panel.appendChild(button);
+        element.appendChild(h2);
+        element.appendChild(panel);
+        return element;
+    }
+
+    protected static panel_select_page() {
+        let element = document.createElement("div");
+        element.classList.add("w-1/2", "border", "rounded-sm", "flex", "flex-col", "items-center", "py-2");
+        let h2 = document.createElement("h2");
+        h2.classList.add("font-semibold");
+        h2.innerText = `${this.config.by_route(this.steps_section)[2].panels.select}`;
+
+        let section = document.createElement("section");
+        section.classList.add("flex", "flex-col", "w-11/12", "overflow-auto", "mx-auto", "mt-4", "gap-1",);
+        let section_id = UuidGenerator.generate();
+        section.id = section_id;
+
+        this.pages.forEach(page => {
+            let element = document.createElement("div");
+            element.classList.add("flex", "flex-row", "items-center", "justify-end", "gap-4", "w-full", "px-2", "py-1", "pb-2", "border-b");
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = page.uuid;
+            checkbox.name = "checkbox";
+            checkbox.classList.add("w-5", "h-5");
+            let label = document.createElement("label");
+            label.innerHTML = page.path;
+
+            element.appendChild(label);
+            element.appendChild(checkbox);
+            section.appendChild(element);
+        })
+
+
+        element.appendChild(h2);
+        element.appendChild(section);
+        return element;
+    }
+
+    protected static register_section() {
+        let element = document.createElement("div");
+        element.classList.add("flex", "flex-row", "justify-end", "items-center", "w-full", "px-2", "py-2");
+
+        let button = document.createElement("button");
+        button.classList.add("btn-primary", "px-4", "w-28");
+        button.innerText = `${this.config.by_route(this.current_page).buttons.finish}`;
+        button.id = `${this.popup_id}-button-finish`;
+        button.onclick = async function (e) {
+            let button = e.target as HTMLElement;
+            let ids = button.id.split('-');
+            let checkboxes = document.getElementsByName("checkbox");
+            let form = {
+                website: CacheStore.workspace_uuid(),
+                selected: [],
+                added: []
+            };
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    form.selected.push(checkbox.value);
+                }
+            });
+
+            let added_pages = document.getElementsByName("textbox-add-page");
+            added_pages.forEach(textbox => {
+                if (textbox.value.length > 0) {
+                    form.added.push(textbox.value);
+                }
+            })
+
+            console.log(form);
+        }
+
+        element.appendChild(button);
+        return element;
+    }
 }
