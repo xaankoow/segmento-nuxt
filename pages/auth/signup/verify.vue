@@ -146,7 +146,7 @@ onMounted(() => {
 
   if (form.value.email === null) {
     // TODO : TOAST for error
-    // navigateTo("/auth/signup");
+    navigateTo("/auth/signup");
   }
 });
 </script>
