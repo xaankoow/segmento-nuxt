@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  outline: none;
+}
+
 @layer components {
   ul {
     @apply flex flex-col gap-3;
@@ -29,10 +33,10 @@
   }
 
   .alphabet {
-    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-16 h-12
+    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-16 h-12;
   }
   .alphabet.active {
-    @apply bg-primary text-base-100
+    @apply bg-primary text-base-100;
   }
 }
 
