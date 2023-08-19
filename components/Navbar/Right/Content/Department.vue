@@ -4,7 +4,7 @@
     <hr />
     <slot name="sites"></slot>
 
-    <hr />
+    <!-- <hr /> -->
     <div class="flex flex-col gap-2 w-full h-fit">
       <!-- content creating according -->
       <slot name="according"></slot>

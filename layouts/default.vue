@@ -13,14 +13,15 @@
         <NavbarRight class="justify-between py-2">
           <div>
             <!-- پیشخان -->
-            <div @click="actived_navbar = 'home'">
+            <!-- this section get commented until its pages get ready! TODO: when pages was ready, uncomment this section -->
+            <!-- <div @click="actived_navbar = 'home'">
               <NavbarRightSvgItem :active="actived_navbar === 'home'">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M1.38843 13.5818H9.37734C10.1097 13.5818 10.7088 12.9747 10.7088 12.2326V1.43948C10.7088 0.697447 10.1097 0.090332 9.37734 0.090332H1.38843C0.656114 0.090332 0.0569458 0.697447 0.0569458 1.43948V12.2326C0.0569458 12.9747 0.656114 13.5818 1.38843 13.5818ZM1.38843 24.3749H9.37734C10.1097 24.3749 10.7088 23.7678 10.7088 23.0258V17.6292C10.7088 16.8872 10.1097 16.2801 9.37734 16.2801H1.38843C0.656114 16.2801 0.0569458 16.8872 0.0569458 17.6292V23.0258C0.0569458 23.7678 0.656114 24.3749 1.38843 24.3749ZM14.7033 24.3749H22.6922C23.4245 24.3749 24.0237 23.7678 24.0237 23.0258V12.2326C24.0237 11.4906 23.4245 10.8835 22.6922 10.8835H14.7033C13.971 10.8835 13.3718 11.4906 13.3718 12.2326V23.0258C13.3718 23.7678 13.971 24.3749 14.7033 24.3749ZM13.3718 1.43948V6.83605C13.3718 7.57808 13.971 8.18519 14.7033 8.18519H22.6922C23.4245 8.18519 24.0237 7.57808 24.0237 6.83605V1.43948C24.0237 0.697447 23.4245 0.090332 22.6922 0.090332H14.7033C13.971 0.090332 13.3718 0.697447 13.3718 1.43948Z" />
                 </svg>
               </NavbarRightSvgItem>
-            </div>
+            </div> -->
             <div @click="actived_navbar = 'department'">
               <NavbarRightSvgItem :active="actived_navbar === 'department'">
                 <!-- ابزار سئو -->
@@ -110,7 +111,8 @@
             </div>
 
             <!-- site and workspace -->
-            <template v-slot:sites>
+            <!-- temperory comented, when the code get done, we'll uncomment it. TODO: uncomment this section when the code was ready to use. -->
+            <!-- <template v-slot:sites>
 
               <div class="flex flex-col px-5 py-3 gap-4">
                 <ul>
@@ -154,7 +156,7 @@
                   </li>
                 </ul>
               </div>
-            </template>
+            </template> -->
 
             <!-- according -->
             <template v-slot:according>
@@ -201,7 +203,8 @@
                     </NuxtLink>
                   </div>
                 </According>
-                <According :isOpen="selected_tools_section === 'create_content'">
+                <!-- technical seo and rank tracked side bar section - TODO: uncomment this section when rank tracker was ready. -->
+                <!-- <According :isOpen="selected_tools_section === 'create_content'">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/title`)">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,7 +220,7 @@
                       </svg>
                     </SvgLabeled>
                   </template>
-                  <!-- Content -->
+                  
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/rank-tracker/keyword">
                       <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/fields/rank-tracker/title`)"
@@ -230,7 +233,7 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
-                </According>
+                </According> -->
               </div>
             </template>
           </NavbarRightContentDepartment>
@@ -259,29 +262,12 @@ const auth = ref({
   wallet: null,
   subscription: null,
 });
-let plan_type = '';
-switch (ConfigStore.plan().package_id) {
-  case 1:
-    plan_type = "رایگان"
-    break;
-  case 2:
-    plan_type = "پایه"
-    break;
-  case 3:
-    plan_type = "اقتصادی"
-    break;
-  case 4:
-    plan_type = "رشد"
-    break;
-  case 5:
-    plan_type = "پیشرفته"
-    break;
-}
+
 onBeforeMount(() => {
   auth.value = {
     name: ConfigStore.user().name,
     wallet: ConfigStore.wallets()[0].balance ?? 0,
-    subscription: ConfigStore.plan().name + " " + plan_type,
+    subscription: cn.by_route(`constants/plans/${ConfigStore.plan().plan.name}`) + " " + cn.by_route(`constants/packages/${ConfigStore.plan().plan.package}`),
   }
 
   workspaces.value = ConfigStore.workspaces();
