@@ -1,37 +1,27 @@
-import Package from "../interfaces/Models/Package";
+import Pack from "../interfaces/Models/Pack";
 import Plans from "../interfaces/Models/Plans";
 import { ref } from "vue"
-export default class PlanModel {
-    protected _package: Package;
-    protected _plans: Array<Plans>;
-    protected _plan = ref<Plans | undefined>(undefined);
+export default class Package {
+    public readonly uuid: string;
+    public readonly name: string;
+    public readonly color: string;
+    public readonly plans: Array<Plans> | null;
+    private _plan = ref<any>(undefined);
 
-    constructor(pack: any, plans: any) {
-        this._package = pack;
-        this._plans = plans;
-    }
-
-    /**
-     * this will return the package from interfaces/Modes/Package
-     */
-    public package() {
-        return this._package;
-    }
-
-    /**
-     * this will return an array of interfaces/Models/Plans
-     */
-    public plans() {
-        return this._plans;
+    constructor(pack: Pack) {
+        this.uuid = pack.uuid;
+        this.name = pack.name;
+        this.color = pack.color;
+        this.plans = pack.plans;
     }
 
     /**
      * select plan by id
      */
-    public select_plan(id: Number) {
-        let plan = this.plans().find(p => p.id === id);
+    public select_plan(uuid: string) {
+        let plan = this.plans?.find(p => p.uuid === uuid);
 
-        this._plan.value = plan;
+        this._plan = plan;
 
         return plan;
     }
@@ -39,8 +29,8 @@ export default class PlanModel {
     /**
      * return the selected plan
      */
-    public selected_plan() {
-        return this._plan.value;
+    public selected_plan(): Plans | undefined {
+        return this._plan;
     }
 
     public check_discount(discount_code: String) {
@@ -67,12 +57,13 @@ export default class PlanModel {
         }
     }
 
-    public calculate_discount(plan: Plans | undefined, discount: number | null, type: number) {
+    public calculate_discount(plan: any, discount: number | null, type: number) {
         /*
          * TYPE = 1 === %
          * TYPE = 2 === $
          */
-        if (plan === undefined) {
+        
+        if (plan === undefined || plan === null) {
             return;
         }
         if (discount === null) {

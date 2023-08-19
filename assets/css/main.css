@@ -25,15 +25,15 @@
   }
 
   .btn-primary {
-    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-base-100  hover:bg-primary-active;
+    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-base-100  hover:bg-primary-active fill-base-100
   }
 
   .btn-secondary {
-    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary/5 text-primary hover:bg-primary/10
+    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary/5 text-primary hover:bg-primary/10 fill-primary
   }
 
   .alphabet {
-    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-16 h-12;
+    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-10 h-10;
   }
   .alphabet.active {
     @apply bg-primary text-base-100;
@@ -42,4 +42,30 @@
 
 .circleChart {
   stroke-width: 4px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #FCFCFB; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #D9D9D9; 
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #aaaaaa; 
 }

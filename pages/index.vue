@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-import ConfigStore from "../store/ConfigStore";
 import Auth from "../middlewares/Auth";
 definePageMeta({
   middleware: [Auth],

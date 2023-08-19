@@ -1,13 +1,13 @@
 <template>
   <div
-    class="flex flex-col w-full min-h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
+    class="flex flex-col w-full h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
     style="direction: rtl">
     <!-- Header section -->
     <NavbarTop :platform="cn.__(['layouts', 'default', 'header', 'platform'])"
       :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()" class="shadow-md mx-auto">
     </NavbarTop>
 
-    <div class="flex flex-row h-full flex-grow mt-2 ml-2 gap-2">
+    <div class="flex flex-row flex-grow pt-2 ml-2 gap-2" style="height: 90vh;">
       <div class="flex flex-row">
         <!-- Right navbar -->
         <NavbarRight class="justify-between py-2">
@@ -179,7 +179,38 @@
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/keyword-research">
                       <SvgLabeled :label="cn.by_route(`${department_section}/create_content/fields/keyword-research`)"
-                        @click="change_active_section('keyword-research')" :active="active_section === 'keyword-research'">
+                        @click="change_active_section('keyword-research')"
+                        :active="active_section === 'keyword-research'">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z" />
+                        </svg>
+                      </SvgLabeled>
+                    </NuxtLink>
+                  </div>
+                </According>
+                <According :isOpen="selected_tools_section === 'create_content'">
+                  <template v-slot:label>
+                    <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/title`)">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_84_933)">
+                          <path
+                            d="M17.1202 0.880517C16.7563 0.51328 16.303 0.247182 15.8049 0.108436C15.3069 -0.0303103 14.7813 -0.0369168 14.2799 0.089267C10.3931 1.10968 6.83344 3.11109 3.94194 5.90177C3.37314 6.47401 2.92958 7.15831 2.63946 7.91118C2.34933 8.66406 2.21898 9.46906 2.25669 10.275C2.31041 11.445 2.72107 12.5704 3.43344 13.5L0.219689 16.7198C0.148056 16.789 0.0909195 16.8717 0.0516128 16.9632C0.012306 17.0547 -0.00838366 17.1531 -0.00924903 17.2527C-0.0101144 17.3523 0.0088619 17.4511 0.0465726 17.5432C0.0842832 17.6354 0.139973 17.7191 0.210393 17.7896C0.280812 17.86 0.364551 17.9157 0.456723 17.9534C0.548896 17.9911 0.647655 18.0101 0.74724 18.0092C0.846824 18.0083 0.945239 17.9877 1.03674 17.9483C1.12825 17.909 1.211 17.8519 1.28019 17.7803L4.49319 14.5673C5.47801 15.3362 6.69224 15.7526 7.94169 15.75C8.76848 15.738 9.58481 15.5633 10.3441 15.2358C11.1033 14.9083 11.7906 14.4344 12.3667 13.8413C15.6667 10.5413 17.5289 5.25677 17.9122 3.69752C18.0368 3.19965 18.0293 2.67789 17.8903 2.18382C17.7514 1.68976 17.486 1.24051 17.1202 0.880517ZM3.75519 10.206C3.72696 9.60807 3.8234 9.01079 4.03837 8.4521C4.25335 7.89342 4.58217 7.38556 5.00394 6.96077C5.32494 6.64202 5.65869 6.34277 5.99994 6.05027V10.9395L4.50744 12.432C4.05264 11.7754 3.79194 11.0039 3.75519 10.206ZM11.2837 12.8003C10.5694 13.5766 9.60154 14.0726 8.5542 14.1991C7.50687 14.3256 6.44877 14.0742 5.57019 13.4903L7.27944 11.781L9.31044 9.75002H13.6319C12.9526 10.8424 12.166 11.8642 11.2837 12.8003ZM16.4587 3.33527C16.0066 5.04529 15.352 6.69522 14.5087 8.25002H10.8104L13.2802 5.78027C13.3518 5.71108 13.409 5.62832 13.4483 5.53682C13.4876 5.44532 13.5083 5.3469 13.5091 5.24732C13.51 5.14773 13.491 5.04897 13.4533 4.9568C13.4156 4.86463 13.3599 4.78089 13.2895 4.71047C13.2191 4.64005 13.1353 4.58436 13.0432 4.54665C12.951 4.50894 12.8522 4.48996 12.7526 4.49083C12.6531 4.49169 12.5546 4.51238 12.4631 4.55169C12.3716 4.591 12.2889 4.64814 12.2197 4.71977L8.46969 8.46977L7.49994 9.43952V4.88402C9.6682 3.36444 12.0849 2.23476 14.6414 1.54577C14.7601 1.51589 14.882 1.50052 15.0044 1.50002C15.201 1.50044 15.3955 1.53968 15.5769 1.61549C15.7582 1.6913 15.9228 1.80218 16.0612 1.94177C16.2439 2.11872 16.3765 2.34077 16.4458 2.58547C16.5151 2.83017 16.5185 3.08883 16.4557 3.33527H16.4587Z" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_84_933">
+                            <rect width="18" height="18" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </SvgLabeled>
+                  </template>
+                  <!-- Content -->
+                  <div class="flex flex-col gap-3">
+                    <NuxtLink to="/rank-tracker/keyword">
+                      <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/fields/rank-tracker/title`)"
+                        @click="change_active_section('keyword-rank-tracker')"
+                        :active="active_section === 'keyword-rank-tracker'">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z" />
@@ -193,8 +224,8 @@
           </NavbarRightContentDepartment>
         </div>
       </div>
-      <div class="flex w-full rounded-t-md bg-base-100 overflow-y-auto">
-        <slot></slot>
+      <div class="flex w-full rounded-t-md bg-base-100 overflow-y-auto pb-3" id="page">
+        <NuxtPage />
       </div>
     </div>
   </div>
@@ -202,6 +233,7 @@
 <script setup>
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
+import One from "../widget/Workspace/Add/Steps/One";
 
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
@@ -215,12 +247,29 @@ const auth = ref({
   wallet: null,
   subscription: null,
 });
-
+let plan_type = '';
+switch (ConfigStore.plan().package_id) {
+  case 1:
+    plan_type = "رایگان"
+    break;
+  case 2:
+    plan_type = "پایه"
+    break;
+  case 3:
+    plan_type = "اقتصادی"
+    break;
+  case 4:
+    plan_type = "رشد"
+    break;
+  case 5:
+    plan_type = "پیشرفته"
+    break;
+}
 onBeforeMount(() => {
   auth.value = {
     name: ConfigStore.user().name,
     wallet: ConfigStore.wallets()[0].balance ?? 0,
-    subscription: ConfigStore.plan().name,
+    subscription: ConfigStore.plan().name + " " + plan_type,
   }
 
   workspaces.value = ConfigStore.workspaces();
@@ -228,7 +277,8 @@ onBeforeMount(() => {
 
 function add_workspace() {
   change_active_section("add_workspace");
-  navigateTo('/workspace/add');
+  let popup = One.render("page");
+  document.getElementById("page").appendChild(popup);
 }
 
 function change_selected_tools_section(title) {

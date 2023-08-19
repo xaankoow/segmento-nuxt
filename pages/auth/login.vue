@@ -1,17 +1,23 @@
 <template>
   <div class="flex w-full items-center">
+    <div
+      class="absolute w-screen h-screen flex items-center justify-center top-0 left-0 bg-base-100/10 pointer-events-none"
+      v-show="request.pending()">
+      <ToolsLoading class="w-56 h-56" />
+    </div>
     <div class="mx-auto">
-      <form @submit.prevent="requestToLogin()" class="flex flex-col gap-11 w-full items-center">
+      <form @submit.prevent="requestToLogin()" class="flex flex-col gap-8 w-full items-center">
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input dir="ltr" v-model="form.email" type="email" required @focus="emailBox.focus()"
+          <input dir="ltr" v-model="form.email" type="email" required @focus="emailBox.focus()" id="input_email"
             @blur="emailBox.leave()" />
           <label for="email" :class="emailBox.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
           </label>
+          <span class="text-error text-xs" v-show="error_happened">{{ config.by_route(`${current_page}/error`) }}</span>
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
           <input dir="ltr" v-model="form.password" type="password" minlength="8" @focus="passwordBox.focus()"
-            @blur="passwordBox.leave()" required />
+            id="input_password" @blur="passwordBox.leave()" required />
           <label for="email" :class="passwordBox.transitionStyle(form.password)">
             {{ config.by_route(`${current_page}/password`) }}
           </label>
@@ -46,20 +52,28 @@ const current_page = "pages/auth/login";
 const emailBox = new CustomTextBox();
 const passwordBox = new CustomTextBox();
 const request = new Request();
+const error_happened = ref(false);
 const form = ref({
   email: "",
   password: "",
 });
-
 async function requestToLogin() {
   let response = await request.post("auth/login", form.value);
+  let email_box = document.getElementById("input_email");
+  let password_box = document.getElementById("input_password");
+
   if (response.status()) {
 
     // TODO : Fix this section later
     let user = response.data().user;
-    if (! user.img) {
+    if (!user.img) {
       user.img = "/images/profileDefaultImg.png";
     }
+    email_box.classList.remove("border-b-2");
+    password_box.classList.remove("border-b-2");
+    email_box.classList.remove("border-b-error");
+    password_box.classList.remove("border-b-error");
+    error_happened.value = false;
 
     ConfigStore.set_token(response.data().token);
     ConfigStore.set_user(JSON.stringify(user));
@@ -71,7 +85,11 @@ async function requestToLogin() {
     navigateTo("/keyword-research");
   } else {
     // TODO : Message to user name or password is incorrect
-    console.log(response.errors());
+    email_box.classList.add("border-b-2");
+    email_box.classList.add("border-b-error");
+    password_box.classList.add("border-b-2");
+    password_box.classList.add("border-b-error");
+    error_happened.value = true;
   }
 }
 </script>

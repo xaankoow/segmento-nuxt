@@ -3,10 +3,10 @@ export default class ResponseModel {
     private _status: boolean;
     private _errors: any;
     private _data: any;
-    private _status_code: Number;
+    private _status_code: number;
     private _version: string;
 
-    constructor(message: string, status: boolean, errors: any, data: any, _status_code: Number, version= 'v1')
+    constructor(message: string, status: boolean, errors: any, data: any, _status_code: number, version= 'v1')
     {
         this._message = message;
         this._status = status;
