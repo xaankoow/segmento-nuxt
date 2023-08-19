@@ -26,7 +26,7 @@ export default class Request {
     protected send_request = async (method: string, url: string, body: any, params: any): Promise<ResponseModel> => {
         let result: any;
         this._pending.value = true;
-        let token = ConfigStore.token();
+        let token = ConfigStore.token() ?? '';
 
         await axios.request({
             baseURL: 'https://core.segmento.ir/api/',

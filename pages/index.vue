@@ -3,12 +3,10 @@
 </template>
 
 <script setup>
-
-onMounted(() => {
-  let token = useCookie("token").value;
-  if (token === null || token === "" || token === undefined) {
-    navigateTo("/auth/login");
-  }
+import ConfigStore from "../store/ConfigStore";
+import Auth from "../middlewares/Auth";
+definePageMeta({
+  middleware: [Auth],
 });
 
 </script>
