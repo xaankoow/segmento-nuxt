@@ -247,6 +247,7 @@ onMounted(() => {
       height: rect.height(),
       padding: 4,
       align: "right",
+      fontFamily: "IRANYekan",
       fontSize: 10,
       zIndex: 100,
     });
