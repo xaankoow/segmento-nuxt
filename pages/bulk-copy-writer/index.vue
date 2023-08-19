@@ -166,7 +166,7 @@ onMounted(() => {
   const stage = new Konva.Stage({
     container: "container",
     width: 500,
-    height: 400,
+    height: 400
   });
 
   stageRef.value = stage;
@@ -247,7 +247,6 @@ onMounted(() => {
       height: rect.height(),
       padding: 4,
       align: "right",
-      fontFamily: "IRANYekan",
       fontSize: 10,
       zIndex: 100,
     });
