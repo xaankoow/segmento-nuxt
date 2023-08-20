@@ -13,14 +13,15 @@
         <NavbarRight class="justify-between py-2">
           <div>
             <!-- پیشخان -->
-            <div @click="actived_navbar = 'home'">
+            <!-- this section get commented until its pages get ready! TODO: when pages was ready, uncomment this section -->
+            <!-- <div @click="actived_navbar = 'home'">
               <NavbarRightSvgItem :active="actived_navbar === 'home'">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M1.38843 13.5818H9.37734C10.1097 13.5818 10.7088 12.9747 10.7088 12.2326V1.43948C10.7088 0.697447 10.1097 0.090332 9.37734 0.090332H1.38843C0.656114 0.090332 0.0569458 0.697447 0.0569458 1.43948V12.2326C0.0569458 12.9747 0.656114 13.5818 1.38843 13.5818ZM1.38843 24.3749H9.37734C10.1097 24.3749 10.7088 23.7678 10.7088 23.0258V17.6292C10.7088 16.8872 10.1097 16.2801 9.37734 16.2801H1.38843C0.656114 16.2801 0.0569458 16.8872 0.0569458 17.6292V23.0258C0.0569458 23.7678 0.656114 24.3749 1.38843 24.3749ZM14.7033 24.3749H22.6922C23.4245 24.3749 24.0237 23.7678 24.0237 23.0258V12.2326C24.0237 11.4906 23.4245 10.8835 22.6922 10.8835H14.7033C13.971 10.8835 13.3718 11.4906 13.3718 12.2326V23.0258C13.3718 23.7678 13.971 24.3749 14.7033 24.3749ZM13.3718 1.43948V6.83605C13.3718 7.57808 13.971 8.18519 14.7033 8.18519H22.6922C23.4245 8.18519 24.0237 7.57808 24.0237 6.83605V1.43948C24.0237 0.697447 23.4245 0.090332 22.6922 0.090332H14.7033C13.971 0.090332 13.3718 0.697447 13.3718 1.43948Z" />
                 </svg>
               </NavbarRightSvgItem>
-            </div>
+            </div> -->
             <div @click="actived_navbar = 'department'">
               <NavbarRightSvgItem :active="actived_navbar === 'department'">
                 <!-- ابزار سئو -->
@@ -110,7 +111,8 @@
             </div>
 
             <!-- site and workspace -->
-            <template v-slot:sites>
+            <!-- temperory comented, when the code get done, we'll uncomment it. TODO: uncomment this section when the code was ready to use. -->
+            <!-- <template v-slot:sites>
 
               <div class="flex flex-col px-5 py-3 gap-4">
                 <ul>
@@ -154,7 +156,7 @@
                   </li>
                 </ul>
               </div>
-            </template>
+            </template> -->
 
             <!-- according -->
             <template v-slot:according>
@@ -188,8 +190,21 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
+                  <div class="flex flex-col gap-3">
+                    <NuxtLink to="/google-title-builder">
+                      <SvgLabeled :label="cn.by_route(`${department_section}/create_content/fields/google-title-builder`)"
+                        @click="change_active_section('google-title-builder')"
+                        :active="active_section === 'google-title-builder'">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z" />
+                        </svg>
+                      </SvgLabeled>
+                    </NuxtLink>
+                  </div>
                 </According>
-                <According :isOpen="selected_tools_section === 'create_content'">
+                <!-- technical seo and rank tracked side bar section - TODO: uncomment this section when rank tracker was ready. -->
+                <!-- <According :isOpen="selected_tools_section === 'create_content'">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/title`)">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -205,7 +220,7 @@
                       </svg>
                     </SvgLabeled>
                   </template>
-                  <!-- Content -->
+                  
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/rank-tracker/keyword">
                       <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/fields/rank-tracker/title`)"
@@ -218,7 +233,7 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
-                </According>
+                </According> -->
               </div>
             </template>
           </NavbarRightContentDepartment>
@@ -247,29 +262,12 @@ const auth = ref({
   wallet: null,
   subscription: null,
 });
-let plan_type = '';
-switch (ConfigStore.plan().package_id) {
-  case 1:
-    plan_type = "رایگان"
-    break;
-  case 2:
-    plan_type = "پایه"
-    break;
-  case 3:
-    plan_type = "اقتصادی"
-    break;
-  case 4:
-    plan_type = "رشد"
-    break;
-  case 5:
-    plan_type = "پیشرفته"
-    break;
-}
+
 onBeforeMount(() => {
   auth.value = {
     name: ConfigStore.user().name,
     wallet: ConfigStore.wallets()[0].balance ?? 0,
-    subscription: ConfigStore.plan().name + " " + plan_type,
+    subscription: cn.by_route(`constants/plans/${ConfigStore.plan().plan.name}`) + " " + cn.by_route(`constants/packages/${ConfigStore.plan().plan.package}`),
   }
 
   workspaces.value = ConfigStore.workspaces();

@@ -31,7 +31,8 @@
                             "create_content": {
                                 "title": "تولید محتوا",
                                 "fields": {
-                                    "keyword-research": "تحقیق کلمه کلیدی"
+                                    "keyword-research": "تحقیق کلمه کلیدی",
+                                    "google-title-builder": "عنوان‌ساز گوگل"
                                 }
                             },
                             "technical_seo": {
@@ -212,8 +213,33 @@
                     "password_length": "گذرواژه باید حداقل 8 کاراکتر باشد"
                 }
             },
-            "search-keyword": {
+            "keyword-research": {
                 "title": "تحقیق کلمه کلیدی",
+                "search": {
+                    "title": "جستجو",
+                    "sentence": [
+                        "هیچ کلمه ای جستجو نکردید!",
+                        "[count] جستجو اول"
+                    ],
+                    "word": "جستجو کلمه کلیدی",
+                    "alphabet": "جستجو بر اساس حروف الفبا"
+                },
+                "my-list": "لیست های من",
+                "place-holder": "درج کلمه کلیدی",
+                "table": {
+                    "select": "انتخاب",
+                    "row": "ردیف",
+                    "result": "کلمه کلیدی",
+                    "buttons": {
+                        "save": "ذخیره پیشنهادات",
+                        "copy": "کپی همه",
+                        "more": "تولید بیشتر"
+                    },
+                    "empty": "اطلاعاتی برای نمایش وجود ندارد!"
+                }
+            },
+            "google-title-builder": {
+                "title": "عنوان‌ساز گوگل",
                 "search": {
                     "title": "جستجو",
                     "sentence": [
@@ -340,7 +366,21 @@
             }
         },
         "constants": {
-            "segmento-platform": "پلتفرم سگمنتو"
+            "segmento-platform": "پلتفرم سگمنتو",
+            "packages": {
+                "FREE": "رایگان",
+                "BASE": "پایه",
+                "ECONOMY": "اقتصادی",
+                "GROWTH": "رشد",
+                "ADVANCED": "پیشرفته"
+            },
+            "plans": {
+                "" : "",
+                "1" : "یک ماهه",
+                "3" : "سه ماهه",
+                "6" : "شش ماهه",
+                "12" : "یکساله"
+            }
         }
     }
 }
