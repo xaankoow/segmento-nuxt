@@ -1,7 +1,9 @@
-export default {
+export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
-
+  typescript: {
+    strict: true
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'segmento-nuxt',
@@ -56,4 +58,4 @@ export default {
       },
     },
   }
-}
+})
