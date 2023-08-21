@@ -1,0 +1,196 @@
+<template>
+    <div class="flex flex-col gap-5 w-full h-full">
+        <!-- loading -->
+        <div v-if="request.pending()"
+            class="absolute top-0 left-0 w-full h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center">
+            <ToolsLoading class="w-32 h-32" />
+        </div>
+        <!-- header section -->
+        <section class="flex items-center border-r-2 gap-4 border-base-content my-2 px-4">
+            <label>{{ config.by_route(`${current_page}/title`) }}</label>
+            <LimitCounter :budget="189" :remained="20" />
+        </section>
+
+        <!-- Tabs -->
+        <div class="flex flex-row items-center gap-3 px-2 py-1">
+            <NuxtLink to="/">
+                <TabItem :title="config.by_route(`${current_page}/search/title`)" :active="true" />
+            </NuxtLink>
+
+            <span class="border-r h-full">&nbsp;</span>
+            <NuxtLink to="/">
+                <TabItem :title="config.by_route(`${current_page}/my-list`)" :active="false" />
+            </NuxtLink>
+        </div>
+
+        <!-- page content -->
+        <div class="flex flex-col gap-2 px-2 w-full h-full">
+            <!-- search box -->
+            <form @submit.prevent="search_keywords_request()" class="flex flex-row items-center w-full gap-2 my-3">
+                <div class="flex flex-row items-center w-full justify-between gap-2">
+                    <div class="custom_input_box w-[95%] text-base-500">
+                        <input v-model="form.keyword" type="text" @focus="search_class.focus()"
+                            @blur="search_class.leave()" />
+                        <label class="!text-base-400"
+                            :class="search_class.transitionStyle(form.keyword, 'text-base-400')">{{
+                                config.by_route(`${current_page}/place-holder`) }}</label>
+                    </div>
+
+                    <!-- <div class="flex flex-row items-center justify-center w-[25%]">
+              <select class="w-full rounded-md border-2 border-base-300 px-2 py-2" v-model="form.lang">
+                <option value="FA">فارسی</option>
+                <option value="EN">انگلیسی</option>
+                <option value="AR">عربی</option>
+                <option value="DU">آلمانی</option>
+                <option value="FR">فرانسوی</option>
+                <option value="SP">اسپانیایی</option>
+                <option value="IT">ایتالیایی</option>
+                <option value="RU">روسی</option>
+                <option value="TR">ترکی</option>
+                <option value="PO">لهستانی</option>
+              </select>
+            </div> -->
+
+                    <button type="submit"
+                        class="btn-primary rounded-lg w-[5%] flex flex-row items-center justify-center h-11">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z"
+                                fill="white" />
+                        </svg>
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- page content label -->
+            <span>{{
+                config
+                    .by_route(`${current_page}/search/sentence`)
+                [Number(data !== null)].replace(
+                    "[count]", data.length
+                )
+            }}</span>
+
+            <!-- page content -->
+            <div class="justify-between w-full pb-2 gap-4" :class="data !== null ? '' : 'h-full'">
+                <!-- form -->
+                <div class="flex flex-col rounded-md py-2 border border-[#d9d9d9] h-full">
+                    <!-- header -->
+                    <div class="flex flex-row justify-between px-2" :class="data?.length === 0
+                        ? 'text-base-350 pointer-events-none opacity-70'
+                        : ''
+                        ">
+                        <div class="flex flex-row gap-5 items-center">
+                            <span class="cursor-pointer">{{
+                                config.by_route(`${current_page}/table/select`)
+                            }}</span>
+                            <span class="cursor-pointer">{{
+                                config.by_route(`${current_page}/table/row`)
+                            }}</span>
+                            <span class="cursor-pointer">{{
+                                config.by_route(`${current_page}/table/result`)
+                            }}</span>
+                        </div>
+                        <div class="flex flex-row items-center gap-8">
+                            <button
+                                class="flex flex-row gap-2 px-3 py-2 items-center justify-evenly p-1 bg-primary text-primary-text rounded-lg [&>svg]:fill-primary-text hover:bg-primary-active">
+                                <svg width="14" height="17" viewBox="0 0 14 17" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M2 14.95L7 12.8L12 14.95V2.3C12 2.23333 11.9667 2.16667 11.9 2.1C11.8333 2.03333 11.7667 2 11.7 2H2.3C2.23333 2 2.16667 2.03333 2.1 2.1C2.03333 2.16667 2 2.23333 2 2.3V14.95ZM1.775 16.7C1.475 16.8333 1.18733 16.8123 0.912 16.637C0.637334 16.4623 0.5 16.2083 0.5 15.875V2.3C0.5 1.8 0.675 1.375 1.025 1.025C1.375 0.675 1.8 0.5 2.3 0.5H11.7C12.2 0.5 12.625 0.675 12.975 1.025C13.325 1.375 13.5 1.8 13.5 2.3V15.875C13.5 16.2083 13.3623 16.4623 13.087 16.637C12.8123 16.8123 12.525 16.8333 12.225 16.7L7 14.45L1.775 16.7ZM2 2C2 2 2.03333 2 2.1 2C2.16667 2 2.23333 2 2.3 2H11.7C11.7667 2 11.8333 2 11.9 2C11.9667 2 12 2 12 2H2Z"
+                                         />
+                                </svg>
+
+                                <span>{{
+                                    config.by_route(`${current_page}/table/buttons/save`)
+                                }}</span>
+                            </button>
+
+                            <button
+                                class="flex flex-row gap-2 px-3 py-2 items-center justify-evenly w-28 p-1 bg-base-250 text-primary rounded-lg [&>svg]:fill-primary hover:bg-base-200 hover:text-primary-active [&>svg]:hover:fill-primary-active">
+                                <svg width="17" height="20" viewBox="0 0 17 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M6.27812 15.7998C5.76146 15.7998 5.32812 15.6248 4.97812 15.2748C4.62812 14.9248 4.45312 14.4998 4.45312 13.9998V2.6248C4.45312 2.10814 4.62812 1.6748 4.97812 1.3248C5.32812 0.974805 5.76146 0.799805 6.27812 0.799805H14.6281C15.1281 0.799805 15.5575 0.978805 15.9161 1.3368C16.2741 1.69547 16.4531 2.1248 16.4531 2.6248V13.9998C16.4531 14.4998 16.2741 14.9248 15.9161 15.2748C15.5575 15.6248 15.1281 15.7998 14.6281 15.7998H6.27812ZM6.27812 14.2998H14.6281C14.7281 14.2998 14.8075 14.2705 14.8661 14.2118C14.9241 14.1538 14.9531 14.0831 14.9531 13.9998V2.6248C14.9531 2.5248 14.9241 2.44547 14.8661 2.3868C14.8075 2.3288 14.7281 2.2998 14.6281 2.2998H6.27812C6.17812 2.2998 6.09913 2.3288 6.04113 2.3868C5.98246 2.44547 5.95312 2.5248 5.95312 2.6248V13.9998C5.95312 14.0831 5.98246 14.1538 6.04113 14.2118C6.09913 14.2705 6.17812 14.2998 6.27812 14.2998ZM2.75312 19.2998C2.25312 19.2998 1.82812 19.1248 1.47812 18.7748C1.12812 18.4248 0.953125 17.9998 0.953125 17.4998V5.5498C0.953125 5.3498 1.02379 5.17481 1.16513 5.02481C1.30713 4.8748 1.48646 4.7998 1.70312 4.7998C1.90312 4.7998 2.07812 4.8748 2.22812 5.02481C2.37812 5.17481 2.45312 5.3498 2.45312 5.5498V17.4998C2.45312 17.5831 2.48213 17.6538 2.54013 17.7118C2.59879 17.7705 2.66979 17.7998 2.75312 17.7998H11.7031C11.9031 17.7998 12.0781 17.8748 12.2281 18.0248C12.3781 18.1748 12.4531 18.3498 12.4531 18.5498C12.4531 18.7665 12.3781 18.9455 12.2281 19.0868C12.0781 19.2288 11.9031 19.2998 11.7031 19.2998H2.75312Z" />
+                                </svg>
+                                <span>{{
+                                    config.by_route(`${current_page}/table/buttons/copy`)
+                                }}</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- when we haven't content this div will show -->
+                    <div class="flex flex-col items-center justify-center w-full h-full" v-if="data === null">
+                        <svg width="109" height="108" viewBox="0 0 109 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M29.2317 84.584C30.4566 84.584 31.5284 84.1512 32.4471 83.2856C33.3657 82.4159 33.8251 81.3176 33.8251 79.9906V49.3685C33.8251 48.0415 33.3657 46.9432 32.4471 46.0735C31.5284 45.208 30.4566 44.7752 29.2317 44.7752C27.9048 44.7752 26.8085 45.208 25.9429 46.0735C25.0732 46.9432 24.6384 48.0415 24.6384 49.3685V79.9906C24.6384 81.3176 25.0732 82.4159 25.9429 83.2856C26.8085 84.1512 27.9048 84.584 29.2317 84.584ZM52.9639 84.584C54.2909 84.584 55.3892 84.1512 56.2589 83.2856C57.1244 82.4159 57.5572 81.3176 57.5572 79.9906V30.9952C57.5572 29.6682 57.1244 28.572 56.2589 27.7064C55.3892 26.8367 54.2909 26.4019 52.9639 26.4019C51.6369 26.4019 50.5407 26.8367 49.6751 27.7064C48.8054 28.572 48.3706 29.6682 48.3706 30.9952V79.9906C48.3706 81.3176 48.8054 82.4159 49.6751 83.2856C50.5407 84.1512 51.6369 84.584 52.9639 84.584ZM76.6961 84.584C78.023 84.584 79.1213 84.1512 79.991 83.2856C80.8566 82.4159 81.2894 81.3176 81.2894 79.9906V67.7418C81.2894 66.4148 80.8566 65.3165 79.991 64.4468C79.1213 63.5812 78.023 63.1485 76.6961 63.1485C75.4712 63.1485 74.3994 63.5812 73.4808 64.4468C72.5621 65.3165 72.1028 66.4148 72.1028 67.7418V79.9906C72.1028 81.3176 72.5621 82.4159 73.4808 83.2856C74.3994 84.1512 75.4712 84.584 76.6961 84.584ZM11.9302 107.551C8.86801 107.551 6.26513 106.479 4.12158 104.335C1.97803 102.192 0.90625 99.5888 0.90625 96.5266V14.4592C0.90625 11.397 1.97803 8.79414 4.12158 6.65059C6.26513 4.50704 8.86801 3.43526 11.9302 3.43526H63.3754C64.7024 3.43526 65.8007 3.86805 66.6704 4.73364C67.536 5.60331 67.9688 6.70162 67.9688 8.02858C67.9688 9.35554 67.536 10.4518 66.6704 11.3174C65.8007 12.1871 64.7024 12.6219 63.3754 12.6219H11.9302C11.4199 12.6219 10.9871 12.8016 10.6318 13.1609C10.2725 13.5161 10.0929 13.9489 10.0929 14.4592V96.5266C10.0929 97.037 10.2725 97.4718 10.6318 97.8311C10.9871 98.1863 11.4199 98.3639 11.9302 98.3639H93.9976C94.508 98.3639 94.9428 98.1863 95.3021 97.8311C95.6573 97.4718 95.8349 97.037 95.8349 96.5266V45.0814C95.8349 43.7544 96.2677 42.6561 97.1333 41.7864C98.003 40.9209 99.1013 40.4881 100.428 40.4881C101.755 40.4881 102.854 40.9209 103.723 41.7864C104.589 42.6561 105.022 43.7544 105.022 45.0814V96.5266C105.022 99.5888 103.95 102.192 101.806 104.335C99.6627 106.479 97.0598 107.551 93.9976 107.551H11.9302ZM91.2416 34.0574C89.9146 34.0574 88.8163 33.6226 87.9466 32.7529C87.0811 31.8873 86.6483 30.791 86.6483 29.4641V21.8086H78.9927C77.6658 21.8086 76.5695 21.3737 75.7039 20.504C74.8343 19.6385 74.3994 18.5422 74.3994 17.2152C74.3994 15.8883 74.8343 14.792 75.7039 13.9264C76.5695 13.0567 77.6658 12.6219 78.9927 12.6219H86.6483V4.96637C86.6483 3.63941 87.0811 2.54109 87.9466 1.67143C88.8163 0.805839 89.9146 0.373047 91.2416 0.373047C92.5686 0.373047 93.6669 0.805839 94.5365 1.67143C95.4021 2.54109 95.8349 3.63941 95.8349 4.96637V12.6219H103.49C104.817 12.6219 105.916 13.0567 106.785 13.9264C107.651 14.792 108.084 15.8883 108.084 17.2152C108.084 18.5422 107.651 19.6385 106.785 20.504C105.916 21.3737 104.817 21.8086 103.49 21.8086H95.8349V29.4641C95.8349 30.791 95.4021 31.8873 94.5365 32.7529C93.6669 33.6226 92.5686 34.0574 91.2416 34.0574Z"
+                                fill="#D9D9D9" />
+                        </svg>
+                        <span class="text-base-350">{{
+                            config.by_route(`${current_page}/table/empty`)
+                        }}</span>
+                    </div>
+
+                    <!-- when have content this div will show -->
+                    <div class="flex flex-col" v-else>
+                        <!-- this must be component -->
+                        <div v-for="(item, index) in data" :key="index" class="flex flex-col gap-1 px-2 mt-3 text-sm">
+                            <!-- table content -->
+                            <div class="flex flex-col gap-2">
+                                <!-- row -->
+                                <div class="border-b flex flex-row gap-12 px-4 py-1 items-center">
+                                    <span>
+                                        <label>
+                                            <input type="checkbox" class="w-5 h-5" />
+                                        </label>
+                                    </span>
+                                    <span> {{ index + 1 }} </span>
+                                    <span> {{ item }} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- options -->
+
+            </div>
+        </div>
+    </div>
+</template>
+  
+<script setup>
+import Request from "../../Api/Request";
+import Config from "../../composables/Config";
+import Auth from "../../middlewares/Auth";
+
+import { CustomTextBox } from "../../composables/CustomTextBox";
+
+const current_page = "pages/idea-generator";
+const config = new Config();
+const search_class = new CustomTextBox();
+const data = ref(null);
+const cache = ref(null);
+const old_alphabet_id = ref(null);
+const request = new Request();
+const form = ref({
+    keyword: "",
+    lang: "FA",
+});
+
+definePageMeta({
+    middleware: [Auth]
+})
+
+async function search_keywords_request() {
+    let res = await request.get("idea-generator/generate", form.value, "v2");
+
+    if (res.status()) {
+        data.value = res.data();
+        cache.value = data.value;
+        console.log(res.data());
+    }
+}
+</script>
