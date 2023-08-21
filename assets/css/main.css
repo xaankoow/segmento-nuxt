@@ -33,10 +33,7 @@
   }
 
   .alphabet {
-    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-10 h-10;
-  }
-  .alphabet.active {
-    @apply bg-primary text-base-100;
+    @apply rounded-md flex items-center justify-center w-10 h-10;
   }
 }
 

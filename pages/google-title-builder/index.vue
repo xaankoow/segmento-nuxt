@@ -19,7 +19,7 @@
 
       <span class="border-r h-full">&nbsp;</span>
       <NuxtLink to="/">
-        <TabItem :title="config.by_route(`${current_page}/my-list`)" :active="false" />
+        <TabItem :title="config.by_route(`${current_page}/my-lists`)" :active="false" />
       </NuxtLink>
     </div>
 
@@ -120,7 +120,7 @@
             <div v-for="(item, index) in data" :key="index" class="flex flex-col gap-1 px-2 mt-3 text-sm">
               <!-- header -->
               <div class="flex flex-row w-full items-center">
-                <span class="bg-base-500 text-base-100 rounded-md px-4">{{
+                <span class="bg-base-500 text-base-100 rounded-md px-4 min-w-fit">{{
                   index
                 }}</span>
                 <hr class="w-full border-base-500" />
