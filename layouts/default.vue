@@ -279,9 +279,9 @@ const active_section = ref("keyword-research");
 const selected_tools_section = ref("create_content");
 
 const auth = ref({
-  name: null,
-  wallet: null,
-  subscription: null,
+  name: "",
+  wallet: 0,
+  subscription: "",
 });
 
 onBeforeMount(() => {
