@@ -30,18 +30,25 @@ module.exports = {
         error: "#F35242",
         primary: {
           DEFAULT: "#0A65CD",
-          focus: "#0AC7E2",
+          hover: "#0AC7E2",
+          focus: "#009FB9",
           active: "#009FB9",
+          disabled: "#D9D9D9",
+          text: "#FFFFFF"
         },
-        scondary: {
+        secondary: {
           DEFAULT: "#F2F5F7",
-          focus: "#0A65CD",
+          hover: "#0A65CD",
+          focus: "#0B4B94",
           active: "#0B4B94",
+          disabled: "#D9D9D9",
+          text: "#488CDA"
         },
         bronze: "#BF8970",
         silver: "#7D7D7D",
         gold: "#FFCE47",
         diamond: "#0A65CD",
+        disabled: "#7D7D7D"
       },
     },
   },

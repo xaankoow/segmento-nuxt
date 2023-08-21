@@ -1,32 +1,30 @@
 <template>
   <div
     class="flex flex-col justify-between items-center border-2 rounded-md shadow transition-all duration-300 hover:shadow-lg">
-    <div class="hidden">
-      text-[#BF8970] border-b-[#BF8970]
-      text-[#7D7D7D] border-b-[#7D7D7D]
-      text-[#FFCE47] border-b-[#FFCE47]
-      text-[#0A65CD] border-b-[#0A65CD]
-    </div>
+
     <!-- plan content -->
     <div class="flex flex-col gap-12 items-center w-full pb-8">
       <!-- header and title -->
-      <div class="w-11/12 flex flex-row items-center justify-center text-xl h-24" :class="package_color()">
-        {{ _package.name }}
+      <div class="w-11/12 flex flex-row items-center justify-center text-xl h-24 border-b"
+        :style="`color: ${_package.color}; border-color: ${_package.color};`">
+        {{ config.by_route(`constants/packages/${_package.name}`) }}
       </div>
 
       <!-- packages section -->
       <div class="w-11/12 flex flex-col gap-4">
-        <div class="flex flex-row items-center justify-between p-2 border text-base-500" v-for="pln in _package.plans"
+        <div class="flex flex-row items-center justify-between border text-base-500" v-for="pln in _package.plans"
           :key="pln.uuid">
-          <!-- title -->
-          <div class="flex flex-row items-center gap-2">
-            <input type="radio" class="w-4 h-4" name="radio" @change="select_plan(pln.uuid)" />
-            <span>{{ pln.name }}</span>
-          </div>
-          <!-- discount title -->
-          <span class="flex items-center text-xs" style="font-size: 0.7rem">
-            {{ pln.discount_title }}
-          </span>
+          <label :for="pln.uuid" class="w-full h-full p-2">
+            <!-- title -->
+            <div class="flex flex-row items-center gap-2">
+              <input :id="pln.uuid" type="radio" class="w-4 h-4" name="radio" @change="select_plan(pln.uuid)" />
+              <span>{{ config.by_route(`constants/plans/${pln.name}`) }}</span>
+            </div>
+            <!-- discount title -->
+            <span class="flex items-center text-xs" style="font-size: 0.7rem">
+              {{ pln.discount_title }}
+            </span>
+          </label>
         </div>
       </div>
     </div>
@@ -34,8 +32,9 @@
     <!-- discount section -->
     <div class="flex flex-col items-center mb-2 w-11/12 gap-12">
       <!-- price view -->
-      <div class="flex flex-col w-full items-center gap-1">
-        <del class="text-xs" v-if="discount_result.status">
+      <div class="flex flex-col w-full items-center gap-1 h-10 justify-center bg-base-200 rounded-[3px]"
+        v-if="_package.selected_plan() !== undefined">
+        <del class="text-xs">
           <span :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
             {{ _package.selected_plan()?.price.final }}
             {{ _package.selected_plan() !== undefined ? currency.title : "" }}
@@ -108,7 +107,7 @@ const props = defineProps({
 
 function select_plan(plan_uuid) {
   props._package.select_plan(plan_uuid)
-  emit('change_plan', plan_uuid) 
+  emit('change_plan', plan_uuid)
 }
 
 const config = new Config();
@@ -122,7 +121,4 @@ const discount_result = ref({
     type: 1,
   },
 });
-function package_color() {
-  return `text-[${props._package.color}] border-b border-b-[${props._package.color}]`;
-}
 </script>
