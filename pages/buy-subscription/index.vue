@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center w-full pb-5 gap-10 [&>div]:w-[64.875rem]">
+  <div class="flex flex-col items-center w-full pb-5 pt-10 gap-10 [&>div]:w-[64.875rem]">
     <!-- title -->
     <div
       class="absolute top-0 left-0 !w-screen !h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
@@ -67,16 +67,6 @@
           <button class="btn-primary w-11/12" @click="buy_the_package()">خرید اشتراک</button>
         </div>
       </div>
-    </div>
-    <div class="flex items-center h-11 !w-full">
-      <span>
-        <svg width="2" height="20" viewBox="0 0 2 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="2" height="20" rx="1" fill="#002145" />
-        </svg>
-      </span>
-      <span class="mx-5">
-        {{ content.title }}
-      </span>
     </div>
     <!-- header -->
     <div class="flex flex-col items-center border rounded-md py-2 gap-2">

@@ -5,19 +5,13 @@
             class="absolute top-0 left-0 w-full h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center">
             <ToolsLoading class="w-32 h-32" />
         </div>
-        <!-- header section -->
-        <section class="flex items-center border-r-2 gap-4 border-base-content my-2 px-4">
-            <label>{{ config.by_route(`${current_page}/title`) }}</label>
-            <LimitCounter :budget="189" :remained="20" />
-        </section>
 
         <!-- Tabs -->
-        <div class="flex flex-row items-center gap-3 px-2 py-1">
+        <div class="flex flex-row items-center gap-3 px-2 py-1 bg-base-200">
             <NuxtLink to="/">
                 <TabItem :title="config.by_route(`${current_page}/search/title`)" :active="true" />
             </NuxtLink>
-
-            <span class="border-r h-full">&nbsp;</span>
+            <TabSeparator></TabSeparator>
             <NuxtLink to="/">
                 <TabItem :title="config.by_route(`${current_page}/my-list`)" :active="false" />
             </NuxtLink>

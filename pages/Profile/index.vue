@@ -1,9 +1,5 @@
 <template>
-  <div class="w-full h-full bg-white">
-    <div class="w-full h-[51px] bg-base-200 flex items-center justify-start text-lg textco">
-      <div class="w-[2px] h-5 rounded-sm bg-icon ml-4"></div>
-      <p>حساب کاربری</p>
-    </div>
+  <div class="w-full bg-white">
     <div class="w-full h-fit flex items-center justify-center flex-col">
       <!-- header -->
       <div class="w-3/4 h-96 mt-10 text-sm">

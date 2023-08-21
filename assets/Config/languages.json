@@ -64,6 +64,18 @@
             }
         },
         "pages": {
+            "profile": {
+                "title": "حساب کاربری",
+                "change-password": {
+                    "title": "تغییر رمز عبور"
+                },
+                "change-phone-number": {
+                    "title": "تغییر شماره همراه"
+                }
+            },
+            "buy-subscription": {
+                "title": "خرید اشتراک سگمنتو"
+            },
             "rank-tracker": {
                 "header": {
                     "title": "ابزار رتبه‌سنج",

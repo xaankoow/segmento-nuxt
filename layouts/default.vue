@@ -260,7 +260,13 @@
           </NavbarRightContentDepartment>
         </div>
       </div>
-      <div class="flex w-full rounded-t-md bg-base-100 overflow-y-auto pb-3" id="page">
+      <div class=" w-full rounded-t-md bg-base-100 overflow-y-auto pb-3" id="page">
+        <div class="bg-base-200 py-2">
+          <section class="flex items-center border-r-2 gap-4 border-base-content px-4">
+            <label>{{ cn.by_route(`pages/${$route.path.split('/')[2] ? $route.path.split('/')[1].toLowerCase() + "/" + $route.path.split('/')[2].toLowerCase() : $route.path.split('/')[1].toLowerCase()}/title`) }}</label>
+            <LimitCounter :budget="189" :remained="20" />
+          </section>
+        </div>
         <NuxtPage />
       </div>
     </div>
