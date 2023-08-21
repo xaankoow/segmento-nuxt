@@ -6,7 +6,6 @@ export default class Request {
     private request = useNuxtApp().$axios;
     protected _pending = ref(false);
 
-
     constructor() {
         return this;
     }
@@ -29,7 +28,7 @@ export default class Request {
         let token = ConfigStore.token() ?? '';
 
         await axios.request({
-            baseURL: 'https://core.segmento.ir/api/',
+            baseURL: `${useRuntimeConfig().public.API_URL}/api/`,
             headers: {
                 'accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded',
