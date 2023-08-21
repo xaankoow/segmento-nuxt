@@ -193,8 +193,8 @@ const props = defineProps({
     type: Object,
     default: function () {
       return {
-        name: "محمد مهدی نورانی",
-        subscription: "اشتراک الماسی",
+        name: "",
+        subscription: "",
       };
     },
   },

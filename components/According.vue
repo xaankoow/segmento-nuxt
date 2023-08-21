@@ -25,7 +25,7 @@
       </div>
     </button>
     <div
-      class="overflow-hidden transition-all text-sm duration-100 px-7"
+      class="overflow-hidden transition-all text-sm duration-100 px-7 flex flex-col gap-2"
       :class="!isOpen ? 'h-0' : 'h-fit py-4'"
     >
       <slot></slot>
