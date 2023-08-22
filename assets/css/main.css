@@ -25,18 +25,15 @@
   }
 
   .btn-primary {
-    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-primary-text  hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled;
+    @apply flex justify-around items-center rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-primary-text  hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled;
   }
 
   .btn-secondary {
-    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled;
+    @apply flex justify-around items-center rounded-lg py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled;
   }
 
   .alphabet {
-    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-10 h-10;
-  }
-  .alphabet.active {
-    @apply bg-primary text-base-100;
+    @apply rounded-md flex items-center justify-center w-10 h-10;
   }
 }
 
