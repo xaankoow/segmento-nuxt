@@ -7,7 +7,7 @@
       :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()" class="shadow-md mx-auto">
     </NavbarTop>
 
-    <div class="flex flex-row flex-grow pt-2 ml-2 gap-2" style="height: 90vh;">
+    <div class="flex flex-row flex-grow pt-2 ml-2 gap-2" style="height: 93vh;">
       <div class="flex flex-row">
         <!-- Right navbar -->
         <NavbarRight class="justify-between py-2">
@@ -88,11 +88,6 @@
                     d="M15.0378 0C6.76927 0 0.0585938 6.79968 0.0585938 15.1779C0.0585938 23.556 6.76927 30.3557 15.0378 30.3557C23.3063 30.3557 30.017 23.556 30.017 15.1779C30.017 6.79968 23.3063 0 15.0378 0ZM16.5357 25.8024H13.5399V22.7668H16.5357V25.8024ZM19.6364 14.0395L18.2883 15.4359C17.5393 16.21 17.0001 16.9081 16.7304 18.0009C16.6106 18.4866 16.5357 19.033 16.5357 19.7312H13.5399V18.9723C13.5399 18.2742 13.6597 17.6063 13.8694 16.984C14.169 16.1037 14.6633 15.3145 15.2924 14.677L17.1499 12.7646C17.8389 12.0968 18.1684 11.095 17.9737 10.0326C17.779 8.93976 16.9401 8.01391 15.8916 7.71036C14.2289 7.23984 12.6861 8.19605 12.1917 9.63795C12.012 10.1995 11.5476 10.6245 10.9634 10.6245H10.5141C9.64528 10.6245 9.04611 9.77455 9.28578 8.92459C9.92988 6.69344 11.8023 4.99352 14.1241 4.62925C16.4009 4.26498 18.5729 5.46403 19.921 7.36127C21.6886 9.83526 21.1643 12.4914 19.6364 14.0395Z" />
                 </svg>
               </NavbarRightSvgItem>
-            </div>
-            <hr class="mt-[1.125rem] w-[1.875rem] mx-auto" />
-            <div
-              class="flex mt-[0.79rem] w-[2.621rem] h-[2.277rem] cursor-pointer rounded-md hover:bg-base-250 items-center">
-              <img src="/images/Xaankoo-Logo-Tranceparents.svg" />
             </div>
           </div>
         </NavbarRight>
@@ -261,13 +256,15 @@
         </div>
       </div>
       <div class=" w-full rounded-t-md bg-base-100 overflow-y-auto pb-3" id="page">
-        <div class="bg-base-200 py-2">
+        <div class="bg-base-200 py-2 h-[6%]">
           <section class="flex items-center border-r-2 gap-4 border-base-content px-4">
             <label>{{ cn.by_route(`pages/${$route.path.split('/')[2] ? $route.path.split('/')[1].toLowerCase() + "/" + $route.path.split('/')[2].toLowerCase() : $route.path.split('/')[1].toLowerCase()}/title`) }}</label>
             <LimitCounter :budget="189" :remained="20" />
           </section>
         </div>
-        <NuxtPage />
+        <div class="h-[94%]">
+          <NuxtPage />
+        </div>
       </div>
     </div>
   </div>

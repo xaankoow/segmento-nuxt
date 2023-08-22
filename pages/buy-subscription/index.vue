@@ -107,7 +107,7 @@
         </footer>
       </div>
       <!-- buy button -->
-      <button class="flex select-none btn-primary items-center justify-around" :disabled="(selected_plan_uuid === null)"
+      <button class="flex select-none btn-primary" :disabled="(selected_plan_uuid === null)"
         @click="check_plan()">
         <span>فعال سازی اشتراک</span>
         <span class="pr-2">

@@ -42,20 +42,20 @@
         <!-- user detail section -->
         <div>
           <div class="flex flex-row">
-            <div tabindex="0" class="w-[2.5rem] h-[2.5rem] mt-[0.438rem] mr-[0.625rem] btn-square avatar">
-              <div class="w-[2.5rem]">
+            <div tabindex="0" class="w-[2.5rem] h-full mr-[0.625rem] btn-square avatar flex items-center justify-center">
+              <div class="w-full">
                 <img src="/images/profileDefaultImg.png" class="mask mask-squircle" />
               </div>
             </div>
-            <div class="mr-[0.688rem]">
+            <div class="mr-[0.688rem] text-s flex-col items-center justify-center">
               <div>
                 {{ profile.name }}
               </div>
               <div class="flex flex-row items-center gap-2">
-                <span>
-                  <radial-progress :value="80" style="--size: 0.875rem; --thickness: 2px" />
-                </span>
-                <span class="text-xs">
+                <!-- <span> -->
+                  <!-- <radial-progress :value="30"/> -->
+                <!-- </span> -->
+                <span class="text-[10px]">
                   {{ profile.subscription }}
                 </span>
               </div>
@@ -177,7 +177,7 @@
 
 <style scoped>
 .navbar {
-  min-height: 9.5vh;
+  height: 6.5vh;
 }
 </style>
 
