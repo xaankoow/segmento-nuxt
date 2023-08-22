@@ -36,20 +36,25 @@
         v-if="_package.selected_plan() !== undefined">
         <del class="text-xs">
           <span :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
-            {{ _package.selected_plan()?.price.final }}
+            {{ Math.ceil( _package.selected_plan()?.price.final / 1000) }}
             {{ _package.selected_plan() !== undefined ? currency.title : "" }}
           </span>
         </del>
         <span :class="discount_result.status ? 'font-semibold text-primary' : ''"
           :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
           {{
-            _package.calculate_discount(
-              _package.selected_plan(),
-              discount_result.discount?.value ?? null,
-              2
-            )
+            Math.ceil(
+              _package.calculate_discount(
+                _package.selected_plan(),
+                discount_result.discount?.value ?? null,
+                2
+              )
+              / 1000)
           }}
           {{ _package.selected_plan() !== undefined ? currency.title : "" }}
+          <span class="text-xs">
+            باتخفیف
+          </span>
         </span>
       </div>
 
@@ -98,7 +103,7 @@ const props = defineProps({
   currency: {
     default() {
       return {
-        title: "تومان",
+        title: "هزارتومان",
         left_side: true,
       };
     },

@@ -6,7 +6,7 @@
       v-if="request.pending()">
       <ToolsLoading class="w-32 h-32" />
     </div>
-    <div class="absolute top-0 left-0 !w-screen !h-screen z-50 bg-base-350/40 flex justify-center items-center"
+    <div class="absolute top-0 left-0 z-50 bg-base-350/40 flex justify-center items-center !w-screen !h-screen"
       id="the_package" v-if="the_package !== null">
       <!-- the package and confirm to buy -->
       <div class="flex flex-col justify-between w-96 h-2/3 bg-base-100 rounded-md">
@@ -22,7 +22,7 @@
         <div class="flex flex-col w-full [&>*]:w-11/12 [&>*]:mx-auto h-full">
           <div class="flex flex-col gap-2 my-2 items-center justify-center">
             <span>نام اشتراک:</span>
-            <span class="font-semibold">{{ the_package.package }}</span>
+            <span class="font-semibold">{{ config.by_route(`constants/packages/${the_package.package}`) }}</span>
           </div>
           <hr />
 
@@ -30,11 +30,11 @@
             <div class="flex flex-col gap-4">
               <div class="flex flex-row items-center justify-between">
                 <span>مدت اشتراک:</span>
-                <span> {{ the_package.name }}</span>
+                <span>{{ config.by_route(`constants/plans/${the_package.name}`) }}</span>
               </div>
               <div class="flex flex-row items-center justify-between">
                 <span>قیمت اشتراک:</span>
-                <span> {{ the_package.price.value }}</span>
+                <span>{{ Math.ceil(the_package.price.value / 1000) }} هزارتومان</span>
               </div>
             </div>
             <!-- discount section -->
@@ -57,7 +57,7 @@
           <hr />
           <div class="flex flex-col items-center gap-3 my-4">
             <span class="font-bold">قیمت نهایی و پرداخت</span>
-            <span>{{ the_package.price.final }} تومان</span>
+            <span>{{ Math.ceil(the_package.price.final / 1000) }} هزارتومان</span>
           </div>
           <hr />
         </div>
@@ -73,9 +73,9 @@
       <span class="text-4xl">
         {{ content.header }}
       </span>
-      <button class="btn-secondary py-2 px-4 rounded-md">
+      <!-- <button class="btn-secondary py-2 px-4 rounded-md">
         {{ content.detail }}
-      </button>
+      </button> -->
     </div>
     <!-- package -->
     <div class="flex flex-row items-center justify-between gap-1">
@@ -133,11 +133,13 @@
 import Request from "../../Api/Request";
 import HTMLController from "../../Controllers/HTMLController";
 import Package from "../../Models/Package";
+import Config from "../../composables/Config";
 
 const request = new Request();
 const packages = ref([]);
 const selected_plan_uuid = ref(null);
 const the_package = ref(null);
+const config = new Config();
 
 onBeforeMount(() => {
   collect_packages();

@@ -1,13 +1,14 @@
 <template>
   <div
-    class="flex flex-col w-full h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
-    style="direction: rtl">
+    class="flex flex-col w-full !h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
+    style="direction: rtl; height: 100vh !important; ">
     <!-- Header section -->
     <NavbarTop :platform="cn.__(['layouts', 'default', 'header', 'platform'])"
       :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()" class="shadow-md mx-auto">
     </NavbarTop>
 
-    <div class="flex flex-row flex-grow pt-2 ml-2 gap-2" style="height: 93vh;">
+
+    <div class="flex flex-row flex-grow ml-2 pt-2 gap-2" style="height: 93vh;">
       <div class="flex flex-row">
         <!-- Right navbar -->
         <NavbarRight class="justify-between py-2">
@@ -209,8 +210,7 @@
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/idea-generator">
                       <SvgLabeled :label="cn.by_route(`${department_section}/create_content/fields/idea-generator`)"
-                        @click="change_active_section('idea-generator')"
-                        :active="active_section === 'idea-generator'">
+                        @click="change_active_section('idea-generator')" :active="active_section === 'idea-generator'">
                         <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M11.4917 1.71625C10.5762 0.898405 9.45509 0.345685 8.24891 0.117571C7.04273 -0.110543 5.79718 -0.00541525 4.64631 0.421642C3.49543 0.848699 2.48279 1.58151 1.71738 2.54123C0.951975 3.50094 0.462768 4.65121 0.302412 5.86825C0.158397 6.93538 0.273576 8.02151 0.638201 9.03471C1.00283 10.0479 1.60617 10.9583 2.39716 11.689C2.88631 12.118 3.28102 12.6438 3.55627 13.2333C3.83153 13.8228 3.98132 14.4631 3.99616 15.1135V15.2342C3.99696 15.968 4.28879 16.6715 4.80762 17.1903C5.32646 17.7091 6.02992 18.001 6.76366 18.0017H7.22866C7.96241 18.001 8.66587 17.7091 9.1847 17.1903C9.70354 16.6715 9.99537 15.968 9.99616 15.2342V14.8225C10.0074 14.2476 10.1427 13.6819 10.3928 13.1641C10.6428 12.6463 11.0018 12.1887 11.4452 11.8225C12.1641 11.1928 12.741 10.4176 13.1377 9.54811C13.5345 8.67863 13.7419 7.73479 13.7463 6.7791C13.7507 5.82341 13.5519 4.8777 13.1632 4.00461C12.7746 3.13153 12.2048 2.351 11.4917 1.71475V1.71625ZM7.22866 16.5017H6.76366C6.42762 16.5014 6.10546 16.3677 5.86784 16.1301C5.63023 15.8924 5.49656 15.5703 5.49616 15.2342C5.49616 15.2342 5.49091 15.0392 5.49016 15.0017H8.49616V15.2342C8.49576 15.5703 8.3621 15.8924 8.12448 16.1301C7.88687 16.3677 7.5647 16.5014 7.22866 16.5017ZM10.4537 10.696C9.59973 11.4367 8.98304 12.4126 8.68066 13.5017H7.74616V8.11375C8.18334 7.95919 8.56209 7.67332 8.8306 7.29527C9.0991 6.91722 9.24424 6.46544 9.24616 6.00175C9.24616 5.80283 9.16714 5.61207 9.02649 5.47142C8.88584 5.33077 8.69507 5.25175 8.49616 5.25175C8.29725 5.25175 8.10648 5.33077 7.96583 5.47142C7.82518 5.61207 7.74616 5.80283 7.74616 6.00175C7.74616 6.20066 7.66714 6.39143 7.52649 6.53208C7.38584 6.67273 7.19507 6.75175 6.99616 6.75175C6.79725 6.75175 6.60648 6.67273 6.46583 6.53208C6.32518 6.39143 6.24616 6.20066 6.24616 6.00175C6.24616 5.80283 6.16714 5.61207 6.02649 5.47142C5.88584 5.33077 5.69507 5.25175 5.49616 5.25175C5.29725 5.25175 5.10648 5.33077 4.96583 5.47142C4.82518 5.61207 4.74616 5.80283 4.74616 6.00175C4.74808 6.46544 4.89323 6.91722 5.16173 7.29527C5.43023 7.67332 5.80898 7.95919 6.24616 8.11375V13.5017H5.25466C4.91641 12.3837 4.282 11.3779 3.41866 10.591C2.68588 9.90819 2.16371 9.03002 1.91376 8.06011C1.66382 7.0902 1.69655 6.06904 2.00807 5.11712C2.31959 4.1652 2.89692 3.32226 3.67191 2.68777C4.44691 2.05328 5.38723 1.65372 6.38191 1.53625C6.58811 1.51323 6.79543 1.50171 7.00291 1.50175C8.29109 1.49792 9.53467 1.97322 10.4919 2.83525C11.0467 3.32995 11.49 3.93691 11.7924 4.61592C12.0948 5.29492 12.2494 6.03045 12.246 6.77374C12.2426 7.51703 12.0812 8.25111 11.7726 8.92731C11.464 9.60352 11.0152 10.2064 10.4559 10.696H10.4537Z" />
@@ -255,11 +255,12 @@
           </NavbarRightContentDepartment>
         </div>
       </div>
-      <div class=" w-full rounded-t-md bg-base-100 overflow-y-auto pb-3" id="page">
+      <div class=" w-full rounded-t-md bg-base-100 overflow-y-auto" id="page">
         <div class="bg-base-200 py-2 h-[6%]">
           <section class="flex items-center border-r-2 gap-4 border-base-content px-4">
-            <label>{{ cn.by_route(`pages/${$route.path.split('/')[2] ? $route.path.split('/')[1].toLowerCase() + "/" + $route.path.split('/')[2].toLowerCase() : $route.path.split('/')[1].toLowerCase()}/title`) }}</label>
-            <LimitCounter :budget="189" :remained="20" />
+            <label>{{ cn.by_route(`pages/${$route.path.split('/')[2] ? $route.path.split('/')[1].toLowerCase() + "/" +
+              $route.path.split('/')[2].toLowerCase() : $route.path.split('/')[1].toLowerCase()}/title`) }}</label>
+            <!-- <LimitCounter :budget="100" :remained="19" /> -->
           </section>
         </div>
         <div class="h-[94%]">
@@ -267,6 +268,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script setup>
