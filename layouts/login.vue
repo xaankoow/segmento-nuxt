@@ -100,7 +100,6 @@
       </div>
     </div>
   </div>
-  <TagManager />
 </template>
 <script setup>
 import Config from '../composables/Config';

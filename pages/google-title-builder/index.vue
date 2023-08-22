@@ -69,27 +69,25 @@
         <!-- form -->
         <div class="flex flex-col rounded-md py-2 border border-[#d9d9d9] h-full">
           <!-- header -->
-          <div class="flex flex-row justify-between px-2" :class="data?.length === 0
-            ? 'text-base-350 pointer-events-none opacity-70'
-            : ''
-            ">
-            <div class="flex flex-row gap-5 items-center">
-              <span class="cursor-pointer">{{
+          <div class="flex flex-row justify-between px-2" :class="`${data === null ? 'text-primary-disabled' : ''}`">
+            <div class="flex items-center gap-2">
+              <span class="w-14 flex justify-center">{{
                 config.by_route(`${current_page}/table/select`)
               }}</span>
-              <span class="cursor-pointer">{{
+              <span class="w-14 flex justify-center">{{
                 config.by_route(`${current_page}/table/row`)
               }}</span>
-              <span class="cursor-pointer">{{
+              <span class="w-fit">{{
                 config.by_route(`${current_page}/table/result`)
               }}</span>
             </div>
-            <button
-              class="flex flex-row items-center justify-evenly w-28 p-1 bg-base-250 text-primary rounded-lg [&>svg]:fill-primary hover:bg-base-200 hover:text-primary-active [&>svg]:hover:fill-primary-active">
+            <button class="w-28 p-1 rounded-lg btn-secondary" disabled>
               <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
-                  d="M6.27812 15.7998C5.76146 15.7998 5.32812 15.6248 4.97812 15.2748C4.62812 14.9248 4.45312 14.4998 4.45312 13.9998V2.6248C4.45312 2.10814 4.62812 1.6748 4.97812 1.3248C5.32812 0.974805 5.76146 0.799805 6.27812 0.799805H14.6281C15.1281 0.799805 15.5575 0.978805 15.9161 1.3368C16.2741 1.69547 16.4531 2.1248 16.4531 2.6248V13.9998C16.4531 14.4998 16.2741 14.9248 15.9161 15.2748C15.5575 15.6248 15.1281 15.7998 14.6281 15.7998H6.27812ZM6.27812 14.2998H14.6281C14.7281 14.2998 14.8075 14.2705 14.8661 14.2118C14.9241 14.1538 14.9531 14.0831 14.9531 13.9998V2.6248C14.9531 2.5248 14.9241 2.44547 14.8661 2.3868C14.8075 2.3288 14.7281 2.2998 14.6281 2.2998H6.27812C6.17812 2.2998 6.09913 2.3288 6.04113 2.3868C5.98246 2.44547 5.95312 2.5248 5.95312 2.6248V13.9998C5.95312 14.0831 5.98246 14.1538 6.04113 14.2118C6.09913 14.2705 6.17812 14.2998 6.27812 14.2998ZM2.75312 19.2998C2.25312 19.2998 1.82812 19.1248 1.47812 18.7748C1.12812 18.4248 0.953125 17.9998 0.953125 17.4998V5.5498C0.953125 5.3498 1.02379 5.17481 1.16513 5.02481C1.30713 4.8748 1.48646 4.7998 1.70312 4.7998C1.90312 4.7998 2.07812 4.8748 2.22812 5.02481C2.37812 5.17481 2.45312 5.3498 2.45312 5.5498V17.4998C2.45312 17.5831 2.48213 17.6538 2.54013 17.7118C2.59879 17.7705 2.66979 17.7998 2.75312 17.7998H11.7031C11.9031 17.7998 12.0781 17.8748 12.2281 18.0248C12.3781 18.1748 12.4531 18.3498 12.4531 18.5498C12.4531 18.7665 12.3781 18.9455 12.2281 19.0868C12.0781 19.2288 11.9031 19.2998 11.7031 19.2998H2.75312Z" />
+                  d="M6.27812 15.7998C5.76146 15.7998 5.32812 15.6248 4.97812 15.2748C4.62812 14.9248 4.45312 14.4998 4.45312 13.9998V2.6248C4.45312 2.10814 4.62812 1.6748 4.97812 1.3248C5.32812 0.974805 5.76146 0.799805 6.27812 0.799805H14.6281C15.1281 0.799805 15.5575 0.978805 15.9161 1.3368C16.2741 1.69547 16.4531 2.1248 16.4531 2.6248V13.9998C16.4531 14.4998 16.2741 14.9248 15.9161 15.2748C15.5575 15.6248 15.1281 15.7998 14.6281 15.7998H6.27812ZM6.27812 14.2998H14.6281C14.7281 14.2998 14.8075 14.2705 14.8661 14.2118C14.9241 14.1538 14.9531 14.0831 14.9531 13.9998V2.6248C14.9531 2.5248 14.9241 2.44547 14.8661 2.3868C14.8075 2.3288 14.7281 2.2998 14.6281 2.2998H6.27812C6.17812 2.2998 6.09913 2.3288 6.04113 2.3868C5.98246 2.44547 5.95312 2.5248 5.95312 2.6248V13.9998C5.95312 14.0831 5.98246 14.1538 6.04113 14.2118C6.09913 14.2705 6.17812 14.2998 6.27812 14.2998ZM2.75312 19.2998C2.25312 19.2998 1.82812 19.1248 1.47812 18.7748C1.12812 18.4248 0.953125 17.9998 0.953125 17.4998V5.5498C0.953125 5.3498 1.02379 5.17481 1.16513 5.02481C1.30713 4.8748 1.48646 4.7998 1.70312 4.7998C1.90312 4.7998 2.07812 4.8748 2.22812 5.02481C2.37812 5.17481 2.45312 5.3498 2.45312 5.5498V17.4998C2.45312 17.5831 2.48213 17.6538 2.54013 17.7118C2.59879 17.7705 2.66979 17.7998 2.75312 17.7998H11.7031C11.9031 17.7998 12.0781 17.8748 12.2281 18.0248C12.3781 18.1748 12.4531 18.3498 12.4531 18.5498C12.4531 18.7665 12.3781 18.9455 12.2281 19.0868C12.0781 19.2288 11.9031 19.2998 11.7031 19.2998H2.75312Z"
+                  fill="#FFFFFF" />
               </svg>
+
               <span>{{
                 config.by_route(`${current_page}/table/buttons/copy`)
               }}</span>
@@ -114,9 +112,9 @@
             <div v-for="(item, index) in data" :key="index" class="flex flex-col gap-1 px-2 mt-3 text-sm">
               <!-- header -->
               <div class="flex flex-row w-full items-center">
-                <span class="bg-base-500 text-base-100 rounded-md px-4 min-w-fit">{{
-                  index
-                }}</span>
+                <span class="bg-base-500 text-base-100 rounded-md px-4 min-w-fit">
+                  {{ index === "default" ? config.by_route(`${current_page}/default`) : index }}
+                </span>
                 <hr class="w-full border-base-500" />
               </div>
 
@@ -124,14 +122,14 @@
               <div class="flex flex-col gap-2">
                 <!-- row -->
                 <div v-for="(letter, index) in item" :key="index"
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center">
-                  <span>
+                  class="border-b flex flex-row gap-2 pl-4 py-1 items-center">
+                  <span class="w-14 flex justify-center">
                     <label>
                       <input type="checkbox" class="w-5 h-5" />
                     </label>
                   </span>
-                  <span> {{ index + 1 }} </span>
-                  <span> {{ letter }} </span>
+                  <span class="w-14 flex justify-center"> {{ Number(index) + 1 }} </span>
+                  <span class="w-fit"> {{ letter }} </span>
                 </div>
               </div>
             </div>
@@ -139,7 +137,7 @@
         </div>
 
         <!-- options -->
-        
+
       </div>
     </div>
   </div>
