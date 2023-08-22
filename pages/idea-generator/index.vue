@@ -61,7 +61,7 @@
             <span>{{
                 config
                     .by_route(`${current_page}/search/sentence`)
-                [Number(data === [])].replace(
+                [Number(data.length !== 0)].replace(
                     "[count]", data.length
                 )
             }}</span>
@@ -169,7 +169,7 @@ const cache = ref([]);
 const request = new Request();
 const form = ref({
     keyword: "",
-    lang: "FA",
+    limit: 10,
 });
 
 definePageMeta({
@@ -179,6 +179,7 @@ definePageMeta({
 async function search_keywords_request() {
     let res = await request.get("idea-generator/generate", form.value, "v2");
 
+    console.log(res);
     if (res.status()) {
         data.value = res.data();
         cache.value = data.value;
