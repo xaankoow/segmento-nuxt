@@ -235,6 +235,7 @@ export default class Three {
             checkbox.classList.add("w-5", "h-5");
             let label = document.createElement("label");
             label.innerHTML = page.path;
+            label.style.direction = "ltr";
 
             element.appendChild(label);
             element.appendChild(checkbox);

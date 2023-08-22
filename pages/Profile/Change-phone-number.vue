@@ -6,12 +6,6 @@
       class="w-[530px] h-[422px] rounded-lg overflow-hidden text-sm"
     >
       <div
-        class="w-full h-[51px] bg-base-200 flex items-center justify-start text-lg textco"
-      >
-        <div class="w-[2px] h-5 rounded-sm bg-icon ml-4"></div>
-        <p>تغییر شماره همراه</p>
-      </div>
-      <div
         v-if="status === 'enterPhoneNumber'"
         class="w-full h-[371px] bg-white flex flex-col justify-between items-center p-3"
       >

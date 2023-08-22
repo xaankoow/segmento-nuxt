@@ -17,7 +17,7 @@
   }
 
   input {
-    @apply border-2 border-base-350 rounded-sm py-2 px-4 focus:border-b-primary outline-none
+    @apply border-2 border-base-350 rounded-sm py-2 px-4 focus:border-b-primary outline-none;
   }
 
   .btn {
@@ -25,18 +25,15 @@
   }
 
   .btn-primary {
-    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-base-100  hover:bg-primary-active fill-base-100
+    @apply flex justify-around items-center rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-primary-text  hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled;
   }
 
   .btn-secondary {
-    @apply rounded-lg py-2 px-3 transition-all duration-200 bg-primary/5 text-primary hover:bg-primary/10 fill-primary
+    @apply flex justify-around items-center rounded-lg py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled;
   }
 
   .alphabet {
-    @apply rounded-md flex items-center justify-center text-primary-active bg-primary/20 w-10 h-10;
-  }
-  .alphabet.active {
-    @apply bg-primary text-base-100;
+    @apply rounded-md flex items-center justify-center w-10 h-10;
   }
 }
 
@@ -52,12 +49,12 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #FCFCFB; 
+  background: #fcfcfb;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #D9D9D9; 
+  background: #d9d9d9;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -67,5 +64,5 @@
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #aaaaaa; 
+  background: #aaaaaa;
 }
