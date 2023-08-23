@@ -179,7 +179,6 @@ definePageMeta({
 async function search_keywords_request() {
     let res = await request.get("idea-generator/generate", form.value, "v2");
 
-    console.log(res);
     if (res.status()) {
         data.value = res.data();
         cache.value = data.value;
