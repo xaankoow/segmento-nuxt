@@ -122,14 +122,14 @@
           <NavbarRightContentHome v-if="actived_navbar === 'home'" />
           <NavbarRightContentDepartment v-else>
             <!-- پیشخان -->
-            <div class="flex flex-row px-5 py-3 gap-4 items-center" @click="change_active_section('counter')">
+            <!-- <div class="flex flex-row px-5 py-3 gap-4 items-center" @click="change_active_section('counter')">
               <SvgLabeled :label="cn.by_route(`${department_section}/counter`)" :active="active_section === 'counter'">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10.25 5.1V1.4C10.25 1.15 10.3373 0.937333 10.512 0.762C10.6873 0.587333 10.9 0.5 11.15 0.5H16.6C16.85 0.5 17.0627 0.587333 17.238 0.762C17.4127 0.937333 17.5 1.15 17.5 1.4V5.1C17.5 5.35 17.4127 5.56267 17.238 5.738C17.0627 5.91267 16.85 6 16.6 6H11.15C10.9 6 10.6873 5.91267 10.512 5.738C10.3373 5.56267 10.25 5.35 10.25 5.1ZM0.5 8.6V1.4C0.5 1.15 0.587667 0.937333 0.763 0.762C0.937667 0.587333 1.15 0.5 1.4 0.5H6.85C7.1 0.5 7.31267 0.587333 7.488 0.762C7.66267 0.937333 7.75 1.15 7.75 1.4V8.6C7.75 8.85 7.66267 9.06267 7.488 9.238C7.31267 9.41267 7.1 9.5 6.85 9.5H1.4C1.15 9.5 0.937667 9.41267 0.763 9.238C0.587667 9.06267 0.5 8.85 0.5 8.6ZM10.25 16.6V9.4C10.25 9.15 10.3373 8.93733 10.512 8.762C10.6873 8.58733 10.9 8.5 11.15 8.5H16.6C16.85 8.5 17.0627 8.58733 17.238 8.762C17.4127 8.93733 17.5 9.15 17.5 9.4V16.6C17.5 16.85 17.4127 17.0627 17.238 17.238C17.0627 17.4127 16.85 17.5 16.6 17.5H11.15C10.9 17.5 10.6873 17.4127 10.512 17.238C10.3373 17.0627 10.25 16.85 10.25 16.6ZM0.5 16.6V12.9C0.5 12.65 0.587667 12.4373 0.763 12.262C0.937667 12.0873 1.15 12 1.4 12H6.85C7.1 12 7.31267 12.0873 7.488 12.262C7.66267 12.4373 7.75 12.65 7.75 12.9V16.6C7.75 16.85 7.66267 17.0627 7.488 17.238C7.31267 17.4127 7.1 17.5 6.85 17.5H1.4C1.15 17.5 0.937667 17.4127 0.763 17.238C0.587667 17.0627 0.5 16.85 0.5 16.6ZM2 8H6.25V2H2V8ZM11.75 16H16V10H11.75V16ZM11.75 4.5H16V2H11.75V4.5ZM2 16H6.25V13.5H2V16Z" />
                 </svg>
               </SvgLabeled>
-            </div>
+            </div> -->
 
             <!-- site and workspace -->
             <!-- temperory comented, when the code get done, we'll uncomment it. TODO: uncomment this section when the code was ready to use. -->
@@ -262,7 +262,7 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
-                  <div class="flex flex-col gap-3">
+                  <!-- <div class="flex flex-col gap-3">
                     <NuxtLink to="/bulk-copy-writer">
                       <SvgLabeled :label="cn.by_route(`${department_section}/create-content/fields/bulk-copy-writer`)"
                         @click="change_active_section('bulk-copy-writer')"
@@ -282,7 +282,7 @@
                         </svg>
                       </SvgLabeled>
                     </NuxtLink>
-                  </div>
+                  </div> -->
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/idea-generator">
                       <SvgLabeled :label="cn.by_route(`${department_section}/create-content/fields/idea-generator`)"
