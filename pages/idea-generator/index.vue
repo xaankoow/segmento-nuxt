@@ -12,9 +12,9 @@
                 <TabItem :title="config.by_route(`${current_page}/search/title`)" :active="true" />
             </NuxtLink>
             <TabSeparator></TabSeparator>
-            <NuxtLink to="/">
+            <!-- <NuxtLink to="/"> -->
                 <TabItem :title="config.by_route(`${current_page}/my-list`)" :active="false" />
-            </NuxtLink>
+            <!-- </NuxtLink> -->
         </div>
 
         <!-- page content -->
