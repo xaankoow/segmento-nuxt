@@ -5,6 +5,31 @@
     <!-- Header section -->
     <NavbarTop :platform="cn.__(['layouts', 'default', 'header', 'platform'])"
       :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()" class="shadow-md mx-auto">
+      <template v-slot:dashboard-icon>
+        <label tabindex="0" class="flex h-fit my-auto cursor-pointer w-12 pr-2" @click="show_hide_navbar()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_9_187)">
+              <path
+                d="M1 18H23C23.2652 18 23.5196 18.1054 23.7071 18.2929C23.8946 18.4804 24 18.7348 24 19C24 19.2652 23.8946 19.5196 23.7071 19.7071C23.5196 19.8946 23.2652 20 23 20H1C0.734784 20 0.48043 19.8946 0.292893 19.7071C0.105357 19.5196 0 19.2652 0 19C0 18.7348 0.105357 18.4804 0.292893 18.2929C0.48043 18.1054 0.734784 18 1 18Z"
+                fill="#063468" />
+              <path
+                d="M23 15H9C8.73478 15 8.48043 14.8946 8.29289 14.7071C8.10536 14.5196 8 14.2652 8 14C8 13.7348 8.10536 13.4804 8.29289 13.2929C8.48043 13.1054 8.73478 13 9 13H23C23.2652 13 23.5196 13.1054 23.7071 13.2929C23.8946 13.4804 24 13.7348 24 14C24 14.2652 23.8946 14.5196 23.7071 14.7071C23.5196 14.8946 23.2652 15 23 15Z"
+                fill="#063468" />
+              <path
+                d="M23 5H9C8.73478 5 8.48043 4.89464 8.29289 4.70711C8.10536 4.51957 8 4.26522 8 4C8 3.73478 8.10536 3.48043 8.29289 3.29289C8.48043 3.10536 8.73478 3 9 3H23C23.2652 3 23.5196 3.10536 23.7071 3.29289C23.8946 3.48043 24 3.73478 24 4C24 4.26522 23.8946 4.51957 23.7071 4.70711C23.5196 4.89464 23.2652 5 23 5Z"
+                fill="#063468" />
+              <path
+                d="M23 10H1C0.734784 10 0.48043 9.89464 0.292893 9.70711C0.105357 9.51957 0 9.26522 0 9C0 8.73478 0.105357 8.48043 0.292893 8.29289C0.48043 8.10536 0.734784 8 1 8H23C23.2652 8 23.5196 8.10536 23.7071 8.29289C23.8946 8.48043 24 8.73478 24 9C24 9.26522 23.8946 9.51957 23.7071 9.70711C23.5196 9.89464 23.2652 10 23 10Z"
+                fill="#063468" />
+            </g>
+            <defs>
+              <clipPath id="clip0_9_187">
+                <rect width="24" height="24" fill="white" transform="matrix(1 0 0 -1 0 24)" />
+              </clipPath>
+            </defs>
+          </svg>
+        </label>
+      </template>
     </NavbarTop>
 
 
@@ -24,7 +49,7 @@
               </NavbarRightSvgItem>
             </div> -->
             <div @click="actived_navbar = 'department'">
-              <NavbarRightSvgItem :active="actived_navbar === 'department'">
+              <NavbarRightSvgItem :active="actived_navbar === 'department'" @click="show_hide_navbar()">
                 <!-- ابزار سئو -->
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_45_562)">
@@ -93,7 +118,7 @@
           </div>
         </NavbarRight>
         <!-- Right navbar content -->
-        <div class="w-64 bg-base-100 h-full rounded-l-md border-l">
+        <div class="w-64 bg-base-100 h-full rounded-l-md border-l" id="right_navbar">
           <NavbarRightContentHome v-if="actived_navbar === 'home'" />
           <NavbarRightContentDepartment v-else>
             <!-- پیشخان -->
@@ -226,10 +251,10 @@
                   </template>
                   <!-- Content -->
                   <div class="flex flex-col gap-3">
-                    <NuxtLink to="/creative-copy-writer">
-                      <SvgLabeled :label="cn.by_route(`${department_section}/create-content/fields/creative-copy-writer`)"
-                        @click="change_active_section('creative-copy-writer')"
-                        :active="active_section === 'creative-copy-writer'">
+                    <NuxtLink to="/title-copy-writer">
+                      <SvgLabeled :label="cn.by_route(`${department_section}/create-content/fields/title-copy-writer`)"
+                        @click="change_active_section('title-copy-writer')"
+                        :active="active_section === 'title-copy-writer'">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z" />
@@ -327,6 +352,7 @@
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
 import One from "../widget/Workspace/Add/Steps/One";
+import { ref } from "vue";
 
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
@@ -367,5 +393,13 @@ function change_active_section(section) {
 }
 function profile() {
   return auth.value
+}
+function show_hide_navbar() {
+  let right_navbar = document.getElementById('right_navbar');
+  if(right_navbar.style.display === 'none'){
+    right_navbar.style.display = 'flex';
+  } else {
+    right_navbar.style.display = 'none';
+  }
 }
 </script>

@@ -31,16 +31,16 @@
                             "create-content": {
                                 "title": "تولید محتوا",
                                 "fields": {
-                                    "creative-copy-writer": "ابزار عنوان‌ساز خلاق",
-                                    "bulk-copy-writer": "ابزار عنوان‌ساز انبوه",
-                                    "idea-generator": "ابزار ایده ساز"
+                                    "title-copy-writer": "کپی‌رایتینگ عنوان",
+                                    "bulk-copy-writer": "کپی‌رایتینگ انبوه",
+                                    "idea-generator": "ایده ساز"
                                 }
                             },
                             "seo": {
                                 "title": "سئو",
                                 "fields": {
-                                    "keyword-research": "ابزار تحقیق کلمه کلیدی",
-                                    "google-title-builder": "ابزار عنوان‌ساز گوگل"
+                                    "keyword-research": "تحقیق کلمه کلیدی",
+                                    "google-title-builder": "عنوان‌ساز گوگل"
                                 }
                             },
                             "technical_seo": {
@@ -87,8 +87,8 @@
                 "title": "خرید اشتراک سگمنتو"
             },
             "rank-tracker": {
+                "title": "ابزار رتبه‌سنج",
                 "header": {
-                    "title": "ابزار رتبه‌سنج",
                     "tabs": [
                         "نمای کلی",
                         "کلمات کلیدی",
@@ -237,7 +237,7 @@
                 }
             },
             "keyword-research": {
-                "title": "تحقیق کلمه کلیدی",
+                "title": "ابزار تحقیق کلمه کلیدی",
                 "search": {
                     "title": "جستجو",
                     "sentence": [
@@ -262,7 +262,7 @@
                 }
             },
             "google-title-builder": {
-                "title": "عنوان‌ساز گوگل",
+                "title": "ابزار عنوان‌ساز گوگل",
                 "search": {
                     "title": "جستجو",
                     "sentence": [
@@ -288,7 +288,7 @@
                 }
             },
             "idea-generator": {
-                "title": "ایده تولید محتوا",
+                "title": "ابزار ایده‌ساز",
                 "search": {
                     "title": "جستجو",
                     "sentence": [
@@ -312,21 +312,31 @@
                     "empty": "اطلاعاتی برای نمایش وجود ندارد!"
                 }
             },
-            "creative-copy-writer": {
-                "title": "عنوان‌نویس خلاق",
+            "title-copy-writer": {
+                "title": "ابزار کپی‌رایتینگ عنوان",
                 "buttons": {
                     "create": "تولید عنوان",
                     "copy-subjects": "کپی موضوعات"
+                },
+                "sentences": {
+                    "no-question-data": "اطلاعاتی برای نمایش موضوعات سوالی وجود ندارد!",
+                    "no-comparision-data": "اطلاعاتی برای نمایش موضوعات مقایسه‌ای وجود ندارد!",
+                    "no-other-data": "اطلاعاتی برای نمایش موضوعات متفرقه وجود ندارد!"
+                },
+                "subjects": {
+                    "comparision": "موضوعات مقایسه‌ای",
+                    "questional": "موضوعات سوالی",
+                    "other": "موضوعات متفرقه"
                 }
             },
             "bulk-copy-writer": {
-                "title": "عنوان‌نویس انبوه",
+                "title": "ابزار کپی‌رایتینگ انبوه",
                 "buttons": {
                     "create": "تولید عنوان",
                     "copy-subjects": "کپی موضوعات",
                     "copy-all": "کپی همه"
                 },
-                "categories": {
+                "subjects": {
                     "comparision": "موضوعات مقایسه‌ای",
                     "questional": "موضوعات سوالی",
                     "other": "موضوعات متفرقه"
@@ -437,6 +447,11 @@
         "components": {
             "plan": {
                 "discount": "کد تخفیف"
+            },
+            "copy": {
+                "": "کپی",
+                "all": "کپی همه",
+                "results": "کپی نتایج"
             }
         },
         "constants": {
