@@ -140,6 +140,8 @@ import { ref } from "vue";
 import Config from "../../composables/Config";
 import Request from "../../Api/Request";
 import UuidGenerator from "/composables/UuidGenerator";
+import Konva from "konva";
+
 
 const config = new Config();
 const cache = ref(null);
