@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-row gap-3 w-full h-full items-center cursor-pointer">
-    <span :class="active ? '[&>svg]:fill-primary' : '[&>svg]:fill-base-content'">
+    <span class="w-5 flex justify-center">
+      <span :class="active ? '[&>svg]:fill-primary' : '[&>svg]:fill-base-content'">
         <slot></slot>
+      </span>
     </span>
     <span :class="active ? 'text-primary' : ''">
       {{ label }}
