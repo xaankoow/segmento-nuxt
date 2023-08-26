@@ -12,7 +12,8 @@ definePageMeta({
 })
 
 
-const { rtl, locale, state } = useXankoWebApp()
+const { rtl, locale, state } = useSegmentoApp()
+console.log(rtl,locale,state)
 
 </script>
 

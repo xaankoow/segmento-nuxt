@@ -65,8 +65,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      WEBAPP_NAME: process.env.WEBAPP_NAME,
-      WEBAPP_LOCALE: process.env.WEBAPP_LOCALE,
+      APP_NAME: process.env.APP_NAME,
+      APP_LOCALE: process.env.APP_LOCALE,
+      APP_FALLBACK_LOCALE: process.env.APP_FALLBACK_LOCALE,
       API_URL: process.env.API_URL
     }
   }

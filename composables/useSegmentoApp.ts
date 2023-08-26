@@ -1,10 +1,10 @@
 import { RootStateWebApp } from "@/types/stores"
-export const useXankoWebApp = defineStore("app", () => {
+export const useSegmentoApp = defineStore("app", () => {
     const runtimeConfig = useRuntimeConfig()
 
     //state
     const state: RootStateWebApp = reactive({
-        locale: runtimeConfig.public.WEBAPP_LOCALE as string
+        locale: runtimeConfig.public.APP_LOCALE as string
     })
 
     //getters
