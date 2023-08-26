@@ -45,6 +45,10 @@ export default class Request {
             let response = res.response.data;
             result = new ResponseModel(res.message, response.status, response.specific_error, response.data, res.status);
             console.log(res);
+            if (res.response.status) {
+                ConfigStore.logout();
+                return navigateTo('/auth/login');
+            }
         }).finally(() => {
             this._pending.value = false;
         })
