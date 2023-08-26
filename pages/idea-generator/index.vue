@@ -182,7 +182,6 @@ async function search_keywords_request() {
     if (res.status()) {
         data.value = res.data();
         cache.value = data.value;
-        console.log(res.data());
     }
 }
 </script>
