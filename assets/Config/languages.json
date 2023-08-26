@@ -46,8 +46,9 @@
                             "technical-seo": {
                                 "title": "سئو تکنیکال",
                                 "fields": {
-                                    "rank-tracker": "ابزار رتبه‌سنج",
-                                    "serp-builder": "سرپ‌ساز"
+                                    "rank-tracker": "رتبه‌سنج",
+                                    "g-ads-preview": "پیش‌نمایش گوگل‌ادز",
+                                    "serp-preview": "پیش‌نمایش سرپ"
                                 }
                             }
                         }
@@ -255,8 +256,11 @@
                     "empty": "اطلاعاتی برای نمایش وجود ندارد!"
                 }
             },
-            "serp-builder": {
-                "title": "ابزار سرپ‌ساز"
+            "serp-preview": {
+                "title": "ابزار پیش‌نمایش سرپ"
+            },
+            "g-ads-preview": {
+                "title": "ابزار پیش‌نمایش گوگل‌ادز"
             },
             "google-title-builder": {
                 "title": "ابزار عنوان‌ساز گوگل",
