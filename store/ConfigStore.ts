@@ -3,7 +3,6 @@ import Workspace from "../interfaces/Models/Config/Workspace";
 import Wallet from "../interfaces/Models/Wallet";
 import Package from "../interfaces/Package";
 import User from "../interfaces/User";
-import { defineStore } from "pinia";
 
 export default class ConfigStore {
     private _token: string;

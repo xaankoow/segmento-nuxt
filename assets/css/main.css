@@ -1,6 +1,9 @@
+@import "./lang.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 * {
   outline: none;
