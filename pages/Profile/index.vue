@@ -1,14 +1,10 @@
 <template>
-  <div class="w-full h-full bg-white">
-    <div class="w-full h-[51px] bg-base-200 flex items-center justify-start text-lg textco">
-      <div class="w-[2px] h-5 rounded-sm bg-icon ml-4"></div>
-      <p>حساب کاربری</p>
-    </div>
+  <div class="w-full bg-white">
     <div class="w-full h-fit flex items-center justify-center flex-col">
       <!-- header -->
-      <div class="w-3/4 h-96 border-b border-base-400 mt-10 text-sm">
+      <div class="w-3/4 h-96 mt-10 text-sm">
         <div class="w-full h-2/6 flex">
-          <div class="w-3/4 h-full flex">
+          <div class="w-3/4 flex">
             <div class="relative h-24">
               <div class="rounded-full w-[84px] h-[84px] overflow-hidden flex items-center justify-center">
                 <img :src="ConfigStore.user().img" alt="profile image" class="w-full h-full" />
@@ -22,18 +18,25 @@
                 </svg>
               </button>
             </div>
-            <div class="h-24 flex items-center justify-around mr-4 flex-col" style="font-size: 1.25rem;">
-              <p>{{ ConfigStore.user().name }}</p>
-              <p class="w-28 h-5 rounded-[30px] bg-base-200 text-xs text-base-500 flex items-center justify-center">
-                {{ ConfigStore.user().email }}
-              </p>
+            <div class="h-24 w-auto flex items-center justify-around mr-4 flex-col" style="font-size: 1.25rem;">
+              <div class="h-[50%] w-full flex items-center justify-start">
+                {{ ConfigStore.user().name }}
+                <span
+                  class="w-[66px] h-[21px] bg-warning rounded-[30px] text-[10px] flex items-center justify-center mr-2">
+                  <NuxtLink to="/subscription-status">
+                    {{ config.by_route(`constants/packages/${ConfigStore.plan().plan.package}`) }}
+                  </NuxtLink>
+                </span>
+              </div>
+              <div class="h-[50%] w-full text-xs flex items-center justify-start">
+                {{ ConfigStore.user().email.value }}
+              </div>
             </div>
-            <div class="w-[66px] h-[21px] bg-warning rounded-[30px] mt-5 text-[10px] flex items-center justify-center">
-              {{ ConfigStore.plan().name }}
-            </div>
+
           </div>
           <div class="w-1/4 h-full flex justify-end">
-            <button class="w-[105px] h-10 rounded-lg bg-dimound flex items-center justify-evenly text-white text-sm">
+            <button @click="logout()"
+              class="w-[105px] h-10 rounded-lg btn-primary flex items-center justify-evenly text-sm">
               خروج
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_5898_4554" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -49,28 +52,28 @@
             </button>
           </div>
         </div>
-        <div class="w-full h-4/6 flex flex-col items-center justify-evenly">
-          <div class="w-full flex items-center justify-between opacity-70">
+        <div class="w-full h-4/6 flex flex-col items-center justify-evenly pointer-events-none">
+          <div class="w-full flex items-center justify-between">
             <p>اطلاعات شخصی</p>
-            <p class="text-primary cursor-pointer">تغییر شماره همراه</p>
+            <p class="cursor-pointer disabled text-disabled">تغییر شماره همراه</p>
           </div>
-          <div class="w-full pointer-events-none ">
+          <div class="w-full">
             <div class="w-full flex justify-between">
-              <input class="w-[48%] h-11 border rounded border-base-300 p-2 focus:border-b-diamond focus:border-b-2"
-                placeholder="نام" type="text" />
-              <input class="w-[48%] h-11 border rounded border-base-300 p-2 focus:border-b-diamond focus:border-b-2"
-                placeholder="نام خانوادگی" type="text" />
+              <input class="w-full h-11 border rounded border-base-300 p-2 focus:border-b-diamond focus:border-b-2"
+                placeholder="نام و نام خانوادگی" type="text" :value="`${ConfigStore.user().name}`" disabled />
             </div>
-            <input class="w-full h-11 border rounded border-base-300 p-2 mt-5 focus:border-b-diamond focus:border-b-2"
-              placeholder="آدرس ایمیل" type="email" />
+
           </div>
-          <div class="w-full flex justify-end text-diamond">
-            <NuxtLink to="/profile/change-password" class="cursor-pointer text-primary">تغییر گذرواژه</NuxtLink>
+          <div class="w-full flex justify-end text-disabled">
+            <NuxtLink to="/profile/change-password" class="cursor-pointer">تغییر گذرواژه</NuxtLink>
           </div>
         </div>
       </div>
+
+      <hr class="border-b border-base-400" />
+
       <!-- main -->
-      <div class="w-3/4 h-auto mt-10 text-sm border-b border-base-400 pb-6">
+      <!-- <div class="w-3/4 h-auto mt-10 text-sm border-b border-base-400 pb-6">
         <p class="mb-5">اطلاعات کسب و کار شما</p>
         <DropdownIndexTwo>
           <template v-slot:title> زمینه فعالیت شما (نوع سایت) </template>
@@ -161,17 +164,19 @@
             <option value="">اینستاگرام</option>
           </template>
         </DropdownIndexTwo>
-        <div class="w-full h-auto flex justify-end mt-5 [&>button]:cursor-not-allowed opacity-70">
+        <div class="w-full h-auto flex justify-end mt-5">
           <button class="w-[89px] h-10 btn-secondary" disabled>
             انصراف
           </button>
-          <button class="w-32 h-10 btn-primary text-white mr-7">
+          <button class="w-32 h-10 btn-primary mr-7" disabled>
             ذخیره تغییرات
           </button>
         </div>
-      </div>
+      </div> -->
+
+
       <!-- footer -->
-      <div class="w-3/4 h-auto mt-10 text-sm text-base-content">
+      <!-- <div class="w-3/4 h-auto mt-10 text-sm text-base-content">
         <p class="mb-4">پیغام برای تیم سگمنتو</p>
         <div id="app">
           <editor api-key="no-api-key" :init="{
@@ -214,15 +219,18 @@
             ارسال پیام
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script setup>
-import Editor from "@tinymce/tinymce-vue";
+// import Editor from "@tinymce/tinymce-vue";
 import Auth from "../../middlewares/Auth";
 import ConfigStore from "../../store/ConfigStore";
+import Config from "../../composables/Config";
+
+const config = new Config();
 
 definePageMeta({
   middleware: [Auth]
@@ -233,4 +241,9 @@ const props = defineProps({
     default: "/images/profileDefaultImg.png"
   },
 });
+
+function logout() {
+  ConfigStore.logout();
+  navigateTo("/auth/login");
+}
 </script>

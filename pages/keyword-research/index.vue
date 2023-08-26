@@ -5,21 +5,15 @@
       class="absolute top-0 left-0 w-full h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center">
       <ToolsLoading class="w-32 h-32" />
     </div>
-    <!-- header section -->
-    <section class="flex items-center border-r-2 gap-4 border-base-content my-2 px-4">
-      <label>{{ config.by_route(`${current_page}/title`) }}</label>
-      <LimitCounter :budget="189" :remained="20" />
-    </section>
 
     <!-- Tabs -->
-    <div class="flex flex-row items-center gap-3 px-2 py-1">
+    <div class="flex flex-row items-center gap-3 px-2 py-1 bg-base-200">
       <NuxtLink to="/">
         <TabItem :title="config.by_route(`${current_page}/search/title`)" :active="true" />
       </NuxtLink>
-
-      <span class="border-r h-full">&nbsp;</span>
+      <TabSeparator></TabSeparator>
       <NuxtLink to="/">
-        <TabItem :title="config.by_route(`${current_page}/my-list`)" :active="false" />
+        <TabItem :title="config.by_route(`${current_page}/my-lists`)" :active="false" />
       </NuxtLink>
     </div>
 
@@ -34,7 +28,7 @@
               config.by_route(`${current_page}/place-holder`) }}</label>
           </div>
 
-          <div class="flex flex-row items-center justify-center w-[25%]">
+          <div class="flex flex-row items-center justify-center w-[30%]">
             <select class="w-full rounded-md border-2 border-base-300 px-2 py-2" v-model="form.lang">
               <option value="FA">فارسی</option>
               <option value="EN">انگلیسی</option>
@@ -49,7 +43,7 @@
             </select>
           </div>
 
-          <button type="submit" class="btn-primary rounded-lg w-[10%] flex flex-row items-center justify-center h-11">
+          <button type="submit" class="btn-primary w-[5%] h-11">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z"
@@ -90,12 +84,13 @@
                 config.by_route(`${current_page}/table/result`)
               }}</span>
             </div>
-            <button
-              class="flex flex-row items-center justify-evenly w-28 p-1 bg-base-250 text-primary rounded-lg [&>svg]:fill-primary hover:bg-base-200 hover:text-primary-active [&>svg]:hover:fill-primary-active">
+            <button class="w-28 p-1 rounded-lg btn-secondary" disabled>
               <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
-                  d="M6.27812 15.7998C5.76146 15.7998 5.32812 15.6248 4.97812 15.2748C4.62812 14.9248 4.45312 14.4998 4.45312 13.9998V2.6248C4.45312 2.10814 4.62812 1.6748 4.97812 1.3248C5.32812 0.974805 5.76146 0.799805 6.27812 0.799805H14.6281C15.1281 0.799805 15.5575 0.978805 15.9161 1.3368C16.2741 1.69547 16.4531 2.1248 16.4531 2.6248V13.9998C16.4531 14.4998 16.2741 14.9248 15.9161 15.2748C15.5575 15.6248 15.1281 15.7998 14.6281 15.7998H6.27812ZM6.27812 14.2998H14.6281C14.7281 14.2998 14.8075 14.2705 14.8661 14.2118C14.9241 14.1538 14.9531 14.0831 14.9531 13.9998V2.6248C14.9531 2.5248 14.9241 2.44547 14.8661 2.3868C14.8075 2.3288 14.7281 2.2998 14.6281 2.2998H6.27812C6.17812 2.2998 6.09913 2.3288 6.04113 2.3868C5.98246 2.44547 5.95312 2.5248 5.95312 2.6248V13.9998C5.95312 14.0831 5.98246 14.1538 6.04113 14.2118C6.09913 14.2705 6.17812 14.2998 6.27812 14.2998ZM2.75312 19.2998C2.25312 19.2998 1.82812 19.1248 1.47812 18.7748C1.12812 18.4248 0.953125 17.9998 0.953125 17.4998V5.5498C0.953125 5.3498 1.02379 5.17481 1.16513 5.02481C1.30713 4.8748 1.48646 4.7998 1.70312 4.7998C1.90312 4.7998 2.07812 4.8748 2.22812 5.02481C2.37812 5.17481 2.45312 5.3498 2.45312 5.5498V17.4998C2.45312 17.5831 2.48213 17.6538 2.54013 17.7118C2.59879 17.7705 2.66979 17.7998 2.75312 17.7998H11.7031C11.9031 17.7998 12.0781 17.8748 12.2281 18.0248C12.3781 18.1748 12.4531 18.3498 12.4531 18.5498C12.4531 18.7665 12.3781 18.9455 12.2281 19.0868C12.0781 19.2288 11.9031 19.2998 11.7031 19.2998H2.75312Z" />
+                  d="M6.27812 15.7998C5.76146 15.7998 5.32812 15.6248 4.97812 15.2748C4.62812 14.9248 4.45312 14.4998 4.45312 13.9998V2.6248C4.45312 2.10814 4.62812 1.6748 4.97812 1.3248C5.32812 0.974805 5.76146 0.799805 6.27812 0.799805H14.6281C15.1281 0.799805 15.5575 0.978805 15.9161 1.3368C16.2741 1.69547 16.4531 2.1248 16.4531 2.6248V13.9998C16.4531 14.4998 16.2741 14.9248 15.9161 15.2748C15.5575 15.6248 15.1281 15.7998 14.6281 15.7998H6.27812ZM6.27812 14.2998H14.6281C14.7281 14.2998 14.8075 14.2705 14.8661 14.2118C14.9241 14.1538 14.9531 14.0831 14.9531 13.9998V2.6248C14.9531 2.5248 14.9241 2.44547 14.8661 2.3868C14.8075 2.3288 14.7281 2.2998 14.6281 2.2998H6.27812C6.17812 2.2998 6.09913 2.3288 6.04113 2.3868C5.98246 2.44547 5.95312 2.5248 5.95312 2.6248V13.9998C5.95312 14.0831 5.98246 14.1538 6.04113 14.2118C6.09913 14.2705 6.17812 14.2998 6.27812 14.2998ZM2.75312 19.2998C2.25312 19.2998 1.82812 19.1248 1.47812 18.7748C1.12812 18.4248 0.953125 17.9998 0.953125 17.4998V5.5498C0.953125 5.3498 1.02379 5.17481 1.16513 5.02481C1.30713 4.8748 1.48646 4.7998 1.70312 4.7998C1.90312 4.7998 2.07812 4.8748 2.22812 5.02481C2.37812 5.17481 2.45312 5.3498 2.45312 5.5498V17.4998C2.45312 17.5831 2.48213 17.6538 2.54013 17.7118C2.59879 17.7705 2.66979 17.7998 2.75312 17.7998H11.7031C11.9031 17.7998 12.0781 17.8748 12.2281 18.0248C12.3781 18.1748 12.4531 18.3498 12.4531 18.5498C12.4531 18.7665 12.3781 18.9455 12.2281 19.0868C12.0781 19.2288 11.9031 19.2998 11.7031 19.2998H2.75312Z"
+                  fill="#FFFFFF" />
               </svg>
+
               <span>{{
                 config.by_route(`${current_page}/table/buttons/copy`)
               }}</span>
@@ -146,7 +141,7 @@
 
         <!-- options -->
         <div class="flex justify-center w-[35%]" :class="data !== null ? 'h-[200vh]' : ''">
-          <div class="flex flex-col gap-4 items-center w-10/12">
+          <div class="flex flex-col gap-4 items-center w-full">
             <!-- drop down disabled -->
             <div class="flex flex-row items-center w-full bg-base-400 text-base-500 justify-between rounded-md">
               <span class="w-10/12 px-3 py-2">{{
@@ -166,9 +161,8 @@
             </div>
 
             <!-- word list -->
-            <div v-if="data !== null"
-              class="sticky top-20 left-10 rounded-sm grid grid-cols-8 text-primary-active w-full gap-2">
-              <button class="alphabet" v-for="(data, index) in cache" :key="index" :id="`alpha-${index}`"
+            <div v-if="data !== null" class="sticky top-20 left-10 rounded-sm grid grid-cols-8 w-full gap-2">
+              <button class="alphabet btn-secondary" v-for="(data, index) in cache" :key="index" :id="`alpha-${index}`"
                 @click="update_list_by_alphabet(index, `alpha-${index}`)">
                 {{ index }}
               </button>
