@@ -24,7 +24,7 @@
                         "department": {
                             "counter": "پیشخان",
                             "site": {
-                                "title": "سایت ها",
+                                "title": "سایت‌ها",
                                 "add": "افزودن سایت",
                                 "manage": "مدیریت سایت"
                             },
@@ -43,17 +43,11 @@
                                     "google-title-builder": "عنوان‌ساز گوگل"
                                 }
                             },
-                            "technical_seo": {
+                            "technical-seo": {
                                 "title": "سئو تکنیکال",
                                 "fields": {
-                                    "rank-tracker": {
-                                        "title": "ابزار رتبه‌سنج",
-                                        "fields": {
-                                            "overview": "بازبینی",
-                                            "keywords": "کلمات کلیدی",
-                                            "competitors": "رقبا"
-                                        }
-                                    }
+                                    "rank-tracker": "ابزار رتبه‌سنج",
+                                    "serp-builder": "سرپ‌ساز"
                                 }
                             }
                         }
@@ -260,6 +254,9 @@
                     },
                     "empty": "اطلاعاتی برای نمایش وجود ندارد!"
                 }
+            },
+            "serp-builder": {
+                "title": "ابزار سرپ‌ساز"
             },
             "google-title-builder": {
                 "title": "ابزار عنوان‌ساز گوگل",
