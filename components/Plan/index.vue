@@ -14,14 +14,14 @@
       <div class="w-11/12 flex flex-col gap-4">
         <div class="flex flex-row items-center justify-between border text-base-500" v-for="pln in _package.plans"
           :key="pln.uuid">
-          <label :for="pln.uuid" class="w-full h-full p-2">
+          <label :for="pln.uuid" class="w-full h-full p-2 flex flex-row items-center justify-between">
             <!-- title -->
             <div class="flex flex-row items-center gap-2">
               <input :id="pln.uuid" type="radio" class="w-4 h-4" name="radio" @change="select_plan(pln.uuid)" />
               <span>{{ config.by_route(`constants/plans/${pln.name}`) }}</span>
             </div>
             <!-- discount title -->
-            <span class="flex items-center text-xs" style="font-size: 0.7rem">
+            <span class="flex items-center text-xs" style="font-size: 0.6rem">
               {{ pln.discount_title }}
             </span>
           </label>
@@ -34,22 +34,24 @@
       <!-- price view -->
       <div class="flex flex-col w-full items-center gap-1 h-10 justify-center bg-base-200 rounded-[3px]"
         v-if="_package.selected_plan() !== undefined">
-        <del class="text-xs">
+        <del class="text-xs" v-if="discount_result.status === true">
           <span :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
-            {{ _package.selected_plan()?.price.final }}
+            {{ Math.ceil( _package.selected_plan()?.price.final / 1000) }}
             {{ _package.selected_plan() !== undefined ? currency.title : "" }}
           </span>
         </del>
+
         <span :class="discount_result.status ? 'font-semibold text-primary' : ''"
           :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
           {{
-            _package.calculate_discount(
-              _package.selected_plan(),
-              discount_result.discount?.value ?? null,
-              2
-            )
+            Math.ceil(
+              calculate_discount(discount_result.discount, _package.selected_plan()?.price.final)
+              / 1000)
           }}
           {{ _package.selected_plan() !== undefined ? currency.title : "" }}
+          <span class="text-xs">
+            باتخفیف
+          </span>
         </span>
       </div>
 
@@ -58,8 +60,7 @@
           :class="discount_result.status ? '!border-b-2 !border-b-success' : ''" />
         <label class="text-base-content" :class="discountBox.transitionStyle(discount, 'text-base-content')">
           {{ config.by_route("components/plan/discount") }}</label>
-        <button @click="discount_result = _package.check_discount(discount)"
-          :class="discountBox.fullTextBox(discount) ? 'absolute' : 'hidden'"
+        <button @click="check_discount()" :class="discountBox.fullTextBox(discount) ? 'absolute' : 'hidden'"
           class="left-2 top-2 transition-all duration-300 transform text-sm">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_134_2892" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -83,6 +84,7 @@
 </template>
 
 <script setup>
+import Request from "../../Api/Request";
 import Config from "../../composables/Config";
 import { CustomTextBox } from "../../composables/CustomTextBox";
 import Package from "../../Models/Package";
@@ -98,7 +100,7 @@ const props = defineProps({
   currency: {
     default() {
       return {
-        title: "تومان",
+        title: "هزارتومان",
         left_side: true,
       };
     },
@@ -114,11 +116,40 @@ const config = new Config();
 const discount = ref("");
 const discountBox = new CustomTextBox();
 const discount_result = ref({
-  message: "کد تخفیف صحیح است",
+  message: '',
   status: null,
   discount: {
-    value: 5,
-    type: 1,
+    value: null,
+    type: null,
   },
 });
+
+function calculate_discount(discount, price) {
+  if (discount.value !== null && discount.type !== null) {
+    // Maybe price doesn't set but this section processed ! fix the bug ...
+    
+    // ZERO equal percent
+    if (discount.type === 0) {
+      return price - ((price * discount.value) / 100)
+    }
+    // ONE equal value
+    return price - discount.value
+  }
+
+  return price;
+}
+
+async function check_discount() {
+  const request = new Request();
+  let response = await request.post('packages/check-discount', { code: discount.value });
+
+  discount_result.value = {
+    message: response.message(),
+    status: response.status(),
+    discount: {
+      type: response.data().type?.code ?? null,
+      value: response.data().value ?? null
+    }
+  }
+}
 </script>

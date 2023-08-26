@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-3 h-full w-full px-2 py-3">
     <slot></slot>
-    <hr />
+    <!-- <hr /> -->
     <slot name="sites"></slot>
 
     <!-- <hr /> -->

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full">صفحه اصلی</div>
+  <div class="flex w-full"></div>
 </template>
 
 <script setup>
