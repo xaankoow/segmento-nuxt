@@ -61,7 +61,7 @@
             <span>{{
                 config
                     .by_route(`${current_page}/search/sentence`)
-                [Number(data === [])].replace(
+                [Number(data.length !== 0)].replace(
                     "[count]", data.length
                 )
             }}</span>
@@ -169,7 +169,7 @@ const cache = ref([]);
 const request = new Request();
 const form = ref({
     keyword: "",
-    lang: "FA",
+    limit: 10,
 });
 
 definePageMeta({
@@ -182,7 +182,6 @@ async function search_keywords_request() {
     if (res.status()) {
         data.value = res.data();
         cache.value = data.value;
-        console.log(res.data());
     }
 }
 </script>
