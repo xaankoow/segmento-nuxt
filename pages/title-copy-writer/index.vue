@@ -1,3 +1,4 @@
+<!-- I kow about the ugly code! TODO: this section needs some refactor! -->
 <template>
   <div class="w-full h-auto rounded-lg overflow-hidden text-sm">
     <div class="w-full h-full text-base-400 text-sm flex flex-col items-center justify-between p-7">
