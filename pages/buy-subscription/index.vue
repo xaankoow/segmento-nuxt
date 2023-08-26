@@ -133,6 +133,7 @@
 import Request from "../../Api/Request";
 import HTMLController from "../../Controllers/HTMLController";
 import Package from "../../Models/Package";
+import ConfigStore from "../../store/ConfigStore";
 
 const request = new Request();
 const packages = ref([]);
@@ -177,6 +178,7 @@ async function buy_the_package() {
 
   if (response.status_code() < 300) {
     if (response.status()) {
+      ConfigStore.logout();
       return navigateTo(response.data().payment_url, { external: true });
     }
   }
