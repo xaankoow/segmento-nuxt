@@ -12,9 +12,9 @@
         <TabItem :title="config.by_route(`${current_page}/search/title`)" :active="true" />
       </NuxtLink>
       <TabSeparator></TabSeparator>
-      <NuxtLink to="/">
+      <!-- <NuxtLink to="/"> -->
         <TabItem :title="config.by_route(`${current_page}/my-lists`)" :active="false" />
-      </NuxtLink>
+      <!-- </NuxtLink> -->
     </div>
 
     <!-- page content -->
@@ -69,18 +69,15 @@
         <!-- form -->
         <div class="flex flex-col w-[65%] rounded-md py-2 border border-[#d9d9d9]">
           <!-- header -->
-          <div class="flex flex-row justify-between px-2" :class="data?.length === 0
-            ? 'text-base-350 pointer-events-none opacity-70'
-            : ''
-            ">
-            <div class="flex flex-row gap-5 items-center">
-              <span class="cursor-pointer">{{
+          <div class="flex flex-row justify-between px-2" :class="`${data === null ? 'text-primary-disabled' : ''}`">
+            <div class="flex items-center gap-2">
+              <span class="w-14 flex justify-center">{{
                 config.by_route(`${current_page}/table/select`)
               }}</span>
-              <span class="cursor-pointer">{{
+              <span class="w-14 flex justify-center">{{
                 config.by_route(`${current_page}/table/row`)
               }}</span>
-              <span class="cursor-pointer">{{
+              <span class="w-fit">{{
                 config.by_route(`${current_page}/table/result`)
               }}</span>
             </div>
@@ -125,14 +122,14 @@
               <div class="flex flex-col gap-2">
                 <!-- row -->
                 <div v-for="(letter, index) in item" :key="index"
-                  class="border-b flex flex-row gap-12 px-4 py-1 items-center">
-                  <span>
+                  class="border-b flex flex-row gap-2 pl-4 py-1 items-center">
+                  <span class="w-14 flex justify-center">
                     <label>
                       <input type="checkbox" class="w-5 h-5" />
                     </label>
                   </span>
-                  <span> {{ index + 1 }} </span>
-                  <span> {{ letter }} </span>
+                  <span class="w-14 flex justify-center"> {{ Number(index) + 1 }} </span>
+                  <span class="w-fit"> {{ letter }} </span>
                 </div>
               </div>
             </div>
