@@ -18,7 +18,8 @@ export default defineNuxtConfig({
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@/assets/Fonts/YekanWebFonts/css/fontiran.css",
-    "@/assets/css/main.css"
+    "@/assets/css/main.css",
+    "@mdi/font/css/materialdesignicons.min.css"
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

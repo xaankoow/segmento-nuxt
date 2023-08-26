@@ -1,13 +1,13 @@
 <template>
-    <div class="dataTable">
-        <table dir="rtl">
+    <div class="dataTable" dir="rtl">
+        <table>
             <slot name="header">
                 <DataTableHeader :headers="dataTable.headers"></DataTableHeader>
             </slot>
             <tbody>
                 <slot>
-                    <DataTableRow v-for="(item, index) in dataTable.items" :key="index"
-                        :model="{ headers: dataTable.headers, item }">
+                    <DataTableRow v-for="(items, index) in dataTable.items" :key="index"
+                        :model="{ headers: dataTable.headers, items }">
                     </DataTableRow>
                 </slot>
             </tbody>
@@ -23,9 +23,11 @@
 
 
 import DataTable from '@/interfaces/DataTable'
+
 const props = defineProps<{
     dataTable: DataTable
 }>()
+
 </script>
 
 <style scoped lang="postcss">
