@@ -14,14 +14,14 @@
       <div class="w-11/12 flex flex-col gap-4">
         <div class="flex flex-row items-center justify-between border text-base-500" v-for="pln in _package.plans"
           :key="pln.uuid">
-          <label :for="pln.uuid" class="w-full h-full p-2">
+          <label :for="pln.uuid" class="w-full h-full p-2 flex flex-row items-center justify-between">
             <!-- title -->
             <div class="flex flex-row items-center gap-2">
               <input :id="pln.uuid" type="radio" class="w-4 h-4" name="radio" @change="select_plan(pln.uuid)" />
               <span>{{ config.by_route(`constants/plans/${pln.name}`) }}</span>
             </div>
             <!-- discount title -->
-            <span class="flex items-center text-xs" style="font-size: 0.7rem">
+            <span class="flex items-center text-xs" style="font-size: 0.6rem">
               {{ pln.discount_title }}
             </span>
           </label>
