@@ -182,7 +182,7 @@
             <!-- according -->
             <template v-slot:according>
               <div>
-                <According :isOpen="selected_tools_section === 'create-content'">
+                <According :isOpen="true">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/seo/title`)">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -233,7 +233,7 @@
                     </NuxtLink>
                   </div>
                 </According>
-                <According :isOpen="selected_tools_section === 'create-content'">
+                <According :isOpen="true">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/create-content/title`)">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -295,10 +295,9 @@
                     </NuxtLink>
                   </div>
                 </According>
-                <!-- technical seo and rank tracked side bar section - TODO: uncomment this section when rank tracker was ready. -->
-                <!-- <According :isOpen="selected_tools_section === 'create-content'">
+                <According :isOpen="true">
                   <template v-slot:label>
-                    <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/title`)">
+                    <SvgLabeled :label="cn.by_route(`${department_section}/technical-seo/title`)">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_84_933)">
                           <path
@@ -312,20 +311,20 @@
                       </svg>
                     </SvgLabeled>
                   </template>
-                  
+                  <!-- Content -->
                   <div class="flex flex-col gap-3">
-                    <NuxtLink to="/rank-tracker/keyword">
-                      <SvgLabeled :label="cn.by_route(`${department_section}/technical_seo/fields/rank-tracker/title`)"
-                        @click="change_active_section('keyword-rank-tracker')"
-                        :active="active_section === 'keyword-rank-tracker'">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <NuxtLink to="/serp-builder">
+                      <SvgLabeled :label="cn.by_route(`${department_section}/technical-seo/fields/serp-builder`)"
+                        @click="change_active_section('serp-builder')" :active="active_section === 'serp-builder'">
+                        <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
-                            d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z" />
+                            d="M14.25 0.25H3.75C2.7558 0.251191 1.80267 0.646661 1.09966 1.34966C0.396661 2.05267 0.00119089 3.0058 0 4L0 8.5C0.00119089 9.4942 0.396661 10.4473 1.09966 11.1503C1.80267 11.8533 2.7558 12.2488 3.75 12.25H8.25V13H6C5.80109 13 5.61032 13.079 5.46967 13.2197C5.32902 13.3603 5.25 13.5511 5.25 13.75C5.25 13.9489 5.32902 14.1397 5.46967 14.2803C5.61032 14.421 5.80109 14.5 6 14.5H12C12.1989 14.5 12.3897 14.421 12.5303 14.2803C12.671 14.1397 12.75 13.9489 12.75 13.75C12.75 13.5511 12.671 13.3603 12.5303 13.2197C12.3897 13.079 12.1989 13 12 13H9.75V12.25H14.25C15.2442 12.2488 16.1973 11.8533 16.9003 11.1503C17.6033 10.4473 17.9988 9.4942 18 8.5V4C17.9988 3.0058 17.6033 2.05267 16.9003 1.34966C16.1973 0.646661 15.2442 0.251191 14.25 0.25ZM16.5 8.5C16.5 9.09674 16.2629 9.66903 15.841 10.091C15.419 10.5129 14.8467 10.75 14.25 10.75H3.75C3.15326 10.75 2.58097 10.5129 2.15901 10.091C1.73705 9.66903 1.5 9.09674 1.5 8.5V4C1.5 3.40326 1.73705 2.83097 2.15901 2.40901C2.58097 1.98705 3.15326 1.75 3.75 1.75H14.25C14.8467 1.75 15.419 1.98705 15.841 2.40901C16.2629 2.83097 16.5 3.40326 16.5 4V8.5Z" />
                         </svg>
+
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
-                </According> -->
+                </According>
               </div>
             </template>
           </NavbarRightContentDepartment>
@@ -396,7 +395,7 @@ function profile() {
 }
 function show_hide_navbar() {
   let right_navbar = document.getElementById('right_navbar');
-  if(right_navbar.style.display === 'none'){
+  if (right_navbar.style.display === 'none') {
     right_navbar.style.display = 'flex';
   } else {
     right_navbar.style.display = 'none';
