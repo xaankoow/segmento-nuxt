@@ -53,10 +53,20 @@ export default defineNuxtConfig({
     postcss: {
       postcssOptions: {
         plugins: {
+          "postcss-import": {},
+          "postcss-preset-env": {},
+          "tailwindcss/nesting": {},
           tailwindcss: {},
           autoprefixer: {},
+          ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {}),
         },
       },
     },
+  },
+  runtimeConfig: {
+    public: {
+      WEBAPP_NAME: process.env.WEBAPP_NAME,
+      WEBAPP_LOCALE: process.env.WEBAPP_LOCALE
+    }
   }
 })

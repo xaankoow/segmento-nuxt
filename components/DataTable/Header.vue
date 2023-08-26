@@ -13,20 +13,20 @@
 <script setup lang="ts">
 
 const props = withDefaults(defineProps<{
-    headers: Array<string>
+    headers?: Array<string>
 }>(), {
-    headers: ["نمودار", "ردیف", "کلمه کلیدی", "رتبه فعلی", "عدد افت و رشد", "آخرین بروزرسانی", "میانگین ۷ دوره", "برچسب", "تاریخ افزودن", "سایت رقیب ۱", "عملیات"]
+    headers: ["chart", "row", "word_key", "rate_now", "nubmer_fall_raise", "last_update", "average_period", "lable", "created_at", "site_rival", "operations"]
 })
 </script>
 
 <style scoped lang="postcss">
 thead {
-    @apply h-[60px] bg-gray-200/20;
+    @apply h-[60px];
     .headers {
         th {
-            @apply bg-transparent border text-xs font-normal;
+            @apply border text-xs font-normal bg-gray-200/20;
             &:nth-child(11){
-               @apply sticky left-0 z-10;
+               @apply sticky left-0 z-10 bg-gray-50;
             }
         }
     }

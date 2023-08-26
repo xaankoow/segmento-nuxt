@@ -4,9 +4,9 @@
             :class="{ active: selected_row }"
         >
             <slot :item="model.items" :name="`${ model.items[header] }.${ index }`">
-                <div v-if="header != 'عملیات' && header != 'نمودار'" :class="[ header == 'کلمه کلیدی' ? 'flex items-center': null ]">
+                <div v-if="model.items[header] != 'op' && model.items[header] != 'نمودار'" :class="[ model.items[header] == 'کلمه کلیدی' ? 'flex items-center': null ]">
                     {{ model.items[header] }}
-                    <div v-show="header == 'کلمه کلیدی'" class="cpToCB w-12" v-click-outside="()=> popupMenu= false">
+                    <div v-show="model.items[header] == 'کلمه کلیدی'" class="cpToCB w-12" v-click-outside="()=> popupMenu= false">
                         <Icon @click.stop.prevent.self="copy_to_clipBoard(model.items[header])"
                         >mdi-content-copy</Icon>
                         <LazyGmenu v-if="popupMenu" :active="popupMenu" :key="index+1" :m-top="-28.9" :m-left="-25" class="w-16">
@@ -14,11 +14,11 @@
                         </LazyGmenu>
                     </div>
                 </div>
-                <div v-if="header == 'نمودار'">
+                <div v-if="model.items[header] == 'نمودار'">
                     <!-- <button><img :src="insightsIconPath"></button> -->
                     <Icon class="text-lg">mdi-chart-timeline-variant</Icon>
                 </div>
-                <div v-if="header == 'عملیات'" class="flex items-center justify-center">
+                <div v-if="model.items[header] == 'op'" class="flex items-center justify-center">
                     <!-- TODO use cusotme icon component -->
                     <button><img :src="bookmarkIconPath"></button>
                     <button><img :src="labelIconPath"></button>
@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import DataTable from '@/interfaces/DataTable'
+import DataTable, { rows } from '@/interfaces/DataTable'
 import insightsIconPath from "@/assets/icons/insights.svg"
 import bookmarkIconPath from "@/assets/icons/bookmark_add.svg"
 import labelIconPath from "@/assets/icons/label.svg"
@@ -40,7 +40,22 @@ import copyContentIconPath from "@/assets/icons/content_copy.svg"
 
 //props
 const props = defineProps<{
-    model: DataTable
+    model: {
+        headers: rows[] ,
+        items: {
+            chart: string
+            row: number
+            word_key: string
+            rate_now: number
+            nubmer_fall_raise: number
+            last_update: string
+            average_period: number
+            lable: string
+            created_at: string
+            site_rival: string
+            operations: string
+        }
+    }
 }>()
 
 

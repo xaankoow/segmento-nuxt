@@ -1,5 +1,5 @@
 <template>
-    <div class="inset-0 w-screen h-screen flex items-center justify-center">
+    <div :class="{ rtl: rtl }" class="inset-0 w-screen h-screen flex items-center justify-center">
         <DataTable :dataTable="dataTable"></DataTable>
     </div>
 </template>
@@ -10,6 +10,9 @@ import { dataTable } from "@/constants/dataTable"
 definePageMeta({
     layout: false
 })
+
+
+const { rtl, locale, state } = useXankoWebApp()
 
 </script>
 

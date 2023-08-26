@@ -1,142 +1,172 @@
 
 import DataTable from "@/interfaces/DataTable"
 export const dataTable: DataTable = {
-    headers: ["نمودار", "ردیف", "کلمه کلیدی", "رتبه فعلی", "عدد افت و رشد", "آخرین بروزرسانی", "میانگین ۷ دوره", "برچسب", "تاریخ افزودن", "سایت رقیب ۱", "عملیات"],
+    headers: ["chart", "row", "word_key", "rate_now", "nubmer_fall_raise", "last_update", "average_period", "lable", "created_at", "site_rival", "operations"],
     items: [
         {
-            "نمودار": "chart",
-            "ردیف": 1,
-            "کلمه کلیدی": "آموزش سئو در مشهد",
-            "رتبه فعلی": 20,
-            "عدد افت و رشد": 60,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 80,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
         },
         {
-            "نمودار": "chart",
-            "ردیف": 2,
-            "کلمه کلیدی": "آموزش سئو در مشهد",
-            "رتبه فعلی": 10,
-            "عدد افت و رشد": 66,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 50,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
         },
         {
-            "نمودار": "chart",
-            "ردیف": 3,
-            "کلمه کلیدی": "آموزش سئو در تهران",
-            "رتبه فعلی": 10,
-            "عدد افت و رشد": 40,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 80,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
         },
         {
-            "نمودار": "chart",
-            "ردیف": 4,
-            "کلمه کلیدی": "آموزش سئو در مشهد",
-            "رتبه فعلی": 10,
-            "عدد افت و رشد": 40,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 80,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
         },
         {
-            "نمودار": "chart",
-            "ردیف": 5,
-            "کلمه کلیدی": "آموزش سئو در مشهد",
-            "رتبه فعلی": 10,
-            "عدد افت و رشد": 40,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 80,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
         },
         {
-            "نمودار": "chart",
-            "ردیف": 4,
-            "کلمه کلیدی": "آموزش سئو در مشهد",
-            "رتبه فعلی": 94,
-            "عدد افت و رشد": 22,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 49,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
         },
         {
-            "نمودار": "chart",
-            "ردیف": 5,
-            "کلمه کلیدی": "آموزش سئو در مشهد",
-            "رتبه فعلی": 10,
-            "عدد افت و رشد": 40,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 80,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
         },
         {
-            "نمودار": "chart",
-            "ردیف": 4,
-            "کلمه کلیدی": "آموزش سئو در مشهد",
-            "رتبه فعلی": 10,
-            "عدد افت و رشد": 40,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 80,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
         },
         {
-            "نمودار": "chart",
-            "ردیف": 5,
-            "کلمه کلیدی": "آموزش سئو در مشهد",
-            "رتبه فعلی": 5,
-            "عدد افت و رشد": 66,
-            "آخرین بروزرسانی": "1400/5/9",
-            "میانگین ۷ دوره": 3,
-            "برچسب": "برچسب من",
-            "تاریخ افزودن": "1400/3/8",
-            "سایت رقیب ۱": "www.example.com",
-            "عملیات": "op"
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
 
 
-        }
+        },
+        {
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
+
+
+        },
+        {
+            "chart": "نمودار",
+            "row": 1,
+            "word_key": "آموزش سئو در مشهد",
+            "rate_now": 20,
+            "nubmer_fall_raise": 60,
+            "last_update": "1400/5/9",
+            "average_period": 80,
+            "lable": "برچسب من",
+            "created_at": "1400/3/8",
+            "site_rival": "www.example.com",
+            "operations": "op"
+
+
+        },
     ]
 }

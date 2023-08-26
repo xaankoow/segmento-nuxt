@@ -1,5 +1,5 @@
 <template>
-    <div class="dataTable" dir="rtl">
+    <div class="dataTable">
         <table>
             <slot name="header">
                 <DataTableHeader :headers="dataTable.headers"></DataTableHeader>
@@ -36,7 +36,7 @@ const props = defineProps<{
     max-width: 1000px;
     max-height:600px;
     table {
-        @apply border-none font-iranyekan rounded text-xs;
+        @apply border-separate border-spacing-0 font-iranyekan rounded text-xs;
     }
 }
 </style>

@@ -1,0 +1,30 @@
+@import "../Fonts/YekanWebFonts/css/fontiran.css";
+
+[class^="fa"], [class*=" fa"] * {
+    font-family: iranyekan;
+}
+
+
+
+.en * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+@layer utilities {
+    .rtl {
+      direction: rtl;
+      &.text-start,
+      .text-start {
+        @apply text-right;
+      }
+    }
+  
+    .ltr {
+      direction: ltr;
+      &.text-start,
+      .text-start {
+        @apply text-left;
+      }
+    }
+}

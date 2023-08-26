@@ -49,9 +49,6 @@ const style = computed(() => {
 
 
 <style lang="postcss" scoped>
-/* .menu-global {
-    @apply tw-block tw-w-full;
-} */
 .menu {
     @apply absolute bg-white outline-none shadow-[1px_0_20px_-5px_] overflow-y-auto p-0 m-0 rounded z-20;
     max-width: 465px;
