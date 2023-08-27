@@ -12,7 +12,7 @@
                     بار برای همیشه حل کنید.</p>
             </div>
             <div class="w-full flex flex-wrap justify-around mt-8">
-                <div class="w-full md:w-2/5 flex flex-col py-2">
+                <form class="w-full md:w-2/5 flex flex-col py-2" @submit.prevent="false">
                     <div class="flex flex-col">
                         <TextInput class="my-1" lable="آدرس وبسایت (Final URL)" placeholder="مثال: segmento.ir">
                         </TextInput>
@@ -43,7 +43,7 @@
                             <button class="rounded-xl py-2 px-5 bg-blue-600 text-white">اجرا</button>
                         </div>
                     </div>
-                </div>
+                </form>
                 <div class="w-full md:w-2/5 flex flex-col justify-center">
                     <div>
                         <h3>پیش‌نمایش تبلیغ شما در گوگل</h3>
