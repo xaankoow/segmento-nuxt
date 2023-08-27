@@ -107,8 +107,7 @@
         </footer>
       </div>
       <!-- buy button -->
-      <button class="flex select-none btn-primary" :disabled="(selected_plan_uuid === null)"
-        @click="check_plan()">
+      <button class="flex select-none btn-primary" :disabled="(selected_plan_uuid === null)" @click="check_plan()">
         <span>فعال سازی اشتراک</span>
         <span class="pr-2">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
