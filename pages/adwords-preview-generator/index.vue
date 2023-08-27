@@ -1,5 +1,5 @@
 <template>
-    <div :class="[rtl ? 'rtl' : 'ltr', locale]" class="3xl:container mx-auto bg-gray-50">
+    <div :class="[rtl ? 'rtl' : 'ltr', locale]" class="3xl:container mx-auto">
         <div class="p-2">
             <h1 class="text-lg">شبیه‌ساز تبلیغات گوگل ادز</h1>
         </div>
@@ -30,14 +30,10 @@
                             <TextInput class="mt-3 input__text__path"></TextInput>
                         </div>
                         <div class="flex flex-col">
-                            <label for="" class="mt-4">توضیحات اول (Description 1)</label>
-                            <textarea class="rounded border p-4 mt-2"
-                                placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "></textarea>
+                            <textarea-field class="mt-2"  lable="توضیحات اول (Description 1)" placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "></textarea-field>
                         </div>
                         <div class="flex flex-col">
-                            <label for="" class="mt-4">توضیحات دوم (Description 2)</label>
-                            <textarea class="rounded border p-4 mt-2"
-                                placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "></textarea>
+                            <textarea-field class="mt-2"  lable="توضیحات دوم (Description 2)" placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "></textarea-field>
                         </div>
                         <div class="text-left mt-5">
                             <button class="rounded-xl py-2 px-5 bg-blue-600 text-white">اجرا</button>

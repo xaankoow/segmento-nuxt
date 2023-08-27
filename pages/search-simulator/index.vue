@@ -13,7 +13,7 @@
                 </p>
             </div>
             <div class="w-full flex flex-wrap justify-around mt-8">
-                <form class="w-full md:w-2/5 flex flex-col py-2" @submit.prevent="false">
+                <form class="w-full md:w-5/12 flex flex-col p-5 shadow-lg rounded border" @submit.prevent="false">
                     <div class="flex flex-col">
                         <TextInput class="my-1" lable="آدرس وبسایت (Final URL)" placeholder="مثال: segmento.ir">
                         </TextInput>
@@ -22,9 +22,7 @@
                         <TextInput class="my-1" lable="عنوان (Title)"
                             placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل"></TextInput>
                         <div class="flex flex-col">
-                            <label for="" class="mt-4">توضیحات (Description)</label>
-                            <textarea class="rounded border p-4 mt-2"
-                                placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "></textarea>
+                            <textarea-field class="mt-2"  lable="توضیحات (Description)" placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "></textarea-field>
                         </div>
                         <TextInput class="my-1" lable="نمایش کلمات کلیدی (Bold Keyword)"
                             placeholder="درج کلمه کلیدی (جداشونده با ویرگول و یا فاصله)"></TextInput>
@@ -33,10 +31,10 @@
                         </div>
                     </div>
                 </form>
-                <div class="w-full md:w-2/5 flex flex-col justify-center">
-                    <div>
-                        <div class="rounded-tl-xl rounded-tr-xl bg-gray-600 h-[25px] mt-3 shadow"></div>
-                        <div class="bg-white h-[505px] shadow relative">
+                <div class="w-full md:w-2/5">
+                    <div class="shadow-lg rounded">
+                        <div class="rounded-tl-xl rounded-tr-xl bg-gray-600 h-[25px]"></div>
+                        <div class="bg-white h-[548px] relative">
                             <img src="@/assets/icons/simulatorPage.svg" alt="">
                         </div>
                     </div>
