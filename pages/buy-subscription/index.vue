@@ -100,8 +100,7 @@
               </svg>
             </span>
             <p>
-              با خرید اشتراک 12 ماهه شما فقط مبلغ 10 ماه رو پرداخت میکنید؛
-              2 ماه مهمون سگمنتو باشین
+              {{ plan_description ?? 'با خرید اشتراک 12 ماهه طلایی شما فقط مبلغ 10 ماه رو پرداخت میکنید؛ 2 ماه مهمون سگمنتو باشین' }}
             </p>
           </div>
         </footer>
@@ -140,13 +139,18 @@ const packages = ref([]);
 const selected_plan_uuid = ref(null);
 const the_package = ref(null);
 const config = new Config();
+const plan_description = ref(null)
 
 onBeforeMount(() => {
   collect_packages();
 });
 
-function update_selected_plan(plan_uuid) {
-  selected_plan_uuid.value = plan_uuid;
+function update_selected_plan(plan) {
+  if (plan !== null) {
+  selected_plan_uuid.value = plan.uuid;
+  plan_description.value = plan.text;
+
+  }
 }
 
 async function check_plan() {
