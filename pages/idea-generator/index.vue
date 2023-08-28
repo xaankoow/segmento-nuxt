@@ -8,12 +8,12 @@
 
         <!-- Tabs -->
         <div class="flex flex-row items-center gap-3 px-2 py-1 bg-base-200">
-            <NuxtLink to="/">
+            <NuxtLink to="/idea-generator">
                 <TabItem :title="config.by_route(`${current_page}/search/title`)" :active="true" />
             </NuxtLink>
             <TabSeparator></TabSeparator>
             <!-- <NuxtLink to="/"> -->
-                <TabItem :title="config.by_route(`${current_page}/my-list`)" :active="false" />
+            <TabItem :title="config.by_route(`${current_page}/my-list`)" :active="false" />
             <!-- </NuxtLink> -->
         </div>
 
