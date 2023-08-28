@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center w-full pb-5 pt-10 gap-10 [&>div]:w-[64.875rem]">
+  <div class="flex flex-col items-center w-full pb-5 pt-5 gap-5 [&>div]:w-[64.875rem]">
     <!-- title -->
     <div
       class="absolute top-0 left-0 !w-screen !h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
@@ -68,26 +68,18 @@
         </div>
       </div>
     </div>
-    <!-- header -->
-    <div class="flex flex-col items-center border rounded-md py-2 gap-2">
-      <span class="text-4xl">
-        {{ content.header }}
-      </span>
-      <!-- <button class="btn-secondary py-2 px-4 rounded-md">
-        {{ content.detail }}
-      </button> -->
-    </div>
     <!-- package -->
-    <div class="flex flex-row items-center justify-between gap-1">
-      <Plan class="w-1/4 h-[35rem]" v-for="pack in packages" :key="pack.uuid" :_package="pack"
+    <div class="flex flex-row items-center justify-between">
+      <Plan class="w-[22%] h-fit" v-for="pack in packages" :key="pack.uuid" :_package="pack"
         @change_plan="update_selected_plan" />
     </div>
     <div class="flex flex-col gap-5 items-center">
       <!-- navigation -->
       <div class="w-full">
-        <footer class="footer p-4 bg-base-250 rounded-md border text-base-content">
-          <div class="flex flex-row gap-3 items-center">
-            <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <footer class="footer p-4 bg-base-250 rounded-md border text-base-content" v-if="plan_description">
+          <div class="flex flex-row items-center">
+            <span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_134_2785" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                   height="24">
                   <rect width="24" height="24" fill="#D9D9D9" />
@@ -100,13 +92,13 @@
               </svg>
             </span>
             <p>
-              {{ plan_description ?? 'با خرید اشتراک 12 ماهه طلایی شما فقط مبلغ 10 ماه رو پرداخت میکنید؛ 2 ماه مهمون سگمنتو باشین' }}
+              {{ plan_description }}
             </p>
           </div>
         </footer>
       </div>
       <!-- buy button -->
-      <button class="flex select-none btn-primary" :disabled="(selected_plan_uuid === null)" @click="check_plan()">
+      <button class="flex select-none btn-primary" @click="check_plan()" v-if="selected_plan_uuid !== null">
         <span>فعال سازی اشتراک</span>
         <span class="pr-2">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,11 +109,13 @@
       </button>
       <!-- footer -->
       <div class="flex flex-row items-center w-full justify-between border rounded-md px-7 py-7">
-        <span class="text-lg">اگر بیزینس هستید یا به امکانات و منابع بیشتری نیاز دارید:
+        <span class="text-lg">
+          امکانات و منابع بیشتر یا خدمات اختصاصی دریافت کنید
         </span>
-        <button class="rounded-md btn-secondary py-2 px-5 transition-all duration-100">
+        <a href="https://segmento.ir/about/contact/" target="_blank"
+          class="rounded-md btn-secondary py-2 px-5 transition-all duration-100">
           توضیحات بیشتر
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -147,8 +141,8 @@ onBeforeMount(() => {
 
 function update_selected_plan(plan) {
   if (plan !== null) {
-  selected_plan_uuid.value = plan.uuid;
-  plan_description.value = plan.text;
+    selected_plan_uuid.value = plan.uuid;
+    plan_description.value = plan.text;
 
   }
 }

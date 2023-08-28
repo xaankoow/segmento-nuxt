@@ -1,12 +1,11 @@
 <template>
-  <div
-    class="flex flex-col justify-between items-center border-2 rounded-md shadow transition-all duration-300 hover:shadow-lg">
+  <div class="flex flex-col justify-between items-center border-2 border-gray-200 rounded-md">
 
     <!-- plan content -->
-    <div class="flex flex-col gap-12 items-center w-full pb-8">
+    <div class="flex flex-col items-center w-full">
       <!-- header and title -->
-      <div class="w-11/12 flex flex-row items-center justify-center text-xl h-24 border-b"
-        :style="`color: ${_package.color}; border-color: ${_package.color};`">
+      <div
+        class="w-11/12 flex flex-row items-center justify-center text-xl h-16 text-base-content">
         {{ config.by_route(`constants/packages/${_package.name}`) }}
       </div>
 
@@ -30,14 +29,14 @@
     </div>
 
     <!-- discount section -->
-    <div class="flex flex-col items-center mb-2 w-11/12 gap-12">
+    <div class="flex flex-col items-center mb-2 w-11/12">
       <!-- price view -->
-      <div class="flex flex-col w-full items-center gap-1 h-10 justify-center bg-base-200 rounded-[3px]"
+      <div class="flex flex-col w-full items-center h-10 justify-center bg-base-200 rounded-[3px] my-3"
         v-if="_package.selected_plan() !== undefined">
         <del class="text-xs" v-if="discount_result.status === true">
           <span :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
-            {{ Math.ceil( _package.selected_plan()?.price.final / 1000) }}
-            {{ _package.selected_plan() !== undefined ? currency.title : "" }}
+            {{ Math.ceil(_package.selected_plan()?.price.final / 1000) }}
+            {{ currency.title }}
           </span>
         </del>
 
@@ -48,14 +47,35 @@
               calculate_discount(discount_result.discount, _package.selected_plan()?.price.final)
               / 1000)
           }}
-          {{ _package.selected_plan() !== undefined ? currency.title : "" }}
+          {{ currency.title }}
+          <span class="text-xs">
+            باتخفیف
+          </span>
+        </span>
+      </div>
+      <div class="flex flex-col w-full items-center h-10 justify-center bg-base-200 rounded-[3px] my-3" v-else>
+        <del class="text-xs" v-if="discount_result.status === true">
+          <span :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
+            {{ Math.ceil(_package.plans[0].price / 1000) }}
+            {{ currency.title }}
+          </span>
+        </del>
+
+        <span :class="discount_result.status ? 'font-semibold text-primary' : ''"
+          :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
+          {{
+            Math.ceil(
+              _package.plans[0].price.final
+              / 1000)
+          }}
+          {{ currency.title }}
           <span class="text-xs">
             باتخفیف
           </span>
         </span>
       </div>
 
-      <div class="custom_input_box my-2">
+      <div class="custom_input_box w-full">
         <input v-model="discount" type="text" @focus="discountBox.focus()" @blur="discountBox.leave()" class="!border-2"
           :class="discount_result.status ? '!border-b-2 !border-b-success' : ''" />
         <label class="text-base-content" :class="discountBox.transitionStyle(discount, 'text-base-content')">
@@ -127,7 +147,7 @@ const discount_result = ref({
 function calculate_discount(discount, price) {
   if (discount.value !== null && discount.type !== null) {
     // Maybe price doesn't set but this section processed ! fix the bug ...
-    
+
     // ZERO equal percent
     if (discount.type === 0) {
       return price - ((price * discount.value) / 100)
