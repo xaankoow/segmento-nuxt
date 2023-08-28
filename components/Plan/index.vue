@@ -108,8 +108,8 @@ const props = defineProps({
 });
 
 function select_plan(plan_uuid) {
-  props._package.select_plan(plan_uuid)
-  emit('change_plan', plan_uuid)
+  let pln = props._package.select_plan(plan_uuid)
+  emit('change_plan', pln)
 }
 
 const config = new Config();
