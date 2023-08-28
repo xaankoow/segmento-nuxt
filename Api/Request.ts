@@ -45,7 +45,7 @@ export default class Request {
             let response = res.response.data;
             result = new ResponseModel(res.message, response.status, response.specific_error, response.data, res.status);
             console.log(res);
-            if (res.response.status) {
+            if (res.response.status === 401) {
                 ConfigStore.logout();
                 return navigateTo('/auth/login');
             }
