@@ -182,6 +182,8 @@
             <!-- according -->
             <template v-slot:according>
               <div>
+
+                <!-- Seo Section -->
                 <According :isOpen="true">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/seo/title`)">
@@ -227,6 +229,8 @@
                     </NuxtLink>
                   </div>
                 </According>
+
+                <!-- Content Creation Section -->
                 <According :isOpen="true">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/create-content/title`)">
@@ -290,6 +294,8 @@
                     </NuxtLink>
                   </div>
                 </According>
+
+                <!-- Technical Seo Secion -->
                 <According :isOpen="true">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/technical-seo/title`)">
