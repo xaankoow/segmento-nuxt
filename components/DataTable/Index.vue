@@ -34,7 +34,8 @@ const props = defineProps<{
 .dataTable {
     @apply overflow-auto;
     max-width: 1000px;
-    max-height:600px;
+    max-height: 600px;
+
     table {
         @apply border-separate border-spacing-0 font-iranyekan rounded text-xs;
     }
@@ -44,21 +45,22 @@ const props = defineProps<{
 <style lang="postcss">
 /* width */
 ::-webkit-scrollbar {
-  @apply w-[4px] h-[4px];
+    @apply w-[4px] h-[4px];
 
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
-  @apply shadow-md;
+    @apply shadow-md;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300/50 rounded-3xl;
+    @apply bg-gray-300/50 rounded-3xl;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-300 cursor-pointer; 
+    @apply bg-gray-300 cursor-pointer;
 }
 </style>

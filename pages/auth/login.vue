@@ -81,6 +81,7 @@ async function requestToLogin() {
     ConfigStore.set_wallets(JSON.stringify(response.data().wallets));
     ConfigStore.set_workspaces(JSON.stringify(response.data().workspaces));
     ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
+    ConfigStore.set_limits(JSON.stringify(response.data().limits));
 
     navigateTo("/keyword-research");
   } else {
