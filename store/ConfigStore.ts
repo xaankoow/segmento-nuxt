@@ -1,7 +1,7 @@
 import Plan from "../interfaces/Models/Config/Plan";
 import Workspace from "../interfaces/Models/Config/Workspace";
 import Wallet from "../interfaces/Models/Wallet";
-import Package from "../interfaces/Package";
+import Limit from "../interfaces/Models/Config/Limit";
 import User from "../interfaces/User";
 
 export default class ConfigStore {
@@ -11,6 +11,7 @@ export default class ConfigStore {
     private _roles: String[] | [];
     private _wallets: Array<Wallet>;
     private _workspaces: Array<Workspace>;
+    private _limits: Array<Limit>
 
     public static set_token(token) {
         useCookie("token").value = token;
@@ -34,6 +35,10 @@ export default class ConfigStore {
 
     public static set_roles(roles) {
         useCookie("rolse").value = roles;
+    }
+
+    public static set_limits(limits) {
+        useCookie("limits").value = limits;
     }
 
     public static wallets(): Array<Wallet> {
@@ -60,6 +65,10 @@ export default class ConfigStore {
         return useCookie("roles").value;
     }
 
+    public static limits(): Array<Limit> {
+        return useCookie("limits").value;
+    }
+
     public static logout() {
         this.set_plan(null);
         this.set_token(null);
@@ -67,5 +76,6 @@ export default class ConfigStore {
         this.set_workspaces(null);
         this.set_wallets(null);
         this.set_roles(null);
+        this.set_limits(null);
     }
 }
