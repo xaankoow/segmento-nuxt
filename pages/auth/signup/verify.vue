@@ -123,6 +123,7 @@ async function verify_email() {
     ConfigStore.set_wallets(JSON.stringify(response.data().wallets));
     ConfigStore.set_workspaces(JSON.stringify(response.data().workspaces));
     ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
+    ConfigStore.set_limits(JSON.stringify(response.data().limits));
 
     return navigateTo("/keyword-research");
   }
