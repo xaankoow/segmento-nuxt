@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-5 w-full h-full">
         <!-- loading -->
         <div v-if="request.pending()"
-            class="absolute top-0 left-0 w-full h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center">
+            class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center">
             <ToolsLoading class="w-32 h-32" />
         </div>
 

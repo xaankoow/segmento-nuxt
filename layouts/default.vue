@@ -4,7 +4,7 @@
     style="direction: rtl; height: 100vh !important; ">
     <!-- Header section -->
     <NavbarTop :platform="cn.__(['layouts', 'default', 'header', 'platform'])"
-      :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()" class="shadow-md mx-auto">
+      :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()" class="shadow-md mx-auto h-[7vh] w-screen">
       <template v-slot:dashboard-icon>
         <label tabindex="0" class="flex h-fit my-auto cursor-pointer w-12 pr-2" @click="show_hide_navbar()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

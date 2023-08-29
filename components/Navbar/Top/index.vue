@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar flex bg-base-100 items-center">
+  <div class="flex bg-base-100 items-center">
     <div class="navbar-start">
       <div class="flex flex-row align-middle">
         <!-- Dashboard icon -->
@@ -40,7 +40,7 @@
     <div class="navbar-end flex items-center">
       <!-- Profile section -->
       <div
-        class="dropdown dropdown-hover dropdown-bottom w-[16.375rem] border border-transparent hover:border-base-200 h-[3.313rem] mt-[0.75rem]">
+        class="dropdown dropdown-hover dropdown-bottom w-[16.375rem] border border-transparent hover:border-base-200 h-full">
         <!-- user detail section -->
         <div>
           <div class="flex flex-row">
@@ -176,12 +176,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.navbar {
-  height: 6.5vh;
-}
-</style>
 
 <script setup>
 import ConfigStore from '../../../store/ConfigStore';
