@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col items-center w-full pb-5 pt-5 gap-5 [&>div]:w-[64.875rem]">
+  <div class="relative flex flex-col gap-8 items-center w-full [&>div]:w-[64.875rem] h-full justify-center">
     <!-- title -->
     <div
       class="absolute top-0 left-0 !w-full !h-full z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
@@ -99,12 +99,13 @@
         </footer>
       </div>
       <!-- buy button -->
-      <button class="flex select-none" @click="show_factor()"
-        :class="form.plan === null ? 'pointer-events-none btn-secondary' : 'btn-primary'">
+      <button class="flex select-none btn-primary" @click="show_factor()" v-if="form.plan !== null"
+        :disabled="form.plan === null ? true : false">
         <span>فعال سازی اشتراک</span>
-        <span class="pr-2" :class="form.plan === null ? '[&>svg]:fill-secondary-text' : '[&>svg]:fill-white'">
+        <span class="pr-2">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 15.625L0.375 8L8 0.375L9.075 1.45L3.25 7.25H15.625V8.75H3.25L9.075 14.55L8 15.625Z" />
+            <path d="M8 15.625L0.375 8L8 0.375L9.075 1.45L3.25 7.25H15.625V8.75H3.25L9.075 14.55L8 15.625Z" 
+            fill="white"/>
           </svg>
         </span>
       </button>

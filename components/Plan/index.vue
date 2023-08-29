@@ -5,37 +5,36 @@
     <div class="flex flex-col items-center w-full pb-2 gap-4">
       <!-- header and title -->
       <div class="flex flex-col gap-2 items-center justify-center w-full">
-        <div class="w-11/12 flex flex-row items-center justify-center text-xl h-16 text-base-content"
-          :style="`color: ${content.color};`">
+        <div class="w-11/12 flex flex-row items-center justify-center text-xl h-16 text-base-content">
           {{ config.by_route(`constants/packages/${content.name}`) }}
         </div>
-        <hr class="w-11/12 mx-auto" :style="`border-color: ${content.color};`" />
+        <hr class="w-11/12 mx-auto border-base-content" />
       </div>
 
       <!-- plans list -->
       <div class="flex flex-col w-11/12 mx-auto gap-3">
         <!-- plan item -->
-        <div class="flex flex-row items-center justify-between w-full p-2 border rounded-sm" v-for="plan in content.plans"
+        <label :for="plan.uuid" class="flex flex-row items-center justify-between w-full p-2 border rounded-sm cursor-pointer text-base-content" v-for="plan in content.plans"
           :key="plan.uuid">
           <!-- id and name -->
-          <div class="flex flex-row items-center gap-2 text-base-content/80 text-sm">
-            <input type="radio" class="w-5 h-5" :value="plan.uuid" name="plan" @change="plan_changed(plan.uuid)" />
+          <div class="flex flex-row items-center gap-2 text-sm">
+            <input :id="plan.uuid" type="radio" class="w-5 h-5" :value="plan.uuid" name="plan" @change="plan_changed(plan.uuid)" />
             <span>{{ config.by_route(`constants/plans/${plan.name}`) }}</span>
           </div>
           <!-- discount -->
           <div class="text-xs" style="font-size: 0.67rem;">
             {{ plan.discount_title }}
           </div>
-        </div>
+        </label>
       </div>
 
       <!-- pricing -->
-      <div class="flex flex-col w-full items-center justify-between h-40">
+      <div class="flex flex-col w-full items-center gap-6">
         <!-- price -->
-        <div class="flex flex-col items-center gap-2 w-11/12 mx-auto ">
+        <div class="flex flex-col items-center gap-3 w-11/12 ">
           <!-- full price -->
           <del
-            :class="(form.plan.price?.value ?? content.plans[0].price.final) !== form.discount_pricing.final ? '' : 'text-transparent'">
+            :class="(form.plan.price?.value ?? content.plans[0].price.final) !== form.discount_pricing.final ? 'block' : 'hidden'">
             <div class="flex flex-row gap-1 items-center justify-center text-xs">
               <span>
                 {{ (form.plan.price?.value ?? content.plans[0].price.final) / 1000 }}
@@ -43,12 +42,6 @@
               <span>
                 هزارتومان
               </span>
-              <!-- 
-              <span class="text-xs text-base-500"
-                :class="(form.plan.price?.discount ?? content.plans[0].price.discount) > 0 ? 'block' : 'hidden'">
-                (با تخفیف)
-              </span>
-              -->
             </div>
           </del>
 
