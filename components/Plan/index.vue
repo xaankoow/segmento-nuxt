@@ -2,174 +2,145 @@
   <div class="flex flex-col justify-between items-center border-2 border-gray-200 rounded-md">
 
     <!-- plan content -->
-    <div class="flex flex-col items-center w-full">
+    <div class="flex flex-col items-center w-full pb-2 gap-4">
       <!-- header and title -->
-      <div
-        class="w-11/12 flex flex-row items-center justify-center text-xl h-16 text-base-content">
-        {{ config.by_route(`constants/packages/${_package.name}`) }}
+      <div class="flex flex-col gap-2 items-center justify-center w-full">
+        <div class="w-11/12 flex flex-row items-center justify-center text-xl h-16 text-base-content"
+          :style="`color: ${content.color};`">
+          {{ config.by_route(`constants/packages/${content.name}`) }}
+        </div>
+        <hr class="w-11/12 mx-auto" :style="`border-color: ${content.color};`" />
       </div>
 
-      <!-- packages section -->
-      <div class="w-11/12 flex flex-col gap-4">
-        <div class="flex flex-row items-center justify-between border text-base-500" v-for="pln in _package.plans"
-          :key="pln.uuid">
-          <label :for="pln.uuid" class="w-full h-full p-2 flex flex-row items-center justify-between">
-            <!-- title -->
-            <div class="flex flex-row items-center gap-2">
-              <input :id="pln.uuid" type="radio" class="w-4 h-4" name="radio" @change="select_plan(pln.uuid)" />
-              <span>{{ config.by_route(`constants/plans/${pln.name}`) }}</span>
-            </div>
-            <!-- discount title -->
-            <span class="flex items-center text-xs" style="font-size: 0.6rem">
-              {{ pln.discount_title }}
-            </span>
-          </label>
+      <!-- plans list -->
+      <div class="flex flex-col w-11/12 mx-auto gap-3">
+        <!-- plan item -->
+        <div class="flex flex-row items-center justify-between w-full p-2 border rounded-sm" v-for="plan in content.plans"
+          :key="plan.uuid">
+          <!-- id and name -->
+          <div class="flex flex-row items-center gap-2 text-base-content/80 text-sm">
+            <input type="radio" class="w-5 h-5" :value="plan.uuid" name="plan" @change="plan_changed(plan.uuid)" />
+            <span>{{ config.by_route(`constants/plans/${plan.name}`) }}</span>
+          </div>
+          <!-- discount -->
+          <div class="text-xs" style="font-size: 0.67rem;">
+            {{ plan.discount_title }}
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- discount section -->
-    <div class="flex flex-col items-center mb-2 w-11/12">
-      <!-- price view -->
-      <div class="flex flex-col w-full items-center h-10 justify-center bg-base-200 rounded-[3px] my-3"
-        v-if="_package.selected_plan() !== undefined">
-        <del class="text-xs" v-if="discount_result.status === true">
-          <span :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
-            {{ Math.ceil(_package.selected_plan()?.price.final / 1000) }}
-            {{ currency.title }}
-          </span>
-        </del>
+      <!-- pricing -->
+      <div class="flex flex-col w-full items-center justify-between h-40">
+        <!-- price -->
+        <div class="flex flex-col items-center gap-2 w-11/12 mx-auto ">
+          <!-- full price -->
+          <del
+            :class="(form.plan.price?.value ?? content.plans[0].price.final) !== form.discount_pricing.final ? '' : 'text-transparent'">
+            <div class="flex flex-row gap-1 items-center justify-center text-xs">
+              <span>
+                {{ (form.plan.price?.value ?? content.plans[0].price.final) / 1000 }}
+              </span>
+              <span>
+                هزارتومان
+              </span>
+              <!-- 
+              <span class="text-xs text-base-500"
+                :class="(form.plan.price?.discount ?? content.plans[0].price.discount) > 0 ? 'block' : 'hidden'">
+                (با تخفیف)
+              </span>
+              -->
+            </div>
+          </del>
 
-        <span :class="discount_result.status ? 'font-semibold text-primary' : ''"
-          :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
-          {{
-            Math.ceil(
-              calculate_discount(discount_result.discount, _package.selected_plan()?.price.final)
-              / 1000)
-          }}
-          {{ currency.title }}
-          <span class="text-xs">
-            باتخفیف
-          </span>
-        </span>
-      </div>
-      <div class="flex flex-col w-full items-center h-10 justify-center bg-base-200 rounded-[3px] my-3" v-else>
-        <del class="text-xs" v-if="discount_result.status === true">
-          <span :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
-            {{ Math.ceil(_package.plans[0].price / 1000) }}
-            {{ currency.title }}
-          </span>
-        </del>
+          <!-- price after discount -->
+          <div class="flex flex-row gap-1 items-center w-full py-2 justify-center text-sm bg-base-300/40 rounded-md"
+            :class="discount_error.ok ? 'text-primary' : ''">
+            <span>
+              {{ (form.discount_pricing.final) / 1000 }}
+            </span>
+            <span>
+              هزارتومان
+            </span>
+          </div>
+        </div>
 
-        <span :class="discount_result.status ? 'font-semibold text-primary' : ''"
-          :style="`direction: ${currency.left_side ? 'rtl' : 'ltr'};`">
-          {{
-            Math.ceil(
-              _package.plans[0].price.final
-              / 1000)
-          }}
-          {{ currency.title }}
-          <span class="text-xs">
-            باتخفیف
+        <!-- discount -->
+        <form @submit.prevent="check_discount()" class="relative flex flex-row items-center w-11/12 mx-auto">
+          <input type="text" class="w-full" @focus="text_box_focus(true);" @blur="text_box_focus(false);" :class="discount_error.ok ? 'border-b-primary-hover' : ''"
+            v-model="form.discount" />
+          <span class="absolute text-xs pointer-events-none px-2 font-semibold transition-all duration-300"
+            :class="text_box_focus() ? '-top-5' : 'top-3'">کد تخفیف</span>
+          <span class="absolute text-xs -top-5 left-0 text-error" :class="!discount_error.ok ? 'flex' : 'hidden'">
+            {{ discount_error.message }}
           </span>
-        </span>
-      </div>
-
-      <div class="custom_input_box w-full">
-        <input v-model="discount" type="text" @focus="discountBox.focus()" @blur="discountBox.leave()" class="!border-2"
-          :class="discount_result.status ? '!border-b-2 !border-b-success' : ''" />
-        <label class="text-base-content" :class="discountBox.transitionStyle(discount, 'text-base-content')">
-          {{ config.by_route("components/plan/discount") }}</label>
-        <button @click="check_discount()" :class="discountBox.fullTextBox(discount) ? 'absolute' : 'hidden'"
-          class="left-2 top-2 transition-all duration-300 transform text-sm">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <mask id="mask0_134_2892" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-              height="24">
-              <rect x="24" y="24" width="24" height="24" transform="rotate(180 24 24)" fill="#D9D9D9" />
-            </mask>
-            <g mask="url(#mask0_134_2892)">
-              <path
-                d="M12.525 4.8998C12.675 5.0498 12.75 5.22914 12.75 5.4378C12.75 5.6458 12.6833 5.82481 12.55 5.97481L7.25 11.2498L18.875 11.2498C19.075 11.2498 19.25 11.3208 19.4 11.4628C19.55 11.6041 19.625 11.7831 19.625 11.9998C19.625 12.2165 19.55 12.3958 19.4 12.5378C19.25 12.6791 19.075 12.7498 18.875 12.7498L7.25 12.7498L12.55 18.0248C12.6833 18.1748 12.75 18.3538 12.75 18.5618C12.75 18.7705 12.675 18.9498 12.525 19.0998C12.375 19.2331 12.2 19.2998 12 19.2998C11.8 19.2998 11.625 19.2331 11.475 19.0998L5.025 12.6248C4.925 12.5415 4.854 12.4458 4.812 12.3378C4.77067 12.2291 4.75 12.1165 4.75 11.9998C4.75 11.8831 4.77067 11.7708 4.812 11.6628C4.854 11.5541 4.925 11.4581 5.025 11.3748L11.475 4.8998C11.625 4.76647 11.8 4.69981 12 4.69981C12.2 4.69981 12.375 4.76647 12.525 4.8998Z"
-                fill="#0A65CD" />
-            </g>
-          </svg>
-        </button>
-        <span v-if="discount_result.status !== null" class="text-error text-xs left-0 -translate-y-5"
-          style="font-size: 0.625rem" :class="!discount_result.status ? 'absolute' : 'hidden'">
-          {{ discount_result.message }}
-        </span>
+          <button type="submit" class="absolute text-lg text-primary font-semibold left-4 h-fit w-fit rotate-180"
+            :class="text_box_focus() ? 'flex' : 'hidden'">
+            &#x279C;
+          </button>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import Request from "../../Api/Request";
-import Config from "../../composables/Config";
-import { CustomTextBox } from "../../composables/CustomTextBox";
-import Package from "../../Models/Package";
+import Config from '~~/composables/Config';
+import Request from '~~/Api/Request';
+
+const props = defineProps({
+  content: {
+    required: true,
+    type: Object
+  }
+});
 
 const emit = defineEmits([
-  'change_plan'
+  'plan_updated',
 ])
-const props = defineProps({
-  _package: {
-    type: Package,
-    required: true,
-  },
-  currency: {
-    default() {
-      return {
-        title: "هزارتومان",
-        left_side: true,
-      };
-    },
-  },
-});
 
-function select_plan(plan_uuid) {
-  let pln = props._package.select_plan(plan_uuid)
-  emit('change_plan', pln)
-}
-
-const config = new Config();
-const discount = ref("");
-const discountBox = new CustomTextBox();
-const discount_result = ref({
-  message: '',
-  status: null,
-  discount: {
-    value: null,
-    type: null,
-  },
-});
-
-function calculate_discount(discount, price) {
-  if (discount.value !== null && discount.type !== null) {
-    // Maybe price doesn't set but this section processed ! fix the bug ...
-
-    // ZERO equal percent
-    if (discount.type === 0) {
-      return price - ((price * discount.value) / 100)
-    }
-    // ONE equal value
-    return price - discount.value
+const request = new Request();
+const discount_box_focus = ref(false);
+const text_box_focus = (at_focus = null) => {
+  if (at_focus !== null) {
+    discount_box_focus.value = at_focus;
   }
+  return (discount_box_focus.value || form.value.discount.length > 0);
+}
+const form = ref({
+  discount: '',
+  plan: props.content.plans[0],
+  discount_pricing: props.content.plans[0].price
+})
+const config = new Config();
+const discount_error = ref({
+  message: '',
+  ok: null,
+});
 
-  return price;
+function plan_changed(uuid) {
+  form.value.plan = props.content.plans.find((item) => item.uuid === uuid);
+  form.value.discount_pricing = form.value.plan.price;
+  emit('plan_updated', form.value.plan);
 }
 
 async function check_discount() {
-  const request = new Request();
-  let response = await request.post('packages/check-discount', { code: discount.value });
+  let response = await request.post('packages/check-discount', {
+    code: form.value.discount,
+    plan: form.value.plan.uuid
+  });
 
-  discount_result.value = {
-    message: response.message(),
-    status: response.status(),
-    discount: {
-      type: response.data().type?.code ?? null,
-      value: response.data().value ?? null
+  if (response.ok) {
+    form.value.discount_pricing = {
+      price: response.data().price,
+      final: response.data().final,
+      discount: response.data().discount,
+      ok: response.ok
     }
+
+    emit('plan_updated', form.value.plan, form.value.discount_pricing, form.value.discount);
   }
+
+  discount_error.value.message = response.message();
+  discount_error.value.ok = response.ok;
 }
 </script>
