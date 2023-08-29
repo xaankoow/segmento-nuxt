@@ -120,7 +120,7 @@ const discount_error = ref({
 function plan_changed(uuid) {
   form.value.plan = props.content.plans.find((item) => item.uuid === uuid);
   form.value.discount_pricing = form.value.plan.price;
-  emit('plan_updated', form.value.plan);
+  emit('plan_updated', props.content, form.value.plan);
 }
 
 async function check_discount() {
@@ -137,7 +137,7 @@ async function check_discount() {
       ok: response.ok
     }
 
-    emit('plan_updated', form.value.plan, form.value.discount_pricing, form.value.discount);
+    emit('plan_updated', props.content, form.value.plan, form.value.discount_pricing, form.value.discount);
   }
 
   discount_error.value.message = response.message();
