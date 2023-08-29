@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col gap-8 items-center w-full [&>div]:w-[64.875rem] h-full justify-center">
+  <div class="relative flex flex-col gap-8 items-center w-full [&>div]:w-[64.875rem]" :class="form.plan === null ? 'h-full justify-center' : 'h-auto py-4'">
     <!-- title -->
     <div
       class="absolute top-0 left-0 !w-full !h-full z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
