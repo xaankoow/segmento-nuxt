@@ -1,19 +1,25 @@
 <!-- I kow about the ugly code! TODO: this section needs some refactor! -->
 <template>
-  <div class="w-full h-auto rounded-lg overflow-hidden text-sm">
-    <div class="w-full h-full text-base-400 text-sm flex flex-col items-center justify-between p-7">
+  <!-- loading -->
+  <div v-if="request.pending()"
+    class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center">
+    <ToolsLoading class="w-32 h-32" />
+  </div>
+
+  <div class="w-full min-h-full h-full rounded-lg">
+    <div class="w-full h-full text-base-400 text-sm flex flex-col items-center justify-between p-2 gap-2">
       <form @submit.prevent="creative_copy_writer_request()"
-        class="w-full mb-4 flex items-center justify-center flex-col">
+        class="w-full flex items-center justify-center flex-col gap-2">
         <input @keypress="clear()" type="text" placeholder="درج کلمه کلیدی" v-model="form.keyword"
           class="w-full h-11 text-black placeholder:text-base-400 border border-b-2 border-base-400 rounded text-center" />
-        <button class="w-[103px] h-8 rounded-lg mt-3 btn-primary p-1">
+        <button class="w-[103px] h-8 rounded-lg btn-primary p-1">
           {{ config.by_route(`${current_page}/buttons/create`) }}
         </button>
       </form>
 
       <!-- Question Section -->
       <div style="display: none;" id="title_copy_writer_questionparent"
-        class="w-full h-auto mb-4 bg-white py-4 rounded border border-base-400 flex items-center justify-center">
+        class="w-full h-auto bg-white py-4 rounded border border-base-400 flex items-center justify-center">
         <div class="w-[20%] h-full text-base-content flex items-center justify-center flex-col text-lg">
           <p class="mt-16 w-full border-r-2 border-dimound px-2">
             {{ config.by_route(`${current_page}/subjects/questional`) }}
@@ -33,7 +39,7 @@
       </div>
 
       <div id="title_copy_writer_questionparentempty"
-        class="w-full h-44 mb-4 bg-base-200 rounded border border-base-400 flex flex-col items-center justify-center">
+        class="w-full h-2/6 bg-base-200 rounded border border-base-400 flex flex-col items-center justify-center">
         <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="mask0_3536_8950" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="78"
             height="78">
@@ -53,7 +59,7 @@
 
       <!-- Comparition Section -->
       <div style="display: none;" id="title_copy_writer_comparisionparent"
-        class="w-full h-auto mb-4 bg-white py-4 rounded border border-base-400 flex items-center justify-center">
+        class="w-full h-auto bg-white py-4 rounded border border-base-400 flex items-center justify-center">
         <div class="w-[20%] h-full text-base-content flex items-start justify-center flex-col text-lg">
           <p class="mt-16 w-full border-r-2 border-dimound px-2">
             {{ config.by_route(`${current_page}/subjects/comparision`) }}
@@ -73,7 +79,7 @@
       </div>
 
       <div id="title_copy_writer_comparisionparentempty"
-        class="w-full h-44 mb-4 bg-base-200 rounded border border-base-400 flex flex-col items-center justify-center">
+        class="w-full h-2/6 bg-base-200 rounded border border-base-400 flex flex-col items-center justify-center">
         <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="mask0_3536_8950" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="78"
             height="78">
@@ -93,7 +99,7 @@
 
       <!-- Other Section -->
       <div style="display: none;" id="title_copy_writer_otherparent"
-        class="w-full h-auto mb-4 bg-white py-4 rounded border border-base-400 flex items-center justify-center">
+        class="w-full h-auto bg-white py-4 rounded border border-base-400 flex items-center justify-center">
         <div class="w-[20%] h-full text-base-content flex items-start justify-center flex-col text-lg">
           <p class="mt-16 w-full border-r-2 border-dimound px-2">
             {{ config.by_route(`${current_page}/subjects/other`) }}
@@ -113,7 +119,7 @@
       </div>
 
       <div id="title_copy_writer_otherparentempty"
-        class="w-full h-44 mb-4 bg-base-200 rounded border border-base-400 flex flex-col items-center justify-center">
+        class="w-full h-2/6 bg-base-200 rounded border border-base-400 flex flex-col items-center justify-center">
         <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="mask0_3536_8950" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="78"
             height="78">
@@ -161,6 +167,7 @@ async function clear() {
   document.getElementById('title_copy_writer_questionparentempty').style.display = 'flex';
   document.getElementById('title_copy_writer_comparisionparentempty').style.display = 'flex';
   document.getElementById('title_copy_writer_otherparentempty').style.display = 'flex';
+  data.value = null;
 }
 
 async function creative_copy_writer_request() {

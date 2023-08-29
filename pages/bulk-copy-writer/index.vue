@@ -49,7 +49,7 @@
       <p class="text-[10px] text-base-content">3. نمایش عناوین پیشنهادی</p>
 
       <!-- چارت نمایش اطلاعات (بصورت استاتیک) -->
-      <div class="w-full h-auto mb-4 bg-white py-4 rounded border border-base-400 flex items-center justify-center">
+      <!-- <div class="w-full h-auto mb-4 bg-white py-4 rounded border border-base-400 flex items-center justify-center">
         <div class="w-[20%] h-full text-base-content flex items-start justify-center flex-col text-lg">
           <p class="mt-16 w-full border-r-2 border-primary px-2">
             موضوعات مقایسه‌ای
@@ -67,7 +67,9 @@
         <div class="flex relative w-[80%]">
           <div id="container" class="font-bold"></div>
         </div>
-      </div>
+      </div> -->
+
+      <!-- <PolyganSubjected /> -->
 
       <!-- بخش اطلاعاتی وجود ندارد! زمانی که دیتایی وارد نشده -->
 
@@ -252,144 +254,145 @@ import Konva from "konva";
 
 const stageRef = ref(null);
 
-onMounted(() => {
-  const stage = new Konva.Stage({
-    container: "container",
-    width: 500,
-    height: 400
-  });
+// onMounted(() => {
+//   const stage = new Konva.Stage({
+//     container: "container",
+//     width: 500,
+//     height: 400
+//   });
 
-  stageRef.value = stage;
+//   stageRef.value = stage;
 
-  const circleLayer = new Konva.Layer(); // لایه‌ی دایره‌ها
-  const lineLayer = new Konva.Layer(); // لایه‌ی خط‌ها
+//   const circleLayer = new Konva.Layer(); // لایه‌ی دایره‌ها
+//   const lineLayer = new Konva.Layer(); // لایه‌ی خط‌ها
 
-  // ایجاد دایره سمت راست
-  const rightCircle = new Konva.Circle({
-    x: stage.width() - 110,
-    y: stage.height() / 2,
-    radius: 10,
-    fill: "#7D7D7D",
-    zIndex: 1, // دایره سمت راست پشت خط‌ها باشد
-  });
+//   // ایجاد دایره سمت راست
+//   const rightCircle = new Konva.Circle({
+//     x: stage.width() - 100,
+//     y: stage.height() / 2,
+//     radius: 10,
+//     fill: "#7D7D7D",
+//     zIndex: 1, // دایره سمت راست پشت خط‌ها باشد
+//   });
 
-  // اضافه کردن دایره سمت راست به لایه دایره‌ها
-  circleLayer.add(rightCircle);
+//   // اضافه کردن دایره سمت راست به لایه دایره‌ها
+//   circleLayer.add(rightCircle);
 
-  // ایجاد یک آرایه از دایره‌ها در سمت چپ
-  const leftCircles = [];
-  const sceneWidth = stage.width();
-  const sceneHeight = stage.height();
+//   // ایجاد یک آرایه از دایره‌ها در سمت چپ
+//   const leftCircles = [];
+//   const sceneWidth = stage.width();
+//   const sceneHeight = stage.height();
   // debugger
   // console.log(children)
 
-  data.forEach(i => {
-    for (let j = 0; j <= i.content.length; j++) {
-      // debugger
-      const circle = new Konva.Circle({
-        x: 100,
-        y:
-          46 + j * 40,
-        radius: 6,
-        fill: i.content[j] ? "#7D7D7D" : "#D9D9D9",
-        zIndex: 1, // دایره سمت چپ‌ها پشت خط‌ها باشند
-      });
+  // let container = document.getElementById("x")
+  // data.forEach(i => {
 
-      leftCircles.push(circle);
-      // اضافه کردن دایره به لایه دایره‌ها
-      circleLayer.add(circle);
+  //   for (let j = 0; j <= i.content.length; j++) {
+  //     // debugger
+  //     const circle = new Konva.Circle({
+  //       x: 100,
+  //       y:
+  //         40 + j * 40,
+  //       radius: 6,
+  //       fill: i.content[j] ? "#7D7D7D" : "#D9D9D9",
+  //       zIndex: 1, // دایره سمت چپ‌ها پشت خط‌ها باشند
+  //     });
 
-      // ایجاد مستطیل‌ها بعد از هر دایره سمت چپ
-      const rect = new Konva.Rect({
-        x: circle.x() + -120,
-        y: circle.y() - 10,
-        width: 100,
-        height: 100,
-        fill: "",
-        opacity: 0.5,
-        visible: true,
-        listening: false,
-        zIndex: 200,
-      });
+  //     leftCircles.push(circle);
+  //     // اضافه کردن دایره به لایه دایره‌ها
+  //     circleLayer.add(circle);
 
-      const stageContainer = stage.getContainer();
+  //     // ایجاد مستطیل‌ها بعد از هر دایره سمت چپ
+  //     const rect = new Konva.Rect({
+  //       x: circle.x(),
+  //       y: circle.y(),
+  //       width: 100,
+  //       height: 100,
+  //       fill: "",
+  //       opacity: 0.5,
+  //       visible: true,
+  //       listening: false,
+  //       zIndex: 200,
+  //     });
 
-      // تغییر عرض و ارتفاع استیج
+  //     const stageContainer = stage.getContainer();
 
-      stageContainer.style.width = "900px";
-      stageContainer.style.width = "900px";
-      stageContainer.style.display = "flex";
-      stageContainer.style.justifyContent = "start";
+  //     // تغییر عرض و ارتفاع استیج
+  //     stageContainer.style.width = "900px";
+  //     stageContainer.style.width = "900px";
+  //     stageContainer.style.display = "flex";
+  //     stageContainer.style.justifyContent = "start";
 
-      // ایجاد یک گروه
-      const group = new Konva.Group();
+  //     // ایجاد یک گروه
+  //     const group = new Konva.Group();
 
-      // اضافه کردن دایره به گروه
-      group.add(circle);
+  //     // اضافه کردن دایره به گروه
+  //     group.add(circle);
 
-      // اضافه کردن مستطیل به گروه
-      group.add(rect);
+  //     // اضافه کردن مستطیل به گروه
+  //     group.add(rect);
 
-      // ایجاد تکست برای متن داخل مستطیل
-      const text = new Konva.Text({
-        x: rect.x(),
-        y: rect.y(),
-        text: i.content[j],
-        fontSize: 14,
-        fill: "black",
-        width: rect.width() + 30,
-        height: rect.height(),
-        padding: 2,
-        align: "right",
-        fontFamily: "IRANYekan",
-        fontSize: 10,
-        zIndex: 100,
-      });
+  //     // ایجاد تکست برای متن داخل مستطیل
+  //     const text = new Konva.Text({
+  //       x: rect.x(),
+  //       y: rect.y(),
+  //       text: i.content[j],
+  //       fontSize: 14,
+  //       fill: "black",
+  //       width: rect.width(),
+  //       height: rect.height(),
+  //       padding: 4,
+  //       align: "right",
+  //       fontFamily: "IRANYekan",
+  //       fontSize: 12,
+  //       zIndex: 100,
+  //     });
 
-      // اضافه کردن تکست به گروه
-      group.add(text);
+  //     // اضافه کردن تکست به گروه
+  //     group.add(text);
 
-      // اضافه کردن گروه به لایه
-      circleLayer.add(group);
+  //     // اضافه کردن گروه به لایه
+  //     circleLayer.add(group);
 
-      // ایجاد خط از مرکز دایره در سمت چپ به مرکز دایره سمت راست
-      const line = new Konva.Line({
-        points: [circle.x(), circle.y(), sceneWidth - 100, sceneHeight / 2],
-        stroke: "#D9D9D9",
-        strokeWidth: 1,
-        zIndex: 0, // خط‌ها در جلوی دایره‌ها باشند
-      });
+  //     // ایجاد خط از مرکز دایره در سمت چپ به مرکز دایره سمت راست
+  //     const line = new Konva.Line({
+  //       points: [circle.x(), circle.y(), sceneWidth - 100, sceneHeight / 2],
+  //       stroke: "#D9D9D9",
+  //       strokeWidth: 1,
+  //       zIndex: 0, // خط‌ها در جلوی دایره‌ها باشند
+  //     });
 
-      line.on("mouseover", () => {
-        // وقتی خط hover می‌شود، رنگ آن تغییر می‌کند
-        line.stroke("#0A65CD");
-        // رسم نقاشی مجدد برای به‌روزرسانی تغییرات
-        lineLayer.batchDraw();
-      });
+  //     line.on("mouseover", () => {
+  //       // وقتی خط hover می‌شود، رنگ آن تغییر می‌کند
+  //       line.stroke("#0A65CD");
+  //       // رسم نقاشی مجدد برای به‌روزرسانی تغییرات
+  //       lineLayer.batchDraw();
+  //     });
 
-      line.on("mouseout", () => {
-        // وقتی خط از حالت hover خارج می‌شود، رنگ به حالت اصلی بازمی‌گردد
-        line.stroke("#D9D9D9");
-        // رسم نقاشی مجدد برای به‌روزرسانی تغییرات
-        lineLayer.batchDraw();
-      });
+  //     line.on("mouseout", () => {
+  //       // وقتی خط از حالت hover خارج می‌شود، رنگ به حالت اصلی بازمی‌گردد
+  //       line.stroke("#D9D9D9");
+  //       // رسم نقاشی مجدد برای به‌روزرسانی تغییرات
+  //       lineLayer.batchDraw();
+  //     });
 
-      // اضافه کردن خط به لایه‌ی خط‌ها
-      lineLayer.add(line);
-      // j += 1;
-      debugger
-      console.log(leftCircles)
-    }
-    // i += 1;
-  })
+  //     // اضافه کردن خط به لایه‌ی خط‌ها
+  //     lineLayer.add(line);
+  //     // j += 1;
+  //     // debugger
+  //     console.log(leftCircles)
+  //   }
+  //   return true
+  // })
 
   // ردن لایه‌ها به صحنه
-  stage.add(lineLayer);
-  stage.add(circleLayer);
+  // stage.add(lineLayer);
+  // stage.add(circleLayer);
 
-  // رسم نقاشی
-  stage.draw();
+  // // رسم نقاشی
+  // stage.draw();
 
-})
+// })
 
 </script>
