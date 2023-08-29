@@ -233,7 +233,7 @@
                 <!-- Content Creation Section -->
                 <According :isOpen="true">
                   <template v-slot:label>
-                    <SvgLabeled :label="cn.by_route(`${department_section}/create-content/title`)">
+                    <SvgLabeled :label="cn.by_route(`${department_section}/content-creation/title`)">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_84_933)">
                           <path
@@ -250,7 +250,7 @@
                   <!-- Content -->
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/title-copy-writer">
-                      <SvgLabeled :label="cn.by_route(`${department_section}/create-content/fields/title-copy-writer`)"
+                      <SvgLabeled :label="cn.by_route(`${department_section}/content-creation/fields/title-copy-writer`)"
                         @click="change_active_section('title-copy-writer')"
                         :active="active_section === 'title-copy-writer'">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -263,7 +263,7 @@
                   </div>
                   <!-- <div class="flex flex-col gap-3">
                     <NuxtLink to="/bulk-copy-writer">
-                      <SvgLabeled :label="cn.by_route(`${department_section}/create-content/fields/bulk-copy-writer`)"
+                      <SvgLabeled :label="cn.by_route(`${department_section}/content-creation/fields/bulk-copy-writer`)"
                         @click="change_active_section('bulk-copy-writer')"
                         :active="active_section === 'bulk-copy-writer'">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -284,7 +284,7 @@
                   </div> -->
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/idea-generator">
-                      <SvgLabeled :label="cn.by_route(`${department_section}/create-content/fields/idea-generator`)"
+                      <SvgLabeled :label="cn.by_route(`${department_section}/content-creation/fields/idea-generator`)"
                         @click="change_active_section('idea-generator')" :active="active_section === 'idea-generator'">
                         <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
@@ -378,7 +378,7 @@ const department_section = "layouts/default/navbar/right/department";
 const workspaces = ref(null);
 const actived_navbar = ref("department");
 const active_section = ref("keyword-research");
-const selected_tools_section = ref("create-content");
+const selected_tools_section = ref("content-creation");
 
 const auth = ref({
   name: "",

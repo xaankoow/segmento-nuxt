@@ -28,7 +28,7 @@
                                 "add": "افزودن سایت",
                                 "manage": "مدیریت سایت"
                             },
-                            "create-content": {
+                            "content-creation": {
                                 "title": "تولید محتوا",
                                 "fields": {
                                     "title-copy-writer": "کپی‌رایتینگ عنوان",
@@ -67,7 +67,7 @@
         },
         "pages": {
             "": {
-                "title": "صفحه اصلی"
+                "title": "پیشخوان"
             },
             "profile": {
                 "title": "حساب کاربری",
