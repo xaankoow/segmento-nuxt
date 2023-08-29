@@ -6,7 +6,7 @@
       v-if="request.pending()">
       <ToolsLoading class="w-32 h-32" />
     </div>
-    <div class="absolute -top-11 left-0 !w-full !h-full z-50 bg-base-350/40 justify-center items-center flex hidden" id="package_factor">
+    <div class="absolute -top-11 left-0 !w-full !h-full z-50 bg-base-350/40 justify-center items-center hidden" id="package_factor">
       <div class="flex flex-col justify-between items-center w-[26rem] bg-base-100 rounded-md -mt-32">
         <!-- header -->
         <div
