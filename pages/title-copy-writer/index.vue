@@ -19,7 +19,7 @@
       
       <!-- empty section -->
       <div id="title_copy_writer_questionparentempty"
-        class="w-full h-full bg-base-200 rounded border border-base-400 flex flex-col items-center justify-center">
+        class="w-full h-full bg-base-200 rounded border border-base-400 flex flex-col items-center justify-center gap-5">
         <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="mask0_3536_8950" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="78"
             height="78">
@@ -32,7 +32,7 @@
           </g>
         </svg>
         <p>
-          {{ config.by_route(`${current_page}/sentences/no-question-data`) }}
+          {{ config.by_route(`${current_page}/sentences/no-data`) }}
         </p>
       </div>
       <!-- empty section -->
