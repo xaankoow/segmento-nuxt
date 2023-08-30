@@ -28,7 +28,7 @@
           <!-- package data -->
           <div class="flex flex-col gap-3 items-center w-full text-sm">
             <span>نام اشتراک</span>
-            <span class="font-semibold">{{ config.by_route(`constants/packages/${form.package?.name ?? 3}`) ?? 'تستی' }}</span>
+            <span class="font-semibold">{{ config.by_route(`constants/packages/${form.package?.name ?? 3}`) }}</span>
             <hr class="w-11/12" />
           </div>
 

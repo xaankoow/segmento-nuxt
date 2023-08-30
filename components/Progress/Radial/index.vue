@@ -4,7 +4,7 @@
     :style="`background-color: ${bg}; --value:${value}; width:${size};height:${size};`"
   >
     <div class="text-center">
-      <p :style="{ color: textColor, fontSize: fontSize }">{{ valueText }}</p>
+      <p :style="{ color: textColor, fontSize: fontSize }">{{ remained }}</p>
       <p :style="{ color: textColor, fontSize: fontSizeText }">
         {{ textValue }}
       </p>
@@ -36,7 +36,7 @@ const props = defineProps({
     type: Number,
     default: 100,
   },
-  valueText: {
+  remained: {
     type: Number,
     default: 70,
   },
@@ -49,7 +49,7 @@ const props = defineProps({
     default: "#10CCAE33",
   },
   size: {
-    type: Number,
+    type: String,
     default: "7rem",
   },
   sizeCircle: {
@@ -76,7 +76,7 @@ const props = defineProps({
 
 const circleStyle = computed(() => {
   const circumference = 2 * Math.PI * props.sizeCircle; // محیط دایره
-  const offset = (circumference * (props.value - props.valueText)) / props.value; // محاسبه strokeDashoffset بر اساس value
+  const offset = (circumference * (props.value - props.remained)) / props.value; // محاسبه strokeDashoffset بر اساس value
   return {
     strokeDasharray: circumference,
     strokeDashoffset: offset,
