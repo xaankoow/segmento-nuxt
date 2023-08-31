@@ -38,9 +38,9 @@
               <p>{{ auth.remained_days }} {{ config.by_route(`${current_page}/day`) }}</p>
             </div>
           </div>
-          <button class="w-[117px] h-8 rounded-lg btn-primary p-1 text-sm">
+          <NuxtLink to="/buy-subscription" class="w-[117px] h-8 rounded-lg btn-primary p-1 text-sm">
             {{ config.by_route(`${current_page}/buttons/subscription-renewal`) }}
-          </button>
+          </NuxtLink>
         </div>
         <div
           class="w-[28%] h-[275px] flex flex-col items-center justify-between bg-base-200 border border-base-400 rounded py-6 px-4">
@@ -77,9 +77,9 @@
         <div
           class="w-[38%] h-[275px] flex flex-col items-center justify-between bg-base-200 border border-base-400 rounded py-3 px-4">
           <img src="../../public/images/Rectangle.png" alt="Rectangle" class="w-[220px] h-[205px]" />
-          <button class="w-[168px] h-8 rounded-lg btn-primary text-sm">
+          <NuxtLink to="/buy-subscription" class="w-[168px] h-8 rounded-lg btn-primary text-sm">
             {{ config.by_route(`${current_page}/buttons/buy-subscription`) }}
-          </button>
+          </NuxtLink>
         </div>
       </div>
       <hr class="w-full h-[1px] bg-base-400 my-7" />
