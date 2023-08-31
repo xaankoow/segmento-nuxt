@@ -1,12 +1,12 @@
 <template>
-  <div class="relative flex flex-col items-center w-full pb-5 pt-5 gap-5 [&>div]:w-[64.875rem]">
+  <div class="relative flex flex-col gap-8 items-center w-full [&>div]:w-[64.875rem]" :class="form.plan === null ? 'h-full justify-center' : 'h-auto py-4'">
     <!-- title -->
     <div
       class="absolute top-0 left-0 !w-full !h-full z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
       v-if="request.pending()">
       <ToolsLoading class="w-32 h-32" />
     </div>
-    <div class="absolute -top-11 left-0 !w-full !h-full z-50 bg-base-350/40 justify-center items-center flex hidden" id="package_factor">
+    <div class="absolute -top-11 left-0 !w-full !h-full z-50 bg-base-350/40 justify-center items-center hidden" id="package_factor">
       <div class="flex flex-col justify-between items-center w-[26rem] bg-base-100 rounded-md -mt-32">
         <!-- header -->
         <div
@@ -28,7 +28,7 @@
           <!-- package data -->
           <div class="flex flex-col gap-3 items-center w-full text-sm">
             <span>نام اشتراک</span>
-            <span class="font-semibold">{{ config.by_route(`constants/packages/${form.package?.name ?? 3}`) ?? 'تستی' }}</span>
+            <span class="font-semibold">{{ config.by_route(`constants/packages/${form.package?.name ?? 3}`) }}</span>
             <hr class="w-11/12" />
           </div>
 
@@ -99,12 +99,13 @@
         </footer>
       </div>
       <!-- buy button -->
-      <button class="flex select-none" @click="show_factor()"
-        :class="form.plan === null ? 'pointer-events-none btn-secondary' : 'btn-primary'">
+      <button class="flex select-none btn-primary" @click="show_factor()" v-if="form.plan !== null"
+        :disabled="form.plan === null ? true : false">
         <span>فعال سازی اشتراک</span>
-        <span class="pr-2" :class="form.plan === null ? '[&>svg]:fill-secondary-text' : '[&>svg]:fill-white'">
+        <span class="pr-2">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 15.625L0.375 8L8 0.375L9.075 1.45L3.25 7.25H15.625V8.75H3.25L9.075 14.55L8 15.625Z" />
+            <path d="M8 15.625L0.375 8L8 0.375L9.075 1.45L3.25 7.25H15.625V8.75H3.25L9.075 14.55L8 15.625Z" 
+            fill="white"/>
           </svg>
         </span>
       </button>

@@ -1512,7 +1512,7 @@ const series = [
   },
 ];
 const content = ref({
-  title: "ابزار رتبه سنج (رنک ترکینگ)",
+  title: "اپلیکیشن رتبه سنج (رنک ترکینگ)",
   tabs: [
     {
       title: "نمای کلی",

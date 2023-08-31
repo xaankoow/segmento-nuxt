@@ -2,7 +2,7 @@
   <div class="w-full h-auto rounded-lg overflow-hidden text-sm">
     <div class="w-full h-[51px] bg-base-200 flex items-center justify-start text-lg">
       <div class="w-[2px] h-5 rounded-sm bg-icon ml-4"></div>
-      <p>ابزار کپی رایتینگ عنوان انبوه</p>
+      <p>اپلیکیشن کپی رایتینگ عنوان انبوه</p>
       <div class="w-[87px] h-6 text-xs p-1 rounded bg-base-250 mr-9 flex items-center justify-center">
         <p class="text-base-500">15000</p>
         <hr class="w-[1px] h-full bg-base-500 mx-1" />

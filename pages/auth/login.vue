@@ -83,7 +83,7 @@ async function requestToLogin() {
     ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
     ConfigStore.set_limits(JSON.stringify(response.data().limits));
 
-    navigateTo("/keyword-research");
+    navigateTo("/");
   } else {
     // TODO : Message to user name or password is incorrect
     email_box.classList.add("border-b-2");
