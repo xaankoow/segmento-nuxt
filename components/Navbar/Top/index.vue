@@ -65,7 +65,7 @@
           </div>
           <ul tabindex="0"
             class="dropdown-content gap-0 z-50 [&>*>*]:rounded-none [&>li]:mx-1 [&>li]:rounded-sm [&>li:hover]:bg-base-250 p-0 pt-[0.625rem] text-sm menu shadow-md bg-base-100 rounded-[0.188rem] rounded-t-none border border-base-200 w-[16.375rem]">
-            <li
+            <li v-if="DEV_ENV"
               class="!mx-auto mb-[0.625rem] !rounded-md [&>*>label>span>svg]:fill-base-content hover:text-primary hover:[&>*>label>span>svg]:fill-primary"
               style="font-size: 10px">
               <NuxtLink to="/"
@@ -111,7 +111,7 @@
                 </span>
               </NuxtLink>
             </li>
-            <li>
+            <li v-if="DEV_ENV">
               <NuxtLink to="/subscription-status" class="flex flex-row">
                 <span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -124,7 +124,7 @@
                 </span>
               </NuxtLink>
             </li>
-            <li>
+            <li v-if="DEV_ENV">
               <NuxtLink class="flex flex-row !pointer-events-none">
                 <span>
                   <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,7 +178,10 @@
 </template>
 
 <script setup>
-import ConfigStore from '../../../store/ConfigStore';
+import ConfigStore from '/store/ConfigStore';
+
+const runtimeConfig = useRuntimeConfig()
+const DEV_ENV = runtimeConfig.public.DEV_ENV;
 
 const props = defineProps({
   platform: {

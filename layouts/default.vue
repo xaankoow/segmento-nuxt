@@ -296,7 +296,7 @@
                 </According>
 
                 <!-- Technical Seo Secion -->
-                <According :isOpen="true">
+                <According :isOpen="true" v-if="DEV_ENV">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/technical-seo/title`)">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -379,6 +379,8 @@ const workspaces = ref(null);
 const actived_navbar = ref("department");
 const active_section = ref("keyword-research");
 const selected_tools_section = ref("content-creation");
+const runtimeConfig = useRuntimeConfig()
+const DEV_ENV = runtimeConfig.public.DEV_ENV;
 
 const auth = ref({
   name: "",
