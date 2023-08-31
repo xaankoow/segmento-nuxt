@@ -125,7 +125,7 @@ async function verify_email() {
     ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
     ConfigStore.set_limits(JSON.stringify(response.data().limits));
 
-    return navigateTo("/keyword-research");
+    return navigateTo("/");
   }
   code_error.value = config.by_route(`${current_page}/code_error`)
 }

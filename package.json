@@ -23,6 +23,7 @@
     "@tinymce/tinymce-vue": "^5.1.0",
     "apexcharts": "^3.41.0",
     "axios": "^1.4.0",
+    "jalali-moment": "^3.3.11",
     "konva": "^9.2.0",
     "tinymce": "^6.6.0",
     "vue-konva": "^3.0.2",

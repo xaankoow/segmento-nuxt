@@ -40,12 +40,12 @@ export default class Request {
             data: body
         }).then((res) => {
             let response = res.data
-            result = new ResponseModel(response.message ?? '', response.status, response.errors, response.data, res.status);
+            result = new ResponseModel(response.message ?? '', response.status, response.errors, response.data, res.status, response.ok ?? false);
         }).catch((res) => {
             let response = res.response.data;
-            result = new ResponseModel(res.message, response.status, response.specific_error, response.data, res.status);
+            result = new ResponseModel(res.message, response.status, response.specific_error, response.data, res.status, response.ok ?? false);
             console.log(res);
-            if (res.response.status) {
+            if (res.response.status === 401) {
                 ConfigStore.logout();
                 return navigateTo('/auth/login');
             }

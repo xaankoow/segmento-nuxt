@@ -4,16 +4,16 @@ export default class ResponseModel {
     private _errors: any;
     private _data: any;
     private _status_code: number;
-    private _version: string;
+    public readonly ok: boolean;
 
-    constructor(message: string, status: boolean, errors: any, data: any, _status_code: number, version= 'v1')
+    constructor(message: string, status: boolean, errors: any, data: any, _status_code: number, ok = false)
     {
         this._message = message;
         this._status = status;
         this._errors = errors;
         this._data = data;
         this._status_code = _status_code;
-        this._version = version;
+        this.ok = ok;
     }
 
     public message()
