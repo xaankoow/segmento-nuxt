@@ -12,30 +12,18 @@
     <div class="url">
       <h1 class="mb-4">وارد کردن آدرس صفحه ( URLs ):</h1>
       <div class="links box">
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
+        <textarea id="textAreaUrl" @input="urls=$event.target.value + ' '"></textarea>
       </div>
       <span class="warning text-slate-500 text-sm">در هر خط فقط یک آدرس صفحه بنویسید.</span>
     </div>
     <div class="domains">
       <h1 class="mb-4">وارد کردن آدرس سایت ( Domains ):</h1>
       <div class="links box">
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
-        <p class="py-1">https://segmento.ir/google-indexer/</p>
+      <textarea id="textAreaDomain" @input="domains=$event.target.value + ' '" ></textarea>
       </div>
       <span class="warning text-slate-500 text-sm">در هر خط فقط یک آدرس صفحه بنویسید.</span>
     </div>
-    <button class="createFile w-[130px] h-8 rounded-lg btn-primary p-1">
+    <button @click="spliteText()" :class="['createFile w-[130px] h-8 rounded-lg btn-primary p-1',domains.length> 0 || urls.length ?'' : 'disabled']">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
         <mask id="mask0_19_42" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
           <rect width="24" height="24" fill="#D9D9D9"/>
@@ -51,11 +39,12 @@
       <div class="counter">
         <div>
           <h1>تعداد آدرس های وبسایت:</h1>
-          <span>  0 صفحه </span>
+          <span>   {{urlTextLength}} صفحه </span>
         </div>
         <div>
           <h1>تعداد آدرس های وبسایت:</h1>
-          <span>0 وبسایت</span>
+          <span> {{newTextLength}} وبسایت</span>
+
         </div>
       </div>
     </div>
@@ -173,6 +162,7 @@
 .urlBox .box{
   display: inline-block;
   width: 100%;
+  height: 320px;
   border-radius: 10px;
   padding: 10px 10px 0px;
   max-height: 180px;
@@ -197,9 +187,17 @@
   vertical-align: middle;
 }
 
-.urlBox .box .links p{
+/*.urlBox .box .links p{
   padding: 10px 0;
+}*/
+
+.urlBox .box textarea{
+  width: 100%;
+  height: 100%;
+  resize: none;
+  overflow: hidden;
 }
+
 /*btn Style*/
 .createFile{
   margin: 20px auto 0;
@@ -253,6 +251,94 @@
   margin: 15px auto 0;
 }
 
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: rgb(217 217 217 / 1);
+}
+
 </style>
-<script setup lang="ts">
+<script setup>
+const domains=ref("");
+const urls=ref("");
+let newText=[];
+let urlText=[];
+let newTextLength=ref(0);
+const urlTextLength=ref(0)
+
+watch(()=>{
+  console.log(urlTextLength.value)
+})
+const convertToText=(text, filename)=>{
+    const blob = new Blob([text], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+
+    link.click();
+
+    // عملیات آزاد کردن منابع
+    URL.revokeObjectURL(url);
+}
+
+
+const spliteText= () => {
+  newText=[];
+  urlText=[];
+  let domainsVal=domains.value.split("\n");
+  // let arg=['https://','http://','/'];
+  domainsVal.forEach(i => {
+      // arg.forEach(j=>{
+        if (!i.includes("http") && !i.includes("https://") && !i.includes("/") && !i.includes("www.") && i!=" " && i!=""){
+          let txt =i.replaceAll(' ','');
+          newText.push("domain:"+txt);
+        }
+        else {
+         let text= i.replace(/^https?:\/\//, '')?.split("/")[0];
+         // text.includes("www.") ? newText.push(text.split("www.")[1]):newText.push(text);
+         if (text.includes("www.")){
+           if (!newText.includes("domain:" + text.split("www.")[1]) && text!="" && text!=" "){
+             let txt= text.split("www.")[1].replaceAll(' ','')
+            newText.push("domain:"+txt);
+           }
+         }
+         if (!text.includes("www.")){
+           if (!newText.includes("domain:" + text) && text!="" && text!=" "){
+             let txt= text.replaceAll(' ','')
+             newText.push("domain:"+txt);
+           }
+         }
+        }
+
+  })
+
+  let urlsValue=urls.value;
+  let splitVal=urlsValue.split("\n")
+  splitVal.forEach(i => {
+    // arg.forEach(j=>{
+      // text.includes("www.") ? newText.push(text.split("www.")[1]):newText.push(text)
+        if (!urlText.includes(i.replaceAll(" ","")) && i!=""){
+          urlText.push(i);
+        }
+  })
+    // convertToText(`#https://app.segmento.ir/disavow-file-generator\n\n#Domains to disavow\n${newText.join("\n")}\n\n#Pages to disavow\n${urlText.join("\n")}`,"zankonoyan");
+
+    // resetForm();
+    newTextLength.value=newText.length;
+    urlTextLength.value=urlText.length
+  console.log(urlTextLength.value);
+
+}
+
+const resetForm=()=>{
+    newText=[];
+    urlText=[];
+    document.getElementById("textAreaUrl").value="";
+    document.getElementById("textAreaDomain").value="";
+     domains.value=""
+     urls.value=""
+}
+
 </script>
