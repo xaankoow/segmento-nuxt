@@ -1,82 +1,83 @@
 <template>
-  <div class="flex flex-col items-center w-full pb-5 pt-5 gap-5 [&>div]:w-[64.875rem]">
+  <div class="relative flex flex-col gap-8 items-center w-full [&>div]:w-[64.875rem]" :class="form.plan === null ? 'h-full justify-center' : 'h-auto py-4'">
     <!-- title -->
     <div
-      class="absolute top-0 left-0 !w-screen !h-screen z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
+      class="absolute top-0 left-0 !w-full !h-full z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
       v-if="request.pending()">
       <ToolsLoading class="w-32 h-32" />
     </div>
-    <div class="absolute top-0 left-0 z-50 bg-base-350/40 flex justify-center items-center !w-screen !h-screen"
-      id="the_package" v-if="the_package !== null">
-      <!-- the package and confirm to buy -->
-      <div class="flex flex-col justify-between w-96 h-2/3 bg-base-100 rounded-md">
+    <div class="absolute -top-11 left-0 !w-full !h-full z-50 bg-base-350/40 justify-center items-center hidden" id="package_factor">
+      <div class="flex flex-col justify-between items-center w-[26rem] bg-base-100 rounded-md -mt-32">
         <!-- header -->
-        <div class="flex flex-row bg-base-500 h-12 rounded-t-md text-base-100 items-center justify-between px-4">
-          <span class="w-6"></span>
-          <div>رسید نهایی خرید اشتراک</div>
-          <button class="flex text-2xl font-thin w-6 cursor-pointer"
-            @click="HTMLController.hide_element('the_package')">×</button>
+        <div
+          class="flex flex-row items-center justify-between w-full px-3 py-2 rounded-t-md bg-base-500 text-white text-sm">
+          <!-- space -->
+          <span class="flex flex-row items-center w-1/4"></span>
+          <span class="flex flex-row items-center w-2/4 justify-center">
+            رسید نهایی خرید اشتراک
+          </span>
+          <span class="flex flex-row items-center w-1/4 justify-end px-3">
+            <button class="flex flex-row items-center" @click="HTMLController.hide_element('package_factor')">
+              &#x2715;
+            </button>
+          </span>
         </div>
 
         <!-- content -->
-        <div class="flex flex-col w-full [&>*]:w-11/12 [&>*]:mx-auto h-full">
-          <div class="flex flex-col gap-2 my-2 items-center justify-center">
-            <span>نام اشتراک:</span>
-            <span class="font-semibold">{{ config.by_route(`constants/packages/${the_package.package}`) }}</span>
-          </div>
-          <hr />
-
-          <div class="flex flex-col gap-4 p-4 h-full justify-evenly">
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-row items-center justify-between">
-                <span>مدت اشتراک:</span>
-                <span>{{ config.by_route(`constants/plans/${the_package.name}`) }}</span>
-              </div>
-              <div class="flex flex-row items-center justify-between">
-                <span>قیمت اشتراک:</span>
-                <span>{{ Math.ceil(the_package.price.value / 1000) }} هزارتومان</span>
-              </div>
-            </div>
-            <!-- discount section -->
-            <div class="flex flex-col gap-4" v-if="the_package.discount">
-              <div class="flex flex-row items-center justify-between">
-                <span>تخفیف سگمنتو:</span>
-                <span> {{ the_package.discount !== null ? the_package.discount.value : '0' }}</span>
-              </div>
-              <div class="flex flex-row items-center justify-between">
-                <span>کد تخفیف:</span>
-                <span> {{ the_package.discount !== null ? the_package.discount.code : '' }}</span>
-              </div>
-              <div class="flex flex-row items-center justify-between">
-                <span>مقدار ریالی تخفیف:</span>
-                <span> {{ the_package.discount !== null ? the_package.discount.price : '0' }}</span>
-              </div>
-            </div>
+        <div class="flex flex-col w-full p-4 pb-0">
+          <!-- package data -->
+          <div class="flex flex-col gap-3 items-center w-full text-sm">
+            <span>نام اشتراک</span>
+            <span class="font-semibold">{{ config.by_route(`constants/packages/${form.package?.name ?? 3}`) }}</span>
+            <hr class="w-11/12" />
           </div>
 
-          <hr />
-          <div class="flex flex-col items-center gap-3 my-4">
+          <!-- plan data -->
+          <div class="flex flex-col p-4 items-center justify-center w-full text-sm gap-5">
+            <div class="flex flex-row items-center justify-between w-full px-3">
+              <span>مدت اشتراک: </span>
+              <span>{{ config.by_route(`constants/plans/${form.plan?.name ?? 3}`) }}</span>
+            </div>
+            <div class="flex flex-row items-center justify-between w-full px-3">
+              <span>قیمت اشتراک:</span>
+              <span>{{ form.plan?.price.value ?? 25000000 }} تومان</span>
+            </div>
+            <div class="flex flex-row items-center justify-between w-full px-3">
+              <span>تخفیف سگمنتو:</span>
+              <span>{{ form.plan?.price.discount ?? 25000000 }} تومان</span>
+            </div>
+            <div class="flex flex-row items-center justify-between w-full px-3">
+              <span>کد تخفیف:</span>
+              <span :class="form.discount_code === null ? 'text-error' : ''">{{ form.discount_code ?? 'انتخاب نشده' }}</span>
+            </div>
+            <div class="flex flex-row items-center justify-between w-full px-3">
+              <span>مقدار ریالی تخفیف:</span>
+              <span :class="form.discount === null ? 'text-error' : ''">{{ form.discount?.discount ?? 0 }} تومان</span>
+            </div>
+            <hr class="w-11/12 mx-auto" />
+          </div>
+          <!-- final price section -->
+          <div class="flex flex-col gap-2 items-center text-sm">
             <span class="font-bold">قیمت نهایی و پرداخت</span>
-            <span>{{ Math.ceil(the_package.price.final / 1000) }} هزارتومان</span>
+            <span>{{ form.discount?.final ?? form.plan?.price.final ?? 2000000 }} تومان</span>
+            <hr class="w-11/12 mx-auto" />
           </div>
-          <hr />
-        </div>
 
-        <!-- register -->
-        <div class="flex flex-row items-center justify-center w-full py-4">
-          <button class="btn-primary w-11/12" @click="buy_the_package()">خرید اشتراک</button>
+          <form @submit.prevent="buy_the_package()" class="text-sm flex flex-col items-center w-full justify-center py-2">
+            <button type="submit" class="btn-primary w-11/12">خرید اشتراک</button>
+          </form>
         </div>
       </div>
     </div>
     <!-- package -->
     <div class="flex flex-row items-center justify-between">
-      <Plan class="w-[22%] h-fit" v-for="pack in packages" :key="pack.uuid" :_package="pack"
-        @change_plan="update_selected_plan" />
+      <Plan class="w-[22%] h-fit" v-for="pack in packages" :key="pack.uuid" :content="pack"
+        @plan_updated="plan_changed" />
     </div>
     <div class="flex flex-col gap-5 items-center">
       <!-- navigation -->
       <div class="w-full">
-        <footer class="footer p-4 bg-base-250 rounded-md border text-base-content" v-if="plan_description">
+        <footer class="footer p-4 bg-base-250 rounded-md border text-base-content" v-if="form.plan !== null">
           <div class="flex flex-row items-center">
             <span>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,18 +93,19 @@
               </svg>
             </span>
             <p>
-              {{ plan_description }}
+              {{ form.plan.text }}
             </p>
           </div>
         </footer>
       </div>
       <!-- buy button -->
-      <button class="flex select-none btn-primary" @click="check_plan()" v-if="selected_plan_uuid !== null">
+      <button class="flex select-none btn-primary" @click="show_factor()" v-if="form.plan !== null"
+        :disabled="form.plan === null ? true : false">
         <span>فعال سازی اشتراک</span>
         <span class="pr-2">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 15.625L0.375 8L8 0.375L9.075 1.45L3.25 7.25H15.625V8.75H3.25L9.075 14.55L8 15.625Z"
-              fill="white" />
+            <path d="M8 15.625L0.375 8L8 0.375L9.075 1.45L3.25 7.25H15.625V8.75H3.25L9.075 14.55L8 15.625Z" 
+            fill="white"/>
           </svg>
         </span>
       </button>
@@ -130,48 +132,36 @@ import ConfigStore from "../../store/ConfigStore";
 
 const request = new Request();
 const packages = ref([]);
-const selected_plan_uuid = ref(null);
-const the_package = ref(null);
+const form = ref({
+  package: null,
+  plan: null,
+  discount: null,
+  discount_code: '',
+});
+
 const config = new Config();
-const plan_description = ref(null)
 
 onBeforeMount(() => {
   collect_packages();
 });
 
-function update_selected_plan(plan) {
-  if (plan !== null) {
-    selected_plan_uuid.value = plan.uuid;
-    plan_description.value = plan.text;
-
-  }
+function plan_changed(pack, plan, discount = null, discount_code = null) {
+  form.value.package = pack;
+  form.value.plan = plan;
+  form.value.discount = discount;
+  form.value.discount_code = discount_code;
 }
 
-async function check_plan() {
-  let response = await request.post("packages/check_plan", {
-    plan_uuid: selected_plan_uuid.value,
-    discount_code: null,
-    use_wallet: 0
-  })
-
-  if (response.status_code() < 300) {
-    if (response.status()) {
-      the_package.value = response.data();
-      HTMLController.visible_element("the_package");
-    }
-  }
-  else {
-    console.log(response.errors()); // TODO : show errors!
-  }
+function show_factor() {
+  HTMLController.visible_element('package_factor');
 }
-
 
 async function buy_the_package() {
-  HTMLController.hide_element("the_package");
+  HTMLController.hide_element("package_factor");
 
   let response = await request.post("packages/buy", {
-    plan_uuid: selected_plan_uuid.value,
-    discount_code: null,
+    plan_uuid: form.value.plan.uuid,
+    discount_code: form.value.discount_code,
     use_wallet: 0
   })
 
@@ -196,10 +186,4 @@ async function collect_packages() {
     console.log(response);
   }
 }
-
-const content = ref({
-  title: "خرید اشتراک سگمنتو",
-  header: "رایگان شروع کنید؛ قدرتمند ادامه دهید",
-  detail: "توضیحات بیشتر",
-});
 </script>
