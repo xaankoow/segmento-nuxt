@@ -27,7 +27,7 @@
       <!-- search box -->
       <form
         @submit.prevent="search_keywords_request()"
-        class="flex flex-row items-center w-full gap-2 my-3"
+        class="flex flex-row items-center w-full gap-2 mt-2"
       >
         <div class="flex flex-row items-center w-full justify-between gap-2">
           <div class="custom_input_box w-[65%] text-base-500">
@@ -80,11 +80,13 @@
       </form>
 
       <!-- page content label -->
-      <span>{{
+      <span>
+      {{
         config
           .by_route(`${current_page}/search/sentence`)
           [Number(data !== null)].replace("[count]", Object.values(data ?? []).reduce((sum, innerArray) => sum + innerArray.length, 0))
-      }}</span>
+      }}
+      </span>
 
       <!-- page content -->
       <div
