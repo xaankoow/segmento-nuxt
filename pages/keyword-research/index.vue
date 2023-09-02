@@ -89,7 +89,7 @@
       <!-- page content -->
       <div
         class="flex flex-row justify-between w-full gap-4"
-        :class="data !== null ? '' : 'h-fit'"
+        :class="data === null ? 'h-full pb-2' : 'h-fit'"
       >
         <!-- form -->
         <div class="flex flex-col w-[65%] rounded-md border border-[#d9d9d9]" :class="data === null ? 'h-full' : 'h-fit'">
