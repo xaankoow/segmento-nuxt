@@ -34,7 +34,7 @@
         <div class="flex flex-row items-center w-full justify-between gap-2 h-10">
           <div class="custom_input_box w-[65%] text-base-500">
             <input
-              class="border border-base-400 rounded-md"
+              class="border border-base-400 rounded-[3px]"
               v-model="form.keyword"
               type="text"
               @focus="search_class.focus()"
@@ -49,7 +49,7 @@
 
           <div class="flex flex-row items-center justify-center w-[30%]">
             <select
-              class="w-full rounded-md border border-base-400 px-2 py-2"
+              class="w-full rounded-[3px] border border-base-400 px-2 py-2"
               v-model="form.lang"
             >
               <option value="FA">فارسی</option>
@@ -104,7 +104,7 @@
       >
         <!-- form -->
         <div
-          class="flex flex-col rounded-md border border-base-400"
+          class="flex flex-col rounded-[3px] border border-base-400"
           :class="data === null ? 'h-full w-full' : 'h-fit w-[65%]'"
         >
           <!-- header -->
@@ -173,7 +173,7 @@
               <div class="flex flex-row w-full items-center py-2 pr-2">
                 <span class="flex justify-center">
                   <span
-                    class="w-8 bg-gray-200 text-base-content rounded-md flex justify-center"
+                    class="w-8 bg-gray-200 text-base-content rounded-[3px] flex justify-center"
                   >
                     {{ index }}
                   </span>
@@ -213,7 +213,7 @@
         <div class="flex justify-center w-[35%] h-[200vh]" v-if="data !== null">
           <div class="flex flex-col gap-4 items-center w-full">
             <!-- drop down disabled -->
-            <!-- <div class="flex flex-row items-center w-full bg-base-400 text-base-500 justify-between rounded-md">
+            <!-- <div class="flex flex-row items-center w-full bg-base-400 text-base-500 justify-between rounded-[3px]">
               <span class="w-10/12 px-3 py-2">{{
                 config.by_route(`${current_page}/search/word`)
               }}</span>

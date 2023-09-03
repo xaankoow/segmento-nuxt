@@ -37,7 +37,7 @@
               v-model="form.keyword"
               type="text"
               @focus="search_class.focus()"
-              class="border border-base-400 rounded-md"
+              class="border border-base-400 rounded-[3px]"
               @blur="search_class.leave()"
             />
             <label
@@ -48,7 +48,7 @@
           </div>
           <button
             type="submit"
-            class="btn-primary flex justify-center items-center rounded-md w-[5%] h-full"
+            class="btn-primary w-[5%] h-full"
           >
             <svg
               width="18"
@@ -80,7 +80,7 @@
       :class="data.length === 0 ? 'h-full w-full' : 'h-fit'">
         <!-- form -->
         <div
-          class="flex flex-col pt-2 border border-base-400 rounded-md"
+          class="flex flex-col pt-2 border border-base-400 rounded-[3px]"
           :class="`${data.length === 0 ? 'text-primary-disabled h-full' : 'h-fit'}`"
         >
           <!-- header -->
