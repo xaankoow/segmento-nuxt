@@ -9,21 +9,21 @@
   </div>
 
   <div class="urlBox">
-    <div class="url">
-      <h1 class="mb-4">وارد کردن آدرس صفحه ( URLs ):</h1>
-      <div class="links box">
-        <textarea id="textAreaUrl" @input="urls=$event.target.value + ' '"></textarea>
+    <div :class="['url',focusedUrl ? 'focuse': '']">
+      <h1 class="mb-4"> وارد کردن آدرس صفحه: ( URLs )</h1>
+      <div>
+        <textarea @focus="focusedUrl=true" @blur="focusedUrl=false"  id="textAreaUrl" class="links box" @input="urls=$event.target.value + ' '" @keydown="spliteText()"></textarea>
       </div>
       <span class="warning text-slate-500 text-sm">در هر خط فقط یک آدرس صفحه بنویسید.</span>
     </div>
-    <div class="domains">
-      <h1 class="mb-4">وارد کردن آدرس سایت ( Domains ):</h1>
-      <div class="links box">
-      <textarea id="textAreaDomain" @input="domains=$event.target.value + ' '" ></textarea>
+    <div :class="['domains',focusDomain ? 'focuse': '']">
+      <h1 class="mb-4">وارد کردن آدرس سایت: ( Domains )</h1>
+      <div>
+      <textarea @focus="focusDomain=true" @blur="focusDomain=false" id="textAreaDomain" class="links box" @input="domains=$event.target.value + ' '" @keydown="spliteText()"></textarea>
       </div>
       <span class="warning text-slate-500 text-sm">در هر خط فقط یک آدرس صفحه بنویسید.</span>
     </div>
-    <button @click="spliteText()" :class="['createFile w-[130px] h-8 rounded-lg btn-primary p-1',domains.length> 0 || urls.length ?'' : 'disabled']">
+    <button @click="submitForm()" :class="['createFile w-[130px] h-8 rounded-lg btn-primary p-1',domains.length> 0 || urls.length ?'' : 'disabled']">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
         <mask id="mask0_19_42" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
           <rect width="24" height="24" fill="#D9D9D9"/>
@@ -128,13 +128,21 @@
   content: "";
   display: inline-block;
   width: calc(100% - 20px);
-  height: 3px;
+  height: 5px;
   background-color: #0A65CD;
   z-index: 20;
   position: absolute;
   bottom: 33px;
   right: 11px;
-  border-radius: 2px;
+  border-radius: 10px 10px 0 0;
+  opacity: 0;
+  transition: 0.2s all ease-in-out;
+}
+
+
+.focuse::after{
+  opacity: 1!important;
+  transition: 0.2s all ease-in-out;
 }
 
 .urlBox h1{
@@ -168,8 +176,12 @@
   max-height: 180px;
   border: 2px solid #e7e7e7;
   text-align: left;
-  overflow: scroll;
   direction: ltr;
+  resize: unset;
+}
+
+textarea:focus .urlBox > div::after{
+  background: red;
 }
 
 /*warning icon*/
@@ -191,12 +203,12 @@
   padding: 10px 0;
 }*/
 
-.urlBox .box textarea{
+/*.urlBox .box textarea{
   width: 100%;
   height: 100%;
   resize: none;
   overflow: hidden;
-}
+}*/
 
 /*btn Style*/
 .createFile{
@@ -265,10 +277,9 @@ let newText=[];
 let urlText=[];
 let newTextLength=ref(0);
 const urlTextLength=ref(0)
+let focusDomain=ref(false)
+let focusedUrl=ref(false)
 
-watch(()=>{
-  console.log(urlTextLength.value)
-})
 const convertToText=(text, filename)=>{
     const blob = new Blob([text], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
@@ -288,7 +299,6 @@ const spliteText= () => {
   newText=[];
   urlText=[];
   let domainsVal=domains.value.split("\n");
-  // let arg=['https://','http://','/'];
   domainsVal.forEach(i => {
       // arg.forEach(j=>{
         if (!i.includes("http") && !i.includes("https://") && !i.includes("/") && !i.includes("www.") && i!=" " && i!=""){
@@ -297,18 +307,17 @@ const spliteText= () => {
         }
         else {
          let text= i.replace(/^https?:\/\//, '')?.split("/")[0];
-         // text.includes("www.") ? newText.push(text.split("www.")[1]):newText.push(text);
-         if (text.includes("www.")){
-           if (!newText.includes("domain:" + text.split("www.")[1]) && text!="" && text!=" "){
+         if (text.includes("www.") && !newText.includes("domain:" + text.split("www.")[1]) && text!="" && text!=" "){
+           // if (!newText.includes("domain:" + text.split("www.")[1]) && text!="" && text!=" "){
              let txt= text.split("www.")[1].replaceAll(' ','')
             newText.push("domain:"+txt);
-           }
+           // }
          }
-         if (!text.includes("www.")){
-           if (!newText.includes("domain:" + text) && text!="" && text!=" "){
+         if (!text.includes("www.") && !newText.includes("domain:" + text) && text!="" && text!=" "){
+           // if (!newText.includes("domain:" + text) && text!="" && text!=" "){
              let txt= text.replaceAll(' ','')
              newText.push("domain:"+txt);
-           }
+           // }
          }
         }
 
@@ -317,14 +326,10 @@ const spliteText= () => {
   let urlsValue=urls.value;
   let splitVal=urlsValue.split("\n")
   splitVal.forEach(i => {
-    // arg.forEach(j=>{
-      // text.includes("www.") ? newText.push(text.split("www.")[1]):newText.push(text)
         if (!urlText.includes(i.replaceAll(" ","")) && i!=""){
           urlText.push(i);
         }
   })
-    // convertToText(`#https://app.segmento.ir/disavow-file-generator\n\n#Domains to disavow\n${newText.join("\n")}\n\n#Pages to disavow\n${urlText.join("\n")}`,"zankonoyan");
-
     // resetForm();
     newTextLength.value=newText.length;
     urlTextLength.value=urlText.length
@@ -332,11 +337,17 @@ const spliteText= () => {
 
 }
 
+const submitForm=()=>{
+  spliteText ();
+  convertToText(`#https://app.segmento.ir/disavow-file-generator\n\n#Domains to disavow\n${newText.join("\n")}\n\n#Pages to disavow\n${urlText.join("\n")}`,"zankonoyan");
+
+}
+
 const resetForm=()=>{
     newText=[];
     urlText=[];
-    document.getElementById("textAreaUrl").value="";
-    document.getElementById("textAreaDomain").value="";
+  const Areaurl= document.getElementById("textAreaUrl")
+  const AreaDomain= document.getElementById("textAreaDomain")
      domains.value=""
      urls.value=""
 }
