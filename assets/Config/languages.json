@@ -296,7 +296,11 @@
                 "title": "اپلیکیشن پیش‌نمایش گوگل‌ادز"
             },
           "disavow-builder": {
-                "title": "دیساو ساز"
+                "title": "سازنده فایل Disavow",
+                "tabs": {
+                    "generate": "ساخت فایل جدید",
+                    "my-files": "فایل‌های من"
+                }
             },
             "google-title-builder": {
                 "title": "اپلیکیشن عنوان‌ساز گوگل",
