@@ -5,7 +5,7 @@
     <div class="flex flex-col items-center w-full pb-2 gap-4">
       <!-- header and title -->
       <div class="flex flex-col gap-2 items-center justify-center w-full">
-        <div class="w-11/12 flex flex-row items-center justify-center text-xl h-16 text-base-content">
+        <div class="w-11/12 flex flex-row items-center justify-center text-xl h-16 text-base-content font-bold">
           {{ config.by_route(`constants/packages/${content.name}`) }}
         </div>
         <hr class="w-11/12 mx-auto border-base-content" />
@@ -59,10 +59,10 @@
 
         <!-- discount -->
         <form @submit.prevent="check_discount()" class="relative flex flex-row items-center w-11/12 mx-auto">
-          <input type="text" class="w-full rounded-[3px] border-[1.5px]" @focus="text_box_focus(true);" @blur="text_box_focus(false);" :class="discount_error.ok ? 'border-b-primary-hover' : ''"
+          <input type="text" class="w-full rounded-[3px] border-[1.5px] text-xs" @focus="text_box_focus(true);" @blur="text_box_focus(false);" :class="discount_error.ok ? 'border-b-primary-hover' : ''"
             v-model="form.discount" />
           <span class="absolute text-xs pointer-events-none px-2 font-semibold transition-all duration-300"
-            :class="text_box_focus() ? '-top-5' : 'top-3'">کد تخفیف</span>
+            :class="text_box_focus() ? '-top-5' : 'top-2'">کد تخفیف</span>
           <span class="absolute text-xs -top-5 left-0 text-error" :class="!discount_error.ok ? 'flex' : 'hidden'">
             {{ discount_error.message }}
           </span>

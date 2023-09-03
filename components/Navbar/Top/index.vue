@@ -60,7 +60,7 @@
                 <!-- <radial-progress :value="30"/> -->
                 <!-- </span> -->
                 <span class="text-[10px]">
-                  {{ profile.subscription }}
+                  {{ config.by_route('constants/subscription') }}: {{ profile.subscription }}
                 </span>
               </div>
             </div>
@@ -181,6 +181,8 @@
 
 <script setup>
 import ConfigStore from '/store/ConfigStore';
+import Config from "/composables/Config";
+const config = new Config();
 
 const runtimeConfig = useRuntimeConfig()
 const DEV_ENV = runtimeConfig.public.DEV_ENV;

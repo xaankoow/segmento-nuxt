@@ -488,6 +488,7 @@
         },
         "constants": {
             "segmento-platform": "پلتفرم سگمنتو",
+            "subscription": "اشتراک",
             "packages": {
                 "FREE": "رایگان",
                 "BASE": "پایه",
