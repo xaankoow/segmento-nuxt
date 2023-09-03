@@ -555,7 +555,7 @@
                 <span class="w-full"> همین الان با 50% تخفیف شروع کنید.</span>
                 <span class="flex justify-between w-full">
                   <span> کد تخفیف: </span>
-                  <code>starter</code>
+                  <span>استارتر</span>
                 </span>
               </NuxtLink>
               <div
@@ -564,7 +564,7 @@
               >
                 <span class="flex justify-between w-full">
                   <span> کد تخفیف: </span>
-                  <code class="selection:bg-base-400 selection:text-base-content">starter</code>
+                  <span class="selection:bg-base-400 selection:text-base-content">استارتر</span>
                 </span>
               </div>
               <NuxtLink

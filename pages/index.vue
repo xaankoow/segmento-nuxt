@@ -178,7 +178,7 @@
       <span> همین الان با 50% تخفیف شروع کنید.</span>
       <span
         >کد تخفیف: 
-        <code>starter</code>
+        <span>استارتر</span>
       </span>
     </NuxtLink>
   </div>
