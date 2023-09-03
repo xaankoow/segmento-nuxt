@@ -94,7 +94,7 @@
         :class="data === null ? 'h-full pb-2' : 'h-fit'"
       >
         <!-- form -->
-        <div class="flex flex-col w-[65%] rounded-md border border-[#d9d9d9]" :class="data === null ? 'h-full' : 'h-fit'">
+        <div class="flex flex-col rounded-md border border-[#d9d9d9]" :class="data === null ? 'h-full w-full' : 'h-fit w-[65%]'">
           <!-- header -->
           <div
             class="flex flex-row justify-between px-2 py-2"
@@ -199,8 +199,8 @@
 
         <!-- options -->
         <div
-          class="flex justify-center w-[35%]"
-          :class="data !== null ? 'h-[200vh]' : ''"
+          class="flex justify-center w-[35%] h-[200vh]"
+          v-if="data !== null"
         >
           <div class="flex flex-col gap-4 items-center w-full">
             <!-- drop down disabled -->
@@ -218,7 +218,6 @@
             </div> -->
 
             <div
-              v-if="data !== null"
               class="flex flex-row justify-center items-center w-full"
             >
               {{ config.by_route(`${current_page}/search/alphabet`) }}
@@ -226,7 +225,6 @@
 
             <!-- word list -->
             <div
-              v-if="data !== null"
               class="sticky top-20 left-10 rounded-sm grid grid-cols-8 w-full gap-2"
             >
               <button
