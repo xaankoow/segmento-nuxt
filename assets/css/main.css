@@ -24,15 +24,15 @@
   }
 
   .btn {
-    @apply rounded-lg py-2 px-3 transition-all duration-200;
+    @apply rounded-[9px] py-2 px-3 transition-all duration-200;
   }
 
   .btn-primary {
-    @apply flex justify-around items-center rounded-lg py-2 px-3 transition-all duration-200 bg-primary text-primary-text  hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled;
+    @apply flex justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-primary text-primary-text  hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled;
   }
 
   .btn-secondary {
-    @apply flex justify-around items-center rounded-lg py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled;
+    @apply flex justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled;
   }
 
   .alphabet {

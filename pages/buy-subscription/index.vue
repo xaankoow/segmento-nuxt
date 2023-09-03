@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col gap-8 items-center w-full [&>div]:w-[64.875rem]" :class="form.plan === null ? 'h-full justify-center' : 'h-auto py-4'">
+  <div class="relative flex flex-col gap-8 items-center w-full px-2" :class="form.plan === null ? 'h-full justify-center' : 'h-auto py-4'">
     <!-- title -->
     <div
       class="absolute top-0 left-0 !w-full !h-full z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
@@ -70,11 +70,11 @@
       </div>
     </div>
     <!-- package -->
-    <div class="flex flex-row items-center justify-between">
-      <Plan class="w-[22%] h-fit" v-for="pack in packages" :key="pack.uuid" :content="pack"
+    <div class="flex w-full items-center justify-between gap-2">
+      <Plan class="w-1/4 h-fit" v-for="pack in packages" :key="pack.uuid" :content="pack"
         @plan_updated="plan_changed" />
     </div>
-    <div class="flex flex-col gap-5 items-center">
+    <div class="flex flex-col gap-5 items-center w-full">
       <!-- navigation -->
       <div class="w-full">
         <footer class="footer p-4 bg-base-250 rounded-md border text-base-content" v-if="form.plan !== null">
@@ -172,7 +172,7 @@ async function buy_the_package() {
     }
   }
   else {
-    console.log(response.errors()); // TODO : show errors!
+    console.log(response.errors()); // TODO: show errors!
   }
 }
 
