@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-5 w-full h-full">
+  <div class="flex flex-col w-full h-full">
     <!-- loading -->
     <div
       v-if="request.pending()"
@@ -23,15 +23,18 @@
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col gap-2 px-2 w-full h-full">
+    <div class="flex flex-col gap-4 p-2 w-full pt-6"
+    :class="data === null ? 'h-full' : 'h-fit'"
+    >
       <!-- search box -->
       <form
         @submit.prevent="search_keywords_request()"
-        class="flex flex-row items-center w-full gap-2 mt-2"
+        class="flex flex-row items-center w-full gap-2"
       >
-        <div class="flex flex-row items-center w-full justify-between gap-2">
+        <div class="flex flex-row items-center w-full justify-between gap-2 h-10">
           <div class="custom_input_box w-[65%] text-base-500">
-            <input class="border border-[#d9d9d9] rounded-md"
+            <input
+              class="border border-base-400 rounded-md"
               v-model="form.keyword"
               type="text"
               @focus="search_class.focus()"
@@ -46,7 +49,7 @@
 
           <div class="flex flex-row items-center justify-center w-[30%]">
             <select
-              class="w-full rounded-md border border-[#d9d9d9] px-2 py-2"
+              class="w-full rounded-md border border-base-400 px-2 py-2"
               v-model="form.lang"
             >
               <option value="FA">فارسی</option>
@@ -62,7 +65,7 @@
             </select>
           </div>
 
-          <button type="submit" class="btn-primary w-[5%] h-11">
+          <button type="submit" class="btn-primary w-[5%] h-full">
             <svg
               width="18"
               height="18"
@@ -80,21 +83,30 @@
       </form>
 
       <!-- page content label -->
-      <span>
-      {{
-        config
-          .by_route(`${current_page}/search/sentence`)
-          [Number(data !== null)].replace("[count]", Object.values(data ?? []).reduce((sum, innerArray) => sum + innerArray.length, 0))
-      }}
+      <span v-if="data !== null">
+        {{
+          config
+            .by_route(`${current_page}/search/sentence`)
+            [Number(data !== null)].replace(
+              "[count]",
+              Object.values(data ?? []).reduce(
+                (sum, innerArray) => sum + innerArray.length,
+                0
+              )
+            )
+        }}
       </span>
 
       <!-- page content -->
       <div
         class="flex flex-row justify-between w-full gap-4"
-        :class="data === null ? 'h-full pb-2' : 'h-fit'"
+        :class="data === null ? 'h-full' : 'h-fit'"
       >
         <!-- form -->
-        <div class="flex flex-col rounded-md border border-[#d9d9d9]" :class="data === null ? 'h-full w-full' : 'h-fit w-[65%]'">
+        <div
+          class="flex flex-col rounded-md border border-base-400"
+          :class="data === null ? 'h-full w-full' : 'h-fit w-[65%]'"
+        >
           <!-- header -->
           <div
             class="flex flex-row justify-between px-2 py-2"
@@ -102,13 +114,13 @@
           >
             <div class="flex items-center">
               <span class="w-12 flex justify-center">
-              {{ config.by_route(`${current_page}/table/select`) }}
+                {{ config.by_route(`${current_page}/table/select`) }}
               </span>
               <span class="w-12 flex justify-center">
-              {{ config.by_route(`${current_page}/table/row`) }}
+                {{ config.by_route(`${current_page}/table/row`) }}
               </span>
               <span class="w-fit">
-              {{ config.by_route(`${current_page}/table/result`) }}
+                {{ config.by_route(`${current_page}/table/result`) }}
               </span>
             </div>
 
@@ -128,7 +140,7 @@
 
           <!-- when we haven't content this div will show -->
           <div
-            class="flex flex-col items-center justify-center h-full"
+            class="flex flex-col items-center justify-center h-full gap-3"
             v-if="data === null"
           >
             <svg
@@ -198,10 +210,7 @@
         </div>
 
         <!-- options -->
-        <div
-          class="flex justify-center w-[35%] h-[200vh]"
-          v-if="data !== null"
-        >
+        <div class="flex justify-center w-[35%] h-[200vh]" v-if="data !== null">
           <div class="flex flex-col gap-4 items-center w-full">
             <!-- drop down disabled -->
             <!-- <div class="flex flex-row items-center w-full bg-base-400 text-base-500 justify-between rounded-md">
@@ -217,16 +226,12 @@
               </span>
             </div> -->
 
-            <div
-              class="flex flex-row justify-center items-center w-full"
-            >
+            <div class="flex flex-row justify-center items-center w-full">
               {{ config.by_route(`${current_page}/search/alphabet`) }}
             </div>
 
             <!-- word list -->
-            <div
-              class="sticky top-20 left-10 rounded-sm grid grid-cols-8 w-full gap-2"
-            >
+            <div class="sticky top-20 left-10 rounded-sm grid grid-cols-8 w-full gap-2">
               <button
                 class="alphabet btn-secondary bg-[#F2F5F770] text-base-content"
                 v-for="(data, index) in cache"
