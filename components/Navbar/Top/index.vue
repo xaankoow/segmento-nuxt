@@ -1,7 +1,7 @@
 <template>
   <div class="flex bg-base-100 items-center">
     <div class="navbar-start">
-      <div class="flex flex-row align-middle">
+      <div class="flex flex-row align-middle gap-1">
         <!-- Dashboard icon -->
         <slot name="dashboard-icon">
           <label tabindex="0" class="flex h-fit my-auto">
@@ -29,12 +29,14 @@
           </label>
         </slot>
         <!-- Segmento platfrom -->
-        <label tabindex="0" class="flex h-fit my-auto gap-2 items-center">
-          <span>
-            <SvgSegmento />
-          </span>
-          <span> {{ platform }} </span>
-        </label>
+        <NuxtLink to="/">
+          <label tabindex="0" class="flex h-fit my-auto gap-2 items-center cursor-pointer">
+            <span>
+              <SvgSegmento />
+            </span>
+            <span> {{ platform }} </span>
+          </label>
+        </NuxtLink>
       </div>
     </div>
     <div class="navbar-end flex items-center">

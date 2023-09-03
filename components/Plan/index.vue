@@ -14,7 +14,7 @@
       <!-- plans list -->
       <div class="flex flex-col w-11/12 mx-auto gap-3">
         <!-- plan item -->
-        <label :for="plan.uuid" class="flex flex-row items-center justify-between w-full p-2 border rounded-sm cursor-pointer text-base-content" v-for="plan in content.plans"
+        <label :for="plan.uuid" class="bg-base-200 border-base-200 flex flex-row items-center justify-between w-full p-2 rounded-sm cursor-pointer text-base-content" v-for="plan in content.plans"
           :key="plan.uuid">
           <!-- id and name -->
           <div class="flex flex-row items-center gap-2 text-sm">
@@ -59,7 +59,7 @@
 
         <!-- discount -->
         <form @submit.prevent="check_discount()" class="relative flex flex-row items-center w-11/12 mx-auto">
-          <input type="text" class="w-full" @focus="text_box_focus(true);" @blur="text_box_focus(false);" :class="discount_error.ok ? 'border-b-primary-hover' : ''"
+          <input type="text" class="w-full rounded-[3px] border-[1.5px]" @focus="text_box_focus(true);" @blur="text_box_focus(false);" :class="discount_error.ok ? 'border-b-primary-hover' : ''"
             v-model="form.discount" />
           <span class="absolute text-xs pointer-events-none px-2 font-semibold transition-all duration-300"
             :class="text_box_focus() ? '-top-5' : 'top-3'">کد تخفیف</span>
