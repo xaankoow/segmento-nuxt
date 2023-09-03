@@ -13,7 +13,7 @@
     <!-- title -->
 
     <div
-      class="top-0 left-0 w-screen h-screen fixed z-50 bg-base-350/40 flex justify-center items-center hidden"
+      class="top-0 left-0 w-screen h-screen fixed z-50 bg-base-350/40 justify-center items-center hidden"
       id="package_factor"
     >
       <div
