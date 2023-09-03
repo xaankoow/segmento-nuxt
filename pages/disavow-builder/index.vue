@@ -119,7 +119,7 @@
             برای فرستادن لینک و ارسال آن به گوگل بر روی کلید ارسال فایل کلیک کنید:
           </span>
           <span class="flex items-center justify-center h-1/2">
-            <button class="btn-primary gap-3">
+            <a target="_blank" href="https://www.google.com/webmasters/tools/disavow-links-main" class="btn-primary gap-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -146,7 +146,7 @@
                 </g>
               </svg>
               ارسال فایل
-            </button>
+            </a>
           </span>
         </div>
       </div>
@@ -269,7 +269,7 @@ const spliteText = () => {
 const submitForm = () => {
   spliteText();
   convertToText(
-    `#https://app.segmento.ir/disavow-file-generator\n\n#Domains to disavow\n${newText.join(
+    `#https://app.segmento.ir/disavow-builder\n\n#Domains to disavow\n${newText.join(
       "\n"
     )}\n\n#Pages to disavow\n${urlText.join("\n")}`,
     "zankonoyan"
