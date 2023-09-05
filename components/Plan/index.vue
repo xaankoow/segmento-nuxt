@@ -68,7 +68,10 @@
             class="flex flex-row gap-1 items-center w-full py-2 justify-center text-sm bg-base-300/40 rounded-md"
             :class="discount_error.ok ? 'text-primary' : ''"
           >
-            <span>
+            <span v-if="form.discount_pricing.final === 0">
+              رایگان شد!
+            </span>
+            <span v-else>
               {{ formatPrice(form.discount_pricing.final) }}
             </span>
           </div>
@@ -100,7 +103,7 @@
           </span>
           <button
             type="submit"
-            class="absolute text-lg text-primary font-semibold left-4 h-fit w-fit rotate-180"
+            class="absolute text-lg text-primary font-semibold left-4 h-fit w-fit rotate-180 font-mono"
             :class="text_box_focus() ? 'flex' : 'hidden'"
           >
             &#x279C;
