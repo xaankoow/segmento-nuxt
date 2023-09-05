@@ -13,7 +13,6 @@
   >
     <div
       class="flex flex-col justify-center items-center w-[26rem] bg-base-100 rounded-md m-auto pb-2"
-      
     >
       <!-- header -->
       <div
@@ -38,7 +37,7 @@
       <div class="flex flex-col w-full p-4 pb-0">
         <!-- package data -->
         <div class="flex flex-col gap-3 items-center w-full text-sm">
-          <span>نام اشتراک</span>
+          <span>نام اشتراک:</span>
           <span class="font-semibold">{{
             config.by_route(`constants/packages/${form.package?.name}`)
           }}</span>
@@ -55,30 +54,39 @@
             <span>قیمت اشتراک:</span>
             <span>{{ form.plan?.price.value }}</span>
           </div>
-          <div class="flex flex-row items-center justify-between w-full px-3" v-if="form.plan?.price.discount !== 0">
+          <div
+            class="flex flex-row items-center justify-between w-full px-3"
+            v-if="form.plan?.price.discount !== 0"
+          >
             <span>تخفیف سگمنتو:</span>
             <span>{{ form.plan?.price.discount }}</span>
           </div>
           <div class="flex flex-row items-center justify-between w-full px-3">
-            <span >کد تخفیف:</span>
+            <span>کد تخفیف:</span>
             <span :class="form.discount_code === null ? 'text-error' : ''">{{
               form.discount_code ?? "نداشتید"
             }}</span>
           </div>
-          <div class="flex flex-row items-center justify-between w-full px-3" v-if="form.discount?.discount">
+          <div
+            class="flex flex-row items-center justify-between w-full px-3"
+            v-if="form.discount?.discount"
+          >
             <span>مقدار ریالی تخفیف:</span>
-            <span :class="form.discount === null ? 'text-error' : ''"
-              >{{ formatPrice(form.discount?.discount) }}</span
-            >
+            <span :class="form.discount === null ? 'text-error' : ''">{{
+              formatPrice(form.discount?.discount)
+            }}</span>
           </div>
           <hr class="w-full mx-auto" />
         </div>
         <!-- final price section -->
         <div class="flex flex-col gap-2 items-center text-sm">
           <span class="font-bold">قیمت نهایی و پرداخت</span>
-          <span
-            >{{ formatPrice(form.discount?.final ?? form.plan?.price.final ?? 2000000) }}</span
-          >
+          <span v-if="(form.discount?.final ?? form.plan?.price.final) === 0">
+            رایگان شد!
+          </span>
+          <span v-else>
+            {{ formatPrice(form.discount?.final ?? form.plan?.price.final) }}
+          </span>
           <hr class="w-11/12 mx-auto" />
         </div>
 
