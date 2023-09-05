@@ -1,43 +1,22 @@
 <template>
+  <!-- Tabs -->
+  <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
+    <TabItem to="/rank-tracker/overview" :active="true">
+      {{ tabs[0] }}
+    </TabItem>
+    <TabSeparator></TabSeparator>
+    <TabItem to="/rank-tracker/keyword" :active="false">
+      {{ tabs[1] }}
+    </TabItem>
+    <TabSeparator></TabSeparator>
+    <TabItem to="/rank-tracker/competitors" :active="false">
+      {{ tabs[2] }}
+    </TabItem>
+  </div>
+
   <div class="flex flex-col gap-2 w-full flex-grow">
-    <!-- title and tabs and update -->
+    <!-- update -->
     <div class="flex flex-row justify-between items-center">
-      <!-- title and tabs -->
-      <div class="flex flex-col">
-        <!-- title -->
-        <div class="flex items-center h-11 w-full">
-          <span>
-            <svg
-              width="2"
-              height="20"
-              viewBox="0 0 2 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="2" height="20" rx="1" fill="#002145" />
-            </svg>
-          </span>
-          <span class="mx-5">
-            {{ config.__(`pages/rank-tracker/header/title`.split("/")) }}
-          </span>
-        </div>
-        <!-- Tabs -->
-        <div class="flex flex-row items-center gap-3 px-2 py-1">
-          <span class="cursor-wait" to="/rank-tracker/overview"
-            ><TabItem :title="tabs[0]" :active="false"
-          /></span>
-
-          <span class="border-r h-full">&nbsp;</span>
-          <NuxtLink to="/rank-tracker/keyword"
-            ><TabItem :title="tabs[1]" :active="true"
-          /></NuxtLink>
-
-          <span class="border-l h-full">&nbsp;</span>
-          <span class="cursor-wait" to="/rank-tracker/competitors">
-            <TabItem :title="tabs[2]" :active="false" />
-          </span>
-        </div>
-      </div>
       <!-- update title -->
       <div class="flex flex-col gap-2 px-3 items-center text-base-500">
         <span class="flex flex-row items-center gap-2">

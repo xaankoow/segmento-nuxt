@@ -1,52 +1,56 @@
 <template>
   <!-- Tabs -->
-  <div class="flex flex-row items-center gap-3 px-2 py-1 bg-base-200 h-[7%]">
-    <NuxtLink to="/">
-      <TabItem :title="config.by_route(`${current_page}/tabs/generate`)" :active="true" />
-    </NuxtLink>
-    <TabSeparator></TabSeparator>
-    <!-- <NuxtLink to="/"> -->
-    <TabItem :title="config.by_route(`${current_page}/tabs/my-files`)" :active="false" />
-    <!-- </NuxtLink> -->
+  <div class="flex flex-row items-center gap-3 px-2 bg-base-200 h-[7%]">
+    <TabItem to="/disavow-builder" :active="true">
+      {{ config.by_route(`${current_page}/tabs/generate`) }}
+    </TabItem>
+    <!-- <TabSeparator></TabSeparator>
+    <TabItem :active="false">
+      {{ config.by_route(`${current_page}/tabs/my-files`) }}
+    </TabItem> -->
   </div>
 
   <!-- page content -->
   <div class="py-2 px-4 flex flex-col gap-2 h-[93%] justify-center">
-    <div class="flex flex-col border rounded-[9px] p-2 py-4 gap-2">
+    <div class="flex flex-col border rounded-[9px] p-2 py-4 gap-2 items-end">
       <div class="w-full flex">
         <div class="w-1/2 flex flex-col gap-2 px-4">
-          <h1 class="border-r-2 pr-2 border-r-primary">وارد کردن آدرس صفحه: (URLs)</h1>
-          <textarea
+          <h1 class="border-r-2 pr-2 border-r-primary">
+            {{ config.by_route(`${current_page}/boxes/urls-input`) }}
+          </h1>
+          <InputTextArea
             dir="ltr"
             @focus="focusedUrl = true"
             @blur="focusedUrl = false"
             id="textAreaUrl"
-            class="h-44 w-full rounded-[3px] resize-none border text-sm p-2 text-left focus:border-b-primary"
+            class="h-44 w-full text-left"
             @input="urls = $event.target.value + ' '"
             @keydown="spliteText()"
-          ></textarea>
+          />
           <span class="warning text-base-500 text-sm">
-            در هر خط فقط یک آدرس صفحه بنویسید.
+            {{ config.by_route(`${current_page}/warnings/urls-input`) }}
           </span>
         </div>
         <div class="w-1/2 flex flex-col gap-2 px-4">
-          <h1 class="border-r-2 pr-2 border-r-primary">وارد کردن آدرس سایت: (Domains)</h1>
-          <textarea
+          <h1 class="border-r-2 pr-2 border-r-primary">
+            {{ config.by_route(`${current_page}/boxes/domains-input`) }}
+          </h1>
+          <InputTextArea
             dir="ltr"
             @focus="focusDomain = true"
             @blur="focusDomain = false"
             id="textAreaDomain"
-            class="h-44 w-full rounded-[3px] resize-none border text-sm p-2 text-left focus:border-b-primary"
+            class="h-44 w-full text-left"
             @input="domains = $event.target.value + ' '"
             @keydown="spliteText()"
-          ></textarea>
+          />
           <span class="warning text-base-500 text-sm">
-            در این قسمت آدرس سایت را بنویسید.
+            {{ config.by_route(`${current_page}/warnings/domains-input`) }}
           </span>
         </div>
       </div>
-      <div class="flex items-center justify-end pt-2">
-        <button @click="submitForm()" class="btn-primary text-sm py-1 px-2">
+      <div class="flex items-center justify-center pt-2 px-4 w-1/3">
+        <button @click="submitForm()" class="btn-primary text-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -72,7 +76,7 @@
               />
             </g>
           </svg>
-          ساخت و دانلود فایل
+          {{ config.by_route(`${current_page}/buttons/generate`) }}
         </button>
       </div>
     </div>
@@ -80,19 +84,27 @@
       <div class="w-1/3 p-2 pl-4 h-full">
         <div class="flex flex-col p-2 rounded-[5px] bg-base-250 h-full">
           <div class="w-full flex flex-row h-1/2 items-center justify-around">
-            <span class="text-base-content">تعداد آدرس های وبسایت: </span>
-            <span class="text-base-500"> {{ urlTextLength }} صفحه </span>
+            <span class="text-base-content">
+              {{ config.by_route(`${current_page}/boxes/count-of-pages`) }}
+            </span>
+            <span class="text-base-500">
+              {{ urlTextLength }} {{ config.by_route(`constants/page`) }}
+            </span>
           </div>
           <div class="w-full flex flex-row h-1/2 items-center justify-around">
-            <span class="text-base-content">تعداد آدرس های وبسایت: </span>
-            <span class="text-base-500"> {{ newTextLength }} وبسایت</span>
+            <span class="text-base-content">
+              {{ config.by_route(`${current_page}/boxes/count-of-websites`) }}
+            </span>
+            <span class="text-base-500">
+              {{ newTextLength }} {{ config.by_route(`constants/website`) }}
+            </span>
           </div>
         </div>
       </div>
       <div class="w-1/3 p-2">
         <div class="flex flex-col p-2 rounded-[5px] h-full items-center justify-around">
           <span class="flex items-center justify-center h-1/2">
-            برای ذخیره در فایل‌های من کلیک کنید:
+            {{ config.by_route(`${current_page}/boxes/click-to-save`) }}
           </span>
           <span class="flex items-center justify-center h-1/2">
             <button class="btn-primary gap-3" disabled>
@@ -108,7 +120,7 @@
                   fill="white"
                 />
               </svg>
-              ذخیره
+              {{ config.by_route(`${current_page}/buttons/save`) }}
             </button>
           </span>
         </div>
@@ -116,10 +128,14 @@
       <div class="w-1/3 p-2">
         <div class="flex flex-col p-2 rounded-[5px] h-full">
           <span class="flex items-center justify-center h-1/2 p-4">
-            برای فرستادن لینک و ارسال آن به گوگل بر روی کلید ارسال فایل کلیک کنید:
+            {{ config.by_route(`${current_page}/boxes/click-to-send`) }}
           </span>
           <span class="flex items-center justify-center h-1/2">
-            <button class="btn-primary gap-3">
+            <a
+              target="_blank"
+              href="https://www.google.com/webmasters/tools/disavow-links-main"
+              class="btn-primary gap-3"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -145,8 +161,8 @@
                   />
                 </g>
               </svg>
-              ارسال فایل
-            </button>
+              {{ config.by_route(`${current_page}/buttons/send-file`) }}
+            </a>
           </span>
         </div>
       </div>
@@ -269,7 +285,7 @@ const spliteText = () => {
 const submitForm = () => {
   spliteText();
   convertToText(
-    `#https://app.segmento.ir/disavow-file-generator\n\n#Domains to disavow\n${newText.join(
+    `#https://app.segmento.ir/disavow-builder\n\n#Domains to disavow\n${newText.join(
       "\n"
     )}\n\n#Pages to disavow\n${urlText.join("\n")}`,
     "zankonoyan"
