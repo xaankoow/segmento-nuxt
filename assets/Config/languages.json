@@ -296,11 +296,28 @@
             "g-ads-preview": {
                 "title": "اپلیکیشن پیش‌نمایش گوگل‌ادز"
             },
-          "disavow-builder": {
+            "disavow-builder": {
                 "title": "سازنده فایل Disavow",
                 "tabs": {
                     "generate": "ساخت فایل جدید",
                     "my-files": "فایل‌های من"
+                },
+                "buttons": {
+                    "generate": "ساخت و دانلود فایل",
+                    "save": "ذخیره",
+                    "send-file": "ارسال فایل"
+                },
+                "warnings": {
+                    "urls-input": "در هر خط فقط یک آدرس صفحه بنویسید.",
+                    "domains-input": "در این قسمت آدرس سایت را بنویسید."
+                },
+                "boxes": {
+                    "urls-input": "وارد کردن آدرس صفحه: (URLs)",
+                    "domains-input": "وارد کردن آدرس سایت: (Domains)",
+                    "click-to-send": "برای فرستادن لینک و ارسال آن به گوگل بر روی کلید ارسال فایل کلیک کنید:",
+                    "click-to-save": "برای ذخیره در فایل‌های من کلیک کنید:",
+                    "count-of-pages": "تعداد آدرس‌های صفحات:",
+                    "count-of-websites": "تعداد آدرس‌های وبسایت:"
                 }
             },
             "google-title-builder": {
@@ -497,6 +514,8 @@
         "constants": {
             "segmento-platform": "پلتفرم سگمنتو",
             "subscription": "اشتراک",
+            "website": "وبسایت",
+            "page": "صفحه",
             "packages": {
                 "FREE": "رایگان",
                 "BASE": "پایه",
