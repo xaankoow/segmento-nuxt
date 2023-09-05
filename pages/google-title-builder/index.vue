@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-5 w-full h-full">
+  <div class="flex flex-col w-full h-full">
     <!-- loading -->
     <div v-if="request.pending()"
       class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center">
@@ -7,41 +7,26 @@
     </div>
 
     <!-- Tabs -->
-    <div class="flex flex-row items-center gap-3 px-2 py-1 bg-base-200">
-      <NuxtLink to="/">
-        <TabItem :title="config.by_route(`${current_page}/search/title`)" :active="true" />
-      </NuxtLink>
-      <TabSeparator></TabSeparator>
-      <!-- <NuxtLink to="/"> -->
-      <TabItem :title="config.by_route(`${current_page}/my-lists`)" :active="false" />
-      <!-- </NuxtLink> -->
+    <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
+      <TabItem to="/google-title-builder" :active="true">
+        {{ config.by_route(`${current_page}/search/title`) }}
+      </TabItem>
+      <!-- <TabSeparator></TabSeparator>
+      <TabItem :active="false">
+        {{ config.by_route(`${current_page}/my-lists`) }}
+      </TabItem> -->
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col gap-2 px-2 w-full h-full">
+    <div class="flex flex-col gap-2 px-2 w-full h-full pt-8">
       <!-- search box -->
-      <form @submit.prevent="search_keywords_request()" class="flex flex-row items-center w-full gap-2 my-3">
+      <form @submit.prevent="search_keywords_request()" class="flex flex-row items-center w-full gap-2">
         <div class="flex flex-row items-center w-full justify-between gap-2 h-10">
           <div class="custom_input_box w-[95%] text-base-500">
             <input v-model="form.keyword" type="text" class="border border-base-400 rounded-[3px]" @focus="search_class.focus()" @blur="search_class.leave()" />
             <label class="!text-base-400" :class="search_class.transitionStyle(form.keyword, 'text-base-400')">{{
               config.by_route(`${current_page}/place-holder`) }}</label>
           </div>
-
-          <!-- <div class="flex flex-row items-center justify-center w-[25%]">
-            <select class="w-full rounded-[3px] border-2 border-base-300 px-2 py-2" v-model="form.lang">
-              <option value="FA">فارسی</option>
-              <option value="EN">انگلیسی</option>
-              <option value="AR">عربی</option>
-              <option value="DU">آلمانی</option>
-              <option value="FR">فرانسوی</option>
-              <option value="SP">اسپانیایی</option>
-              <option value="IT">ایتالیایی</option>
-              <option value="RU">روسی</option>
-              <option value="TR">ترکی</option>
-              <option value="PO">لهستانی</option>
-            </select>
-          </div> -->
 
           <button type="submit" class="btn-primary w-[5%] h-full">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
