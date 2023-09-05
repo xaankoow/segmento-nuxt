@@ -1,10 +1,10 @@
 <template>
-  <div class="flex bg-base-100 items-center">
-    <div class="navbar-start">
-      <div class="flex flex-row align-middle gap-1">
+  <div class="flex items-center bg-base-100">
+    <div class="navbar-start h-full">
+      <div class="flex flex-row items-center gap-2 h-full">
         <!-- Dashboard icon -->
         <slot name="dashboard-icon">
-          <label tabindex="0" class="flex h-fit my-auto">
+          <label tabindex="0" class="flex my-auto cursor-pointer p-2 hover:bg-base-250 h-full items-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_9_187)">
                 <path
