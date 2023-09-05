@@ -5,9 +5,9 @@
     <!-- Header section -->
     <NavbarTop :platform="cn.__(['layouts', 'default', 'header', 'platform'])"
       :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()"
-      class="shadow-md mx-auto h-[7vh] w-screen">
+      class="shadow-md mx-auto h-[7vh] w-screen p-2">
       <template v-slot:dashboard-icon>
-        <label tabindex="0" class="flex h-fit my-auto cursor-pointer w-12 pr-2" @click="show_hide_navbar()">
+        <label tabindex="0" class="flex my-auto cursor-pointer p-2 hover:bg-base-250 h-full items-center rounded-[3px]" @click="show_hide_navbar()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_9_187)">
               <path
@@ -36,7 +36,7 @@
     <div class="flex flex-row flex-grow ml-2 pt-2 gap-2" style="height: 93vh">
       <div class="flex flex-row">
         <!-- Right navbar -->
-        <NavbarRight class="justify-between py-2">
+        <NavbarRight class="justify-between pb-2">
           <div>
             <!-- پیشخان -->
             <!-- this section get commented until its pages get ready! TODO: when pages was ready, uncomment this section -->
