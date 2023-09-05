@@ -159,10 +159,9 @@ onBeforeMount(() => {
     subscription: `${config.by_route(`constants/plans/${ConfigStore.plan().plan.name}`)} ${config.by_route(`constants/packages/${ConfigStore.plan().plan.package}`)}`,
     expire_at: `${jalaliMoment(ConfigStore.plan().expire_at, 'YYYY-MM-DD HH:mm:ss').format('jYYYY/jMM/jDD')}`,
     started_at: `${jalaliMoment(ConfigStore.plan().created_at).format('jYYYY/jMM/jDD')}`,
-    full_time: `${Math.floor((new Date(ConfigStore.plan().expire_at) - new Date(ConfigStore.plan().created_at)) / (1000 * 60 * 60 * 24))}`,
-    remained_days: `${Math.floor((new Date(ConfigStore.plan().expire_at) - new Date()) / (1000 * 60 * 60 * 24))}`,
+    full_time: Math.floor((new Date(ConfigStore.plan().expire_at) - new Date(ConfigStore.plan().created_at)) / (1000 * 60 * 60 * 24)),
+    remained_days: Math.floor((new Date(ConfigStore.plan().expire_at) - new Date()) / (1000 * 60 * 60 * 24)),
   }
-  console.log(ConfigStore.plan())
 })
 
 onBeforeMount(() => {

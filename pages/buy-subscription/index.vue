@@ -233,7 +233,7 @@ async function buy_the_package() {
   if (response.status_code() < 300) {
     if (response.status()) {
       ConfigStore.logout();
-      return navigateTo(response.data().payment_url, { external: true });
+      return navigateTo(response.data().link, { external: true });
     }
   } else {
     console.log(response.errors()); // TODO: show errors!
