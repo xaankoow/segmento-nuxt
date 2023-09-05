@@ -73,7 +73,7 @@
           >
             <span>مقدار ریالی تخفیف:</span>
             <span :class="form.discount === null ? 'text-error' : ''">{{
-              formatPrice(form.discount?.discount)
+              form.discount?.discount
             }}</span>
           </div>
           <hr class="w-full mx-auto" />
@@ -85,7 +85,7 @@
             رایگان شد!
           </span>
           <span v-else>
-            {{ formatPrice(form.discount?.final ?? form.plan?.price.final) }}
+            {{ form.discount?.final ?? form.plan?.price.final }}
           </span>
           <hr class="w-11/12 mx-auto" />
         </div>
