@@ -12,7 +12,7 @@
 
   <!-- page content -->
   <div class="py-2 px-4 flex flex-col gap-2 h-[93%] justify-center">
-    <div class="flex flex-col border rounded-[9px] p-2 py-4 gap-2">
+    <div class="flex flex-col border rounded-[9px] p-2 py-4 gap-2 items-end">
       <div class="w-full flex">
         <div class="w-1/2 flex flex-col gap-2 px-4">
           <h1 class="border-r-2 pr-2 border-r-primary">
@@ -49,7 +49,7 @@
           </span>
         </div>
       </div>
-      <div class="flex items-center justify-end pt-2 px-4">
+      <div class="flex items-center justify-center pt-2 px-4 w-1/3">
         <button @click="submitForm()" class="btn-primary text-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
