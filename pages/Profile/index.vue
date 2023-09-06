@@ -76,7 +76,6 @@
 </template>
 
 <script setup>
-import { defineProps, ref, onUnmounted } from 'vue';
 import Auth from '/middlewares/Auth';
 import ConfigStore from '/store/ConfigStore';
 import Config from '/composables/Config';
@@ -85,13 +84,6 @@ const config = new Config();
 
 definePageMeta({
   middleware: [Auth],
-});
-
-const { image: userImage } = defineProps({
-  image: {
-    type: String,
-    default: '/images/profileDefaultImg.png',
-  },
 });
 
 const userName = ref(ConfigStore.user().name);
