@@ -1,67 +1,37 @@
 <template>
+  <!-- Tabs -->
+  <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
+    <TabItem to="/rank-tracker/overview" :active="false">
+      {{ tabs[0] }}
+    </TabItem>
+    <TabSeparator></TabSeparator>
+    <TabItem to="/rank-tracker/keyword" :active="false">
+      {{ tabs[1] }}
+    </TabItem>
+    <TabSeparator></TabSeparator>
+    <TabItem to="/rank-tracker/competitors" :active="true">
+      {{ tabs[2] }}
+    </TabItem>
+  </div>
   <div class="flex flex-col gap-2 w-full flex-grow">
-    <!-- title and tabs and update -->
+    <!-- update -->
     <div class="flex flex-row justify-between items-center">
-      <!-- title and tabs -->
-      <div class="flex flex-col">
-        <!-- title -->
-        <div class="flex items-center h-11 w-full">
-          <span>
-            <svg
-              width="2"
-              height="20"
-              viewBox="0 0 2 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="2" height="20" rx="1" fill="#002145" />
-            </svg>
-          </span>
-          <span class="mx-5">
-            {{ config.__(`pages/rank-tracker/header/title`.split("/")) }}
-          </span>
-        </div>
-
-        <!-- Tabs -->
-        <div class="flex flex-row items-center gap-3 px-2 py-1">
-          <span class="cursor-pointer opacity-70" to="/rank-tracker/overview"
-            ><TabItem :title="tabs[0]" :active="false"
-          /></span>
-
-          <span class="border-r h-full">&nbsp;</span>
-          <NuxtLink to="/rank-tracker/keyword"
-            ><TabItem :title="tabs[1]" :active="false"
-          /></NuxtLink>
-
-          <span class="border-l h-full">&nbsp;</span>
-          <span class="cursor-pointer opacity-70" to="/rank-tracker/competitors">
-            <TabItem :title="tabs[2]" :active="true" />
-          </span>
-        </div>
-      </div>
-
       <!-- update title -->
       <div class="flex flex-col gap-2 px-3 items-center text-base-500">
         <span class="flex flex-row items-center gap-2">
           <label
-            >{{
-              config.__("pages/rank-tracker/header/update/latest".split("/"))
-            }}:</label
+            >{{ config.__("pages/rank-tracker/header/update/latest".split("/")) }}:</label
           >
           <span>1402/03/25</span>
         </span>
         <span class="flex flex-row items-center gap-2">
           <label
             >{{
-              config.__(
-                "pages/rank-tracker/header/update/period/title".split("/")
-              )
+              config.__("pages/rank-tracker/header/update/period/title".split("/"))
             }}:</label
           >
           <span>{{
-            config.__(
-              "pages/rank-tracker/header/update/period/default".split("/")
-            )
+            config.__("pages/rank-tracker/header/update/period/default".split("/"))
           }}</span>
         </span>
       </div>
@@ -150,9 +120,7 @@
           </span>
 
           <table class="table table-xs border rounded-md">
-            <tbody
-              class="[&>tr>td]:text-right [&>tr>td]:border [&>tr]:border-none"
-            >
+            <tbody class="[&>tr>td]:text-right [&>tr>td]:border [&>tr]:border-none">
               <tr>
                 <td>Domain.com</td>
                 <td>Keyword</td>
@@ -160,63 +128,37 @@
                   <tr>
                     <td>&nbsp;</td>
                     <td>
-                      {{
-                        config.by_route(
-                          `${current_page}/table/site_domain_title`
-                        )
-                      }}
+                      {{ config.by_route(`${current_page}/table/site_domain_title`) }}
                     </td>
                     <td>Domain.com</td>
                   </tr>
                   <tr>
                     <td>
-                      {{
-                        config.by_route(`${current_page}/table/cells/current_rank`)
-                      }}
+                      {{ config.by_route(`${current_page}/table/cells/current_rank`) }}
                     </td>
                     <td>5</td>
                     <td>6</td>
                   </tr>
                   <tr>
                     <td>
-                      {{
-                        config.by_route(`${current_page}/table/cells/change_rate`)
-                      }}
+                      {{ config.by_route(`${current_page}/table/cells/change_rate`) }}
                     </td>
                     <td>
-                      {{
-                        config
-                          .by_route(`${current_page}/rank`)
-                          .replace("[rank]", 2)
-                      }}
+                      {{ config.by_route(`${current_page}/rank`).replace("[rank]", 2) }}
                     </td>
                     <td>
-                      {{
-                        config
-                          .by_route(`${current_page}/rank`)
-                          .replace("[rank]", 4)
-                      }}
+                      {{ config.by_route(`${current_page}/rank`).replace("[rank]", 4) }}
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      {{
-                        config.by_route(`${current_page}/table/cells/average`)
-                      }}
+                      {{ config.by_route(`${current_page}/table/cells/average`) }}
                     </td>
                     <td>
-                      {{
-                        config
-                          .by_route(`${current_page}/rank`)
-                          .replace("[rank]", 2)
-                      }}
+                      {{ config.by_route(`${current_page}/rank`).replace("[rank]", 2) }}
                     </td>
                     <td>
-                      {{
-                        config
-                          .by_route(`${current_page}/rank`)
-                          .replace("[rank]", 4)
-                      }}
+                      {{ config.by_route(`${current_page}/rank`).replace("[rank]", 4) }}
                     </td>
                   </tr>
                 </td>
@@ -345,9 +287,7 @@
             <template v-slot:content>
               <fieldset class="text-base-content">
                 <ul class="w-full flex flex-col gap-0">
-                  <li
-                    class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                  >
+                  <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                     <input
                       type="radio"
                       name="id-1"
@@ -355,9 +295,7 @@
                     />
                     <span>1 ساعت</span>
                   </li>
-                  <li
-                    class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                  >
+                  <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                     <input
                       type="radio"
                       name="id-2"
@@ -365,9 +303,7 @@
                     />
                     <span>2 ساعت</span>
                   </li>
-                  <li
-                    class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                  >
+                  <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                     <input
                       type="radio"
                       name="id-3"
@@ -375,9 +311,7 @@
                     />
                     <span>4 ساعت</span>
                   </li>
-                  <li
-                    class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                  >
+                  <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                     <input
                       type="radio"
                       name="id-4"
@@ -608,8 +542,8 @@
 import Config from "../../composables/Config";
 
 onBeforeMount(() => {
-  navigateTo('/rank-tracker/keyword');
-})
+  navigateTo("/rank-tracker/keyword");
+});
 
 const current_page = "pages/rank-tracker/competitors";
 const series = [

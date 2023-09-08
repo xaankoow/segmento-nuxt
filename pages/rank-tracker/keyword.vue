@@ -1,66 +1,38 @@
 <template>
+  <!-- Tabs -->
+  <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
+    <TabItem to="/rank-tracker/overview" :active="false">
+      {{ tabs[0] }}
+    </TabItem>
+    <TabSeparator></TabSeparator>
+    <TabItem to="/rank-tracker/keyword" :active="true">
+      {{ tabs[1] }}
+    </TabItem>
+    <TabSeparator></TabSeparator>
+    <TabItem to="/rank-tracker/competitors" :active="false">
+      {{ tabs[2] }}
+    </TabItem>
+  </div>
+
   <div class="flex flex-col gap-2 w-full flex-grow">
-    <!-- title and tabs and update -->
+    <!-- tabs and update -->
     <div class="flex flex-row justify-between items-center">
-      <!-- title and tabs -->
-      <div class="flex flex-col">
-        <!-- title -->
-        <div class="flex items-center h-11 w-full">
-          <span>
-            <svg
-              width="2"
-              height="20"
-              viewBox="0 0 2 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="2" height="20" rx="1" fill="#002145" />
-            </svg>
-          </span>
-          <span class="mx-5">
-            {{ config.__(`pages/rank-tracker/header/title`.split("/")) }}
-          </span>
-        </div>
-
-        <!-- Tabs -->
-        <div class="flex flex-row items-center gap-3 px-2 py-1">
-          <span class="pointer-events-none" to="/rank-tracker/overview"
-            ><TabItem :title="tabs[0]" :active="false"
-          /></span>
-
-          <span class="border-r h-full">&nbsp;</span>
-          <NuxtLink to="/rank-tracker/keyword"
-            ><TabItem :title="tabs[1]" :active="true"
-          /></NuxtLink>
-
-          <span class="border-l h-full">&nbsp;</span>
-          <span class="pointer-events-none" to="/rank-tracker/competitors">
-            <TabItem :title="tabs[2]" :active="false" />
-          </span>
-        </div>
-      </div>
       <!-- update title -->
       <div class="flex flex-col gap-2 px-3 items-center text-base-500">
         <span class="flex flex-row items-center gap-2">
           <label
-            >{{
-              config.__("pages/rank-tracker/header/update/latest".split("/"))
-            }}:</label
+            >{{ config.__("pages/rank-tracker/header/update/latest".split("/")) }}:</label
           >
           <span>1402/03/25</span>
         </span>
         <span class="flex flex-row items-center gap-2">
           <label
             >{{
-              config.__(
-                "pages/rank-tracker/header/update/period/title".split("/")
-              )
+              config.__("pages/rank-tracker/header/update/period/title".split("/"))
             }}:</label
           >
           <span>{{
-            config.__(
-              "pages/rank-tracker/header/update/period/default".split("/")
-            )
+            config.__("pages/rank-tracker/header/update/period/default".split("/"))
           }}</span>
         </span>
       </div>
@@ -355,9 +327,7 @@
               <template v-slot:content>
                 <fieldset class="text-base-content">
                   <ul class="w-full flex flex-col gap-0">
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -365,9 +335,7 @@
                       />
                       <span>1 ساعت</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-2"
@@ -375,9 +343,7 @@
                       />
                       <span>2 ساعت</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-3"
@@ -385,9 +351,7 @@
                       />
                       <span>4 ساعت</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-4"
@@ -427,9 +391,7 @@
               <template v-slot:content>
                 <fieldset class="text-base-content">
                   <ul class="w-full flex flex-col gap-0">
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -437,9 +399,7 @@
                       />
                       <span>1 رتبه</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -447,9 +407,7 @@
                       />
                       <span>2 رتبه</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -457,9 +415,7 @@
                       />
                       <span>4 رتبه</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -499,9 +455,7 @@
               <template v-slot:content>
                 <fieldset class="text-base-content">
                   <ul class="w-full flex flex-col gap-0">
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -509,9 +463,7 @@
                       />
                       <span>1 موبایل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-2"
@@ -519,9 +471,7 @@
                       />
                       <span>2 موبایل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-3"
@@ -529,9 +479,7 @@
                       />
                       <span>4 موبایل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-4"
@@ -635,9 +583,7 @@
               <template v-slot:content>
                 <fieldset class="text-base-content">
                   <ul class="w-full flex flex-col gap-0">
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -645,9 +591,7 @@
                       />
                       <span>1 هفته قبل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-2"
@@ -655,9 +599,7 @@
                       />
                       <span>2 هفته قبل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-3"
@@ -665,9 +607,7 @@
                       />
                       <span>4 هفته قبل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-4"
@@ -707,9 +647,7 @@
               <template v-slot:content>
                 <fieldset class="text-base-content">
                   <ul class="w-full flex flex-col gap-0">
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -717,9 +655,7 @@
                       />
                       <span>1 سایت</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-2"
@@ -727,9 +663,7 @@
                       />
                       <span>2 سایت</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-3"
@@ -737,9 +671,7 @@
                       />
                       <span>4 سایت</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-4"
@@ -779,9 +711,7 @@
               <template v-slot:content>
                 <fieldset class="text-base-content">
                   <ul class="w-full flex flex-col gap-0">
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -789,9 +719,7 @@
                       />
                       <span>1 موبایل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-2"
@@ -799,9 +727,7 @@
                       />
                       <span>2 موبایل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-3"
@@ -809,9 +735,7 @@
                       />
                       <span>4 موبایل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-4"
@@ -851,9 +775,7 @@
               <template v-slot:content>
                 <fieldset class="text-base-content">
                   <ul class="w-full flex flex-col gap-0">
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -861,9 +783,7 @@
                       />
                       <span>1 رقیب</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-2"
@@ -871,9 +791,7 @@
                       />
                       <span>2 رقیب</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-3"
@@ -881,9 +799,7 @@
                       />
                       <span>4 رقیب</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-4"
@@ -932,9 +848,7 @@
               <template v-slot:content>
                 <fieldset class="text-base-content">
                   <ul class="w-full flex flex-col gap-0">
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-1"
@@ -942,9 +856,7 @@
                       />
                       <span>1 هفته قبل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-2"
@@ -952,9 +864,7 @@
                       />
                       <span>2 هفته قبل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-3"
@@ -962,9 +872,7 @@
                       />
                       <span>4 هفته قبل</span>
                     </li>
-                    <li
-                      class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer"
-                    >
+                    <li class="flex flex-row gap-2 items-center px-2 py-1 cursor-pointer">
                       <input
                         type="radio"
                         name="id-4"
@@ -1110,7 +1018,7 @@
 
         <!-- the chart -->
         <div>
-          <ChartLine :series="series" /> 
+          <ChartLine :series="series" />
         </div>
       </div>
     </div>

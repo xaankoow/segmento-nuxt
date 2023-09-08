@@ -9,22 +9,20 @@
     </div>
 
     <!-- Tabs -->
-    <div class="flex flex-row items-center gap-3 px-2 py-1 bg-base-200">
-      <NuxtLink to="/">
-        <TabItem
-          :title="config.by_route(`${current_page}/search/title`)"
-          :active="true"
-        />
-      </NuxtLink>
-      <TabSeparator></TabSeparator>
-      <!-- <NuxtLink to="/"> -->
-      <TabItem :title="config.by_route(`${current_page}/my-lists`)" :active="false" />
-      <!-- </NuxtLink> -->
+    <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
+      <TabItem to="/keyword-research" :active="true">
+        {{ config.by_route(`${current_page}/search/title`) }}
+      </TabItem>
+      <!-- <TabSeparator></TabSeparator> -->
+      <!-- <TabItem :active="false">
+        {{ config.by_route(`${current_page}/my-lists`) }}
+      </TabItem> -->
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col gap-4 p-2 w-full pt-6"
-    :class="data === null ? 'h-full' : 'h-fit'"
+    <div
+      class="flex flex-col gap-4 p-2 w-full pt-8"
+      :class="data === null ? 'h-full' : 'h-fit'"
     >
       <!-- search box -->
       <form

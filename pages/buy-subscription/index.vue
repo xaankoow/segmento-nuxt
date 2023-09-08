@@ -1,78 +1,93 @@
 <template>
-  <div class="relative flex flex-col gap-8 items-center w-full px-2" :class="form.plan === null ? 'h-full justify-center' : 'h-auto py-4'">
-    <!-- title -->
-    <div
-      class="absolute top-0 left-0 !w-full !h-full z-50 bg-base-350/40 pointer-events-none flex justify-center items-center"
-      v-if="request.pending()">
-      <ToolsLoading class="w-32 h-32" />
-    </div>
-    <div class="absolute -top-11 left-0 !w-full !h-full z-50 bg-base-350/40 justify-center items-center hidden" id="package_factor">
-      <div class="flex flex-col justify-between items-center w-[26rem] bg-base-100 rounded-md -mt-32">
-        <!-- header -->
-        <div
-          class="flex flex-row items-center justify-between w-full px-3 py-2 rounded-t-md bg-base-500 text-white text-sm">
-          <!-- space -->
-          <span class="flex flex-row items-center w-1/4"></span>
-          <span class="flex flex-row items-center w-2/4 justify-center">
-            رسید نهایی خرید اشتراک
-          </span>
-          <span class="flex flex-row items-center w-1/4 justify-end px-3">
-            <button class="flex flex-row items-center" @click="HTMLController.hide_element('package_factor')">
-              &#x2715;
-            </button>
-          </span>
+  <!-- loading -->
+  <div v-if="request.pending()"
+    class="top-0 left-0 w-screen h-screen fixed z-50 bg-base-350/40 flex justify-center items-center">
+    <ToolsLoading class="w-32 h-32" />
+  </div>
+
+  <div class="top-0 left-0 w-screen h-screen fixed z-50 bg-base-350/40 justify-center items-center hidden"
+    id="package_factor">
+    <div class="flex flex-col justify-center items-center w-[26rem] bg-base-100 rounded-md m-auto pb-2">
+      <!-- header -->
+      <div
+        class="flex flex-row items-center justify-between w-full px-3 py-2 rounded-t-md bg-base-500 text-white text-sm">
+        <!-- space -->
+        <span class="flex flex-row items-center w-1/4"></span>
+        <span class="flex flex-row items-center w-2/4 justify-center">
+          رسید نهایی خرید اشتراک
+        </span>
+        <span class="flex flex-row items-center w-1/4 justify-end text-xl h-full">
+          <button class="flex flex-row items-center font-mono px-1 h-full"
+            @click="HTMLController.hide_element('package_factor')">
+            &#x2715;
+          </button>
+        </span>
+      </div>
+
+      <!-- content -->
+      <div class="flex flex-col w-full p-4 pb-0">
+        <!-- package data -->
+        <div class="flex flex-col gap-3 items-center w-full text-sm">
+          <span>نام اشتراک:</span>
+          <span class="font-semibold">{{
+            config.by_route(`constants/packages/${form.package?.name}`)
+          }}</span>
+          <hr class="w-11/12" />
         </div>
 
-        <!-- content -->
-        <div class="flex flex-col w-full p-4 pb-0">
-          <!-- package data -->
-          <div class="flex flex-col gap-3 items-center w-full text-sm">
-            <span>نام اشتراک</span>
-            <span class="font-semibold">{{ config.by_route(`constants/packages/${form.package?.name ?? 3}`) }}</span>
-            <hr class="w-11/12" />
+        <!-- plan data -->
+        <div class="flex flex-col p-4 items-center justify-center w-full text-sm gap-5">
+          <div class="flex flex-row items-center justify-between w-full px-3">
+            <span>مدت اشتراک: </span>
+            <span>{{ config.by_route(`constants/plans/${form.plan?.name}`) }}</span>
           </div>
-
-          <!-- plan data -->
-          <div class="flex flex-col p-4 items-center justify-center w-full text-sm gap-5">
-            <div class="flex flex-row items-center justify-between w-full px-3">
-              <span>مدت اشتراک: </span>
-              <span>{{ config.by_route(`constants/plans/${form.plan?.name ?? 3}`) }}</span>
-            </div>
-            <div class="flex flex-row items-center justify-between w-full px-3">
-              <span>قیمت اشتراک:</span>
-              <span>{{ form.plan?.price.value ?? 25000000 }} تومان</span>
-            </div>
-            <div class="flex flex-row items-center justify-between w-full px-3">
-              <span>تخفیف سگمنتو:</span>
-              <span>{{ form.plan?.price.discount ?? 25000000 }} تومان</span>
-            </div>
-            <div class="flex flex-row items-center justify-between w-full px-3">
-              <span>کد تخفیف:</span>
-              <span :class="form.discount_code === null ? 'text-error' : ''">{{ form.discount_code ?? 'انتخاب نشده' }}</span>
-            </div>
-            <div class="flex flex-row items-center justify-between w-full px-3">
-              <span>مقدار ریالی تخفیف:</span>
-              <span :class="form.discount === null ? 'text-error' : ''">{{ form.discount?.discount ?? 0 }} تومان</span>
-            </div>
-            <hr class="w-11/12 mx-auto" />
+          <div class="flex flex-row items-center justify-between w-full px-3">
+            <span>قیمت اشتراک:</span>
+            <span>{{ ExtensionTools.formatPrice(form.plan?.price.value) }}</span>
           </div>
-          <!-- final price section -->
-          <div class="flex flex-col gap-2 items-center text-sm">
-            <span class="font-bold">قیمت نهایی و پرداخت</span>
-            <span>{{ form.discount?.final ?? form.plan?.price.final ?? 2000000 }} تومان</span>
-            <hr class="w-11/12 mx-auto" />
+          <div class="flex flex-row items-center justify-between w-full px-3" v-if="form.plan?.price.discount !== 0">
+            <span>تخفیف سگمنتو:</span>
+            <span>{{ ExtensionTools.formatPrice(form.plan?.price.discount) }}</span>
           </div>
-
-          <form @submit.prevent="buy_the_package()" class="text-sm flex flex-col items-center w-full justify-center py-2">
-            <button type="submit" class="btn-primary w-11/12">خرید اشتراک</button>
-          </form>
+          <div class="flex flex-row items-center justify-between w-full px-3">
+            <span>کد تخفیف:</span>
+            <span :class="form.discount_code === null ? 'text-error' : ''">{{
+              form.discount_code ?? "نداشتید"
+            }}</span>
+          </div>
+          <div class="flex flex-row items-center justify-between w-full px-3" v-if="form.discount?.discount">
+            <span>مقدار ریالی تخفیف:</span>
+            <span :class="form.discount === null ? 'text-error' : ''">
+              {{ ExtensionTools.formatPrice(form.discount?.discount) }}
+            </span>
+          </div>
+          <hr class="w-full mx-auto" />
         </div>
+        <!-- final price section -->
+        <div class="flex flex-col gap-2 items-center text-sm">
+          <span class="font-bold">قیمت نهایی و پرداخت</span>
+          <span v-if="(form.discount?.final ?? form.plan?.price.final) === 0">
+            رایگان شد!
+          </span>
+          <span v-else>
+            {{ ExtensionTools.formatPrice(form.discount?.final ?? form.plan?.price.final) }}
+          </span>
+          <hr class="w-11/12 mx-auto" />
+        </div>
+
+        <form @submit.prevent="buy_the_package()" class="text-sm flex flex-col items-center w-full justify-center py-2">
+          <button type="submit" class="btn-primary w-11/12">خرید اشتراک</button>
+        </form>
       </div>
     </div>
+  </div>
+  <div class="flex flex-col gap-8 items-center w-full px-2"
+    :class="form.plan === null ? 'h-full justify-center' : 'h-auto py-4'">
+    <!-- title -->
+
     <!-- package -->
     <div class="flex w-full items-center justify-between gap-2">
-      <Plan class="w-1/4 h-fit" v-for="pack in packages" :key="pack.uuid" :content="pack"
-        @plan_updated="plan_changed" />
+      <Plan class="w-1/4 h-fit" v-for="pack in packages" :key="pack.uuid" :content="pack" @plan_updated="plan_changed" />
     </div>
     <div class="flex flex-col gap-5 items-center w-full">
       <!-- navigation -->
@@ -104,16 +119,14 @@
         <span>فعال سازی اشتراک</span>
         <span class="pr-2">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 15.625L0.375 8L8 0.375L9.075 1.45L3.25 7.25H15.625V8.75H3.25L9.075 14.55L8 15.625Z" 
-            fill="white"/>
+            <path d="M8 15.625L0.375 8L8 0.375L9.075 1.45L3.25 7.25H15.625V8.75H3.25L9.075 14.55L8 15.625Z"
+              fill="white" />
           </svg>
         </span>
       </button>
       <!-- footer -->
       <div class="flex flex-row items-center w-full justify-between border rounded-md px-7 py-7">
-        <span class="text-lg">
-          امکانات و منابع بیشتر یا خدمات اختصاصی دریافت کنید
-        </span>
+        <span class="text-lg"> امکانات و منابع بیشتر یا خدمات اختصاصی دریافت کنید </span>
         <a href="https://segmento.ir/about/contact/" target="_blank"
           class="rounded-md btn-secondary py-2 px-5 transition-all duration-100">
           توضیحات بیشتر
@@ -129,6 +142,7 @@ import HTMLController from "../../Controllers/HTMLController";
 import Package from "../../Models/Package";
 import Config from "../../composables/Config";
 import ConfigStore from "../../store/ConfigStore";
+import ExtensionTools from "~~/composables/ExtensionTools";
 
 const request = new Request();
 const packages = ref([]);
@@ -136,7 +150,7 @@ const form = ref({
   package: null,
   plan: null,
   discount: null,
-  discount_code: '',
+  discount_code: "",
 });
 
 const config = new Config();
@@ -153,7 +167,7 @@ function plan_changed(pack, plan, discount = null, discount_code = null) {
 }
 
 function show_factor() {
-  HTMLController.visible_element('package_factor');
+  HTMLController.visible_element("package_factor", "flex");
 }
 
 async function buy_the_package() {
@@ -162,28 +176,27 @@ async function buy_the_package() {
   let response = await request.post("packages/buy", {
     plan_uuid: form.value.plan.uuid,
     discount_code: form.value.discount_code,
-    use_wallet: 0
-  })
+    use_wallet: 0,
+  });
 
   if (response.status_code() < 300) {
     if (response.status()) {
       ConfigStore.logout();
-      return navigateTo(response.data().payment_url, { external: true });
+      return navigateTo(response.data().link, { external: true });
     }
-  }
-  else {
+  } else {
     console.log(response.errors()); // TODO: show errors!
   }
 }
 
 async function collect_packages() {
-  let response = await request.get('package');
+  let response = await request.get("package");
   if (response.status_code() < 300) {
-    packages.value = response.data().map(pack => new Package(pack))
-  }
-  else {
+    packages.value = response.data().map((pack) => new Package(pack));
+  } else {
     // TODO: send error message
     console.log(response);
   }
 }
+
 </script>
