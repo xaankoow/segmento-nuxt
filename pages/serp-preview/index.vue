@@ -7,7 +7,7 @@
     <div class="searchTitle mb-4">
       <lable class="text-sm flow-root my-2.5 font-bold">آدرس وبسایت (URL)</lable>
       <div class="flex gap-2.5">
-        <input @input="txtUrl=$event.target.value" placeholder="example: segmento.ir" type="text" class="w-80 h-11 text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-left" />
+        <input @input="txtUrl=$event.target.value" placeholder="example: segmento.ir" type="text" class="w-80 h-11 text-black placeholder:text-base-400 border border-base-400 rounded-[5px] ltr" />
         <button class="btn-primary rounded-md text-sm" :disabled="txtUrl.length==0" @click="checkHttpRgex()">دریافت</button>
       </div>
     </div>
@@ -21,9 +21,9 @@
     </div>
     <div class="Desc mb-4">
       <lable class="flex justify-between text-sm mb-2.5 font-bold">توضیحات (Description)
-        <span class="ltr">({{descTitle.length}} / 100px )</span>
+        <span class="ltr">({{descTitle.length}} / 150px )</span>
       </lable>
-      <textarea @input="descTitle=$event.target.value" @keydown="progressBar(descTitle.length,`desc`)" placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش " class="w-full h-24 py-2 px-4 resize-none text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-right" maxlength="100"></textarea>
+      <textarea @input="descTitle=$event.target.value" @keydown="progressBar(descTitle.length,`desc`)" placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش " class="w-full h-24 py-2 px-4 resize-none text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-right" maxlength="150"></textarea>
       <span class="titleProgress" id="descProgressBar"></span>
     </div>
     <div class="keyword mb-4">
@@ -34,7 +34,7 @@
       اجرا
     </button>
   </div>
-  <div class="preview p-4 inline-block float-left rounded text-black">
+  <div class="preview p-4 inline-block float-left rounded text-black overflow-hidden">
     <div class="searchHeader  pb-2.5 flex justify-stretch items-center flex-row-reverse gap-4 cursor-pointer">
       <span>ALL</span>
       <span>Images</span>
@@ -44,13 +44,18 @@
     </div>
     <box class="box">
       <div class="content p-1 py-3">
-        <div :class="txtUrl.length > 0 ? 'url':'' ">
-          <h2 class="w-full text-left">{{txtUrl}}</h2>
-          <nuxt-link class="float-left flow-root text-neutral-500 text-xs mt-2" href="/">{{txtUrl}}</nuxt-link>
+        <div class=" flex flex-row-reverse items-center">
+          <div :class="[txtUrl.length > 0 ? 'urlImg inline-block' :'hidden']">
+            <img src="../../assets/icons/google.png" />
+          </div>
+          <div class="sample">
+            <h2 class="w-full ltr minimize">{{txtUrl}}</h2>
+            <nuxt-link class="minimize float-left text-neutral-500 text-xs ltr" href="/">{{txtUrl}}</nuxt-link>
+          </div>
         </div>
-        <h1 class="flow-root text-black w-full text-xl text-left text-blue-700 py-1">{{titleLength}}</h1>
+        <h1 class="flow-root minimize text-black w-full text-xl text-left text-blue-700 py-1">{{titleLength}}</h1>
         <div class="description flow-root text-xs w-full text-left">
-          <p class="text-neutral-500">
+          <p class="text-neutral-500 minimize">
             {{descTitle}}
           </p>
         </div>
@@ -126,17 +131,23 @@
   width: max-content;
 }
 
-.url::before{
-  content: "";
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  background-color: red;
-  vertical-align: sub;
-  margin-right: 9px;
-  border-radius: 50%;
-  float: left;
-  margin-top: 11px;
+.urlImg{
+  width: 70px;
+  /*height: 70px;*/
+}
+
+.urlImg img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.minimize{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 </style>
@@ -144,6 +155,11 @@
   const titleLength=ref('');
   const descTitle=ref('')
   const txtUrl=ref('');
+
+  watch(()=>{
+    debugger
+    console.log(txtUrl.value)
+  })
 
   const progressBar=(length,type)=>{
     let progress=document.getElementById("tProgressBar");
