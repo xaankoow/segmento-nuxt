@@ -171,16 +171,18 @@
     </div>
   </div>
   <div class="flex w-full p-2 h-[10%] gap-2 justify-center items-center">
-    <NuxtLink
-      to="/buy-subscription"
-      class="rounded-[3px] w-full h-full flex justify-around items-center bg-gradient-to-r from-[#1444b0] to-primary text-base-100"
-    >
-      <span> همین الان با 50% تخفیف شروع کنید.</span>
-      <span
-        >کد تخفیف: 
-        <span>استارتر</span>
-      </span>
-    </NuxtLink>
+    <Copy content="استارتر">
+      <NuxtLink
+        to="/buy-subscription"
+        class="rounded-[3px] w-full h-full flex justify-around items-center bg-gradient-to-r from-[#1444b0] to-primary text-base-100"
+      >
+        <span> همین الان با 50% تخفیف شروع کنید.</span>
+        <span
+          >کد تخفیف:
+          <span>استارتر</span>
+        </span>
+      </NuxtLink>
+    </Copy>
   </div>
 </template>
 
