@@ -40,6 +40,7 @@
                                 "title": "سئو",
                                 "fields": {
                                     "keyword-research": "تحقیق کلمه کلیدی",
+                                    "google-suggested-words": "کلمات پیشنهادی گوگل",
                                     "google-title-builder": "عنوان‌ساز گوگل"
                                 }
                             },
@@ -267,6 +268,31 @@
             },
             "keyword-research": {
                 "title": "اپلیکیشن تحقیق کلمه کلیدی",
+                "search": {
+                    "title": "جستجو",
+                    "sentence": [
+                        "",
+                        "تعداد نتایج: [count] عبارت"
+                    ],
+                    "word": "جستجو کلمه کلیدی",
+                    "alphabet": "جستجو بر اساس حروف الفبا"
+                },
+                "my-lists": "لیست‌های من",
+                "place-holder": "درج کلمه کلیدی",
+                "table": {
+                    "select": "انتخاب",
+                    "row": "ردیف",
+                    "result": "کلمه کلیدی",
+                    "buttons": {
+                        "save": "ذخیره پیشنهادات",
+                        "copy": "کپی همه",
+                        "more": "تولید بیشتر"
+                    },
+                    "empty": "اطلاعاتی برای نمایش وجود ندارد!"
+                }
+            },
+            "google-suggested-words": {
+                "title": "اپلیکیشن کلمات پیشنهادی گوگل",
                 "search": {
                     "title": "جستجو",
                     "sentence": [
