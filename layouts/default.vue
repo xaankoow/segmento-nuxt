@@ -7,7 +7,8 @@
       :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()"
       class="shadow-md mx-auto h-[7vh] w-screen p-2">
       <template v-slot:dashboard-icon>
-        <label tabindex="0" class="flex my-auto cursor-pointer p-2 hover:bg-base-250 h-full items-center rounded-[3px]" @click="show_hide_navbar()">
+        <label tabindex="0" class="flex my-auto cursor-pointer p-2 hover:bg-base-250 h-full items-center rounded-[3px]"
+          @click="show_hide_navbar()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_9_187)">
               <path
@@ -231,6 +232,23 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
+                  <div class="flex flex-col gap-3">
+                    <NuxtLink to="/google-suggested-words">
+                      <SvgLabeled :label="cn.by_route(
+                        `${department_section}/seo/fields/google-suggested-words`
+                      )
+                        " @click="change_active_section('google-suggested-words')" :active="$route.path.split('/')[1].toLowerCase() ===
+    'google-suggested-words'
+    ">
+                        <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M11 4.5C11.1989 4.5 11.3897 4.57902 11.5303 4.71967C11.671 4.86032 11.75 5.05109 11.75 5.25C11.75 5.44891 11.671 5.63968 11.5303 5.78033C11.3897 5.92098 11.1989 6 11 6H5C4.80109 6 4.61032 5.92098 4.46967 5.78033C4.32902 5.63968 4.25 5.44891 4.25 5.25C4.25 5.05109 4.32902 4.86032 4.46967 4.71967C4.61032 4.57902 4.80109 4.5 5 4.5H11ZM16.7803 17.7803C16.6396 17.9209 16.4489 17.9998 16.25 17.9998C16.0511 17.9998 15.8604 17.9209 15.7197 17.7803L13.9145 15.975C13.3799 16.3162 12.7592 16.4983 12.125 16.5C11.4575 16.5 10.805 16.3021 10.25 15.9312C9.69493 15.5604 9.26235 15.0333 9.00691 14.4166C8.75146 13.7999 8.68462 13.1213 8.81485 12.4666C8.94507 11.8119 9.26651 11.2105 9.73851 10.7385C10.2105 10.2665 10.8119 9.94507 11.4666 9.81485C12.1213 9.68462 12.7999 9.75146 13.4166 10.0069C14.0333 10.2624 14.5604 10.6949 14.9312 11.25C15.3021 11.805 15.5 12.4575 15.5 13.125C15.4983 13.7592 15.3162 14.3799 14.975 14.9145L16.7803 16.7197C16.9209 16.8604 16.9998 17.0511 16.9998 17.25C16.9998 17.4489 16.9209 17.6396 16.7803 17.7803ZM12.125 15C12.4958 15 12.8584 14.89 13.1667 14.684C13.475 14.478 13.7154 14.1851 13.8573 13.8425C13.9992 13.4999 14.0363 13.1229 13.964 12.7592C13.8916 12.3955 13.713 12.0614 13.4508 11.7992C13.1886 11.537 12.8545 11.3584 12.4908 11.286C12.1271 11.2137 11.7501 11.2508 11.4075 11.3927C11.0649 11.5346 10.772 11.775 10.566 12.0833C10.36 12.3916 10.25 12.7542 10.25 13.125C10.25 13.6223 10.4475 14.0992 10.7992 14.4508C11.1508 14.8025 11.6277 15 12.125 15ZM8.75 16.5H4.25C3.65326 16.5 3.08097 16.2629 2.65901 15.841C2.23705 15.419 2 14.8467 2 14.25V3.75C2 3.15326 2.23705 2.58097 2.65901 2.15901C3.08097 1.73705 3.65326 1.5 4.25 1.5H13.25C13.4489 1.5 13.6397 1.57902 13.7803 1.71967C13.921 1.86032 14 2.05109 14 2.25V8.25C14 8.44891 14.079 8.63968 14.2197 8.78033C14.3603 8.92098 14.5511 9 14.75 9C14.9489 9 15.1397 8.92098 15.2803 8.78033C15.421 8.63968 15.5 8.44891 15.5 8.25V2.25C15.5 1.65326 15.2629 1.08097 14.841 0.65901C14.419 0.237053 13.8467 0 13.25 0L4.25 0C3.2558 0.00119089 2.30267 0.396661 1.59966 1.09966C0.896661 1.80267 0.501191 2.7558 0.5 3.75V14.25C0.501191 15.2442 0.896661 16.1973 1.59966 16.9003C2.30267 17.6033 3.2558 17.9988 4.25 18H8.75C8.94891 18 9.13968 17.921 9.28033 17.7803C9.42098 17.6397 9.5 17.4489 9.5 17.25C9.5 17.0511 9.42098 16.8603 9.28033 16.7197C9.13968 16.579 8.94891 16.5 8.75 16.5Z"
+                            fill="#002145" />
+                        </svg>
+
+                      </SvgLabeled>
+                    </NuxtLink>
+                  </div>
                 </According>
 
                 <!-- Content Creation Section -->
@@ -360,7 +378,8 @@
                       <SvgLabeled :label="cn.by_route(
                         `${department_section}/technical-seo/fields/disavow-builder`
                       )
-                        " @click="change_active_section('disavow-builder')" :active="$route.path.split('/')[1].toLowerCase() === 'disavow-builder'">
+                        " @click="change_active_section('disavow-builder')" :active="$route.path.split('/')[1].toLowerCase() === 'disavow-builder'
+    ">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_5618_18836)">
                             <path
@@ -381,25 +400,31 @@
                   </div>
                 </According>
               </div>
-              <NuxtLink v-if="$route.path.split('/')[1].toLowerCase() === ''" to="/buy-subscription"
-                class="rounded-[3px] w-full p-2 flex flex-col justify-center gap-2 items-center bg-secondary text-base-content text-sm h-20">
-                <span class="w-full"> همین الان با 50% تخفیف شروع کنید.</span>
-                <span class="flex justify-between w-full">
-                  <span> کد تخفیف: </span>
-                  <span>استارتر</span>
-                </span>
-              </NuxtLink>
-              <div v-else-if="$route.path.split('/')[1].toLowerCase() === 'buy-subscription'"
-                class="rounded-[3px] w-full p-2 flex flex-col justify-center gap-2 items-center bg-gradient-to-r from-[#1444b0] to-primary text-base-100 text-sm h-12">
-                <span class="flex justify-between w-full">
-                  <span> کد تخفیف: </span>
+              <Copy content="استارتر" v-if="$route.path.split('/')[1].toLowerCase() === ''">
+                <NuxtLink to="/buy-subscription"
+                  class="rounded-[3px] w-full p-2 flex flex-col justify-center gap-2 items-center bg-secondary text-base-content text-sm h-20">
+                  <span class="w-full"> همین الان با 50% تخفیف شروع کنید.</span>
+                  <span class="flex justify-between w-full">
+                    <span>
+                      کد تخفیف:
+                      <span>استارتر</span>
+                    </span>
+                  </span>
+                </NuxtLink>
+              </Copy>
+              <Copy content="استارتر" v-else-if="$route.path.split('/')[1].toLowerCase() === 'buy-subscription'"
+                class="rounded-[3px] w-full p-2 flex flex-col justify-center gap-2 items-start bg-gradient-to-r from-[#1444b0] to-primary text-base-100 text-sm h-12">
+                <span>
+                  کد تخفیف:
                   <span class="selection:bg-base-400 selection:text-base-content">استارتر</span>
                 </span>
-              </div>
-              <NuxtLink v-else to="/buy-subscription"
-                class="rounded-[3px] w-full p-2 flex flex-col justify-center gap-2 items-center bg-gradient-to-r from-[#1444b0] to-primary text-base-100 text-sm h-12">
-                همین الان با 50% تخفیف شروع کنید.
-              </NuxtLink>
+              </Copy>
+              <Copy content="استارتر" v-else>
+                <NuxtLink to="/buy-subscription"
+                  class="rounded-[3px] w-full p-2 flex flex-col justify-center gap-2 items-center bg-gradient-to-r from-[#1444b0] to-primary text-base-100 text-sm h-12">
+                  همین الان با 50% تخفیف شروع کنید.
+                </NuxtLink>
+              </Copy>
             </template>
           </NavbarRightContentDepartment>
         </div>

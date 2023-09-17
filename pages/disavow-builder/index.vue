@@ -285,10 +285,10 @@ const spliteText = () => {
 const submitForm = () => {
   spliteText();
   convertToText(
-    `#https://app.segmento.ir/disavow-builder\n\n#Domains to disavow\n${newText.join(
+    `# https://app.segmento.ir/disavow-builder\n\n# Domains to disavow\n${newText.join(
       "\n"
-    )}\n\n#Pages to disavow\n${urlText.join("\n")}`,
-    "zankonoyan"
+    )}\n\n# Pages to disavow\n${urlText.join("\n")}`,
+    "disavow-ymd"
   );
 };
 

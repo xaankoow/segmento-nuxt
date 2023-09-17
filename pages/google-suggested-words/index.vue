@@ -30,7 +30,7 @@
         class="flex flex-row items-center w-full gap-2"
       >
         <div class="flex flex-row items-center w-full justify-between gap-2 h-10">
-          <div class="custom_input_box w-[65%] text-base-500">
+          <div class="custom_input_box w-[95%] text-base-500">
             <InputText
               v-model="form.keyword"
               type="text"
@@ -42,24 +42,6 @@
               :class="search_class.transitionStyle(form.keyword, 'text-base-400')"
               >{{ config.by_route(`${current_page}/place-holder`) }}</label
             >
-          </div>
-
-          <div class="flex flex-row items-center justify-center w-[30%]">
-            <select
-              class="w-full rounded-[3px] border border-base-400 px-2 py-2"
-              v-model="form.lang"
-            >
-              <option value="FA">فارسی</option>
-              <option value="EN">انگلیسی</option>
-              <option value="AR">عربی</option>
-              <option value="DU">آلمانی</option>
-              <option value="FR">فرانسوی</option>
-              <option value="SP">اسپانیایی</option>
-              <option value="IT">ایتالیایی</option>
-              <option value="RU">روسی</option>
-              <option value="TR">ترکی</option>
-              <option value="PO">لهستانی</option>
-            </select>
           </div>
 
           <button type="submit" class="btn-primary w-[5%] h-full">
@@ -101,8 +83,8 @@
       >
         <!-- form -->
         <div
-          class="flex flex-col rounded-[3px] border border-base-400"
-          :class="data === null ? 'h-full w-full' : 'h-fit w-[65%]'"
+          class="flex flex-col rounded-[3px] border border-base-400 w-full"
+          :class="data === null ? 'h-full' : 'h-fit'"
         >
           <!-- header -->
           <div
@@ -170,7 +152,7 @@
               <div class="flex flex-row w-full items-center py-2 pr-2">
                 <span class="flex justify-center">
                   <span
-                    class="w-8 bg-gray-200 text-base-content rounded-[3px] flex justify-center"
+                    class="w-[200px] bg-gray-200 text-base-content rounded-[3px] flex justify-center"
                   >
                     {{ index }}
                   </span>
@@ -205,43 +187,6 @@
             </div>
           </div>
         </div>
-
-        <!-- options -->
-        <div class="flex justify-center w-[35%] h-[200vh]" v-if="data !== null">
-          <div class="flex flex-col gap-4 items-center w-full">
-            <!-- drop down disabled -->
-            <!-- <div class="flex flex-row items-center w-full bg-base-400 text-base-500 justify-between rounded-[3px]">
-              <span class="w-10/12 px-3 py-2">{{
-                config.by_route(`${current_page}/search/word`)
-              }}</span>
-              <span class="w-2/12 border-r border-r-base-500 flex flex-row items-center justify-center h-full">
-                <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M1.075 9.29961L9.375 0.974609C9.45833 0.891276 9.55433 0.828943 9.663 0.78761C9.771 0.74561 9.88333 0.724609 10 0.724609C10.1167 0.724609 10.2293 0.74561 10.338 0.78761C10.446 0.828943 10.5417 0.891276 10.625 0.974609L18.95 9.29961C19.15 9.49961 19.25 9.73294 19.25 9.99961C19.25 10.2663 19.1417 10.5079 18.925 10.7246C18.7417 10.9246 18.5127 11.0246 18.238 11.0246C17.9627 11.0246 17.725 10.9246 17.525 10.7246L10 3.17461L2.45 10.7246C2.26667 10.9079 2.04167 10.9996 1.775 10.9996C1.50833 10.9996 1.275 10.8996 1.075 10.6996C0.875 10.4996 0.775 10.2663 0.775 9.99961C0.775 9.73294 0.875 9.49961 1.075 9.29961Z"
-                    fill="#7D7D7D" />
-                </svg>
-              </span>
-            </div> -->
-
-            <div class="flex flex-row justify-center items-center w-full">
-              {{ config.by_route(`${current_page}/search/alphabet`) }}
-            </div>
-
-            <!-- word list -->
-            <div class="sticky top-20 left-10 rounded-sm grid grid-cols-8 w-full gap-2">
-              <button
-                class="alphabet btn-secondary bg-[#F2F5F770] text-base-content"
-                v-for="(data, index) in cache"
-                :class="data.length <= 0 ? 'hidden' : ''"
-                :key="index"
-                :id="`alpha-${index}`"
-                @click="update_list_by_alphabet(index, `alpha-${index}`)"
-              >
-                {{ index }}
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -259,7 +204,6 @@ const config = new Config();
 const search_class = new CustomTextBox();
 const data = ref(null);
 const cache = ref(null);
-const old_alphabet_id = ref(null);
 const request = new Request();
 const form = ref({
   keyword: "",
@@ -276,47 +220,11 @@ onBeforeMount(() => {
   }
 });
 
-function toggle_active_alphabet(id) {
-  if (old_alphabet_id.value !== null) {
-    let old_alphabet = document.getElementById(old_alphabet_id.value);
-    old_alphabet.classList.toggle("active");
-  }
-  let current_alphabet = document.getElementById(id);
-  current_alphabet.classList.toggle("active");
-  old_alphabet_id.value = id;
-}
-
-function update_list_by_alphabet(item, id) {
-  if (id === old_alphabet_id.value) {
-    let old_alphabet = document.getElementById(old_alphabet_id.value);
-    old_alphabet.classList.toggle("active");
-    data.value = cache.value;
-    old_alphabet_id.value = null;
-  } else {
-    // TODO : Fix this ugly section later :))
-    let cacheToArray = Object.entries(cache.value);
-    let custom_array = cacheToArray.filter((itm) => {
-      return itm[0] === item;
-    });
-    if (custom_array !== null && custom_array.length > 0) {
-      custom_array = custom_array.map((item) => {
-        return Object.values(item[1]) ?? [];
-      });
-    } else {
-      custom_array = [[]];
-    }
-
-    data.value = {
-      [item]: custom_array[0],
-    };
-    toggle_active_alphabet(id);
-  }
-}
-
 async function search_keywords_request() {
-  let res = await request.get("keyword-research/generate", form.value, "v2");
+  let res = await request.get("google-suggested-words/generate", form.value, "v2");
 
   data.value = res.data();
   cache.value = data.value;
+  console.log(res);
 }
 </script>

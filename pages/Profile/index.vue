@@ -71,179 +71,28 @@
       </div>
 
       <hr class="border-b border-base-400" />
-
-      <!-- main -->
-      <!-- <div class="w-3/4 h-auto mt-10 text-sm border-b border-base-400 pb-6">
-        <p class="mb-5">اطلاعات کسب و کار شما</p>
-        <DropdownIndexTwo>
-          <template v-slot:title> زمینه فعالیت شما (نوع سایت) </template>
-          <template v-slot:option>
-            <option value="">لطفا یک گزینه را انتخاب کنید</option>
-            <option value="">سایت فروش محصولات فیزیکی</option>
-            <option value="">سایت فروش محصولات مجازی</option>
-            <option value="">سایت آموزشی</option>
-            <option value="">سایت شرکتی</option>
-            <option value="">سایت صنعتی</option>
-            <option value="">سایت ارز دیجیتال</option>
-            <option value="">سایت خبری</option>
-            <option value="">سایت استارتاپ</option>
-            <option value="">سایت وبلاگی</option>
-            <option value="">سایت شخصی</option>
-            <option value="">سایت لوازم بهداشتی</option>
-            <option value="">سایت لوازم آرایشی</option>
-            <option value="">سایت پوشاک</option>
-            <option value="">سایت لوازم ورزشی</option>
-            <option value="">سایت فروش کتاب</option>
-            <option value="">سایت موسیقی</option>
-            <option value="">سایت دیجیتال مارکتینگ</option>
-            <option value="">سفارشی</option>
-          </template>
-        </DropdownIndexTwo>
-        <DropdownIndexTwo>
-          <template v-slot:title> تعداد اعضای شرکت </template>
-          <template v-slot:option>
-            <option value="">لطفا یک گزینه را انتخاب کنید</option>
-            <option value="">کمتر از 5 نفر</option>
-            <option value="">کمتر از 10 نفر</option>
-            <option value="">کمتر از 20 نفر</option>
-            <option value="">کمتر از 50 نفر</option>
-            <option value="">کمتر از 100 نفر</option>
-          </template>
-        </DropdownIndexTwo>
-        <DropdownIndexTwo>
-          <template v-slot:title> تعداد متخصص سئو </template>
-          <template v-slot:option>
-            <option value="">لطفا یک گزینه را انتخاب کنید</option>
-            <option value="">کمتر از 3 نفر</option>
-            <option value="">کمتر از 5 نفر</option>
-            <option value="">کمتر از 10 نفر</option>
-            <option value="">کمتر از 20 نفر</option>
-          </template>
-        </DropdownIndexTwo>
-        <DropdownIndexTwo>
-          <template v-slot:title> ترافیک ماهانه وب سایت شما </template>
-          <template v-slot:option>
-            <option value="">لطفا یک گزینه را انتخاب کنید</option>
-            <option value="">کمتر از 1k</option>
-            <option value="">کمتر از 5k</option>
-            <option value="">کمتر از 10k</option>
-            <option value="">کمتر از 20k</option>
-            <option value="">کمتر از 50k</option>
-            <option value="">کمتر از 100k</option>
-            <option value="">کمتر از 200k</option>
-            <option value="">کمتر از 300k</option>
-            <option value="">کمتر از 500k</option>
-            <option value="">کمتر از 1M</option>
-            <option value="">کمتر از 2M</option>
-            <option value="">کمتر از 5M</option>
-          </template>
-        </DropdownIndexTwo>
-        <DropdownIndexTwo>
-          <template v-slot:title> سمت شما در تیم </template>
-          <template v-slot:option>
-            <option value="">لطفا یک گزینه را انتخاب کنید</option>
-            <option value="">متخصص سئو</option>
-            <option value="">مدیر ارشد سئو</option>
-            <option value="">مشاور سئو</option>
-            <option value="">پیمانکار سئو</option>
-            <option value="">فریلنسر</option>
-            <option value="">وبمستر</option>
-            <option value="">مدیر دیجیتال مارکتینگ</option>
-          </template>
-        </DropdownIndexTwo>
-        <DropdownIndexTwo>
-          <template v-slot:title> روش آشنایی با سگمنتو </template>
-          <template v-slot:option>
-            <option value="">لطفا یک گزینه را انتخاب کنید</option>
-            <option value="">آشنایی قبلی</option>
-            <option value="">گوگل</option>
-            <option value="">تبلیغات</option>
-            <option value="">سایت همکار</option>
-            <option value="">متخصص های همکار</option>
-            <option value="">لینکدین</option>
-            <option value="">اینستاگرام</option>
-          </template>
-        </DropdownIndexTwo>
-        <div class="w-full h-auto flex justify-end mt-5">
-          <button class="w-[89px] h-10 btn-secondary" disabled>
-            انصراف
-          </button>
-          <button class="w-32 h-10 btn-primary mr-7" disabled>
-            ذخیره تغییرات
-          </button>
-        </div>
-      </div> -->
-
-
-      <!-- footer -->
-      <!-- <div class="w-3/4 h-auto mt-10 text-sm text-base-content">
-        <p class="mb-4">پیغام برای تیم سگمنتو</p>
-        <div id="app">
-          <editor api-key="no-api-key" :init="{
-            height: 500,
-            menubar: false,
-            toolbar: 'undo redo',
-            toolbar_location: 'right',
-            plugins: [
-              'advlist',
-              'advcode',
-              'advtable',
-              'autolink',
-              'checklist',
-              'export',
-              'lists',
-              'link',
-              'image',
-              'charmap',
-              'preview',
-              'anchor',
-              'searchreplace',
-              'visualblocks',
-              'powerpaste',
-              'fullscreen',
-              'formatpainter',
-              'insertdatetime',
-              'media',
-              'table',
-              'help',
-              'wordcount',
-            ],
-            toolbar:
-              ' casechange blocks | bold italic underline| \
-                              alignleft aligncenter alignright alignjustify | \
-                              bullist numlst checklist | link ',
-          }" />
-        </div>
-        <div class="w-full flex justify-end opacity-70">
-          <button class="w-24 h-10 btn-primary ml-0 my-4 cursor-not-allowed">
-            ارسال پیام
-          </button>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script setup>
-// import Editor from "@tinymce/tinymce-vue";
-import Auth from "../../middlewares/Auth";
-import ConfigStore from "../../store/ConfigStore";
-import Config from "../../composables/Config";
+import Auth from '/middlewares/Auth';
+import ConfigStore from '/store/ConfigStore';
+import Config from '/composables/Config';
 
 const config = new Config();
 
 definePageMeta({
-  middleware: [Auth]
-})
-const props = defineProps({
-  image: {
-    type: String,
-    default: "/images/profileDefaultImg.png"
-  },
+  middleware: [Auth],
 });
+
+const userName = ref(ConfigStore.user().name);
+const userEmail = ref(ConfigStore.user().email.value);
+const userPackage = ref(config.by_route(`constants/packages/${ConfigStore.plan().plan.package}`));
 
 function logout() {
   ConfigStore.logout();
-  navigateTo("/auth/login");
+  navigateTo('/auth/login');
 }
+
 </script>
