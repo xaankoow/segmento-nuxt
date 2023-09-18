@@ -1,22 +1,23 @@
 <template>
   <div class="p-2 flex flex-col gap-2 h-full">
-    <div
-      class="w-full text-base-content h-[17%] p-2 justify-around flex flex-col items-center bg-base-200 rounded-[3px]"
-    >
-      <div class="text-lg text-center">
-        فقط عنوان و توضیحات متا خود را وارد کنید تا یک پیش نمایش از وبسایت خودتان را در
-        صفحه سرچ گوگل مشاهده کنید:
-      </div>
-      <div class="text-xs w-[73%]">
-        خیلی از مواقع مطمئن نیستیم که عنوان و توضیحات متایی (Meta Title and Description)
-        که برای گوگل می‌نویسیم، به درستی نمایش داده خواهند شد یا نه. این پیش‌نمایش به شما
-        کمک می‌کند این مشکل را یک بار برای همیشه حل کنید.
-      </div>
-    </div>
-    <div class="w-full flex flex-row gap-2 h-[68%]">
+    <div class="w-full flex flex-row gap-2 h-[85%]">
       <div class="flex flex-col justify-around h-full border w-2/5 rounded-[3px] p-2">
+        <div class="title gap-1 flex flex-col">
+          <label class="flex justify-between text-sm text-base-content">
+            برند (Brand)
+          </label>
+          <div class="w-full flex flex-col items-end">
+            <InputText
+              v-model="site.brand"
+              placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل"
+              type="text"
+              :class="`w-full text-right`"
+            />
+          </div>
+        </div>
+
         <div class="gap-1 flex flex-col">
-          <label class="text-sm flow-root font-bold">آدرس وبسایت (URL)</label>
+          <label class="text-sm flow-root text-[#041e49]">آدرس وبسایت (URL)</label>
           <div class="flex justify-between h-10 gap-2">
             <InputText
               v-model="site.url"
@@ -34,7 +35,7 @@
           </div>
         </div>
         <div class="title gap-1 flex flex-col">
-          <label class="flex justify-between text-sm font-bold text-base-content">
+          <label class="flex justify-between text-sm text-base-content">
             عنوان (Title)
             <span class="ltr">({{ site.title.length }}/61)</span>
           </label>
@@ -53,7 +54,7 @@
           </div>
         </div>
         <div class="Desc text-base-content gap-1 flex flex-col">
-          <label class="flex justify-between text-sm font-bold">
+          <label class="flex justify-between text-sm">
             توضیحات (Description)
             <span class="ltr">({{ site.description.length }}/158)</span>
           </label>
@@ -71,7 +72,7 @@
           </div>
         </div>
         <div class="gap-1 flex flex-col">
-          <label class="flow-root text-sm font-bold text-base-content">
+          <label class="flow-root text-sm text-[#041e49] text-base-content">
             نمایش کلمات کلیدی (Bold Keyword)
           </label>
           <InputText
@@ -92,7 +93,12 @@
               <img class="w-[18px] h-[18px]" src="/favicon.ico" />
             </div>
             <div class="flex flex-col">
-              <div class="h-1/2 text-[14px]" dir="rtl">نام برند شما</div>
+              <div class="h-1/2 text-[14px]" dir="rtl" v-if="site.brand === ''">
+                سگمنتو
+              </div>
+              <div class="h-1/2 text-[14px]" dir="rtl" v-else>
+                {{ site.brand }}
+              </div>
               <div class="h-1/2 text-[12px]">
                 {{
                   url_regex.test(site.url)
@@ -182,6 +188,7 @@ const site = ref({
   title: "",
   description: "",
   keyword: "",
+  brand: "",
 });
 const url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
 
