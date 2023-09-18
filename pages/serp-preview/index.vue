@@ -20,14 +20,13 @@
           <div class="flex justify-between h-10 gap-2">
             <InputText
               v-model="site.url"
-              placeholder="example:www.segmento.ir"
-              @keyup="minimizeParams(site.url)"
+              placeholder="segmento.ir/hi"
               type="text"
               class="w-4/5 ltr"
             />
             <button
               class="btn-primary rounded-[3px] text-sm w-1/5 h-full"
-              :disabled="site.url.length === 0"
+              :disabled="site.url.length === 0 || true"
               @click="receive_from_google(site.url)"
             >
               دریافت
@@ -37,41 +36,37 @@
         <div class="title gap-1 flex flex-col">
           <label class="flex justify-between text-sm font-bold text-base-content">
             عنوان (Title)
-            <span class="ltr">({{ site.title.length }}/69)</span>
+            <span class="ltr">({{ site.title.length }}/61)</span>
           </label>
           <div class="w-full flex flex-col items-end">
             <span
-              class="h-px w-full transition-all ease-in-out duration-300 z-10"
-              id="tProgressBar"
+              class="h-px transition-all ease-in-out duration-300 z-10"
+              :class="input_quality(site.title.length, 'title')"
             >
             </span>
             <InputText
               v-model="site.title"
-              @keydown="progressBar(site.title.length, `title`)"
               placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل"
               type="text"
               :class="`w-full text-right`"
-              maxlength="69"
             />
           </div>
         </div>
         <div class="Desc text-base-content gap-1 flex flex-col">
           <label class="flex justify-between text-sm font-bold">
             توضیحات (Description)
-            <span class="ltr">({{ site.description.length }}/156)</span>
+            <span class="ltr">({{ site.description.length }}/158)</span>
           </label>
           <div class="w-full flex flex-col items-end">
             <span
-              class="h-px w-full transition-all ease-in-out duration-300 z-10"
-              id="descProgressBar"
+              class="h-px transition-all ease-in-out duration-300 z-10"
+              :class="input_quality(site.description.length, 'desc')"
             >
             </span>
             <InputTextArea
               v-model="site.description"
-              @keydown="progressBar(site.description.length, `desc`)"
               placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "
               class="w-full h-24 -mt-px"
-              maxlength="156"
             />
           </div>
         </div>
@@ -79,7 +74,12 @@
           <label class="flow-root text-sm font-bold text-base-content">
             نمایش کلمات کلیدی (Bold Keyword)
           </label>
-          <InputText v-model="site.keyword" placeholder="درج کلمه کلیدی" type="text" class="w-full text-right" />
+          <InputText
+            v-model="site.keyword"
+            placeholder="درج کلمه کلیدی"
+            type="text"
+            class="w-full text-right"
+          />
         </div>
       </div>
       <div class="w-3/5 h-full border p-4 rounded-[3px]" dir="ltr">
@@ -94,18 +94,24 @@
             <div class="flex flex-col">
               <div class="h-1/2 text-[14px]" dir="rtl">نام برند شما</div>
               <div class="h-1/2 text-[12px]">
-                {{ minimizeUrl === "" ? "https://segmento.ir" : minimizeUrl }}
+                {{
+                  url_regex.test(site.url)
+                    ? url_humanity(site.url)
+                    : "https://segmento.ir"
+                }}
               </div>
             </div>
           </div>
           <!-- content -->
           <div class="flex flex-col">
-            <div class="flex flex-row h-[35px] text-left text-[20px] text-[#1a0dab]">
+            <div
+              class="flex flex-row h-[35px] text-left text-[20px] text-[#1a0dab] w-[600] overflow-hidden"
+            >
               <span dir="rtl" v-if="site.title === ''">
                 پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو
               </span>
               <span dir="rtl" v-else>
-                {{ site.title }}
+                {{ text_humanity(site.title, 61) }}
               </span>
             </div>
             <div
@@ -116,8 +122,16 @@
                 و پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا، تبلیغات گوگل یا
                 بلاگری را برای شما ...
               </p>
-              <p dir="rtl" v-else v-html="site.description.replaceAll(site.keyword, `<b>${site.keyword}</b>`)">
-              </p>
+              <p
+                dir="rtl"
+                v-else
+                v-html="
+                  text_humanity(site.description, 158).replaceAll(
+                    site.keyword,
+                    `<b>${site.keyword}</b>`
+                  )
+                "
+              ></p>
             </div>
           </div>
         </div>
@@ -163,76 +177,83 @@
 </template>
 
 <script setup>
-import axios from "axios";
-
 const site = ref({
   url: "",
   title: "",
   description: "",
   keyword: "",
 });
+const url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
 
-const minimizeUrl = ref("");
-const progressBar = (length, type) => {
-  let progress = document.getElementById("tProgressBar");
-  let descProgress = document.getElementById("descProgressBar");
+const input_quality = (length, type) => {
   switch (type) {
     case "title":
-      if (length < 10) progress.style.width = "20px";
-      else if (length < 15) {
-        progress.style.width = "30%";
-        progress.style.background = "red";
-      } else if (length < 30) {
-        progress.style.width = "50%";
-        progress.style.background = "orange";
-      } else if (length >= 30) {
-        progress.style.width = "100%";
-        progress.style.background = "#1bc31b";
-      }
       if (length === 0 || length === 1) {
-        progress.style.width = "0px";
-        progress.style.background = "red";
+        return "w-0 bg-red-600";
+      } else if (length < 10) {
+        return "w-[10%] bg-red-600";
+      } else if (length < 15) {
+        return "w-[30%] bg-red-600";
+      } else if (length < 30) {
+        return "w-[50%] bg-orange-500";
+      } else {
+        return "w-[100%] bg-[#1bc31b]";
       }
-      break;
     case "desc":
-      if (length < 10) descProgress.style.width = "20px";
-      else if (length < 15) {
-        descProgress.style.width = "30%";
-        descProgress.style.background = "red";
-      } else if (length < 30) {
-        descProgress.style.width = "50%";
-        descProgress.style.background = "orange";
-      } else if (length >= 30) {
-        descProgress.style.width = "100%";
-        descProgress.style.background = "#1bc31b";
-      }
       if (length === 0 || length === 1) {
-        descProgress.style.width = "0px";
-        descProgress.style.background = "red";
+        return "w-0 bg-red-600";
+      } else if (length < 10) {
+        return "w-[10%] bg-red-600";
+      } else if (length < 15) {
+        return "w-[30%] bg-red-600";
+      } else if (length < 30) {
+        return "w-[50%] bg-orange-500";
+      } else {
+        return "w-[100%] bg-[#1bc31b]";
       }
-      break;
   }
 };
+
 const receive_from_google = (query) => {
-  if (/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i.test(query)) {
+  if (url_regex.test(query)) {
     alert("true address format");
-    let res = send_request_to_google(query);
-    console.log(res);
   } else {
     alert("false address format");
   }
 };
-const minimizeParams = (el) => {
-  if (/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i.test(el)) {
+
+const text_humanity = (text, length) => {
+  text = text.trim();
+  let words = text.split(" ");
+  if (text.length <= length) {
+    return text;
+  } else if (words.length > 1) {
+    while (text.length > length) {
+      if (words.length <= 1) {
+        return `${text.substring(0, length - 4)} ...`;
+      } else {
+        words = text.split(" ");
+        text = words.slice(0, words.length - 1).join(" ");
+      }
+    }
+    return `${text} ...`;
+  } else {
+    return `${text.substring(0, length - 4)} ...`;
+  }
+};
+
+const url_humanity = (url) => {
+  if (url_regex.test(url)) {
+    url = url.replace(/^\/+|\/+$/g, "");
     // to check is the string in url format that we want or not
-    let text = el.split("/");
+    let text = url.split("/");
     let first, last, middle;
-    if (/(http:\/\/|https:\/\/)/.test(el)) {
+    if (/(http:\/\/|https:\/\/)/.test(url)) {
       // to check if the string has http or https or not
       first = `${text[0]}//${text[2]}`;
       last = text[text.length - 1] !== "" ? text[text.length - 1] : text[text.length - 2];
-      if (text.length > 4) middle = " >...> ";
-      else middle = ">";
+      if (text.length > 4) middle = " › ... › ";
+      else middle = " › ";
     } else {
       first = `https://${text[0]}`;
       last = text[text.length - 1] !== "" ? text[text.length - 1] : text[text.length - 2];
@@ -242,22 +263,14 @@ const minimizeParams = (el) => {
           middle = "";
           break;
         case 2:
-          middle = ">";
+          middle = " › ";
           break;
         default:
-          middle = " >...> ";
+          middle = " › ... › ";
           break;
       }
     }
-    minimizeUrl.value = `${first}${middle}${
-      last?.length > 16 ? last.substring(0, 13) + "..." : last
-    }`;
-    return true;
+    return `${first}${middle}${last?.length > 16 ? last.substring(0, 13) + "..." : last}`;
   }
-};
-
-const send_request_to_google = (query) => {
-  return `https://www.google.com/search?q=${query}`;
-  // return axios.get(`https://www.google.com/search?q=${query}`);
 };
 </script>
