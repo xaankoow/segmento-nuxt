@@ -19,16 +19,16 @@
           <label class="text-sm flow-root font-bold">آدرس وبسایت (URL)</label>
           <div class="flex justify-between h-10 gap-2">
             <InputText
-              @input="txtUrl = $event.target.value"
+              v-model="site.url"
               placeholder="example:www.segmento.ir"
-              @keyup="minimizeParams($event.target.value)"
+              @keyup="minimizeParams(site.url)"
               type="text"
               class="w-4/5 ltr"
             />
             <button
               class="btn-primary rounded-[3px] text-sm w-1/5 h-full"
-              :disabled="txtUrl.length === 0"
-              @click="checkHttpRegex()"
+              :disabled="site.url.length === 0"
+              @click="receive_from_google(site.url)"
             >
               دریافت
             </button>
@@ -37,7 +37,7 @@
         <div class="title gap-1 flex flex-col">
           <label class="flex justify-between text-sm font-bold text-base-content">
             عنوان (Title)
-            <span class="ltr">({{ titleLength.length }}/69px )</span>
+            <span class="ltr">({{ site.title.length }}/69)</span>
           </label>
           <div class="w-full flex flex-col items-end">
             <span
@@ -46,8 +46,8 @@
             >
             </span>
             <InputText
-              @input="titleLength = $event.target.value"
-              @keydown="progressBar(titleLength.length, `title`)"
+              v-model="site.title"
+              @keydown="progressBar(site.title.length, `title`)"
               placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل"
               type="text"
               :class="`w-full text-right`"
@@ -58,7 +58,7 @@
         <div class="Desc text-base-content gap-1 flex flex-col">
           <label class="flex justify-between text-sm font-bold">
             توضیحات (Description)
-            <span class="ltr">({{ descTitle.length }}/156px )</span>
+            <span class="ltr">({{ site.description.length }}/156)</span>
           </label>
           <div class="w-full flex flex-col items-end">
             <span
@@ -67,8 +67,8 @@
             >
             </span>
             <InputTextArea
-              @input="descTitle = $event.target.value"
-              @keydown="progressBar(descTitle.length, `desc`)"
+              v-model="site.description"
+              @keydown="progressBar(site.description.length, `desc`)"
               placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "
               class="w-full h-24 -mt-px"
               maxlength="156"
@@ -79,34 +79,44 @@
           <label class="flow-root text-sm font-bold text-base-content">
             نمایش کلمات کلیدی (Bold Keyword)
           </label>
-          <InputText placeholder="درج کلمه کلیدی" type="text" class="w-full text-right" />
+          <InputText v-model="site.keyword" placeholder="درج کلمه کلیدی" type="text" class="w-full text-right" />
         </div>
       </div>
-      <div class="w-3/5 h-full border p-4 inline-block float-left rounded-[3px]">
-        <div>
-          <div class="content p-1 py-3">
-            <div class="flex flex-row-reverse items-center">
-              <div :class="[txtUrl.length > 0 ? 'w-[70px] inline-block h-10' : 'hidden']">
-                <img class="w-full h-full" src="../../assets/icons/google.png" />
-              </div>
-              <div class="minimize">
-                <h2 class="w-full ltr">{{ txtUrl }}</h2>
-                <NuxtLink
-                  class="minimize float-left text-neutral-500 text-xs ltr"
-                  href="/"
-                >
-                  {{ minimizeUrl }}
-                </NuxtLink>
+      <div class="w-3/5 h-full border p-4 rounded-[3px]" dir="ltr">
+        <div class="w-[652px] flex flex-col gap-[5px] text-left">
+          <!-- head -->
+          <div class="flex flex-row h-[38px] items-center">
+            <div
+              class="w-[28px] h-[28px] mr-[12px] bg-[#f1f3f4] border-x border-[#ecedef] rounded-[100%] flex justify-center items-center"
+            >
+              <img class="w-[18px] h-[18px]" src="/favicon.ico" />
+            </div>
+            <div class="flex flex-col">
+              <div class="h-1/2 text-[14px]" dir="rtl">نام برند شما</div>
+              <div class="h-1/2 text-[12px]">
+                {{ minimizeUrl === "" ? "https://segmento.ir" : minimizeUrl }}
               </div>
             </div>
-            <h1
-              class="minimize minimizeTitle w-full text-base text-left text-blue-700 py-1 float-left"
+          </div>
+          <!-- content -->
+          <div class="flex flex-col">
+            <div class="flex flex-row h-[35px] text-left text-[20px] text-[#1a0dab]">
+              <span dir="rtl" v-if="site.title === ''">
+                پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو
+              </span>
+              <span dir="rtl" v-else>
+                {{ site.title }}
+              </span>
+            </div>
+            <div
+              class="flex flex-row h-[47.11px] w-[600px] text-[14px] text-left overflow-hidden text-[#4d5156]"
             >
-              {{ titleLength }}
-            </h1>
-            <div class="description flow-root text-xs w-full text-left">
-              <p class="text-neutral-500 minimize float-left">
-                {{ descTitle }}
+              <p dir="rtl" v-if="site.description === ''">
+                پلتفرم <b>سگمنتو</b> ابزارهای کاملی برای سئو سایت در اختیارتان قرار می‌دهد
+                و پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا، تبلیغات گوگل یا
+                بلاگری را برای شما ...
+              </p>
+              <p dir="rtl" v-else v-html="site.description.replaceAll(site.keyword, `<b>${site.keyword}</b>`)">
               </p>
             </div>
           </div>
@@ -151,24 +161,17 @@
     </div>
   </div>
 </template>
-<style scoped>
-.minimize {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 100%;
-}
 
-.minimizeTitle {
-  width: calc(100% - 130px);
-  -webkit-line-clamp: 1;
-}
-</style>
 <script setup>
 import axios from "axios";
 
-const titleLength = ref("");
-const descTitle = ref("");
-const txtUrl = ref("");
+const site = ref({
+  url: "",
+  title: "",
+  description: "",
+  keyword: "",
+});
+
 const minimizeUrl = ref("");
 const progressBar = (length, type) => {
   let progress = document.getElementById("tProgressBar");
@@ -210,24 +213,22 @@ const progressBar = (length, type) => {
       break;
   }
 };
-const checkHttpRegex = () => {
-  // const regex = /^https:\/\/[a-zA-Z0-9.-]+[a-zA-Z0-9\/]*$/;
-  if (!txtUrl.value) {
-    alert("آدرس وبسایت مورد نظر صحیح نمی باشد.");
-    return false;
+const receive_from_google = (query) => {
+  if (/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i.test(query)) {
+    alert("true address format");
+    let res = send_request_to_google(query);
+    console.log(res);
   } else {
-    sendRequest();
+    alert("false address format");
   }
 };
 const minimizeParams = (el) => {
-  let regex = /^www/;
-  // if (minimizeUrl.value.length===11) minimizeUrl.value = ""
-  minimizeUrl.value = "";
-  if (el.match(regex).length > 0) {
-    console.log("yes");
+  if (/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i.test(el)) {
+    // to check is the string in url format that we want or not
     let text = el.split("/");
     let first, last, middle;
-    if (text[0].includes("https") || text[0].includes("http")) {
+    if (/(http:\/\/|https:\/\/)/.test(el)) {
+      // to check if the string has http or https or not
       first = `${text[0]}//${text[2]}`;
       last = text[text.length - 1] !== "" ? text[text.length - 1] : text[text.length - 2];
       if (text.length > 4) middle = " >...> ";
@@ -255,10 +256,8 @@ const minimizeParams = (el) => {
   }
 };
 
-const sendRequest = () => {
-  let res = axios.get("https://www.google.com", txtUrl.value).then(async (result) => {
-    let response = await result.data;
-    console.log(response);
-  });
+const send_request_to_google = (query) => {
+  return `https://www.google.com/search?q=${query}`;
+  // return axios.get(`https://www.google.com/search?q=${query}`);
 };
 </script>

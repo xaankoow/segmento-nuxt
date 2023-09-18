@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="flex text-sm overflow-scroll rounded-[3px]"
-    :class="[h, w]"
-    dir="ltr"
-  >
+  <div class="flex text-sm overflow-scroll rounded-[3px]" :class="[h, w]" dir="ltr">
     <div class="py-2 border border-r-0 bg-base-200 h-fit min-h-full">
       <span
         v-for="line in lines"
@@ -13,6 +9,8 @@
       </span>
     </div>
     <textarea
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
       @keyup="line_counter($event)"
       class="resize-none overflow-hidden border focus:border-b-primary p-2 h-full w-full"
       :class="class"
@@ -37,6 +35,8 @@ const props = defineProps({
     default: "w-1/2",
   },
 });
+defineProps(["modelValue"]);
+defineEmits(["update:modelValue"]);
 
 function line_counter(event) {
   lines.value = event.target.value.split("\n").length;

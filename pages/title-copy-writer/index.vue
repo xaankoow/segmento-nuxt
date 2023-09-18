@@ -10,8 +10,8 @@
     <div class="w-full h-full text-base-400 text-sm flex flex-col items-center justify-between p-2 gap-2">
       <form @submit.prevent="creative_copy_writer_request()"
         class="w-full flex items-center justify-center flex-col gap-2">
-        <input @keypress="clear()" type="text" placeholder="درج کلمه کلیدی" v-model="form.keyword"
-          class="w-full h-11 text-black placeholder:text-base-400 border border-base-400 rounded-[3px] text-center" />
+        <InputText @keypress="clear()" type="text" placeholder="درج کلمه کلیدی" v-model="form.keyword"
+          class="w-full h-11 text-center" />
         <button class="h-8 btn-primary">
           {{ config.by_route(`${current_page}/buttons/create`) }}
         </button>

@@ -23,7 +23,7 @@
       <form @submit.prevent="search_keywords_request()" class="flex flex-row items-center w-full gap-2">
         <div class="flex flex-row items-center w-full justify-between gap-2 h-10">
           <div class="custom_input_box w-[95%] text-base-500">
-            <input v-model="form.keyword" type="text" class="border border-base-400 rounded-[3px]" @focus="search_class.focus()" @blur="search_class.leave()" />
+            <InputText v-model="form.keyword" type="text" @focus="search_class.focus()" @blur="search_class.leave()" />
             <label class="!text-base-400" :class="search_class.transitionStyle(form.keyword, 'text-base-400')">{{
               config.by_route(`${current_page}/place-holder`) }}</label>
           </div>
