@@ -176,7 +176,7 @@ function update_list_by_alphabet(item, id) {
     old_alphabet_id.value = null;
   }
   else {
-    // TODO : Fix this ugly section later :))
+    // TODO: Fix this ugly section later :))
     let cacheToArray = Object.entries(cache.value);
     let custom_array = cacheToArray.filter(itm => {
       return itm[0] === item

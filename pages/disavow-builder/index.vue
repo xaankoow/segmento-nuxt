@@ -218,10 +218,7 @@ const convertToText = (text, filename) => {
   const link = document.createElement("a");
   link.href = url;
   link.download = filename;
-
   link.click();
-
-  // عملیات آزاد کردن منابع
   URL.revokeObjectURL(url);
 };
 
@@ -230,7 +227,6 @@ const spliteText = () => {
   urls_list = [];
   let domainsVal = domains.value.split("\n");
   domainsVal.forEach((i) => {
-    // arg.forEach(j=>{
     if (
       !i.includes("http") &&
       !i.includes("https://") &&
@@ -249,10 +245,8 @@ const spliteText = () => {
         text != "" &&
         text != " "
       ) {
-        // if (!domains_list.includes("domain:" + text.split("www.")[1]) && text!="" && text!=" "){
         let txt = text.split("www.")[1].replaceAll(" ", "");
         domains_list.push("domain:" + txt);
-        // }
       }
       if (
         !text.includes("www.") &&
@@ -260,10 +254,8 @@ const spliteText = () => {
         text != "" &&
         text != " "
       ) {
-        // if (!domains_list.includes("domain:" + text) && text!="" && text!=" "){
         let txt = text.replaceAll(" ", "");
         domains_list.push("domain:" + txt);
-        // }
       }
     }
   });
