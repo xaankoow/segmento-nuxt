@@ -30,11 +30,10 @@
       >
         <div class="flex items-center w-full justify-between gap-2 h-10">
           <div class="custom_input_box w-[95%] text-base-500">
-            <input
+            <InputText
               v-model="form.keyword"
               type="text"
               @focus="search_class.focus()"
-              class="border border-base-400 rounded-[3px]"
               @blur="search_class.leave()"
             />
             <label

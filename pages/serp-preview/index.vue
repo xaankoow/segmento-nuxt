@@ -19,15 +19,15 @@
           <label class="text-sm flow-root font-bold">آدرس وبسایت (URL)</label>
           <div class="flex justify-between h-10 gap-2">
             <InputText
-              @input="txtUrl = $event.target.value"
+              v-model="site.url"
               placeholder="example:www.segmento.ir"
-              @keyup="minimizeParams($event.target.value)"
+              @keyup="minimizeParams(site.url)"
               type="text"
               class="w-4/5 ltr"
             />
             <button
               class="btn-primary rounded-[3px] text-sm w-1/5 h-full"
-              :disabled="txtUrl.length === 0"
+              :disabled="site.url.length === 0"
               @click="checkHttpRegex()"
             >
               دریافت
@@ -37,7 +37,7 @@
         <div class="title gap-1 flex flex-col">
           <label class="flex justify-between text-sm font-bold text-base-content">
             عنوان (Title)
-            <span class="ltr">({{ titleLength.length }}/69px )</span>
+            <span class="ltr">({{ site.title.length }}/69px)</span>
           </label>
           <div class="w-full flex flex-col items-end">
             <span
@@ -46,8 +46,8 @@
             >
             </span>
             <InputText
-              @input="titleLength = $event.target.value"
-              @keydown="progressBar(titleLength.length, `title`)"
+              v-model="site.title"
+              @keydown="progressBar(site.title.length, `title`)"
               placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل"
               type="text"
               :class="`w-full text-right`"
@@ -58,7 +58,7 @@
         <div class="Desc text-base-content gap-1 flex flex-col">
           <label class="flex justify-between text-sm font-bold">
             توضیحات (Description)
-            <span class="ltr">({{ descTitle.length }}/156px )</span>
+            <span class="ltr">({{ site.description.length }}/156px)</span>
           </label>
           <div class="w-full flex flex-col items-end">
             <span
@@ -67,8 +67,8 @@
             >
             </span>
             <InputTextArea
-              @input="descTitle = $event.target.value"
-              @keydown="progressBar(descTitle.length, `desc`)"
+              v-model="site.description"
+              @keydown="progressBar(site.description.length, `desc`)"
               placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "
               class="w-full h-24 -mt-px"
               maxlength="156"
@@ -86,11 +86,11 @@
         <div>
           <div class="content p-1 py-3">
             <div class="flex flex-row-reverse items-center">
-              <div :class="[txtUrl.length > 0 ? 'w-[70px] inline-block h-10' : 'hidden']">
+              <div v-if="site.url.length > 0" class="w-[70px] inline-block h-10">
                 <img class="w-full h-full" src="../../assets/icons/google.png" />
               </div>
               <div class="minimize">
-                <h2 class="w-full ltr">{{ txtUrl }}</h2>
+                <h2 class="w-full ltr">{{ site.url }}</h2>
                 <NuxtLink
                   class="minimize float-left text-neutral-500 text-xs ltr"
                   href="/"
@@ -102,11 +102,11 @@
             <h1
               class="minimize minimizeTitle w-full text-base text-left text-blue-700 py-1 float-left"
             >
-              {{ titleLength }}
+              {{ site.title }}
             </h1>
             <div class="description flow-root text-xs w-full text-left">
               <p class="text-neutral-500 minimize float-left">
-                {{ descTitle }}
+                {{ site.description }}
               </p>
             </div>
           </div>
@@ -166,8 +166,12 @@
 <script setup>
 import axios from "axios";
 
-const titleLength = ref("");
-const descTitle = ref("");
+const site = ref({
+  url: "",
+  title: "",
+  description: "",
+  keyword: ""
+});
 const txtUrl = ref("");
 const minimizeUrl = ref("");
 const progressBar = (length, type) => {
