@@ -24,8 +24,8 @@
             @blur="focusedUrl = false"
             id="textAreaUrl"
             class="h-44 w-full text-left"
-            @input="urls = $event.target.value + ' '"
-            @keydown="spliteText()"
+            v-model="urls"
+            @input="spliteText()"
           />
           <span class="warning text-base-500 text-sm">
             {{ config.by_route(`${current_page}/warnings/urls-input`) }}
@@ -41,8 +41,8 @@
             @blur="focusDomain = false"
             id="textAreaDomain"
             class="h-44 w-full text-left"
-            @input="domains = $event.target.value + ' '"
-            @keydown="spliteText()"
+            v-model="domains"
+            @input="spliteText()"
           />
           <span class="warning text-base-500 text-sm">
             {{ config.by_route(`${current_page}/warnings/domains-input`) }}
@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="flex items-center justify-center pt-2 px-4 w-1/3">
-        <button @click="submitForm()" class="btn-primary text-sm">
+        <button @click="convert_to_txt()" class="btn-primary text-sm" :disabled="domains.trim().length == 0 && urls.trim().length == 0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -88,7 +88,7 @@
               {{ config.by_route(`${current_page}/boxes/count-of-pages`) }}
             </span>
             <span class="text-base-500">
-              {{ urlTextLength }} {{ config.by_route(`constants/page`) }}
+              {{ urls_list.length }} {{ config.by_route(`constants/page`) }}
             </span>
           </div>
           <div class="w-full flex flex-row h-1/2 items-center justify-around">
@@ -96,7 +96,7 @@
               {{ config.by_route(`${current_page}/boxes/count-of-websites`) }}
             </span>
             <span class="text-base-500">
-              {{ newTextLength }} {{ config.by_route(`constants/website`) }}
+              {{ domains_list.length }} {{ config.by_route(`constants/website`) }}
             </span>
           </div>
         </div>
@@ -200,15 +200,14 @@
 
 <script setup>
 import Config from "../../composables/Config";
+import jalaliMoment from 'jalali-moment';
 
 const current_page = "pages/disavow-builder";
 const config = new Config();
 const domains = ref("");
 const urls = ref("");
-let newText = [];
-let urlText = [];
-let newTextLength = ref(0);
-const urlTextLength = ref(0);
+let domains_list = [];
+let urls_list = [];
 let focusDomain = ref(false);
 let focusedUrl = ref(false);
 
@@ -227,8 +226,8 @@ const convertToText = (text, filename) => {
 };
 
 const spliteText = () => {
-  newText = [];
-  urlText = [];
+  domains_list = [];
+  urls_list = [];
   let domainsVal = domains.value.split("\n");
   domainsVal.forEach((i) => {
     // arg.forEach(j=>{
@@ -241,29 +240,29 @@ const spliteText = () => {
       i != ""
     ) {
       let txt = i.replaceAll(" ", "");
-      newText.push("domain:" + txt);
+      domains_list.push("domain:" + txt);
     } else {
       let text = i.replace(/^https?:\/\//, "")?.split("/")[0];
       if (
         text.includes("www.") &&
-        !newText.includes("domain:" + text.split("www.")[1]) &&
+        !domains_list.includes("domain:" + text.split("www.")[1]) &&
         text != "" &&
         text != " "
       ) {
-        // if (!newText.includes("domain:" + text.split("www.")[1]) && text!="" && text!=" "){
+        // if (!domains_list.includes("domain:" + text.split("www.")[1]) && text!="" && text!=" "){
         let txt = text.split("www.")[1].replaceAll(" ", "");
-        newText.push("domain:" + txt);
+        domains_list.push("domain:" + txt);
         // }
       }
       if (
         !text.includes("www.") &&
-        !newText.includes("domain:" + text) &&
+        !domains_list.includes("domain:" + text) &&
         text != "" &&
         text != " "
       ) {
-        // if (!newText.includes("domain:" + text) && text!="" && text!=" "){
+        // if (!domains_list.includes("domain:" + text) && text!="" && text!=" "){
         let txt = text.replaceAll(" ", "");
-        newText.push("domain:" + txt);
+        domains_list.push("domain:" + txt);
         // }
       }
     }
@@ -272,32 +271,20 @@ const spliteText = () => {
   let urlsValue = urls.value;
   let splitVal = urlsValue.split("\n");
   splitVal.forEach((i) => {
-    if (!urlText.includes(i.replaceAll(" ", "")) && i != "") {
-      urlText.push(i);
+    if (!urls_list.includes(i.replaceAll(" ", "")) && i != "") {
+      urls_list.push(i);
     }
   });
-  // resetForm();
-  newTextLength.value = newText.length;
-  urlTextLength.value = urlText.length;
-  console.log(urlTextLength.value);
 };
 
-const submitForm = () => {
+const convert_to_txt = () => {
+  let formattedDate = jalaliMoment().locale('fa').format('YYYYMMDD');
   spliteText();
   convertToText(
-    `# https://app.segmento.ir/disavow-builder\n\n# Domains to disavow\n${newText.join(
+    `# https://app.segmento.ir/disavow-builder\n\n# Domains to disavow\n${domains_list.join(
       "\n"
-    )}\n\n# Pages to disavow\n${urlText.join("\n")}`,
-    "disavow-ymd"
+    )}\n\n# Pages to disavow\n${urls_list.join("\n")}`,
+    `disavow-smp-${formattedDate}-d${domains_list.length}-p${urls_list.length}`
   );
-};
-
-const resetForm = () => {
-  newText = [];
-  urlText = [];
-  const Areaurl = document.getElementById("textAreaUrl");
-  const AreaDomain = document.getElementById("textAreaDomain");
-  domains.value = "";
-  urls.value = "";
 };
 </script>
