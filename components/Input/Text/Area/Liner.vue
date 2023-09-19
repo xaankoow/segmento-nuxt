@@ -12,7 +12,7 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       @keyup="line_counter($event)"
-      class="resize-none overflow-hidden border focus:border-b-primary p-2 h-full w-full"
+      class="resize-none overflow-hidden border border-b-[2px] focus:border-b-primary p-2 h-full w-full"
       :class="class"
     ></textarea>
   </div>

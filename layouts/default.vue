@@ -345,7 +345,7 @@
                     </SvgLabeled>
                   </template>
                   <!-- Content -->
-                  <div class="flex flex-col gap-3" v-if="DEV_ENV">
+                  <div class="flex flex-col gap-3">
                     <NuxtLink to="/serp-preview">
                       <SvgLabeled :label="cn.by_route(
                         `${department_section}/technical-seo/fields/serp-preview`

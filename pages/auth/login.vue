@@ -8,7 +8,7 @@
     <div class="mx-auto">
       <form @submit.prevent="requestToLogin()" class="flex flex-col gap-8 w-full items-center">
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input dir="ltr" v-model="form.email" type="email" required @focus="emailBox.focus()" id="input_email"
+          <InputText dir="ltr" v-model="form.email" type="email" required @focus="emailBox.focus()" id="input_email"
             @blur="emailBox.leave()" />
           <label for="email" :class="emailBox.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
@@ -16,7 +16,7 @@
           <span class="text-error text-xs" v-show="error_happened">{{ config.by_route(`${current_page}/error`) }}</span>
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input dir="ltr" v-model="form.password" type="password" minlength="8" @focus="passwordBox.focus()"
+          <InputText dir="ltr" v-model="form.password" type="password" minlength="8" @focus="passwordBox.focus()"
             id="input_password" @blur="passwordBox.leave()" required />
           <label for="email" :class="passwordBox.transitionStyle(form.password)">
             {{ config.by_route(`${current_page}/password`) }}
