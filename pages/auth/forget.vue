@@ -11,7 +11,7 @@
       <form @submit.prevent="sendActiveCode()" class="flex flex-row justify-between items-center"
             :class="step !== 1 ? 'pointer-events-none opacity-80' : ''">
         <div class="custom_input_box w-[16.25rem]">
-          <input dir="ltr" v-model="form.email" type="email" id="email_box" required @focus="email.focus()"
+          <InputText dir="ltr" v-model="form.email" type="email" id="email_box" required @focus="email.focus()"
                  @blur="email.leave()" />
           <label :class="email.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
@@ -39,14 +39,14 @@
           <div
             class="flex flex-row gap-5 text-base-content [&>input]:w-1/4 [&>input]:p-2 [&>input]:text-center [&>input]:rounded-md"
             style="direction: ltr">
-            <input id="number_1" type="number" :max="9" :min="0" />
-            <!-- TODO : change focus when keypress for ones -->
-            <input id="number_2" type="number" :max="9" :min="0" />
-            <!-- TODO : change focus when keypress for ones -->
-            <input id="number_3" type="number" :max="9" :min="0" />
-            <!-- TODO : change focus when keypress for ones -->
-            <input id="number_4" type="number" :max="9" :min="0" />
-            <!-- TODO : change focus when keypress for ones -->
+            <InputText id="number_1" type="number" :max="9" :min="0" />
+            <!-- TODO: change focus when keypress for ones -->
+            <InputText id="number_2" type="number" :max="9" :min="0" />
+            <!-- TODO: change focus when keypress for ones -->
+            <InputText id="number_3" type="number" :max="9" :min="0" />
+            <!-- TODO: change focus when keypress for ones -->
+            <InputText id="number_4" type="number" :max="9" :min="0" />
+            <!-- TODO: change focus when keypress for ones -->
           </div>
           <span class="absolute -bottom-5 text-error text-xs" v-show="code_error">{{ code_error }}</span>
         </div>
@@ -61,14 +61,14 @@
       <form @submit.prevent="changePassword()" class="flex flex-col gap-12 mt-8">
         <div class="relative flex flex-row gap-5 w-full items-center" :class="step !== 3 ? 'pointer-events-none opacity-80' : ''">
           <div class="custom_input_box w-1/2">
-            <input dir="ltr" v-model="form.password" type="password" @focus="password.focus()" @blur="password.leave()"
+            <InputText dir="ltr" v-model="form.password" type="password" @focus="password.focus()" @blur="password.leave()"
                    id="password" />
             <label :class="password.transitionStyle(form.password)">
               {{ config.by_route(`${current_page}/password`) }}
             </label>
           </div>
           <div class="custom_input_box w-1/2">
-            <input dir="ltr" v-model="form.password_confirmation" type="password" @focus="confirmPassword.focus()"
+            <InputText dir="ltr" v-model="form.password_confirmation" type="password" @focus="confirmPassword.focus()"
                    id="password_confirm" @blur="confirmPassword.leave()" />
             <label :class="confirmPassword.transitionStyle(form.password_confirmation)">
               {{ config.by_route(`${current_page}/confirmPassword`) }}

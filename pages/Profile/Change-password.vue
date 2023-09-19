@@ -49,11 +49,11 @@
             <p>تغییر گذرواژه</p>
           </div>
           <div class="w-full pointer-events-none">
-            <input class="w-full h-11 border rounded border-base-300 p-2 mt-5 focus:border-b-diamond focus:border-b-2"
+            <InputText class="w-full mt-5"
               placeholder="گذرواژه فعلی" type="text" />
-            <input class="w-full h-11 border rounded border-base-300 p-2 mt-5 focus:border-b-diamond focus:border-b-2"
+            <InputText class="w-full mt-5"
               placeholder="گذرواژه جدید" type="text" />
-            <input class="w-full h-11 border rounded border-base-300 p-2 mt-5 focus:border-b-diamond focus:border-b-2"
+            <InputText class="w-full mt-5"
               placeholder="تکرار گذرواژه جدید" type="email" />
           </div>
           <div class="w-full h-auto flex justify-end mt-5">

@@ -39,7 +39,7 @@
             عنوان (Title)
             <span class="ltr">({{ site.title.length }}/63)</span>
           </label>
-          <InputText
+          <InputTextProgressed
             v-model="site.title"
             placeholder="پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو"
             class="w-full"

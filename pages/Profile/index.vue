@@ -59,7 +59,7 @@
           </div>
           <div class="w-full">
             <div class="w-full flex justify-between">
-              <input class="w-full h-11 border rounded border-base-300 p-2 focus:border-b-diamond focus:border-b-2"
+              <InputText class="w-full"
                 placeholder="نام و نام خانوادگی" type="text" :value="`${ConfigStore.user().name}`" disabled />
             </div>
 
