@@ -25,8 +25,9 @@ module.exports = {
           content: "#002145",
         },
         icon: "#002145",
-        success: "#10CCAE",
-        warning: "#FFCE47",
+        success: "#35aa66",
+        warning: "#ffcb1c",
+        danger: "#ef4444",
         error: "#F35242",
         primary: {
           DEFAULT: "#0A65CD",
@@ -44,10 +45,6 @@ module.exports = {
           disabled: "#D9D9D9",
           text: "#488CDA"
         },
-        bronze: "#BF8970",
-        silver: "#7D7D7D",
-        gold: "#FFCE47",
-        diamond: "#0A65CD",
         disabled: "#7D7D7D"
       },
     },

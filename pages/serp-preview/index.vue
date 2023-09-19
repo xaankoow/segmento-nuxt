@@ -186,23 +186,23 @@ const input_quality = (length, type) => {
   switch (type) {
     case "title":
       if (length === 0) {
-        return "bg-red-600";
+        return "bg-danger";
       } else if (length < 40) {
-        return "bg-orange-500";
+        return "bg-warning";
       } else if (length < 63) {
-        return "bg-[#1bc31b]";
+        return "bg-success";
       } else {
-        return "bg-red-600";
+        return "bg-danger";
       }
     case "desc":
       if (length === 0) {
-        return "bg-red-600";
+        return "bg-danger";
       } else if (length < 80) {
-        return "bg-orange-500";
+        return "bg-warning";
       } else if (length < 156) {
-        return "bg-[#1bc31b]";
+        return "bg-success";
       } else {
-        return "bg-red-600";
+        return "bg-danger";
       }
   }
 };
