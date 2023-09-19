@@ -56,13 +56,11 @@
           <InputText v-model="secondRoute"
                      :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-left`"
                      maxlength="69"
-                     @keyup="checkRoute($event.target.value)"
           />
           <span class="bg-[#D9D9D9] p-2 px-4 rounded-[5px] text-[14px] flex items-end">/</span>
           <input @input="FirstRoute= $event.target.value"
                  :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-left`"
                  maxlength="69"
-                 @keyup="checkRoute($event.target.value)"
           />
         </div>
       </div>
@@ -103,10 +101,10 @@
             </div>
 
             <div class="flex flex-col w-1/2">
-              <div v-if="newVal.length >0" class="h-1/2 text-[14px]" dir="ltr"> سگمنتو </div>
+              <div v-if="newVal.length >0" class="h-1/2 text-[14px]" dir="ltr"> سگمنتو</div>
               <div class="h-1/2 text-[14px] w-full float-left minimize ltr">
                 {{
-                  newVal.length > 0 && finallRoute.length === 0 ? newVal : finallRoute
+                  checkRoute(FirstRoute, secondRoute, newVal)
                 }}
               </div>
               <div class="h-1/2 text-[12px] minimize float-left text-neutral-500 text-xs ltr">{{
@@ -118,11 +116,13 @@
           </div>
 
           <span class="minimize w-full  minimizeTitle text-base ltr text-blue-700 float-left p-2.5">
-                  <h1 class="inline-block" v-if="titleLength.length > 0">
-                    {{ titleLength }}
-                  </h1>
-                  <h1 class="inline-block" v-if="secondTitle.length> 0">{{ '-' + secondTitle }}</h1>
-                  <h1 class="inline-block" v-if="thirdTitle.length > 0">{{ '-' + thirdTitle }}</h1>
+                  <span class="inline-block">
+                    {{ titleLength.length> 0 ? titleLength : 'سگمنتو'}}
+                    {{ secondTitle.length> 0 ? ` - ${secondTitle}` : ''}}
+                    {{ thirdTitle.length> 0 ? ` - ${thirdTitle}` : ''}}
+                  </span>
+<!--                  <span class="inline-block" v-if=""> {{' - ' + secondTitle }}</span>-->
+<!--                  <span class="inline-block" v-if="thirdTitle.length > 0"> {{ ' - ' + thirdTitle }}</span>-->
                 </span>
           <div class="description flow-root text-xs text-left w-[70%] float-left px-2.5">
             <p class="text-neutral-500 summarizeText   text-align: left;">
@@ -149,7 +149,7 @@
                   <img class="w-[18px] h-[18px]" src="/favicon.ico">
                 </div>
                 <div class="flex flex-col w-1/2">
-                  <div v-if="newVal.length >0" class="h-1/2 text-[14px]" dir="ltr"> سگمنتو </div>
+                  <div v-if="newVal.length >0" class="h-1/2 text-[14px]" dir="ltr"> سگمنتو</div>
                   <div class="h-1/2 text-[14px] w-full float-left minimize ltr">
                     {{
                       newVal.length > 0 && finallRoute.length === 0 ? newVal : finallRoute
@@ -177,7 +177,7 @@
               </div>
             </div>
           </div>
-          <img src="../../assets/icons/iphoneImg.png" alt="test" class="w-full h-full object-cover"/>
+          <img src="../../assets/images/iphoneImg.png" alt="test" class="w-full h-full object-cover"/>
         </div>
       </div>
     </div>
@@ -253,12 +253,27 @@ const checkUrl = (val) => {
     console.log(newVal.value)
   } else if (!splitVal[0].includes('http') && FirstRoute.value.length === 0 && secondRoute.value.length === 0) newVal.value = val
 }
-const checkRoute = (val) => {
-  if (FirstRoute.value.length > 0 && newVal.value.length > 0 && newVal.value.split("/")[0].includes("http")) finallRoute.value = `${newVal.value.split("/")[0]}//${newVal.value.split("/")[2]}/${FirstRoute.value}`
-  else finallRoute.value = `${newVal.value.split("/")[0]}/${FirstRoute.value}`
-  if (secondRoute.value.length > 0 && newVal.value.length > 0 && newVal.value.split("/")[0].includes("http")) finallRoute.value = `${newVal.value.split("/")[0]}//${newVal.value.split("/")[2]}/${FirstRoute.value}/${secondRoute.value}`
-  else if (secondRoute.value.length > 0 && newVal.value.length > 0) finallRoute.value = `${newVal.value.split("/")[0]}/${FirstRoute.value}/${secondRoute.value}`
-  if (newVal.value.length === 0) finallRoute.value = `${newVal.value.split("/")[0]}/${FirstRoute.value}`
+const checkRoute = (first, second, url) => {
+  const url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
+  if (url_regex.test(url)) {
+    url = url.replace(/^\/+|\/+$/g, "");
+    url = url.replaceAll(/(http:\/\/|https:\/\/)/, '');
+    let final = "";
+    let url_parts = url.split('/');
+    if (first === '') {
+      return url;
+    } else {
+      final += `/${url_parts[0]}`;
+      if(second === ''){
+        return final;
+      } else {
+        final += `/${second}`;
+        return final;
+      }
+    }
+  } else {
+    return "https://segmento.ir/hi"
+  }
 }
 
 
