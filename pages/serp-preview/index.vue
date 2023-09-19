@@ -1,7 +1,7 @@
 <template>
   <div class="p-2 flex flex-col gap-2 h-full">
     <div class="w-full flex flex-row gap-2 h-[85%]">
-      <div class="flex flex-col justify-around h-full border w-2/5 rounded-[3px] p-2">
+      <div class="flex flex-col justify-around h-full w-full rounded-[3px] p-2">
         <div class="title gap-1 flex flex-col">
           <label class="flex justify-between text-sm text-base-content">
             برند (Brand)
@@ -9,7 +9,7 @@
           <div class="w-full flex flex-col items-end">
             <InputText
               v-model="site.brand"
-              placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل"
+              placeholder="سگمنتو"
               type="text"
               :class="`w-full text-right`"
             />
@@ -21,69 +21,58 @@
           <div class="flex justify-between h-10 gap-2">
             <InputText
               v-model="site.url"
-              placeholder="segmento.ir/hi"
+              placeholder="https://segmento.ir/hi"
               type="text"
-              class="w-4/5 ltr"
+              class="w-full ltr"
             />
-            <button
+            <!-- <button
               class="btn-primary rounded-[3px] text-sm w-1/5 h-full"
               :disabled="site.url.length === 0 || true"
               @click="receive_from_google(site.url)"
             >
               دریافت
-            </button>
+            </button> -->
           </div>
         </div>
         <div class="title gap-1 flex flex-col">
           <label class="flex justify-between text-sm text-base-content">
             عنوان (Title)
-            <span class="ltr">({{ site.title.length }}/61)</span>
+            <span class="ltr">({{ site.title.length }}/63)</span>
           </label>
-          <div class="w-full flex flex-col items-end">
-            <span
-              class="h-px transition-all ease-in-out duration-300 z-10"
-              :class="input_quality(site.title.length, 'title')"
-            >
-            </span>
-            <InputText
-              v-model="site.title"
-              placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل"
-              type="text"
-              :class="`w-full text-right`"
-            />
-          </div>
+          <InputText
+            v-model="site.title"
+            placeholder="پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو"
+            class="w-full"
+            :used="(site.title.length / 63) * 100"
+            :use_color="input_quality(site.title.length, 'title')"
+          />
         </div>
         <div class="Desc text-base-content gap-1 flex flex-col">
           <label class="flex justify-between text-sm">
             توضیحات (Description)
             <span class="ltr">({{ site.description.length }}/158)</span>
           </label>
-          <div class="w-full flex flex-col items-end">
-            <span
-              class="h-px transition-all ease-in-out duration-300 z-10"
-              :class="input_quality(site.description.length, 'desc')"
-            >
-            </span>
-            <InputTextArea
-              v-model="site.description"
-              placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "
-              class="w-full h-24 -mt-px"
-            />
-          </div>
+          <InputTextArea
+            v-model="site.description"
+            placeholder="پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان قرار می‌دهد و پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا، تبلیغات گوگل یا بلاگری را برای شما آسان می‌کند."
+            class="w-full h-28 -mt-px"
+            :used="(site.description.length / 158) * 100"
+            :use_color="input_quality(site.description.length, 'desc')"
+          />
         </div>
         <div class="gap-1 flex flex-col">
-          <label class="flow-root text-sm text-[#041e49] text-base-content">
+          <label class="flow-root text-sm text-base-content">
             نمایش کلمات کلیدی (Bold Keyword)
           </label>
           <InputText
             v-model="site.keyword"
-            placeholder="درج کلمه کلیدی"
+            placeholder="سئو"
             type="text"
             class="w-full text-right"
           />
         </div>
       </div>
-      <div class="w-3/5 h-full border p-4 rounded-[3px]" dir="ltr">
+      <div class="h-full border p-4 rounded-[3px]" dir="ltr">
         <div class="w-[652px] flex flex-col gap-[5px] text-left">
           <!-- head -->
           <div class="flex flex-row h-[38px] items-center">
@@ -103,7 +92,7 @@
                 {{
                   url_regex.test(site.url)
                     ? url_humanity(site.url)
-                    : "https://segmento.ir"
+                    : url_humanity("https://segmento.ir/hi")
                 }}
               </div>
             </div>
@@ -117,19 +106,20 @@
                 پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو
               </span>
               <span dir="rtl" v-else>
-                {{ text_humanity(site.title, 61) }}
+                {{ text_humanity(site.title, 55) }}
               </span>
             </div>
             <div
-              class="flex flex-row h-[47.11px] w-[600px] text-[14px] text-left overflow-hidden text-[#4d5156]"
+              class="flex flex-row h-[47.11px] w-[600px] text-[14px] text-left text-[#4d5156] break-words"
             >
               <p dir="rtl" v-if="site.description === ''">
-                پلتفرم <b>سگمنتو</b> ابزارهای کاملی برای سئو سایت در اختیارتان قرار می‌دهد
-                و پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا، تبلیغات گوگل یا
-                بلاگری را برای شما ...
+                پلتفرم سگمنتو ابزارهای کاملی برای <b>سئو</b> سایت در اختیارتان قرار می‌دهد
+                و پیداکردن کلمات کلیدی برای استراتژی <b>سئو</b>، تولید محتوا، تبلیغات گوگل
+                یا بلاگری را برای شما ...
               </p>
               <p
                 dir="rtl"
+                class="break-words w-[600px]"
                 v-else
                 v-html="
                   text_humanity(site.description, 158).replaceAll(
@@ -195,28 +185,24 @@ const url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
 const input_quality = (length, type) => {
   switch (type) {
     case "title":
-      if (length === 0 || length === 1) {
-        return "w-0 bg-red-600";
-      } else if (length < 10) {
-        return "w-[10%] bg-red-600";
-      } else if (length < 15) {
-        return "w-[30%] bg-red-600";
-      } else if (length < 30) {
-        return "w-[50%] bg-orange-500";
+      if (length === 0) {
+        return "bg-red-600";
+      } else if (length < 40) {
+        return "bg-orange-500";
+      } else if (length < 63) {
+        return "bg-[#1bc31b]";
       } else {
-        return "w-[100%] bg-[#1bc31b]";
+        return "bg-red-600";
       }
     case "desc":
-      if (length === 0 || length === 1) {
-        return "w-0 bg-red-600";
-      } else if (length < 10) {
-        return "w-[10%] bg-red-600";
-      } else if (length < 15) {
-        return "w-[30%] bg-red-600";
-      } else if (length < 30) {
-        return "w-[50%] bg-orange-500";
+      if (length === 0) {
+        return "bg-red-600";
+      } else if (length < 80) {
+        return "bg-orange-500";
+      } else if (length < 156) {
+        return "bg-[#1bc31b]";
       } else {
-        return "w-[100%] bg-[#1bc31b]";
+        return "bg-red-600";
       }
   }
 };
@@ -231,21 +217,21 @@ const receive_from_google = (query) => {
 
 const text_humanity = (text, length) => {
   text = text.trim();
-  let words = text.split(" ");
+  // let words = text.split(" ");
   if (text.length <= length) {
     return text;
-  } else if (words.length > 1) {
-    while (text.length > length) {
-      if (words.length <= 1) {
-        return `${text.substring(0, length - 4)} ...`;
-      } else {
-        words = text.split(" ");
-        text = words.slice(0, words.length - 1).join(" ");
-      }
-    }
-    return `${text} ...`;
+    // } else if (words.length > 1) {
+    //   while (text.length > length) {
+    //     if (words.length <= 1) {
+    //       return `${text.substring(0, length - 4)} ...`;
+    //     } else {
+    //       words = text.split(" ");
+    //       text = words.slice(0, words.length - 1).join(" ");
+    //     }
+    //   }
+    //   return `${text} ...`;
   } else {
-    return `${text.substring(0, length - 4)} ...`;
+    return `${text.substring(0, length)} ...`;
   }
 };
 
