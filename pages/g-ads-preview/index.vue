@@ -1,19 +1,20 @@
 <template>
   <div class="p-2">
     <div class="mt-4 leading-loose">
-      <h1 class="font-bold text-lg text-center">این ابزار به شما کمک خواهد کرد که متن‌های مورد نظر خود برای تبلیغات گوگل ادز را آماده کنید و آنها را با دیگران به اشتراک بگذارید.</h1>
+      <h1 class="font-bold text-lg text-center">این ابزار به شما کمک خواهد کرد که متن‌های مورد نظر خود برای تبلیغات گوگل
+        ادز را آماده کنید و آنها را با دیگران به اشتراک بگذارید.</h1>
       <span class="text-sm">خیلی از مواقع مطمئن نیستیم که متن و شکل تبلیغی که برای گوگل ادز می‌نویسیم، به درستی نمایش داده خواهند شد یا نه. این پیش‌نمایش به شما کمک می‌کند این مشکل را یک بار برای همیشه حل کنید.</span>
     </div>
-    <div class="searchBox  border p-4 inline-block w-[45%]  rounded-[10px] ">
-      <div class="searchTitle mb-4">
+    <div class="searchBox p-4 pt-0 inline-block w-[45%]  rounded-[10px] ">
+      <div class="searchTitle mb-6">
         <label class="text-sm flow-root my-2.5 font-bold">آدرس وبسایت (Final URL)</label>
         <div class="flex justify-between gap-4 w-full">
-          <input @input="txtUrl=$event.target.value" placeholder="example:www.segmento.ir"
-                  type="text"
+          <input @input="checkUrl($event.target.value)" placeholder="example:www.segmento.ir"
+                 type="text"
                  class="w-full h-11 text-black placeholder:text-base-400 border border-base-400 rounded-[5px] ltr"/>
         </div>
       </div>
-      <div class="title mb-4">
+      <div class="title mb-6">
         <label class="flex justify-between text-sm mb-2.5 font-bold">
           عنوان اول (Headline 1)
           <span class="ltr text-[#10CCAE]">{{ titleLength.length }}</span>
@@ -22,9 +23,9 @@
                placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل" type="text"
                :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-right`"
                maxlength="69"/>
-        <span class="titleProgress" id="tProgressBar"></span>
+        <!--        <span class="titleProgress" id="tProgressBar"></span>-->
       </div>
-      <div class="title mb-4">
+      <div class="title mb-6">
         <label class="flex justify-between text-sm mb-2.5 font-bold">
           عنوان دوم (Headline 2)
           <span class="ltr text-[#10CCAE]">{{ secondTitle.length }}</span>
@@ -33,88 +34,154 @@
                placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل" type="text"
                :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-right`"
                maxlength="69"/>
-        <span class="titleProgress" id="tProgressBar"></span>
+        <!--        <span class="titleProgress" id="tProgressBar"></span>-->
       </div>
-      <div class="title mb-4">
+      <div class="title mb-6">
         <label class="flex justify-between text-sm mb-2.5 font-bold">
           عنوان سوم (Headline 3)
           <span class="ltr text-[#10CCAE]">{{ thirdTitle.length }}</span>
         </label>
-        <input @input="thirdTitle=$event.target.value" @keydown="progressBar(titleLength.length,`title`)"
+        <input @input="thirdTitle=$event.target.value"
                placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل" type="text"
                :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-right`"
                maxlength="69"/>
-        <span class="titleProgress" id="tProgressBar"></span>
+        <!--        <span class="titleProgress" id="tProgressBar"></span>-->
       </div>
-      <div class="route mb-4">
+      <div class="route mb-6">
         <label class="flex justify-between text-sm mb-2.5 font-bold">
           مسیر سایت (Path)
-<!--          <span class="ltr text-[#10CCAE]">{{ route.length }}</span>-->
+          <!--          <span class="ltr text-[#10CCAE]">{{ route.length }}</span>-->
         </label>
         <div class="flex justify-between gap-3 align-center">
-              <input @input="route=route + $event.target.value"
-               placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل" type="text"
-               :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-left`"
-               maxlength="69"/>
-                <span class="bg-[#D9D9D9] p-2 px-4 rounded-[5px] text-[14px] flex items-end">/</span>
-              <input @input="route= route + $event.target.value"
-               placeholder="مثال: پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل" type="text"
-               :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-left`"
-               maxlength="69"/>
+          <InputText v-model="secondRoute"
+                     :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-left`"
+                     maxlength="69"
+                     @keyup="checkRoute($event.target.value)"
+          />
+          <span class="bg-[#D9D9D9] p-2 px-4 rounded-[5px] text-[14px] flex items-end">/</span>
+          <input @input="FirstRoute= $event.target.value"
+                 :class="`w-full text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-left`"
+                 maxlength="69"
+                 @keyup="checkRoute($event.target.value)"
+          />
         </div>
       </div>
-      <div class="Desc mb-4">
+      <div class="Desc mb-6">
         <label class="flex justify-between text-sm mb-2.5 font-bold">توضیحات اول (Description 1)
           <span class="ltr text-[#10CCAE]">{{ descTitle.length }}</span>
         </label>
-        <textarea @input="descTitle=$event.target.value"
-                  placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "
-                  class="w-full h-24 py-2 px-4 resize-none text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-right"
-                  maxlength="156"></textarea>
-        <span class="titleProgress" id="descProgressBar"></span>
+        <InputTextArea @input="descTitle=$event.target.value"
+                       placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "
+                       class="w-full h-24 text-right"
+                       maxlength="156"></InputTextArea>
       </div>
-      <div class="Desc mb-4">
+      <div class="Desc mb-6">
         <label class="flex justify-between text-sm mb-2.5 font-bold">توضیحات دوم (Description 2)
           <span class="ltr text-[#10CCAE]">{{ secondDesc.length }}</span>
         </label>
-        <textarea @input="secondDesc=$event.target.value"
-                  placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "
-                  class="w-full h-24 py-2 px-4 resize-none text-black placeholder:text-base-400 border border-base-400 rounded-[5px] text-right"
-                  maxlength="156"></textarea>
-        <span class="titleProgress" id="descProgressBar"></span>
+        <InputTextArea @input="secondDesc=$event.target.value"
+                       placeholder="مثال: دسترسی شما به هوشمندترین و قدرتمندترین ابزار سئو ایرانی، فارسی و چابک از همین الان شروع میشه. اگر برای ساده‌شدن کارهای‌تان و موفقیت در سئو آماده هستید پس وقتش "
+                       class="w-full h-24 py-2 text-right"
+                       maxlength="156"></InputTextArea>
       </div>
-      <button class="btn-primary px-5 float-left">اجرا
-      </button>
     </div>
     <div class="inline-block w-[55%] align-top relative">
+      <h1 class="text-[#002145] text-[18px] font-normal pb-4 pr-4 w-max">پیش‌ نمایش تبلیغ شما در گوگل</h1>
+      <!--   deskMode   -->
+      <div class="deskMode flow-root w-[630px] h-[200px]  rounded-[10px] m-auto border border-base-400 overflow-hidden">
+        <span class="headBox flow-root w-full h-[30px] bg-[#7D7D7D] rounded-t-[10px] mb-5"></span>
+        <div class="content p-1 float-left w-full">
+
+          <h1 v-if="newVal.length >0" class="text-xs text-[darkslategrey] text-left font-bold ml-1.5">Sponsored</h1>
+
+          <div dir="ltr" class="flex flex-row h-[38px] pt-4 items-center">
+
+            <div
+              v-if="newVal.length > 0"
+              class="w-[28px] h-[28px] mr-[12px] bg-[#f1f3f4] border-x border-[#ecedef] rounded-[100%] flex justify-center items-center">
+              <img class="w-[18px] h-[18px]" src="/favicon.ico">
+            </div>
+
+            <div class="flex flex-col w-1/2">
+              <div v-if="newVal.length >0" class="h-1/2 text-[14px]" dir="ltr"> سگمنتو </div>
+              <div class="h-1/2 text-[14px] w-full float-left minimize ltr">
+                {{
+                  newVal.length > 0 && finallRoute.length === 0 ? newVal : finallRoute
+                }}
+              </div>
+              <div class="h-1/2 text-[12px] minimize float-left text-neutral-500 text-xs ltr">{{
+                  minimizeUrl
+                }}
+
+              </div>
+            </div>
+          </div>
+
+          <span class="minimize w-full  minimizeTitle text-base ltr text-blue-700 float-left p-2.5">
+                  <h1 class="inline-block" v-if="titleLength.length > 0">
+                    {{ titleLength }}
+                  </h1>
+                  <h1 class="inline-block" v-if="secondTitle.length> 0">{{ '-' + secondTitle }}</h1>
+                  <h1 class="inline-block" v-if="thirdTitle.length > 0">{{ '-' + thirdTitle }}</h1>
+                </span>
+          <div class="description flow-root text-xs text-left w-[70%] float-left px-2.5">
+            <p class="text-neutral-500 summarizeText   text-align: left;">
+              {{ descTitle + secondDesc }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!--      mobile mode    -->
       <div class="flex flex-col justify-center">
-        <div class="preview border h-[150px] shadow-[0px_8px_16px_0px_rgba(0, 0, 0, 0.14)] p-4 inline-block m-auto w-[300px] absolute top-[80px] right-[172px]  rounded-[10px] text-black overflow-hidden">
-          <div class="box">
-            <div class="content p-1">
-              <div class=" flex flex-row-reverse items-center">
-                <div :class="[txtUrl.length > 0 ? 'urlImg inline-block h-10' :'hidden']">
-                  <img class="w-full h-full object-contain" src="../../assets/icons/google.png"/>
+        <div class="w-[400px] h-full m-auto relative">
+          <div
+            class="preview border h-[160px] shadow-[0px_8px_16px_0px_rgba(0, 0, 0, 0.14)]  inline-block m-auto w-[300px] absolute top-[80px] right-[48px]  rounded-[10px] text-black overflow-hidden">
+            <div class="content pt-4 ">
+              <h1 v-if="newVal.length >0" class="text-xs text-[darkslategrey] text-left font-bold ml-2.5">
+                Sponsored</h1>
+
+
+              <div dir="ltr" class="flex flex-row h-[38px] pt-4 items-center">
+                <div
+                  v-if="newVal.length > 0"
+                  class="w-[28px] h-[28px] mr-[12px] bg-[#f1f3f4] border-x border-[#ecedef] rounded-[100%] flex justify-center items-center">
+                  <img class="w-[18px] h-[18px]" src="/favicon.ico">
                 </div>
-                <div class="sample minimize">
-                  <h2 class="w-full ltr">{{ txtUrl }}</h2>
-                  <nuxt-link class="minimize float-left text-neutral-500 text-xs ltr" href="/">{{ minimizeUrl }}</nuxt-link>
+                <div class="flex flex-col w-1/2">
+                  <div v-if="newVal.length >0" class="h-1/2 text-[14px]" dir="ltr"> سگمنتو </div>
+                  <div class="h-1/2 text-[14px] w-full float-left minimize ltr">
+                    {{
+                      newVal.length > 0 && finallRoute.length === 0 ? newVal : finallRoute
+                    }}
+                  </div>
+                  <div class="h-1/2 text-[12px] minimize float-left text-neutral-500 text-xs ltr">{{
+                      minimizeUrl
+                    }}
+
+                  </div>
                 </div>
               </div>
-              <h1 class="flow-root minimize  minimizeTitle w-full text-base text-left text-blue-700 py-1 float-left">{{ titleLength }}</h1>
-              <div class="description flow-root text-xs w-full text-left">
-                <p class="text-neutral-500 minimize float-left">
-                  {{ descTitle }}
+
+              <span class="minimize minimizeTitle w-full text-base ltr text-blue-700 float-left p-2.5">
+                  <h1 class="contents" v-if="titleLength.length > 0">
+                    {{ titleLength }}
+                  </h1>
+                  <h1 class="contents" v-if="secondTitle.length> 0">{{ '-' + secondTitle }}</h1>
+                  <h1 class="contents" v-if="thirdTitle.length > 0">{{ '-' + thirdTitle }}</h1>
+                </span>
+              <div class="description flow-root text-xs w-full text-left px-2.5">
+                <p class="text-neutral-500 summarizeText float-left text-justify">
+                  {{ descTitle + secondDesc }}
                 </p>
               </div>
             </div>
           </div>
-        </div>
-        <div class="w-[400px] h-full m-auto">
           <img src="../../assets/icons/iphoneImg.png" alt="test" class="w-full h-full object-cover"/>
         </div>
       </div>
     </div>
-    <div class="additional mt-8 text-center border-dashed border-2 px-4 pt-3 border-sky-500 rounded-xl">
+    <div class="additional bg-[#F2F5F7] mt-8 text-center border-dashed border-2 px-4 pt-3 border-sky-500 rounded-xl">
       <span class="w-full flow-root">نیاز به بهترین عنوان‌های گوگل داری؟ میتونی از ابزار عنوان ساز گوگلی سگمنتو استفاده کنی تا بهترین و بهینه‌ترین عناوین رو برای کمپین گوگل ادز استفاده کنی</span>
       <button class="btn-primary">ابزار عنوان نویس گوگل
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -132,152 +199,67 @@
   </div>
 </template>
 <style scoped>
-
-.additional {
-  background: #F2F5F7;
-}
-
 .additional .btn-primary {
   margin: 10px auto;
 }
 
-.titleProgress {
-  display: flow-root;
-  background-color: red;
-  float: left;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  border-radius: 0 0 5px 5px;
-  margin-left: 5px;
-  width: 0;
-  height: 3px;
-}
-
-#descProgressBar {
-  margin-top: -8px;
-}
-
-
-.urlImg {
-  width: 70px;
-  /*height: 70px;*/
-}
 
 .minimize {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  /*width: 100%;*/
 }
 
-.minimizeTitle{
-  width: calc(100% - 130px);
-  -webkit-line-clamp: 1;
+.minimizeTitle {
+  -webkit-line-clamp: 2;
+  /*width: 50%;*/
 }
+
+.summarizeText {
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+}
+
 
 </style>
 <script setup>
-import Request from "../../Api/Request";
-import axios from "axios";
+import {watch} from "vue";
 
 const titleLength = ref('');
 const descTitle = ref('');
-const  secondTitle=ref('');
-const thirdTitle=ref('')
-const route=ref('');
-const secondDesc=ref('')
+const secondTitle = ref('');
+const thirdTitle = ref('')
+const FirstRoute = ref('');
+const secondRoute = ref('');
+const secondDesc = ref('')
 const txtUrl = ref('');
 const minimizeUrl = ref('');
+const newVal = ref('');
+const finallRoute = ref('')
 
-const progressBar = (length, type) => {
-  let progress = document.getElementById("tProgressBar");
-  let descProgress = document.getElementById("descProgressBar");
-  switch (type) {
-    case "title":
-      if (length < 10) progress.style.width = "20px";
-      else if (length < 15) {
-        progress.style.width = "100px";
-        progress.style.background = "red"
-      } else if (length < 30) {
-        progress.style.width = "200px";
-        progress.style.background = "orange"
-      } else if (length => 30) {
-        progress.style.width = "442px";
-        progress.style.background = "#1bc31b"
-      }
-      if (length === 0 || length === 1) {
-        progress.style.width = "0px";
-        progress.style.background = "red"
-      }
-      break;
-    case "desc":
-      if (length < 10) descProgress.style.width = "20px";
-      else if (length < 15) {
-        descProgress.style.width = "100px";
-        descProgress.style.background = "red"
-      } else if (length < 30) {
-        descProgress.style.width = "200px";
-        descProgress.style.background = "orange"
-      } else if (length => 30) {
-        descProgress.style.width = "442px";
-        descProgress.style.background = "#1bc31b"
-      }
-      if (length === 0 || length === 1) {
-        descProgress.style.width = "0px";
-        descProgress.style.background = "red"
-      }
-      break
-  }
-}
-const checkHttpRegex = () => {
-  // const regex = /^https:\/\/[a-zA-Z0-9.-]+[a-zA-Z0-9\/]*$/;
-  if (!txtUrl.value) {
-    alert("آدرس وبسایت مورد نظر صحیح نمی باشد.");
-    return false;
-  } else {
-    sendRequest();
-  }
-}
-const minimizeParams = (el) => {
-  let regex = /^www/;
-  // if (minimizeUrl.value.length===11) minimizeUrl.value = ""
-  minimizeUrl.value = "";
-  if (el.match(regex).length>0) {
-    console.log("yes");
-    let text = el.split('/');
-    let first, last, middle;
-    if (text[0].includes('https') || text[0].includes('http')) {
-      first = `${text[0]}//${text[2]}`;
-      last = text[text.length - 1] !== '' ? text[text.length - 1] : text[text.length - 2];
-      if (text.length > 4) middle = " >...> "
-      else middle = ">"
-    } else {
-      first = `https://${text[0]}`;
-      last = text[text.length - 1] !== '' ? text[text.length - 1] : text[text.length - 2];
-      switch (text[text.length - 1] !== '' ? text.length : text.length - 1) {
-        case 1:
-          last = '';
-          middle = "";
-          break;
-        case 2:
-          middle = ">";
-          break;
-        default:
-          middle = " >...> "
-          break;
-      }
-    }
-    minimizeUrl.value = `${first}${middle}${last?.length > 16 ? last.substring(0, 13) + '...' : last}`;
-    return  true;
-  }
+watch(() => {
+  console.log(txtUrl.value.split("/")[2]);
+  console.log(txtUrl.value.split("/")[0]);
+})
 
+const checkUrl = (val) => {
+  let splitVal = val.split("/")
+  if (val.length > 0 && splitVal[0].includes('https') && splitVal[2] !== undefined) {
+    newVal.value = `${splitVal[0]}//${splitVal[2]}/${splitVal[3]}`;
+    console.log(newVal.value)
+  } else if (!splitVal[0].includes('http') && FirstRoute.value.length === 0 && secondRoute.value.length === 0) newVal.value = val
+}
+const checkRoute = (val) => {
+  if (FirstRoute.value.length > 0 && newVal.value.length > 0 && newVal.value.split("/")[0].includes("http")) finallRoute.value = `${newVal.value.split("/")[0]}//${newVal.value.split("/")[2]}/${FirstRoute.value}`
+  else finallRoute.value = `${newVal.value.split("/")[0]}/${FirstRoute.value}`
+  if (secondRoute.value.length > 0 && newVal.value.length > 0 && newVal.value.split("/")[0].includes("http")) finallRoute.value = `${newVal.value.split("/")[0]}//${newVal.value.split("/")[2]}/${FirstRoute.value}/${secondRoute.value}`
+  else if (secondRoute.value.length > 0 && newVal.value.length > 0) finallRoute.value = `${newVal.value.split("/")[0]}/${FirstRoute.value}/${secondRoute.value}`
+  if (newVal.value.length === 0) finallRoute.value = `${newVal.value.split("/")[0]}/${FirstRoute.value}`
 }
 
-const sendRequest = () => {
-  let res = axios.get('https://www.google.com', txtUrl.value).then(async result => {
-    let response = await result.data;
-    console.log(response)
-  })
-}
 
 </script>
