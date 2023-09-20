@@ -17,7 +17,7 @@
         </div>
 
         <div class="gap-1 flex flex-col">
-          <label class="text-sm flow-root text-[#041e49]">آدرس وبسایت (URL)</label>
+          <label class="text-sm">آدرس وبسایت (URL)</label>
           <div class="flex justify-between h-10 gap-2">
             <InputText
               v-model="site.url"
@@ -61,7 +61,7 @@
           />
         </div>
         <div class="gap-1 flex flex-col">
-          <label class="flow-root text-sm text-base-content">
+          <label class="text-sm text-base-content">
             نمایش کلمات کلیدی (Bold Keyword)
           </label>
           <InputText
@@ -189,7 +189,7 @@ const input_quality = (length, type) => {
         return "bg-danger";
       } else if (length < 40) {
         return "bg-warning";
-      } else if (length < 63) {
+      } else if (length <= 63) {
         return "bg-success";
       } else {
         return "bg-danger";
@@ -199,7 +199,7 @@ const input_quality = (length, type) => {
         return "bg-danger";
       } else if (length < 80) {
         return "bg-warning";
-      } else if (length < 156) {
+      } else if (length <= 155) {
         return "bg-success";
       } else {
         return "bg-danger";
