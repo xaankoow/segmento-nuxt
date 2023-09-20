@@ -9,7 +9,7 @@ defineEmits(["update:modelValue"]);
 </script>
 
 <template>
-  <div class="flex flex-col items-end">
+  <div class="flex flex-col items-start">
     <textarea
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
