@@ -217,19 +217,8 @@ const receive_from_google = (query) => {
 
 const text_humanity = (text, length) => {
   text = text.trim();
-  // let words = text.split(" ");
   if (text.length <= length) {
     return text;
-    // } else if (words.length > 1) {
-    //   while (text.length > length) {
-    //     if (words.length <= 1) {
-    //       return `${text.substring(0, length - 4)} ...`;
-    //     } else {
-    //       words = text.split(" ");
-    //       text = words.slice(0, words.length - 1).join(" ");
-    //     }
-    //   }
-    //   return `${text} ...`;
   } else {
     return `${text.substring(0, length)} ...`;
   }
