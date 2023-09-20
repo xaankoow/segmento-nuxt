@@ -106,7 +106,7 @@
                 پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو
               </span>
               <span dir="rtl" v-else>
-                {{ text_humanity(site.title, 55) }}
+                {{ text_humanity(site.title, 63) }}
               </span>
             </div>
             <div
