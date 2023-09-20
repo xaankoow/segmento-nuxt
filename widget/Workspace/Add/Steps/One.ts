@@ -154,8 +154,8 @@ export default class AddWorkspaceStepOne {
     input.classList.add("relative");
     input.style.direction = "ltr";
     input.innerHTML = `
-          <input type="text" id="website_text_box"
-            class="w-full border-2 border-base-350 rounded-sm py-2 pl-16 focus:border-b-primary outline-none"
+          <InputText type="text" id="website_text_box"
+            class="w-full pl-16"
             placeholder="example.ir" id="${this.popup_id}-input" />
           <label class="absolute left-[0.6rem] top-[0.6rem]">https://</label>
           <label class="absolute right-3 top-4 text-xs text-error hidden" id="error_label" style="direction: rtl">error</label>

@@ -39,7 +39,7 @@
             عنوان (Title)
             <span class="ltr">({{ site.title.length }}/63)</span>
           </label>
-          <InputText
+          <InputTextProgressed
             v-model="site.title"
             placeholder="پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو"
             class="w-full"
@@ -106,7 +106,7 @@
                 پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو
               </span>
               <span dir="rtl" v-else>
-                {{ text_humanity(site.title, 55) }}
+                {{ text_humanity(site.title, 63) }}
               </span>
             </div>
             <div
@@ -186,23 +186,23 @@ const input_quality = (length, type) => {
   switch (type) {
     case "title":
       if (length === 0) {
-        return "bg-red-600";
+        return "bg-danger";
       } else if (length < 40) {
-        return "bg-orange-500";
+        return "bg-warning";
       } else if (length < 63) {
-        return "bg-[#1bc31b]";
+        return "bg-success";
       } else {
-        return "bg-red-600";
+        return "bg-danger";
       }
     case "desc":
       if (length === 0) {
-        return "bg-red-600";
+        return "bg-danger";
       } else if (length < 80) {
-        return "bg-orange-500";
+        return "bg-warning";
       } else if (length < 156) {
-        return "bg-[#1bc31b]";
+        return "bg-success";
       } else {
-        return "bg-red-600";
+        return "bg-danger";
       }
   }
 };
@@ -238,31 +238,25 @@ const text_humanity = (text, length) => {
 const url_humanity = (url) => {
   if (url_regex.test(url)) {
     url = url.replace(/^\/+|\/+$/g, "");
-    // to check is the string in url format that we want or not
-    let text = url.split("/");
+    url = url.replace(/(http:\/\/|https:\/\/)/, "");
+
+    let url_parts = url.split("/");
     let first, last, middle;
-    if (/(http:\/\/|https:\/\/)/.test(url)) {
-      // to check if the string has http or https or not
-      first = `${text[0]}//${text[2]}`;
-      last = text[text.length - 1] !== "" ? text[text.length - 1] : text[text.length - 2];
-      if (text.length > 4) middle = " › ... › ";
-      else middle = " › ";
-    } else {
-      first = `https://${text[0]}`;
-      last = text[text.length - 1] !== "" ? text[text.length - 1] : text[text.length - 2];
-      switch (text[text.length - 1] !== "" ? text.length : text.length - 1) {
-        case 1:
-          last = "";
-          middle = "";
-          break;
-        case 2:
-          middle = " › ";
-          break;
-        default:
-          middle = " › ... › ";
-          break;
-      }
+    first = `https://${url_parts[0]}`;
+    last = url_parts[url_parts.length - 1];
+    switch (url_parts.length) {
+      case 1:
+        last = "";
+        middle = "";
+        break;
+      case 2:
+        middle = " › ";
+        break;
+      default:
+        middle = " › ... › ";
+        break;
     }
+
     return `${first}${middle}${last?.length > 16 ? last.substring(0, 13) + "..." : last}`;
   }
 };
