@@ -181,13 +181,13 @@
                   v-if="site.description.one === '' && site.description.two === ''"
                   class="w-[600px] break-words"
                 >
-                  پلتفرم سگمنتو ابزارهای کاملی برای <b>سئو</b> سایت در اختیارتان قرار
-                  می‌دهد. پیداکردن کلمات کلیدی برای استراتژی <b>سئو</b>، تولید محتوا،
+                  پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان قرار
+                  می‌دهد. پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا،
                   تبلیغات گوگل یا بلاگری را برای شما.
                 </p>
                 <p dir="rtl" v-else>
-                  {{ text_humanity(site.description.one, 90) }}
-                  {{ text_humanity(site.description.two, 90) }}
+                  {{ text_humanity(site.description.one, 90) }}.
+                  {{ site.description.two.length > 0 ? `${text_humanity(site.description.two, 90)}.` : "" }}
                 </p>
               </div>
             </div>
@@ -257,13 +257,13 @@
                           "
                           class="w-full text-[14px] break-words"
                         >
-                          پلتفرم سگمنتو ابزارهای کاملی برای <b>سئو</b> سایت در اختیارتان
-                          قرار می‌دهد. پیداکردن کلمات کلیدی برای استراتژی <b>سئو</b>،
+                          پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان
+                          قرار می‌دهد. پیداکردن کلمات کلیدی برای استراتژی سئو،
                           تولید محتوا، تبلیغات گوگل یا بلاگری را برای شما.
                         </p>
                         <p dir="rtl" v-else>
                           {{ text_humanity(site.description.one, 90) }}.
-                          {{ text_humanity(site.description.two, 90) }}.
+                          {{ site.description.two.length > 0 ? `${text_humanity(site.description.two, 90)}.` : "" }}
                         </p>
                       </div>
                     </div>
@@ -301,11 +301,8 @@
                         <img class="w-[18px] h-[18px]" src="/favicon.ico" />
                       </div>
                       <div class="flex flex-col">
-                        <div class="h-1/2 text-[14px]" dir="rtl" v-if="site.brand === ''">
+                        <div class="h-1/2 text-[14px]" dir="rtl">
                           سگمنتو
-                        </div>
-                        <div class="h-1/2 text-[14px]" dir="rtl" v-else>
-                          https://segmento.ir/hi
                         </div>
                         <div class="h-1/2 text-[12px]">https://segmento.ir/hi</div>
                       </div>
@@ -315,17 +312,7 @@
                       <div
                         class="flex flex-row-reverse py-2.5 text-left text-[20px] text-[#1a0dab] w-[600]"
                       >
-                        <span
-                          dir="rtl"
-                          v-if="
-                            site.title.one === '' &&
-                            site.title.two === '' &&
-                            site.title.three === ''
-                          "
-                        >
-                          پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو
-                        </span>
-                        <span dir="rtl" v-else>
+                        <span dir="rtl">
                           پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو
                         </span>
                       </div>
@@ -333,8 +320,8 @@
                         class="h-fit w-full text-[14px] text-left text-[#4d5156] break-words"
                       >
                         <p dir="rtl" class="w-full text-[14px] break-words">
-                          پلتفرم سگمنتو ابزارهای کاملی برای <b>سئو</b> سایت در اختیارتان
-                          قرار می‌دهد. پیداکردن کلمات کلیدی برای استراتژی <b>سئو</b>،
+                          پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان
+                          قرار می‌دهد. پیداکردن کلمات کلیدی برای استراتژی سئو،
                           تولید محتوا، تبلیغات گوگل یا بلاگری را برای شما.
                         </p>
                       </div>
