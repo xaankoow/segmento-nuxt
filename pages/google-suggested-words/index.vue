@@ -2,7 +2,7 @@
   <div class="flex flex-col w-full h-full">
     <!-- loading -->
     <div
-      v-if="request.pending()"
+      v-if="request.pending.value"
       class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center"
     >
       <ToolsLoading class="w-32 h-32" />
@@ -193,18 +193,18 @@
 </template>
 
 <script setup>
-import Request from "../../Api/Request";
-import Config from "../../composables/Config";
-import Auth from "../../middlewares/Auth";
-
-import { CustomTextBox } from "../../composables/CustomTextBox";
+import Request from "~~/Api/Request";
+import Config from "~~/composables/Config";
+import Auth from "~~/middlewares/Auth";
+import { CustomTextBox } from "~~/composables/CustomTextBox";
 
 const current_page = "pages/keyword-research";
 const config = new Config();
-const search_class = new CustomTextBox();
+const search_class = new CustomTextBox(); 
+
 const data = ref(null);
 const cache = ref(null);
-const request = new Request();
+const request = new Request("v1");
 const form = ref({
   keyword: "",
   lang: "FA",
@@ -221,10 +221,8 @@ onBeforeMount(() => {
 });
 
 async function search_keywords_request() {
-  let res = await request.get("google-suggested-words/generate", form.value, "v2");
-
-  data.value = res.data();
+  let res = await request.get("google-suggested-words/generate", form.value);
+  data.value = res.data;
   cache.value = data.value;
-  console.log(res);
 }
 </script>

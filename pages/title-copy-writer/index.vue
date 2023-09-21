@@ -1,7 +1,7 @@
 <!-- I kow about the ugly code! TODO: this section needs some refactor! -->
 <template>
   <!-- loading -->
-  <div v-if="request.pending()"
+  <div v-if="request.pending.value"
     class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center">
     <ToolsLoading class="w-32 h-32" />
   </div>
@@ -111,16 +111,16 @@
 <script setup>
 const data = ref({ value: null });
 import { ref } from "vue";
-import Config from "../../composables/Config";
-import Request from "../../Api/Request";
-import UuidGenerator from "/composables/UuidGenerator";
+import Config from "~~/composables/Config";
+import Request from "~~/Api/Request";
+import UuidGenerator from "~~/composables/UuidGenerator";
 import Konva from "konva";
 
 
 const config = new Config();
 const cache = ref(null);
 const current_page = "pages/title-copy-writer";
-const request = new Request();
+const request = new Request("v1");
 const form = ref({
   keyword: "",
   lang: "FA",
@@ -136,9 +136,9 @@ async function clear() {
 }
 
 async function creative_copy_writer_request() {
-  let res = await request.get("copy-writer/write", form.value, "v2");
+  let res = await request.get("copy-writer/write", form.value);
 
-  data.value = res.data();
+  data.value = res.data;
   cache.value = data.value;
 
   document.getElementById('title_copy_writer_questionparent').style.display = 'flex';

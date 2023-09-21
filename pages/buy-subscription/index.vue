@@ -1,7 +1,7 @@
 <template>
   <!-- loading -->
   <div
-    v-if="request.pending()"
+    v-if="request.pending.value"
     class="top-0 left-0 w-screen h-screen fixed z-50 bg-base-350/40 flex justify-center items-center"
   >
     <ToolsLoading class="w-32 h-32" />
@@ -201,14 +201,14 @@
 </template>
 
 <script setup>
-import Request from "../../Api/Request";
-import HTMLController from "../../Controllers/HTMLController";
-import Package from "../../Models/Package";
-import Config from "../../composables/Config";
-import ConfigStore from "../../store/ConfigStore";
+import Request from "~~/Api/Request";
+import HTMLController from "~~/Controllers/HTMLController";
+import Package from "~~/Models/Package";
+import Config from "~~/composables/Config";
+import ConfigStore from "~~/store/ConfigStore";
 import ExtensionTools from "~~/composables/ExtensionTools";
 
-const request = new Request();
+const request = new Request("v1");
 const packages = ref([]);
 const form = ref({
   package: null,

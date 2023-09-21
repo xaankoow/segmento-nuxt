@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-full h-full">
     <!-- loading -->
-    <div v-if="request.pending()"
+    <div v-if="request.pending.value"
       class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center">
       <ToolsLoading class="w-32 h-32" />
     </div>
@@ -130,11 +130,11 @@
 </template>
 
 <script setup>
-import Request from "../../Api/Request";
-import Config from "../../composables/Config";
-import Auth from "../../middlewares/Auth";
+import Request from "~~/Api/Request";
+import Config from "~~/composables/Config";
+import Auth from "~~/middlewares/Auth";
 
-import { CustomTextBox } from "../../composables/CustomTextBox";
+import { CustomTextBox } from "~~/composables/CustomTextBox";
 
 const current_page = "pages/google-title-builder";
 const config = new Config();
@@ -142,7 +142,7 @@ const search_class = new CustomTextBox();
 const data = ref(null);
 const cache = ref(null);
 const old_alphabet_id = ref(null);
-const request = new Request();
+const request = new Request("v1");
 const form = ref({
   keyword: "",
   lang: "FA",
@@ -158,49 +158,10 @@ onBeforeMount(() => {
   }
 });
 
-function toggle_active_alphabet(id) {
-  if (old_alphabet_id.value !== null) {
-    let old_alphabet = document.getElementById(old_alphabet_id.value);
-    old_alphabet.classList.toggle("active");
-  }
-  let current_alphabet = document.getElementById(id);
-  current_alphabet.classList.toggle("active");
-  old_alphabet_id.value = id;
-}
-
-function update_list_by_alphabet(item, id) {
-  if (id === old_alphabet_id.value) {
-    let old_alphabet = document.getElementById(old_alphabet_id.value);
-    old_alphabet.classList.toggle("active");
-    data.value = cache.value
-    old_alphabet_id.value = null;
-  }
-  else {
-    // TODO: Fix this ugly section later :))
-    let cacheToArray = Object.entries(cache.value);
-    let custom_array = cacheToArray.filter(itm => {
-      return itm[0] === item
-    })
-    if (custom_array !== null && custom_array.length > 0) {
-      custom_array = custom_array.map(item => {
-        return Object.values(item[1]) ?? []
-      })
-    }
-    else {
-      custom_array = [[]]
-    }
-
-    data.value = {
-      [item]: custom_array[0]
-    }
-    toggle_active_alphabet(id);
-  }
-}
-
 async function search_keywords_request() {
-  let res = await request.get("gtb/generate", form.value, "v2");
+  let res = await request.get("gtb/generate", form.value);
 
-  data.value = res.data();
+  data.value = res.data;
   cache.value = data.value;
 }
 </script>

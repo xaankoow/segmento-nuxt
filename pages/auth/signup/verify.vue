@@ -2,7 +2,7 @@
   <div class="flex flex-col w-full items-center">
     <div
       class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center bg-base-100/10 pointer-events-none"
-      v-show="request.pending()">
+      v-show="request.pending">
       <ToolsLoading class="w-56 h-56" />
     </div>
     <form @submit.prevent="verify_email()" class="flex flex-col w-full gap-6 my-auto font-medium items-center">

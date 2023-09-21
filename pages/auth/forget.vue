@@ -2,7 +2,7 @@
   <div class="flex flex-col w-full mx-11 gap-12 mt-[3.75rem]">
     <div
       class="absolute w-screen h-screen flex items-center justify-center top-0 left-0 bg-base-100/10 pointer-events-none"
-      v-show="request.pending()">
+      v-show="request.pending">
       <ToolsLoading class="w-56 h-56" />
     </div>
     <span v-html="config.by_route(`${current_page}/description`)"> </span>
@@ -93,9 +93,9 @@
 </template>
     
 <script setup>
-import Request from "../../Api/Request";
-import Config from "../../composables/Config";
-import { CustomTextBox } from "../../composables/CustomTextBox";
+import Request from "~~/Api/Request";
+import Config from "~~/composables/Config";
+import { CustomTextBox } from "~~/composables/CustomTextBox";
 
 definePageMeta({
   layout: "login",
