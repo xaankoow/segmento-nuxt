@@ -9,13 +9,13 @@
       <form @submit.prevent="send_active_code_to_email()" class="flex flex-col gap-11 w-full items-center"
         :class="request.pending() ? 'pointer-events-none' : ''">
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input v-model="form.name" type="text" required @focus="fullname.focus()" @blur="fullname.leave()" />
+          <InputText v-model="form.name" type="text" required @focus="fullname.focus()" @blur="fullname.leave()" />
           <label for="fullname" :class="fullname.transitionStyle(form.name)">
             {{ config.by_route(`${current_page}/fullname`) }}
           </label>
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <input dir="ltr" v-model="form.email" type="email" required @focus="email.focus()" @blur="email.leave()"
+          <InputText dir="ltr" v-model="form.email" type="email" required @focus="email.focus()" @blur="email.leave()"
             id="email_box" />
           <label for="email" :class="email.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
@@ -25,14 +25,14 @@
         </div>
         <div class="relative flex flex-row gap-1 w-[22.625rem]">
           <div class="custom_input_box text-base-content w-[22.625rem]">
-            <input dir="ltr" v-model="form.password" type="password" minlength="8" required @focus="password.focus()"
+            <InputText dir="ltr" v-model="form.password" type="password" minlength="8" required @focus="password.focus()"
               id="password" @blur="password.leave()" />
             <label for="password" :class="password.transitionStyle(form.password)">
               {{ config.by_route(`${current_page}/password`) }}
             </label>
           </div>
           <div class="custom_input_box text-base-content w-[22.625rem]">
-            <input dir="ltr" v-model="form.password_confirmation" id="confirm" type="password" required minlength="8"
+            <InputText dir="ltr" v-model="form.password_confirmation" id="confirm" type="password" required minlength="8"
               @focus="confirmPassword.focus()" @blur="confirmPassword.leave()" />
             <label for="confirmPassword" :class="confirmPassword.transitionStyle(form.password_confirmation)
               ">

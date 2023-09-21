@@ -15,14 +15,14 @@
           <div
             class="flex flex-row mx-auto text-base-content w-[16.25rem] [&>input]:w-full [&>input]:h-14 [&>input]:p-1 [&>input]:text-center [&>input]:rounded-sm"
             style="direction: ltr">
-            <input class="text-3xl tracking-[1rem] text-center" id="number_1" type="text" maxlength="4"/>
-            <!-- TODO : change focus when keypress for ones -->
-            <input style="display: none;" id="number_2" type="text" maxlength="1"/>
-            <!-- TODO : change focus when keypress for ones -->
-            <input style="display: none;" id="number_3" type="text" maxlength="1"/>
-            <!-- TODO : change focus when keypress for ones -->
-            <input style="display: none;" id="number_4" type="text" maxlength="1"/>
-            <!-- TODO : change focus when keypress for ones -->
+            <InputText class="text-3xl tracking-[1rem] text-center" id="number_1" type="text" maxlength="4"/>
+            <!-- TODO: change focus when keypress for ones -->
+            <InputText style="display: none;" id="number_2" type="text" maxlength="1"/>
+            <!-- TODO: change focus when keypress for ones -->
+            <InputText style="display: none;" id="number_3" type="text" maxlength="1"/>
+            <!-- TODO: change focus when keypress for ones -->
+            <InputText style="display: none;" id="number_4" type="text" maxlength="1"/>
+            <!-- TODO: change focus when keypress for ones -->
           </div>
           <span class="absolute -bottom-6 text-error text-xs">{{ code_error }}</span>
         </div>

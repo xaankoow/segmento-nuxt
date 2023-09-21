@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="w-1/4 h-full flex justify-end">
-            <NuxtLink to="/profile" class="w-[105px] h-10 rounded-lg bg-diamond flex items-center justify-evenly text-white text-sm">
+            <NuxtLink to="/profile" class="w-[105px] h-10 rounded-lg bg-primary flex items-center justify-evenly text-white text-sm">
               خروج
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_5898_4554" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -49,11 +49,11 @@
             <p>تغییر گذرواژه</p>
           </div>
           <div class="w-full pointer-events-none">
-            <input class="w-full h-11 border rounded border-base-300 p-2 mt-5 focus:border-b-diamond focus:border-b-2"
+            <InputText class="w-full mt-5"
               placeholder="گذرواژه فعلی" type="text" />
-            <input class="w-full h-11 border rounded border-base-300 p-2 mt-5 focus:border-b-diamond focus:border-b-2"
+            <InputText class="w-full mt-5"
               placeholder="گذرواژه جدید" type="text" />
-            <input class="w-full h-11 border rounded border-base-300 p-2 mt-5 focus:border-b-diamond focus:border-b-2"
+            <InputText class="w-full mt-5"
               placeholder="تکرار گذرواژه جدید" type="email" />
           </div>
           <div class="w-full h-auto flex justify-end mt-5">
