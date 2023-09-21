@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full rounded-[9px]">
     <!-- loading -->
-    <div v-if="request.pending()"
+    <div v-if="request.pending.value"
       class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center">
       <ToolsLoading class="w-32 h-32" />
     </div>
@@ -137,14 +137,14 @@
 </template>
 
 <script setup>
-import Config from "/composables/Config";
-import Request from "/Api/Request";
-import ConfigStore from "/store/ConfigStore";
+import Config from "~~/composables/Config";
+import Request from "~~/Api/Request";
+import ConfigStore from "~~/store/ConfigStore";
 import jalaliMoment from 'jalali-moment';
 
 const current_page = "pages/subscription-status";
 const config = new Config();
-const request = new Request();
+const request = new Request("v1");
 const limits = ref([]);
 const auth = ref({
   subscription: "",
@@ -170,7 +170,7 @@ onBeforeMount(() => {
 
 async function collect_limits() {
   let response = await request.get('profile/limits').then(response => {
-    limits.value = response.data()
+    limits.value = response.data
   }).catch(err => {
     // TODO send error message
     console.log(err)

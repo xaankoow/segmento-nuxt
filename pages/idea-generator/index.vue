@@ -2,7 +2,7 @@
   <div class="flex flex-col w-full h-full">
     <!-- loading -->
     <div
-      v-if="request.pending()"
+      v-if="request.pending.value"
       class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center"
     >
       <ToolsLoading class="w-32 h-32" />
@@ -207,18 +207,17 @@
   </div>
 </template>
 <script setup>
-import Request from "../../Api/Request";
-import Config from "../../composables/Config";
-import Auth from "../../middlewares/Auth";
-
-import { CustomTextBox } from "../../composables/CustomTextBox";
+import Request from "~~/Api/Request";
+import Config from "~~/composables/Config";
+import Auth from "~~/middlewares/Auth";
+import { CustomTextBox } from "~~/composables/CustomTextBox";
 
 const current_page = "pages/idea-generator";
 const config = new Config();
 const search_class = new CustomTextBox();
 const data = ref([]);
 
-const request = new Request();
+const request = new Request("v1");
 const form = ref({
   keyword: "",
   limit: 10,
@@ -230,10 +229,10 @@ definePageMeta({
 
 async function search_keywords_request(update) {
   let res = await request
-    .get("idea-generator/generate", form.value, "v2")
+    .get("idea-generator/generate", form.value)
     .then((res) => {
       // this code will add new data to previous one to the table when the argument 'update' be true and else, previous data will get overwriden.
-      update ? (data.value = [...data.value, ...res.data()]) : (data.value = res.data());
+      update ? (data.value = [...data.value, ...res.data]) : (data.value = res.data);
     })
     .catch((err) => {
       console.log(err);
