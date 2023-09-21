@@ -386,8 +386,8 @@ const site = ref({
   brand: "",
   url: "",
   title: {
-    one: "ccccccccccccccccccccccccccccccccccc",
-    two: "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    one: "",
+    two: "",
     three: "",
   },
   path: {
