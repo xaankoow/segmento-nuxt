@@ -119,7 +119,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-[5px]">
+      <div class="flex flex-col gap-1">
         <div class="title gap-1 flex flex-col text-sm text-base-content">
           پیش‌ نمایش تبلیغ شما در گوگل
         </div>
@@ -386,8 +386,8 @@ const site = ref({
   brand: "",
   url: "",
   title: {
-    one: "",
-    two: "",
+    one: "ccccccccccccccccccccccccccccccccccc",
+    two: "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
     three: "",
   },
   path: {
