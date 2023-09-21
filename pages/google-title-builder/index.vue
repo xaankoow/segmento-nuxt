@@ -159,7 +159,7 @@ onBeforeMount(() => {
 });
 
 async function search_keywords_request() {
-  let res = await request.get("gtb/generate", form.value, "v2");
+  let res = await request.get("gtb/generate", form.value);
 
   data.value = res.data;
   cache.value = data.value;
