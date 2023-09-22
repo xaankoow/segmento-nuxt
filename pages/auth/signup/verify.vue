@@ -2,7 +2,7 @@
   <div class="flex flex-col w-full items-center">
     <div
       class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center bg-base-100/10 pointer-events-none"
-      v-show="request.pending">
+      v-show="request.pending.value">
       <ToolsLoading class="w-56 h-56" />
     </div>
     <form @submit.prevent="verify_email()" class="flex flex-col w-full gap-6 my-auto font-medium items-center">
@@ -110,20 +110,20 @@ async function verify_email() {
   form.value.code = Number(`${number_1}${number_2}${number_3}${number_4}`);
   let response = await request.post("auth/verifyEmail", form.value);
 
-  if (response.status()) {
+  if (response.ok) {
     // TODO : Fix this section later
-    let user = response.data().user;
+    let user = response.data.user;
     if (!user.img) {
       user.img = "/images/profileDefaultImg.png";
     }
 
-    ConfigStore.set_token(response.data().token);
+    ConfigStore.set_token(response.data.token);
     ConfigStore.set_user(JSON.stringify(user));
-    ConfigStore.set_plan(JSON.stringify(response.data().plan));
-    ConfigStore.set_wallets(JSON.stringify(response.data().wallets));
-    ConfigStore.set_workspaces(JSON.stringify(response.data().workspaces));
-    ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
-    ConfigStore.set_limits(JSON.stringify(response.data().limits));
+    ConfigStore.set_plan(JSON.stringify(response.data.plan));
+    ConfigStore.set_wallets(JSON.stringify(response.data.wallets));
+    ConfigStore.set_workspaces(JSON.stringify(response.data.workspaces));
+    ConfigStore.set_roles(JSON.stringify(response.data.workspaces));
+    ConfigStore.set_limits(JSON.stringify(response.data.limits));
 
     return navigateTo("/");
   }
@@ -132,7 +132,7 @@ async function verify_email() {
 async function resendEmail() {
   let response = await request.post("auth/email/verify/resend", { email: form.value.email });
 
-  if (response.status()) {
+  if (response.ok) {
     let button = document.getElementById("btn-resend");
     button.classList.add("pointer-event-none", "border-2", "border-success");
   }

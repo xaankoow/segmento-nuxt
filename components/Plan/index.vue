@@ -162,7 +162,7 @@ async function check_discount() {
   if (response.ok) {
     form.value.discount_pricing = {
       price: response.data.price,
-      final: response.data.final,
+      final: response.data.final_price,
       discount: response.data.discount,
       ok: response.ok,
     };
