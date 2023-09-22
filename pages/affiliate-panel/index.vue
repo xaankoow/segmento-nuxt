@@ -15,12 +15,12 @@
         کیف پول</p>
     </div>
     <div
-      class="additional mt-8 text-center border-dashed border-2 px-4 py-3 flex flex-col items-center border-sky-500 bg-[#F2F5F7] rounded-[9px]">
+      class="additional mt-2 text-center border-dashed border-2 px-4 py-3 flex flex-col items-center border-sky-500 bg-[#F2F5F7] rounded-[9px]">
       <span class="w-full flow-root text-lg">برای مدیریت و افزودن حساب بانکی میتوانید به این صفحه مراجعه کنید: </span>
       <button class="btn-primary max-w-max mt-4 mb-3">مدیریت حساب بانکی
       </button>
     </div>
-    <div class="cards flex justify-between py-5 text-center">
+    <div class="cards flex justify-between py-2 text-center">
       <div class="card information border-2 w-[240px] h-[160px] rounded-[9px] py-3 gap-2.5 rounded-[6px] bg-[#F2F5F7]">
         <h1 class="border-b pb-2">تعداد کل دعوتی‌ها</h1>
         <span class="text-[#7D7D7D]">دعوت شدگان:</span>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="card  border-2 w-[240px] h-[160px] rounded py-3 gap-2.5 rounded-[6px]">
-        <h1>تعداد کل دعوتی‌ها</h1>
+        <h1>سه ماهه</h1>
         <span class="text-[#7D7D7D]">دعوت شدگان:</span>
         <span class="counter text-[#7D7D7D] text-sm">2160 نفر</span>
         <div class="Income border-t pt-3.5 flex justify-around text-sm">
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="card  border-2 w-[240px] h-[160px] rounded py-3 gap-2.5 rounded-[6px]">
-        <h1>تعداد کل دعوتی‌ها</h1>
+        <h1>شش ماهه</h1>
         <span class="text-[#7D7D7D]">دعوت شدگان:</span>
         <span class="counter text-[#7D7D7D] text-sm">2160 نفر</span>
         <div class="Income border-t pt-3.5 flex justify-around text-sm">
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="card  border-2 w-[240px] h-[160px] rounded py-3 gap-2.5 rounded-[6px]">
-        <h1>تعداد کل دعوتی‌ها</h1>
+        <h1>یکساله ماهه</h1>
         <span class="text-[#7D7D7D]">دعوت شدگان:</span>
         <span class="counter text-[#7D7D7D] text-sm">2160 نفر</span>
         <div class="Income border-t pt-3.5 flex justify-around text-sm">
@@ -66,79 +66,55 @@
         </div>
         <span class="pt-[65px] text-[28px] flow-root">150 ثبت‌ نام فعال</span>
       </div>
-      <div class="buyersCounter overflow-scroll flex border px-2.5 rounded-[9px] max-h-[250px] w-1/2">
+      <div class="buyersCounter flex border rounded-[9px] max-h-[250px] w-1/2">
         <div class="w-full">
-          <div class="tr border-b border-l py-2.5 flex justify-between gap-2.5 pl-8">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center border-b border-l  flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید اول:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
-          <div class="tr border-b border-l py-2.5 flex justify-between gap-2.5 pl-8">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center border-b border-l  flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید دوم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
-          <div class="tr border-b border-l py-2.5 flex justify-between gap-2.5 pl-8">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center border-b border-l  flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید سوم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
-          <div class="tr border-b border-l py-2.5 flex justify-between gap-2.5 pl-8">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center border-b border-l  flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید چهارم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
-          <div class="tr border-b border-l py-2.5 flex justify-between gap-2.5 pl-8">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
-          </div>
-          <div class="tr border-b border-l py-2.5 flex justify-between gap-2.5 pl-8">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
-          </div>
-          <div class="tr border-b border-l py-2.5 flex justify-between gap-2.5 pl-8">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
-          </div>
-          <div class="tr border-l py-2.5 flex justify-between gap-2.5 pl-8">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center  border-l  flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید پنجم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
         </div>
-        <div class="w-full px-2">
-          <div class="tr border-b  py-2.5 flex justify-between gap-2.5">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+        <div class="w-full">
+          <div class="tr h-[50px] items-center border-b flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید ششم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
-          <div class="tr border-b  py-2.5 flex justify-between gap-2.5">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center border-b flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید هفتم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
-          <div class="tr border-b  py-2.5 flex justify-between gap-2.5">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center border-b flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید هشتم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
-          <div class="tr border-b  py-2.5 flex justify-between gap-2.5">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center border-b  flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید نهم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
-          <div class="tr border-b  py-2.5 flex justify-between gap-2.5">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
-          </div>
-          <div class="tr border-b  py-2.5 flex justify-between gap-2.5">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
-          </div>
-          <div class="tr border-b  py-2.5 flex justify-between gap-2.5">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
-          </div>
-          <div class="tr border-l py-2.5 flex justify-between gap-2.5">
-            <span class="text-sm text-[#7D7D7D]">تعداد کاربران خرید اول:</span>
-            <span class="text-sm text-[#002145]">2160نفر</span>
+          <div class="tr h-[50px] items-center flex justify-between gap-2.5">
+            <span class="text-sm text-[#7D7D7D] pr-2.5">تعداد کاربران خرید دهم:</span>
+            <span class="text-sm text-[#002145] pl-2.5">2160 نفر</span>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="advertisement gap-5 text-center my-5 flex justify-between p-5 min-h-[200px] bg-[#F2F5F7] border-2 border-dashed border-[#0A65CD] rounded-[9px] items-center">
+      class="advertisement gap-5 text-center my-2 flex justify-between p-5 min-h-[200px] bg-[#F2F5F7] border-2 border-dashed border-[#0A65CD] rounded-[9px] items-center">
       <div class="item flex item-center flex-col gap-8 border-l-2 border-[#D9D9D9] w-[460px]">
         <h1 class="text-[20px]">لینک دعوت</h1>
         <nuxt-link>https://segmento.ir/affiliate/userSEG-4587</nuxt-link>
@@ -157,21 +133,20 @@
       </div>
 
     </div>
-    <div class="Subscription">
-      <div class="flex gap-2.5">
+    <div class="Subscription mb-2 grid grid-cols-2 gap-2 ">
         <Dropdown
-          class="box transition w-full ease-in-out delay-0 mb-4 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
+          class="box transition overflow-auto w-full ease-in-out delay-0 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
           <template v-slot:title>
             <span class="text-[#BF8970]">اشتراک برنزی</span>
           </template>
           <template v-slot:content>
             <div class="parent flex flex-col">
-              <div class="header flex gap-1 justify-between text-[12px] text-[#002145]">
+              <div class="header flex  text-[12px] text-[#002145] px-4">
+              <span
+                class="w-[33%] pt-4 h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">دوره زمانی</span>
                 <span
-                  class="w-[191px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">دوره زمانی</span>
-                <span
-                  class="w-[175px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">تعداد کل خرید</span>
-                <span class="w-[180px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] text-center">مبلغ کل پورسانت (5%)</span>
+                  class="w-[33%] pt-4  h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">تعداد کل خرید</span>
+                <span class="pt-4 w-1/3 text-center h-[50px] text-[14px] text-[#002145]">مبلغ کل پورسانت (5%)</span>
               </div>
               <span class="w-full border-1 border-b-[#7D7D7D] border-t"></span>
               <div class="content flex flex-col">
@@ -221,18 +196,18 @@
           </template>
         </Dropdown>
         <Dropdown
-          class="box transition w-full ease-in-out delay-0 mb-4 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
+          class="box overflow-auto transition w-full ease-in-out delay-0 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
           <template v-slot:title>
             <span class="text-[#7D7D7D]">اشتراک نقره ای</span>
           </template>
           <template v-slot:content>
             <div class="parent flex flex-col">
-              <div class="header flex gap-1 justify-between text-[12px] text-[#002145]">
+              <div class="header flex  text-[12px] text-[#002145] px-4">
+              <span
+                class="w-[33%] pt-4 h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">دوره زمانی</span>
                 <span
-                  class="w-[191px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">دوره زمانی</span>
-                <span
-                  class="w-[159px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">تعداد کل خرید</span>
-                <span class="w-[180px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] text-center">مبلغ کل پورسانت (5%)</span>
+                  class="w-[33%] pt-4  h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">تعداد کل خرید</span>
+                <span class="pt-4 w-1/3 text-center h-[50px] text-[14px] text-[#002145]">مبلغ کل پورسانت (5%)</span>
               </div>
               <span class="w-full border-1 border-b-[#7D7D7D]  border-t"></span>
               <div class="content flex flex-col">
@@ -281,21 +256,19 @@
             </div>
           </template>
         </Dropdown>
-      </div>
-      <div class="flex gap-2.5">
         <Dropdown
-          class="box transition w-full ease-in-out delay-0 mb-4 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
+          class="box transition overflow-auto w-full ease-in-out delay-0 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
           <template v-slot:title>
             <span class="text-[#FFCE47]">اشتراک طلایی</span>
           </template>
           <template v-slot:content>
             <div class="parent flex flex-col">
-              <div class="header flex gap-1 justify-between text-[12px] text-[#002145]">
+              <div class="header flex  text-[12px] text-[#002145] px-4">
               <span
-                class="w-[191px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">دوره زمانی</span>
+                class="w-[33%] pt-4 h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">دوره زمانی</span>
                 <span
-                  class="w-[159px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">تعداد کل خرید</span>
-                <span class="w-[180px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] text-center">مبلغ کل پورسانت (5%)</span>
+                  class="w-[33%] pt-4  h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">تعداد کل خرید</span>
+                <span class="pt-4 w-1/3 text-center h-[50px] text-[14px] text-[#002145]">مبلغ کل پورسانت (5%)</span>
               </div>
               <span class="w-full border-1 border-b-[#7D7D7D]  border-t"></span>
               <div class="content flex flex-col">
@@ -344,18 +317,18 @@
           </template>
         </Dropdown>
         <Dropdown
-          class="box w-full transition ease-in-out delay-0 mb-4 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
+          class="box w-full overflow-auto transition ease-in-out delay-0 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
           <template v-slot:title>
             <span class="text-[#0A65CD]">اشتراک الماسی</span>
           </template>
           <template v-slot:content>
             <div class="parent flex flex-col">
-              <div class="header flex gap-1 justify-between text-[12px] text-[#002145]">
+              <div class="header flex  text-[12px] text-[#002145] px-4">
               <span
-                class="w-[191px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">دوره زمانی</span>
+                class="w-[33%] pt-4 h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">دوره زمانی</span>
                 <span
-                  class="w-[159px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">تعداد کل خرید</span>
-                <span class="w-[180px] pt-[16px] text-center h-[50px] text-[14px] text-[#002145] text-center">مبلغ کل پورسانت (5%)</span>
+                  class="w-[33%] pt-4  h-[50px] text-[14px] text-[#002145] border-1 border-l-[#D9D9D9] border-l text-center">تعداد کل خرید</span>
+                <span class="pt-4 w-1/3 text-center h-[50px] text-[14px] text-[#002145]">مبلغ کل پورسانت (5%)</span>
               </div>
               <span class="w-full border-1 border-b-[#7D7D7D]  border-t"></span>
               <div class="content flex flex-col">
@@ -403,10 +376,10 @@
             </div>
           </template>
         </Dropdown>
-      </div>
+
     </div>
     <div
-      class="wallet flex flex-col items-center text-center bg-[#FCFCFB] border rounded-[10px] py-5 px-2.5 mb-5 gap-4">
+      class="wallet flex flex-col items-center text-center bg-[#FCFCFB] border rounded-[10px] py-5 px-2.5 mb-2 gap-4">
       <div class="flex items-end gap-2.5">
         <h1 class="font-bold">برداشت نقدی پورسانت و خرید اشتراک های سگمنتو</h1>
         <span class="text-[12px]">(انتقال به کیف‌پول)</span>
