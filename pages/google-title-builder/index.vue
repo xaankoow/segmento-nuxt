@@ -151,17 +151,13 @@ const form = ref({
 definePageMeta({
   middleware: [Auth]
 })
-onBeforeMount(() => {
-  let token = useCookie("token").value;
-  if (token === null || token === "" || token === undefined) {
-    return navigateTo("/auth/login");
-  }
-});
 
 async function search_keywords_request() {
   let res = await request.get("gtb/generate", form.value);
 
-  data.value = res.data;
-  cache.value = data.value;
+  if (res.ok) {
+    data.value = res.data;
+    cache.value = data.value;
+  }
 }
 </script>
