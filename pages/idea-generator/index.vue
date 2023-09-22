@@ -228,6 +228,7 @@ definePageMeta({
 });
 
 async function search_keywords_request(update) {
+  // TODO : check this section later need to change.!
   let res = await request
     .get("idea-generator/generate", form.value)
     .then((res) => {
