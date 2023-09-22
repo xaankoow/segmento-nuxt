@@ -243,20 +243,18 @@ async function buy_the_package() {
     use_wallet: 0,
   });
 
-  if (response.status_code() < 300) {
-    if (response.status()) {
-      ConfigStore.logout();
-      return navigateTo(response.data().link, { external: true });
-    }
+  if (response.ok) {
+    ConfigStore.logout();
+    return navigateTo(response.data.link, { external: true });
   } else {
-    console.log(response.errors()); // TODO: show errors!
+    console.log(response.errors); // TODO: show errors!
   }
 }
 
 async function collect_packages() {
   let response = await request.get("package");
-  if (response.status_code() < 300) {
-    packages.value = response.data().map((pack) => new Package(pack));
+  if (response.ok) {
+    packages.value = response.data.map((pack) => new Package(pack));
   } else {
     // TODO: send error message
     console.log(response);
