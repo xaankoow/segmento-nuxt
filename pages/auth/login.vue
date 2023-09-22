@@ -88,6 +88,7 @@ async function requestToLogin() {
   let response = await request.post("auth/login", form.value);
   let email_box = document.getElementById("input_email");
   let password_box = document.getElementById("input_password");
+  console.log(response);
 
   if (response.ok) {
     // TODO : Fix this section later
