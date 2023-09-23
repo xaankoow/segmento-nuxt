@@ -1,13 +1,13 @@
 <template>
   <div>
     <button
-      class="flex items-center justify-between w-full py-2 px-4"
+      class="flex flex-row items-center justify-between w-full py-2"
     >
       <div class="font-semibold">
         <slot name="label"></slot>
       </div>
       <div
-        class="transition-all duration-100"
+        class="transition-all duration-100 w-[15px] h-[15px] flex items-center justify-center"
         :class="isOpen ? 'transform -rotate-90' : 'transform rotate-0'"
       >
         <svg
@@ -25,7 +25,7 @@
       </div>
     </button>
     <div
-      class="overflow-hidden transition-all text-sm duration-100 px-7 flex flex-col gap-2"
+      class="overflow-hidden transition-all text-sm duration-100 px-3 flex flex-col gap-2"
       :class="!isOpen ? 'h-0' : 'h-fit py-4'"
     >
       <slot></slot>
