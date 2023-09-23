@@ -128,7 +128,7 @@ const props = defineProps({
 
 const emit = defineEmits(["plan_updated"]);
 
-const request = new Request();
+const request = new Request("v1");
 const discount_box_focus = ref(false);
 const text_box_focus = (at_focus = null) => {
   if (at_focus !== null) {
@@ -161,9 +161,9 @@ async function check_discount() {
 
   if (response.ok) {
     form.value.discount_pricing = {
-      price: response.data().price,
-      final: response.data().final,
-      discount: response.data().discount,
+      price: response.data.price,
+      final: response.data.final_price,
+      discount: response.data.discount,
       ok: response.ok,
     };
 
@@ -176,7 +176,7 @@ async function check_discount() {
     );
   }
 
-  discount_error.value.message = response.message();
+  discount_error.value.message = response.message;
   discount_error.value.ok = response.ok;
 }
 </script>

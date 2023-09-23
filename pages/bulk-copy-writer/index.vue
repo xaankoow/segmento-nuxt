@@ -122,7 +122,7 @@
 </template>
 
 <script setup>
-import Request from "../../Api/Request";
+import Request from "~~/Api/Request";
 
 // برای فعال مردن دکمه ثبت
 const textSize = ref('');
@@ -166,7 +166,7 @@ const isExsit = (data) => {
 
 const sendValue = () => {
   console.log("copy-writer/bulk?" + sperateText)
-  const request = new Request();
+  const request = new Request("v1");
   let res = request.post("copy-writer/bulk?", sperateText).then(res => {
     console.log(res)
     resetData();

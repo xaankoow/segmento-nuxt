@@ -4,53 +4,50 @@ import ConfigStore from "../store/ConfigStore";
 
 export default class Request {
     private request = useNuxtApp().$axios;
-    protected _pending = ref(false);
+    private url = useRuntimeConfig().public.API_URL;
+    public readonly pending = ref(false);
 
-    constructor() {
+    constructor(version: string|null = null) {
+        if(version) this.url += `/${version}`;
         return this;
     }
 
-    public get = async (url, params, version = 'v2') => {
-        return await this.send_request('GET', `${version}/${url}`, null, params);
+    public get = async (path: string, params: JSON) => {
+        return await this.send_request('GET', path, null, params);
     }
 
-    public post = async (url, body, version = 'v2') => {
-        return await this.send_request('POST', `${version}/${url}`, body, null);
+    public post = async (path: string, body: JSON) => {
+        return await this.send_request('POST', path, body, null);
     }
 
-    public pending(): Boolean {
-        return this._pending.value;
-    }
-
-    protected send_request = async (method: string, url: string, body: any, params: any): Promise<ResponseModel> => {
+    protected send_request = async (method: string, path: string, body: any, params: any): Promise<ResponseModel> => {
         let result: any;
-        this._pending.value = true;
+        this.pending.value = true;
         let token = ConfigStore.token() ?? '';
 
         await axios.request({
-            baseURL: `${useRuntimeConfig().public.API_URL}/api/`,
+            baseURL: `${this.url}/`,
             headers: {
                 'accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Authorization": `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             },
             method: method,
-            url: url,
+            url: path,
             params: params,
             data: body
         }).then((res) => {
             let response = res.data
-            result = new ResponseModel(response.message ?? '', response.status, response.errors, response.data, res.status, response.ok ?? false);
+            result = new ResponseModel(response.message ?? '', response.ok, response.errors, response.data, res.status);
         }).catch((res) => {
             let response = res.response.data;
-            result = new ResponseModel(res.message, response.status, response.specific_error, response.data, res.status, response.ok ?? false);
-            console.log(res);
+            result = new ResponseModel(response.message ?? res.message, false, response.errors ?? [], [], res.status);
             if (res.response.status === 401) {
                 ConfigStore.logout();
                 return navigateTo('/auth/login');
             }
         }).finally(() => {
-            this._pending.value = false;
+            this.pending.value = false;
         })
 
         return result;

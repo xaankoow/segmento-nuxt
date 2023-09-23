@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-end h-10">
+  <div class="flex flex-col items-start h-10 !text-right">
     <InputText
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
