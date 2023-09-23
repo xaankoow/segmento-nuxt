@@ -228,6 +228,7 @@ function plan_changed(pack, plan, discount = null, discount_code = null) {
   form.value.plan = plan;
   form.value.discount = discount;
   form.value.discount_code = discount_code;
+  console.log(plan);
 }
 
 function show_factor() {
