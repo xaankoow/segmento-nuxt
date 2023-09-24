@@ -124,64 +124,37 @@
               target="_blank"
               href="https://segmento.ir/about/contact/"
               @click="actived_navbar = 'support'"
-              class="flex flex-row w-full h-[2.277rem] cursor-pointer rounded-md hover:bg-base-250 items-center p-px"
+              class="flex flex-row w-full h-[2.277rem] cursor-pointer rounded-md items-center p-px"
             >
-              <img src="../assets/icons/academy.png" class="w-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-full h-full"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
+                />
+              </svg>
             </a>
             <!-- پشتیبانی -->
             <a
               target="_blank"
               href="https://segmento.ir/about/contact/"
               @click="actived_navbar = 'support'"
-              class="flex flex-row w-full h-[2.277rem] cursor-pointer rounded-md hover:bg-base-250 items-center"
+              class="flex flex-row w-full h-[2.277rem] cursor-pointer rounded-md hover:[&>svg]:fill-primary items-center p-0.5"
             >
               <svg
-                class="mx-auto"
-                width="34"
-                height="34"
-                viewBox="0 0 34 34"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                class="h-full w-full fill-base-content"
+                viewBox="0 0 512 512"
               >
                 <path
-                  d="M5.72168 14.1827C5.72168 7.89269 10.8107 2.83337 17 2.83337C23.1893 2.83337 28.2783 7.89269 28.2783 14.1827"
-                  stroke="#002145"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M27.3155 27.9932C25.8026 30.7279 22.3641 31.6851 19.6133 30.181"
-                  stroke="#002145"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M7.92225 25.1218H5.17144C3.93358 25.1218 2.83325 24.0279 2.83325 22.7972V19.242C2.83325 18.0114 3.93358 16.9175 5.17144 16.9175H7.92225C8.60995 16.9175 9.02257 17.4644 9.02257 18.0114V23.8911C9.02257 24.5748 8.60995 25.1218 7.92225 25.1218Z"
-                  fill="#002145"
-                  stroke="#002145"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M26.0776 16.9175H28.8284C30.0663 16.9175 31.1666 18.0114 31.1666 19.242V22.7972C31.1666 24.0279 30.0663 25.1218 28.8284 25.1218H26.0776C25.3899 25.1218 24.9773 24.5748 24.9773 24.0279V18.1481C24.9773 17.4644 25.3899 16.9175 26.0776 16.9175Z"
-                  fill="#002145"
-                  stroke="#002145"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M19.5386 29.7561C20.0042 28.977 19.5875 27.8765 18.6079 27.298C17.6283 26.7195 16.4569 26.8821 15.9913 27.6611C15.5258 28.4402 15.9425 29.5408 16.9221 30.1193C17.9017 30.6978 19.0731 30.5352 19.5386 29.7561Z"
-                  fill="#002145"
-                  stroke="#002145"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
+                  d="M256 48C141.1 48 48 141.1 48 256v40c0 13.3-10.7 24-24 24s-24-10.7-24-24V256C0 114.6 114.6 0 256 0S512 114.6 512 256V400.1c0 48.6-39.4 88-88.1 88L313.6 488c-8.3 14.3-23.8 24-41.6 24H240c-26.5 0-48-21.5-48-48s21.5-48 48-48h32c17.8 0 33.3 9.7 41.6 24l110.4 .1c22.1 0 40-17.9 40-40V256c0-114.9-93.1-208-208-208zM144 208h16c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H144c-35.3 0-64-28.7-64-64V272c0-35.3 28.7-64 64-64zm224 0c35.3 0 64 28.7 64 64v48c0 35.3-28.7 64-64 64H352c-17.7 0-32-14.3-32-32V240c0-17.7 14.3-32 32-32h16z"
                 />
               </svg>
             </a>
