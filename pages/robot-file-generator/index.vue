@@ -14,7 +14,7 @@
         کیف پول</p>
     </div>
     <div class="content py-2">
-      <span class="flex items-center gap-2.5 px-2.5 w-max">
+      <span class="flex items-center gap-2.5 p-2.5 w-max">
         <div class="circle w-[18px] h-[18px] rounded-[50%] bg-[#0A65CD] flex justify-center items-center">
           <div class="child flow-root w-[10px] h-[10px] rounded-[50%] bg-[white] border-solid"></div>
         </div>
