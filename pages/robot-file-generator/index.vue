@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <div class="container px-2">
     <div class="notice flex flex-col gap-4">
       <h1 class="text-[#7D7D7D]">لطفا به نکات زیر توجه کنید: </h1>
@@ -15,7 +15,7 @@
     </div>
     <div class="content py-2">
       <span class="flex items-center gap-2.5 p-2.5 w-max">
-        <div class="circle w-[18px] h-[18px] rounded-[50%] bg-[#0A65CD] flex justify-center items-center">
+        <div class="circle w-[19px] h-[19px] rounded-[50%] bg-[#0A65CD] flex justify-center items-center">
           <div class="child flow-root w-[10px] h-[10px] rounded-[50%] bg-[white] border-solid"></div>
         </div>
         فایل ساز ربات
@@ -41,7 +41,75 @@
             انتخاب ربات موتور جستجو
           </h1>
           <div class="combo">
-            <DropdownIndexTwo class="h-max border-none m-0"/>
+            <input-select class="border rounded-[2px]">
+              <template v-slot:title>
+                <span>شامل همه ربات موتورهای جستجو</span>
+              </template>
+              <template v-slot:content>
+                <div class="parent flex ltr  items-center gap-[7px] w-full flex-col">
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">All Bots</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">APIs-Google</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">AdsBot Mobile Web Android</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">AdsBot Mobile Web</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">AdsBot</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">AdsSense</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">Googlebot Image</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">Googlebot News</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">Googlebot Video</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">Googlebot Desktop</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">Googlebot Smartphone</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoRobots">Bingbot</input-radio>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </input-select>
           </div>
           <div
             class="resultBox h-[209px]  border border-dashed border-[#0A65CD] bg-[#fff9e8] rounded-[10px] p-2">
@@ -89,11 +157,31 @@
         <div class="behavior flex flex-col w-full pt-2.5 gap-4 relative">
           <h1 class="title flex items-center gap-2.5">
             <span class="before w-[2px] h-4 rounded-[15px] bg-[#0A65CD] absolute right-[-34px]"></span>
-            انتخاب ربات موتور جستجو
+            انتخاب نوع رفتار ربات
           </h1>
+
           <div class="combo">
-            <DropdownIndexTwo class="h-max border-none m-0"/>
+            <input-select class="border rounded-[2px]">
+              <template v-slot:title>
+                <span>مجاز</span>
+              </template>
+              <template v-slot:content>
+                <div class="parent flex  items-center gap-[7px] w-full flex-col cursor-pointer">
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoPermission">مجاز</input-radio>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-max">
+                      <input-radio name="rdoPermission">منع</input-radio>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </input-select>
           </div>
+
           <div class="links">
             <div class="flex flex-col gap-2.5">
               <div class="flex flex-col gap-1">
@@ -200,7 +288,8 @@
             <span>disallow: /dashboard*</span>
           </div>
           <div class="text-left flex flex-row-reverse gap-2.5">
-            <button class="py-[8px] px-[20px] my-[15px] rounded-[9px]  bg-[#0A65CD] text-[#FFFFFF] text-sm flex gap-2.5 items-center">
+            <button
+              class="py-[8px] px-[20px] my-[15px] rounded-[9px]  bg-[#0A65CD] text-[#FFFFFF] text-sm flex gap-2.5 items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_36_80" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                       height="24">
