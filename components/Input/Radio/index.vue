@@ -2,7 +2,7 @@
   <label class="flex items-center gap-2.5 cursor-pointer">
     <input
       type="radio"
-      checked="checked"
+      :checked="isChecked"
       :name="name"
       :value="modelValue"
       class="absolute h-0 w-0 opacity-0"
@@ -15,8 +15,10 @@
 </template>
 
 <script setup>
-defineProps(["modelValue",'name']);
+const { modelValue, name } = defineProps(["modelValue", "name"]);
 defineEmits(["update:modelValue"]);
+const value = modelValue;
+const isChecked = computed(() => modelValue === value);
 </script>
 
 
@@ -46,6 +48,6 @@ defineEmits(["update:modelValue"]);
   height: 10px;
   border-radius: 50%;
   background: white;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 </style>

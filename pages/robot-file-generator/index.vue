@@ -114,7 +114,7 @@
           <div
             class="resultBox h-[209px]  border border-dashed border-[#0A65CD] bg-[#fff9e8] rounded-[10px] p-2">
             <span class="flex items-center gap-1 text-[13px] ">
-              <div>
+              <div v-show="textValue.length>0 && textValue?.includes('*')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                             height="24">
@@ -127,29 +127,68 @@
                       </g>
                       </svg>
               </div>
-              1.خود این آدرس
+                <span class="flow-root text-[13px]" v-show="textValue.length>0 && textValue?.includes('*')">شامل تمامی ربات ها</span>
             </span>
-            <span class="text-[13px] px-[30px]">2.تمام آدرس های بعد از آن خزش نشود</span>
+            <span class="flex items-center gap-1 text-[13px] ">
+              <div v-show="textValue.length>0 && textValue?.includes('$')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                            height="24">
+                      <rect width="24" height="24" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_30_1381)">
+                      <path
+                        d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
+                        fill="#FFCE47"/>
+                      </g>
+                      </svg>
+              </div>
+              <span class="flow-root text-[13px]"
+                    v-show="textValue.length>0 && textValue?.includes('$')"> شامل علامت $</span>
+            </span>
+            <!--            <span class="flow-root text-[13px] px-[30px]">4.تمام آدرس های بعد از آن خزش نشود</span>-->
           </div>
           <div
             class="resultBox h-[209px] border border-dashed border-[#0A65CD] bg-[#fff9e8] rounded-[10px] p-2">
-            <span class="flex items-center gap-1 text-[13px] ">
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                            height="24">
-                      <rect width="24" height="24" fill="#D9D9D9"/>
-                      </mask>
-                      <g mask="url(#mask0_30_1381)">
-                      <path
-                        d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
-                        fill="#FFCE47"/>
-                      </g>
-                      </svg>
-              </div>
-              1.خود این آدرس
-            </span>
-            <span class="text-[13px] px-[30px]">2.تمام آدرس های بعد از آن خزش نشود</span>
+            <!--            <span class="flex items-center gap-1 text-[13px] ">-->
+            <!--              <div>-->
+            <!--                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">-->
+            <!--                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"-->
+            <!--                            height="24">-->
+            <!--                      <rect width="24" height="24" fill="#D9D9D9"/>-->
+            <!--                      </mask>-->
+            <!--                      <g mask="url(#mask0_30_1381)">-->
+            <!--                      <path-->
+            <!--                        d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"-->
+            <!--                        fill="#FFCE47"/>-->
+            <!--                      </g>-->
+            <!--                      </svg>-->
+            <!--              </div>-->
+            <!--              1.خود این آدرس-->
+            <!--            </span>-->
+            <!--            <span class="text-[13px] px-[30px]">2.تمام آدرس های بعد از آن خزش نشود</span>-->
+            <div class="flex flex-col" v-for="report in reportRes">
+              <span class="flex items-center gap-2.5">
+                <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+                                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0"
+                                            y="0" width="24"
+                                            height="24">
+                                      <rect width="24" height="24" fill="#D9D9D9"/>
+                                      </mask>
+                                      <g mask="url(#mask0_30_1381)">
+                                      <path
+                                        d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
+                                        fill="#FFCE47"/>
+                                      </g>
+                                      </svg>
+                </div>
+                {{ ` لینک مورد نظر: ${report.val}` }}</span>
+              <span>{{ report.startFlag ? 'فاقد حرف *' : '' }}</span>
+              <span>{{ report.dFlag ? 'فاقد حرف $' : '' }}</span>
+              <span>{{ report.slashFlag ? 'فاقد حرف /' : '' }}</span>
+            </div>
           </div>
         </div>
         <div class="border h-[550px]"></div>
@@ -169,12 +208,12 @@
                 <div class="parent flex  items-center gap-[7px] w-full flex-col cursor-pointer">
                   <div class="w-full">
                     <div class="w-max">
-                      <input-radio name="rdoPermission">مجاز</input-radio>
+                      <input-radio name="rdoPermission" :value="selectedValue">مجاز</input-radio>
                     </div>
                   </div>
                   <div class="w-full">
                     <div class="w-max">
-                      <input-radio name="rdoPermission">منع</input-radio>
+                      <input-radio :value="test" name="rdoPermission">منع</input-radio>
                     </div>
                   </div>
                 </div>
@@ -189,9 +228,11 @@
                 <div class="flex items-center align-center gap-5 relative">
                   <InputText
                     type="text"
-                    class="h-max py-[10px]"
+                    class="h-max py-[10px] ltr"
+                    v-model="textValue"
                   />
-                  <div class="add bg-[#F2F5F7] p-1 rounded-[3px] absolute left-[50px] cursor-pointer">
+                  <button @click="setItem('ads','مجاز',textValue)"
+                          class="add bg-[#F2F5F7] p-1 rounded-[3px] absolute right-[10px] cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                       <mask id="mask0_36_60" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                             height="25">
@@ -203,92 +244,21 @@
                           fill="#488CDA"/>
                       </g>
                     </svg>
-                  </div>
-                  <span class="delete cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <mask id="mask0_28_2147" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                      height="24">
-                <rect width="24" height="24" fill="#D9D9D9"/>
-                </mask>
-                <g mask="url(#mask0_28_2147)">
-                <path
-                  d="M11.9984 13.0484L6.92344 18.1234C6.7901 18.2568 6.61944 18.3274 6.41144 18.3354C6.20277 18.3441 6.02344 18.2734 5.87344 18.1234C5.72344 17.9734 5.64844 17.7984 5.64844 17.5984C5.64844 17.3984 5.72344 17.2234 5.87344 17.0734L10.9484 11.9984L5.87344 6.92344C5.7401 6.7901 5.66944 6.6191 5.66144 6.41044C5.65277 6.20244 5.72344 6.02344 5.87344 5.87344C6.02344 5.72344 6.19844 5.64844 6.39844 5.64844C6.59844 5.64844 6.77344 5.72344 6.92344 5.87344L11.9984 10.9484L17.0734 5.87344C17.2068 5.7401 17.3778 5.6691 17.5864 5.66044C17.7944 5.65244 17.9734 5.72344 18.1234 5.87344C18.2734 6.02344 18.3484 6.19844 18.3484 6.39844C18.3484 6.59844 18.2734 6.77344 18.1234 6.92344L13.0484 11.9984L18.1234 17.0734C18.2568 17.2068 18.3274 17.3774 18.3354 17.5854C18.3441 17.7941 18.2734 17.9734 18.1234 18.1234C17.9734 18.2734 17.7984 18.3484 17.5984 18.3484C17.3984 18.3484 17.2234 18.2734 17.0734 18.1234L11.9984 13.0484Z"
-                  fill="#F35242"/>
-                </g>
-                <path
-                  d="M0 3C0 1.34315 1.34315 0 3 0H21C22.6569 0 24 1.34315 24 3V21C24 22.6569 22.6569 24 21 24H3C1.34315 24 0 22.6569 0 21V3Z"
-                  fill="#F35242" fill-opacity="0.1"/>
-                </svg>
-
-            </span>
-                </div>
-              </div>
-              <div class="flex flex-col gap-1">
-                <span class="text-[#002145] text-[12px] font-normal px-2.5">درج لینک</span>
-                <div class="flex items-center align-center gap-5 relative">
-                  <InputText
-                    type="text"
-                    class="h-max py-[10px]"
-                  />
-                  <div class="add bg-[#F2F5F7] p-1 rounded-[3px] absolute left-[50px] cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                      <mask id="mask0_36_60" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                            height="25">
-                        <rect y="0.5" width="24" height="24" fill="#D9D9D9"/>
-                      </mask>
-                      <g mask="url(#mask0_36_60)">
-                        <path
-                          d="M12 19.25C11.7833 19.25 11.6043 19.1793 11.463 19.038C11.321 18.896 11.25 18.7167 11.25 18.5V13.25H6C5.78333 13.25 5.60433 13.179 5.463 13.037C5.321 12.8957 5.25 12.7167 5.25 12.5C5.25 12.2833 5.321 12.104 5.463 11.962C5.60433 11.8207 5.78333 11.75 6 11.75H11.25V6.5C11.25 6.28333 11.321 6.10433 11.463 5.963C11.6043 5.821 11.7833 5.75 12 5.75C12.2167 5.75 12.396 5.821 12.538 5.963C12.6793 6.10433 12.75 6.28333 12.75 6.5V11.75H18C18.2167 11.75 18.396 11.8207 18.538 11.962C18.6793 12.104 18.75 12.2833 18.75 12.5C18.75 12.7167 18.6793 12.8957 18.538 13.037C18.396 13.179 18.2167 13.25 18 13.25H12.75V18.5C12.75 18.7167 12.6793 18.896 12.538 19.038C12.396 19.1793 12.2167 19.25 12 19.25Z"
-                          fill="#488CDA"/>
-                      </g>
-                    </svg>
-                  </div>
-                  <span class="delete cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <mask id="mask0_28_2147" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                      height="24">
-                <rect width="24" height="24" fill="#D9D9D9"/>
-                </mask>
-                <g mask="url(#mask0_28_2147)">
-                <path
-                  d="M11.9984 13.0484L6.92344 18.1234C6.7901 18.2568 6.61944 18.3274 6.41144 18.3354C6.20277 18.3441 6.02344 18.2734 5.87344 18.1234C5.72344 17.9734 5.64844 17.7984 5.64844 17.5984C5.64844 17.3984 5.72344 17.2234 5.87344 17.0734L10.9484 11.9984L5.87344 6.92344C5.7401 6.7901 5.66944 6.6191 5.66144 6.41044C5.65277 6.20244 5.72344 6.02344 5.87344 5.87344C6.02344 5.72344 6.19844 5.64844 6.39844 5.64844C6.59844 5.64844 6.77344 5.72344 6.92344 5.87344L11.9984 10.9484L17.0734 5.87344C17.2068 5.7401 17.3778 5.6691 17.5864 5.66044C17.7944 5.65244 17.9734 5.72344 18.1234 5.87344C18.2734 6.02344 18.3484 6.19844 18.3484 6.39844C18.3484 6.59844 18.2734 6.77344 18.1234 6.92344L13.0484 11.9984L18.1234 17.0734C18.2568 17.2068 18.3274 17.3774 18.3354 17.5854C18.3441 17.7941 18.2734 17.9734 18.1234 18.1234C17.9734 18.2734 17.7984 18.3484 17.5984 18.3484C17.3984 18.3484 17.2234 18.2734 17.0734 18.1234L11.9984 13.0484Z"
-                  fill="#F35242"/>
-                </g>
-                <path
-                  d="M0 3C0 1.34315 1.34315 0 3 0H21C22.6569 0 24 1.34315 24 3V21C24 22.6569 22.6569 24 21 24H3C1.34315 24 0 22.6569 0 21V3Z"
-                  fill="#F35242" fill-opacity="0.1"/>
-                </svg>
-
-            </span>
+                  </button>
                 </div>
               </div>
             </div>
-            <button
-              class="addBtn py-[8px] px-[20px] my-[15px] rounded-[9px] float-left bg-[#F2F5F7] text-[#488CDA] text-sm flex gap-2.5 align-center items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <mask id="mask0_36_16" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                      height="24">
-                  <rect width="24" height="24" fill="#D9D9D9"/>
-                </mask>
-                <g mask="url(#mask0_36_16)">
-                  <path
-                    d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                    fill="#488CDA"/>
-                </g>
-              </svg>
-              افزدون لینک
-            </button>
           </div>
           <div
-            class="resultBox h-[209px] border border-solid border-base-400 bg-[#FCFCFB] rounded-[5px] p-[15px] flex flex-col gap-2.5 ltr">
-            <span>disallow: /dashboard*</span>
-            <span>disallow: /dashboard*</span>
-            <span>disallow: /dashboard*</span>
-            <span>disallow: /dashboard*</span>
-            <span>disallow: /dashboard*</span>
+            class="resultBox mt-[130px] h-[209px] border border-solid border-base-400 bg-[#FCFCFB] rounded-[5px] p-[15px] flex flex-col gap-2.5 ltr">
+            <div class="flex flex-col" v-for="item in linkRef">
+              <span>userAgent:{{ item.key1 }}</span>
+              <span>{{ item.key2 === 1 ? `allow: ${item.value}` : `disAllow: ${item.value}` }}</span>
+            </div>
           </div>
           <div class="text-left flex flex-row-reverse gap-2.5">
             <button
+              @click="checkRule"
               class="py-[8px] px-[20px] my-[15px] rounded-[9px]  bg-[#0A65CD] text-[#FFFFFF] text-sm flex gap-2.5 items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_36_80" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -304,7 +274,7 @@
               دانلود
             </button>
             <button
-              class="save py-[8px] px-[20px] my-[15px] rounded-[9px]  bg-[#F2F5F7] text-[#488CDA] flex gap-2.5 text-sm items-center">
+              class="save hidden py-[8px] px-[20px] my-[15px] rounded-[9px]  bg-[#F2F5F7] text-[#488CDA] flex gap-2.5 text-sm items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_36_47" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                       height="24">
@@ -336,6 +306,49 @@
   margin-left: 10px;
 }
 </style>
-<script setup lang="ts">
-import DropdownIndexTwo from "~/components/Dropdown/DropdownIndexTwo.vue";
+<script setup>
+const selectedValue = ref("مجاز");
+const textValue = ref('');
+const linkRef = ref();
+const links = [];
+const reportRes = ref()
+
+const
+  setItem = (robot, permission, text) => {
+    linkRef.value = ""
+    let res = {
+      value: text,
+      key1: "ads",
+      key2: "1"
+    }
+    links.push(res)
+    linkRef.value = links
+
+    console.log(links)
+  }
+
+const checkRule = () => {
+  debugger
+  let report = [];
+  links.forEach((i, index) => {
+    const item = {
+      val: i.value,
+      startFlag: false,
+      dFlag: false,
+      slashFlag: false
+    };
+    if (!i.value.includes("*")) {
+      item.startFlag = true;
+    }
+    if (!i.value.includes("/")) {
+      item.slashFlag = true;
+    }
+    if (!i.value.includes("$")) {
+      item.dFlag = true;
+    }
+    report.push(item);
+  });
+  reportRes.value = report;
+  console.log(report)
+}
 </script>

@@ -23,7 +23,7 @@
       </div>
     </div>
     <!-- content -->
-    <div class=" bg-base-100 z-50 shadow-sm border right-[-1px] w-[631.5px] border-t-0"
+    <div class=" bg-base-100 z-50 shadow-sm border right-[-1px] w-[546px] border-t-0"
          :class="isOpen ? 'open absolute ' : 'hidden'">
       <div class="flex gap-[9px] flex-col p-2" @click="isOpen=false">
         <slot name="content"></slot>
