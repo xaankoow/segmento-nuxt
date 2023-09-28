@@ -12,7 +12,7 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       @keyup="line_counter($event)"
-      class="resize-none overflow-hidden border border-b-[2px] focus:border-b-primary p-2 h-full w-full"
+      class="resize-none overflow-hidden border border-b-[2px] focus:border-b-primary p-2 w-full"
       :class="class"
     ></textarea>
   </div>
@@ -34,14 +34,14 @@ const props = defineProps({
     type: String,
     default: "w-1/2",
   },
+  modelValue:{}
 });
-defineProps(["modelValue"]);
+
 defineEmits(["update:modelValue"]);
 
 function line_counter(event) {
   lines.value = event.target.value.split("\n").length;
   event.target.style.height = "100%";
-  //   event.target.style.backgroundColor = "green";
   console.log(event.target.style);
 }
 </script>
