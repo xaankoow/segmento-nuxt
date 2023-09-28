@@ -184,6 +184,12 @@
       </NuxtLink>
     </Copy>
   </div>
+  <div class="w-full flex flex-row justify-center items-center">
+    <InputTextAreaLiner2 v-model="text"> </InputTextAreaLiner2>
+  </div>
+  <div>
+    {{ text }}
+  </div>
 </template>
 
 <script setup>
@@ -196,4 +202,5 @@ definePageMeta({
 
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
+const text = ref("");
 </script>
