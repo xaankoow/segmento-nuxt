@@ -36,7 +36,7 @@ import insightsIconPath from "@/assets/icons/insights.svg"
 import bookmarkIconPath from "@/assets/icons/bookmark_add.svg"
 import labelIconPath from "@/assets/icons/label.svg"
 import deleteIconPath from "@/assets/icons/delete.svg"
-import copyContentIconPath from "@/assets/icons/content_"
+import copyContentIconPath from "@/assets/icons/copy.svg"
 
 //props
 const props = defineProps<{
