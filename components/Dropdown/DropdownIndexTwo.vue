@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-14 my-10">
+  <div class="w-full h-14">
     <!-- header -->
     <p class="mb-2">
       <slot name="title"></slot>

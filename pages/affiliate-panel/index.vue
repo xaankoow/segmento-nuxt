@@ -1,6 +1,5 @@
 <template>
   <div class="p-2">
-
     <div class="notice flex flex-col gap-4">
       <h1 class="text-[#7D7D7D]">لطفا به نکات زیر توجه کنید: </h1>
       <p class="text-[#7D7D7D]">نمونه متن برای نوشتن نکات مهم برای بخش کیف پول میباشد نظیر سقف و کف های برداشت و شارژ
