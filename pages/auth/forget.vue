@@ -2,17 +2,17 @@
   <div class="flex flex-col w-full mx-11 gap-12 mt-[3.75rem]">
     <div
       class="absolute w-screen h-screen flex items-center justify-center top-0 left-0 bg-base-100/10 pointer-events-none"
-      v-show="request.pending()">
+      v-show="request.pending.value">
       <ToolsLoading class="w-56 h-56" />
     </div>
     <span v-html="config.by_route(`${current_page}/description`)"> </span>
     <div class="flex flex-col gap-10 w-[36.438rem]">
       <!-- step 1 => send code to email -->
       <form @submit.prevent="sendActiveCode()" class="flex flex-row justify-between items-center"
-            :class="step !== 1 ? 'pointer-events-none opacity-80' : ''">
+        :class="step !== 1 ? 'pointer-events-none opacity-80' : ''">
         <div class="custom_input_box w-[16.25rem]">
           <InputText dir="ltr" v-model="form.email" type="email" id="email_box" required @focus="email.focus()"
-                 @blur="email.leave()" />
+            @blur="email.leave()" />
           <label :class="email.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
           </label>
@@ -31,7 +31,7 @@
 
       <!-- step 2 => confirm email code -->
       <form @submit.prevent="verifyCode()" class="flex flex-row justify-between items-center"
-            :class="step !== 2 ? 'pointer-events-none opacity-80' : ''">
+        :class="step !== 2 ? 'pointer-events-none opacity-80' : ''">
         <div class="relative flex flex-col gap-3 items-center w-[16.25rem]">
           <span>
             {{ config.by_route(`${current_page}/active_code`) }}
@@ -59,17 +59,18 @@
 
       <!-- step 3 => password and confirmed -->
       <form @submit.prevent="changePassword()" class="flex flex-col gap-12 mt-8">
-        <div class="relative flex flex-row gap-5 w-full items-center" :class="step !== 3 ? 'pointer-events-none opacity-80' : ''">
+        <div class="relative flex flex-row gap-5 w-full items-center"
+          :class="step !== 3 ? 'pointer-events-none opacity-80' : ''">
           <div class="custom_input_box w-1/2">
-            <InputText dir="ltr" v-model="form.password" type="password" @focus="password.focus()" @blur="password.leave()"
-                   id="password" />
+            <InputText dir="ltr" v-model="form.password" type="password" @focus="password.focus()"
+              @blur="password.leave()" id="password" />
             <label :class="password.transitionStyle(form.password)">
               {{ config.by_route(`${current_page}/password`) }}
             </label>
           </div>
           <div class="custom_input_box w-1/2">
             <InputText dir="ltr" v-model="form.password_confirmation" type="password" @focus="confirmPassword.focus()"
-                   id="password_confirm" @blur="confirmPassword.leave()" />
+              id="password_confirm" @blur="confirmPassword.leave()" />
             <label :class="confirmPassword.transitionStyle(form.password_confirmation)">
               {{ config.by_route(`${current_page}/confirmPassword`) }}
             </label>
@@ -78,7 +79,7 @@
         </div>
         <div class="flex flex-row justify-between items-center">
           <button type="submit" :class="step !== 3 ? 'pointer-events-none opacity-80' : ''"
-                  class="bg-base-100 hover:bg-base-250 text-base-content border-none w-[10.125rem] h-11 rounded-md">
+            class="bg-base-100 hover:bg-base-250 text-base-content border-none w-[10.125rem] h-11 rounded-md">
             {{ config.by_route(`${current_page}/btn_accept_password`) }}
           </button>
           <label class="text-xs">
@@ -93,9 +94,9 @@
 </template>
     
 <script setup>
-import Request from "../../Api/Request";
-import Config from "../../composables/Config";
-import { CustomTextBox } from "../../composables/CustomTextBox";
+import Request from "~~/Api/Request";
+import Config from "~~/composables/Config";
+import { CustomTextBox } from "~~/composables/CustomTextBox";
 
 definePageMeta({
   layout: "login",
@@ -132,19 +133,18 @@ async function sendActiveCode() {
     "auth/forgot-password",
     { email: form.value.email }
   );
+  console.log(response);
 
-  if (response.status_code() < 300) {
-    if (response.status()) {
-      step.value = 2;
-      // TODO : TOAST send active code to email was successfully
-      start_timer();
-      email_box.classList.remove("border-b-2", "border-b-error");
-      email_error.value = false;
-      return;
-    }
+  if (response.ok) {
+    step.value = 2;
+    // TODO : TOAST send active code to email was successfully
+    start_timer();
+    email_box.classList.remove("border-b-2", "border-b-error");
+    email_error.value = false;
+    return;
   }
   email_box.classList.add("border-b-2", "border-b-error");
-  email_error.value = true;
+  email_error.value = response.errors.email[0];
   step.value = 1;
 }
 
@@ -159,7 +159,7 @@ async function verifyCode() {
   step.value = 10;
   let response = await request.post("auth/verifyCode", form.value, "v1");
 
-  if (response.status()) {
+  if (response.ok) {
     step.value = 3;
     code_error.value = false;
   } else {
@@ -175,12 +175,12 @@ async function changePassword() {
 
   let response = await request.post("auth/change-password", form.value, "v1");
 
-  if (response.status()) {
+  if (response.ok) {
     // TODO : TOAST success message
     return navigateTo("/auth/login");
   } else {
     // TODO : TOAST error message
-    password_error.value = response.errors().password[0] ?? ''
+    password_error.value = response.errors.password[0] ?? ''
   }
 }
 

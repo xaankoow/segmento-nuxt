@@ -1,7 +1,7 @@
 <template>
   <!-- loading -->
   <div
-    v-if="request.pending()"
+    v-if="request.pending.value"
     class="top-0 left-0 w-screen h-screen fixed z-50 bg-base-350/40 flex justify-center items-center"
   >
     <ToolsLoading class="w-32 h-32" />
@@ -201,14 +201,14 @@
 </template>
 
 <script setup>
-import Request from "../../Api/Request";
-import HTMLController from "../../Controllers/HTMLController";
-import Package from "../../Models/Package";
-import Config from "../../composables/Config";
-import ConfigStore from "../../store/ConfigStore";
+import Request from "~~/Api/Request";
+import HTMLController from "~~/Controllers/HTMLController";
+import Package from "~~/Models/Package";
+import Config from "~~/composables/Config";
+import ConfigStore from "~~/store/ConfigStore";
 import ExtensionTools from "~~/composables/ExtensionTools";
 
-const request = new Request();
+const request = new Request("v1");
 const packages = ref([]);
 const form = ref({
   package: null,
@@ -243,20 +243,18 @@ async function buy_the_package() {
     use_wallet: 0,
   });
 
-  if (response.status_code() < 300) {
-    if (response.status()) {
-      ConfigStore.logout();
-      return navigateTo(response.data().link, { external: true });
-    }
+  if (response.ok) {
+    ConfigStore.logout();
+    return navigateTo(response.data.link, { external: true });
   } else {
-    console.log(response.errors()); // TODO: show errors!
+    console.log(response.errors); // TODO: show errors!
   }
 }
 
 async function collect_packages() {
   let response = await request.get("package");
-  if (response.status_code() < 300) {
-    packages.value = response.data().map((pack) => new Package(pack));
+  if (response.ok) {
+    packages.value = response.data.map((pack) => new Package(pack));
   } else {
     // TODO: send error message
     console.log(response);

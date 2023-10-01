@@ -1,29 +1,55 @@
 <template>
+  <!-- loading -->
+  <div
+    v-if="request.pending.value"
+    class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center"
+  >
+    <ToolsLoading class="w-32 h-32" />
+  </div>
+
   <div class="flex w-full items-center">
-    <div
-      class="absolute w-screen h-screen flex items-center justify-center top-0 left-0 bg-base-100/10 pointer-events-none"
-      v-show="request.pending()">
-      <ToolsLoading class="w-56 h-56" />
-    </div>
     <div class="mx-auto">
-      <form @submit.prevent="requestToLogin()" class="flex flex-col gap-8 w-full items-center">
+      <form
+        @submit.prevent="requestToLogin()"
+        class="flex flex-col gap-8 w-full items-center"
+      >
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <InputText dir="ltr" v-model="form.email" type="email" required @focus="emailBox.focus()" id="input_email"
-            @blur="emailBox.leave()" />
+          <InputText
+            dir="ltr"
+            v-model="form.email"
+            type="email"
+            required
+            @focus="emailBox.focus()"
+            id="input_email"
+            @blur="emailBox.leave()"
+          />
           <label for="email" :class="emailBox.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
           </label>
-          <span class="text-error text-xs" v-show="error_happened">{{ config.by_route(`${current_page}/error`) }}</span>
+          <span class="text-error text-xs" v-show="error_happened">{{
+            config.by_route(`${current_page}/error`)
+          }}</span>
         </div>
         <div class="custom_input_box text-base-content w-[22.625rem]">
-          <InputText dir="ltr" v-model="form.password" type="password" minlength="8" @focus="passwordBox.focus()"
-            id="input_password" @blur="passwordBox.leave()" required />
+          <InputText
+            dir="ltr"
+            v-model="form.password"
+            type="password"
+            minlength="8"
+            @focus="passwordBox.focus()"
+            id="input_password"
+            @blur="passwordBox.leave()"
+            required
+          />
           <label for="email" :class="passwordBox.transitionStyle(form.password)">
             {{ config.by_route(`${current_page}/password`) }}
           </label>
         </div>
         <div class="flex justify-between w-full items-center">
-          <button type="submit" class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md">
+          <button
+            type="submit"
+            class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md"
+          >
             {{ config.by_route(`${current_page}/open`) }}
           </button>
           <label class="text-xs">
@@ -38,10 +64,10 @@
 </template>
 
 <script setup>
-import Config from "../../composables/Config";
-import { CustomTextBox } from "../../composables/CustomTextBox";
-import Request from "../../Api/Request";
-import ConfigStore from "../../store/ConfigStore";
+import Config from "~~/composables/Config";
+import { CustomTextBox } from "~~/composables/CustomTextBox";
+import Request from "~~/Api/Request";
+import ConfigStore from "~~/store/ConfigStore";
 
 definePageMeta({
   layout: "login",
@@ -57,15 +83,16 @@ const form = ref({
   email: "",
   password: "",
 });
+
 async function requestToLogin() {
   let response = await request.post("auth/login", form.value);
   let email_box = document.getElementById("input_email");
   let password_box = document.getElementById("input_password");
+  console.log(response);
 
-  if (response.status()) {
-
+  if (response.ok) {
     // TODO : Fix this section later
-    let user = response.data().user;
+    let user = response.data.user;
     if (!user.img) {
       user.img = "/images/profileDefaultImg.png";
     }
@@ -75,13 +102,13 @@ async function requestToLogin() {
     password_box.classList.remove("border-b-error");
     error_happened.value = false;
 
-    ConfigStore.set_token(response.data().token);
+    ConfigStore.set_token(response.data.token);
     ConfigStore.set_user(JSON.stringify(user));
-    ConfigStore.set_plan(JSON.stringify(response.data().plan));
-    ConfigStore.set_wallets(JSON.stringify(response.data().wallets));
-    ConfigStore.set_workspaces(JSON.stringify(response.data().workspaces));
-    ConfigStore.set_roles(JSON.stringify(response.data().workspaces));
-    ConfigStore.set_limits(JSON.stringify(response.data().limits));
+    ConfigStore.set_plan(JSON.stringify(response.data.plan));
+    ConfigStore.set_wallets(JSON.stringify(response.data.wallets));
+    ConfigStore.set_workspaces(JSON.stringify(response.data.workspaces));
+    ConfigStore.set_roles(JSON.stringify(response.data.workspaces));
+    ConfigStore.set_limits(JSON.stringify(response.data.limits));
 
     navigateTo("/");
   } else {
