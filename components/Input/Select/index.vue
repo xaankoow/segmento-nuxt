@@ -1,7 +1,8 @@
 <template>
-  <div class="relative h-fit transition ease-in-out delay-150" >
+  <div class="relative h-fit transition rounded ease-in-out delay-150">
     <!-- header -->
-    <div class="cursor-pointer relative w-full text-center p-4" @click="isOpen = !isOpen">
+    <div class="cursor-pointer relative w-full text-right p-2" :class="isOpen ? 'border border-b-[#0A65CD] border-b-[2px] rounded-b-[3px]': ''"
+         @click="isOpen = !isOpen">
       <div>
         <slot name="title"></slot>
         <span class="absolute top-1/2 left-4">
@@ -22,8 +23,11 @@
       </div>
     </div>
     <!-- content -->
-    <div class=" w-full bg-base-100 z-50 shadow-sm" :class="isOpen ? 'open' : 'hidden'">
-      <slot name="content"></slot>
+    <div class=" bg-base-100 z-50 shadow-sm border right-[-1px] w-[546px] border-t-0"
+         :class="isOpen ? 'open absolute ' : 'hidden'">
+      <div class="flex gap-[9px] flex-col p-2" @click="isOpen=false">
+        <slot name="content"></slot>
+      </div>
     </div>
   </div>
 </template>
