@@ -196,5 +196,4 @@ definePageMeta({
 
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
-const text = ref("");
 </script>
