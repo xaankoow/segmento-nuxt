@@ -90,7 +90,7 @@
               </div>
               <div class="h-1/2 text-[12px]">
                 {{
-                  url_regex.test(site.url)
+                  site.url !== '' && site.url !== undefined
                     ? url_humanity(site.url)
                     : url_humanity("https://segmento.ir/hi")
                 }}
@@ -207,14 +207,6 @@ const input_quality = (length, type) => {
   }
 };
 
-const receive_from_google = (query) => {
-  if (url_regex.test(query)) {
-    alert("true address format");
-  } else {
-    alert("false address format");
-  }
-};
-
 const text_humanity = (text, length) => {
   text = text.trim();
   if (text.length <= length) {
@@ -225,10 +217,9 @@ const text_humanity = (text, length) => {
 };
 
 const url_humanity = (url) => {
+  url = url.replace(/(http:\/\/|https:\/\/)/, "");
+  url = url.replace(/^\/+|\/+$/g, "");
   if (url_regex.test(url)) {
-    url = url.replace(/^\/+|\/+$/g, "");
-    url = url.replace(/(http:\/\/|https:\/\/)/, "");
-
     let url_parts = url.split("/");
     let first, last, middle;
     first = `https://${url_parts[0]}`;
@@ -247,6 +238,8 @@ const url_humanity = (url) => {
     }
 
     return `${first}${middle}${last?.length > 16 ? last.substring(0, 13) + "..." : last}`;
+  } else {
+    return `https://${url?.length > 16 ? url.substring(0, 13) + "..." : url}`;
   }
 };
 </script>

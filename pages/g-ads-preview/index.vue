@@ -222,7 +222,7 @@
                         <div class="h-1/2 text-[14px]" dir="rtl" v-else>
                           {{ site.brand }}
                         </div>
-                        <div class="h-1/2 text-[12px]">
+                        <div class="h-1/2 text-[12px]" dir="ltr">
                           {{ checkRoute(site.path.one, site.path.two, site.url) }}
                         </div>
                       </div>
@@ -401,23 +401,20 @@ const site = ref({
 });
 
 const checkRoute = (first, second, url) => {
-  const url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
-  if (url_regex.test(url)) {
-    url = url.replace(/^\/+|\/+$/g, "");
-    url = url.replace(/(http:\/\/|https:\/\/)/, "");
+  url = url.replace(/^\/+|\/+$/g, "");
+  url = url.replace(/(http:\/\/|https:\/\/)/, "");
+  if (url !== "" && url !== undefined) {
     let final = "https://";
     let url_parts = url.split("/");
     if (first === "") {
-      return `https://${url}`;
+      final += url;
     } else {
       final += `${url_parts[0]}/${first}`;
-      if (second === "") {
-        return final;
-      } else {
+      if (second !== "") {
         final += `/${second}`;
-        return final;
       }
     }
+    return final?.length > 38 ? final.substring(0, 35) + "..." : final;
   } else {
     return "https://segmento.ir/hi";
   }
