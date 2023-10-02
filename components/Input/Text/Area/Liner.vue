@@ -1,28 +1,28 @@
 <template>
-  <div class="card flex flex-row text-sm overflow-scroll rounded-[3px]" :class="[h, w]" dir="ltr">
-    <div class=" number-card py-2 border border-r-0 bg-base-200 h-fit min-h-full" ref="numberCardDiv">
+  <div class="card flex flex-row text-sm overflow-hidden rounded-[3px]" :class="[h, w]" dir="ltr">
+    <div class=" number-card py-2 border border-r-0 bg-base-200 h-fit min-h-full" ref="firstTextarea">
       <span
-        v-for="line in lines"
-        class="text-base-content flex flex-row justify-center w-6"
-      >
+        v-for="line in lines" :key="line" 
+        class="text-base-content flex flex-row justify-center w-6">
         {{ line }}
       </span>
     </div>
     <textarea
-    ref="textAreaDiv"
+      ref="secendTextarea"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       @keyup="line_counter($event)"
-      class="resize-none overflow-hidden border border-b-[2px] focus:border-b-primary p-2 w-full"
+      @scroll="scroll_changed($event)"
+      class="txt resize-none overflow-sroll border border-b-[2px] focus:border-b-primary p-2 w-full"
       :class="class"
     ></textarea>
   </div>
 </template>
 
 <script setup>
-const lines = ref(1);
-const numberCardDiv = ref(null)
-const textAreaDiv = ref(null)
+const lines = ref("");
+const firstTextarea = ref(null)
+const secendTextarea = ref(null)
 
 const props = defineProps({
   class: {
@@ -40,15 +40,12 @@ const props = defineProps({
   modelValue:{}
 });
 defineEmits(["update:modelValue"]);
+
 function line_counter(event) {
   lines.value = event.target.value.split("\n").length;
-  // event.target.style.height = "100%";
-  if (lines.value > 7) {
-    numberCardDiv.value.style.height = "1000px";
-    textAreaDiv.value.style.height = "1000px";
-  }else {
-    numberCardDiv.value.style.height = "170px";
-    textAreaDiv.value.style.height = "170px";
-  }
+  firstTextarea.value.style.transform = `translateY(${-event.target.scrollTop}px)`
+}
+function scroll_changed(event) {
+  firstTextarea.value.style.transform = `translateY(${-event.target.scrollTop}px)`
 }
 </script>

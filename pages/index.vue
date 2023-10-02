@@ -185,7 +185,7 @@
     </Copy>
   </div>
   <div class="w-full flex flex-row justify-center items-center">
-    <InputTextAreaLiner2 v-model="text"> </InputTextAreaLiner2>
+    <InputTextAreaLiner v-model="text"> </InputTextAreaLiner>
   </div>
   <div>
     {{ text }}
