@@ -184,12 +184,6 @@
       </NuxtLink>
     </Copy>
   </div>
-  <div class="w-full flex flex-row justify-center items-center">
-    <InputTextAreaLiner v-model="text"> </InputTextAreaLiner>
-  </div>
-  <div>
-    {{ text }}
-  </div>
 </template>
 
 <script setup>
