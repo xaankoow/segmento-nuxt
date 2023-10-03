@@ -20,12 +20,9 @@
           </h1>
           <InputTextArea
             dir="ltr"
-            @focus="focusedUrl = true"
-            @blur="focusedUrl = false"
             id="textAreaUrl"
             class="h-44 w-full text-left"
             v-model="urls"
-            @input="spliteText()"
           />
           <span class="warning text-base-500 text-sm">
             {{ config.by_route(`${current_page}/warnings/urls-input`) }}
@@ -37,12 +34,9 @@
           </h1>
           <InputTextArea
             dir="ltr"
-            @focus="focusDomain = true"
-            @blur="focusDomain = false"
             id="textAreaDomain"
             class="h-44 w-full text-left"
             v-model="domains"
-            @input="spliteText()"
           />
           <span class="warning text-base-500 text-sm">
             {{ config.by_route(`${current_page}/warnings/domains-input`) }}
@@ -50,7 +44,11 @@
         </div>
       </div>
       <div class="flex items-center justify-center pt-2 px-4 w-1/3">
-        <button @click="convert_to_txt()" class="btn-primary text-sm" :disabled="domains.trim().length == 0 && urls.trim().length == 0">
+        <button
+          @click="convert_to_txt()"
+          class="btn-primary text-sm"
+          :disabled="domains.trim().length == 0 && urls.trim().length == 0"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -88,7 +86,8 @@
               {{ config.by_route(`${current_page}/boxes/count-of-pages`) }}
             </span>
             <span class="text-base-500">
-              {{ urls_list.length }} {{ config.by_route(`constants/page`) }}
+              {{ format_urls(urls)[1] }}
+              {{ config.by_route(`constants/page`) }}
             </span>
           </div>
           <div class="w-full flex flex-row h-1/2 items-center justify-around">
@@ -96,7 +95,8 @@
               {{ config.by_route(`${current_page}/boxes/count-of-websites`) }}
             </span>
             <span class="text-base-500">
-              {{ domains_list.length }} {{ config.by_route(`constants/website`) }}
+              {{ format_domains(domains)[1] }}
+              {{ config.by_route(`constants/website`) }}
             </span>
           </div>
         </div>
@@ -171,17 +171,6 @@
 </template>
 
 <style scoped>
-.notification p:before {
-  content: "";
-  display: inline-block;
-  background-color: #0a65cd;
-  vertical-align: middle;
-  width: 8px;
-  height: 8px;
-  margin-left: 12px;
-  border-radius: 50%;
-}
-
 /*warning icon*/
 .warning::before {
   content: "";
@@ -200,21 +189,16 @@
 
 <script setup>
 import Config from "../../composables/Config";
-import jalaliMoment from 'jalali-moment';
+import jalaliMoment from "jalali-moment";
 
 const current_page = "pages/disavow-builder";
 const config = new Config();
 const domains = ref("");
 const urls = ref("");
-let domains_list = [];
-let urls_list = [];
-let focusDomain = ref(false);
-let focusedUrl = ref(false);
 
 const convertToText = (text, filename) => {
   const blob = new Blob([text], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
-
   const link = document.createElement("a");
   link.href = url;
   link.download = filename;
@@ -222,61 +206,61 @@ const convertToText = (text, filename) => {
   URL.revokeObjectURL(url);
 };
 
-const spliteText = () => {
-  domains_list = [];
-  urls_list = [];
-  let domainsVal = domains.value.split("\n");
-  domainsVal.forEach((i) => {
-    if (
-      !i.includes("http") &&
-      !i.includes("https://") &&
-      !i.includes("/") &&
-      !i.includes("www.") &&
-      i != " " &&
-      i != ""
-    ) {
-      let txt = i.replaceAll(" ", "");
-      domains_list.push("domain:" + txt);
-    } else {
-      let text = i.replace(/^https?:\/\//, "")?.split("/")[0];
-      if (
-        text.includes("www.") &&
-        !domains_list.includes("domain:" + text.split("www.")[1]) &&
-        text != "" &&
-        text != " "
-      ) {
-        let txt = text.split("www.")[1].replaceAll(" ", "");
-        domains_list.push("domain:" + txt);
-      }
-      if (
-        !text.includes("www.") &&
-        !domains_list.includes("domain:" + text) &&
-        text != "" &&
-        text != " "
-      ) {
-        let txt = text.replaceAll(" ", "");
-        domains_list.push("domain:" + txt);
-      }
-    }
+const format_domains = (domains) => {
+  domains = domains.split("\n");
+  domains.forEach((element, index) => {
+    element = element.replace(/(www\.|https?:\/\/)/g, "");
+    element = element.replace(/^\/|\/$/g, "");
+    element = element.trim();
+    element = element.split("/")[0];
+    element = element.toLowerCase();
+    domains[index] = element;
   });
+  domains = [...new Set(domains)];
+  domains = domains.filter((domain) => domain !== "");
+  let domainRegex = /^([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-z]{2,}$/;
+  let wrong_domains = domains.filter((str) => !domainRegex.test(str));
+  domains = domains.filter((str) => domainRegex.test(str));
+  return [
+    domains.join("\n"),
+    domains.length,
+    `# ${wrong_domains.join("\n# ")}`,
+    wrong_domains.length,
+  ];
+};
 
-  let urlsValue = urls.value;
-  let splitVal = urlsValue.split("\n");
-  splitVal.forEach((i) => {
-    if (!urls_list.includes(i.replaceAll(" ", "")) && i != "") {
-      urls_list.push(i);
-    }
+const format_urls = (urls) => {
+  urls = urls.split("\n");
+  urls.forEach((element, index) => {
+    element = element.replace(/^\/|\/$/g, "");
+    element = element.toLowerCase();
+    urls[index] = element.trim();
   });
+  urls = [...new Set(urls)];
+  urls = urls.filter((domain) => domain !== "");
+  let urlRegex = /^(http(s)?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?)$/;
+  let wrong_urls = urls.filter((str) => !urlRegex.test(str));
+  urls = urls.filter((str) => urlRegex.test(str));
+  return [
+    urls.join("\n"),
+    urls.length,
+    `# ${wrong_urls.join("\n# ")}`,
+    wrong_urls.length,
+  ];
 };
 
 const convert_to_txt = () => {
-  let formattedDate = jalaliMoment().locale('fa').format('YYYYMMDD');
-  spliteText();
+  let formattedDate = jalaliMoment().locale("fa").format("YYYYMMDD");
+  let domains_list = format_domains(domains.value);
+  let urls_list = format_urls(urls.value);
+  domains_list[0] = `domain:${domains_list[0].split("\n").join("\ndomain:")}`;
   convertToText(
-    `# https://app.segmento.ir/disavow-builder\n\n# Domains to disavow\n${domains_list.join(
-      "\n"
-    )}\n\n# Pages to disavow\n${urls_list.join("\n")}`,
-    `disavow-smp-${formattedDate}-d${domains_list.length}-p${urls_list.length}`
+    `# https://app.segmento.ir/disavow-builder\n\n# Domains to disavow:${
+      domains_list[1] > 0 ? `\n${domains_list[0]}` : ""
+    }\n\n# Pages to disavow:${urls_list[1] > 0 ? `\n${urls_list[0]}` : ""}${
+      domains_list[3] > 0 ? `\n\n# Wrong domains:\n${domains_list[2]}` : ""
+    }${urls_list[3] > 0 ? `\n\n# Wrong URLs:\n${urls_list[2]}` : ""}`,
+    `disavow-smp-${formattedDate}-d${domains_list[1]}-p${urls_list[1]}`
   );
 };
 </script>
