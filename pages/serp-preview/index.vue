@@ -90,7 +90,7 @@
               </div>
               <div class="h-1/2 text-[12px]">
                 {{
-                  site.url !== '' && site.url !== undefined
+                  site.url !== "" && site.url !== undefined
                     ? url_humanity(site.url)
                     : url_humanity("https://segmento.ir/hi")
                 }}
@@ -134,9 +134,9 @@
       </div>
     </div>
     <div
-      class="bg-base-250 border-dashed border-2 border-primary rounded-[3px] flex flex-col items-center justify-between h-[15%] p-2"
+      class="bg-base-250 rounded-[3px] flex flex-col items-center justify-between h-[15%] p-2"
     >
-      <div class="w-full flex justify-center">
+      <div class="w-full flex justify-center text-base-content">
         تبلیغات برای گوگل ادز داری و نمیدونی چطوری برای کاربر میخوای نمایشش بدی، میتونی از
         ابزار پیش نمایش متن تبلیغات گوگل ادز سگمنتو استفاده کنی؛
       </div>
