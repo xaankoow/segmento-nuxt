@@ -1,9 +1,17 @@
 <template>
-  <div class="card flex flex-row text-sm overflow-hidden rounded-[3px]" :class="[h, w]" dir="ltr">
-    <div class=" number-card py-2 border border-r-0 bg-base-200 h-fit min-h-full" ref="firstTextarea">
+  <div
+    class="card flex flex-row text-sm overflow-hidden rounded-[3px] h-44 w-1/2"
+    dir="ltr"
+  >
+    <div
+      class="number-card py-2 border border-r-0 bg-base-200 h-fit min-h-full"
+      ref="firstTextarea"
+    >
       <span
-        v-for="line in lines" :key="line" 
-        class="text-base-content flex flex-row justify-center w-6">
+        v-for="line in lines"
+        :key="line"
+        class="text-base-content flex flex-row justify-center w-6"
+      >
         {{ line }}
       </span>
     </div>
@@ -14,39 +22,28 @@
       @keyup="line_counter($event)"
       @scroll="scroll_changed($event)"
       class="txt resize-none overflow-sroll border border-b-[2px] focus:border-b-primary p-2 w-full"
-      :class="class"
     ></textarea>
   </div>
 </template>
 
 <script setup>
 const lines = ref("");
-const firstTextarea = ref(null)
-const secendTextarea = ref(null)
+const firstTextarea = ref(null);
+const secendTextarea = ref(null);
 
 const props = defineProps({
-  class: {
-    type: String,
+  modelValue: {
     default: "",
   },
-  h: {
-    type: String,
-    default: "h-44",
-  },
-  w: {
-    type: String,
-    default: "w-1/2",
-  },
-  modelValue:{}
 });
 
 defineEmits(["update:modelValue"]);
 
 function line_counter(event) {
   lines.value = event.target.value.split("\n").length;
-  firstTextarea.value.style.transform = `translateY(${-event.target.scrollTop}px)`
+  firstTextarea.value.style.transform = `translateY(${-event.target.scrollTop}px)`;
 }
 function scroll_changed(event) {
-  firstTextarea.value.style.transform = `translateY(${-event.target.scrollTop}px)`
+  firstTextarea.value.style.transform = `translateY(${-event.target.scrollTop}px)`;
 }
 </script>
