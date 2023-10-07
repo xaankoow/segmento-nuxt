@@ -20,8 +20,9 @@
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col gap-4 p-2 w-full pt-6"
-    :class="data.length === 0 ? 'h-full' : 'h-fit'"
+    <div
+      class="flex flex-col gap-4 p-2 w-full pt-8"
+      :class="data.length === 0 ? 'h-full' : 'h-fit'"
     >
       <!-- search box -->
       <form
@@ -42,10 +43,7 @@
               >{{ config.by_route(`${current_page}/place-holder`) }}</label
             >
           </div>
-          <button
-            type="submit"
-            class="btn-primary w-[5%] h-full"
-          >
+          <button type="submit" class="btn-primary w-[5%] h-full">
             <svg
               width="18"
               height="18"
@@ -72,8 +70,7 @@
       </span>
 
       <!-- page content -->
-      <div class="justify-between"
-      :class="data.length === 0 ? 'h-full w-full' : 'h-fit'">
+      <div class="justify-between" :class="data.length === 0 ? 'h-full w-full' : 'h-fit'">
         <!-- form -->
         <div
           class="flex flex-col pt-2 border border-base-400 rounded-[3px]"
@@ -93,7 +90,7 @@
               </span>
             </div>
             <div class="flex flex-row items-center gap-4">
-            <!-- when save component get ready, uncoment this section -->
+              <!-- when save component get ready, uncoment this section -->
               <!-- <button class="w-40 p-1 rounded-lg btn-primary" disabled>
                 <svg
                   width="17"
@@ -177,7 +174,9 @@
                     <span class="w-12 flex justify-center items-center">
                       {{ Number(index) + 1 }}
                     </span>
-                    <span class="w-fit flex justify-center items-center pr-3.5"> {{ item }} </span>
+                    <span class="w-fit flex justify-center items-center pr-3.5">
+                      {{ item }}
+                    </span>
                   </div>
                 </div>
               </div>
