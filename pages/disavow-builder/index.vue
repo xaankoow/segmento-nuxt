@@ -9,7 +9,6 @@
       {{ config.by_route(`${current_page}/tabs/my-files`) }}
     </TabItem> -->
   </div>
-
   <!-- page content -->
   <div class="py-2 px-4 flex flex-col gap-2 h-[93%] justify-center">
     <div class="flex flex-col border rounded-[9px] p-2 py-4 gap-2 items-end">
@@ -18,7 +17,7 @@
           <h1 class="border-r-2 pr-2 border-r-primary">
             {{ config.by_route(`${current_page}/boxes/urls-input`) }}
           </h1>
-          <InputTextArea
+          <InputTextAreaLiner
             dir="ltr"
             id="textAreaUrl"
             class="h-44 w-full text-left"
@@ -32,7 +31,7 @@
           <h1 class="border-r-2 pr-2 border-r-primary">
             {{ config.by_route(`${current_page}/boxes/domains-input`) }}
           </h1>
-          <InputTextArea
+          <InputTextAreaLiner
             dir="ltr"
             id="textAreaDomain"
             class="h-44 w-full text-left"
@@ -195,6 +194,7 @@ const current_page = "pages/disavow-builder";
 const config = new Config();
 const domains = ref("");
 const urls = ref("");
+const test = ref("");
 
 const convertToText = (text, filename) => {
   const blob = new Blob([text], { type: "text/plain" });
