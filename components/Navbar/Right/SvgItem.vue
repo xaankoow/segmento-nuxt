@@ -1,9 +1,8 @@
 <template>
   <div
-    class="flex flex-row mt-[0.888rem] w-[2.621rem] h-[2.277rem] cursor-pointer rounded-md items-center
-    hover:bg-base-250" :class="active ? 'bg-base-250' : ''"
+    class="flex flex-row w-[2.621rem] cursor-pointer rounded-md items-center hover:[&>span>svg]:fill-primary"
   >
-    <span class="w-full flex place-content-center" :class="active ? '[&>svg]:fill-primary  border-r border-r-primary' : '[&>svg]:fill-base-content'">
+    <span class="w-full flex place-content-center [&>svg]:fill-base-content" :class="active ? 'border-r border-r-primary' : ''">
       <slot></slot>
     </span>
   </div>

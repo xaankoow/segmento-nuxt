@@ -181,13 +181,17 @@
                   v-if="site.description.one === '' && site.description.two === ''"
                   class="w-[600px] break-words"
                 >
-                  پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان قرار
-                  می‌دهد. پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا،
-                  تبلیغات گوگل یا بلاگری را برای شما.
+                  پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان قرار می‌دهد.
+                  پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا، تبلیغات گوگل یا
+                  بلاگری را برای شما.
                 </p>
                 <p dir="rtl" v-else>
                   {{ text_humanity(site.description.one, 90) }}.
-                  {{ site.description.two.length > 0 ? `${text_humanity(site.description.two, 90)}.` : "" }}
+                  {{
+                    site.description.two.length > 0
+                      ? `${text_humanity(site.description.two, 90)}.`
+                      : ""
+                  }}
                 </p>
               </div>
             </div>
@@ -222,7 +226,7 @@
                         <div class="h-1/2 text-[14px]" dir="rtl" v-else>
                           {{ site.brand }}
                         </div>
-                        <div class="h-1/2 text-[12px]">
+                        <div class="h-1/2 text-[12px]" dir="ltr">
                           {{ checkRoute(site.path.one, site.path.two, site.url) }}
                         </div>
                       </div>
@@ -244,7 +248,11 @@
                         </span>
                         <span dir="rtl" v-else>
                           {{ text_humanity(site.title.one, 30) }}
-                          {{ site.title.two.length > 0 ? ` - ${text_humanity(site.title.two, 30)}` : "" }}
+                          {{
+                            site.title.two.length > 0
+                              ? ` - ${text_humanity(site.title.two, 30)}`
+                              : ""
+                          }}
                         </span>
                       </div>
                       <div
@@ -257,13 +265,17 @@
                           "
                           class="w-full text-[14px] break-words"
                         >
-                          پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان
-                          قرار می‌دهد. پیداکردن کلمات کلیدی برای استراتژی سئو،
-                          تولید محتوا، تبلیغات گوگل یا بلاگری را برای شما.
+                          پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان قرار
+                          می‌دهد. پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا،
+                          تبلیغات گوگل یا بلاگری را برای شما.
                         </p>
                         <p dir="rtl" v-else>
                           {{ text_humanity(site.description.one, 90) }}.
-                          {{ site.description.two.length > 0 ? `${text_humanity(site.description.two, 90)}.` : "" }}
+                          {{
+                            site.description.two.length > 0
+                              ? `${text_humanity(site.description.two, 90)}.`
+                              : ""
+                          }}
                         </p>
                       </div>
                     </div>
@@ -301,9 +313,7 @@
                         <img class="w-[18px] h-[18px]" src="/favicon.ico" />
                       </div>
                       <div class="flex flex-col">
-                        <div class="h-1/2 text-[14px]" dir="rtl">
-                          سگمنتو
-                        </div>
+                        <div class="h-1/2 text-[14px]" dir="rtl">سگمنتو</div>
                         <div class="h-1/2 text-[12px]">https://segmento.ir/hi</div>
                       </div>
                     </div>
@@ -320,9 +330,9 @@
                         class="h-fit w-full text-[14px] text-left text-[#4d5156] break-words"
                       >
                         <p dir="rtl" class="w-full text-[14px] break-words">
-                          پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان
-                          قرار می‌دهد. پیداکردن کلمات کلیدی برای استراتژی سئو،
-                          تولید محتوا، تبلیغات گوگل یا بلاگری را برای شما.
+                          پلتفرم سگمنتو ابزارهای کاملی برای سئو سایت در اختیارتان قرار
+                          می‌دهد. پیداکردن کلمات کلیدی برای استراتژی سئو، تولید محتوا،
+                          تبلیغات گوگل یا بلاگری را برای شما.
                         </p>
                       </div>
                     </div>
@@ -331,21 +341,19 @@
               </div>
             </div>
             <div class="w-full h-[100%] overflow-hidden">
-            <img
-              src="../../assets/images/iphoneImg.png"
-              alt="test"
-              class="w-full h-full object-cover"
-            />
+              <img
+                src="../../assets/images/iphoneImg.png"
+                alt="test"
+                class="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div
-      class="additional bg-[#F2F5F7] mt-8 text-center border-dashed border-2 px-4 pt-3 border-sky-500 rounded-xl"
-    >
-      <span class="w-full flow-root"
+    <div class="additional bg-base-250 mt-8 text-center px-4 pt-3 rounded-[3px]">
+      <span class="w-full text-base-content"
         >نیاز به بهترین عنوان‌های گوگل داری؟ میتونی از ابزار عنوان ساز گوگلی سگمنتو
         استفاده کنی تا بهترین و بهینه‌ترین عناوین رو برای کمپین گوگل ادز استفاده کنی</span
       >
@@ -401,23 +409,20 @@ const site = ref({
 });
 
 const checkRoute = (first, second, url) => {
-  const url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
-  if (url_regex.test(url)) {
-    url = url.replace(/^\/+|\/+$/g, "");
-    url = url.replace(/(http:\/\/|https:\/\/)/, "");
+  url = url.replace(/^\/+|\/+$/g, "");
+  url = url.replace(/(http:\/\/|https:\/\/)/, "");
+  if (url !== "" && url !== undefined) {
     let final = "https://";
     let url_parts = url.split("/");
     if (first === "") {
-      return `https://${url}`;
+      final += url;
     } else {
       final += `${url_parts[0]}/${first}`;
-      if (second === "") {
-        return final;
-      } else {
+      if (second !== "") {
         final += `/${second}`;
-        return final;
       }
     }
+    return final?.length > 38 ? final.substring(0, 35) + "..." : final;
   } else {
     return "https://segmento.ir/hi";
   }

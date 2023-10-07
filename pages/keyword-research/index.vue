@@ -74,7 +74,7 @@
         <div class="flex flex-col rounded-[3px] border border-base-400"
           :class="data === null ? 'h-full w-full' : 'h-fit w-[65%]'">
           <!-- header -->
-          <div class="flex flex-row justify-between px-2 py-2" :class="`${data === null ? 'text-primary-disabled' : ''}`">
+          <div class="flex flex-row justify-between p-2" :class="`${data === null ? 'text-primary-disabled' : ''}`">
             <div class="flex items-center">
               <span class="w-12 flex justify-center">
                 {{ config.by_route(`${current_page}/table/select`) }}

@@ -50,16 +50,17 @@
       }}</span>
 
       <!-- page content -->
-      <div class="justify-between w-full pb-2 gap-4" :class="data !== null ? '' : 'h-full'">
+      <div class="flex flex-row justify-between w-full gap-4" :class="data === null ? 'h-full' : 'h-fit'">
         <!-- form -->
-        <div class="flex flex-col rounded-[3px] py-2 border border-[#d9d9d9] h-full">
+        <div class="flex flex-col rounded-[3px] border border-base-400 w-full"
+        :class="data === null ? 'h-full' : 'h-fit'">
           <!-- header -->
-          <div class="flex flex-row justify-between px-2" :class="`${data === null ? 'text-primary-disabled' : ''}`">
-            <div class="flex items-center gap-2">
-              <span class="w-14 flex justify-center">{{
+          <div class="flex flex-row justify-between p-2" :class="`${data === null ? 'text-primary-disabled' : ''}`">
+            <div class="flex items-center">
+              <span class="w-12 flex justify-center">{{
                 config.by_route(`${current_page}/table/select`)
               }}</span>
-              <span class="w-14 flex justify-center">{{
+              <span class="w-12 flex justify-center">{{
                 config.by_route(`${current_page}/table/row`)
               }}</span>
               <span class="w-fit">{{
@@ -98,24 +99,28 @@
             <div v-for="(item, index) in data" :key="index" class="flex flex-col gap-1 px-2 mt-3 text-sm">
               <!-- header -->
               <div class="flex flex-row w-full items-center">
-                <span class="bg-base-500 text-base-100 rounded-[3px] px-4 min-w-fit">
-                  {{ index === "default" ? config.by_route(`${current_page}/default`) : index }}
+                <span class="w-[100px] bg-gray-200 text-base-content rounded-[3px] flex justify-center">
+                  {{ index === "default" ? config.by_route(`${current_page}/table/default`) : index }}
                 </span>
-                <hr class="w-full border-base-500" />
+                <hr class="w-full border-gray-200" />
               </div>
 
               <!-- table content -->
-              <div class="flex flex-col gap-2">
+              <div class="flex flex-col">
                 <!-- row -->
-                <div v-for="(letter, index) in item" :key="index"
-                  class="border-b flex flex-row gap-2 pl-4 py-1 items-center">
-                  <span class="w-14 flex justify-center">
-                    <label>
+                <div v-for="(letter, index) in item" :key="index" class="flex flex-row items-center py-2" :class="Number(index) + 1 !== item.length ? 'border-b border-gray-100' : ''
+                  ">
+                  <span class="w-12 h-fit flex justify-center items-center">
+                    <label class="flex justify-center items-center">
                       <input type="checkbox" class="w-5 h-5" />
                     </label>
                   </span>
-                  <span class="w-14 flex justify-center"> {{ Number(index) + 1 }} </span>
-                  <span class="w-fit"> {{ letter }} </span>
+                  <span class="w-12 flex justify-center items-center">
+                    {{ Number(index) + 1 }}
+                  </span>
+                  <span class="w-fit flex justify-center items-center pr-3.5">
+                    {{ letter }}
+                  </span>
                 </div>
               </div>
             </div>
