@@ -21,7 +21,7 @@
       @input="$emit('update:modelValue', $event.target.value)"
       @keyup="line_counter($event)"
       @scroll="scroll_changed($event)"
-      class="txt resize-none overflow-sroll border border-b-[2px] focus:border-b-primary p-2 w-full"
+      class="text-base-content resize-none overflow-sroll border border-b-[2px] focus:border-b-primary p-2 w-full"
     ></textarea>
   </div>
 </template>

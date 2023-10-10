@@ -1,53 +1,74 @@
 <template>
-  <label class="flex items-center gap-2.5 cursor-pointer">
+<div class="flex items-center justify-center">
     <input
       type="radio"
-      :checked="isChecked"
       :name="name"
-      :value="modelValue"
-      class="absolute h-0 w-0 opacity-0"
-      @input="$emit('update:modelValue', $event.target.value)"
+      :id="id"
+      :value="id"
+      @change="$emit('update:modelValue', $event.target.value)"
     />
-    <span class="checkmark relative w-5 h-5 border border-base-400 rounded-[50%]"></span>
+    <label :for="id">
     <slot></slot>
   </label>
-
+</div>
 </template>
 
 <script setup>
-const { modelValue, name } = defineProps(["modelValue", "name"]);
+const { modelValue, name , id } = defineProps(["modelValue", "name", "id"]);
 defineEmits(["update:modelValue"]);
 const value = modelValue;
 const isChecked = computed(() => modelValue === value);
+
 </script>
 
-
 <style scoped>
-/* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #0A65CD
+input:checked,
+input:not(:checked) {
+    display: none;
 }
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
+input:checked + label,
+input:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
 }
-
-/* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
+input:checked + label:before,
+input:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
 }
-
-/* Style the indicator (dot/circle) */
-.container .checkmark:after {
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: white;
-  transform: translate(-50%, -50%);
+input:checked + label:after,
+input:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #0A65CD;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.3s ease;
+}
+input:not(:checked) + label:after {
+    opacity: 0;
+    /* -webkit-transform: scale(0);
+    transform: scale(0); */
+}
+input:checked + label:after {
+    opacity: 1;
+    /* -webkit-transform: scale(1);
+    transform: scale(1); */
 }
 </style>
