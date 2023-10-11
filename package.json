@@ -26,6 +26,7 @@
     "jalali-moment": "^3.3.11",
     "konva": "^9.2.0",
     "tinymce": "^6.6.0",
+    "vue-json-pretty": "^2.2.4",
     "vue-konva": "^3.0.2",
     "vue3-apexcharts": "^1.4.1",
     "vue3-persian-datetime-picker": "^1.2.2"
