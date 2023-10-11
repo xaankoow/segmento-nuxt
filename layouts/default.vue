@@ -633,7 +633,7 @@
           </NavbarRightContentDepartment>
         </div>
       </div>
-      <div class="w-full rounded-t-md bg-base-100 overflow-y-auto" id="page">
+      <div class="w-full rounded-t-md bg-base-100 overflow-y-hidden" id="page">
         <div class="bg-base-200 py-2 h-[6%]">
           <section class="flex items-center border-r-2 gap-4 border-base-content px-4">
             <label>{{
@@ -650,7 +650,7 @@
             <!-- <LimitCounter :budget="100" :remained="19" /> -->
           </section>
         </div>
-        <div class="h-[94%]">
+        <div class="h-[94%] overflow-scroll">
           <NuxtPage />
         </div>
       </div>
