@@ -19,7 +19,7 @@
         1. درج کلمات کلیدی ( در هر خط فقط یک کلمه وارد کنید )
       </p>
       <div class="w-full mb-4 flex items-center justify-center flex-col gap-4">
-        <InputTextAreaLiner class="w-full rounded-e" v-model="textareaValue" />
+        <InputTextAreaLiner dir="rtl" class="w-full rounded-e" v-model="textareaValue" />
       <!-- ____________________________________
       part 2 (subject select)
       _________________________________________ -->
@@ -27,17 +27,17 @@
           <p>2. انتخاب موضوع</p>
         <div
           class="w-full h-[67px] text-base-content border border-base-400 rounded mt-2 flex items-center justify-around">
-          <inputRadio class="w-full" v-model="form.type" :name="topic" :id=1 @change="checkUpdate($event)">
+          <InputRadio class="w-full" v-model="form.type" :name="topic" :id=1 @change="checkUpdate($event)">
             موضوعات سوالی
-          </inputRadio>
+          </InputRadio>
 
-          <inputRadio class="w-full" v-model="form.type" :name="topic" :id=2 @change="checkUpdate($event)">
+          <InputRadio class="w-full" v-model="form.type" :name="topic" :id=2 @change="checkUpdate($event)">
             موضوعات مقایسه‌ای
-          </inputRadio>
+          </InputRadio>
 
-          <inputRadio class="w-full" v-model="form.type" :name="topic" :id=3 @change="checkUpdate($event)">
+          <InputRadio class="w-full" v-model="form.type" :name="topic" :id=3 @change="checkUpdate($event)">
             موضوعات متفرقه
-          </inputRadio>
+          </InputRadio>
         </div>
         </div>
         
