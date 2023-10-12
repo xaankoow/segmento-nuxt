@@ -16,14 +16,14 @@
             </button>
         </div>
         <div class="w-full flex relative  h-full">
-            <svg ref="svg" class="tree-chart" width="400" :height=phraseLength*33  fill="none" version="1.1" >
+            <svg ref="svg" class="w-full flex h-fit" width="400" :height=phraseLength*33  fill="none" version="1.1" >
             <circle class="circle" cx="99%" cy="50%" r="5.5" fill="black" fill-opacity="0.7" > </circle>
             <g class="line" >
                 <line v-for="word in defaultPhrase.content" :key="word" opacity="0.2"
                 x1="76%" :y1=defaultPhrase.content.indexOf(word)*45+37 x2="99%" y2="50%" style="stroke:black;stroke-width:0.7" />
             </g>
             
-            <g class="name">
+            <g class="w-auto h-max flex flex-col">
                 <a v-for="word in defaultPhrase.content" :key="word"> 
                     <circle class="circle" cx="76%" :cy=defaultPhrase.content.indexOf(word)*45+37 r="3.5" fill="gray" fill-opacity="0.2"> </circle>
                     <text x="74%" :y=defaultPhrase.content.indexOf(word)*45+40  paint-order="stroke" style="fill:navy; font-size:16px;">
@@ -52,17 +52,3 @@ onMounted(() => {
 })
 
 </script>
-
-<style lang="scss" scoped>
-.tree-chart{
-    display: flex;
-    height: fit-content;
-    width: 100%;
-}
-.name{
-    width: auto;
-    height: max-content;
-    display: flex;
-    flex-direction: column;
-}
-</style>
