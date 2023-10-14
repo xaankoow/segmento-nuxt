@@ -50,11 +50,11 @@
       part 3 (show details)
       چارت نمایش اطلاعات (بصورت استاتیک)
       _________________________________________ -->
-      <p class="text-[10px] text-base-content">3. نمایش عناوین پیشنهادی</p>
-      <div class="w-full h-auto mb-4 bg-white py-5 rounded-xl border border-base-400 flex items-center justify-center" v-for="phrase in results" :key="phrase"  v-if="showDetailAgreement">
+      <p v-if="showDetailAgreement" class="text-[10px] text-base-content">3. نمایش عناوین پیشنهادی</p>
+      <div class="w-full h-auto mb-4 bg-white py-5 rounded-[3px] border border-base-400 flex items-center justify-center" v-for="phrase in results" :key="phrase"  v-if="showDetailAgreement">
         <div class="min-w-fit h-full text-base-content flex items-start justify-center flex-col">
             <p class="mt-16 w-full pr-5 border-r-2 border-primary px-2 text-base">
-            {{ subjectValue }} برای <i class="text-base-500" >{{ phrase.keyword }}</i>
+            {{ subjectValue }} برای <b>{{ phrase.keyword }}</b>
             </p>
             <button
             class="w-40 h-10 rounded-lg cursor-pointer text-[#0A65CDB2] flex items-center justify-evenly bg-[#0A65CD26] text-base mt-5 mx-5">
