@@ -38,7 +38,7 @@ onMounted(() => {
     defaultPhrase.value = props.phrase
     phraseLength.value = defaultPhrase.value.content.length
     props.phrase.content.forEach((currentValue) => {
-        let newValue = currentValue.replace(props.phrase.keyword,`<pre class="text-base-500"> ${props.phrase.keyword} </pre>`)
+        let newValue = currentValue.replace(props.phrase.keyword,`&thinsp;<b>${props.phrase.keyword}</b>&thinsp;`)
         words.value.push(newValue)
     });
 })
