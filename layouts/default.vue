@@ -410,7 +410,7 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
-                  <!-- <div class="flex flex-col gap-3">
+                  <div class="flex flex-col gap-3" v-if="DEV_ENV">
                     <NuxtLink to="/bulk-copy-writer">
                       <SvgLabeled :label="cn.by_route(`${department_section}/content-creation/fields/bulk-copy-writer`)"
                         @click="change_active_section('bulk-copy-writer')"
@@ -430,7 +430,7 @@
                         </svg>
                       </SvgLabeled>
                     </NuxtLink>
-                  </div> -->
+                  </div>
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/idea-generator">
                       <SvgLabeled
