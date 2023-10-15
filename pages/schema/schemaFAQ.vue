@@ -20,7 +20,7 @@
                     <InputTextArea class="h-36 w-[80%]" @keyup="changeAnswer(index)" placeholder="متن نمونه" v-model="values[index].answer" />
                 </div>
             </div>
-            <button class="btn-primary px-5" @click="addQuestion">
+            <button class="btn-primary px-5 bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addQuestion">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
