@@ -17,29 +17,22 @@
       <!-- plans list -->
       <div class="flex flex-col w-11/12 mx-auto gap-3">
         <!-- plan item -->
-        <label
-          :for="plan.uuid"
-          class="bg-base-200 border-base-200 flex flex-row items-center justify-between w-full p-2 rounded-sm cursor-pointer text-base-content"
+        <InputRadio
+          class="w-full text-base-content bg-base-200 border-base-200"
           v-for="plan in content.plans"
           :key="plan.uuid"
+          :id="plan.uuid"
+          v-model="plan.uuid"
+          name="plan"
+          @change="plan_changed(plan.uuid)"
         >
-          <!-- id and name -->
-          <div class="flex flex-row items-center gap-2 text-sm">
-            <input
-              :id="plan.uuid"
-              type="radio"
-              class="w-5 h-5"
-              :value="plan.uuid"
-              name="plan"
-              @change="plan_changed(plan.uuid)"
-            />
+          <div class="flex flex-row justify-between items-center w-full">
             <span>{{ config.by_route(`constants/plans/${plan.name}`) }}</span>
+            <div class="text-xs" style="font-size: 0.67rem">
+              {{ ExtensionTools.formatPrice(plan.price.final) }}
+            </div>
           </div>
-          <!-- discount -->
-          <div class="text-xs" style="font-size: 0.67rem">
-            {{ ExtensionTools.formatPrice(plan.price.final) }}
-          </div>
-        </label>
+        </InputRadio>
       </div>
 
       <!-- pricing -->
@@ -57,8 +50,11 @@
           >
             <div class="flex flex-row gap-1 items-center justify-center text-xs">
               <span>
-                {{ ExtensionTools.formatPrice((form.plan.price?.value ?? content.plans[0].price.final)) }}
-                
+                {{
+                  ExtensionTools.formatPrice(
+                    form.plan.price?.value ?? content.plans[0].price.final
+                  )
+                }}
               </span>
             </div>
           </del>
@@ -68,9 +64,7 @@
             class="flex flex-row gap-1 items-center w-full py-2 justify-center text-sm bg-base-300/40 rounded-md"
             :class="discount_error.ok ? 'text-primary' : ''"
           >
-            <span v-if="form.discount_pricing.final === 0">
-              رایگان شد!
-            </span>
+            <span v-if="form.discount_pricing.final === 0"> رایگان شد! </span>
             <span v-else>
               {{ ExtensionTools.formatPrice(form.discount_pricing.final) }}
             </span>
