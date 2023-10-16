@@ -1,5 +1,5 @@
 <template>
-  <span @click="copyall(content)" class="cursor-pointer inline-block">
+  <span @click="copyall(content)">
     <slot>
       <svg
         :width="width"

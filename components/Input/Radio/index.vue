@@ -6,7 +6,7 @@ const isChecked = computed(() => modelValue === value);
 </script>
 
 <template>
-  <div class="flex items-center justify-center" dir="rtl">
+  <div class="flex flex-row items-center justify-center" dir="rtl">
     <input
       class="hidden"
       type="radio"
@@ -15,58 +15,26 @@ const isChecked = computed(() => modelValue === value);
       :value="id"
       @change="$emit('update:modelValue', $event.target.value)"
     />
-    <label :for="id">
+    <label
+      class="w-full h-full p-2 pr-8 relative flex flex-row items-center cursor-pointer"
+      :for="id"
+    >
+      <span
+        class="radio border-2 border-base-300 h-[18px] w-[18px] absolute right-2 flex items-center justify-center radio-blue"
+      >
+        <span class="h-[10px] w-[10px] bg-white rounded-full"></span>
+      </span>
       <slot></slot>
     </label>
   </div>
 </template>
 
 <style scoped>
-input:checked + label,
-input:not(:checked) + label {
-  position: relative;
-  padding-right: 28px;
-  cursor: pointer;
-  line-height: 20px;
-  display: inline-block;
-  color: #666;
-}
-
-input:checked + label:before,
-input:not(:checked) + label:before {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #ddd;
-  border-radius: 100%;
-  background: #fff;
-}
-
-input:checked + label:before {
-  background: #0a65cd;
+input[type="radio"]:checked + label .radio {
+  background-color: #0a65cd; /* Red background color when checked */
   border: none;
 }
-
-input:checked + label:after,
-input:not(:checked) + label:after {
-  content: "";
-  width: 10px;
-  height: 10px;
-  background: #fff;
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  border-radius: 100%;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.3s ease;
-}
-input:not(:checked) + label:after {
+input[type="radio"]:not(:checked) + label .radio * {
   opacity: 0;
-}
-input:checked + label:after {
-  opacity: 1;
 }
 </style>
