@@ -33,10 +33,9 @@
           >
             <p>2. انتخاب موضوع</p>
             <div
-              class="w-full h-[67px] text-base-content border border-base-400 rounded mt-2 flex items-center justify-around"
+              class="w-full h-[67px] text-base-content border border-base-400 rounded mt-2 flex items-center justify-around gap-4 p-4"
             >
               <InputRadio
-                class="w-full"
                 v-model="form.type"
                 :name="topic"
                 :id="1"
@@ -46,7 +45,6 @@
               </InputRadio>
 
               <InputRadio
-                class="w-full"
                 v-model="form.type"
                 :name="topic"
                 :id="2"
@@ -56,7 +54,6 @@
               </InputRadio>
 
               <InputRadio
-                class="w-full"
                 v-model="form.type"
                 :name="topic"
                 :id="3"
