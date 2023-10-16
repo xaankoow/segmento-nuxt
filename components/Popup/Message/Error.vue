@@ -1,5 +1,5 @@
 <template>
-  <Popup2Message headerBgColor="bg-error" :title="title">
+  <PopupMessage headerBgColor="bg-error" :title="title">
     <template v-slot:header>
       <slot name="header"></slot>
     </template>
@@ -11,7 +11,7 @@
     <template v-slot:footer>
       <slot name="footer"></slot>
     </template>
-  </Popup2Message>
+  </PopupMessage>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-  <Popup2>
+  <Popup>
     <div
       class="flex flex-col justify-between items-center rounded-md shadow-lg min-w-[24rem] min-h-[18rem] bg-base-100"
     >
@@ -26,7 +26,7 @@
         <slot name="footer"></slot>
       </div>
     </div>
-  </Popup2>
+  </Popup>
 </template>
 
 <script setup>
