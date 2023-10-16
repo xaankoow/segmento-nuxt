@@ -1,5 +1,4 @@
 <template>
-    <label class="text-sm" :for="id">{{ labelValue }}</label>
     <input
         :id="id"
         type="number"
@@ -12,6 +11,6 @@
 </template>
 
 <script setup>
-defineProps(["modelValue" , "placeholder" , "labelValue" , "id"]);
+defineProps(["modelValue" , "id"]);
 defineEmits(["update:modelValue"]);
 </script>
