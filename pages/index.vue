@@ -185,12 +185,29 @@
         </NuxtLink>
       </Copy>
     </div>
+    <!-- <div>
+      <button
+        @click="isPopupVisible = true"
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300"
+      >
+        {{ isPopupVisible ? "Close Popup" : "Show Popup" }}
+      </button>
+      <Popup
+        :isPopupVisible="isPopupVisible"
+        @update:isPopupVisible="isPopupVisible = !isPopupVisible"
+      >
+        <h2>Hello, this is a popup!</h2>
+        <p>Popup content goes here.</p>
+      </Popup>
+    </div> -->
   </div>
 </template>
 
 <script setup>
 import Config from "../composables/Config";
 import Auth from "../middlewares/Auth";
+
+const isPopupVisible = ref(false);
 
 definePageMeta({
   middleware: [Auth],
