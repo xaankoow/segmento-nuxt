@@ -1,8 +1,10 @@
 <script setup>
+import Config from "~~/composables/Config";
+
+const cn = new Config();
+const dir = cn.by_route("config/dir");
 const { modelValue, name, id } = defineProps(["modelValue", "name", "id"]);
 defineEmits(["update:modelValue"]);
-const value = modelValue;
-const isChecked = computed(() => modelValue === value);
 </script>
 
 <template>
@@ -16,11 +18,13 @@ const isChecked = computed(() => modelValue === value);
       @change="$emit('update:modelValue', $event.target.value)"
     />
     <label
-      class="w-full h-full p-2 pr-8 relative flex flex-row items-center cursor-pointer"
+      class="w-full h-full p-2 relative flex flex-row items-center cursor-pointer"
+      :class="dir == 'ltr' ? 'pl-8' : 'pr-8'"
       :for="id"
     >
       <span
-        class="radio border-2 border-base-300 h-[18px] w-[18px] absolute right-2 flex items-center justify-center radio-blue"
+        class="radio border-2 border-base-300 h-[18px] w-[18px] absolute flex items-center justify-center radio-blue"
+        :class="dir == 'ltr' ? 'left-2' : 'right-2'"
       >
         <span class="h-[10px] w-[10px] bg-white rounded-full"></span>
       </span>
