@@ -28,11 +28,11 @@
   }
 
   .btn-primary {
-    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-primary text-primary-text [&>svg]:fill-primary-text  hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled;
+    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-primary text-primary-text [&>svg]:fill-primary-text  hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled disabled:cursor-default;
   }
 
   .btn-secondary {
-    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text [&>svg]:fill-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled;
+    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text [&>svg]:fill-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled disabled:cursor-default;
   }
 
   .btn-secondary:hover svg {
