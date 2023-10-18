@@ -16,55 +16,74 @@
                 <div class="w-full h-full align-start" >
                     <InputTextArea class="h-36" @keyup="changeDescriptionDescription()" placeholder="توضیحات" v-model="valuesDescription.description" />
                 </div>
-                <div class="w-[80%] " >
-                    <InputText placeholder="آدرس تصویر" @keyup="changeDescriptionImage()" v-model="valuesDescription.image" />
+                <div class="w-full " >
+                    <InputURL placeholder="آدرس تصویر" id="descriptionImageUrl" @keyup="changeDescriptionImage()" v-model="valuesDescription.image" />
                 </div>
                 <div class="w-full flex gap-3">
                     <div class="w-[40%] h-[45px] flex items-center gap-6">
                         <span class="text-sm" >مجموع زمان</span>
-                        <InputNumber id="totalTime" placeholder="23"  @input="changeDescriptionTotalTime()" v-model="valuesDescription.totalTime"/>
+                        <InputNumber id="totalTime"  @input="changeDescriptionTotalTime()" v-model="valuesDescription.totalTime"/>
                     </div>
                 <!-- description end -->
                 <!-- Currency start -->
                     <div class="w-[40%] h-[45px] flex items-center gap-6">
                         <span class="text-sm">قیمت تخمینی</span>
-                        <InputNumber id="price" placeholder="23" @input="changeCurrencyValue()" v-model="valuesCurrency.value"/>
+                        <InputNumber id="price" @input="changeCurrencyValue()" v-model="valuesCurrency.value"/>
                     </div>
                 </div>
                 <div class="w-[260px]">
-                    <Dropdown class="box transition overflow-auto w-full ease-in-out delay-0 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
-                    <template v-slot:title>
-                        <span class=" w-full text-sm text-right">واحد پول</span>
-                    </template>
+                    <DropdownRadioDropDown class="box transition overflow-auto w-full ease-in-out delay-0 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
                     <template v-slot:content>
-                        <div class="parent flex flex-col pb-6">                           
-                            <div class="content flex flex-col items-center justify-center">
-                                <span class="w-[33%] text-[#002145] text-sm text-center">ریال</span>
-                                <span class="w-[33%] pt-[16px] text-[#002145] text-sm text-center">دلار</span>
-                                <span class="w-[33%] pt-[16px] text-[#002145] text-sm text-center">یورو</span>
+                        <li>
+                            <div class="flex items-center">
+                                <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">ریال</label>
                             </div>
-                        </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <input checked id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">دلار</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <input id="default-radio-3" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="default-radio-3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">یورو</label>
+                            </div>
+                        </li>
                     </template>
-                    </Dropdown>
+                    </DropdownRadioDropDown>
                 </div>
                 <!-- Currency end -->
                 <!-- supply start -->
-                <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addSupply()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    افزودن موجودی 
-                </button>
-                <div class="w-[80%]" v-if="supplyNumber" v-for="(value , index) in valuesSupply" :key="index" >
-                    <InputText placeholder="آدرس تصویر" @keyup="changeSupplyName()" v-model="valuesSupply" />
+                <div class="w-full flex items-center gap-6" v-if="supplyNumber" v-for="(value , index) in valuesSupply" :key="index" >
+                    <InputText class="w-[80%] align-start" style="width: 80%;" placeholder = "ابزار" @keyup="changeSupplyName(index)" v-model="valuesSupply[index].name"/>
+                    <button @click="deleteOneQuestion(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                        ✕  
+                    </button>
                 </div>
-                <!-- supply end -->
-                <button class="btn-primary px-5 bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addQuestion">
+                <button class="btn-primary px-5 bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addSupply()">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     افزودن ابزار 
                 </button>
+                <!-- supply end -->
+                <!-- tools start -->
+                <div class="w-full flex items-center gap-6" v-if="toolsNumber" v-for="(value , index) in valuesTools" :key="index" >
+                    <InputText class="w-[80%] align-start" style="width: 80%;" placeholder = "موجودی" @keyup="changeToolsName(index)" v-model="valuesTools[index].name"/>
+                    <button @click="deleteOneQuestion(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                        ✕  
+                    </button>
+                </div>
+                <button class="btn-primary px-5 bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addTools()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    افزودن موجودی 
+                </button>
+                <!-- tools end -->
                 <!-- steps start -->
                 <div class="w-full flex flex-col gap-10" v-for="(value , index) in valuesStep" :key="index">
                     <div class="w-full flex items-center gap-6" >
@@ -74,24 +93,24 @@
                         </button>
                     </div>
                     <div class="w-[80%] " >
-                        <InputText placeholder="آدرس تصویر" @keyup="changeStepImage(index)" v-model="valuesStep[index].image" />
+                        <InputURL placeholder="آدرس تصویر" @keyup="changeStepImage(index)" v-model="valuesStep[index].image" />
                     </div>
                     <div class=" w-[80%] flex gap-[5%]">
                         <div class="w-[60%] " >
-                            <InputText placeholder="آدرس" @keyup="changeStepAddress(index)" v-model="valuesStep[index].address" />
+                            <InputURL placeholder="آدرس" @keyup="changeStepAddress(index)" v-model="valuesStep[index].address" />
                         </div>
                         <div class="w-[35%] " >
                             <InputText placeholder="نام" @keyup="changeStepName(index)" v-model="valuesStep[index].name" />
                         </div>
                     </div>
                 </div>
-                <!-- steps end -->
                 <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addStep">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     افزودن قدم 
                 </button>
+                <!-- steps end -->
             </div>
             <!-- _______________________________________ -->
             <!-- left part -->
@@ -131,6 +150,7 @@
     import { ref , onMounted } from "vue"
     const dataForCopy = ref("")
     const supplyNumber= ref(0)
+    const toolsNumber= ref(0)
     const stepNumber = ref(1)
     const valuesDescription = ref(
         {
@@ -149,8 +169,9 @@
     const valuesSupply = ref([
 
     ]);
+    const valuesTools = ref([
 
-
+]);
     const valuesStep = ref([
         {
             text: "",
@@ -187,27 +208,46 @@
         dataForCopy.value = document.getElementById("code").textContent
     })
     // for delete button //
-    function deleteQuestions() {
-        questionNumber.value = 1
-        values.value = [
+    function deleteAllData() {
+        supplyNumber.value = 0
+        stepNumber.value = 1
+        valuesDescription.value = [
         {
-            question: "",
-            answer: ""
+            name: "",
+            description: "",
+            image: "",
+            totalTime: "",
         }
         ];
-        jsonData.value =
+        valuesCurrency.value = ref(
         {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [{
-            "@type": "Question",
-            "name": "",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": ""
-            }
-        }]
+            currency: "",
+            value: "",
         }
+        );
+        valuesSupply.value = ref([
+
+        ]);
+        valuesStep.value = ref([
+            {
+                text: "",
+                image: "",
+                address: "",
+                name: "",
+            }
+        ]);
+        jsonData.value = ref(
+        {
+            "@context": "https://schema.org/", 
+            "@type": "HowTo", 
+            "name": "",
+            "step": [{
+                "@type": "HowToStep",
+                "text": "",
+            },
+        ]
+        }
+        );
     }
     // for delete one added question
     function deleteOneQuestion(taskIndex){
@@ -293,7 +333,8 @@
     }
     // for supply //
     function addSupply() {
-        valuesSupply.value[supplyNumber] = {
+        supplyNumber.value ++
+        valuesSupply.value[supplyNumber.value-1] = {
             "@type": "HowToSupply",
             "name": ""
         }
@@ -311,19 +352,77 @@
                 newJson = addElementToObject(jsonData.value, "supply", "name");
             }
             jsonData.value = newJson
+            jsonData.value.supply = [
+            {
+                "@type": "HowToSupply",
+                "name": ""
+            }
+            ]
         }else{
-            jsonData.value.supply[supplyNumber] = 
+            jsonData.value.supply[supplyNumber.value-1] =
             {
                 "@type": "HowToSupply",
                 "name": ""
             }
         }
-        supplyNumber ++
     }
-    function changeSupplyName() {
-
+    function changeSupplyName(taskIndex) {
+        jsonData.value.supply[taskIndex].name = valuesSupply.value[taskIndex].name
+    }
+    // for tools //
+    function addTools() {
+        toolsNumber.value ++
+        valuesTools.value[toolsNumber.value-1] = {
+            "@type": "HowToTool",
+            "name": ""
+        }
+        if(!jsonData.value.tool){
+            let newJson={}
+            if(jsonData.value.supply){
+                newJson = addElementToObject(jsonData.value, "tool", "supply");
+            }else if(jsonData.value.estimatedCost){
+                newJson = addElementToObject(jsonData.value, "tool", "estimatedCost");
+            }else if(jsonData.value.totalTime){
+                newJson = addElementToObject(jsonData.value, "tool", "totalTime");
+            }else if(jsonData.value.image){
+                newJson = addElementToObject(jsonData.value, "tool", "image");
+            }else if(jsonData.value.description){
+                newJson = addElementToObject(jsonData.value, "tool", "description");
+            }else{
+                newJson = addElementToObject(jsonData.value, "tool", "name");
+            }
+            jsonData.value = newJson
+            jsonData.value.supply = [
+            {
+                "@type": "HowToSupply",
+                "name": ""
+            }
+            ]
+        }else{
+            jsonData.value.tool[toolsNumber.value-1] =
+            {
+                "@type": "HowToTool",
+                "name": ""
+            }
+        }
+    }
+    function changeToolsName(taskIndex) {
+        jsonData.value.supply[taskIndex].name = valuesSupply.value[taskIndex].name
     }
     // for steps //
+    function addStep() {
+        stepNumber.value ++
+        jsonData.value.step[stepNumber.value-1] = 
+        {
+            "@type": "HowToStep",
+            "text": "",
+        }, 
+        valuesStep.value[stepNumber.value-1] =     
+        {
+            question: "",
+            answer: ""
+        }
+    }
     function changeStepText(taskIndex) {
         jsonData.value.step[taskIndex].text = valuesStep.value[taskIndex].text
     }
@@ -336,28 +435,7 @@
     function changeStepName(taskIndex) {
         jsonData.value.step[taskIndex].name = valuesStep.value[taskIndex].name
     }
-
-
-
-
-    // for add step button //
-    function addStep() {
-        stepNumber.value ++
-        jsonData.value.step[stepNumber.value-1] = 
-        {
-            "@type": "HowToStep",
-            "text": "",
-        }, 
-        values.value[questionNumber.value-1] =     
-        {
-            question: "",
-            answer: ""
-        }
-    }
     </script>
-    
-    
-    
     <style lang="scss" scoped>
     
     </style>
