@@ -9,7 +9,15 @@
         <!-- right part -->
         <!-- _______________________________________ -->
         <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-10 align-start justify-start">
-            <div class="flex flex-col gap-10" v-for="(value , index) in values" :key="value">
+            <div class="flex flex-col gap-10" v-if="questionNumber == 1">
+                <div class="w-full" >
+                    <InputText class="w-full align-start" placeholder="متن نمونه" @keyup="changeQuestionName(0)" v-model="values[0].question" />
+                </div>
+                <div class="w-full h-full align-start" >
+                    <InputTextArea class="h-36 w-full" @keyup="changeAnswer(0)" placeholder="متن نمونه" v-model="values[0].answer" />
+                </div>
+            </div>
+            <div class="flex flex-col gap-10" v-if="questionNumber > 1" v-for="(value , index) in values" :key="value">
                 <div class="w-full flex items-center gap-6" >
                     <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="متن نمونه" @keyup="changeQuestionName(index)" v-model="values[index].question" />
                     <button @click="deleteOneQuestion(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
@@ -64,7 +72,7 @@
 
 <script setup>
 import { ref , onMounted } from "vue"
-const dataForCopy = ref("")
+
 const questionNumber = ref(1)
 const values = ref([
     {
@@ -87,6 +95,7 @@ const jsonData = ref(
 }
 );
 // for copy button //
+const dataForCopy = ref("")
 onMounted(()=>{
     dataForCopy.value = document.getElementById("code").textContent
 })
@@ -150,9 +159,3 @@ function addQuestion() {
     }
 }
 </script>
-
-
-
-<style lang="scss" scoped>
-
-</style>
