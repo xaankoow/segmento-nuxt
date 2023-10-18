@@ -1,8 +1,6 @@
 <script setup>
 const { modelValue, name, id } = defineProps(["modelValue", "name", "id"]);
 defineEmits(["update:modelValue"]);
-const value = modelValue;
-const isChecked = computed(() => modelValue === value);
 </script>
 
 <template>
