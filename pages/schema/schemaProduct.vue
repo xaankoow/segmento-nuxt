@@ -25,20 +25,40 @@
                     <div class="w-1/2 " >
                         <InputURL placeholder="برند محصول" @keyup="changeBrandName()" v-model="valuesBrand.name" />
                     </div>
-                <!-- description end -->
+                <!-- brand end -->
                 <!-- identification start -->
                     <div class="w-1/2 " >
-                        <InputText placeholder="ویژگی شناسایی" @keyup="changeStepName(index)" v-model="valuesStep[index].name" />
                     </div>
                 </div>
-
-
-
-                
+                <div  class="w-full flex gap-[6%] flex-wrap " v-if="valuesIdentification">
+                    <div class="w-[47%]  " v-for="value in valuesIdentification" :key="value" >
+                        <InputText :placeholder=value @keyup="changeProductName()" v-model="valuesProduct.name" />
+                    </div>
+                </div>
                 <!-- identification end -->
-
+                <!-- aggregateRating start -->
+                <div class="w-full flex gap-3">
+                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                        <span class="text-sm" >مجموع رتبه</span>
+                        <InputNumber id="totalTime"  @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue"/>
+                    </div>
+                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                        <span class="text-sm">تعداد رتبه</span>
+                        <InputNumber id="price" @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount"/>
+                    </div>
+                </div>
+                <div class="w-full flex gap-3">
+                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                        <span class="text-sm" >بالاترین رتبه</span>
+                        <InputNumber id="totalTime"  @input="changeHighestRating()" v-model="valuesAggregateRating.bestRating"/>
+                    </div>
+                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                        <span class="text-sm">پایین ترین رتبه</span>
+                        <InputNumber id="price" @input="changeLowestRating()" v-model="valuesAggregateRating.worstRating"/>
+                    </div>
+                </div>
+                <!-- aggregateRating end -->
         </div>
-
             <!-- _______________________________________ -->
             <!-- left part -->
             <!-- _______________________________________ -->
@@ -79,18 +99,15 @@ const dataForCopy = ref("")
 // const supplyNumber= ref(0)
 // const toolsNumber= ref(0)
 // const stepNumber = ref(1)
-const valuesProduct = ref(
-    {
-        name: "",
-        image: "",
-        description: "",
-    }
-);
-const valuesBrand = ref(
-    {
-        name: "",
-    }
-);
+
+const identificationOptions = ["sku" , "gtin8" , "gtin13" , "gtin140" , "mpn"]
+const valuesIdentification = ref([])
+
+
+// const valuesIdentification = ["sku" , "gtin8" , "gtin13" , "gtin140" , "mpn"]
+
+
+
 // const valuesCurrency = ref(
 //     {
 //         currency: "",
@@ -130,6 +147,13 @@ function addElementToObject(object, newProperty, beforNewProperty) {
     return newObject;
 }
 // for product //
+const valuesProduct = ref(
+    {
+        name: "",
+        image: "",
+        description: "",
+    }
+);
 function changeProductName() {
     jsonData.value.name = valuesProduct.value.name
 }
@@ -142,21 +166,62 @@ function changeProductDescription() {
     jsonData.value.description = valuesProduct.value.description
 }
 // for brand
+const valuesBrand = ref(
+    {
+        name: "",
+    }
+);
 function changeBrandName() {
     const newJson = addElementToObject(jsonData.value, "description", "image");
     jsonData.value = newJson
     jsonData.value.description = valuesProduct.value.description
 }
-// function changeProductDescription() {
-//     let newJson = {}
-//     if(jsonData.value.description){
-//         newJson = addElementToObject(jsonData.value, "image", "description");
-//     }else{
-//         newJson = addElementToObject(jsonData.value, "image", "name");
-//     }
-//     jsonData.value = newJson
-//     jsonData.value.image = valuesDescription.value.image
-// }
+// for aggregate rating
+const valuesAggregateRating = ref(
+    {
+    "@type": "AggregateRating",
+    "ratingValue": "",
+    "ratingCount": "",
+    "bestRating": "",
+    "worstRating": ""
+  },
+)
+function addAggregateRating(){
+    let newJson = {}
+    if(jsonData.value.mpn){
+        newJson = addElementToObject(jsonData.value, "aggregateRating", "mpn");
+    }else if(jsonData.value.gtin14){
+        newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin14");
+    }else if(jsonData.value.gtin13){
+        newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin13");
+    }else if(jsonData.value.gtin8){
+        newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin8");
+    }else if(jsonData.value.sku){
+        newJson = addElementToObject(jsonData.value, "aggregateRating", "sku");
+    }else if(jsonData.value.brand){
+        newJson = addElementToObject(jsonData.value, "aggregateRating", "brand");
+    }else{
+        newJson = addElementToObject(jsonData.value, "aggregateRating", "image");
+    }
+    jsonData.value = newJson
+    jsonData.value.aggregateRating = valuesAggregateRating.value
+}
+function changeAggregateRating() {
+    addAggregateRating()
+    jsonData.value.aggregateRating.ratingValue = valuesAggregateRating.value.ratingValue
+}
+function changeNumberOfRating() {
+    addAggregateRating()
+    jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount
+}
+function changeHighestRating() {
+    addAggregateRating()
+    jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating
+}
+function changeLowestRating() {
+    addAggregateRating()
+    jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating
+}
 
 // // for copy button //
 // onMounted(()=>{

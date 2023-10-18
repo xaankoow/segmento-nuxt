@@ -32,38 +32,24 @@
                     </div>
                 </div>
                 <div class="w-[260px]">
-                    <DropdownRadioDropDown class="box transition overflow-auto w-full ease-in-out delay-0 h-16 gap-3.5 flex item-center border items-center rounded-b-[10px] flex-col">
-                    <template v-slot:content>
-                        <li>
-                            <div class="flex items-center">
-                                <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">ریال</label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center">
-                                <input checked id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">دلار</label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center">
-                                <input id="default-radio-3" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="default-radio-3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">یورو</label>
-                            </div>
-                        </li>
+                    <DropdownSingleSelectedDropDown>
+                    <template v-slot:option >
+                        <option value="" disabled selected>واحد پول</option>
+                        <option @click="changeCurrencyCurrency($event)" value="rial" class="text-base-500">ریال</option>
+                        <option @change="changeCurrencyCurrency($event)" value="dollar" class="text-base-500">دلار</option>
+                        <option @change="changeCurrencyCurrency($event)" value="euro" class="text-base-500">یورو</option>
                     </template>
-                    </DropdownRadioDropDown>
+                    </DropdownSingleSelectedDropDown>
                 </div>
                 <!-- Currency end -->
                 <!-- supply start -->
-                <div class="w-full flex items-center gap-6" v-if="supplyNumber" v-for="(value , index) in valuesSupply" :key="index" >
+                <div class="w-full flex items-center gap-6 z-[1000]" v-if="supplyNumber" v-for="(value , index) in valuesSupply" :key="index" >
                     <InputText class="w-[80%] align-start" style="width: 80%;" placeholder = "ابزار" @keyup="changeSupplyName(index)" v-model="valuesSupply[index].name"/>
                     <button @click="deleteOneQuestion(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                         ✕  
                     </button>
                 </div>
-                <button class="btn-primary px-5 bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addSupply()">
+                <button class="btn-primary px-5 bg-[#F2F5F7] px-5 text-[#488CDA] z-[1000]" @click="addSupply()">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -144,35 +130,61 @@
             </div>
         </div>
     </div>
-    </template>
+</template>
     
-    <script setup>
-    import { ref , onMounted } from "vue"
-    const dataForCopy = ref("")
-    const supplyNumber= ref(0)
-    const toolsNumber= ref(0)
-    const stepNumber = ref(1)
-    const valuesDescription = ref(
-        {
-            name: "",
-            description: "",
-            image: "",
-            totalTime: "",
+<script setup>
+import { ref , onMounted } from "vue"
+
+const jsonData = ref(
+{
+    "@context": "https://schema.org/", 
+    "@type": "HowTo", 
+    "name": "",
+    "step": [{
+        "@type": "HowToStep",
+        "text": "",
+    },
+]
+}
+);
+function addElementToObject(object, newProperty, beforNewProperty) {
+    let newObject = {};
+    for (const property in object) {
+        newObject[property] = object[property];
+        if (property === beforNewProperty) {
+        newObject[newProperty] = newProperty;
         }
+    }
+    return newObject;
+}
+
+// for copy button //
+const dataForCopy = ref("")
+onMounted(()=>{
+    dataForCopy.value = document.getElementById("code").textContent
+})
+// for delete button //
+function deleteAllData() {
+    supplyNumber.value = 0
+    stepNumber.value = 1
+    valuesDescription.value = [
+    {
+        name: "",
+        description: "",
+        image: "",
+        totalTime: "",
+    }
+    ];
+    valuesCurrency.value = ref(
+    {
+        currency: "",
+        value: "",
+    }
     );
-    const valuesCurrency = ref(
-        {
-            currency: "",
-            value: "",
-        }
-    );
-    const valuesSupply = ref([
+    valuesSupply.value = ref([
 
     ]);
-    const valuesTools = ref([
-
-]);
-    const valuesStep = ref([
+    valuesStep.value = ref([
         {
             text: "",
             image: "",
@@ -180,7 +192,7 @@
             name: "",
         }
     ]);
-    const jsonData = ref(
+    jsonData.value = ref(
     {
         "@context": "https://schema.org/", 
         "@type": "HowTo", 
@@ -192,251 +204,223 @@
     ]
     }
     );
-    function addElementToObject(object, newProperty, beforNewProperty) {
-        let newObject = {};
-        for (const property in object) {
-            newObject[property] = object[property];
-            if (property === beforNewProperty) {
-            newObject[newProperty] = newProperty;
-            }
-        }
-        return newObject;
+}
+// for delete one added question
+function deleteOneQuestion(taskIndex){
+    // questionNumber.value = questionNumber.value-1
+    delete jsonData.value.mainEntity[taskIndex]
+    delete values.value[taskIndex]
+}
+// for Description //
+const valuesDescription = ref(
+    {
+        name: "",
+        description: "",
+        image: "",
+        totalTime: "",
     }
-
-    // for copy button //
-    onMounted(()=>{
-        dataForCopy.value = document.getElementById("code").textContent
-    })
-    // for delete button //
-    function deleteAllData() {
-        supplyNumber.value = 0
-        stepNumber.value = 1
-        valuesDescription.value = [
-        {
-            name: "",
-            description: "",
-            image: "",
-            totalTime: "",
-        }
-        ];
-        valuesCurrency.value = ref(
-        {
-            currency: "",
-            value: "",
-        }
-        );
-        valuesSupply.value = ref([
-
-        ]);
-        valuesStep.value = ref([
-            {
-                text: "",
-                image: "",
-                address: "",
-                name: "",
-            }
-        ]);
-        jsonData.value = ref(
-        {
-            "@context": "https://schema.org/", 
-            "@type": "HowTo", 
-            "name": "",
-            "step": [{
-                "@type": "HowToStep",
-                "text": "",
-            },
-        ]
-        }
-        );
+);
+function changeDescriptionName() {
+    jsonData.value.name = valuesDescription.value.name
+}
+function changeDescriptionDescription() {
+    const newJson = addElementToObject(jsonData.value, "description", "name");
+    jsonData.value = newJson
+    jsonData.value.description = valuesDescription.value.description
+}
+function changeDescriptionImage() {
+    let newJson = {}
+    if(jsonData.value.description){
+        newJson = addElementToObject(jsonData.value, "image", "description");
+    }else{
+        newJson = addElementToObject(jsonData.value, "image", "name");
     }
-    // for delete one added question
-    function deleteOneQuestion(taskIndex){
-        // questionNumber.value = questionNumber.value-1
-        delete jsonData.value.mainEntity[taskIndex]
-        delete values.value[taskIndex]
+    jsonData.value = newJson
+    jsonData.value.image = valuesDescription.value.image
+}
+function changeDescriptionTotalTime() {
+    let newJson={}
+    if(jsonData.value.image){
+        newJson = addElementToObject(jsonData.value, "totalTime", "image");
+    }else if(jsonData.value.description){
+        newJson = addElementToObject(jsonData.value, "totalTime", "description");
+    }else{
+        newJson = addElementToObject(jsonData.value, "totalTime", "name");
     }
-    // for Description //
-    function changeDescriptionName() {
-        jsonData.value.name = valuesDescription.value.name
+    jsonData.value = newJson
+    jsonData.value.totalTime = valuesDescription.value.totalTime
+}
+// for Currency //
+const valuesCurrency = ref(
+    {
+        currency: "",
+        value: "",
     }
-    function changeDescriptionDescription() {
-        const newJson = addElementToObject(jsonData.value, "description", "name");
-        jsonData.value = newJson
-        jsonData.value.description = valuesDescription.value.description
-    }
-    function changeDescriptionImage() {
-        let newJson = {}
-        if(jsonData.value.description){
-            newJson = addElementToObject(jsonData.value, "image", "description");
-        }else{
-            newJson = addElementToObject(jsonData.value, "image", "name");
-        }
-        jsonData.value = newJson
-        jsonData.value.image = valuesDescription.value.image
-    }
-    function changeDescriptionTotalTime() {
-        let newJson={}
-        if(jsonData.value.image){
-            newJson = addElementToObject(jsonData.value, "totalTime", "image");
+);
+function changeCurrencyValue() {
+    let newJson={}
+    if(!jsonData.value.estimatedCost){
+        if(jsonData.value.totalTime){
+            newJson = addElementToObject(jsonData.value, "estimatedCost", "totalTime");
+        }else if(jsonData.value.image){
+            newJson = addElementToObject(jsonData.value, "estimatedCost", "image");
         }else if(jsonData.value.description){
-            newJson = addElementToObject(jsonData.value, "totalTime", "description");
+            newJson = addElementToObject(jsonData.value, "estimatedCost", "description");
         }else{
-            newJson = addElementToObject(jsonData.value, "totalTime", "name");
+            newJson = addElementToObject(jsonData.value, "estimatedCost", "name");
         }
         jsonData.value = newJson
-        jsonData.value.totalTime = valuesDescription.value.totalTime
-    }
-    // for Currency //
-    function changeCurrencyValue() {
-        let newJson={}
-        if(!jsonData.value.estimatedCost){
-            if(jsonData.value.totalTime){
-                newJson = addElementToObject(jsonData.value, "estimatedCost", "totalTime");
-            }else if(jsonData.value.image){
-                newJson = addElementToObject(jsonData.value, "estimatedCost", "image");
-            }else if(jsonData.value.description){
-                newJson = addElementToObject(jsonData.value, "estimatedCost", "description");
-            }else{
-                newJson = addElementToObject(jsonData.value, "estimatedCost", "name");
-            }
-            jsonData.value = newJson
-            jsonData.value.estimatedCost = 
-            {
-            "@type": "MonetaryAmount",
-            "currency": "",
-            "value": "" ,
-            }
+        jsonData.value.estimatedCost = 
+        {
+        "@type": "MonetaryAmount",
+        "currency": "",
+        "value": "" ,
         }
-        jsonData.value.estimatedCost.value = valuesCurrency.value.value
     }
-    function changeCurrencyCurrency() {
-        let newJson={}
-        if(!jsonData.value.estimatedCost){
-            if(jsonData.value.totalTime){
-                newJson = addElementToObject(jsonData.value, "estimatedCost", "totalTime");
-            }else if(jsonData.value.image){
-                newJson = addElementToObject(jsonData.value, "estimatedCost", "image");
-            }else if(jsonData.value.description){
-                newJson = addElementToObject(jsonData.value, "estimatedCost", "description");
-            }else{
-                newJson = addElementToObject(jsonData.value, "estimatedCost", "name");
-            }
-            jsonData.value = newJson
-            jsonData.value.estimatedCost = 
-            {
-            "@type": "MonetaryAmount",
-            "currency": "",
-            "value": "" ,
-            }
+    jsonData.value.estimatedCost.value = valuesCurrency.value.value
+}
+function changeCurrencyCurrency(el) {
+    let newJson={}
+    console.log(el);
+    if(!jsonData.value.estimatedCost){
+        if(jsonData.value.totalTime){
+            newJson = addElementToObject(jsonData.value, "estimatedCost", "totalTime");
+        }else if(jsonData.value.image){
+            newJson = addElementToObject(jsonData.value, "estimatedCost", "image");
+        }else if(jsonData.value.description){
+            newJson = addElementToObject(jsonData.value, "estimatedCost", "description");
+        }else{
+            newJson = addElementToObject(jsonData.value, "estimatedCost", "name");
         }
-        jsonData.value.estimatedCost.currency = valuesCurrency.value.currency
+        jsonData.value = newJson
+        jsonData.value.estimatedCost = 
+        {
+        "@type": "MonetaryAmount",
+        "currency": "",
+        "value": "" ,
+        }
     }
-    // for supply //
-    function addSupply() {
-        supplyNumber.value ++
-        valuesSupply.value[supplyNumber.value-1] = {
+    jsonData.value.estimatedCost.currency = valuesCurrency.value.currency
+}
+// for supply //
+const supplyNumber= ref(0)
+const valuesSupply = ref([
+
+]);
+function addSupply() {
+    supplyNumber.value ++
+    valuesSupply.value[supplyNumber.value-1] = {
+        "@type": "HowToSupply",
+        "name": ""
+    }
+    if(!jsonData.value.supply){
+        let newJson={}
+        if(jsonData.value.estimatedCost){
+            newJson = addElementToObject(jsonData.value, "supply", "estimatedCost");
+        }else if(jsonData.value.totalTime){
+            newJson = addElementToObject(jsonData.value, "supply", "totalTime");
+        }else if(jsonData.value.image){
+            newJson = addElementToObject(jsonData.value, "supply", "image");
+        }else if(jsonData.value.description){
+            newJson = addElementToObject(jsonData.value, "supply", "description");
+        }else{
+            newJson = addElementToObject(jsonData.value, "supply", "name");
+        }
+        jsonData.value = newJson
+        jsonData.value.supply = [
+        {
             "@type": "HowToSupply",
             "name": ""
         }
-        if(!jsonData.value.supply){
-            let newJson={}
-            if(jsonData.value.estimatedCost){
-                newJson = addElementToObject(jsonData.value, "supply", "estimatedCost");
-            }else if(jsonData.value.totalTime){
-                newJson = addElementToObject(jsonData.value, "supply", "totalTime");
-            }else if(jsonData.value.image){
-                newJson = addElementToObject(jsonData.value, "supply", "image");
-            }else if(jsonData.value.description){
-                newJson = addElementToObject(jsonData.value, "supply", "description");
-            }else{
-                newJson = addElementToObject(jsonData.value, "supply", "name");
-            }
-            jsonData.value = newJson
-            jsonData.value.supply = [
-            {
-                "@type": "HowToSupply",
-                "name": ""
-            }
-            ]
-        }else{
-            jsonData.value.supply[supplyNumber.value-1] =
-            {
-                "@type": "HowToSupply",
-                "name": ""
-            }
+        ]
+    }else{
+        jsonData.value.supply[supplyNumber.value-1] =
+        {
+            "@type": "HowToSupply",
+            "name": ""
         }
     }
-    function changeSupplyName(taskIndex) {
-        jsonData.value.supply[taskIndex].name = valuesSupply.value[taskIndex].name
+}
+function changeSupplyName(taskIndex) {
+    jsonData.value.supply[taskIndex].name = valuesSupply.value[taskIndex].name
+}
+// for tools //
+const toolsNumber= ref(0)
+const valuesTools = ref([
+
+]);
+function addTools() {
+    toolsNumber.value ++
+    valuesTools.value[toolsNumber.value-1] = {
+        "@type": "HowToTool",
+        "name": ""
     }
-    // for tools //
-    function addTools() {
-        toolsNumber.value ++
-        valuesTools.value[toolsNumber.value-1] = {
+    if(!jsonData.value.tool){
+        let newJson={}
+        if(jsonData.value.supply){
+            newJson = addElementToObject(jsonData.value, "tool", "supply");
+        }else if(jsonData.value.estimatedCost){
+            newJson = addElementToObject(jsonData.value, "tool", "estimatedCost");
+        }else if(jsonData.value.totalTime){
+            newJson = addElementToObject(jsonData.value, "tool", "totalTime");
+        }else if(jsonData.value.image){
+            newJson = addElementToObject(jsonData.value, "tool", "image");
+        }else if(jsonData.value.description){
+            newJson = addElementToObject(jsonData.value, "tool", "description");
+        }else{
+            newJson = addElementToObject(jsonData.value, "tool", "name");
+        }
+        jsonData.value = newJson
+        jsonData.value.supply = [
+        {
+            "@type": "HowToSupply",
+            "name": ""
+        }
+        ]
+    }else{
+        jsonData.value.tool[toolsNumber.value-1] =
+        {
             "@type": "HowToTool",
             "name": ""
         }
-        if(!jsonData.value.tool){
-            let newJson={}
-            if(jsonData.value.supply){
-                newJson = addElementToObject(jsonData.value, "tool", "supply");
-            }else if(jsonData.value.estimatedCost){
-                newJson = addElementToObject(jsonData.value, "tool", "estimatedCost");
-            }else if(jsonData.value.totalTime){
-                newJson = addElementToObject(jsonData.value, "tool", "totalTime");
-            }else if(jsonData.value.image){
-                newJson = addElementToObject(jsonData.value, "tool", "image");
-            }else if(jsonData.value.description){
-                newJson = addElementToObject(jsonData.value, "tool", "description");
-            }else{
-                newJson = addElementToObject(jsonData.value, "tool", "name");
-            }
-            jsonData.value = newJson
-            jsonData.value.supply = [
-            {
-                "@type": "HowToSupply",
-                "name": ""
-            }
-            ]
-        }else{
-            jsonData.value.tool[toolsNumber.value-1] =
-            {
-                "@type": "HowToTool",
-                "name": ""
-            }
-        }
     }
-    function changeToolsName(taskIndex) {
-        jsonData.value.supply[taskIndex].name = valuesSupply.value[taskIndex].name
+}
+function changeToolsName(taskIndex) {
+    jsonData.value.supply[taskIndex].name = valuesSupply.value[taskIndex].name
+}
+// for steps //
+const stepNumber = ref(1)
+const valuesStep = ref([
+    {
+        text: "",
+        image: "",
+        address: "",
+        name: "",
     }
-    // for steps //
-    function addStep() {
-        stepNumber.value ++
-        jsonData.value.step[stepNumber.value-1] = 
-        {
-            "@type": "HowToStep",
-            "text": "",
-        }, 
-        valuesStep.value[stepNumber.value-1] =     
-        {
-            question: "",
-            answer: ""
-        }
+]);
+function addStep() {
+    stepNumber.value ++
+    jsonData.value.step[stepNumber.value-1] = 
+    {
+        "@type": "HowToStep",
+        "text": "",
+    }, 
+    valuesStep.value[stepNumber.value-1] =     
+    {
+        question: "",
+        answer: ""
     }
-    function changeStepText(taskIndex) {
-        jsonData.value.step[taskIndex].text = valuesStep.value[taskIndex].text
-    }
-    function changeStepImage(taskIndex) {
-        jsonData.value.step[taskIndex].image = valuesStep.value[taskIndex].image
-    }
-    function changeStepAddress(taskIndex) {
-        jsonData.value.step[taskIndex].url = valuesStep.value[taskIndex].address
-    }
-    function changeStepName(taskIndex) {
-        jsonData.value.step[taskIndex].name = valuesStep.value[taskIndex].name
-    }
-    </script>
-    <style lang="scss" scoped>
-    
-    </style>
-    
+}
+function changeStepText(taskIndex) {
+    jsonData.value.step[taskIndex].text = valuesStep.value[taskIndex].text
+}
+function changeStepImage(taskIndex) {
+    jsonData.value.step[taskIndex].image = valuesStep.value[taskIndex].image
+}
+function changeStepAddress(taskIndex) {
+    jsonData.value.step[taskIndex].url = valuesStep.value[taskIndex].address
+}
+function changeStepName(taskIndex) {
+    jsonData.value.step[taskIndex].name = valuesStep.value[taskIndex].name
+}
+</script>
