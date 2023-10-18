@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-  <span @click="copy(content)" class="cursor-pointer flex">
-=======
-  <span @click="copy(content)">
->>>>>>> main
+  <span @click="copyall(content)">
     <slot>
       <svg
         :width="width"
@@ -37,7 +33,7 @@
 <script setup>
 const props = defineProps({
   content: {
-    type: String,
+    type: [Object, Array],
     required: true,
   },
   width: {
@@ -50,13 +46,9 @@ const props = defineProps({
   },
 });
 
-function copy(content) {
-  // Get the text content to copy
-  const textToCopy = content;
-
-  // Create a temporary textarea element
+function copyall(content) {
   const tempTextArea = document.createElement("textarea");
-  tempTextArea.value = textToCopy;
+  tempTextArea.value = content.join("\n");
   document.body.appendChild(tempTextArea);
 
   // Select the text in the textarea
@@ -65,7 +57,6 @@ function copy(content) {
   try {
     // Copy the selected text to the clipboard
     document.execCommand("copy");
-    console.log("Text copied to clipboard!");
   } catch (err) {
     console.error("Unable to copy text:", err);
   }
