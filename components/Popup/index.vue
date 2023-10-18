@@ -1,24 +1,48 @@
+<script setup>
+import { defineProps, defineEmits } from "vue";
+import Config from "~~/composables/Config";
+
+const cn = new Config();
+const dir = cn.by_route("config/dir");
+
+defineProps({
+  modelValue: {},
+  bubble_bursting: {
+    type: Boolean,
+    default: true,
+  },
+});
+defineEmits(["update:modelValue"]);
+</script>
+
 <template>
   <div
-    v-if="isPopupVisible"
+    v-if="modelValue"
     class="fixed inset-0 z-50 top-0 left-0 w-full h-screen bg-[#E8E8E8]/50 flex justify-center items-center"
-    @click.self="bubble_bursting ? $emit('close') : ''"
+    @click.self="bubble_bursting ? $emit('update:modelValue', false) : ''"
   >
     <div :class="class" class="bg-white rounded-[3px]">
-      <slot></slot>
-      <button
-        @click="$emit('update:isPopupVisible', false)"
-        class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300"
-      >
-        Close
-      </button>
+      <div v-if="$slots.header" :dir="dir">
+        <div
+          class="flex flex-row items-center justify-between w-full px-2 py-1 rounded-t-md bg-base-500 text-white text-sm"
+        >
+          <span class="flex flex-row items-center w-1/4"></span>
+          <span class="flex flex-row items-center w-2/4 justify-center">
+            <slot name="header"></slot>
+          </span>
+          <span class="flex flex-row items-center w-1/4 justify-end text-xl h-full"
+            ><button
+              class="flex flex-row items-center font-mono px-1 h-full"
+              @click="$emit('update:modelValue', false)"
+            >
+              ✕
+            </button>
+          </span>
+        </div>
+      </div>
+      <div v-if="$slots.default">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
-
-<script setup>
-import { defineProps, defineEmits } from "vue";
-
-const { isPopupVisible } = defineProps(["isPopupVisible"]);
-const emits = defineEmits(["update:isPopupVisible", "close"]);
-</script>
