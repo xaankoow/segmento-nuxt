@@ -20,6 +20,7 @@ defineEmits(["update:modelValue"]);
 <template>
   <div class="flex flex-row items-center justify-center" :dir="dir">
     <input
+      :checked="modelValue"
       class="hidden"
       type="checkbox"
       :name="name"
