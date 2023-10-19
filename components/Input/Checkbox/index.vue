@@ -5,7 +5,7 @@ const cn = new Config();
 const props = defineProps({
   modelValue: {},
   name: { type: String },
-  id: { type: (String, Number) },
+  id: {},
   value: { type: String },
   dir: { type: String, default: false },
 });
