@@ -1,6 +1,10 @@
 <script setup>
 const props = defineProps({
   modelValue: {},
+  direction: {
+    type: String,
+    default: "rtl",
+  },
 });
 defineEmits(["update:modelValue"]);
 </script>
@@ -19,7 +23,7 @@ defineEmits(["update:modelValue"]);
       <img src="/images/site.png" class="h-[150px]" alt="site png" />
     </div>
   </div>
-  <div class="w-full h-1/2 items-center flex flex-col p-4 gap-4">
+  <div class="w-full h-1/2 items-center flex flex-col p-4 gap-1 overflow-y-scroll">
     <div class="gap-1 flex flex-col w-full">
       <label class="text-sm">آدرس وبسایت شما:</label>
       <div class="flex justify-between h-10 gap-2 w-full">
@@ -33,20 +37,23 @@ defineEmits(["update:modelValue"]);
       </div>
     </div>
     <div
-      class="gap-1 flex flex-col w-full overflow-scroll"
+      class="gap-1 flex flex-col w-full pb-4"
       v-if="modelValue.pages[0].keywords.length > 0"
     >
-      <label class="text-sm">کلمه کلیدی هدف:</label>
       <div
-        class="flex flex-row items-center justify-between h-10 gap-2 w-full"
-        v-for="(keyword, index) in modelValue.pages[0].keywords"
+        class="flex flex-row items-center justify-between gap-2 w-full h-10 mt-5"
+        v-for="(__, index) in modelValue.pages[0].keywords"
         :key="index"
       >
-        <InputText
+        <InputTextMarked
           v-model="modelValue.pages[0].keywords[index]"
+          placeholder="کتاب"
           type="text"
           class="w-full"
-        />
+          :dir="direction"
+        >
+          کلمه کلیدی هدف
+        </InputTextMarked>
         <svg
           @click="modelValue.pages[0].keywords.splice(index, 1)"
           class="cursor-pointer"

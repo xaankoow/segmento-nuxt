@@ -39,12 +39,14 @@ defineEmits(["update:modelValue"]);
               :id="index"
               dir="ltr"
             >
-              {{
-                modelValue.pages[index].slug == ""
-                  ? `${modelValue.website}`
-                  : `${modelValue.website}/${modelValue.pages[index].slug}`
-              }}
-              {{ modelValue.pages[index].is_money_page }}
+              <span
+                class="text-base-content"
+                v-html="
+                  modelValue.pages[index].slug == ''
+                    ? `${modelValue.website}`
+                    : `<span class='text-base-400'>${modelValue.website}/</span>${modelValue.pages[index].slug}`
+                "
+              ></span>
             </InputCheckbox>
           </div>
         </div>
@@ -86,7 +88,7 @@ defineEmits(["update:modelValue"]);
                 </svg>
                 <InputText
                   v-model="modelValue.money_pages[money_pages_index].slug"
-                  placeholder="segmento.ir"
+                  placeholder="shop/shoes"
                   type="text"
                   class="w-full"
                   dir="ltr"

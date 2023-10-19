@@ -37,12 +37,14 @@ defineEmits(["update:modelValue"]);
               :id="`default${index}`"
               dir="ltr"
             >
-              {{
-                modelValue.pages[index].slug == ""
-                  ? `${modelValue.website}`
-                  : `${modelValue.website}/${modelValue.pages[index].slug}`
-              }}
-              {{ modelValue.pages[index].lighthouse_tracker }}
+              <span
+                class="text-base-content"
+                v-html="
+                  modelValue.pages[index].slug == ''
+                    ? `${modelValue.website}`
+                    : `<span class='text-base-400'>${modelValue.website}/</span>${modelValue.pages[index].slug}`
+                "
+              ></span>
             </InputCheckbox>
           </div>
           <div
@@ -56,12 +58,14 @@ defineEmits(["update:modelValue"]);
               :id="`money${index}`"
               dir="ltr"
             >
-              {{
-                modelValue.money_pages[index].slug == ""
-                  ? `${modelValue.website}`
-                  : `${modelValue.website}/${modelValue.money_pages[index].slug}`
-              }}
-              {{ modelValue.money_pages[index].lighthouse_tracker }}
+              <span
+                class="text-base-content"
+                v-html="
+                  modelValue.money_pages[index].slug == ''
+                    ? `${modelValue.website}`
+                    : `<span class='text-base-400'>${modelValue.website}/</span>${modelValue.money_pages[index].slug}`
+                "
+              ></span>
             </InputCheckbox>
           </div>
         </div>
@@ -103,7 +107,7 @@ defineEmits(["update:modelValue"]);
                 </svg>
                 <InputText
                   v-model="modelValue.lighthouse_pages[lighthouse_pages_index].slug"
-                  placeholder="segmento.ir"
+                  placeholder="blog/door-opening"
                   type="text"
                   class="w-full"
                   dir="ltr"

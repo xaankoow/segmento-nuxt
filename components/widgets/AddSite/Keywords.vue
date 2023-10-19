@@ -1,6 +1,10 @@
 <script setup>
 const props = defineProps({
   modelValue: {},
+  direction: {
+    type: String,
+    default: "rtl",
+  },
 });
 defineEmits(["update:modelValue"]);
 </script>
@@ -19,7 +23,7 @@ defineEmits(["update:modelValue"]);
       <img src="/images/keywordStep.png" class="h-[150px]" alt="site png" />
     </div>
   </div>
-  <div class="w-full h-1/2 items-center flex flex-col p-4 gap-4 overflow-scroll">
+  <div class="w-full h-1/2 items-center flex flex-col p-4 pt-6 gap-6 overflow-scroll">
     <div
       class="gap-1 flex flex-row-reverse w-full"
       v-for="(page, index) in modelValue.pages"
@@ -47,13 +51,15 @@ defineEmits(["update:modelValue"]);
               fill-opacity="0.1"
             />
           </svg>
-          <InputText
+          <InputTextMarked
             v-model="modelValue.pages[index].slug"
-            placeholder="segmento.ir"
+            placeholder="pricing"
             type="text"
             class="w-full"
             dir="ltr"
-          />
+          >
+            صفحه هدف
+          </InputTextMarked>
           <svg
             width="20"
             height="20"
@@ -69,7 +75,7 @@ defineEmits(["update:modelValue"]);
         </div>
       </div>
       <div
-        class="w-1/2 flex flex-col items-center gap-2 px-2"
+        class="w-1/2 flex flex-col items-center gap-6 px-2"
         dir="ltr"
         v-if="index !== 0"
       >
@@ -97,13 +103,15 @@ defineEmits(["update:modelValue"]);
               fill-opacity="0.1"
             />
           </svg>
-          <InputText
+          <InputTextMarked
             v-model="modelValue.pages[index].keywords[keyword_index]"
-            placeholder="segmento.ir"
+            placeholder="کتاب"
             type="text"
             class="w-full"
-            dir="ltr"
-          />
+            :dir="direction"
+          >
+            کلمه کلیدی
+          </InputTextMarked>
         </div>
         <div class="w-full">
           <button

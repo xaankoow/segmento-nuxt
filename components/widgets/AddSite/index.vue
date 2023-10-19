@@ -35,6 +35,42 @@ const reset_popup = () => {
     lighthouse_pages: [],
   };
 };
+
+const domain_validation = () => {
+  let website = data.value.website.replace(/(www\.|https?:\/\/)/g, "");
+  website = website.replace(/^\/|\/$/g, "");
+  website = website.trim();
+  website = website.split("/")[0];
+  data.value.website = website.toLowerCase();
+
+  let domainRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-z]{2,}$/;
+  return domainRegex.test(data.value.website);
+};
+
+const pages_validation = () => {
+  // let pages;
+  // switch (step.value) {
+  //   case 1:
+  //     pages = data.value.pages.slice(1);
+  //     break;
+  //   case 2:
+  //     pages = data.value.money_pages;
+  //     break;
+  //   case 3:
+  //     pages = data.value.lighthouse_pages;
+  //     break;
+  //   default:
+  //     return true;
+  // }
+  // for (let i = 0; i < pages.length; i++) {
+  //   console.log(pages[i]);
+  //   if (pages[i] === "") {
+  //     return false;
+  //   }
+  // }
+  return true;
+};
+
 reset_popup();
 </script>
 
@@ -91,10 +127,14 @@ reset_popup();
       >
         <!-- content starts -->
         <div class="w-full h-[88%]">
-          <WidgetsAddSiteFirst v-if="step == 0" v-model="data" />
-          <WidgetsAddSiteKeywords v-if="step == 1" v-model="data" />
-          <WidgetsAddSiteMoneyPages v-if="step == 2" v-model="data" />
-          <WidgetsAddSiteLighthousePages v-if="step == 3" v-model="data" />
+          <WidgetsAddSiteFirst v-if="step == 0" v-model="data" :direction="dir" />
+          <WidgetsAddSiteKeywords v-if="step == 1" v-model="data" :direction="dir" />
+          <WidgetsAddSiteMoneyPages v-if="step == 2" v-model="data" :direction="dir" />
+          <WidgetsAddSiteLighthousePages
+            v-if="step == 3"
+            v-model="data"
+            :direction="dir"
+          />
         </div>
         <!-- content done -->
         <hr class="w-[96%] border-px border-base-400" />
@@ -145,7 +185,9 @@ reset_popup();
             <button
               @click="console.log(data)"
               class="btn-secondary"
-              :disabled="data.website == ''"
+              :disabled="
+                data.website == '' || !domain_validation() || !pages_validation()
+              "
             >
               پایان
             </button>
@@ -155,7 +197,7 @@ reset_popup();
               v-if="step < max_step"
               @click="step++"
               class="btn-primary"
-              :disabled="data.website == ''"
+              :disabled="data.website == '' || !domain_validation()"
             >
               ادامه
               <svg
