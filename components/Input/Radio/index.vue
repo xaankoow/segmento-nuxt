@@ -35,7 +35,7 @@ defineEmits(["update:modelValue"]);
 
 <style scoped>
 input[type="radio"]:checked + label .radio {
-  background-color: #0a65cd; /* Red background color when checked */
+  background-color: #0a65cd;
   border: none;
 }
 input[type="radio"]:not(:checked) + label .radio * {
