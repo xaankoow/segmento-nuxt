@@ -59,13 +59,12 @@ defineEmits(["update:modelValue"]);
           <div
             class="gap-1 flex flex-row w-full"
             v-for="(page, money_pages_index) in modelValue.money_pages"
-            :key="index"
+            :key="money_pages_index"
           >
-            <div class="w-full flex flex-col gap-2 px-2" dir="ltr" v-if="index !== 0">
+            <div class="w-full flex flex-col gap-2 px-2" dir="ltr">
               <div
-                class="flex flex-row gap-2 items-center w-full"
+                class="flex flex-row gap-2 items-center justify-between w-full"
                 dir="ltr"
-                v-if="index !== 0"
               >
                 <svg
                   @click="modelValue.money_pages.splice(money_pages_index, 1)"
@@ -90,13 +89,13 @@ defineEmits(["update:modelValue"]);
                   v-model="modelValue.money_pages[money_pages_index].slug"
                   placeholder="shop/shoes"
                   type="text"
-                  class="w-full"
+                  class="!w-[92%]"
                   dir="ltr"
                 />
               </div>
             </div>
           </div>
-          <div class="w-full flex flex-row justify-center px-2">
+          <div class="w-full flex flex-row justify-end px-2">
             <button
               @click="
                 modelValue.money_pages.push({
@@ -106,7 +105,8 @@ defineEmits(["update:modelValue"]);
                   keywords: [],
                 })
               "
-              class="btn-secondary w-full justify-center"
+              class="btn-secondary justify-center"
+              :class="modelValue.money_pages.length > 0 ? 'w-[92%]' : 'w-full'"
             >
               <svg
                 width="24"

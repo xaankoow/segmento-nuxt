@@ -80,7 +80,7 @@ reset_popup();
     :modelValue="modelValue"
     :bubble_bursting="true"
   >
-    <div>
+    <div class="shadow-lg">
       <!-- header starts -->
       <div class="flex flex-row items-center w-full p-2 gap-2">
         <div class="flex flex-row items-center justify-start w-full gap-2">
@@ -137,94 +137,96 @@ reset_popup();
           />
         </div>
         <!-- content done -->
-        <hr class="w-[96%] border-px border-base-400" />
-        <div
-          class="w-full grid grid-cols-3 p-4 h-fit"
-          :class="step > 0 ? 'justify-between' : 'justify-end'"
-        >
-          <div class="flex flex-row justify-start">
-            <button
-              class="btn-secondary"
-              v-if="step > 0"
-              @click="step--"
-              :disabled="data.website == ''"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+        <div class="h-[12%] w-full flex flex-col items-center">
+          <hr class="w-[96%] border-px border-base-400 h-px" />
+          <div
+            class="w-full grid grid-cols-3 items-center px-4 py-1 h-full"
+            :class="step > 0 ? 'justify-between' : 'justify-end'"
+          >
+            <div class="flex flex-row justify-start">
+              <button
+                class="btn-secondary"
+                v-if="step > 0"
+                @click="step--"
+                :disabled="data.website == ''"
               >
-                <mask
-                  id="mask0_5618_19570"
-                  style="mask-type: alpha"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
+                <svg
                   width="24"
                   height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <rect
-                    x="24"
-                    y="24"
+                  <mask
+                    id="mask0_5618_19570"
+                    style="mask-type: alpha"
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
                     width="24"
                     height="24"
-                    transform="rotate(-180 24 24)"
-                  />
-                </mask>
-                <g mask="url(#mask0_5618_19570)">
-                  <path
-                    d="M12.9 4.89987L19.35 11.3749C19.45 11.4582 19.5207 11.5542 19.562 11.6629C19.604 11.7709 19.625 11.8832 19.625 11.9999C19.625 12.1165 19.604 12.2292 19.562 12.3379C19.5207 12.4459 19.45 12.5415 19.35 12.6249L12.9 19.0999C12.75 19.2332 12.575 19.3042 12.375 19.3129C12.175 19.3209 12 19.2499 11.85 19.0999C11.7 18.9499 11.621 18.7749 11.613 18.5749C11.6043 18.3749 11.675 18.1915 11.825 18.0249L17.125 12.7499L5.5 12.7499C5.3 12.7499 5.125 12.6792 4.975 12.5379C4.825 12.3959 4.75 12.2165 4.75 11.9999C4.75 11.7832 4.825 11.6042 4.975 11.4629C5.125 11.3209 5.3 11.2499 5.5 11.2499L17.125 11.2499L11.825 5.94987C11.6917 5.81654 11.621 5.64587 11.613 5.43787C11.6043 5.2292 11.675 5.04987 11.825 4.89987C11.975 4.74987 12.154 4.67487 12.362 4.67487C12.5707 4.67487 12.75 4.74987 12.9 4.89987Z"
-                  />
-                </g>
-              </svg>
-            </button>
-          </div>
-          <div class="flex flex-row justify-center">
-            <button
-              @click="console.log(data)"
-              class="btn-secondary"
-              :disabled="
-                data.website == '' || !domain_validation() || !pages_validation()
-              "
-            >
-              پایان
-            </button>
-          </div>
-          <div class="flex flex-row justify-end">
-            <button
-              v-if="step < max_step"
-              @click="step++"
-              class="btn-primary"
-              :disabled="data.website == '' || !domain_validation()"
-            >
-              ادامه
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="24"
+                      y="24"
+                      width="24"
+                      height="24"
+                      transform="rotate(-180 24 24)"
+                    />
+                  </mask>
+                  <g mask="url(#mask0_5618_19570)">
+                    <path
+                      d="M12.9 4.89987L19.35 11.3749C19.45 11.4582 19.5207 11.5542 19.562 11.6629C19.604 11.7709 19.625 11.8832 19.625 11.9999C19.625 12.1165 19.604 12.2292 19.562 12.3379C19.5207 12.4459 19.45 12.5415 19.35 12.6249L12.9 19.0999C12.75 19.2332 12.575 19.3042 12.375 19.3129C12.175 19.3209 12 19.2499 11.85 19.0999C11.7 18.9499 11.621 18.7749 11.613 18.5749C11.6043 18.3749 11.675 18.1915 11.825 18.0249L17.125 12.7499L5.5 12.7499C5.3 12.7499 5.125 12.6792 4.975 12.5379C4.825 12.3959 4.75 12.2165 4.75 11.9999C4.75 11.7832 4.825 11.6042 4.975 11.4629C5.125 11.3209 5.3 11.2499 5.5 11.2499L17.125 11.2499L11.825 5.94987C11.6917 5.81654 11.621 5.64587 11.613 5.43787C11.6043 5.2292 11.675 5.04987 11.825 4.89987C11.975 4.74987 12.154 4.67487 12.362 4.67487C12.5707 4.67487 12.75 4.74987 12.9 4.89987Z"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+            <div class="flex flex-row justify-center">
+              <button
+                @click="console.log(data)"
+                class="btn-secondary"
+                :disabled="
+                  data.website == '' || !domain_validation() || !pages_validation()
+                "
               >
-                <mask
-                  id="mask0_7092_675"
-                  style="mask-type: alpha"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
+                پایان
+              </button>
+            </div>
+            <div class="flex flex-row justify-end">
+              <button
+                v-if="step < max_step"
+                @click="step++"
+                class="btn-primary"
+                :disabled="data.website == '' || !domain_validation()"
+              >
+                ادامه
+                <svg
                   width="24"
                   height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <rect width="24" height="24" />
-                </mask>
-                <g mask="url(#mask0_7092_675)">
-                  <path
-                    d="M11.1 19.1001L4.65 12.6251C4.55 12.5418 4.47933 12.4458 4.438 12.3371C4.396 12.2291 4.375 12.1168 4.375 12.0001C4.375 11.8835 4.396 11.7708 4.438 11.6621C4.47933 11.5541 4.55 11.4585 4.65 11.3751L11.1 4.90013C11.25 4.7668 11.425 4.6958 11.625 4.68713C11.825 4.67913 12 4.75013 12.15 4.90013C12.3 5.05013 12.379 5.22513 12.387 5.42513C12.3957 5.62513 12.325 5.80846 12.175 5.97513L6.875 11.2501H18.5C18.7 11.2501 18.875 11.3208 19.025 11.4621C19.175 11.6041 19.25 11.7835 19.25 12.0001C19.25 12.2168 19.175 12.3958 19.025 12.5371C18.875 12.6791 18.7 12.7501 18.5 12.7501H6.875L12.175 18.0501C12.3083 18.1835 12.379 18.3541 12.387 18.5621C12.3957 18.7708 12.325 18.9501 12.175 19.1001C12.025 19.2501 11.846 19.3251 11.638 19.3251C11.4293 19.3251 11.25 19.2501 11.1 19.1001Z"
-                  />
-                </g>
-              </svg>
-            </button>
+                  <mask
+                    id="mask0_7092_675"
+                    style="mask-type: alpha"
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
+                    width="24"
+                    height="24"
+                  >
+                    <rect width="24" height="24" />
+                  </mask>
+                  <g mask="url(#mask0_7092_675)">
+                    <path
+                      d="M11.1 19.1001L4.65 12.6251C4.55 12.5418 4.47933 12.4458 4.438 12.3371C4.396 12.2291 4.375 12.1168 4.375 12.0001C4.375 11.8835 4.396 11.7708 4.438 11.6621C4.47933 11.5541 4.55 11.4585 4.65 11.3751L11.1 4.90013C11.25 4.7668 11.425 4.6958 11.625 4.68713C11.825 4.67913 12 4.75013 12.15 4.90013C12.3 5.05013 12.379 5.22513 12.387 5.42513C12.3957 5.62513 12.325 5.80846 12.175 5.97513L6.875 11.2501H18.5C18.7 11.2501 18.875 11.3208 19.025 11.4621C19.175 11.6041 19.25 11.7835 19.25 12.0001C19.25 12.2168 19.175 12.3958 19.025 12.5371C18.875 12.6791 18.7 12.7501 18.5 12.7501H6.875L12.175 18.0501C12.3083 18.1835 12.379 18.3541 12.387 18.5621C12.3957 18.7708 12.325 18.9501 12.175 19.1001C12.025 19.2501 11.846 19.3251 11.638 19.3251C11.4293 19.3251 11.25 19.2501 11.1 19.1001Z"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -48,22 +48,22 @@ defineEmits(["update:modelValue"]);
             </InputCheckbox>
           </div>
           <div
-            v-for="(page, index) in modelValue.money_pages"
-            :key="index"
+            v-for="(page, money_page_index) in modelValue.money_pages"
+            :key="money_page_index"
             class="w-full flex flex-row"
             dir="ltr"
           >
             <InputCheckbox
-              v-model="modelValue.money_pages[index].lighthouse_tracker"
-              :id="`money${index}`"
+              v-model="modelValue.money_pages[money_page_index].lighthouse_tracker"
+              :id="`money${money_page_index}`"
               dir="ltr"
             >
               <span
                 class="text-base-content"
                 v-html="
-                  modelValue.money_pages[index].slug == ''
+                  modelValue.money_pages[money_page_index].slug == ''
                     ? `${modelValue.website}`
-                    : `<span class='text-base-400'>${modelValue.website}/</span>${modelValue.money_pages[index].slug}`
+                    : `<span class='text-base-400'>${modelValue.website}/</span>${modelValue.money_pages[money_page_index].slug}`
                 "
               ></span>
             </InputCheckbox>
@@ -77,17 +77,16 @@ defineEmits(["update:modelValue"]);
         <div class="w-full flex flex-col overflow-y-auto bg-white gap-2 h-5/6">
           <div
             class="gap-1 flex flex-row w-full"
-            v-for="(page, lighthouse_pages_index) in modelValue.lighthouse_pages"
-            :key="index"
+            v-for="(page, lighthouse_page_index) in modelValue.lighthouse_pages"
+            :key="lighthouse_page_index"
           >
-            <div class="w-full flex flex-col gap-2 px-2" dir="ltr" v-if="index !== 0">
+            <div class="w-full flex flex-col gap-2 px-2" dir="ltr">
               <div
-                class="flex flex-row gap-2 items-center w-full"
+                class="flex flex-row gap-2 items-center justify-between w-full"
                 dir="ltr"
-                v-if="index !== 0"
               >
                 <svg
-                  @click="modelValue.lighthouse_pages.splice(lighthouse_pages_index, 1)"
+                  @click="modelValue.lighthouse_pages.splice(lighthouse_page_index, 1)"
                   class="cursor-pointer"
                   width="24"
                   height="24"
@@ -106,16 +105,16 @@ defineEmits(["update:modelValue"]);
                   />
                 </svg>
                 <InputText
-                  v-model="modelValue.lighthouse_pages[lighthouse_pages_index].slug"
+                  v-model="modelValue.lighthouse_pages[lighthouse_page_index].slug"
                   placeholder="blog/door-opening"
                   type="text"
-                  class="w-full"
+                  class="!w-[92%]"
                   dir="ltr"
                 />
               </div>
             </div>
           </div>
-          <div class="w-full flex flex-row justify-center px-2">
+          <div class="w-full flex flex-row justify-end px-2">
             <button
               @click="
                 modelValue.lighthouse_pages.push({
@@ -125,7 +124,8 @@ defineEmits(["update:modelValue"]);
                   keywords: [],
                 })
               "
-              class="btn-secondary w-full justify-center"
+              class="btn-secondary justify-center"
+              :class="modelValue.lighthouse_pages.length > 0 ? 'w-[92%]' : 'w-full'"
             >
               <svg
                 width="24"

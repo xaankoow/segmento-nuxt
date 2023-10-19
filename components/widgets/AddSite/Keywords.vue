@@ -80,7 +80,7 @@ defineEmits(["update:modelValue"]);
         v-if="index !== 0"
       >
         <div
-          class="w-full flex flex-row items-center gap-2 pr-2"
+          class="w-full flex flex-row items-center justify-between gap-2"
           v-for="(keyword, keyword_index) in modelValue.pages[index].keywords"
           :key="keyword_index"
         >
@@ -107,16 +107,17 @@ defineEmits(["update:modelValue"]);
             v-model="modelValue.pages[index].keywords[keyword_index]"
             placeholder="کتاب"
             type="text"
-            class="w-full"
+            class="w-[92%]"
             :dir="direction"
           >
             کلمه کلیدی
           </InputTextMarked>
         </div>
-        <div class="w-full">
+        <div class="w-full flex flex-row justify-end">
           <button
             @click="modelValue.pages[index].keywords.push('')"
-            class="btn-secondary w-full justify-center"
+            class="btn-secondary justify-center"
+            :class="modelValue.pages[index].keywords.length > 0 ? 'w-[92%]' : 'w-full'"
             dir="rtl"
           >
             <svg
