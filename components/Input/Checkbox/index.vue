@@ -1,53 +1,57 @@
-<template>
-  <label class="flex items-center gap-2.5 cursor-pointer">
-    <input
-      type="checkbox"
-      checked="checked"
-      :name="name"
-      :value="modelValue"
-      class="absolute h-0 w-0 opacity-0"
-      @input="$emit('update:modelValue', $event.target.value)"
-    />
-    <span class="checkmark relative w-[22px] h-[22px] border border-base-400 rounded-[5px]"></span>
-    <slot></slot>
-  </label>
-
-</template>
-
 <script setup>
-defineProps(["modelValue", 'name']);
+import Config from "~~/composables/Config";
+
+const cn = new Config();
+const props = defineProps({
+  modelValue: {},
+  name: { type: String },
+  id: {},
+  value: { type: String },
+  dir: { type: String, default: false },
+});
+if (props.dir) {
+  const dir = props.dir;
+} else {
+  const dir = cn.by_route("config/dir");
+}
 defineEmits(["update:modelValue"]);
 </script>
 
+<template>
+  <div class="flex flex-row items-center justify-center" :dir="dir">
+    <input
+      :checked="modelValue"
+      class="hidden"
+      type="checkbox"
+      :name="name"
+      :id="id"
+      :value="modelValue"
+      @change="$emit('update:modelValue', $event.target.checked)"
+    />
+    <label
+      class="w-full h-full p-2 relative flex flex-row items-center cursor-pointer"
+      :class="dir == 'ltr' ? 'pl-8' : 'pr-8'"
+      :for="id"
+    >
+      <span
+        class="checkbox rounded-[1px] border-2 border-base-300 h-[18px] w-[18px] absolute flex items-center justify-center"
+        :class="dir == 'ltr' ? 'left-2' : 'right-2'"
+      >
+        <span class="h-[10px] w-[10px]">
+          <img class="h-full w-full" src="/images/checked.png" alt="checked" />
+        </span>
+      </span>
+      <slot></slot>
+    </label>
+  </div>
+</template>
 
 <style scoped>
-/* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #0A65CD;
-  border-radius: 5px;
+input[type="checkbox"]:checked + label .checkbox {
+  background-color: #0a65cd;
+  border: none;
 }
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.container .checkmark:after {
-  right: 50%;
-  top: 50%;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg) translate(-50%,-60%);
+input[type="checkbox"]:not(:checked) + label .checkbox * {
+  opacity: 0;
 }
 </style>

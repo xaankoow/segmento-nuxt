@@ -194,7 +194,6 @@ const current_page = "pages/disavow-builder";
 const config = new Config();
 const domains = ref("");
 const urls = ref("");
-const test = ref("");
 
 const convertToText = (text, filename) => {
   const blob = new Blob([text], { type: "text/plain" });

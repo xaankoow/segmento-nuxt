@@ -3,7 +3,12 @@ import Config from "~~/composables/Config";
 
 const cn = new Config();
 const dir = cn.by_route("config/dir");
-const { modelValue, name, id } = defineProps(["modelValue", "name", "id"]);
+const props = defineProps({
+  modelValue: {},
+  name: { type: String },
+  id: { type: String },
+  value: { type: String },
+});
 defineEmits(["update:modelValue"]);
 </script>
 
@@ -14,7 +19,7 @@ defineEmits(["update:modelValue"]);
       type="radio"
       :name="name"
       :id="id"
-      :value="id"
+      :value="value ?? id"
       @change="$emit('update:modelValue', $event.target.value)"
     />
     <label
@@ -35,7 +40,7 @@ defineEmits(["update:modelValue"]);
 
 <style scoped>
 input[type="radio"]:checked + label .radio {
-  background-color: #0a65cd; /* Red background color when checked */
+  background-color: #0a65cd;
   border: none;
 }
 input[type="radio"]:not(:checked) + label .radio * {

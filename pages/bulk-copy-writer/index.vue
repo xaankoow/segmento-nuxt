@@ -38,7 +38,7 @@
               <InputRadio
                 v-model="form.type"
                 :name="topic"
-                :id="1"
+                id="1"
                 @change="checkUpdate($event)"
               >
                 موضوعات سوالی
@@ -47,7 +47,7 @@
               <InputRadio
                 v-model="form.type"
                 :name="topic"
-                :id="2"
+                id="2"
                 @change="checkUpdate($event)"
               >
                 موضوعات مقایسه‌ای
@@ -56,7 +56,7 @@
               <InputRadio
                 v-model="form.type"
                 :name="topic"
-                :id="3"
+                id="3"
                 @change="checkUpdate($event)"
               >
                 موضوعات متفرقه
