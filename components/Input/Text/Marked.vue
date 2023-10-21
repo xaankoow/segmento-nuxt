@@ -11,6 +11,8 @@
         :id="id"
         :dir="dir"
         class="h-10"
+        :class="input_class"
+        :style="input_style"
       />
       <label
         :for="id"
@@ -29,6 +31,8 @@ defineProps({
   placeholder: { type: String },
   id: { type: String },
   dir: { type: String, default: "rtl" },
+  input_class: { type: String, default: "" },
+  input_style: { type: String, default: "" },
 });
 const is_focused = ref(false);
 </script>
