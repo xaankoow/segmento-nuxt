@@ -4,20 +4,21 @@
       <InputText
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        @focus="discount_box_focus = true"
-        @blur="discount_box_focus = false"
+        @focus="is_focused = true"
+        @blur="is_focused = false"
         type="text"
-        :placeholder="discount_box_focus ? placeholder : ''"
+        :placeholder="is_focused ? placeholder : ''"
         :id="id"
         :dir="dir"
         class="h-10"
       />
-      <span
-        class="right-0 absolute text-xs pointer-events-none px-2 transition-all duration-300"
-        :class="discount_box_focus ? '-top-5' : 'top-2.5'"
+      <label
+        :for="id"
+        class="right-0 absolute text-xs px-2 transition-all duration-300"
+        :class="is_focused || modelValue !== '' ? '-top-5' : 'top-2.5'"
       >
         <slot></slot>
-      </span>
+      </label>
     </div>
   </div>
 </template>
@@ -29,5 +30,5 @@ defineProps({
   id: { type: String },
   dir: { type: String, default: "rtl" },
 });
-const discount_box_focus = ref(false);
+const is_focused = ref(false);
 </script>

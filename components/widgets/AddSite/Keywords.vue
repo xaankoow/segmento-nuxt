@@ -109,6 +109,7 @@ defineEmits(["update:modelValue"]);
             type="text"
             class="w-[92%]"
             :dir="direction"
+            :id="`page-${index}-keyword-${keyword_index}`"
           >
             کلمه کلیدی
           </InputTextMarked>

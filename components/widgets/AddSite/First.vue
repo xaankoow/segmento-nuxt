@@ -51,6 +51,7 @@ defineEmits(["update:modelValue"]);
           type="text"
           class="w-full"
           :dir="direction"
+          :id="`keyword-${index}`"
         >
           کلمه کلیدی هدف
         </InputTextMarked>
