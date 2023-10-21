@@ -48,26 +48,34 @@ const domain_validation = () => {
 };
 
 const pages_validation = () => {
-  // let pages;
-  // switch (step.value) {
-  //   case 1:
-  //     pages = data.value.pages.slice(1);
-  //     break;
-  //   case 2:
-  //     pages = data.value.money_pages;
-  //     break;
-  //   case 3:
-  //     pages = data.value.lighthouse_pages;
-  //     break;
-  //   default:
-  //     return true;
-  // }
-  // for (let i = 0; i < pages.length; i++) {
-  //   console.log(pages[i]);
-  //   if (pages[i] === "") {
-  //     return false;
-  //   }
-  // }
+  let pages;
+  switch (step.value) {
+    case 0:
+      pages = [data.value.pages[0]];
+      break;
+    case 1:
+      pages = data.value.pages.slice(1);
+      break;
+    case 2:
+      pages = data.value.money_pages;
+      break;
+    case 3:
+      pages = data.value.lighthouse_pages;
+      break;
+    default:
+      return true;
+  }
+  for (let i = 0; i < pages.length; i++) {
+    if (pages[i].slug === "" && step.value != 0) {
+      return false;
+    } else {
+      for (let j = 0; j < pages[i].keywords.length; j++) {
+        if (pages[i].keywords[j] === "") {
+          return false;
+        }
+      }
+    }
+  }
   return true;
 };
 
@@ -198,7 +206,9 @@ reset_popup();
                 v-if="step < max_step"
                 @click="step++"
                 class="btn-primary"
-                :disabled="data.website == '' || !domain_validation()"
+                :disabled="
+                  data.website == '' || !domain_validation() || !pages_validation()
+                "
               >
                 ادامه
                 <svg
