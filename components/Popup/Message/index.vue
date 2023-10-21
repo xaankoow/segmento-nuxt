@@ -20,7 +20,7 @@ const emit = defineEmits(["update:modelValue"]);
     :bubble_bursting="true"
   >
     <div
-      class="flex flex-col justify-between items-center rounded-md shadow-lg min-w-[24rem] min-h-[18rem] bg-base-100"
+      class="flex flex-col justify-between items-center rounded-md shadow-lg min-w-[24rem] bg-base-100"
     >
       <div class="flex flex-col gap-2 w-full">
         <!-- header -->
@@ -39,7 +39,7 @@ const emit = defineEmits(["update:modelValue"]);
       </div>
 
       <!-- footer -->
-      <div class="flex w-full flex-row items-center justify-center pb-4 text-primary">
+      <div class="flex w-full flex-row items-center justify-center text-primary">
         <slot name="footer"></slot>
       </div>
     </div>
