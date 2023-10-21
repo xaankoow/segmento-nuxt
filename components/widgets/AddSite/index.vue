@@ -1,7 +1,9 @@
 <script setup>
+import Request from "~~/Api/Request";
 import { defineProps, defineEmits } from "vue";
 import Config from "~~/composables/Config";
 
+const request = new Request("v1");
 const cn = new Config();
 const dir = cn.by_route("config/dir");
 const props = defineProps({
@@ -25,12 +27,12 @@ const reset_popup = () => {
         keywords: [],
       },
     ],
-    competitors: [
-      {
-        keyword: null,
-        url: null,
-      },
-    ],
+    // competitors: [
+    //   {
+    //     keyword: null,
+    //     url: null,
+    //   },
+    // ],
     money_pages: [],
     lighthouse_pages: [],
   };
@@ -48,7 +50,7 @@ const domain_validation = () => {
 };
 
 const pages_validation = () => {
-  let pages;
+  let pages = [];
   switch (step.value) {
     case 0:
       pages = [data.value.pages[0]];
@@ -85,6 +87,28 @@ const pages_validation = () => {
   return true;
 };
 
+async function send_data_to_server() {
+  // TODO: check why the response status code is 500
+  // TODO : check this section later need to change.!
+  let res = await request
+    .post("workspaces/add", data.value)
+    .then((res) => {
+      // this code will add new data to previous one to the table when the argument 'update' be true and else, previous data will get overwriden.
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+const end_progress = () => {
+  data.value.pages.push(...data.value.money_pages);
+  data.value.pages.push(...data.value.lighthouse_pages);
+  delete data.value.money_pages;
+  delete data.value.lighthouse_pages;
+  send_data_to_server();
+  reset_popup();
+};
+
 reset_popup();
 </script>
 
@@ -112,26 +136,38 @@ reset_popup();
           </svg>
           <div>تعریف سایت جدید</div>
         </div>
-        <div class="flex flex-row items-center justify-end w-full gap-2">
-          <svg
-            @click="reset_popup()"
-            class="cursor-pointer"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        <div
+          class="flex flex-row items-center justify-end w-full gap-2"
+          @click="reset_popup()"
+        >
+          <button
+            class="[&>svg]:fill-danger hover:bg-red-100 rounded-[3px] cursor-pointer"
           >
-            <path
-              d="M12.35 13.4L7.275 18.475C7.14167 18.6083 6.971 18.679 6.763 18.687C6.55433 18.6957 6.375 18.625 6.225 18.475C6.075 18.325 6 18.15 6 17.95C6 17.75 6.075 17.575 6.225 17.425L11.3 12.35L6.225 7.275C6.09167 7.14167 6.021 6.97067 6.013 6.762C6.00433 6.554 6.075 6.375 6.225 6.225C6.375 6.075 6.55 6 6.75 6C6.95 6 7.125 6.075 7.275 6.225L12.35 11.3L17.425 6.225C17.5583 6.09167 17.7293 6.02067 17.938 6.012C18.146 6.004 18.325 6.075 18.475 6.225C18.625 6.375 18.7 6.55 18.7 6.75C18.7 6.95 18.625 7.125 18.475 7.275L13.4 12.35L18.475 17.425C18.6083 17.5583 18.679 17.729 18.687 17.937C18.6957 18.1457 18.625 18.325 18.475 18.475C18.325 18.625 18.15 18.7 17.95 18.7C17.75 18.7 17.575 18.625 17.425 18.475L12.35 13.4Z"
-              fill="#F35242"
-            />
-            <path
-              d="M0 3C0 1.34315 1.34315 0 3 0H21C22.6569 0 24 1.34315 24 3V21C24 22.6569 22.6569 24 21 24H3C1.34315 24 0 22.6569 0 21V3Z"
-              fill="#F35242"
-              fill-opacity="0.1"
-            />
-          </svg>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <mask
+                id="mask0_165_316"
+                style="mask-type: alpha"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="24"
+                height="24"
+              >
+                <rect width="24" height="24" />
+              </mask>
+              <g mask="url(#mask0_165_316)">
+                <path
+                  d="M7.3 20.5C6.8 20.5 6.375 20.325 6.025 19.975C5.675 19.625 5.5 19.2 5.5 18.7V6H4.5V4.5H9V3.625H15V4.5H19.5V6H18.5V18.7C18.5 19.2 18.325 19.625 17.975 19.975C17.625 20.325 17.2 20.5 16.7 20.5H7.3ZM17 6H7V18.7C7 18.7667 7.03333 18.8333 7.1 18.9C7.16667 18.9667 7.23333 19 7.3 19H16.7C16.7667 19 16.8333 18.9667 16.9 18.9C16.9667 18.8333 17 18.7667 17 18.7V6ZM9.4 17H10.9V8H9.4V17ZM13.1 17H14.6V8H13.1V17Z"
+                />
+              </g>
+            </svg>
+          </button>
         </div>
       </div>
       <!-- header done -->
@@ -198,7 +234,7 @@ reset_popup();
             </div>
             <div class="flex flex-row justify-center">
               <button
-                @click="console.log(data)"
+                @click="end_progress()"
                 class="btn-secondary"
                 :disabled="
                   data.website == '' || !domain_validation() || !pages_validation()
