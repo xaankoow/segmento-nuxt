@@ -24,7 +24,7 @@ const linesSum = ref("")
 
 watch(code, () => {
   lineCounter(code.value);
-  console.log(code.value);
+//   console.log(code.value);
 });
 
 function lineCounter(el) {
