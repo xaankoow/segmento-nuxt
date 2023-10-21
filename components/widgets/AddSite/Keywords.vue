@@ -57,6 +57,7 @@ defineEmits(["update:modelValue"]);
             type="text"
             class="w-full"
             dir="ltr"
+            :id="`page-${index}`"
           >
             صفحه هدف
           </InputTextMarked>
