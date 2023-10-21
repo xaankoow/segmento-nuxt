@@ -186,7 +186,7 @@
           <NavbarRightContentHome v-if="actived_navbar === 'home'" />
           <NavbarRightContentDepartment v-else>
             <!-- پیشخان -->
-            <!-- <div class="flex flex-row px-5 py-3 gap-4 items-center" @click="change_active_section('counter')">
+            <!-- <div class="flex flex-row px-5 py-3 gap-4 items-center">
               <SvgLabeled :label="cn.by_route(`${department_section}/counter`)" :active="$route.path.split('/')[1].toLowerCase() === 'counter'">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -219,7 +219,6 @@
                       <li
                         v-for="workspace in workspaces"
                         :key="workspace.uuid"
-                        @click="change_active_section(workspace.website)"
                       >
                         <SvgLabeled
                           :label="workspace.website"
@@ -262,7 +261,7 @@
                       </li>
                     </ul>
                   </li>
-                  <!-- <li class="mt-2" @click="change_active_section('workspace_management')">
+                  <!-- <li class="mt-2">
                     <SvgLabeled
                       :label="cn.by_route(`${department_section}/site/manage`)"
                       :active="
@@ -313,7 +312,6 @@
                         :label="
                           cn.by_route(`${department_section}/seo/fields/keyword-research`)
                         "
-                        @click="change_active_section('keyword-research')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'keyword-research'
                         "
@@ -340,7 +338,6 @@
                             `${department_section}/seo/fields/google-title-builder`
                           )
                         "
-                        @click="change_active_section('google-title-builder')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() ===
                           'google-title-builder'
@@ -378,7 +375,6 @@
                             `${department_section}/seo/fields/google-suggested-words`
                           )
                         "
-                        @click="change_active_section('google-suggested-words')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() ===
                           'google-suggested-words'
@@ -436,7 +432,6 @@
                             `${department_section}/content-creation/fields/title-copy-writer`
                           )
                         "
-                        @click="change_active_section('title-copy-writer')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'title-copy-writer'
                         "
@@ -463,8 +458,9 @@
                             `${department_section}/content-creation/fields/bulk-copy-writer`
                           )
                         "
-                        @click="change_active_section('bulk-copy-writer')"
-                        :active="active_section === 'bulk-copy-writer'"
+                        :active="
+                          $route.path.split('/')[1].toLowerCase() === 'bulk-copy-writer'
+                        "
                       >
                         <svg
                           width="18"
@@ -498,7 +494,6 @@
                             `${department_section}/content-creation/fields/idea-generator`
                           )
                         "
-                        @click="change_active_section('idea-generator')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'idea-generator'
                         "
@@ -563,7 +558,6 @@
                             `${department_section}/technical-seo/fields/serp-preview`
                           )
                         "
-                        @click="change_active_section('serp-preview')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'serp-preview'
                         "
@@ -590,7 +584,6 @@
                             `${department_section}/technical-seo/fields/g-ads-preview`
                           )
                         "
-                        @click="change_active_section('g-ads-preview')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'g-ads-preview'
                         "
@@ -617,7 +610,6 @@
                             `${department_section}/technical-seo/fields/disavow-builder`
                           )
                         "
-                        @click="change_active_section('disavow-builder')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'disavow-builder'
                         "
@@ -657,9 +649,8 @@
                             `${department_section}/technical-seo/fields/schema-builder`
                           )
                         "
-                        @click="change_active_section('schema-builder')"
                         :active="
-                          $route.path.split('/')[1].toLowerCase() === 'schema-builder'
+                          $route.path.split('/')[1].toLowerCase() === 'schema'
                         "
                       >
                         <svg
@@ -755,8 +746,6 @@ const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
 const workspaces = ref(null);
 const actived_navbar = ref("department");
-const active_section = ref("keyword-research");
-const selected_tools_section = ref("content-creation");
 const runtimeConfig = useRuntimeConfig();
 const DEV_ENV = runtimeConfig.public.DEV_ENV;
 
@@ -779,19 +768,6 @@ onBeforeMount(() => {
   workspaces.value = ConfigStore.workspaces();
 });
 
-function add_workspace() {
-  change_active_section("add_workspace");
-  let popup = One.render("page");
-  document.getElementById("page").appendChild(popup);
-}
-
-function change_selected_tools_section(title) {
-  selected_tools_section.value = title === selected_tools_section.value ? "" : title;
-}
-
-function change_active_section(section) {
-  active_section.value = section;
-}
 function profile() {
   return auth.value;
 }
