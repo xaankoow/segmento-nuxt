@@ -2,6 +2,8 @@
 const props = defineProps({
   modelValue: {},
 });
+const domain_element = ref([]);
+
 defineEmits(["update:modelValue"]);
 </script>
 
@@ -63,7 +65,7 @@ defineEmits(["update:modelValue"]);
           >
             <div class="w-full flex flex-col gap-2 px-2" dir="ltr">
               <div
-                class="flex flex-row gap-2 items-center justify-between w-full"
+                class="flex flex-row gap-2 items-center justify-between w-full relative"
                 dir="ltr"
               >
                 <svg
@@ -85,11 +87,17 @@ defineEmits(["update:modelValue"]);
                     fill-opacity="0.1"
                   />
                 </svg>
+                <span ref="domain_element" class="absolute left-[10%]">
+                  {{ modelValue.website }}/
+                </span>
                 <InputText
                   v-model="modelValue.money_pages[money_pages_index].slug"
                   placeholder="shop/shoes"
                   type="text"
                   class="!w-[92%]"
+                  :style="`padding-left: ${
+                    Boolean(domain_element[0]) ? domain_element[0].offsetWidth + 6 : 18
+                  }px;`"
                   dir="ltr"
                 />
               </div>

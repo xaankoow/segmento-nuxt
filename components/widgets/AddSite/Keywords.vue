@@ -6,6 +6,8 @@ const props = defineProps({
     default: "rtl",
   },
 });
+const domain_element = ref([]);
+
 defineEmits(["update:modelValue"]);
 </script>
 
@@ -31,7 +33,11 @@ defineEmits(["update:modelValue"]);
       :class="index !== 0 ? '' : 'hidden'"
     >
       <div class="w-1/2 flex flex-col gap-2 px-2" dir="ltr" v-if="index !== 0">
-        <div class="flex flex-row gap-2 items-center" dir="ltr" v-if="index !== 0">
+        <div
+          class="flex flex-row gap-2 items-center relative"
+          dir="ltr"
+          v-if="index !== 0"
+        >
           <svg
             @click="modelValue.pages.splice(index, 1)"
             class="cursor-pointer"
@@ -51,11 +57,17 @@ defineEmits(["update:modelValue"]);
               fill-opacity="0.1"
             />
           </svg>
+          <span ref="domain_element" class="absolute left-[10%] z-10">
+            {{ modelValue.website }}/
+          </span>
           <InputTextMarked
             v-model="modelValue.pages[index].slug"
             placeholder="pricing"
             type="text"
             class="w-full"
+            :input_style="`padding-left: ${
+              Boolean(domain_element[0]) ? domain_element[0].offsetWidth + 6 : 18
+            }px;`"
             dir="ltr"
             :id="`page-${index}`"
           >
