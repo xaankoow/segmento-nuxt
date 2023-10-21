@@ -74,6 +74,12 @@ const pages_validation = () => {
           return false;
         }
       }
+      if (String(pages[i].slug).startsWith(data.value.website)) {
+        pages[i].slug = pages[i].slug.replace(data.value.website, "");
+      }
+      if (String(pages[i].slug).startsWith("/")) {
+        pages[i].slug = pages[i].slug.replace("/", "");
+      }
     }
   }
   return true;
