@@ -105,6 +105,7 @@ const end_progress = () => {
   data.value.pages.push(...data.value.lighthouse_pages);
   delete data.value.money_pages;
   delete data.value.lighthouse_pages;
+  console.log(data.value);
   send_data_to_server();
   reset_popup();
 };
