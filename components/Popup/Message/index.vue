@@ -1,5 +1,24 @@
+<script setup>
+const props = defineProps({
+  headerBgColor: {
+    type: String,
+    default: "bg-success",
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  modelValue: {},
+});
+const emit = defineEmits(["update:modelValue"]);
+</script>
+
 <template>
-  <PopupTemp>
+  <Popup
+    @update:modelValue="$emit('update:modelValue', false)"
+    :modelValue="modelValue"
+    :bubble_bursting="true"
+  >
     <div
       class="flex flex-col justify-between items-center rounded-md shadow-lg min-w-[24rem] min-h-[18rem] bg-base-100"
     >
@@ -24,18 +43,5 @@
         <slot name="footer"></slot>
       </div>
     </div>
-  </PopupTemp>
+  </Popup>
 </template>
-
-<script setup>
-const props = defineProps({
-  headerBgColor: {
-    type: String,
-    default: "bg-success",
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-});
-</script>
