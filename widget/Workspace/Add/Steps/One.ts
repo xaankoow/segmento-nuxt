@@ -136,7 +136,7 @@ export default class AddWorkspaceStepOne {
 
         <!-- image -->
         <div class="w-2/5 flex items-center justify-center">
-          <img src="/images/workspace.png" class="w-40 h-44" />
+          <img src="/images/site.png" class="w-40 h-44" />
         </div>
       </div>`
 

@@ -3,6 +3,8 @@
     class="flex flex-col w-full !h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
     style="direction: rtl; height: 100vh !important"
   >
+    <WidgetsAddSite v-model="isPopupVisible"></WidgetsAddSite>
+
     <!-- Header section -->
     <NavbarTop
       :platform="cn.__(['layouts', 'default', 'header', 'platform'])"
@@ -238,7 +240,7 @@
                           </svg>
                         </SvgLabeled>
                       </li>
-                      <li @click="add_workspace()">
+                      <li @click="isPopupVisible = true">
                         <SvgLabeled
                           :label="cn.by_route(`${department_section}/site/add`)"
                           :active="
@@ -721,6 +723,7 @@ import ConfigStore from "../store/ConfigStore";
 import One from "../widget/Workspace/Add/Steps/One";
 import { ref } from "vue";
 
+const isPopupVisible = ref(false);
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
 const workspaces = ref(null);
