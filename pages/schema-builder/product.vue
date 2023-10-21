@@ -1,14 +1,10 @@
 <template>
-    <div class="w-full h-auto rounded">
-        <div class="w-full h-full p-7">
-            <p class="text-base-content text-[18px]"> ساخت اسکیما Product </p>
-        </div>
-    
-        <div class="flex justify-start items-start gap-4 w-full h-full p-7" >
+    <div class="w-full h-auto">
+        <div class="flex justify-start items-start gap-2 w-full h-full p-2" >
             <!-- _______________________________________ -->
             <!-- right part -->
             <!-- _______________________________________ -->
-            <div class="w-1/2 h-full flex flex-col gap-10 align-start justify-start">
+            <div class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <!-- Product start -->
                 <div class="w-full " >
                     <InputText placeholder="نام محصول" @keyup="changeProductName()" v-model="valuesProduct.name" />
@@ -52,7 +48,7 @@
                 <!-- identification end -->
                 <!-- _______________________________________ -->
                 <!-- offer start -->
-                <div class="w-full flex flex-col gap-10">
+                <div class="w-full flex flex-col gap-2">
                     <div class="flex gap-[10%]">
                         <div class="w-[45%] h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
                             <DropdownFinalDropDown class="z-index-[1100]">
@@ -134,7 +130,7 @@
                 <!-- aggregateRating end -->
                 <!-- _______________________________________ -->
                 <!-- review start -->
-                <div class="w-full flex flex-col gap-10" v-for="(value , index) in valuesReview" :key="index" >
+                <div class="w-full flex flex-col gap-2" v-for="(value , index) in valuesReview" :key="index" >
                     <div class="w-full flex items-center gap-6" >
                         <InputText  class="w-[80%] align-start" style="width: 80%;" placeholder="عنوان بررسی" @keyup="changeReviewName()" v-model="valuesReview[index].name" />
                         <button @click="deleteOneQuestion(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
@@ -174,8 +170,8 @@
             <!-- _______________________________________ -->
             <!-- left part -->
             <!-- _______________________________________ -->
-            <div class="w-1/2 flex flex-col gap-10">
-                <div class="flex gap-10 w-full" >
+            <div class="w-1/2 flex flex-col gap-2">
+                <div class="flex gap-2 w-full" >
                     <button @click="deleteQuestions" class="btn-primary px-4" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

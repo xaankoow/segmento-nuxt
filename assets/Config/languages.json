@@ -233,42 +233,14 @@
                 "how-to": {
                     "title": "How to Schema Builder"
                 },
-                "keyword": {
-                    "header": {
-                        "button": "افزودن کلمه کلیدی"
-                    },
-                    "table": {
-                        "title": "جدول کلمات کلیدی",
-                        "columns": [
-                            "نمودار",
-                            "ردیف",
-                            "کلمه کلیدی",
-                            "رتبه فعلی",
-                            "عدد افت و رشد",
-                            "آخرین بروزرسانی",
-                            "میانگین 7 دوره",
-                            "برچسب",
-                            "تاریخ افزودن",
-                            "سایت رقیب",
-                            "عملیات"
-                        ]
-                    }
+                "faq": {
+                    "title": "FAQ Schema Builder"
                 },
-                "competitors": {
-                    "header": {
-                        "button": "افزودن رقیب",
-                        "competitor_counter": "رقیب شماره [number]"
-                    },
-                    "table": {
-                        "cells": {
-                            "current_rank": "رتبه فعلی",
-                            "change_rate": "میزان تغییر رتبه",
-                            "average": "میانگین 7 دوره"
-                        },
-                        "site_domain_title": "آدرس سایت"
-                    },
-                    "compare": "مقایسه بر اساس",
-                    "rank": "رتبه [rank]"
+                "product": {
+                    "title": "Product Schema Builder"
+                },
+                "website": {
+                    "title": "Website Schema Builder"
                 }
             },
             "auth": {
