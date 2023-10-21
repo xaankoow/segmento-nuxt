@@ -642,7 +642,7 @@
                     </NuxtLink>
                   </div>
                   <div class="flex flex-col gap-3" v-if="DEV_ENV">
-                    <NuxtLink to="/schema/how-to">
+                    <NuxtLink to="/schema-builder/how-to">
                       <SvgLabeled
                         :label="
                           cn.by_route(
@@ -650,7 +650,7 @@
                           )
                         "
                         :active="
-                          $route.path.split('/')[1].toLowerCase() === 'schema'
+                          $route.path.split('/')[1].toLowerCase() === 'schema-builder'
                         "
                       >
                         <svg
