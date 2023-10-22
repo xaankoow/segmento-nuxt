@@ -38,9 +38,9 @@
                             <span> واحد پول</span>
                         </template>
                         <template v-slot:option >
-                            <span @click="changeCurrencyCurrency('rial')" value="rial" class="text-base-500 cursor-pointer">ریال</span>
-                            <span @click="changeCurrencyCurrency('dollar')" value="usDollar" class="text-base-500 cursor-pointer">دلار آمریکا</span>
-                            <span @click="changeCurrencyCurrency('euro')" value="euro" class="text-base-500 cursor-pointer">یورو</span>
+                            <InputRadio @click="changeCurrencyCurrency('rial')" :name="Currency" :id="rial" >ریال</InputRadio>
+                            <InputRadio @click="changeCurrencyCurrency('dollar')" :name="Currency" :id="usDollar" >دلار آمریکا</InputRadio>
+                            <InputRadio @click="changeCurrencyCurrency('euro')" :name="Currency" :id="euro">یورو</InputRadio>
                         </template>
                     </DropdownFinalDropDown>
                 </div>
