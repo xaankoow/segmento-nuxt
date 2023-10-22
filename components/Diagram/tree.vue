@@ -53,7 +53,7 @@ onMounted(() => {
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .tree-chart{
     display: flex;
     height: fit-content;

@@ -1,20 +1,16 @@
 <template>
-    <div class="w-full h-auto rounded">
-        <div class="w-full h-full p-7">
-            <p class="text-base-content text-[18px]"> ساخت اسکیما How To </p>
-        </div>
-    
-        <div class="flex justify-start items-start gap-4 w-full h-full p-7" >
+    <div class="w-full">
+        <div class="flex justify-start items-start gap-2 w-full h-full p-2" >
             <!-- _______________________________________ -->
             <!-- right part -->
             <!-- _______________________________________ -->
-            <div class="w-1/2 h-full flex flex-col gap-10 align-start justify-start">
+            <div class="w-1/2 h-full flex flex-col gap-2 align-start justify-between">
                 <!-- description start -->
                 <div class="w-full " >
                     <InputText placeholder="نام" @keyup="changeDescriptionName()" v-model="valuesDescription.name" />
                 </div>
                 <div class="w-full h-full align-start" >
-                    <InputTextArea class="h-36" @keyup="changeDescriptionDescription()" placeholder="توضیحات" v-model="valuesDescription.description" />
+                    <InputTextArea class="h-32" @keyup="changeDescriptionDescription()" placeholder="توضیحات" v-model="valuesDescription.description" />
                 </div>
                 <div class="w-full " >
                     <InputURL placeholder="آدرس تصویر" id="descriptionImageUrl" @keyup="changeDescriptionImage()" v-model="valuesDescription.image" />
@@ -77,7 +73,7 @@
                 <!-- tools end -->
                 <!-- _______________________________________ -->
                 <!-- steps start -->
-                <div class="w-full flex flex-col gap-10" v-if="stepNumber == 1 ">
+                <div class="w-full flex flex-col gap-2" v-if="stepNumber == 1 ">
                     <div class="w-full">
                         <InputText class="w-full align-start" placeholder="قدم اول" @keyup="changeStepText(0)" v-model="valuesStep[0].text" />
                     </div>
@@ -93,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full flex flex-col gap-10" v-if="stepNumber > 1 "  v-for="(value , index) in valuesStep" :key="index">
+                <div class="w-full flex flex-col gap-2" v-if="stepNumber > 1 "  v-for="(value , index) in valuesStep" :key="index">
                     <div class="w-full flex items-center gap-6" >
                         <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="قدم اول" @keyup="changeStepText(index)" v-model="valuesStep[index].text" />
                         <button @click="deleteOneStep(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
@@ -123,8 +119,8 @@
             <!-- _______________________________________ -->
             <!-- left part -->
             <!-- _______________________________________ -->
-            <div class="w-1/2 flex flex-col gap-10">
-                <div class="flex gap-10 w-full" >
+            <div class="w-1/2 flex flex-col gap-2">
+                <div class="flex gap-2 w-full" >
                     <button @click="deleteAllData" class="btn-primary px-4" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

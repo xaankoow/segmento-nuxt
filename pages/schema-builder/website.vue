@@ -1,14 +1,10 @@
 <template>
     <div class="w-full h-auto rounded">
-        <div class="w-full h-full p-7">
-            <p class="text-base-content text-[18px]"> ساخت اسکیما Website </p>
-        </div>
-    
-        <div class="flex justify-start items-start gap-4 w-full h-full p-7" >
+        <div class="flex justify-start items-start gap-2 w-full h-full p-2" >
             <!-- _______________________________________ -->
             <!-- right part -->
             <!-- _______________________________________ -->
-            <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-10 align-start justify-start">
+            <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                     <div class="w-full" >
                         <InputText class="w-full align-start" placeholder="نام وب سایت" @keyup="changeWebSiteName()" v-model="values.name" />
                     </div>
@@ -25,8 +21,8 @@
             <!-- _______________________________________ -->
             <!-- left part -->
             <!-- _______________________________________ -->
-            <div class="w-1/2 flex flex-col gap-10">
-                <div class="flex gap-10 w-full" >
+            <div class="w-1/2 flex flex-col gap-2">
+                <div class="flex gap-2 w-full" >
                     <button @click="deleteQuestions" class="btn-primary px-4" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

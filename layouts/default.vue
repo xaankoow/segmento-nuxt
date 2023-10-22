@@ -186,7 +186,7 @@
           <NavbarRightContentHome v-if="actived_navbar === 'home'" />
           <NavbarRightContentDepartment v-else>
             <!-- پیشخان -->
-            <!-- <div class="flex flex-row px-5 py-3 gap-4 items-center" @click="change_active_section('counter')">
+            <!-- <div class="flex flex-row px-5 py-3 gap-4 items-center">
               <SvgLabeled :label="cn.by_route(`${department_section}/counter`)" :active="$route.path.split('/')[1].toLowerCase() === 'counter'">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -219,7 +219,6 @@
                       <li
                         v-for="workspace in workspaces"
                         :key="workspace.uuid"
-                        @click="change_active_section(workspace.website)"
                       >
                         <SvgLabeled
                           :label="workspace.website"
@@ -262,7 +261,7 @@
                       </li>
                     </ul>
                   </li>
-                  <!-- <li class="mt-2" @click="change_active_section('workspace_management')">
+                  <!-- <li class="mt-2">
                     <SvgLabeled
                       :label="cn.by_route(`${department_section}/site/manage`)"
                       :active="
@@ -313,7 +312,6 @@
                         :label="
                           cn.by_route(`${department_section}/seo/fields/keyword-research`)
                         "
-                        @click="change_active_section('keyword-research')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'keyword-research'
                         "
@@ -340,7 +338,6 @@
                             `${department_section}/seo/fields/google-title-builder`
                           )
                         "
-                        @click="change_active_section('google-title-builder')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() ===
                           'google-title-builder'
@@ -378,7 +375,6 @@
                             `${department_section}/seo/fields/google-suggested-words`
                           )
                         "
-                        @click="change_active_section('google-suggested-words')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() ===
                           'google-suggested-words'
@@ -436,7 +432,6 @@
                             `${department_section}/content-creation/fields/title-copy-writer`
                           )
                         "
-                        @click="change_active_section('title-copy-writer')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'title-copy-writer'
                         "
@@ -463,8 +458,9 @@
                             `${department_section}/content-creation/fields/bulk-copy-writer`
                           )
                         "
-                        @click="change_active_section('bulk-copy-writer')"
-                        :active="active_section === 'bulk-copy-writer'"
+                        :active="
+                          $route.path.split('/')[1].toLowerCase() === 'bulk-copy-writer'
+                        "
                       >
                         <svg
                           width="18"
@@ -498,7 +494,6 @@
                             `${department_section}/content-creation/fields/idea-generator`
                           )
                         "
-                        @click="change_active_section('idea-generator')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'idea-generator'
                         "
@@ -563,7 +558,6 @@
                             `${department_section}/technical-seo/fields/serp-preview`
                           )
                         "
-                        @click="change_active_section('serp-preview')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'serp-preview'
                         "
@@ -590,7 +584,6 @@
                             `${department_section}/technical-seo/fields/g-ads-preview`
                           )
                         "
-                        @click="change_active_section('g-ads-preview')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'g-ads-preview'
                         "
@@ -617,7 +610,6 @@
                             `${department_section}/technical-seo/fields/disavow-builder`
                           )
                         "
-                        @click="change_active_section('disavow-builder')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() === 'disavow-builder'
                         "
@@ -645,6 +637,32 @@
                               <rect width="18" height="18" fill="white" />
                             </clipPath>
                           </defs>
+                        </svg>
+                      </SvgLabeled>
+                    </NuxtLink>
+                  </div>
+                  <div class="flex flex-col gap-3" v-if="DEV_ENV">
+                    <NuxtLink to="/schema-builder/how-to">
+                      <SvgLabeled
+                        :label="
+                          cn.by_route(
+                            `${department_section}/technical-seo/fields/schema-builder`
+                          )
+                        "
+                        :active="
+                          $route.path.split('/')[1].toLowerCase() === 'schema-builder'
+                        "
+                      >
+                        <svg
+                          width="18"
+                          height="19"
+                          viewBox="0 0 18 19"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M9.75 18.3926H8.57325C8.45607 18.3926 8.34052 18.3652 8.23585 18.3126C8.13118 18.26 8.04031 18.1836 7.97053 18.0895C7.90075 17.9955 7.854 17.8864 7.83402 17.7711C7.81404 17.6557 7.8214 17.5373 7.8555 17.4253C8.07025 16.7675 8.20276 16.0858 8.25 15.3955C8.25 14.9981 8.09196 14.6169 7.81066 14.3359C7.52936 14.0549 7.14782 13.897 6.75 13.897C6.35218 13.897 5.97064 14.0549 5.68934 14.3359C5.40804 14.6169 5.25 14.9981 5.25 15.3955C5.29724 16.0858 5.42975 16.7675 5.6445 17.4253C5.6786 17.5373 5.68596 17.6557 5.66598 17.7711C5.646 17.8864 5.59925 17.9955 5.52947 18.0895C5.45969 18.1836 5.36882 18.26 5.26415 18.3126C5.15948 18.3652 5.04393 18.3926 4.92675 18.3926H3.75C2.7558 18.3914 1.80267 17.9963 1.09966 17.294C0.396661 16.5917 0.00119089 15.6395 0 14.6463L0 8.65211C0.00119089 7.65888 0.396661 6.70668 1.09966 6.00436C1.80267 5.30204 2.7558 4.90696 3.75 4.90577H3.954C3.83522 4.41447 3.76687 3.91237 3.75 3.40723C3.75 2.61236 4.06607 1.85004 4.62868 1.28798C5.19129 0.725918 5.95435 0.410156 6.75 0.410156C7.54565 0.410156 8.30871 0.725918 8.87132 1.28798C9.43393 1.85004 9.75 2.61236 9.75 3.40723C9.73313 3.91237 9.66478 4.41447 9.546 4.90577H9.75C10.7154 4.90588 11.6437 5.27751 12.342 5.94349C13.0404 6.60946 13.4551 7.51858 13.5 8.48202C13.9918 8.36352 14.4944 8.29499 15 8.27747C15.7956 8.27747 16.5587 8.59324 17.1213 9.1553C17.6839 9.71736 18 10.4797 18 11.2745C18 12.0694 17.6839 12.8317 17.1213 13.3938C16.5587 13.9559 15.7956 14.2716 15 14.2716C14.4944 14.2543 13.9919 14.186 13.5 14.0678V14.6463C13.4988 15.6395 13.1033 16.5917 12.4003 17.294C11.6973 17.9963 10.7442 18.3914 9.75 18.3926ZM9.546 16.8941H9.75C10.3467 16.8941 10.919 16.6572 11.341 16.2357C11.7629 15.8141 12 15.2424 12 14.6463V13.096C12 12.979 12.0274 12.8635 12.0801 12.7589C12.1328 12.6544 12.2092 12.5636 12.3034 12.4939C12.3975 12.4242 12.5067 12.3775 12.6221 12.3575C12.7376 12.3376 12.8561 12.3449 12.9683 12.379C13.6267 12.5933 14.3091 12.7257 15 12.7731C15.3978 12.7731 15.7794 12.6152 16.0607 12.3342C16.342 12.0531 16.5 11.672 16.5 11.2745C16.5 10.8771 16.342 10.496 16.0607 10.2149C15.7794 9.93389 15.3978 9.77601 15 9.77601C14.3091 9.82339 13.6267 9.95576 12.9683 10.1701C12.8561 10.2042 12.7376 10.2115 12.6221 10.1916C12.5067 10.1716 12.3975 10.1249 12.3034 10.0552C12.2092 9.98549 12.1328 9.89471 12.0801 9.79015C12.0274 9.68558 12 9.57014 12 9.45308V8.65211C12 8.05595 11.7629 7.48421 11.341 7.06267C10.919 6.64112 10.3467 6.4043 9.75 6.4043H8.57325C8.45607 6.40434 8.34052 6.37694 8.23585 6.32431C8.13118 6.27167 8.04031 6.19527 7.97053 6.10123C7.90075 6.00719 7.854 5.89812 7.83402 5.78277C7.81404 5.66742 7.8214 5.549 7.8555 5.437C8.07025 4.77924 8.20276 4.09748 8.25 3.40723C8.25 3.00979 8.09196 2.62863 7.81066 2.3476C7.52936 2.06657 7.14782 1.90869 6.75 1.90869C6.35218 1.90869 5.97064 2.06657 5.68934 2.3476C5.40804 2.62863 5.25 3.00979 5.25 3.40723C5.29724 4.09748 5.42975 4.77924 5.6445 5.437C5.6786 5.549 5.68596 5.66742 5.66598 5.78277C5.646 5.89812 5.59925 6.00719 5.52947 6.10123C5.45969 6.19527 5.36882 6.27167 5.26415 6.32431C5.15948 6.37694 5.04393 6.40434 4.92675 6.4043H3.75C3.15326 6.4043 2.58097 6.64112 2.15901 7.06267C1.73705 7.48421 1.5 8.05595 1.5 8.65211V14.6463C1.5 15.2424 1.73705 15.8141 2.15901 16.2357C2.58097 16.6572 3.15326 16.8941 3.75 16.8941H3.954C3.83522 16.4028 3.76687 15.9007 3.75 15.3955C3.75 14.6006 4.06607 13.8383 4.62868 13.2763C5.19129 12.7142 5.95435 12.3984 6.75 12.3984C7.54565 12.3984 8.30871 12.7142 8.87132 13.2763C9.43393 13.8383 9.75 14.6006 9.75 15.3955C9.73313 15.9007 9.66478 16.4028 9.546 16.8941Z"
+                          />
                         </svg>
                       </SvgLabeled>
                     </NuxtLink>
@@ -728,8 +746,6 @@ const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
 const workspaces = ref(null);
 const actived_navbar = ref("department");
-const active_section = ref("keyword-research");
-const selected_tools_section = ref("content-creation");
 const runtimeConfig = useRuntimeConfig();
 const DEV_ENV = runtimeConfig.public.DEV_ENV;
 
@@ -752,19 +768,6 @@ onBeforeMount(() => {
   workspaces.value = ConfigStore.workspaces();
 });
 
-function add_workspace() {
-  change_active_section("add_workspace");
-  let popup = One.render("page");
-  document.getElementById("page").appendChild(popup);
-}
-
-function change_selected_tools_section(title) {
-  selected_tools_section.value = title === selected_tools_section.value ? "" : title;
-}
-
-function change_active_section(section) {
-  active_section.value = section;
-}
 function profile() {
   return auth.value;
 }
