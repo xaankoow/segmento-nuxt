@@ -1,5 +1,23 @@
 <template>
     <div class="w-full h-auto rounded">
+        <!-- Tabs -->
+        <div class="flex flex-row items-center gap-3 text-xs px-2 py-4 h-[7%] bg-base-200">
+            <TabItem to="/schema-builder/faq" :active="false">
+                FAQ page
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/how-to" :active="false">
+                How to
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/product" :active="false">
+                Product
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/website" :active="true">
+                Website
+            </TabItem>
+        </div>
         <div class="flex justify-start items-start gap-2 w-full h-full p-2" >
             <!-- _______________________________________ -->
             <!-- right part -->
@@ -67,6 +85,9 @@
     
     <script setup>
 import { ref , onMounted } from "vue"
+import Config from "~~/composables/Config";
+
+const config = new Config();
 
 const values = ref([
     {
