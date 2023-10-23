@@ -123,7 +123,7 @@
             <!-- آکادمی -->
             <a
               target="_blank"
-              href="https://segmento.ir/about/contact/"
+              href="https://segmento.ir/academy/"
               @click="actived_navbar = 'support'"
               class="flex flex-row w-full h-[2.277rem] cursor-pointer rounded-md [&>svg]:fill-base-content hover:[&>svg]:fill-primary items-center p-0.5"
             >
@@ -374,14 +374,11 @@
                     <NuxtLink to="/google-suggest">
                       <SvgLabeled
                         :label="
-                          cn.by_route(
-                            `${department_section}/seo/fields/google-suggest`
-                          )
+                          cn.by_route(`${department_section}/seo/fields/google-suggest`)
                         "
                         @click="change_active_section('google-suggest')"
                         :active="
-                          $route.path.split('/')[1].toLowerCase() ===
-                          'google-suggest'
+                          $route.path.split('/')[1].toLowerCase() === 'google-suggest'
                         "
                       >
                         <svg
