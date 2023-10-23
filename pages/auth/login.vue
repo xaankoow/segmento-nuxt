@@ -92,24 +92,17 @@ async function requestToLogin() {
 
   if (response.ok) {
     // TODO : Fix this section later
-    let user = response.data.user;
-    if (!user.img) {
-      user.img = "/images/profileDefaultImg.png";
+    if (!response.data.user.img) {
+      response.data.user.img = "/images/profileDefaultImg.png";
     }
+
     email_box.classList.remove("border-b-2");
     password_box.classList.remove("border-b-2");
     email_box.classList.remove("border-b-error");
     password_box.classList.remove("border-b-error");
     error_happened.value = false;
 
-    ConfigStore.set_token(response.data.token);
-    ConfigStore.set_user(JSON.stringify(user));
-    ConfigStore.set_plan(JSON.stringify(response.data.plan));
-    ConfigStore.set_wallets(JSON.stringify(response.data.wallets));
-    ConfigStore.set_workspaces(JSON.stringify(response.data.workspaces));
-    ConfigStore.set_roles(JSON.stringify(response.data.workspaces));
-    ConfigStore.set_limits(JSON.stringify(response.data.limits));
-
+    ConfigStore.init(response.data);
     navigateTo("/");
   } else {
     // TODO : Message to user name or password is incorrect

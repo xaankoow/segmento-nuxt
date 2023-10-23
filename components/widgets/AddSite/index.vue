@@ -13,7 +13,7 @@ const step = ref(0);
 const adding_status = ref(false);
 const max_step = 3;
 const data = ref({});
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "reload"]);
 
 const reset_popup = () => {
   emit("update:modelValue", false);
@@ -95,6 +95,7 @@ async function send_data_to_server() {
       // this code will add new data to previous one to the table when the argument 'update' be true and else, previous data will get overwriden.
       if (res.ok === true) {
         adding_status.value = true;
+        emit("reload");
       }
     })
     .catch((err) => {

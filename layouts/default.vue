@@ -3,7 +3,7 @@
     class="flex flex-col w-full !h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
     style="direction: rtl; height: 100vh !important"
   >
-    <WidgetsAddSite v-model="isPopupVisible"></WidgetsAddSite>
+    <WidgetsAddSite @reload="reload_store()" v-model="isPopupVisible"></WidgetsAddSite>
 
     <!-- Header section -->
     <NavbarTop
@@ -716,7 +716,6 @@
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
 import One from "../widget/Workspace/Add/Steps/One";
-import { ref } from "vue";
 
 const isPopupVisible = ref(false);
 const cn = new Config();
@@ -728,13 +727,8 @@ const selected_tools_section = ref("content-creation");
 const runtimeConfig = useRuntimeConfig();
 const DEV_ENV = runtimeConfig.public.DEV_ENV;
 
-const auth = ref({
-  name: "",
-  wallet: 0,
-  subscription: "",
-});
-
-onBeforeMount(() => {
+const reload_store = () => {
+  ConfigStore.reload();
   auth.value = {
     name: ConfigStore.user().name,
     wallet: ConfigStore.wallets()[0].balance ?? 0,
@@ -745,6 +739,16 @@ onBeforeMount(() => {
   };
 
   workspaces.value = ConfigStore.workspaces();
+};
+
+const auth = ref({
+  name: "",
+  wallet: 0,
+  subscription: "",
+});
+
+onBeforeMount(() => {
+  reload_store();
 });
 
 function add_workspace() {
