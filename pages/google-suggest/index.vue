@@ -162,7 +162,7 @@ definePageMeta({
 });
 
 async function search_keywords_request() {
-  let res = await request.get("google-suggested-words/generate", form.value);
+  let res = await request.get("google-suggest/generate", form.value);
   if (res.ok) {
     data.value = res.data;
     cache.value = data.value;

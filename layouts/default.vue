@@ -371,17 +371,17 @@
                     </NuxtLink>
                   </div>
                   <div class="flex flex-col gap-3">
-                    <NuxtLink to="/google-suggested-words">
+                    <NuxtLink to="/google-suggest">
                       <SvgLabeled
                         :label="
                           cn.by_route(
-                            `${department_section}/seo/fields/google-suggested-words`
+                            `${department_section}/seo/fields/google-suggest`
                           )
                         "
-                        @click="change_active_section('google-suggested-words')"
+                        @click="change_active_section('google-suggest')"
                         :active="
                           $route.path.split('/')[1].toLowerCase() ===
-                          'google-suggested-words'
+                          'google-suggest'
                         "
                       >
                         <svg

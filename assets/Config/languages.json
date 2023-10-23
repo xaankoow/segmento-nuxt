@@ -40,7 +40,7 @@
                                 "title": "سئو",
                                 "fields": {
                                     "keyword-research": "تحقیق کلمه کلیدی",
-                                    "google-suggested-words": "کلمات پیشنهادی گوگل",
+                                    "google-suggest": "کلمات پیشنهادی گوگل",
                                     "google-title-builder": "عنوان‌ساز گوگل"
                                 }
                             },
@@ -291,7 +291,7 @@
                     "empty": "اطلاعاتی برای نمایش وجود ندارد!"
                 }
             },
-            "google-suggested-words": {
+            "google-suggest": {
                 "title": "اپلیکیشن کلمات پیشنهادی گوگل",
                 "search": {
                     "title": "جست‌وجو",
