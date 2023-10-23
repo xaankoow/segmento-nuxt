@@ -215,12 +215,8 @@
                       </svg>
                     </SvgLabeled>
 
-                    <ul class="text-sm px-3">
-                      <li
-                        v-for="workspace in workspaces"
-                        :key="workspace.uuid"
-                        @click="change_active_section(workspace.website)"
-                      >
+                    <ul class="text-sm px-3 pt-2">
+                      <li v-for="workspace in workspaces" :key="workspace.uuid">
                         <SvgLabeled
                           :label="workspace.website"
                           :active="
@@ -288,7 +284,7 @@
 
             <!-- according -->
             <template v-slot:according>
-              <div>
+              <div class="gap-2 flex flex-col">
                 <!-- Seo Section -->
                 <According :isOpen="true">
                   <template v-slot:label>
@@ -648,6 +644,8 @@
                   </div>
                 </According>
               </div>
+            </template>
+            <template v-slot:message>
               <Copy
                 content="استارتر"
                 v-if="$route.path.split('/')[1].toLowerCase() === ''"
