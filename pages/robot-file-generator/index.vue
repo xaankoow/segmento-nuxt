@@ -38,12 +38,12 @@
         <div class="robots flex flex-col gap-4  w-full relative">
           <h1 class="title flex items-center gap-2.5 pr-[18px] pt-2.5">
             <span class="before w-[2px] h-4 rounded-[15px] bg-[#0A65CD] absolute right-[-15px]"></span>
-            انتخاب ربات موتور جستجو
+            انتخاب ربات موتور جست‌وجو
           </h1>
           <div class="combo">
             <input-select class="border rounded-[2px]">
               <template v-slot:title>
-                <span>شامل همه ربات موتورهای جستجو</span>
+                <span>شامل همه ربات موتورهای جست‌وجو</span>
               </template>
               <template v-slot:content>
                 <div class="parent flex ltr  items-center gap-[7px] w-full flex-col">
