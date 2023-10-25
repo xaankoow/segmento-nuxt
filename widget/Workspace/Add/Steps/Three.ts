@@ -18,7 +18,6 @@ export default class Three {
     public static render(parent_id: string, pages, workspace_uuid = null) {
         this.workspace_uuid = workspace_uuid ?? CacheStore.workspace_uuid();
         this.pages = pages;
-        console.log(pages);
         this.parent_id = parent_id;
         let popup = Popup.render();
         this.popup_id = UuidGenerator.generate();

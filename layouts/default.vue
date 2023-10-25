@@ -3,7 +3,7 @@
     class="flex flex-col w-full !h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
     style="direction: rtl; height: 100vh !important"
   >
-    <WidgetsAddSite v-model="isPopupVisible"></WidgetsAddSite>
+    <WidgetsAddSite @reload="reload_store()" v-model="isPopupVisible"></WidgetsAddSite>
 
     <!-- Header section -->
     <NavbarTop
@@ -123,7 +123,7 @@
             <!-- آکادمی -->
             <a
               target="_blank"
-              href="https://segmento.ir/about/contact/"
+              href="https://segmento.ir/academy/"
               @click="actived_navbar = 'support'"
               class="flex flex-row w-full h-[2.277rem] cursor-pointer rounded-md [&>svg]:fill-base-content hover:[&>svg]:fill-primary items-center p-0.5"
             >
@@ -197,7 +197,7 @@
 
             <!-- site and workspace -->
             <!-- temperory comented, when the code get done, we'll uncomment it. TODO: uncomment this section when the code was ready to use. -->
-            <template v-slot:sites v-if="DEV_ENV">
+            <template v-slot:sites>
               <div class="flex flex-col py-2 gap-4">
                 <ul>
                   <li class="flex flex-col gap-2">
@@ -215,14 +215,11 @@
                       </svg>
                     </SvgLabeled>
 
-                    <ul class="text-sm px-3">
-                      <li
-                        v-for="workspace in workspaces"
-                        :key="workspace.uuid"
-                        @click="change_active_section(workspace.website)"
-                      >
+                    <ul class="text-sm px-3 pt-2">
+                      <li v-for="workspace in workspaces" :key="workspace.uuid">
                         <SvgLabeled
                           :label="workspace.website"
+                          label_direction="ltr"
                           :active="
                             $route.path.split('/')[1].toLowerCase() === workspace.website
                           "
@@ -288,7 +285,7 @@
 
             <!-- according -->
             <template v-slot:according>
-              <div>
+              <div class="gap-2 flex flex-col">
                 <!-- Seo Section -->
                 <According :isOpen="true">
                   <template v-slot:label>
@@ -371,17 +368,14 @@
                     </NuxtLink>
                   </div>
                   <div class="flex flex-col gap-3">
-                    <NuxtLink to="/google-suggested-words">
+                    <NuxtLink to="/google-suggest">
                       <SvgLabeled
                         :label="
-                          cn.by_route(
-                            `${department_section}/seo/fields/google-suggested-words`
-                          )
+                          cn.by_route(`${department_section}/seo/fields/google-suggest`)
                         "
-                        @click="change_active_section('google-suggested-words')"
+                        @click="change_active_section('google-suggest')"
                         :active="
-                          $route.path.split('/')[1].toLowerCase() ===
-                          'google-suggested-words'
+                          $route.path.split('/')[1].toLowerCase() === 'google-suggest'
                         "
                       >
                         <svg
@@ -651,6 +645,8 @@
                   </div>
                 </According>
               </div>
+            </template>
+            <template v-slot:message>
               <Copy
                 content="استارتر"
                 v-if="$route.path.split('/')[1].toLowerCase() === ''"
@@ -720,8 +716,6 @@
 <script setup>
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
-import One from "../widget/Workspace/Add/Steps/One";
-import { ref } from "vue";
 
 const isPopupVisible = ref(false);
 const cn = new Config();
@@ -733,6 +727,25 @@ const selected_tools_section = ref("content-creation");
 const runtimeConfig = useRuntimeConfig();
 const DEV_ENV = runtimeConfig.public.DEV_ENV;
 
+const reload_store = () => {
+  ConfigStore.reload()
+    .then(() => {
+      auth.value = {
+        name: ConfigStore.user().name,
+        wallet: ConfigStore.wallets()[0].balance ?? 0,
+        subscription:
+          cn.by_route(`constants/plans/${ConfigStore.plan().plan.name}`) +
+          " " +
+          cn.by_route(`constants/packages/${ConfigStore.plan().plan.package}`),
+      };
+
+      workspaces.value = ConfigStore.workspaces();
+    })
+    .catch((error) => {
+      console.error("Error reloading store:", error);
+    });
+};
+
 const auth = ref({
   name: "",
   wallet: 0,
@@ -740,23 +753,8 @@ const auth = ref({
 });
 
 onBeforeMount(() => {
-  auth.value = {
-    name: ConfigStore.user().name,
-    wallet: ConfigStore.wallets()[0].balance ?? 0,
-    subscription:
-      cn.by_route(`constants/plans/${ConfigStore.plan().plan.name}`) +
-      " " +
-      cn.by_route(`constants/packages/${ConfigStore.plan().plan.package}`),
-  };
-
-  workspaces.value = ConfigStore.workspaces();
+  reload_store();
 });
-
-function add_workspace() {
-  change_active_section("add_workspace");
-  let popup = One.render("page");
-  document.getElementById("page").appendChild(popup);
-}
 
 function change_selected_tools_section(title) {
   selected_tools_section.value = title === selected_tools_section.value ? "" : title;

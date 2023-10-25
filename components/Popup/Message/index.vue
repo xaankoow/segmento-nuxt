@@ -1,12 +1,31 @@
+<script setup>
+const props = defineProps({
+  headerBgColor: {
+    type: String,
+    default: "bg-success",
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  modelValue: {},
+});
+const emit = defineEmits(["update:modelValue"]);
+</script>
+
 <template>
-  <PopupTemp>
+  <Popup
+    @update:modelValue="$emit('update:modelValue', false)"
+    :modelValue="modelValue"
+    :bubble_bursting="true"
+  >
     <div
-      class="flex flex-col justify-between items-center rounded-md shadow-lg min-w-[24rem] min-h-[18rem] bg-base-100"
+      class="flex flex-col justify-between items-center rounded-[9px] shadow-lg min-w-[24rem] bg-base-100"
     >
       <div class="flex flex-col gap-2 w-full">
         <!-- header -->
         <div
-          class="flex w-full flex-row items-center justify-center rounded-md"
+          class="flex w-full flex-row items-center justify-center rounded-[9px]"
           :class="headerBgColor"
         >
           <slot name="header"></slot>
@@ -20,22 +39,9 @@
       </div>
 
       <!-- footer -->
-      <div class="flex w-full flex-row items-center justify-center pb-4 text-primary">
+      <div class="flex w-full flex-row items-center justify-center text-primary">
         <slot name="footer"></slot>
       </div>
     </div>
-  </PopupTemp>
+  </Popup>
 </template>
-
-<script setup>
-const props = defineProps({
-  headerBgColor: {
-    type: String,
-    default: "bg-success",
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-});
-</script>

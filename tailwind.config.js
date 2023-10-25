@@ -25,7 +25,7 @@ module.exports = {
           content: "#002145",
         },
         icon: "#002145",
-        success: "#35aa66",
+        success: "#10CCAE",
         warning: "#ffcb1c",
         danger: "#ef4444",
         error: "#F35242",

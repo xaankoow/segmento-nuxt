@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <button
-      class="flex flex-row items-center justify-between w-full py-2"
-    >
+  <div class="flex flex-col gap-2">
+    <button class="flex flex-row items-center justify-between w-full py-2">
       <div class="font-semibold">
         <slot name="label"></slot>
       </div>
@@ -26,7 +24,7 @@
     </button>
     <div
       class="overflow-hidden transition-all text-sm duration-100 px-3 flex flex-col gap-2"
-      :class="!isOpen ? 'h-0' : 'h-fit py-4'"
+      :class="!isOpen ? 'h-0' : 'h-fit'"
     >
       <slot></slot>
     </div>

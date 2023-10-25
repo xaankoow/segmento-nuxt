@@ -2,24 +2,38 @@
   <div class="flex flex-col w-full mx-11 gap-12 mt-[3.75rem]">
     <div
       class="absolute w-screen h-screen flex items-center justify-center top-0 left-0 bg-base-100/10 pointer-events-none"
-      v-show="request.pending.value">
+      v-show="request.pending.value"
+    >
       <ToolsLoading class="w-56 h-56" />
     </div>
     <span v-html="config.by_route(`${current_page}/description`)"> </span>
     <div class="flex flex-col gap-10 w-[36.438rem]">
       <!-- step 1 => send code to email -->
-      <form @submit.prevent="sendActiveCode()" class="flex flex-row justify-between items-center"
-        :class="step !== 1 ? 'pointer-events-none opacity-80' : ''">
+      <form
+        @submit.prevent="sendActiveCode()"
+        class="flex flex-row justify-between items-center"
+        :class="step !== 1 ? 'pointer-events-none opacity-80' : ''"
+      >
         <div class="custom_input_box w-[16.25rem]">
-          <InputText dir="ltr" v-model="form.email" type="email" id="email_box" required @focus="email.focus()"
-            @blur="email.leave()" />
+          <InputText
+            dir="ltr"
+            v-model="form.email"
+            type="email"
+            id="email_box"
+            required
+            @focus="email.focus()"
+            @blur="email.leave()"
+          />
           <label :class="email.transitionStyle(form.email)">
             {{ config.by_route(`${current_page}/email`) }}
           </label>
           <span class="text-error text-xs" v-show="email_error">{{ email_error }}</span>
         </div>
         <div class="flex flex-row-reverse items-center gap-2">
-          <button type="submit" class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md">
+          <button
+            type="submit"
+            class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md"
+          >
             {{ config.by_route(`${current_page}/receive_code`) }}
           </button>
           <span class="countdown font-mono text-2xl">
@@ -30,15 +44,19 @@
       </form>
 
       <!-- step 2 => confirm email code -->
-      <form @submit.prevent="verifyCode()" class="flex flex-row justify-between items-center"
-        :class="step !== 2 ? 'pointer-events-none opacity-80' : ''">
+      <form
+        @submit.prevent="verifyCode()"
+        class="flex flex-row justify-between items-center"
+        :class="step !== 2 ? 'pointer-events-none opacity-80' : ''"
+      >
         <div class="relative flex flex-col gap-3 items-center w-[16.25rem]">
           <span>
             {{ config.by_route(`${current_page}/active_code`) }}
           </span>
           <div
             class="flex flex-row gap-5 text-base-content [&>input]:w-1/4 [&>input]:p-2 [&>input]:text-center [&>input]:rounded-md"
-            style="direction: ltr">
+            style="direction: ltr"
+          >
             <InputText id="number_1" type="number" :max="9" :min="0" />
             <!-- TODO: change focus when keypress for ones -->
             <InputText id="number_2" type="number" :max="9" :min="0" />
@@ -48,10 +66,15 @@
             <InputText id="number_4" type="number" :max="9" :min="0" />
             <!-- TODO: change focus when keypress for ones -->
           </div>
-          <span class="absolute -bottom-5 text-error text-xs" v-show="code_error">{{ code_error }}</span>
+          <span class="absolute -bottom-5 text-error text-xs" v-show="code_error">{{
+            code_error
+          }}</span>
         </div>
         <div class="h-full flex items-end pb-1">
-          <button type="submit" class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md">
+          <button
+            type="submit"
+            class="bg-base-100 hover:bg-base-250 text-base-content border-none w-24 h-10 rounded-md"
+          >
             {{ config.by_route(`${current_page}/btn_accept_code`) }}
           </button>
         </div>
@@ -59,18 +82,32 @@
 
       <!-- step 3 => password and confirmed -->
       <form @submit.prevent="changePassword()" class="flex flex-col gap-12 mt-8">
-        <div class="relative flex flex-row gap-5 w-full items-center"
-          :class="step !== 3 ? 'pointer-events-none opacity-80' : ''">
+        <div
+          class="relative flex flex-row gap-5 w-full items-center"
+          :class="step !== 3 ? 'pointer-events-none opacity-80' : ''"
+        >
           <div class="custom_input_box w-1/2">
-            <InputText dir="ltr" v-model="form.password" type="password" @focus="password.focus()"
-              @blur="password.leave()" id="password" />
+            <InputText
+              dir="ltr"
+              v-model="form.password"
+              type="password"
+              @focus="password.focus()"
+              @blur="password.leave()"
+              id="password"
+            />
             <label :class="password.transitionStyle(form.password)">
               {{ config.by_route(`${current_page}/password`) }}
             </label>
           </div>
           <div class="custom_input_box w-1/2">
-            <InputText dir="ltr" v-model="form.password_confirmation" type="password" @focus="confirmPassword.focus()"
-              id="password_confirm" @blur="confirmPassword.leave()" />
+            <InputText
+              dir="ltr"
+              v-model="form.password_confirmation"
+              type="password"
+              @focus="confirmPassword.focus()"
+              id="password_confirm"
+              @blur="confirmPassword.leave()"
+            />
             <label :class="confirmPassword.transitionStyle(form.password_confirmation)">
               {{ config.by_route(`${current_page}/confirmPassword`) }}
             </label>
@@ -78,8 +115,11 @@
           <span class="absolute text-error text-xs -bottom-5">{{ password_error }}</span>
         </div>
         <div class="flex flex-row justify-between items-center">
-          <button type="submit" :class="step !== 3 ? 'pointer-events-none opacity-80' : ''"
-            class="bg-base-100 hover:bg-base-250 text-base-content border-none w-[10.125rem] h-11 rounded-md">
+          <button
+            type="submit"
+            :class="step !== 3 ? 'pointer-events-none opacity-80' : ''"
+            class="bg-base-100 hover:bg-base-250 text-base-content border-none w-[10.125rem] h-11 rounded-md"
+          >
             {{ config.by_route(`${current_page}/btn_accept_password`) }}
           </button>
           <label class="text-xs">
@@ -92,7 +132,7 @@
     </div>
   </div>
 </template>
-    
+
 <script setup>
 import Request from "~~/Api/Request";
 import Config from "~~/composables/Config";
@@ -116,7 +156,7 @@ const time = ref(120);
 
 const email_error = ref(false);
 const code_error = ref(false);
-const password_error = ref('');
+const password_error = ref("");
 
 const form = ref({
   email: "",
@@ -129,11 +169,7 @@ const form = ref({
 async function sendActiveCode() {
   let email_box = document.getElementById("email_box");
   step.value = 10;
-  let response = await request.post(
-    "auth/forgot-password",
-    { email: form.value.email }
-  );
-  console.log(response);
+  let response = await request.post("auth/forgot-password", { email: form.value.email });
 
   if (response.ok) {
     step.value = 2;
@@ -180,7 +216,7 @@ async function changePassword() {
     return navigateTo("/auth/login");
   } else {
     // TODO : TOAST error message
-    password_error.value = response.errors.password[0] ?? ''
+    password_error.value = response.errors.password[0] ?? "";
   }
 }
 
@@ -204,7 +240,7 @@ function password_validation() {
 
   password_box.classList.remove("border-b-2", "border-b-error");
   confirm_box.classList.remove("border-b-2", "border-b-error");
-  password_error.value = '';
+  password_error.value = "";
   return true;
 }
 
