@@ -14,6 +14,14 @@
                 Product
             </TabItem>
             <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/recipe" :active="false">
+                Recipe
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/video" :active="false">
+                video
+            </TabItem>
+            <TabSeparator></TabSeparator>
             <TabItem to="/schema-builder/website" :active="true">
                 Website
             </TabItem>
@@ -88,7 +96,6 @@ import { ref , onMounted } from "vue"
 import Config from "~~/composables/Config";
 
 const config = new Config();
-
 const values = ref([
     {
         "name": "",

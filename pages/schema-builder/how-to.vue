@@ -14,6 +14,14 @@
                 Product
             </TabItem>
             <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/recipe" :active="false">
+                Recipe
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/video" :active="false">
+                video
+            </TabItem>
+            <TabSeparator></TabSeparator>
             <TabItem to="/schema-builder/website" :active="false">
                 Website
             </TabItem>
@@ -34,14 +42,14 @@
                     <InputURL placeholder="آدرس تصویر" id="descriptionImageUrl" @keyup="changeDescriptionImage()" v-model="valuesDescription.image" />
                 </div>
                 <div class="w-full flex gap-3">
-                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                    <div class="w-[40%] h-[45px] flex items-center gap-2">
                         <span class="text-sm" >مجموع زمان</span>
                         <InputNumber id="totalTime"  @input="changeDescriptionTotalTime()" v-model="valuesDescription.totalTime"/>
                     </div>
                 <!-- description end -->
                 <!-- _______________________________________ -->
                 <!-- Currency start -->
-                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                    <div class="w-[40%] h-[45px] flex items-center gap-2">
                         <span class="text-sm">قیمت تخمینی</span>
                         <InputNumber id="price" @input="changeCurrencyValue()" v-model="valuesCurrency.value"/>
                     </div>

@@ -14,6 +14,14 @@
                 Product
             </TabItem>
             <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/recipe" :active="false">
+                Recipe
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/video" :active="false">
+                video
+            </TabItem>
+            <TabSeparator></TabSeparator>
             <TabItem to="/schema-builder/website" :active="false">
                 Website
             </TabItem>

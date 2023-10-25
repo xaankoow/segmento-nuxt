@@ -14,6 +14,14 @@
                 Product
             </TabItem>
             <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/recipe" :active="false">
+                Recipe
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/video" :active="false">
+                video
+            </TabItem>
+            <TabSeparator></TabSeparator>
             <TabItem to="/schema-builder/website" :active="false">
                 Website
             </TabItem>
@@ -50,19 +58,31 @@
                                     <span>ویژگی شناسایی</span>
                                 </template>
                                 <template v-slot:option >
-                                    <InputCheckbox @change="changeIdentification('sku')" :name="identification" >sku</InputCheckbox>
-                                    <InputCheckbox @change="changeIdentification('gtin8')" :name="identification">gtin 8</InputCheckbox>
-                                    <InputCheckbox @change="changeIdentification('gtin13')" :name="identification">gtin 13</InputCheckbox>
-                                    <InputCheckbox @change="changeIdentification('gtin14')" :name="identification">gtin 14</InputCheckbox>
-                                    <InputCheckbox @change="changeIdentification('mpn')" :name="identification">mpn</InputCheckbox>
+                                    <InputCheckbox @click="changeSku('sku')" :name="identification" >sku</InputCheckbox>
+                                    <InputCheckbox @click="changeGtin8('gtin8')" :name="identification">gtin 8</InputCheckbox>
+                                    <InputCheckbox @click="changeGtin13('gtin13')" :name="identification">gtin 13</InputCheckbox>
+                                    <InputCheckbox @click="changeGtin14('gtin14')" :name="identification">gtin 14</InputCheckbox>
+                                    <InputCheckbox @click="changeMpn('mpn')" :name="identification">mpn</InputCheckbox>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
                     </div>
                 </div>
-                <div  class="w-full flex gap-[6%] flex-wrap " v-if="valuesIdentification">
-                    <div class="w-[47%]  " v-for="value in valuesIdentification" :key="value" >
-                        <InputText :placeholder=value @keyup="changeProductName()" v-model="valuesProduct.name" />
+                <div  class="w-full flex gap-[10%] flex-wrap ">
+                    <div class="w-[45%]" v-if="sku" >
+                        <InputText placeholder="sku" @keyup="changeSkuValue()" v-model="skuValue" />
+                    </div>
+                    <div class="w-[45%]" v-if="gtin8" >
+                        <InputText placeholder="gtin8" @keyup="changeGtin8Value()" v-model="gtin8Value" />
+                    </div>
+                    <div class="w-[45%]" v-if="gtin13" >
+                        <InputText placeholder="gtin13" @keyup="changeGtin13Value()" v-model="gtin13Value" />
+                    </div>
+                    <div class="w-[45%]" v-if="gtin14" >
+                        <InputText placeholder="gtin14" @keyup="changeGtin14Value()" v-model="gtin14Value" />
+                    </div>
+                    <div class="w-[45%]" v-if="mpn" >
+                        <InputText placeholder="mpn" @keyup="changeMpnValue()" v-model="mpnValue" />
                     </div>
                 </div>
                 <!-- identification end -->
@@ -159,8 +179,9 @@
                         </div>
                     </div>
                     <div v-if="normalOffer" class="w-full">
-                        <div class="w-[45%]">
-                            <InputDate class="w-full" @change="changeNormalOfferDate" :id="priceValidUntil" v-model="valuesNormalOffer.priceValidUntil"></InputDate>
+                        <div class="w-[60%] h-[45px] flex items-center gap-6">
+                            <span class="text-sm w-fit">تاریخ تخفیف</span>
+                            <InputDate class="w-[160px]" @change="changeNormalOfferDate" :id="priceValidUntil" v-model="valuesNormalOffer.priceValidUntil"></InputDate>
                         </div>
                     </div>
                 </div>
@@ -194,7 +215,7 @@
                     <div class="w-full flex items-center gap-6" >
                         <InputText  class="w-[80%] align-start" style="width: 80%;" placeholder="عنوان بررسی" @keyup="changeReviewName(index)" v-model="valuesReview[index].name" />
                         <button @click="deleteOneReview(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
-                        ✕
+                            ✕
                         </button>
                     </div>
                     <div class="w-[80%] h-full align-start" >
@@ -215,7 +236,7 @@
                             <InputText  class="w-full align-start" placeholder=" نام نویسنده" @keyup="changeAuthorName(index)" v-model="valuesReview[index].author.name" />
                         </div>
                         <div class="w-[60%]" >
-                            <InputText  class="w-full align-start" placeholder=" ناشر" @keyup="changePublisherName()" v-model="valuesPublisher[index].name" />
+                            <InputText  class="w-full align-start" placeholder=" ناشر" @keyup="changePublisherName()" v-model="valuesReview[index].publisher.name" />
                         </div>
                     </div>
                 </div>
@@ -277,9 +298,6 @@ import Config from "~~/composables/Config";
 import { ref , onMounted } from "vue"
 const config = new Config();
 const dataForCopy = ref("")
-const identificationOptions = ["sku" , "gtin8" , "gtin13" , "gtin140" , "mpn"]
-const valuesIdentification = ref([])
-// const valuesIdentification = ["sku" , "gtin8" , "gtin13" , "gtin140" , "mpn"]
 const jsonData = ref(
 {
   "@context": "https://schema.org/", 
@@ -330,8 +348,104 @@ function changeBrandName() {
     jsonData.value.brand = valuesBrand.value
 }
 // for identification
+const sku = ref(false)
+const gtin8 = ref(false)
+const gtin13 = ref(false)
+const gtin14 = ref(false)
+const mpn = ref(false)
 
+const skuValue = ref("")
+const gtin8Value = ref("")
+const gtin13Value = ref("")
+const gtin14Value = ref("")
+const mpnValue = ref("")
 
+function changeSku() {
+    if (sku.value){
+        sku.value = false
+        if(jsonDate.value.sku){
+            delete jsonData.value.sku
+        }
+    }else{
+        sku.value = true
+        let newJson = []
+        newJson = addElementToObject(jsonData.value, "sku", "image");
+        jsonData.value = newJson
+        jsonData.value.sku = ""
+    }
+}
+function changeGtin8() {
+    if (gtin8.value){
+        gtin8.value = false
+        if(jsonDate.value.gtin8){
+            delete jsonData.value.gtin8
+        }
+    }else{
+        gtin8.value = true
+        let newJson = []
+        newJson = addElementToObject(jsonData.value, "gtin8", "image");
+        jsonData.value = newJson
+        jsonData.value.gtin8 = ""
+    }
+}
+function changeGtin13() {
+    if (gtin13.value){
+        gtin13.value = false
+        if(jsonDate.value.gtin13){
+            delete jsonData.value.gtin13
+        }
+    }else{
+        gtin13.value = true
+        let newJson = []
+        newJson = addElementToObject(jsonData.value, "gtin13", "image");
+        jsonData.value = newJson
+        jsonData.value.gtin13 = ""
+    }
+}
+function changeGtin14() {
+    if (gtin14.value){
+        gtin14.value = false
+        if(jsonDate.value.gtin14){
+            delete jsonData.value.gtin14
+        }
+    }else{
+        gtin14.value = true
+        let newJson = []
+        newJson = addElementToObject(jsonData.value, "gtin14", "image");
+        jsonData.value = newJson
+        jsonData.value.gtin14 = ""
+    }
+}
+function changeMpn() {
+    if (mpn.value){
+        mpn.value = false
+        if(jsonDate.value.mpn){
+            delete jsonData.value.mpn
+        }
+    }else{
+        mpn.value = true
+        let newJson = []
+        newJson = addElementToObject(jsonData.value, "mpn", "image");
+        jsonData.value = newJson
+        jsonData.value.mpn = ""
+    }
+}
+
+function changeSkuValue() {
+   jsonData.value.sku = skuValue.value
+}
+function changeGtin8Value() {
+   jsonData.value.gtin8 = gtin8Value.value
+}
+function changeGtin13Value() {
+   jsonData.value.gtin13 = gtin13Value.value
+}
+function changeGtin14Value() {
+   jsonData.value.gtin14 = gtin14Value.value
+}
+function changeMpnValue() {
+   jsonData.value.mpn = mpnValue.value
+}
 // for offer
 function changeOffer(el) {
     if (el == "aggregateOffer") {
@@ -576,11 +690,14 @@ const valuesPublisher = ref(
     {"@type": "Organization", "name": ""}
 )
 function deleteOneReview(taskIndex){
-    reviewNumber.value --
-    jsonData.value.review.splice(taskIndex, 1)
-    valuesReview.value.splice(taskIndex, 1)
-    if(reviewNumber.value == 0){
+    if (reviewNumber.value > 1) {
+        reviewNumber.value --
+        valuesReview.value.splice(taskIndex, 1)
+    }else{
+        reviewNumber.value --
+        jsonData.value.review.splice(taskIndex, 1)
         delete jsonData.value.review
+        valuesReview.value.splice(taskIndex, 1)
     }
 }
 function addReview() {
@@ -597,7 +714,8 @@ function addReview() {
             "bestRating": "",
             "worstRating": ""
         },
-        "author": {"@type": "Person", "name": ""}
+        "author": {"@type": "Person", "name": ""},
+        "publisher": {"@type": "Organization", "name": ""}
     }
     let newJson = {}
     if(!jsonData.value.review){
@@ -640,13 +758,7 @@ function changeAuthorName(taskIndex) {
     jsonData.value.review[taskIndex].author.name = valuesReview.value[taskIndex].author.name
 }
 function changePublisherName(taskIndex) {
-    let newJson = {}
-    newJson = addElementToObject(valuesReview.value[taskIndex], "publisher", "author");
-    valuesReview.value[taskIndex] = newJson
-    valuesReview.value[taskIndex].publisher = valuesPublisher.value[taskIndex].publisher
-    newJson = addElementToObject(jsonData.value[taskIndex], "publisher", "author");
-    jsonData.value[taskIndex] = newJson
-    jsonData.value[taskIndex].publisher = valuesReview.value[taskIndex].publisher
+    jsonData.value.review[taskIndex].publisher.name = valuesReview.value[taskIndex].publisher.name
 }
 </script>
 
