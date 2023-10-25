@@ -196,7 +196,6 @@ export default class AddWorkspaceStepOne {
       let ids = button.id.split('-');
       // ids is a string array that start with parent_id (this popup created on which div), popup_id (current popup id), button to recognize DOM and programmer this is a button;
 
-      console.log(button.id);
       if (response.status_code() < 300) {
         if (response.status()) {
           CacheStore.set_workspace_uuid(response.data().uuid);
@@ -251,8 +250,6 @@ export default class AddWorkspaceStepOne {
     element.appendChild(space);
     element.appendChild(btn_finish);
     element.appendChild(btn_next);
-
-    console.log(btn_finish.id, btn_next.id);
 
     return element;
   }

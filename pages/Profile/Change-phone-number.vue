@@ -10,8 +10,8 @@
         class="w-full h-[371px] bg-white flex flex-col justify-between items-center p-3"
       >
         <p>
-          کاربر گرامی برای تایید شماره همراه خود لطفا شماره همراه خود را در کادر
-          پایین وارد کنید تا ما برای شما یک کد تایید ارسال کنیم :<br />
+          کاربر گرامی برای تایید شماره همراه خود لطفا شماره همراه خود را در کادر پایین
+          وارد کنید تا ما برای شما یک کد تایید ارسال کنیم :<br />
           شماره همراه شما برای امنیت حساب کاربریتون مهم است
         </p>
         <div class="w-full h-auto px-10">
@@ -23,10 +23,7 @@
             v-model="phoneNumber"
           />
         </div>
-        <button
-          @click="changeStep"
-          class="w-[137px] h-10 rounded-lg btn-primary"
-        >
+        <button @click="changeStep" class="w-[137px] h-10 rounded-lg btn-primary">
           دریافت کد تایید
         </button>
       </div>
@@ -50,9 +47,7 @@
           کد فعالسازی که برای شما ارسال شده است رو در کادر پایین بنویسید .
           <br />اگر کدی برای شما ارسال نشده است دریافت مجدد کد را فشار دهید
         </p>
-        <div
-          class="w-full h-auto px-10 flex flex-col items-center justify-center"
-        >
+        <div class="w-full h-auto px-10 flex flex-col items-center justify-center">
           <p class="text-sm">کد فعال سازی</p>
           <div class="flex justify-center flex-row-reverse">
             <input
@@ -68,10 +63,7 @@
           </div>
         </div>
         <div class="w-full flex items-center justify-between px-4">
-          <button
-            @click="changeStep"
-            class="w-[137px] h-10 rounded-lg btn-primary"
-          >
+          <button @click="changeStep" class="w-[137px] h-10 rounded-lg btn-primary">
             تایید شماره همراه
           </button>
           <!-- Timer and get the code again  -->
@@ -84,9 +76,7 @@
               :disabled="isTimerActive"
               class="border-b border-black mr-2"
               :class="
-                isTimerActive === true
-                  ? 'text-gray-400 border-gray-400'
-                  : 'text-black'
+                isTimerActive === true ? 'text-gray-400 border-gray-400' : 'text-black'
               "
             >
               دریافت مجدد کد
@@ -97,13 +87,8 @@
       </div>
     </div>
     <!-- success -->
-    <div
-      v-else-if="status === 'success'"
-      class="w-96 h-[300px] rounded-lg bg-white"
-    >
-      <div
-        class="w-full h-28 rounded-lg bg-success flex items-center justify-center"
-      >
+    <div v-else-if="status === 'success'" class="w-96 h-[300px] rounded-lg bg-white">
+      <div class="w-full h-28 rounded-lg bg-success flex items-center justify-center">
         <svg
           width="116"
           height="89"
@@ -150,12 +135,11 @@
 <script setup>
 import { ref, watch } from "vue";
 
-
 definePageMeta({
   middleware: defineNuxtRouteMiddleware((to, from) => {
-    return navigateTo('/');
-  })
-})
+    return navigateTo("/");
+  }),
+});
 
 //timer
 const remainingTime = ref(1 * 60); // زمان باقی‌مانده به ثانیه
@@ -164,9 +148,7 @@ const isTimerActive = ref(false);
 const formatTime = (time) => {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
-  return `${minutes.toString().padStart(2, "0")}:${seconds
-    .toString()
-    .padStart(2, "0")}`;
+  return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 };
 
 const startTimer = () => {
@@ -205,7 +187,6 @@ const changeStep = () => {
     const concatenatedNumber = verificationCode.value.join("");
     const parsedNumber = parseInt(concatenatedNumber, 10);
     const numberLength = parsedNumber.toString().length;
-    console.log(parsedNumber.length);
     if (numberLength < 4) {
       status.value = "enterVerificationCode";
     } else {

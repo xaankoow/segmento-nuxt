@@ -131,6 +131,7 @@ reset_popup();
       <!-- header starts -->
       <WidgetsAddSiteHeader @close="reset_popup()" />
       <!-- header done -->
+
       <!-- body starts -->
       <div
         class="min-h-[80vh] h-[60vh] flex flex-col justify-between items-center w-[60vw]"

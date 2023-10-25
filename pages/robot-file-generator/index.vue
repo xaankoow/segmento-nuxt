@@ -464,8 +464,6 @@ const setItem = (robot, permission, text) => {
   };
   links.push(res);
   linkRef.value = links;
-
-  console.log(links);
 };
 
 const checkRule = () => {
@@ -490,6 +488,5 @@ const checkRule = () => {
     report.push(item);
   });
   reportRes.value = report;
-  console.log(report);
 };
 </script>
