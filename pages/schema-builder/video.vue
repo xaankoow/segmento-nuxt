@@ -40,16 +40,16 @@
                     </div>
                 </div>
                 <div class="w-full flex ">
-                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                    <div class="w-[40%] h-[45px] flex items-center gap-2">
                         <span class="text-sm" >دقیقه</span>
                         <InputNumber id="min"  @input="changeVideoMin()" v-model="videoDuration.min"/>
                     </div>
-                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                    <div class="w-[40%] h-[45px] flex items-center gap-2">
                         <span class="text-sm" >ثانیه</span>
                         <InputNumber id="sec"  @input="changeVideoSec()" v-model="videoDuration.sec"/>
                     </div>
                 </div>
-                <div class="w-[60%] h-[45px] flex items-center gap-6">
+                <div class="w-[60%] h-[45px] flex items-center gap-2">
                     <span class="text-sm w-fit" >تاریخ انتشار</span>
                     <InputDate class="w-[160px]" @change="changeUploadDate" :id="uploadDate" v-model="valuesVideo.uploadDate"></InputDate>
                 </div>
@@ -85,14 +85,6 @@
                         <InputURL class="w-full align-start" placeholder="seek toAction Target Url" @keyup="changeSeekTarget()" v-model="seekTargetUrl" />
                     </div>
                 </div>
-                <!-- <div class="w-full flex gap-2">
-                    <div class="w-1/2" >
-                        <InputText class="w-full align-start" placeholder=" انتشار کننده" @keyup="changeVideoName(0)" v-model="valuesVideo.name" />
-                    </div>
-                    <div class="w-1/2" >
-                        <InputURL class="w-full align-start" placeholder=" آدرس لوگو" @keyup="changeimage(0)" v-model="valuesVideo.thumbnailUrl[0]" />
-                    </div>
-                </div> -->
             </div>
             <!-- _______________________________________ -->
             <!-- left part -->
@@ -140,7 +132,7 @@
         </div>
     </div>
 </template>
-    
+
 <script setup>
 import Config from "~~/composables/Config";
 import { ref , onMounted } from "vue"
