@@ -716,7 +716,6 @@
 <script setup>
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
-import One from "../widget/Workspace/Add/Steps/One";
 
 const isPopupVisible = ref(false);
 const cn = new Config();
@@ -751,12 +750,6 @@ const auth = ref({
 onBeforeMount(() => {
   reload_store();
 });
-
-function add_workspace() {
-  change_active_section("add_workspace");
-  let popup = One.render("page");
-  document.getElementById("page").appendChild(popup);
-}
 
 function change_selected_tools_section(title) {
   selected_tools_section.value = title === selected_tools_section.value ? "" : title;
