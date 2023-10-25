@@ -728,17 +728,22 @@ const runtimeConfig = useRuntimeConfig();
 const DEV_ENV = runtimeConfig.public.DEV_ENV;
 
 const reload_store = () => {
-  ConfigStore.reload();
-  auth.value = {
-    name: ConfigStore.user().name,
-    wallet: ConfigStore.wallets()[0].balance ?? 0,
-    subscription:
-      cn.by_route(`constants/plans/${ConfigStore.plan().plan.name}`) +
-      " " +
-      cn.by_route(`constants/packages/${ConfigStore.plan().plan.package}`),
-  };
+  ConfigStore.reload()
+    .then(() => {
+      auth.value = {
+        name: ConfigStore.user().name,
+        wallet: ConfigStore.wallets()[0].balance ?? 0,
+        subscription:
+          cn.by_route(`constants/plans/${ConfigStore.plan().plan.name}`) +
+          " " +
+          cn.by_route(`constants/packages/${ConfigStore.plan().plan.package}`),
+      };
 
-  workspaces.value = ConfigStore.workspaces();
+      workspaces.value = ConfigStore.workspaces();
+    })
+    .catch((error) => {
+      console.error("Error reloading store:", error);
+    });
 };
 
 const auth = ref({

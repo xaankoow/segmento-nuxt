@@ -6,38 +6,57 @@ import User from "~~/interfaces/User";
 import Request from "~~/Api/Request";
 
 export default class ConfigStore {
-  static async init(data: any): Promise<void> {
-    ConfigStore.set_token(data.token ?? null);
-    ConfigStore.set_user(JSON.stringify(data.user) ?? null);
-    ConfigStore.set_plan(JSON.stringify(data.plan) ?? null);
-    ConfigStore.set_wallets(JSON.stringify(data.wallets) ?? null);
-    ConfigStore.set_workspaces(JSON.stringify(data.workspaces) ?? null);
-    ConfigStore.set_roles(JSON.stringify(data.workspaces) ?? null);
-    ConfigStore.set_limits(JSON.stringify(data.limits) ?? null);
+  static init(data: any): Boolean {
+    const promises = [];
+    promises.push(ConfigStore.set_token(data.token));
+    promises.push(ConfigStore.set_user(JSON.stringify(data.user)));
+    promises.push(ConfigStore.set_plan(JSON.stringify(data.plan)));
+    promises.push(ConfigStore.set_wallets(JSON.stringify(data.wallets)));
+    promises.push(ConfigStore.set_workspaces(JSON.stringify(data.workspaces)));
+    promises.push(ConfigStore.set_roles(JSON.stringify(data.workspaces)));
+    promises.push(ConfigStore.set_limits(JSON.stringify(data.limits)));
+
+    // Wait for all promises to resolve
+    Promise.all(promises)
+      .then(() => {
+        return true;
+      })
+      .catch((error) => {
+        console.error("Error initializing ConfigStore:", error);
+        return false;
+      });
+    return true;
   }
 
-  static async reload(): Promise<void> {
-    const request = new Request('v1');
-    let response = await request.get("profile/init");
-    console.log("response");
+  static reload(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const request = new Request("v1");
+        let response = await request.get("profile/init");
 
-    if (response.ok) {
-      if (!response.data.user.img) {
-        response.data.user.img = "/images/profileDefaultImg.png";
+        if (response.ok) {
+          if (!response.data.user.img) {
+            response.data.user.img = "/images/profileDefaultImg.png";
+          }
+          ConfigStore.set_user(JSON.stringify(response.data.user));
+          ConfigStore.set_plan(JSON.stringify(response.data.plan));
+          ConfigStore.set_wallets(JSON.stringify(response.data.wallets));
+          ConfigStore.set_workspaces(JSON.stringify(response.data.workspaces));
+          ConfigStore.set_roles(JSON.stringify(response.data.workspaces));
+          ConfigStore.set_limits(JSON.stringify(response.data.limits));
+          resolve(); // Resolve the promise if everything is successful
+        } else {
+          ConfigStore.logout();
+          navigateTo("/auth/login");
+          reject(new Error('Failed to reload store')); // Reject the promise if there's an error
+        }
+      } catch (error) {
+        console.error('Error reloading store:', error);
+        reject(error); // Reject the promise if there's an error
       }
-      ConfigStore.set_user(JSON.stringify(response.data.user));
-      ConfigStore.set_plan(JSON.stringify(response.data.plan));
-      ConfigStore.set_wallets(JSON.stringify(response.data.wallets));
-      ConfigStore.set_workspaces(JSON.stringify(response.data.workspaces));
-      ConfigStore.set_roles(JSON.stringify(response.data.workspaces));
-      ConfigStore.set_limits(JSON.stringify(response.data.limits));
-
-      navigateTo("/");
-    } else {
-      ConfigStore.logout();
-      navigateTo("/auth/login");
-    }
+    });
   }
+
 
   public static set_token(token: any) {
     useCookie("token").value = token;
