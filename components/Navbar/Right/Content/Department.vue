@@ -1,7 +1,4 @@
-<script setup>
-const runtimeConfig = useRuntimeConfig();
-const DEV_ENV = runtimeConfig.public.DEV_ENV;
-</script>
+<script setup></script>
 
 <template>
   <div class="flex flex-col h-full w-full gap-2">
@@ -10,7 +7,7 @@ const DEV_ENV = runtimeConfig.public.DEV_ENV;
       <!-- <hr /> -->
       <slot name="sites"></slot>
 
-      <hr v-if="DEV_ENV" />
+      <hr />
       <div class="flex flex-col gap-2 w-full h-full justify-between">
         <!-- content creating according -->
         <slot name="according"></slot>

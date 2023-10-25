@@ -197,7 +197,7 @@
 
             <!-- site and workspace -->
             <!-- temperory comented, when the code get done, we'll uncomment it. TODO: uncomment this section when the code was ready to use. -->
-            <template v-slot:sites v-if="DEV_ENV">
+            <template v-slot:sites>
               <div class="flex flex-col py-2 gap-4">
                 <ul>
                   <li class="flex flex-col gap-2">
