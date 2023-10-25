@@ -20,12 +20,12 @@ const emit = defineEmits(["update:modelValue"]);
     :bubble_bursting="true"
   >
     <div
-      class="flex flex-col justify-between items-center rounded-md shadow-lg min-w-[24rem] bg-base-100"
+      class="flex flex-col justify-between items-center rounded-[9px] shadow-lg min-w-[24rem] bg-base-100"
     >
       <div class="flex flex-col gap-2 w-full">
         <!-- header -->
         <div
-          class="flex w-full flex-row items-center justify-center rounded-md"
+          class="flex w-full flex-row items-center justify-center rounded-[9px]"
           :class="headerBgColor"
         >
           <slot name="header"></slot>
