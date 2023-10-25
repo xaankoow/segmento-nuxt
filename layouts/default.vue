@@ -219,6 +219,7 @@
                       <li v-for="workspace in workspaces" :key="workspace.uuid">
                         <SvgLabeled
                           :label="workspace.website"
+                          label_direction="ltr"
                           :active="
                             $route.path.split('/')[1].toLowerCase() === workspace.website
                           "
