@@ -62,11 +62,11 @@
                                     <span>ویژگی شناسایی</span>
                                 </template>
                                 <template v-slot:option >
-                                    <InputCheckbox @click="changeSku('sku')" :name="identification" >sku</InputCheckbox>
-                                    <InputCheckbox @click="changeGtin8('gtin8')" :name="identification">gtin 8</InputCheckbox>
-                                    <InputCheckbox @click="changeGtin13('gtin13')" :name="identification">gtin 13</InputCheckbox>
-                                    <InputCheckbox @click="changeGtin14('gtin14')" :name="identification">gtin 14</InputCheckbox>
-                                    <InputCheckbox @click="changeMpn('mpn')" :name="identification">mpn</InputCheckbox>
+                                    <InputCheckbox v-model="identifications.sku.is_checked" @click="changeSku('sku')" id="sku" >sku</InputCheckbox>
+                                    <InputCheckbox v-model="identifications.gtin8.is_checked" @click="changeGtin8('gtin8')" id="gtin8">gtin 8</InputCheckbox>
+                                    <InputCheckbox v-model="identifications.gtin13.is_checked" @click="changeGtin13('gtin13')" id="gtin13">gtin 13</InputCheckbox>
+                                    <InputCheckbox v-model="identifications.gtin14.is_checked" @click="changeGtin14('gtin14')" id="gtin14">gtin 14</InputCheckbox>
+                                    <InputCheckbox v-model="identifications.mpn.is_checked" @click="changeMpn('mpn')" id="mpn">mpn</InputCheckbox>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
@@ -352,6 +352,28 @@ function changeBrandName() {
     jsonData.value.brand = valuesBrand.value
 }
 // for identification
+const identifications = ref({
+    sku: {
+        is_checked: false,
+        value: "sku"
+    },
+    gtin8: {
+        is_checked: false,
+        value: "gtin8"
+    },
+    gtin13: {
+        is_checked: false,
+        value: "gtin13"
+    },
+    gtin14: {
+        is_checked: false,
+        value: "gtin14"
+    },
+    mpn: {
+        is_checked: false,
+        value: "mpn"
+    },
+});
 const sku = ref(false)
 const gtin8 = ref(false)
 const gtin13 = ref(false)
@@ -422,12 +444,12 @@ function changeGtin14() {
 }
 function changeMpn() {
     if (mpn.value){
-        mpn.value = false
+mpn.value = false
         if(jsonDate.value.mpn){
             delete jsonData.value.mpn
         }
     }else{
-        mpn.value = true
+mpn.value = true
         let newJson = []
         newJson = addElementToObject(jsonData.value, "mpn", "image");
         jsonData.value = newJson
