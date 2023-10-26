@@ -35,7 +35,15 @@
     @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text [&>svg]:fill-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled disabled:cursor-default;
   }
 
+  .btn-danger {
+    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-[#F3524226]  text-danger [&>svg]:fill-danger hover:text-white hover:bg-danger active:text-white active:bg-danger focus:text-white focus:bg-danger disabled:text-white disabled:bg-secondary-disabled disabled:cursor-default;
+  }
+
   .btn-secondary:hover svg, .btn-secondary:focus svg, .btn-secondary:active svg {
+    @apply fill-white;
+  }
+
+  .btn-danger:hover svg, .btn-danger:focus svg, .btn-danger:active svg {
     @apply fill-white;
   }
 
