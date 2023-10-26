@@ -9,7 +9,7 @@
     </div>
 
     <!-- Tabs -->
-    <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
+    <div class="flex flex-row items-center gap-3 px-2 min-h-[7%] bg-base-200">
       <TabItem to="/money-pages">
         {{ config.by_route(`${current_page}/tabs/list`) }}
       </TabItem>
@@ -20,7 +20,7 @@
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col w-full px-4 gap-5 mt-2 py-2">
+    <div class="flex flex-col w-full px-4 gap-5 mt-2 py-2 h-[93%]">
       <!-- route back -->
       <div class="flex flex-row items-center justify-start">
         <button class="flex items-center justify-between text-primary w-20 mx-2">
