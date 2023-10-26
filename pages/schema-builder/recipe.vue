@@ -10,6 +10,10 @@
                     How to
                 </TabItem>
                 <TabSeparator></TabSeparator>
+                <TabItem to="/schema-builder/local-business" :active="false">
+                    Local Business
+                </TabItem>
+                <TabSeparator></TabSeparator>
                 <TabItem to="/schema-builder/product" :active="false">
                     Product
                 </TabItem>

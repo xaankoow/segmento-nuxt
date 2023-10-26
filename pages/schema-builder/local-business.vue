@@ -10,6 +10,10 @@
                     How to
                 </TabItem>
                 <TabSeparator></TabSeparator>
+                <TabItem to="/schema-builder/local-business" :active="true">
+                    Local Business
+                </TabItem>
+                <TabSeparator></TabSeparator>
                 <TabItem to="/schema-builder/product" :active="false">
                     Product
                 </TabItem>
@@ -18,7 +22,7 @@
                     Recipe
                 </TabItem>
                 <TabSeparator></TabSeparator>
-                <TabItem to="/schema-builder/video" :active="true">
+                <TabItem to="/schema-builder/video" :active="false">
                     video
                 </TabItem>
                 <TabSeparator></TabSeparator>
@@ -57,7 +61,7 @@
                         <InputNumber id="priceRange"  @input="changePriceRange()" v-model="values.priceRange"/>
                     </div>
                 </div>
-
+                <!-- location -->
                 <div class="w-full gap-2">
                     <div class="w-full" >
                         <InputText class="w-full align-start" placeholder="کد پستی" @keyup="changeName" v-model="values.name" />
@@ -78,29 +82,28 @@
                         <InputCheckbox @click="change24Hours()" :name="oppeningHours" >باز بودن به صورت 24 ساعته در 7 روز هفته</InputCheckbox>
                     </div>
                     <div class="w-full flex flex-col gap-2">
-                        <div class="w-full flex gap-2" v-for="(value , index) in valuesOppening" :key="index">
-                            <div class="w-full h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
+                        <div class="w-full flex gap-2 items-center" v-for="(value , index) in valuesOppening" :key="index">
+                            <div class="w-[30%] h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
                                 <DropdownFinalDropDown class="z-index-[1100]">
                                     <template v-slot:title>
-                                        <span></span>
+                                        <span>روزهای کاری</span>
                                     </template>
-                                    <template v-slot:option >
-                                        <InputCheckbox @click="changeDays('saturday')" :name="day" >شنبه</InputCheckbox>
+                                    <template v-slot:option>
+                                        <InputCheckbox  v-for="(day , index) in days" :key="index" @click="changeDays(day)" :name="weekDays">{{ day }}</InputCheckbox>
+                                        <!-- <InputCheckbox @click="changeDays('saturday')" :name="day" >شنبه</InputCheckbox>
                                         <InputCheckbox @click="changeDays('sunday')" :name="days">یک شنبه</InputCheckbox>
                                         <InputCheckbox @click="changeDays('monday')" :name="days">دو شنبه</InputCheckbox>
                                         <InputCheckbox @click="changeDays('tuesday')" :name="days">سه شنبه</InputCheckbox>
                                         <InputCheckbox @click="changeDays('wendsday')" :name="days">چهارشنبه</InputCheckbox>
                                         <InputCheckbox @click="changeDays('thursday')" :name="days">پنج شنبه</InputCheckbox>
-                                        <InputCheckbox @click="changeDays('friday')" :name="days">جمعه</InputCheckbox>
+                                        <InputCheckbox @click="changeDays('friday')" :name="days">جمعه</InputCheckbox> -->
                                     </template>
                                 </DropdownFinalDropDown>
                             </div>
-
-
-                            <div class="w-[25%] h-[45px] flex items-center">
+                            <div class="w-[30%] h-[45px] flex items-center">
                                 <InputNumberNumber2 id="openHour" placeholder="ساعت بازگشایی" @input="changeOpenHour(index)" v-model="valuesOppening[index].opens"/>
                             </div>
-                            <div class="w-[25%] h-[45px] flex items-center">
+                            <div class="w-[30%] h-[45px] flex items-center">
                                 <InputNumberNumber2 id="closeHour" placeholder="ساعت بستن" @input="changecloseHour(index)" v-model="valuesOppening[index].closes"/>
                             </div>
                             <button @click="deleteOneOpenHour(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
@@ -109,7 +112,7 @@
                         </div>
                     </div>
                    
-                    <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addOpenHours">
+                    <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addOpenHours" v-if="!allHoursOppeningOk">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
@@ -242,7 +245,6 @@ function changeTelephone() {
 function changePriceRange() {
     jsonData.value.priceRange = values.value.priceRange
 }
-
 // gor geo
 const valuesGeo = ref(
     {
@@ -276,6 +278,7 @@ function changeLongitude() {
 // for oppening hours
 const allHoursOppeningOk = ref(false)
 const hoursOppeningNumber = ref(0)
+const days = ref([ "شنبه" , "یک شنبه" , "دوشنبه" , "سه شنبه" , "چهارشنبه" , "پنج شنبه" , "جمعه" ])
 const saturday = ref(false)
 const sunday = ref(false)
 const monday = ref(false)
@@ -283,6 +286,7 @@ const tuesday = ref(false)
 const wendsday = ref(false)
 const thursday = ref(false)
 const friday = ref(false)
+const daysOk = ref([saturday , sunday , monday , tuesday , wendsday , thursday , friday])
 const valuesOppening = ref([
 ]
 )
@@ -334,13 +338,9 @@ function changecloseHour(taskIndex) {
     jsonData.value.openingHoursSpecification[taskIndex].closes = valuesOppening.value[taskIndex].closes
 }
 function changeDays(day) {
-    if (day.value) {
-        day.value = false
-    }else{
-        day.value = true
-    }
-    console.log(day)
-    console.log(friday.value)
+    let openDays = daysOk.value.filter((el) => el.value )
+        
+    console.log(openDays);
 }
 // // for copy button //
 // const dataForCopy = ref("")
