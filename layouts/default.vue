@@ -206,7 +206,7 @@
                   class="flex flex-col"
                   :class="active_accordion === 'sites' ? 'gap-2' : '!gap-0'"
                   :isOpen="active_accordion === 'sites'"
-                  @click="change_active_accordion('sites')"
+                  @update="change_active_accordion('sites')"
                 >
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/site/title`)">
@@ -297,7 +297,7 @@
                 <!-- Seo Section -->
                 <Accordion
                   :isOpen="active_accordion === 'seo'"
-                  @click="change_active_accordion('seo')"
+                  @update="change_active_accordion('seo')"
                 >
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/seo/title`)">
@@ -409,7 +409,7 @@
                 <!-- Content Creation Section -->
                 <Accordion
                   :isOpen="active_accordion === 'content-creation'"
-                  @click="change_active_accordion('content-creation')"
+                  @update="change_active_accordion('content-creation')"
                 >
                   <template v-slot:label>
                     <SvgLabeled
@@ -530,7 +530,7 @@
                 <!-- Technical Seo Secion -->
                 <Accordion
                   :isOpen="active_accordion === 'technical-seo'"
-                  @click="change_active_accordion('technical-seo')"
+                  @update="change_active_accordion('technical-seo')"
                 >
                   <template v-slot:label>
                     <SvgLabeled
@@ -744,6 +744,10 @@ const selected_tools_section = ref("content-creation");
 const runtimeConfig = useRuntimeConfig();
 const DEV_ENV = runtimeConfig.public.DEV_ENV;
 const active_accordion = ref("");
+const route = useRoute();
+
+active_accordion.value =
+  cn.by_route(`pages/${route.path.split("/")[1].toLowerCase()}/accordion`) ?? "";
 
 const reload_store = () => {
   ConfigStore.reload()

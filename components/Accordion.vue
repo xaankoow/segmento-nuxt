@@ -1,6 +1,9 @@
 <template>
   <div class="flex flex-col gap-2">
-    <button class="flex flex-row items-center justify-between w-full py-2">
+    <button
+      class="flex flex-row items-center justify-between w-full py-2"
+      @click="$emit('update')"
+    >
       <div class="font-semibold">
         <slot name="label"></slot>
       </div>
@@ -38,4 +41,5 @@ const props = defineProps({
     default: false,
   },
 });
+defineEmits(["update"]);
 </script>
