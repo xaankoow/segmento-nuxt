@@ -63,18 +63,19 @@
                         <template v-slot:title>
                             <span> واحد پول</span>
                         </template>
-                        <template v-slot:option >
-                            <InputRadio @click="changeCurrencyCurrency('rial')" :name="Currency" :id="rial" :value="rial" >ریال</InputRadio>
-                            <InputRadio @click="changeCurrencyCurrency('dollar')" :name="Currency" :id="usDollar" :value="usDollar" >دلار آمریکا</InputRadio>
-                            <InputRadio @click="changeCurrencyCurrency('euro')" :name="Currency" :id="euro" :value="euro">یورو</InputRadio>
+                        <template v-slot:option  >
+                            <InputRadio v-for="(element , index) in Object.keys(currency)" :key="index" v-model="currency[element].is_checked" @click="changeCurrencyCurrency(element)" :id="element" :name="currency" >{{ currency[element].title }}</InputRadio>
                         </template>
+                            <!-- <InputRadio @click="changeCurrencyCurrency('rial')" :name="Currency" :id="rial" :value="rial" >ریال</InputRadio>
+                            <InputRadio @click="changeCurrencyCurrency('dollar')" :name="Currency" :id="usDollar" :value="usDollar" >دلار آمریکا</InputRadio>
+                            <InputRadio @click="changeCurrencyCurrency('euro')" :name="Currency" :id="euro" :value="euro">یورو</InputRadio> -->
                     </DropdownFinalDropDown>
                 </div>
                 <!-- Currency end -->
                 <!-- _______________________________________ -->
                 <!-- supply start -->
                 <div class="w-full flex items-center gap-6 z-[1000]" v-if="supplyNumber" v-for="(value , index) in valuesSupply" :key="index" >
-                    <InputText class="w-[80%] align-start" style="width: 80%;" placeholder = "موجودی" @keyup="changeSupplyName(index)" v-model="valuesSupply[index].name"/>
+                    <InputText class="w-[80%] align-start" style="width: 80%;" :placeholder ="`موجودی ${index+1}`" @keyup="changeSupplyName(index)" v-model="valuesSupply[index].name"/>
                     <button @click="deleteOneSupply(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                         ✕  
                     </button>
@@ -89,7 +90,7 @@
                 <!-- _______________________________________ -->
                 <!-- tools start -->
                 <div class="w-full flex items-center gap-6" v-if="toolsNumber" v-for="(value , index) in valuesTools" :key="index" >
-                    <InputText class="w-[80%] align-start" style="width: 80%;" placeholder = "ابزار" @keyup="changeToolsName(index)" v-model="valuesTools[index].name"/>
+                    <InputText class="w-[80%] align-start" style="width: 80%;" :placeholder ="`ابزار ${index+1}`" @keyup="changeToolsName(index)" v-model="valuesTools[index].name"/>
                     <button @click="deleteOneTool(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                         ✕  
                     </button>
@@ -105,7 +106,7 @@
                 <!-- steps start -->
                 <div class="w-full flex flex-col gap-2" v-if="stepNumber == 1 ">
                     <div class="w-full">
-                        <InputText class="w-full align-start" placeholder="قدم اول" @keyup="changeStepText(0)" v-model="valuesStep[0].text" />
+                        <InputText class="w-full align-start" placeholder="قدم 1" @keyup="changeStepText(0)" v-model="valuesStep[0].text" />
                     </div>
                     <div class="w-full " >
                         <InputURL placeholder="آدرس تصویر" @keyup="changeStepImage(0)" v-model="valuesStep[0].image" />
@@ -121,7 +122,7 @@
                 </div>
                 <div class="w-full flex flex-col gap-2" v-if="stepNumber > 1 "  v-for="(value , index) in valuesStep" :key="index">
                     <div class="w-full flex items-center gap-6" >
-                        <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="قدم اول" @keyup="changeStepText(index)" v-model="valuesStep[index].text" />
+                        <InputText class="w-[80%] align-start" style="width: 80%;" :placeholder="`قدم ${index+1}`" @keyup="changeStepText(index)" v-model="valuesStep[index].text" />
                         <button @click="deleteOneStep(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕  
                         </button>
@@ -229,6 +230,7 @@ function deleteAllData() {
     supplyNumber.value = 0
     toolsNumber.value = 0
     stepNumber.value = 1
+
     valuesDescription.value = [
     {
         name: "",
@@ -248,16 +250,21 @@ function deleteAllData() {
     ]);
     valuesTools.value = ref([
 
-]);
-    valuesStep.value = ref([
-        {
-            text: "",
-            image: "",
-            address: "",
-            name: "",
-        }
     ]);
-    jsonData.value = ref(
+    valuesStep.value.splice(1, valuesStep.value.length)
+    valuesStep.value[0].text = ""
+    valuesStep.value[0].image = ""
+    valuesStep.value[0].address = ""
+    valuesStep.value[0].name = ""
+    // valuesStep.value = ref([
+    // {
+    //     text: "",
+    //     image: "",
+    //     address: "",
+    //     name: "",
+    // }
+    // ]);
+    jsonData.value =
     {
         "@context": "https://schema.org/", 
         "@type": "HowTo", 
@@ -267,8 +274,7 @@ function deleteAllData() {
             "text": "",
         },
     ]
-    }
-    );
+    };
 }
 // for Description //
 const valuesDescription = ref(
@@ -279,6 +285,7 @@ const valuesDescription = ref(
         totalTime: "",
     }
 );
+// for detail
 function changeDescriptionName() {
     jsonData.value.name = valuesDescription.value.name
 }
@@ -316,6 +323,23 @@ const valuesCurrency = ref(
         value: "",
     }
 );
+const currency = ref({
+    rial: {
+        is_checked: false,
+        value: "rial",
+        title: "ریال"
+    },
+    dollar: {
+        is_checked: false,
+        value: "dollar",
+        title: "دلار"
+    },
+    euro: {
+        is_checked: false,
+        value: "euro",
+        title: "یورو"
+    },
+});
 function changeCurrencyValue() {
     let newJson={}
     if(!jsonData.value.estimatedCost){
@@ -340,7 +364,6 @@ function changeCurrencyValue() {
 }
 function changeCurrencyCurrency(el) {
     let newJson={}
-    
     if(!jsonData.value.estimatedCost){
         if(jsonData.value.totalTime){
             newJson = addElementToObject(jsonData.value, "estimatedCost", "totalTime");
@@ -359,17 +382,8 @@ function changeCurrencyCurrency(el) {
         "value": "" ,
         }
     }jsonData.value.estimatedCost.currency = valuesCurrency.value.currency
-    if (el == "rial") {
-        valuesCurrency.value.currency = "rial"
-        jsonData.value.estimatedCost.currency = "rial"
-    }else if(el == "dollar"){
-        valuesCurrency.value.currency = "dollar"
-        jsonData.value.estimatedCost.currency = "dollar"
-    }else {
-        valuesCurrency.value.currency = "euro"
-        jsonData.value.estimatedCost.currency = "euro"
-    }
-    
+    valuesCurrency.value.currency = el
+    jsonData.value.estimatedCost.currency = el
 }
 // for supply //
 const supplyNumber= ref(0)

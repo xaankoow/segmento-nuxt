@@ -62,30 +62,26 @@
                                     <span>ویژگی شناسایی</span>
                                 </template>
                                 <template v-slot:option >
-                                    <InputCheckbox v-model="identifications.sku.is_checked" @click="changeSku('sku')" id="sku" >sku</InputCheckbox>
-                                    <InputCheckbox v-model="identifications.gtin8.is_checked" @click="changeGtin8('gtin8')" id="gtin8">gtin 8</InputCheckbox>
-                                    <InputCheckbox v-model="identifications.gtin13.is_checked" @click="changeGtin13('gtin13')" id="gtin13">gtin 13</InputCheckbox>
-                                    <InputCheckbox v-model="identifications.gtin14.is_checked" @click="changeGtin14('gtin14')" id="gtin14">gtin 14</InputCheckbox>
-                                    <InputCheckbox v-model="identifications.mpn.is_checked" @click="changeMpn('mpn')" id="mpn">mpn</InputCheckbox>
+                                    <InputCheckbox v-for="(element , index) in Object.keys(identifications)" :key="index" v-model="identifications[element].is_checked" @click="changeIdentification(element)" :id="element" >{{ element }}</InputCheckbox>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
                     </div>
                 </div>
                 <div  class="w-full flex gap-[10%] flex-wrap ">
-                    <div class="w-[45%]" v-if="sku" >
+                    <div class="w-[45%]" v-if="identifications.sku.is_checked" >
                         <InputText placeholder="sku" @keyup="changeSkuValue()" v-model="skuValue" />
                     </div>
-                    <div class="w-[45%]" v-if="gtin8" >
+                    <div class="w-[45%]" v-if="identifications.gtin8.is_checked" >
                         <InputText placeholder="gtin8" @keyup="changeGtin8Value()" v-model="gtin8Value" />
                     </div>
-                    <div class="w-[45%]" v-if="gtin13" >
+                    <div class="w-[45%]" v-if="identifications.gtin13.is_checked" >
                         <InputText placeholder="gtin13" @keyup="changeGtin13Value()" v-model="gtin13Value" />
                     </div>
-                    <div class="w-[45%]" v-if="gtin14" >
+                    <div class="w-[45%]" v-if="identifications.gtin14.is_checked" >
                         <InputText placeholder="gtin14" @keyup="changeGtin14Value()" v-model="gtin14Value" />
                     </div>
-                    <div class="w-[45%]" v-if="mpn" >
+                    <div class="w-[45%]" v-if="identifications.mpn.is_checked" >
                         <InputText placeholder="mpn" @keyup="changeMpnValue()" v-model="mpnValue" />
                     </div>
                 </div>
@@ -100,9 +96,9 @@
                                     <span> نوع تخفیف</span>
                                 </template>
                                 <template v-slot:option >
-                                    <InputRadio @click="changeOffer('none')" value="none" class="text-base-500 cursor-pointer">بدون تخفیف</InputRadio>
-                                    <InputRadio @click="changeOffer('aggregateOffer')" value="aggregateOffer" class="text-base-500 cursor-pointer">تخفیف کلی </InputRadio>
-                                    <InputRadio @click="changeOffer('offer')" value="offer" class="text-base-500 cursor-pointer">تخفیف</InputRadio>
+                                    <InputRadio @click="changeOffer('none')" id="none" v-model="offer.noOffer.is_checked" name="offer" class="text-base-500 cursor-pointer">بدون تخفیف</InputRadio>
+                                    <InputRadio @click="changeOffer('aggregateOffer')" id="aggregateOffer" v-model="offer.aggregateOffer.is_checked" name="offer" class="text-base-500 cursor-pointer">تخفیف کلی </InputRadio>
+                                    <InputRadio @click="changeOffer('offer')" id="offer" v-model="offer.offer.is_checked" name="offer" class="text-base-500 cursor-pointer">تخفیف</InputRadio>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
@@ -111,10 +107,8 @@
                                 <template v-slot:title>
                                     <span> واحد پول</span>
                                 </template>
-                                <template v-slot:option >
-                                    <InputRadio @click="changeAggregateCurrency('rial')" value="rial" class="text-base-500 cursor-pointer">ریال</InputRadio>
-                                    <InputRadio @click="changeAggregateCurrency('dollar')" value="usDollar" class="text-base-500 cursor-pointer">دلار آمریکا</InputRadio>
-                                    <InputRadio @click="changeAggregateCurrency('euro')" value="euro" class="text-base-500 cursor-pointer">یورو</InputRadio>
+                                <template v-slot:option  >
+                                    <InputRadio v-for="(element , index) in Object.keys(currency)" :key="index" v-model="currency[element].is_checked" @click="changeAggregateCurrency(element)" :id="element" :name="currency" >{{ currency[element].title }}</InputRadio>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
@@ -154,16 +148,7 @@
                                     <span>موجودی</span>
                                 </template>
                                 <template v-slot:option >
-                                    <InputRadio @click="changeAvailability('in stock')" :name="availability" :id="inStock">in stock</InputRadio>
-                                    <InputRadio @click="changeAvailability('out of stock')" :name="availability" :id="outOfStock">out of stock</InputRadio>
-                                    <InputRadio @click="changeAvailability('online only')" :name="availability" :id="onlineOnly">online only</InputRadio>
-                                    <InputRadio @click="changeAvailability('in store only')" :name="availability" :id="inStoreOnly">in store only</InputRadio>
-                                    <InputRadio @click="changeAvailability('pre-order')" :name="availability" :id="preOrder">pre-order</InputRadio>
-                                    <InputRadio @click="changeAvailability('pre-sale')" :name="availability" :id="preSale">pre-sale</InputRadio>
-                                    <InputRadio @click="changeAvailability('limited availability')" :name="availability" :id="limitedAvailability">limited availability</InputRadio>
-                                    <InputRadio @click="changeAvailability('sold out')" :name="availability" :id="soldOut">sold out</InputRadio>
-                                    <InputRadio @click="changeAvailability('discontinued')" :name="availability" :id="discontinued">discontinued</InputRadio>
-                                    <InputRadio @click="changeAvailability('not specified')" :name="availability" :id="notSpecified">not specified</InputRadio>
+                                    <InputRadio v-for="(element , index) in Object.keys(avalibleStuff)" :key="index" v-model="avalibleStuff[element].is_checked" @click="changeAvailability(element)" :id="element" :name="stuff" >{{ avalibleStuff[element].title }}</InputRadio>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
@@ -173,11 +158,7 @@
                                     <span>وضعیت کالا</span>
                                 </template>
                                 <template v-slot:option >
-                                    <InputRadio @click="changeItemCondition('new')" :name="itemCondition" :id="new">new</InputRadio>
-                                    <InputRadio @click="changeItemCondition('used')" :name="itemCondition" :id="used">used</InputRadio>
-                                    <InputRadio @click="changeItemCondition('refurbished')" :name="itemCondition" :id="refurbished">refurbished</InputRadio>
-                                    <InputRadio @click="changeItemCondition('damaged')" :name="itemCondition" :id="damaged">damaged</InputRadio>
-                                    <InputRadio @click="changeItemCondition('not specified')" :name="itemCondition" :id="notSpecified">not specified</InputRadio>
+                                    <InputRadio v-for="(element , index) in Object.keys(conditionStuff)" :key="index" v-model="conditionStuff[element].is_checked" @click="changeItemCondition(element)" :id="element" :name="stuff" >{{ conditionStuff[element].title }}</InputRadio>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
@@ -374,89 +355,16 @@ const identifications = ref({
         value: "mpn"
     },
 });
-const sku = ref(false)
-const gtin8 = ref(false)
-const gtin13 = ref(false)
-const gtin14 = ref(false)
-const mpn = ref(false)
-
-const skuValue = ref("")
-const gtin8Value = ref("")
-const gtin13Value = ref("")
-const gtin14Value = ref("")
-const mpnValue = ref("")
-
-function changeSku() {
-    if (sku.value){
-        sku.value = false
-        if(jsonDate.value.sku){
-            delete jsonData.value.sku
-        }
-    }else{
-        sku.value = true
+function changeIdentification(el){
+    if (!identifications.value[el].is_checked){
         let newJson = []
-        newJson = addElementToObject(jsonData.value, "sku", "image");
+        newJson = addElementToObject(jsonData.value, el , "image");
         jsonData.value = newJson
-        jsonData.value.sku = ""
+        jsonData.value[el] = ""
+    }else{
+        delete jsonData.value[el]
     }
 }
-function changeGtin8() {
-    if (gtin8.value){
-        gtin8.value = false
-        if(jsonDate.value.gtin8){
-            delete jsonData.value.gtin8
-        }
-    }else{
-        gtin8.value = true
-        let newJson = []
-        newJson = addElementToObject(jsonData.value, "gtin8", "image");
-        jsonData.value = newJson
-        jsonData.value.gtin8 = ""
-    }
-}
-function changeGtin13() {
-    if (gtin13.value){
-        gtin13.value = false
-        if(jsonDate.value.gtin13){
-            delete jsonData.value.gtin13
-        }
-    }else{
-        gtin13.value = true
-        let newJson = []
-        newJson = addElementToObject(jsonData.value, "gtin13", "image");
-        jsonData.value = newJson
-        jsonData.value.gtin13 = ""
-    }
-}
-function changeGtin14() {
-    if (gtin14.value){
-        gtin14.value = false
-        if(jsonDate.value.gtin14){
-            delete jsonData.value.gtin14
-        }
-    }else{
-        gtin14.value = true
-        let newJson = []
-        newJson = addElementToObject(jsonData.value, "gtin14", "image");
-        jsonData.value = newJson
-        jsonData.value.gtin14 = ""
-    }
-}
-function changeMpn() {
-    if (mpn.value){
-mpn.value = false
-        if(jsonDate.value.mpn){
-            delete jsonData.value.mpn
-        }
-    }else{
-mpn.value = true
-        let newJson = []
-        newJson = addElementToObject(jsonData.value, "mpn", "image");
-        jsonData.value = newJson
-        jsonData.value.mpn = ""
-    }
-}
-
 function changeSkuValue() {
    jsonData.value.sku = skuValue.value
 }
@@ -473,6 +381,20 @@ function changeMpnValue() {
    jsonData.value.mpn = mpnValue.value
 }
 // for offer
+const offer = ref({
+    aggregateOffer: {
+        is_checked: false,
+        value: "aggregateOffer"
+    },
+    offer: {
+        is_checked: false,
+        value: "offer"
+    },
+    noOffer: {
+        is_checked: false,
+        value: "euro"
+    },
+});
 function changeOffer(el) {
     if (el == "aggregateOffer") {
         aggregateOffer.value = true
@@ -499,12 +421,12 @@ function changeOffer(el) {
     }else{
         normalOffer.value = false
         aggregateOffer.value = false
-        if (jsonData.value.offer) {
-            delete jsonData.value.offer
+        if (jsonData.value.offers) {
+            delete jsonData.value.offers
         }
     }
 }
-// // aggregate
+    // // aggregate
 const aggregateOffer = ref(false)
 const valuesAggregateOffer = ref(
     {
@@ -516,21 +438,26 @@ const valuesAggregateOffer = ref(
         "offerCount": ""
     }
 )
+const currency = ref({
+    rial: {
+        is_checked: false,
+        value: "rial",
+        title: "ریال"
+    },
+    dollar: {
+        is_checked: false,
+        value: "dollar",
+        title: "دلار"
+    },
+    euro: {
+        is_checked: false,
+        value: "euro",
+        title: "یورو"
+    },
+});
 function changeAggregateCurrency(el) {
-switch (el) {
-    case "rial":
-        valuesAggregateOffer.value.priceCurrency = "rial"
-        jsonData.value.offers.priceCurrency = "rial"
-        break;
-    case "dollar":
-        valuesAggregateOffer.value.priceCurrency = "dollar"
-        jsonData.value.offers.priceCurrency = "dollar"
-        break;
-    default:
-        valuesAggregateOffer.value.priceCurrency = "euro"
-        jsonData.value.offers.priceCurrency = "euro"
-}
-
+        valuesAggregateOffer.value.priceCurrency = el
+        jsonData.value.offers.priceCurrency = el
 }
 function changeAggregateOfferImage() {
     jsonData.value.offers.url = valuesAggregateOffer.value.url
@@ -544,7 +471,7 @@ function changeAggregateOfferLowPrice() {
 function changeAggregateOfferHighPrice() {
     jsonData.value.offers.highPrice = valuesAggregateOffer.value.highPrice
 }
-// // normal
+    // // normal
 const normalOffer = ref(false)
 const valuesNormalOffer = ref(
     {
@@ -557,66 +484,95 @@ const valuesNormalOffer = ref(
     "itemCondition": ""
   }
 )
-function changeNormalCurrency(el) {
-    switch (el) {
-        case "rial":
-            valuesNormalOffer.value.priceCurrency = "rial"
-            jsonData.value.offers.priceCurrency = "rial"
-            break;
-        case "dollar":
-            valuesNormalOffer.value.priceCurrency = "dollar"
-            jsonData.value.offers.priceCurrency = "dollar"
-            break;
-        default:
-            valuesNormalOffer.value.priceCurrency = "euro"
-            jsonData.value.offers.priceCurrency = "euro"
-    }
-}
+const avalibleStuff = ref({
+    inStock: {
+        is_checked: false,
+        value: "inStock",
+        title: "موجود"
+    },
+    outOfStock: {
+        is_checked: false,
+        value: "outOfStock",
+        title: "ناموجود"
+    },
+    onlineOnly: {
+        is_checked: false,
+        value: "onlineOnly",
+        title: "غیرحضوری"
+    },
+    inStoreOnly: {
+        is_checked: false,
+        value: "inStoreOnly",
+        title: "حضوری"
+    },
+    preOrder: {
+        is_checked: false,
+        value: "preOrder",
+        title: "پیش سفارش"
+    },
+    preSale: {
+        is_checked: false,
+        value: "preSale",
+        title: "پیش فروش"
+    },
+    limitedAvailability: {
+        is_checked: false,
+        value: "limitedAvailability",
+        title: "در دسترس بودن محدود"
+    },
+    soldOut: {
+        is_checked: false,
+        value: "soldOut",
+        title: "فروخته شد"
+    },
+    discontinued: {
+        is_checked: false,
+        value: "discontinued",
+        title: "متوقف شد"
+    },
+    notSpecified: {
+        is_checked: false,
+        value: "notSpecified",
+        title: "مشخص نشده است"
+    },
+});
+const conditionStuff = ref({
+    new: {
+        is_checked: false,
+        value: "new",
+        title: "جدید"
+    },
+    used: {
+        is_checked: false,
+        value: "used",
+        title: "استفاده شده"
+    },
+    refurbished: {
+        is_checked: false,
+        value: "refurbished",
+        title: "مرمت شده"
+    },
+    damaged: {
+        is_checked: false,
+        value: "damaged",
+        title: "آسیب دیده"
+    },
+    notSpecified: {
+        is_checked: false,
+        value: "notSpecified",
+        title: "مشخص نشده است"
+    },
+})
 function changeAvailability(el) {
     if (!jsonData.value.offers.availability){
         let newJson = {}
         newJson = addElementToObject(jsonData.value, "availability", "priceValidUntil");
         jsonData.value - newJson
     }
-    switch (el) {
-        case "in stock":
-            valuesNormalOffer.value.availability = "https://schema.org/in stock"
-            jsonData.value.offers.availability = "https://schema.org/in stock"
-            break;
-        case "out of stock":
-            valuesNormalOffer.value.availability = "https://schema.org/out of stock"
-            jsonData.value.offers.availability = "https://schema.org/out of stock"
-            break;
-        case "online only":
-            valuesNormalOffer.value.availability = "https://schema.org/online only"
-            jsonData.value.offers.availability = "https://schema.org/online only"
-            break;
-        case "in store only":
-            valuesNormalOffer.value.availability = "https://schema.org/in store only"
-            jsonData.value.offers.availability = "https://schema.org/in store only"
-            break;
-        case "pre-order":
-            valuesNormalOffer.value.availability = "https://schema.org/pre-order"
-            jsonData.value.offers.availability = "https://schema.org/pre-order"
-            break;
-        case "pre-sale":
-            valuesNormalOffer.value.availability = "https://schema.org/pre-sale"
-            jsonData.value.offers.availability = "https://schema.org/pre-sale"
-            break;
-        case "limited availability":
-            valuesNormalOffer.value.availability = "https://schema.org/limited availability"
-            jsonData.value.offers.availability = "https://schema.org/limited availability"
-            break;
-        case "sold out":
-            valuesNormalOffer.value.availability = "https://schema.org/sold out"
-            jsonData.value.offers.availability = "https://schema.org/sold out"
-            break;
-        case "discontinued":
-            valuesNormalOffer.value.availability = "https://schema.org/discontinued"
-            jsonData.value.offers.availability = "https://schema.org/discontinued"
-            break;
-        default:
-            delete jsonData.value.offers.availability
+    valuesNormalOffer.value.availability = `https://schema.org/${el}`
+    jsonData.value.offers.availability = `https://schema.org/${el}`
+    if(el == "notSpecified"){
+        delete jsonData.value.offers.availability
     }
 }
 function changeItemCondition(el) {
@@ -629,25 +585,10 @@ function changeItemCondition(el) {
         }
         jsonData.value = newJson
     }
-    switch (el) {
-        case "new":
-            valuesNormalOffer.value.itemCondition = "https://schema.org/new Condition "
-            jsonData.value.offers.itemCondition = "https://schema.org/new Condition"
-            break;
-        case "used":
-            valuesNormalOffer.value.itemCondition = "https://schema.org/used Condition"
-            jsonData.value.offers.itemCondition = "https://schema.org/uded Condition"
-            break;
-        case "refurbished":
-            valuesNormalOffer.value.itemCondition = "https://schema.org/refurbished Condition"
-            jsonData.value.offers.itemCondition = "https://schema.org/refurbished Condition"
-            break;
-        case "damaged":
-            valuesNormalOffer.value.itemCondition = "https://schema.org/damaged Condition"
-            jsonData.value.offers.itemCondition = "https://schema.org/damaged Condition"
-            break;
-        default:
-            delete jsonData.value.offers.itemCondition
+    valuesNormalOffer.value.itemCondition = `https://schema.org/${el} Condition `
+    jsonData.value.offers.itemCondition = `https://schema.org/${el} Condition`
+    if(el == "notSpecified"){
+        delete jsonData.value.offers.itemCondition
     }
 }
 function changeNormalOfferImage() {

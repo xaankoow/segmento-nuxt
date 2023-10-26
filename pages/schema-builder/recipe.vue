@@ -104,10 +104,11 @@
                                 <span> نوع غذا</span>
                             </template>
                             <template v-slot:option >
-                                <InputRadio @click="changeRecipeCategory('appetizer')" :id="appetizer" :name="food" class="text-base-500 cursor-pointer">پیش غذا </InputRadio>
+                                <InputRadio v-for="(element , index) in Object.keys(recipeCategory)" :key="index" v-model="recipeCategory[element].is_checked" @click="changeRecipeCategory(element)" :id="element" :name="currency" >{{ recipeCategory[element].title }}</InputRadio>
+                                <!-- <InputRadio @click="changeRecipeCategory('appetizer')" :id="appetizer" :name="food" class="text-base-500 cursor-pointer">پیش غذا </InputRadio>
                                 <InputRadio @click="changeRecipeCategory('entree')" :id="entree" :name="food" class="text-base-500 cursor-pointer">غذا اصلی</InputRadio>
                                 <InputRadio @click="changeRecipeCategory('dessert')" :id="dessert" :name="food" class="text-base-500 cursor-pointer">دسر</InputRadio>
-                                <InputRadio @click="changeRecipeCategory('not specified')" :id="notSpecified" :name="food" class="text-base-500 cursor-pointer">هیچکدام</InputRadio>
+                                <InputRadio @click="changeRecipeCategory('not specified')" :id="notSpecified" :name="food" class="text-base-500 cursor-pointer">هیچکدام</InputRadio> -->
                             </template>
                         </DropdownFinalDropDown>
                     </div>
@@ -414,29 +415,38 @@ function changecookTime() {
     }
 }
 //for food 
+const recipeCategory = ref({
+    appetizer: {
+        is_checked: false,
+        value: "appetizer",
+        title: "پیش غذا"
+    },
+    entree: {
+        is_checked: false,
+        value: "entree",
+        title: "غذای اصلی"
+    },
+    dessert: {
+        is_checked: false,
+        value: "dessert",
+        title: "دسر"
+    },
+    notSpecified: {
+        is_checked: false,
+        value: "notSpecified",
+        title: "مشخص نشده است"
+    },
+})
 function changeRecipeCategory(el) {
     if(!jsonData.value.recipeCategory){
         let newJson = {}
         newJson = addElementToObject(jsonData.value, "recipeCategory", "totalTime");
         jsonData.value = newJson
     }
-    switch (el) {
-        case "appetizer":
-            values.value.recipeCategory = "appetizer"
-            jsonData.value.recipeCategory = "appetizer"
-            break;
-        case "entree":
-            values.value.recipeCategory = "entree"
-            jsonData.value.recipeCategory = "entree"
-            break;
-        case "dessert":
-            values.value.recipeCategory = "dessert"
-            jsonData.value.recipeCategory = "dessert"
-            break;
-        default:
-            values.value.recipeCategory = ""
-            delete jsonData.value.recipeCategory
-            break;
+    values.value.recipeCategory = el
+    jsonData.value.recipeCategory = el
+    if(el == notSpecified){
+        delete jsonData.value.recipeCategory
     }
 }
 function changeRecipeCuisine() {

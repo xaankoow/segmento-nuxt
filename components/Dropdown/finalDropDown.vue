@@ -1,5 +1,5 @@
 <template>
-    <div class="card w-full h-full inline-block relative">
+    <div class="w-full h-full inline-block relative group">
         <!-- header -->
         <div class="h-full w-full flex justify-between px-2 flex items-center ">
             <span>
@@ -10,7 +10,9 @@
             </svg>
         </div>
         <!-- content -->
-        <div class="dropdowncard hidden w-full h-auto top-[43px] flex flex-col gap-4 py-2 text-center border border-base-400 rounded rounded-t-none bg-[#FCFCFB] absolute z-[2000]" :name=props.title>
+        <div class="hidden w-full h-auto top-[43px] flex-col gap-4 py-2 text-center border border-base-400 rounded rounded-t-none bg-[#FCFCFB] absolute z-[2000]"
+        :class="disabled ? '' : 'group-hover:flex'"
+        :name=props.title>
             <slot name="option"></slot>
         </div>
     </div>
@@ -22,12 +24,13 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
     title: String,
 });
 </script>
 
 <style scoped>
-.card:hover .dropdowncard {
-    display: flex;
-}
 </style>
