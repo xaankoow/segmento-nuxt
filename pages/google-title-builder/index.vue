@@ -203,7 +203,6 @@ const config = new Config();
 const search_class = new CustomTextBox();
 const data = ref(null);
 const cache = ref(null);
-const old_alphabet_id = ref(null);
 const request = new Request("v1");
 const form = ref({
   keyword: "",
