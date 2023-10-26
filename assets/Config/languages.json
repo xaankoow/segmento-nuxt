@@ -444,6 +444,10 @@
             "money-pages": {
                 "title": "صفحات تجاری",
                 "accordion": "seo",
+                "tabs": {
+                    "list": "لیست صفحات",
+                    "analytics": "آمار و گزارش"
+                },
                 "single": {
                     "title": "صفحات تجاری",
                     "accordion": "seo",

@@ -1,44 +1,36 @@
 <template>
-  <div class="w-full h-full bg-white">
-    <!-- header -->
-    <div class="w-full h-24 bg-base-200 text-base-content">
-      <div class="w-60 h-1/2 text-xl flex items-center justify-between">
-        <div class="w-[2px] h-5 rounded-[1px] bg-base-content"></div>
-        <p>صفحات تجاری</p>
-        <div
-          class="w-20 h-6 flex items-center justify-center text-base-500 bg-base-250 rounded text-sm"
-        >
-          <p>3600</p>
-          <hr class="w-[1px] h-4 mx-1 bg-base-500" />
-          <p class="text-success">2500</p>
-        </div>
-      </div>
-
-      <div class="w-72 h-1/2 text-sm flex items-end justify-between">
-        <div class="h-3/4 w-1/2 flex items-center justify-between flex-col">
-          <p class="cursor-pointer text-primary">صفحات تجاری</p>
-          <div class="h-[2px] w-7 rounded-sm bg-primary"></div>
-        </div>
-        <div class="w-[1px] h-7 bg-base-400 mb-3"></div>
-        <div class="h-3/4 w-1/2 flex items-center justify-between flex-col">
-          <p class="cursor-pointer">آمار و گزارش</p>
-          <div class="h-[2px] w-7 rounded-sm"></div>
-        </div>
-      </div>
+  <div class="flex flex-col w-full h-full">
+    <!-- loading -->
+    <div
+      v-if="request.pending.value"
+      class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center"
+    >
+      <ToolsLoading class="w-32 h-32" />
     </div>
+
+    <!-- Tabs -->
+    <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
+      <TabItem to="/money-pages" :active="true">
+        {{ config.by_route(`${current_page}/tabs/list`) }}
+      </TabItem>
+      <TabSeparator></TabSeparator>
+      <TabItem>
+        {{ config.by_route(`${current_page}/tabs/analytics`) }}
+      </TabItem>
+    </div>
+
     <!--  body -->
-    <div class="w-full h-auto">
+    <div class="w-full h-[93%]">
       <!-- text -->
       <div class="w-full h-32 flex items-end justify-center">
         <div
           class="w-[96%] h-[108px] rounded-lg border border-base-400 bg-base-200 flex items-center justify-center text-sm p-4"
         >
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-          ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
-          کاربردهای متنوع با هدف بهبود اپلیکیشنهای کاربردی می باشد، کتابهای زیادی
-          در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می
-          طلبد،
+          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
+          طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
+          لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود
+          اپلیکیشنهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده،
+          شناخت فراوان جامعه و متخصصان را می طلبد،
         </div>
       </div>
       <!-- add page -->
@@ -95,61 +87,41 @@
             <option value="">لطفا یک گزینه را انتخاب کنید</option>
           </select>
         </div>
-        <button
-          class="w-[72px] h-10 bg-base-250 rounded-lg text-sm text-[#488CDA]"
-        >
+        <button class="w-[72px] h-10 bg-base-250 rounded-lg text-sm text-[#488CDA]">
           اعمال
         </button>
       </div>
       <!-- item -->
-      <div
-        class="w-full h-[672px] px-5 flex items-center justify-center bg-white mt-7"
-      >
+      <div class="w-full h-[672px] px-5 flex items-center justify-center bg-white mt-7">
         <div
           class="w-full h-full rounded-lg border border-base-400 overflow-hidden text-sm"
         >
           <!-- Guide bar -->
           <table class="w-full h-auto bg-base-200 overflow-y-scroll" dir="rtl">
             <tr class="w-full h-[61px]">
-              <td
-                class="h-[60px] w-[78px] text-center border-l border-base-400"
-              >
+              <td class="h-[60px] w-[78px] text-center border-l border-base-400">
                 انتخاب
               </td>
-              <td
-                class="h-[60px] w-[49px] text-center border-l border-base-400"
-              >
-                ردیف
-              </td>
-              <td
-                class="h-[60px] w-[246px] text-center border-l border-base-400"
-              >
+              <td class="h-[60px] w-[49px] text-center border-l border-base-400">ردیف</td>
+              <td class="h-[60px] w-[246px] text-center border-l border-base-400">
                 آدرس صفحات URLs
               </td>
-              <td
-                class="h-[60px] w-[197px] text-center border-l border-base-400"
-              >
+              <td class="h-[60px] w-[197px] text-center border-l border-base-400">
                 میانگین رتبه کلمات کلیدی
               </td>
-              <td
-                class="h-[60px] w-[147px] text-center border-l border-base-400"
-              >
+              <td class="h-[60px] w-[147px] text-center border-l border-base-400">
                 آخرین بروزرسانی
               </td>
-              <td
-                class="h-[60px] w-[197px] text-center border-l border-base-400"
-              >
+              <td class="h-[60px] w-[197px] text-center border-l border-base-400">
                 وضعیت صفحه
               </td>
-              <td class="h-[60px] w-[76px] text-center border-base-400">
-                جزییات
-              </td>
+              <td class="h-[60px] w-[76px] text-center border-base-400">جزییات</td>
             </tr>
           </table>
           <!-- Map on data -->
           <div dir="ltr" class="w-full h-auto max-h-[672px] overflow-y-scroll">
             <table class="w-full h-auto overflow-auto" dir="rtl">
-              <tr v-for="index in 12" :key="index" class="w-full h-[61px]">
+              <tr v-for="index in 11" :key="index" class="w-full h-[61px]">
                 <td
                   class="h-[60px] w-[72px] text-center border-l border-base-400 border-b"
                 >
@@ -209,25 +181,19 @@
                 <td
                   class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6"
                 >
-                  <p>{{progress}} درصد</p>
+                  <p>{{ 80 }} درصد</p>
                   <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
                     <div
                       class="h-[10px] rounded-xl"
                       :style="{
-                        width: progress + '%',
+                        width: '80%',
                         backgroundColor:
-                          progress <= 25
-                            ? '#F35242'
-                            : progress <= 50
-                            ? '#FFCE47'
-                            : '#10CCAE',
+                          80 <= 25 ? '#F35242' : 80 <= 50 ? '#FFCE47' : '#10CCAE',
                       }"
                     ></div>
                   </div>
                 </td>
-                <td
-                  class="h-[60px] w-[76px] text-center border-base-400 border-b"
-                >
+                <td class="h-[60px] w-[76px] text-center border-base-400 border-b">
                   <div class="w-full h-full flex items-center justify-center">
                     <button
                       class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
@@ -292,10 +258,10 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  progress:{
-    type: String,
-    default: 80
-  } 
-});
+import Config from "~~/composables/Config";
+import Request from "~~/Api/Request";
+
+const request = new Request("v1");
+const current_page = "pages/money-pages";
+const config = new Config();
 </script>
