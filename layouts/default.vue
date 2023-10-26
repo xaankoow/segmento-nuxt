@@ -229,9 +229,7 @@
                       <SvgLabeled
                         :label="workspace.website"
                         label_direction="ltr"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === workspace.website
-                        "
+                        :active="active_site === workspace.website"
                       >
                         <svg
                           width="20"
@@ -249,9 +247,8 @@
                     <li @click="isPopupVisible = true">
                       <SvgLabeled
                         :label="cn.by_route(`${department_section}/site/add`)"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === 'add_workspace'
-                        "
+                        :active="active_section === 'add_workspace' && isPopupVisible"
+                        @click="change_active_section('add_workspace')"
                       >
                         <svg
                           width="19"
@@ -321,10 +318,8 @@
                         :label="
                           cn.by_route(`${department_section}/seo/fields/keyword-research`)
                         "
+                        :active="active_section === 'keyword-research'"
                         @click="change_active_section('keyword-research')"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === 'keyword-research'
-                        "
                       >
                         <svg
                           width="18"
@@ -349,10 +344,7 @@
                           )
                         "
                         @click="change_active_section('google-title-builder')"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() ===
-                          'google-title-builder'
-                        "
+                        :active="active_section === 'google-title-builder'"
                       >
                         <svg
                           width="18"
@@ -385,9 +377,7 @@
                           cn.by_route(`${department_section}/seo/fields/google-suggest`)
                         "
                         @click="change_active_section('google-suggest')"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === 'google-suggest'
-                        "
+                        :active="active_section === 'google-suggest'"
                       >
                         <svg
                           width="17"
@@ -445,9 +435,7 @@
                           )
                         "
                         @click="change_active_section('title-copy-writer')"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === 'title-copy-writer'
-                        "
+                        :active="active_section === 'title-copy-writer'"
                       >
                         <svg
                           width="18"
@@ -507,9 +495,7 @@
                           )
                         "
                         @click="change_active_section('idea-generator')"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === 'idea-generator'
-                        "
+                        :active="active_section === 'idea-generator'"
                       >
                         <svg
                           width="14"
@@ -575,9 +561,7 @@
                           )
                         "
                         @click="change_active_section('serp-preview')"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === 'serp-preview'
-                        "
+                        :active="active_section === 'serp-preview'"
                       >
                         <svg
                           width="18"
@@ -602,9 +586,7 @@
                           )
                         "
                         @click="change_active_section('g-ads-preview')"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === 'g-ads-preview'
-                        "
+                        :active="active_section === 'g-ads-preview'"
                       >
                         <svg
                           width="18"
@@ -629,9 +611,7 @@
                           )
                         "
                         @click="change_active_section('disavow-builder')"
-                        :active="
-                          $route.path.split('/')[1].toLowerCase() === 'disavow-builder'
-                        "
+                        :active="active_section === 'disavow-builder'"
                       >
                         <svg
                           width="18"
@@ -739,15 +719,13 @@ const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
 const workspaces = ref(null);
 const actived_navbar = ref("department");
-const active_section = ref("keyword-research");
+const active_section = ref("");
+const active_site = ref("");
 const selected_tools_section = ref("content-creation");
 const runtimeConfig = useRuntimeConfig();
 const DEV_ENV = runtimeConfig.public.DEV_ENV;
 const active_accordion = ref("");
 const route = useRoute();
-
-active_accordion.value =
-  cn.by_route(`pages/${route.path.split("/")[1].toLowerCase()}/accordion`) ?? "";
 
 const reload_store = () => {
   ConfigStore.reload()
@@ -775,6 +753,10 @@ const auth = ref({
 });
 
 onBeforeMount(() => {
+  active_section.value = route.path.split("/")[1].toLowerCase();
+  // console.log(active_section.value);
+  active_accordion.value =
+    cn.by_route(`pages/${route.path.split("/")[1].toLowerCase()}/accordion`) ?? "";
   reload_store();
 });
 
