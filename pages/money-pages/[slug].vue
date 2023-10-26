@@ -13,7 +13,7 @@
       <TabItem to="/money-pages">
         {{ config.by_route(`${current_page}/tabs/list`) }}
       </TabItem>
-      <TabSeparator></TabSeparator>
+      <TabSeparator />
       <TabItem :active="true">
         {{ config.by_route(`${current_page}/tabs/analytics`) }}
       </TabItem>

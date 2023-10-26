@@ -13,7 +13,7 @@
       <TabItem to="/google-title-builder" :active="true">
         {{ config.by_route(`${current_page}/search/title`) }}
       </TabItem>
-      <!-- <TabSeparator></TabSeparator>
+      <!-- <TabSeparator />
       <TabItem :active="false">
         {{ config.by_route(`${current_page}/my-lists`) }}
       </TabItem> -->
