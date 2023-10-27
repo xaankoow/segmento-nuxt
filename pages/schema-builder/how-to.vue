@@ -314,7 +314,7 @@ function changeDescriptionTotalTime() {
         newJson = addElementToObject(jsonData.value, "totalTime", "name");
     }
     jsonData.value = newJson
-    jsonData.value.totalTime = valuesDescription.value.totalTime
+    jsonData.value.totalTime = 'PT' + valuesDescription.value.totalTime + 'M'
 }
 // for Currency //
 const valuesCurrency = ref(
