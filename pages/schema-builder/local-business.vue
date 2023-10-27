@@ -36,6 +36,39 @@
             <!-- _______________________________________ -->
             <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <div class="flex gap-2">
+                    <div class="w-1/2 h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
+                        <DropdownFinalDropDown class="z-index-[1100] h-[200px]">
+                            <template v-slot:title>
+                                <span>نوع کسب و کار شما</span>
+                            </template>
+                            <template v-slot:option  >
+                                <InputRadio v-for="(element , index) in Object.keys(jobs)" :key="index" v-model="jobs[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs[element].title }}</InputRadio>
+                            </template>
+                        </DropdownFinalDropDown>
+                    </div>
+                    <div class="w-1/2 h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
+                        <DropdownFinalDropDown class="z-index-[1100]">
+                            <template v-slot:title>
+                                <span>عنوان کسب و کار شما</span>
+                            </template>
+                            <template v-slot:option  >
+                                <InputRadio v-if="jobs.AutomotiveBusiness.is_checked" v-for="(element , index) in Object.keys(jobs.AutomotiveBusiness.specificTypes)" :key="index" v-model="jobs.AutomotiveBusiness.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.AutomotiveBusiness.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.EmergencyService.is_checked" v-for="(element , index) in Object.keys(jobs.EmergencyService.specificTypes)" :key="index" v-model="jobs.EmergencyService.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.EmergencyService.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.EntertainmentBusiness.is_checked" v-for="(element , index) in Object.keys(jobs.EntertainmentBusiness.specificTypes)" :key="index" v-model="jobs.EntertainmentBusiness.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.EntertainmentBusiness.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.GovernmentOffice.is_checked" v-for="(element , index) in Object.keys(jobs.GovernmentOffice.specificTypes)" :key="index" v-model="jobs.GovernmentOffice.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.GovernmentOffice.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.FinancialService.is_checked" v-for="(element , index) in Object.keys(jobs.FinancialService.specificTypes)" :key="index" v-model="jobs.FinancialService.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.FinancialService.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.FoodEstablishment.is_checked" v-for="(element , index) in Object.keys(jobs.FoodEstablishment.specificTypes)" :key="index" v-model="jobs.FoodEstablishment.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.FoodEstablishment.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.HomeAndConstructionBusiness.is_checked" v-for="(element , index) in Object.keys(jobs.HomeAndConstructionBusiness.specificTypes)" :key="index" v-model="jobs.HomeAndConstructionBusiness.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.HomeAndConstructionBusiness.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.LegalService.is_checked" v-for="(element , index) in Object.keys(jobs.LegalService.specificTypes)" :key="index" v-model="jobs.LegalService.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.LegalService.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.LodgingBusiness.is_checked" v-for="(element , index) in Object.keys(jobs.LodgingBusiness.specificTypes)" :key="index" v-model="jobs.LodgingBusiness.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.LodgingBusiness.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.MedicalBusiness.is_checked" v-for="(element , index) in Object.keys(jobs.MedicalBusiness.specificTypes)" :key="index" v-model="jobs.MedicalBusiness.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.MedicalBusiness.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.SportsActivityLocation.is_checked" v-for="(element , index) in Object.keys(jobs.SportsActivityLocation.specificTypes)" :key="index" v-model="jobs.SportsActivityLocation.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.SportsActivityLocation.specificTypes[element].title }}</InputRadio>
+                                <InputRadio v-if="jobs.Store.is_checked" v-for="(element , index) in Object.keys(jobs.Store.specificTypes)" :key="index" v-model="jobs.Store.specificTypes[element].is_checked" @click="changeJobs(element)" :id="element" :name="jobs" >{{ jobs.Store.specificTypes[element].title }}</InputRadio>
+                            </template>
+                        </DropdownFinalDropDown>
+                    </div>
+                </div>
+                <div class="flex gap-2">
                     <div class="w-1/2" >
                         <InputText class="w-full align-start" placeholder="نام" @keyup="changeName" v-model="values.name" />
                     </div>
@@ -62,25 +95,25 @@
                     </div>
                 </div>
                 <!-- location -->
-                <div class="w-full gap-2">
+                <div class="w-full flex flex-col gap-2">
                     <div class="w-full flex gap-3">
                         <div class="w-[50%] h-[45px] flex items-center gap-2">
-                            <InputText id="numberNumber" placeholder="کشور" @input="changeCountry()" v-model="values.telephone"/>
+                            <InputText id="numberNumber" placeholder="کشور" @input="changeCountry()" v-model="values.address.addressCountry"/>
                         </div>
                         <div class="w-[50%] h-[45px] flex items-center gap-2">
-                            <InputText id="numberNumber" placeholder="استان" @input="changeState()" v-model="values.telephone"/>
+                            <InputText id="numberNumber" placeholder="استان" @input="changeState()" v-model="values.address.addressRegion"/>
                         </div>
                     </div>
                     <div class="w-full flex gap-3">
                         <div class="w-[50%] h-[45px] flex items-center gap-2">
-                            <InputText id="numberNumber" placeholder="شهر" @input="changeCity()" v-model="values.telephone"/>
+                            <InputText id="numberNumber" placeholder="شهر" @input="changeCity()" v-model="values.address.addressLocality"/>
                         </div>
                         <div class="w-[50%] h-[45px] flex items-center gap-2">
-                            <InputText id="numberNumber" placeholder="خیابان" @input="changeStreet()" v-model="values.telephone"/>
+                            <InputText id="numberNumber" placeholder="خیابان" @input="changeStreet()" v-model="values.address.streetAddress"/>
                         </div>
                     </div>
-                    <div class="w-full" >
-                        <InputText class="w-full align-start" placeholder="کد پستی" @keyup="changeName" v-model="values.name" />
+                    <div class="w-full">
+                        <InputText class="w-full align-start" placeholder="کد پستی" @keyup="changePostalCode" v-model="values.address.postalCode" />
                     </div>
                 </div>
                 <!-- geo -->
@@ -95,7 +128,7 @@
                 <!-- oppening time -->
                 <div class="w-full flex flex-col gap-2">
                     <div class="w-full">
-                        <InputCheckbox @click="change24Hours()" :name="oppeningHours" >باز بودن به صورت 24 ساعته در 7 روز هفته</InputCheckbox>
+                        <InputCheckbox @change="change24Hours" :id="oppeningHours" v-model="allHoursOppeningOk" >باز بودن به صورت 24 ساعته در 7 روز هفته</InputCheckbox>
                     </div>
                     <div class="w-full flex flex-col gap-2">
                         <div class="w-full flex gap-2 items-center" v-for="(value , index) in valuesOppening" :key="index">
@@ -105,7 +138,7 @@
                                         <span>روزهای کاری</span>
                                     </template>
                                     <template v-slot:option>
-                                        <InputCheckbox v-for="(element , index) in Object.keys(days)" :key="index" v-model="days[element].is_checked" @click="changeDays(element , index)" :id="element" >{{ days[element].title }}</InputCheckbox>
+                                        <InputCheckbox v-for="(element , indexDays) in days[index]" :key="indexDays" v-model="days[index][indexDays].is_checked" @click="changeDays(element , index)" :id="element" >{{ days[index][indexDays].title }}</InputCheckbox>
                                     </template>
                                 </DropdownFinalDropDown>
                             </div>
@@ -127,6 +160,52 @@
                         </svg>
                         افزودن ساعت کاری 
                     </button>
+                </div>
+                <!-- soial -->
+                <div class="w-full " >
+                    <div class="w-1/2 h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
+                        <DropdownFinalDropDown class="z-index-[1100]">
+                            <template v-slot:title>
+                                <span>اکانت در شبکه های اجتماعی</span>
+                            </template>
+                            <template v-slot:option >
+                                <InputCheckbox v-for="(element , index) in Object.keys(socialAccount)" :key="index" v-model="socialAccount[element].is_checked" @click="changeSocialAccount(element)" :id="element" >{{ socialAccount[element].title }}</InputCheckbox>
+                            </template>
+                        </DropdownFinalDropDown>
+                    </div>
+                    <div  class="w-full flex gap-[10%] flex-wrap ">
+                        <div class="w-[45%]" v-if="socialAccount.Facbook.is_checked" >
+                            <InputText placeholder="Facbook" @keyup="changeSkuValue()" v-model="skuValue" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.Twitter.is_checked" >
+                            <InputText placeholder="Twitter" @keyup="changeGtin8Value()" v-model="gtin8Value" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.Instagram.is_checked" >
+                            <InputText placeholder="Instagram" @keyup="changeGtin13Value()" v-model="gtin13Value" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.YouTube.is_checked" >
+                            <InputText placeholder="YouTube" @keyup="changeGtin14Value()" v-model="gtin14Value" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.Linkdln.is_checked" >
+                            <InputText placeholder="Linkdln" @keyup="changeMpnValue()" v-model="mpnValue" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.Pinterest.is_checked" >
+                            <InputText placeholder="Pinterest" @keyup="changeSkuValue()" v-model="skuValue" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.SoundCloud.is_checked" >
+                            <InputText placeholder="SoundCloud" @keyup="changeSkuValue()" v-model="skuValue" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.Wikipedia.is_checked" >
+                            <InputText placeholder="Wikipedia" @keyup="changeSkuValue()" v-model="skuValue" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.Github.is_checked" >
+                            <InputText placeholder="Github" @keyup="changeSkuValue()" v-model="skuValue" />
+                        </div>
+                        <div class="w-[45%]" v-if="socialAccount.Website.is_checked" >
+                            <InputText placeholder="Website" @keyup="changeSkuValue()" v-model="skuValue" />
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <!-- _______________________________________ -->
@@ -192,19 +271,15 @@ const values = ref(
         "telephone": "",
         "priceRange": "",
         "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "",
-        "addressLocality": "",
-        "postalCode": "",
-        "addressCountry": ""
+            "@type": "PostalAddress",
+            "streetAddress": "",
+            "addressLocality": "",
+            "addressRegion": "",
+            "postalCode": "",
+            "addressCountry": ""
         }  
     }
 );
-
-// const videoDuration = ref({
-//     min : "" ,
-//     sec : ""
-// })
 const jsonData = ref(
     {
         "@context": "https://schema.org",
@@ -217,10 +292,11 @@ const jsonData = ref(
         "priceRange": "",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "",
-            "addressLocality": "",
-            "postalCode": "",
-            "addressCountry": ""
+            "streetAddress": "sdsd",
+            "addressLocality": "ity",
+            "addressRegion": "AS",
+            "postalCode": "3434",
+            "addressCountry": "US"
         }  
     }
 );
@@ -234,6 +310,816 @@ function addElementToObject(object, newProperty, beforNewProperty) {
     }
     return newObject;
 }
+// // for copy button //
+const dataForCopy = ref("")
+onMounted(()=>{
+    dataForCopy.value = document.getElementById("code").textContent
+})
+// const underJobs = [AutomotiveBusiness, EmergencyService, EntertainmentBusiness, FinancialService, 
+// GovernmentOffice, FoodEstablishment, HomeAndConstructionBusiness, LegalService, LodgingBusiness,
+// MedicalBusiness, SportsActivityLocation, store]
+// for jobs
+const specificTypesJobsOk = ref(false)
+const jobs = ref({
+    AnimalShelter: {
+        is_checked: false,
+        value: "AnimalShelter",
+        title: "پناهگاه حیوانات"
+    },
+    ArchiveOrganization: {
+        is_checked: false,
+        value: "ArchiveOrganization",
+        title: "سازمان آرشیو"
+    },
+    AutomotiveBusiness: {
+        is_checked: false,
+        value: "AutomotiveBusiness",
+        title: "تجارت خودرو",
+        specificTypes:
+        {
+            AutoBodyShop: {
+                is_checked: false,
+                value: "AutoBodyShop",
+                title: "فروشگاه بدنه خودرو"
+            },
+            AutoDealer: {
+                is_checked: false,
+                value: "AutoDealer",
+                title: "فروشنده خودرو"
+            },
+            AutoPartsStore: {
+                is_checked: false,
+                value: "AutoPartsStore",
+                title: "فروشگاه قطعات خودرو"
+            },
+            AutoRental: {
+                is_checked: false,
+                value: "AutoRental",
+                title: "اجاره خودرو"
+            },
+            AutoRepair: {
+                is_checked: false,
+                value: "AutoRepair",
+                title: "تعمیر خودرو"
+            },
+            AutoWash: {
+                is_checked: false,
+                value: "AutoWash",
+                title: "کارواش"
+            },
+            GasStation: {
+                is_checked: false,
+                value: "GasStation",
+                title: "پمپ بنزین"
+            },
+            MotorcycleDealer: {
+                is_checked: false,
+                value: "MotorcycleDealer",
+                title: "فروشنده موتور سیکلت"
+            },
+            MotorcycleRepair: {
+                is_checked: false,
+                value: "MotorcycleRepair",
+                title: "تعمیر موتور سیکلت"
+            },
+        }
+    },
+    ChildCare: {
+        is_checked: false,
+        value: "ChildCare",
+        title: "مراقبت از کودک"
+    },
+    Dentist: {
+        is_checked: false,
+        value: "Dentist",
+        title: "دندانپزشک"
+    },
+    DryCleaningOrLaundry: {
+        is_checked: false,
+        value: "DryCleaningOrLaundry",
+        title: "خشکشویی یا لباسشویی"
+    },
+    EmergencyService: {
+        is_checked: false,
+        value: "EmergencyService",
+        title: "خدمات اضطراری",
+        specificTypes:
+        {
+            FireStation: {
+                is_checked: false,
+                value: "FireStation",
+                title: "ایستگاه آتشنشانی"
+            },
+            Hospital: {
+                is_checked: false,
+                value: "Hospital",
+                title: "بیمارستان"
+            },
+            PoliceStation: {
+                is_checked: false,
+                value: "PoliceStation",
+                title: "ایستگاه پلیس"
+            },
+        }
+    },
+    EmploymentAgency: {
+        is_checked: false,
+        value: "EmploymentAgency",
+        title: "آژانس استخدام"
+    },
+    EntertainmentBusiness: {
+        is_checked: false,
+        value: "EntertainmentBusiness",
+        title: "سرگرمی کسب و کار",
+        specificTypes:
+        {
+            AdultEntertainment: {
+                is_checked: false,
+                value: "AdultEntertainment",
+                title: "سرگرمی بزرگسالان"
+            },
+            AmusementPark: {
+                is_checked: false,
+                value: "AmusementPark",
+                title: "شهر بازی"
+            },
+            ArtGallery: {
+                is_checked: false,
+                value: "ArtGallery",
+                title: "گالری هنر"
+            },
+            Casino: {
+                is_checked: false,
+                value: "Casino",
+                title: "کازینو"
+            },
+            ComedyClub: {
+                is_checked: false,
+                value: "ComedyClub",
+                title: "کلوپ کمدی"
+            },
+            MovieTheater: {
+                is_checked: false,
+                value: "MovieTheater",
+                title: "سینما"
+            },
+            NightClub: {
+                is_checked: false,
+                value: "NightClub",
+                title: "کلوپ شبانه"
+            },
+        }
+    },
+    FinancialService: {
+        is_checked: false,
+        value: "FinancialService",
+        title: "خدمات مالی",
+        specificTypes:
+        {
+            AccountingService: {
+                is_checked: false,
+                value: "AccountingService",
+                title: "خدمات حسابداری"
+            },
+            AutomatedTeller: {
+                is_checked: false,
+                value: "AutomatedTeller",
+                title: "گوینده خودکار"
+            },
+            BankOrCreditUnion: {
+                is_checked: false,
+                value: "BankOrCreditUnion",
+                title: "بانک یا اتحادیه اعتباری"
+            },
+            InsuranceAgency: {
+                is_checked: false,
+                value: "InsuranceAgency",
+                title: "دفتر بیمه"
+            },
+        }
+    },
+    FoodEstablishment: {
+        is_checked: false,
+        value: "FoodEstablishment",
+        title: "تاسیس مواد غذایی",
+        specificTypes:
+        {
+            Bakery: {
+                is_checked: false,
+                value: "Bakery",
+                title: "نانوایی"
+            },
+            BarOrPub: {
+                is_checked: false,
+                value: "BarOrPub",
+                title: "بار یا میخانه"
+            },
+            Brewery: {
+                is_checked: false,
+                value: "Brewery",
+                title: "آبجوسازی"
+            },
+            CafeOrCoffeeShop: {
+                is_checked: false,
+                value: "CafeOrCoffeeShop",
+                title: "کافه یا کافی شاپ"
+            },
+            Distillery: {
+                is_checked: false,
+                value: "Distillery",
+                title: "تقطیر"
+            },
+            FastFoodRestaurant: {
+                is_checked: false,
+                value: "FastFoodRestaurant",
+                title: "رستوران فست فود"
+            },
+            IceCreamShop: {
+                is_checked: false,
+                value: "IceCreamShop",
+                title: "بستنی فروشی"
+            },
+            Restaurant: {
+                is_checked: false,
+                value: "Restaurant",
+                title: "رستوران"
+            },
+            Winery: {
+                is_checked: false,
+                value: "Winery",
+                title: "کارخانه شراب سازی"
+            },
+        }
+    },
+    GovernmentOffice: {
+        is_checked: false,
+        value: "GovernmentOffice",
+        title: "اداره دولتی",
+        specificTypes:
+        {
+            PostOffice: {
+                is_checked: false,
+                value: "PostOffice",
+                title: "اداره پست"
+            },
+        }
+    },
+    HealthAndBeautyBusiness: {
+        is_checked: false,
+        value: "HealthAndBeautyBusiness",
+        title: "کسب و کار سلامت و زیبایی",
+        specificTypes:
+        {
+            BeautySalon: {
+                is_checked: false,
+                value: "BeautySalon",
+                title: "سالن زیبایی"
+            },
+            DaySpa: {
+                is_checked: false,
+                value: "DaySpa",
+                title: "آبگرم روز"
+            },
+            HairSalon: {
+                is_checked: false,
+                value: "HairSalon",
+                title: "سالن آرایشی"
+            },
+            HealthClub: {
+                is_checked: false,
+                value: "HealthClub",
+                title: "باشگاه سلامت"
+            },
+            NailSalon: {
+                is_checked: false,
+                value: "NailSalon",
+                title: "سالن ناخن"
+            },
+            TattooParlor: {
+                is_checked: false,
+                value: "TattooParlor",
+                title: "سالن تاتو"
+            },
+        }
+    },
+    HomeAndConstructionBusiness: {
+        is_checked: false,
+        value: "HomeAndConstructionBusiness",
+        title: "مشاغل خانگی و ساختمانی",
+        specificTypes:
+        {
+            Electrician: {
+                is_checked: false,
+                value: "Electrician",
+                title: "تکنسین برق"
+            },
+            GeneralContractor: {
+                is_checked: false,
+                value: "GeneralContractor",
+                title: "پیمانکار عمومی"
+            },
+            HVACBusiness: {
+                is_checked: false,
+                value: "HVACBusiness",
+                title: "کسب و کار HVAC"
+            },
+            HousePainter: {
+                is_checked: false,
+                value: "HousePainter",
+                title: "نقاش خانه"
+            },
+            Locksmith: {
+                is_checked: false,
+                value: "Locksmith",
+                title: "قفل ساز"
+            },
+            MovingCompany: {
+                is_checked: false,
+                value: "MovingCompany",
+                title: "شرکت حمل و نقل"
+            },
+            Plumber: {
+                is_checked: false,
+                value: "Plumber",
+                title: "لوله کش"
+            },
+            RoofingContractor: {
+                is_checked: false,
+                value: "RoofingContractor",
+                title: "پیمانکار سقف"
+            },
+        }
+    },
+    InternetCafe: {
+        is_checked: false,
+        value: "InternetCafe",
+        title: "کافی نت"
+    },
+    LegalService: {
+        is_checked: false,
+        value: "LegalService",
+        title: "سرویس قانونی",
+        specificTypes:
+        {
+            Attorney: {
+                is_checked: false,
+                value: "Attorney",
+                title: "وکیل"
+            },
+            Notary: {
+                is_checked: false,
+                value: "Notary",
+                title: "دفتر اسناد رسمی"
+            },
+        }
+    },
+    Library: {
+        is_checked: false,
+        value: "Library",
+        title: "کتابخانه"
+    },
+    LodgingBusiness: {
+        is_checked: false,
+        value: "LodgingBusiness",
+        title: "کسب و کار مسکن",
+        specificTypes:
+        {
+            BedAndBreakfast: {
+                is_checked: false,
+                value: "BedAndBreakfast",
+                title: "تخت و صبحانه"
+            },
+            Campground: {
+                is_checked: false,
+                value: "Campground",
+                title: "محل کمپ"
+            },
+            Hostel: {
+                is_checked: false,
+                value: "Hostel",
+                title: "خوابگاه"
+            },
+            Hotel: {
+                is_checked: false,
+                value: "Hotel",
+                title: "هتل"
+            },
+            Motel: {
+                is_checked: false,
+                value: "Motel",
+                title: "متل"
+            },
+            Resort: {
+                is_checked: false,
+                value: "Resort",
+                title: "رفت و آمد مکرر"
+            },
+            VacationRental: {
+                is_checked: false,
+                value: "VacationRental",
+                title: "اجاره تعطیلات"
+            },
+        }
+    },
+    MedicalBusiness: {
+        is_checked: false,
+        value: "MedicalBusiness",
+        title: "تجارت پزشکی",
+        specificTypes:
+        {
+            Dentist: {
+                is_checked: false,
+                value: "Dentist",
+                title: "دندانپزشک"
+            },
+            Dermatology: {
+                is_checked: false,
+                value: "Dermatology",
+                title: "پوست"
+            },
+            DietNutrition: {
+                is_checked: false,
+                value: "DietNutrition",
+                title: "رژیم غذایی تغذیه"
+            },
+            Emergency: {
+                is_checked: false,
+                value: "Emergency",
+                title: "اورژانس"
+            },
+            Geriatric: {
+                is_checked: false,
+                value: "Geriatric",
+                title: "سالمندان"
+            },
+            Gynecologic: {
+                is_checked: false,
+                value: "Gynecologic",
+                title: "زنان و زایمان"
+            },
+            MedicalClinic: {
+                is_checked: false,
+                value: "MedicalClinic",
+                title: "کلینیک پزشکی"
+            },
+            Midwifery: {
+                is_checked: false,
+                value: "Midwifery",
+                title: "مامایی"
+            },
+            Nursing: {
+                is_checked: false,
+                value: "Nursing",
+                title: "پرستاری"
+            },
+            Obstetric: {
+                is_checked: false,
+                value: "Obstetric",
+                title: "زنان و زایمان"
+            },
+            Oncologic: {
+                is_checked: false,
+                value: "Oncologic",
+                title: "انکولوژیک"
+            },
+            Optician: {
+                is_checked: false,
+                value: "Optician",
+                title: "عینک فروشی"
+            },
+            Optometric: {
+                is_checked: false,
+                value: "Optometric",
+                title: "بینایی سنجی"
+            },
+            Otolaryngologic: {
+                is_checked: false,
+                value: "Otolaryngologic",
+                title: "گوش و حلق و بینی"
+            },
+            Pediatric: {
+                is_checked: false,
+                value: "Pediatric",
+                title: "اطفال"
+            },
+            Pharmacy: {
+                is_checked: false,
+                value: "Pharmacy",
+                title: "داروخانه"
+            },
+            Physician: {
+                is_checked: false,
+                value: "Physician",
+                title: "پزشک"
+            },
+            Physiotherapy: {
+                is_checked: false,
+                value: "Physiotherapy",
+                title: "فیزیوتراپی"
+            },
+            PlasticSurgery: {
+                is_checked: false,
+                value: "PlasticSurgery",
+                title: "جراحی پلاستیک"
+            },
+            Podiatric: {
+                is_checked: false,
+                value: "Podiatric",
+                title: "بیماری های پا"
+            },
+            PrimaryCare: {
+                is_checked: false,
+                value: "PrimaryCare",
+                title: "مراقبت های اولیه"
+            },
+            Psychiatric: {
+                is_checked: false,
+                value: "Psychiatric",
+                title: "روانپزشکی"
+            },
+            PublicHealth: {
+                is_checked: false,
+                value: "PublicHealth",
+                title: "سلامت عمومی"
+            },
+            CommunityHealth: {
+                is_checked: false,
+                value: "CommunityHealth",
+                title: "سلامت جامعه"
+            },
+        }
+    },
+    ProfessionalService: {
+        is_checked: false,
+        value: "ProfessionalService",
+        title: "خدمات حرفه ای"
+    },
+    RadioStation: {
+        is_checked: false,
+        value: "RadioStation",
+        title: "ایستگاه رادیویی"
+    },
+    RealEstateAgent: {
+        is_checked: false,
+        value: "RealEstateAgent",
+        title: "نماینده املاک"
+    },
+    RecyclingCenter: {
+        is_checked: false,
+        value: "RecyclingCenter",
+        title: "مرکز بازیافت"
+    },
+    SelfStorage: {
+        is_checked: false,
+        value: "SelfStorage",
+        title: "خود ذخیره سازی"
+    },
+    ShoppingCenter: {
+        is_checked: false,
+        value: "ShoppingCenter",
+        title: "مرکز خرید"
+    },
+    SportsActivityLocation: {
+        is_checked: false,
+        value: "SportsActivityLocation",
+        title: "محل فعالیت ورزشی",
+        specificTypes:
+        {
+            BowlingAlley: {
+                is_checked: false,
+                value: "BowlingAlley",
+                title: "سالن بولینگ"
+            },
+            ExerciseGym: {
+                is_checked: false,
+                value: "ExerciseGym",
+                title: "ورزشگاه"
+            },
+            GolfCourse: {
+                is_checked: false,
+                value: "GolfCourse",
+                title: "زمین گلف"
+            },
+            HealthClub: {
+                is_checked: false,
+                value: "HealthClub",
+                title: "باشگاه سلامت"
+            },
+            PublicSwimmingPool: {
+                is_checked: false,
+                value: "PublicSwimmingPool",
+                title: "استخر شنا عمومی"
+            },
+            SkiResort: {
+                is_checked: false,
+                value: "SkiResort",
+                title: "پیست اسکی"
+            },
+            SportsClub: {
+                is_checked: false,
+                value: "SportsClub",
+                title: "باشگاه ورزشی"
+            },
+            StadiumOrArena: {
+                is_checked: false,
+                value: "StadiumOrArena",
+                title: "استادیوم یا آرنا"
+            },
+            TennisComplex: {
+                is_checked: false,
+                value: "TennisComplex",
+                title: "مجتمع تنیس"
+            },
+        }
+    },
+    Store: {
+        is_checked: false,
+        value: "Store",
+        title: "فروشگاه",
+        specificTypes:
+        {
+            AutoPartsStore: {
+                is_checked: false,
+                value: "AutoPartsStore",
+                title: "فروشگاه قطعات خودرو"
+            },
+            BikeStore: {
+                is_checked: false,
+                value: "BikeStore",
+                title: "فروشگاه دوچرخه"
+            },
+            BookStore: {
+                is_checked: false,
+                value: "BookStore",
+                title: "کتابفروشی"
+            },
+            ClothingStore: {
+                is_checked: false,
+                value: "ClothingStore",
+                title: "فروشگاه پوشاک"
+            },
+            ComputerStore: {
+                is_checked: false,
+                value: "ComputerStore",
+                title: "فروشگاه رایانه"
+            },
+            ConvenienceStore: {
+                is_checked: false,
+                value: "ConvenienceStore",
+                title: "خواروبارفروشی کوچک"
+            },
+            DepartmentStore: {
+                is_checked: false,
+                value: "DepartmentStore",
+                title: "فروشگاه بزرگ"
+            },
+            ElectronicsStore: {
+                is_checked: false,
+                value: "ElectronicsStore",
+                title: "فروشگاه لوازم الکترونیکی"
+            },
+            Florist: {
+                is_checked: false,
+                value: "Florist",
+                title: "گل فروشی"
+            },
+            FurnitureStore: {
+                is_checked: false,
+                value: "FurnitureStore",
+                title: "فروشگاه مبلمان"
+            },
+            GardenStore: {
+                is_checked: false,
+                value: "GardenStore",
+                title: "باغ فروشگاه"
+            },
+            GroceryStore: {
+                is_checked: false,
+                value: "GroceryStore",
+                title: "فروشگاه بقالی"
+            },
+            HardwareStore: {
+                is_checked: false,
+                value: "HardwareStore",
+                title: "فروشگاه سخت افزار"
+            },
+            HobbyShop: {
+                is_checked: false,
+                value: "HobbyShop",
+                title: "فروشگاه سرگرمی"
+            },
+            HomeGoodsStore: {
+                is_checked: false,
+                value: "HomeGoodsStore",
+                title: "فروشگاه کالاهای خانگی"
+            },
+            JewelryStore: {
+                is_checked: false,
+                value: "JewelryStore",
+                title: "جواهر فروشی"
+            },
+            LiquorStore: {
+                is_checked: false,
+                value: "LiquorStore",
+                title: ""
+            },
+            MensClothingStore: {
+                is_checked: false,
+                value: "MensClothingStore",
+                title: "فروشگاه پوشاک مردانه"
+            },
+            MobilePhoneStore: {
+                is_checked: false,
+                value: "MobilePhoneStore",
+                title: "فروشگاه تلفن همراه"
+            },
+            MovieRentalStore: {
+                is_checked: false,
+                value: "MovieRentalStore",
+                title: "فروشگاه اجاره فیلم"
+            },
+            MusicStore: {
+                is_checked: false,
+                value: "MusicStore",
+                title: "فروشگاه موسیقی"
+            },
+            OfficeEquipmentStore: {
+                is_checked: false,
+                value: "OfficeEquipmentStore",
+                title: "فروشگاه تجهیزات اداری"
+            },            
+            OutletStore: {
+                is_checked: false,
+                value: "OutletStore",
+                title: "فروشگاه پریز"
+            },
+            PawnShop: {
+                is_checked: false,
+                value: "PawnShop",
+                title: "فروشگاه رهنی"
+            },
+            PetStore: {
+                is_checked: false,
+                value: "PetStore",
+                title: "فروشگاه حیوانات خانگی"
+            },            
+            ShoeStore: {
+                is_checked: false,
+                value: "ShoeStore",
+                title: "کفش فروشی"
+            },
+            SportingGoodsStore: {
+                is_checked: false,
+                value: "SportingGoodsStore",
+                title: "فروشگاه لوازم ورزشی"
+            },
+            TireShop: {
+                is_checked: false,
+                value: "TireShop",
+                title: "فروشگاه لاستیک فروشی "
+            },            
+            ToyStore: {
+                is_checked: false,
+                value: "ToyStore",
+                title: "فروشگاه اسباب بازی"
+            },
+            WholesaleStore: {
+                is_checked: false,
+                value: "WholesaleStore",
+                title: "فروشگاه عمده فروشی"
+            },
+        }
+    },
+    TelevisionStation: {
+        is_checked: false,
+        value: "TelevisionStation",
+        title: "ایستگاه تلویزیونی"
+    },
+    TouristInformationCenter: {
+        is_checked: false,
+        value: "TouristInformationCenter",
+        title: "مرکز اطلاعات گردشگری"
+    },
+    TravelAgency: {
+        is_checked: false,
+        value: "TravelAgency",
+        title: "آژانس مسافرتی"
+    },
+})
+function changeJobs(el) {
+    jsonData.value["@type"] = el
+    console.log(jobs.value.AutomotiveBusiness.is_checked);
+    for (let job in jobs.value) {
+        if(!job == el)
+        jobs.value[job].is_checked = ""
+    }
+    // if(jobs.value[el].specificTypes){
+    //     specificTypesJobsOk.value = true
+    // }else{
+    //     specificTypesJobsOk.value = false
+    // }
+}
+
 // for detail
 function changeName() {
     jsonData.value.name = values.value.name
@@ -254,8 +1140,22 @@ function changePriceRange() {
     jsonData.value.priceRange = values.value.priceRange
 }
 // for loc
-
-// gor geo
+function changeCountry() {
+    jsonData.value.address.addressCountry = values.value.address.addressCountry
+}
+function changeState() {
+    jsonData.value.address.addressRegion = values.value.address.addressRegion
+}
+function changeCity() {
+    jsonData.value.address.addressLocality = values.value.address.addressLocality
+}
+function changeStreet() {
+    jsonData.value.address.streetAddress = values.value.address.streetAddress
+}
+function changePostalCode() {
+    jsonData.value.address.postalCode = values.value.address.postalCode
+}
+// for geo
 const valuesGeo = ref(
     {
         "@type": "GeoCoordinates",
@@ -288,53 +1188,62 @@ function changeLongitude() {
 // for oppening hours
 const allHoursOppeningOk = ref(false)
 const hoursOppeningNumber = ref(0)
-const days = ref({
-    saturday: {
+const days = ref([
+    [
+    {
+        name: "saturday",
         is_checked: false,
         value: "saturday",
         title: "شنبه"
     },
-    sunday: {
+    {
+        name: "sunday",
         is_checked: false,
         value: "sunday",
         title: "یک شنبه"
     },
-    monday: {
+    {
+        name: "monday",
         is_checked: false,
         value: "monday",
         title: "دوشنبه"
     },
-    tuesday: {
+    {
+        name: "tuesday",
         is_checked: false,
         value: "tuesday",
         title: "سه شنبه"
     },
-    wendsday: {
+    {
+        name: "wendsday",
         is_checked: false,
         value: "wendsday",
         title: "چهارشنبه"
     },
-    thursday: {
+    {
+        name: "thursday",
         is_checked: false,
         value: "thursday",
         title: "پنج شنبه"
     },
-    friday: {
+    {
+        name: "friday",
         is_checked: false,
         value: "friday",
         title: "جمعه"
     },
-})
+    ]
+])
+function change24Hours() {
+    if (allHoursOppeningOk.value == false) {
+        allHoursOppeningOk.value = true
+    }else{
+        allHoursOppeningOk.value = false
+    }
+}
 const valuesOppening = ref([
 ]
 )
-function change24Hours() {
-    if(allHoursOppeningOk.value){
-        allHoursOppeningOk.value = false
-    }else{
-        allHoursOppeningOk.value = true
-    }
-}
 function addOpenHours() {
     hoursOppeningNumber.value ++
     valuesOppening.value[hoursOppeningNumber.value-1] = 
@@ -345,6 +1254,51 @@ function addOpenHours() {
         "opens": "",
         "closes": ""
     }
+    days.value[hoursOppeningNumber.value] = 
+    [
+    {
+        name: "saturday",
+        is_checked: false,
+        value: "saturday",
+        title: "شنبه"
+    },
+    {
+        name: "sunday",
+        is_checked: false,
+        value: "sunday",
+        title: "یک شنبه"
+    },
+    {
+        name: "monday",
+        is_checked: false,
+        value: "monday",
+        title: "دوشنبه"
+    },
+    {
+        name: "tuesday",
+        is_checked: false,
+        value: "tuesday",
+        title: "سه شنبه"
+    },
+    {
+        name: "wendsday",
+        is_checked: false,
+        value: "wendsday",
+        title: "چهارشنبه"
+    },
+    {
+        name: "thursday",
+        is_checked: false,
+        value: "thursday",
+        title: "پنج شنبه"
+    },
+    {
+        name: "friday",
+        is_checked: false,
+        value: "friday",
+        title: "جمعه"
+    },
+    ]
     let newJson = {}
     if(!jsonData.value.openingHoursSpecification){
         if(jsonData.value.geo){
@@ -376,14 +1330,92 @@ function changecloseHour(taskIndex) {
     jsonData.value.openingHoursSpecification[taskIndex].closes = valuesOppening.value[taskIndex].closes
 }
 function changeDays(el , taskIndex) {
-    valuesOppening.value[taskIndex].dayOfWeek.push(el)
-    jsonData.value.openingHoursSpecification[taskIndex].dayOfWeek.push(el)
+    // valuesOppening.value[taskIndex].dayOfWeek.push(el.name)
+    jsonData.value.openingHoursSpecification[taskIndex].dayOfWeek.push(el.name)
 }
-// // for copy button //
-// const dataForCopy = ref("")
-// onMounted(()=>{
-//     dataForCopy.value = document.getElementById("code").textContent
-// })
+// soial
+const socialAccount = ref({
+    Facbook: {
+        is_checked: false,
+        value: "Facbook",
+        title: "فیسبوک"
+    },
+    Twitter: {
+        is_checked: false,
+        value: "Twitter",
+        title: "توییتر"
+    },
+    Instagram: {
+        is_checked: false,
+        value: "Instagram",
+        title: "اینستاگرام"
+    },
+    YouTube: {
+        is_checked: false,
+        value: "YouTube",
+        title: "یوتیوب"
+    },
+    Linkdln: {
+        is_checked: false,
+        value: "Linkdln",
+        title: "لینکدن"
+    },
+    Pinterest: {
+        is_checked: false,
+        value: "Pinterest",
+        title: "پینترست"
+    },
+    SoundCloud: {
+        is_checked: false,
+        value: "SoundCloud",
+        title: "سند کلود"
+    },
+    Wikipedia: {
+        is_checked: false,
+        value: "Wikipedia",
+        title: "ویکی پدیا"
+    },
+    Github: {
+        is_checked: false,
+        value: "Github",
+        title: "گیت هاب"
+    },
+    Website: {
+        is_checked: false,
+        value: "Website",
+        title: "وب سایت"
+    },
+});
+function changeSocialAccount(el){
+    if (!socialAccount.value[el].is_checked){
+        if(!jsonData.value.sameAs){
+            let newJson = []
+            newJson = addElementToObject(jsonData.value, "sameAs" , "address");
+            jsonData.value = newJson
+            jsonData.value.sameAs = []
+        }
+        jsonData.value.sameAs.push(el)
+        // jsonData.value[el] = ""
+    }else{
+        delete jsonData.value[el]
+    }
+}
+function changeSkuValue() {
+   jsonData.value.sku = skuValue.value
+}
+function changeGtin8Value() {
+   jsonData.value.gtin8 = gtin8Value.value
+}
+function changeGtin13Value() {
+   jsonData.value.gtin13 = gtin13Value.value
+}
+function changeGtin14Value() {
+   jsonData.value.gtin14 = gtin14Value.value
+}
+function changeMpnValue() {
+   jsonData.value.mpn = mpnValue.value
+}
+
 // // for delete button //
 // function deleteQuestions() {
 //     imageNumber.value = 1
@@ -420,87 +1452,5 @@ function changeDays(el , taskIndex) {
 //         "target": "={seek_to_second_number}",
 //         "startOffset-input": "required name=seek_to_second_number"
 //     }
-// }
-// // for  video//
-// function changeVideoName() {
-//     jsonData.value.name = valuesVideo.value.name
-// }
-
-// function changeUploadDate() {
-//     jsonData.value.uploadDate = valuesVideo.value.uploadDate
-// }
-// function changeVideoMin() {
-//     if(videoDuration.value.sec){
-//         jsonData.value.duration = "PT" + videoDuration.value.min + "M" + videoDuration.value.sec + "S"
-//     }else{
-//         jsonData.value.duration = "PT" + videoDuration.value.min + "M" + 0 + "S"
-//     }
-// }
-// function changeVideoSec() {
-//     if(videoDuration.value.min){
-//         jsonData.value.duration = "PT" + videoDuration.value.min + "M" + videoDuration.value.sec + "S"
-//     }else{
-//         jsonData.value.duration = "PT" + 0 + "M" + 0 + "S"
-//     }
-// }
-// // for image
-// const imageNumber = ref(1)
-// function addImage() {
-//     imageNumber.value ++
-//     valuesVideo.value.thumbnailUrl[imageNumber.value-1] = ""
-//     jsonData.value.thumbnailUrl = valuesVideo.value.thumbnailUrl
-// }
-// function changeimage(taskIndex) {
-//     if(imageNumber.value == 1){
-//         jsonData.value.thumbnailUrl = valuesVideo.value.thumbnailUrl[0]
-//     }else{
-//         jsonData.value.thumbnailUrl[taskIndex] = valuesVideo.value.thumbnailUrl[taskIndex]
-//     }
-// }
-// function deleteOneImage(taskIndex){
-//     if (imageNumber.value > 1) {
-//         imageNumber.value --
-//         jsonData.value.thumbnailUrl.splice(taskIndex, 1)
-//         valuesVideo.value.splice(taskIndex, 1)
-//     }
-// }
-// const contentUrl = ref("")
-// const embedUrl = ref("")
-// const seekTargetUrl = ref("")
-// const potentialAction = ref(
-//     {
-//         "@type": "SeekToAction",
-//         "target": "={seek_to_second_number}",
-//         "startOffset-input": "required name=seek_to_second_number"
-//     }
-// )
-// function changecontentUrl() {
-//     let newJson = {}
-//     newJson = addElementToObject(jsonData.value, "contentUrl", "duration");
-//     jsonData.value = newJson
-//     jsonData.value.contentUrl = contentUrl.value
-// }
-// function changeEmbedUrl() {
-//     let newJson = {}
-//     if(jsonData.value.contentUrl){
-//         newJson = addElementToObject(jsonData.value, "embedUrl", "contentUrl");
-//     }else{
-//         newJson = addElementToObject(jsonData.value, "embedUrl", "duration");
-//     }
-//     jsonData.value = newJson
-//     jsonData.value.embedUrl = embedUrl.value
-// }
-// function changeSeekTarget() {
-//     let newJson = {}
-//     if(jsonData.value.embedUrl){
-//             newJson = addElementToObject(jsonData.value, "potentialAction", "embedUrl");
-//     }else if (jsonData.value.contentUrl){
-//             newJson = addElementToObject(jsonData.value, "potentialAction", "contentUrl");
-//     }else{
-//         newJson = addElementToObject(jsonData.value, "potentialAction", "duration");
-//     }
-//     jsonData.value = newJson
-//     potentialAction.value.target = seekTargetUrl.value + "={seek_to_second_number}"
-//     jsonData.value.potentialAction = potentialAction.value
 // }
 </script>

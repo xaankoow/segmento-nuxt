@@ -208,8 +208,8 @@
                     </div>
                     <div class="w-[80%] flex gap-3">
                         <div class="w-[45%] h-[45px] flex items-center gap-6">
-                            <span class="text-sm" >مجموع رتبه</span>
-                            <InputNumber id="totalTime"  @input="changeReviewRating(index)" v-model="valuesReview[index].reviewRating.ratingValue"/>
+                            <span class="text-sm" >رتبه</span>
+                            <InputNumber id="totalTime"  @input="changeReviewRating(index)" v-model="valuesReview[index].reviewRating.ratingValue" :min="valuesAggregateRating.worstRating ? valuesAggregateRating.worstRating : 0" :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0"/>
                         </div>
                         <div class="w-[55%] h-[45px] flex items-center gap-6">
                             <span class="text-sm w-[80px]">تاریخ انتشار</span>
@@ -220,7 +220,7 @@
                         <div class="w-[35%]" >
                             <InputText  class="w-full align-start" placeholder=" نام نویسنده" @keyup="changeAuthorName(index)" v-model="valuesReview[index].author.name" />
                         </div>
-                        <div class="w-[60%]" >
+                        <div class="w-[62%]" >
                             <InputText  class="w-full align-start" placeholder=" ناشر" @keyup="changePublisherName()" v-model="valuesReview[index].publisher.name" />
                         </div>
                     </div>
@@ -612,46 +612,56 @@ const valuesAggregateRating = ref(
   },
 )
 function addAggregateRating(){
-    let newJson = {}
-    if(jsonData.value.mpn){
-        newJson = addElementToObject(jsonData.value, "aggregateRating", "mpn");
-    }else if(jsonData.value.gtin14){
-        newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin14");
-    }else if(jsonData.value.gtin13){
-        newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin13");
-    }else if(jsonData.value.gtin8){
-        newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin8");
-    }else if(jsonData.value.sku){
-        newJson = addElementToObject(jsonData.value, "aggregateRating", "sku");
-    }else if(jsonData.value.brand){
-        newJson = addElementToObject(jsonData.value, "aggregateRating", "brand");
-    }else{
-        newJson = addElementToObject(jsonData.value, "aggregateRating", "image");
+    if(!jsonData.value.aggregateRating){
+        let newJson = {}
+        if(jsonData.value.mpn){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "mpn");
+        }else if(jsonData.value.gtin14){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin14");
+        }else if(jsonData.value.gtin13){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin13");
+        }else if(jsonData.value.gtin8){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin8");
+        }else if(jsonData.value.sku){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "sku");
+        }else if(jsonData.value.brand){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "brand");
+        }else{
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "image");
+        }
+        jsonData.value = newJson
+        jsonData.value.aggregateRating = valuesAggregateRating.value
     }
-    jsonData.value = newJson
-    jsonData.value.aggregateRating = valuesAggregateRating.value
 }
 function changeAggregateRating() {
     addAggregateRating()
     aggregateAllow.value = true
     jsonData.value.aggregateRating.ratingValue = valuesAggregateRating.value.ratingValue
+    if (!valuesAggregateRating.value.ratingValue) {
+        delete jsonData.value.aggregateRating
+    }
 }
 function changeNumberOfRating() {
-    addAggregateRating()
-    jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount
+    if(jsonData.value.aggregateRating){
+        addAggregateRating()
+        jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount
+    }
 }
 function changeHighestRating() {
-    addAggregateRating()
-    jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating
+    if(jsonData.value.aggregateRating){
+        addAggregateRating()
+        jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating
+    }
 }
 function changeLowestRating() {
-    addAggregateRating()
-    jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating
+    if(jsonData.value.aggregateRating){
+        addAggregateRating()
+        jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating
+    }
 }
 // for review
 const reviewNumber= ref(0)
 const valuesReview = ref([
-
 ]);
 const valuesPublisher = ref(
     {"@type": "Organization", "name": ""}
@@ -716,7 +726,18 @@ function changeReviewBody(taskIndex) {
     jsonData.value.review[taskIndex].reviewBody = valuesReview.value[taskIndex].reviewBody
 }
 function changeReviewRating(taskIndex) {
+    addAggregateRating()
     jsonData.value.review[taskIndex].reviewRating.ratingValue = valuesReview.value[taskIndex].reviewRating.ratingValue
+    let sum = 0
+    let sumRatingNumber = 0
+    for (let i = 0; i < valuesReview.value.length; i++) {
+        sum += Number(valuesReview.value[i].reviewRating.ratingValue)
+        if(valuesReview.value[i].reviewRating.ratingValue){
+            sumRatingNumber ++
+        }
+    }
+    jsonData.value.aggregateRating.ratingValue = sum/sumRatingNumber
+    jsonData.value.aggregateRating.ratingCount = sumRatingNumber
 }
 function changeDatePublished(taskIndex) {
     jsonData.value.review[taskIndex].datePublished = valuesReview.value[taskIndex].datePublished
