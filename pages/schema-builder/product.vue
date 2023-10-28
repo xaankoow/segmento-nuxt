@@ -62,18 +62,18 @@
                                     <span>ویژگی شناسایی</span>
                                 </template>
                                 <template v-slot:option >
-                                    <InputCheckbox v-for="(element , index) in Object.keys(identifications)" :key="index" v-model="identifications[element].is_checked" @click="changeIdentification(element)" :id="element" >{{ element }}</InputCheckbox>
+                                    <InputCheckbox v-for="(element , index) in identifications" :key="index" v-model="identifications[index].is_checked" @click="changeIdentification(element.name , index)" :id="element.name" >{{ element.name }}</InputCheckbox>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
                     </div>
                 </div>
                 <div  class="w-full flex gap-[10%] flex-wrap ">
-                    <div class="w-[45%]"  v-for="(element , index) in Object.keys(identifications)" :key="index" >
-                        <InputText v-if="identifications[element].is_checked" :placeholder=element @keyup="changeIdentificationValue(element)" v-model="identificationValue[element]" />
+                    <div class="w-[45%] mb-2"  v-for="(element , index) in identifications.filter((el)=>el.is_checked == true)" :key="index" >
+                        <InputText :placeholder=element.name @keyup="changeIdentificationValue(element.name)" v-model="identificationValue[element.name]" />
                     </div>
                 </div>
-                <!-- identification end -->
+                <!-- identification end v-if="identifications[element].is_checked" -->
                 <!-- _______________________________________ -->
                 <!-- offer start -->
                 <div class="w-full flex flex-col gap-2">
@@ -213,7 +213,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addReview">
+                <button class="btn-secondary" @click="addReview">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -226,7 +226,7 @@
             <!-- _______________________________________ -->
             <div class="w-1/2 flex flex-col gap-2">
                 <div class="flex gap-2 w-full" >
-                    <button @click="deleteQuestions" class="btn-primary px-4" >
+                    <button @click="deleteAll" class="btn-primary px-4" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                             <rect width="24" height="24" fill="#D9D9D9"/>
@@ -267,10 +267,7 @@
 </template>
     
 <script setup>
-import Config from "~~/composables/Config";
-import { ref , onMounted } from "vue"
-const config = new Config();
-const dataForCopy = ref("")
+import { ref } from "vue"
 const jsonData = ref(
 {
   "@context": "https://schema.org/", 
@@ -288,6 +285,76 @@ function addElementToObject(object, newProperty, beforNewProperty) {
         }
     }
     return newObject;
+}
+// for copy button //
+const dataForCopy = ref("")
+onMounted(()=>{
+    dataForCopy.value = document.getElementById("code").textContent
+})
+// for delete button //
+function deleteAll() {
+    jsonData.value = 
+    {
+        "@context": "https://schema.org/", 
+        "@type": "Product", 
+        "name": "",
+        "image": ""
+    };
+    valuesProduct.value =
+    {
+        name: "",
+        image: "",
+        description: "",
+    };
+    valuesBrand.value =
+    {
+        "@type": "Brand",
+        "name": ""
+    };
+    identificationValue.value =
+    {
+        sku : "",
+        gtin8 : "",
+        gtin13 : "",
+        gtin14 : "",
+        mpn : ""
+    }
+    aggregateOffer.value = false
+    valuesAggregateOffer.value = 
+    {
+        "@type": "AggregateOffer",
+        "url": "",
+        "priceCurrency": "",
+        "lowPrice": "",
+        "highPrice": "",
+        "offerCount": ""
+    }
+    normalOffer.value = false
+    valuesNormalOffer.value = 
+    {
+    "@type": "Offer",
+    "url": "",
+    "priceCurrency": "",
+    "price": "",
+    "priceValidUntil": "",
+    "availability": "",
+    "itemCondition": ""
+    }
+    aggregateAllow.value = false
+    valuesAggregateRating.value = 
+    {
+    "@type": "AggregateRating",
+    "ratingValue": "",
+    "ratingCount": "",
+    "bestRating": "",
+    "worstRating": ""
+    };
+    readOnlyOk.value = false
+    reviewNumber.value = 0
+    valuesReview.value = [
+    ];
+    valuesPublisher.value =
+    {"@type": "Organization", "name": ""}
 }
 // for product //
 const valuesProduct = ref(
@@ -328,30 +395,35 @@ const identificationValue = ref({
     gtin14 : "",
     mpn : ""
 })
-const identifications = ref({
-    sku: {
+const identifications = ref([
+    {
+        name: "sku",
         is_checked: false,
         value: "sku"
     },
-    gtin8: {
+    {
+        name: "gtin8",
         is_checked: false,
         value: "gtin8"
     },
-    gtin13: {
+    {
+        name: "gtin13",
         is_checked: false,
         value: "gtin13"
     },
-    gtin14: {
+    {
+        name: "gtin14",
         is_checked: false,
         value: "gtin14"
     },
-    mpn: {
+    {
+        name: "mpn",
         is_checked: false,
         value: "mpn"
     },
-});
-function changeIdentification(el){
-    if (!identifications.value[el].is_checked){
+]);
+function changeIdentification(el , index){
+    if (!identifications.value[index].is_checked){
         let newJson = []
         newJson = addElementToObject(jsonData.value, el , "image");
         jsonData.value = newJson
@@ -761,7 +833,3 @@ function changePublisherName(taskIndex) {
     jsonData.value.review[taskIndex].publisher.name = valuesReview.value[taskIndex].publisher.name
 }
 </script>
-
-<style scoped>
-
-</style>

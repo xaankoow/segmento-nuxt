@@ -234,7 +234,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addReview">
+                <button class="btn-secondary" @click="addReview">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -247,7 +247,7 @@
             <!-- _______________________________________ -->
             <div class="w-1/2 flex flex-col gap-2">
                 <div class="flex gap-2 w-full" >
-                    <button @click="deleteQuestions" class="btn-primary px-4" >
+                    <button @click="deleteAll" class="btn-primary px-4" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                             <rect width="24" height="24" fill="#D9D9D9"/>
@@ -289,10 +289,8 @@
 </template>
     
 <script setup>
-import Config from "~~/composables/Config";
 import { ref , onMounted } from "vue"
 
-const config = new Config();
 const values = ref(
     {
         "@context": "https://schema.org/", 
@@ -368,6 +366,90 @@ const dataForCopy = ref("")
 onMounted(()=>{
     dataForCopy.value = document.getElementById("code").textContent
 })
+// for delete button //
+function deleteAll() {
+    values.value =
+    {
+        "@context": "https://schema.org/", 
+        "@type": "Recipe", 
+        "name": "",
+        "image": [],
+        "description": "",
+        "keywords": "",
+        "author": {
+            "@type": "Person",
+            "name": ""
+        },
+        "datePublished": "",
+        "prepTime": "",
+        "cookTime": "", 
+        "totalTime": "",
+        "recipeCategory": "", 
+        "recipeCuisine": "", 
+        "recipeYield": "",
+        "nutrition": {
+            "@type": "NutritionInformation",
+            "servingSize": "",
+            "calories": "",
+            "fatContent": ""
+        }  
+    };
+    valuesVideo.value = 
+    {
+        "@type": "VideoObject",
+        "name": "",
+        "description": "",
+        "thumbnailUrl": "",
+        "uploadDate": "", 
+        "contentUrl": "",
+        "embedUrl": ""
+    }
+    jsonData.value = 
+    {
+        "@context": "https://schema.org/", 
+        "@type": "Recipe", 
+        "name": "",
+        "image": "",
+        "description": "",
+        "keywords": "",
+        "author": {
+            "@type": "Person",
+            "name": ""
+        },
+        "datePublished": "",
+        "prepTime": "",
+        "cookTime": "", 
+        "totalTime": "", 
+        "nutrition": {
+            "@type": "NutritionInformation",
+            "calories": ""
+        }  
+    };
+    imageNumber.value = 1
+    ingredientNumber.value = 0
+    valuesIngredient.value = [
+
+    ]
+    stepNumber.value = 0
+    valuesStep.value = [
+
+    ]
+    aggregateAllow.value = false
+    valuesAggregateRating.value = 
+    {
+    "@type": "AggregateRating",
+    "ratingValue": "",
+    "ratingCount": "",
+    "bestRating": "",
+    "worstRating": ""
+    },
+    readOnlyOk.value = false
+    reviewNumber.value = 0
+    valuesReview.value = [
+    ];
+    valuesPublisher.value =
+    {"@type": "Organization", "name": ""}
+}
 // for details //
 // function deleteQuestions() {
 //     questionNumber.value = 1

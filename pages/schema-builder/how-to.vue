@@ -152,7 +152,7 @@
             <!-- _______________________________________ -->
             <div class="w-1/2 flex flex-col gap-2">
                 <div class="flex gap-2 w-full" >
-                    <button @click="deleteAllData" class="btn-primary px-4" >
+                    <button @click="deleteAll" class="btn-primary px-4" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                             <rect width="24" height="24" fill="#D9D9D9"/>
@@ -193,10 +193,8 @@
 </template>
     
 <script setup>
-import Config from "~~/composables/Config";
 import { ref , onMounted } from "vue"
 
-const config = new Config();
 const jsonData = ref(
 {
     "@context": "https://schema.org/", 
@@ -226,7 +224,7 @@ onMounted(()=>{
     dataForCopy.value = document.getElementById("code").textContent
 })
 // for delete button //
-function deleteAllData() {
+function deleteAll() {
     supplyNumber.value = 0
     toolsNumber.value = 0
     stepNumber.value = 1

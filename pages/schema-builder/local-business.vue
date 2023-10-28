@@ -129,7 +129,7 @@
                 <!-- oppening time -->
                 <div class="w-full flex flex-col gap-2">
                     <div class="w-full">
-                        <InputCheckbox @change="change24Hours" :id="oppeningHours" v-model="allHoursOppeningOk" >باز بودن به صورت 24 ساعته در 7 روز هفته</InputCheckbox>
+                        <InputCheckbox :id="hoursOppening" :name="hoursOppening" v-model="allHoursOppeningOk" @click="change24Hours()">باز بودن به صورت 24 ساعته در 7 روز هفته</InputCheckbox>
                     </div>
                     <div class="w-full flex flex-col gap-2">
                         <div class="w-full flex gap-2 items-center" v-for="(value , index) in valuesOppening" :key="index">
@@ -139,7 +139,14 @@
                                         <span>روزهای کاری</span>
                                     </template>
                                     <template v-slot:option>
-                                        <InputCheckbox v-for="(element , indexDays) in days[index]" :key="indexDays" v-model="days[index][indexDays].is_checked" @click="changeDays(element , index)" :id="element" >{{ days[index][indexDays].title }}</InputCheckbox>
+                                        <InputCheckbox v-model="days[index][0].is_checked" @change="changeDays('sunday' , index)" :id="'sunday'+index" :name="'sunday'+index" > شنبه </InputCheckbox>
+                                        <InputCheckbox v-model="days[index][1].is_checked" @click="changeDays('saturday' , index)" :id="'saturday'+index" :name="'saturday'+index" > یک شنبه </InputCheckbox>
+                                        <InputCheckbox v-model="days[index][2].is_checked" @click="changeDays('monday' , index)" :id="'monday'+index" :name="'monday'+index" > دو شنبه </InputCheckbox>
+                                        <InputCheckbox v-model="days[index][3].is_checked" @click="changeDays('thursday' , index)" :id="'thursday'+index" :name="'thursday'+index" > سه شنبه </InputCheckbox>
+                                        <InputCheckbox v-model="days[index][4].is_checked" @click="changeDays('wendsday' , index)" :id="'wendsday'+index" :name="'wendsday'+index" > چهار شنبه </InputCheckbox>
+                                        <InputCheckbox v-model="days[index][5].is_checked" @click="changeDays('tusday' , index)" :id="'tusday'+index" :name="'tusday'+index" > پنجشنبه </InputCheckbox>
+                                        <InputCheckbox v-model="days[index][6].is_checked" @click="changeDays('friday' , index)" :id="'friday'+index" :name="'friday'+index"> جمعه </InputCheckbox>
+                                        <!-- <InputCheckbox v-for="(element , indexDays) in days[index]" :key="indexDays" v-model="days[index][indexDays].is_checked" @click="changeDays(indexDays , index)" :id="element.name+index" >{{ days[index][indexDays].title }}</InputCheckbox> -->
                                     </template>
                                 </DropdownFinalDropDown>
                             </div>
@@ -155,7 +162,7 @@
                         </div>
                     </div>
                    
-                    <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addOpenHours" v-if="!allHoursOppeningOk">
+                    <button class="btn-secondary" @click="addOpenHours" v-if="!allHoursOppeningOk">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
@@ -174,17 +181,17 @@
                             </template>
                         </DropdownFinalDropDown>
                     </div>
-                    <div  class="w-full flex gap-[10%] flex-wrap relative">
-                        <div class="w-[45%] relative"  v-for="(element , index) in Object.keys(socialAccount)" :key="index" >
-                            <InputText v-if="socialAccount[element].is_checked" :placeholder=element  @keyup="changeSocialAccountValue(element , index)" v-model="socialAccountValue[element]" />
+                    <div  class="w-full flex gap-[10%]  flex-wrap">
+                        <div class="w-[45%] mb-2"  v-for="(element , index) in socialAccount.filter((el)=>el.is_checked == true)" :key="index" >
+                            <InputText :placeholder=element.name  @keyup="changeSocialAccountValue(element.name , index)" v-model="socialAccountValue[element.name]" />
                         </div>
                     </div>
                 </div>
                 <!-- department -->
-                <div class="w-full flex flex-col gap-2" v-for="value in departmentNumber" :key="value">
+                <div class="w-full flex flex-col gap-2 border-r-2 border-[#D9D9D9] pr-2" v-if="departmentNumber" v-for="(value , index) in departmentNumber" :key="index">
                     <!-- department jobs -->
-                    <div class="flex gap-2">
-                        <div class="w-1/2 h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
+                    <div class="flex gap-2 items-center">
+                        <div class="w-[45%] h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
                             <DropdownFinalDropDown class="z-index-[1100] h-[200px]">
                                 <template v-slot:title>
                                     <span>نوع کسب و کار شما</span>
@@ -194,7 +201,7 @@
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
-                        <div class="w-1/2 h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
+                        <div class="w-[45%] h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
                             <DropdownFinalDropDown class="z-index-[1100]" :disabled="!specificDepartmentJobsOk">
                                 <template v-slot:title>
                                     <span>عنوان کسب و کار شما</span>
@@ -215,34 +222,36 @@
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
+                        <button @click="deleteOneDepartment(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                            ✕
+                        </button>
                     </div>
                     <!-- department details -->
                     <div class="flex gap-2">
                         <div class="w-1/3" >
-                            <InputText class="w-full align-start" placeholder="نام" @keyup="changeDepartmentName" v-model="valuesDepartment.name" />
+                            <InputText class="w-full align-start" placeholder="نام" @keyup="changeDepartmentName(index)" v-model="valuesDepartment[index].name" />
                         </div>
                         <div class="w-1/3" >
-                            <InputURL class="w-full align-start" placeholder="لینک تصویر" @keyup="changeDepartmentImage" v-model="valuesDepartment.image" />
+                            <InputURL class="w-full align-start" placeholder="لینک تصویر" @keyup="changeDepartmentImage(index)" v-model="valuesDepartment[index].image" />
                         </div>
                         <div class="w-1/3 h-[45px] flex items-center gap-2">
-                            <InputText id="numberNumber" placeholder="شماره تلفن" @input="changeDepartmentTelephone" v-model="valuesDepartment.telephone"/>
+                            <InputText id="numberNumber" placeholder="شماره تلفن" @input="changeDepartmentTelephone(index)" v-model="valuesDepartment[index].telephone"/>
                         </div>
                     </div>
                 </div>
-                <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addDepartment">
+                <button class="btn-secondary" @click="addDepartment">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     افزودن دپارتمان 
                 </button>
-                
             </div>
             <!-- _______________________________________ -->
             <!-- left part -->
             <!-- _______________________________________ -->
             <div class="w-1/2 flex flex-col gap-2">
                 <div class="flex gap-2 w-full" >
-                    <button @click="deleteQuestions" class="btn-primary px-4" >
+                    <button @click="deleteAll" class="btn-primary px-4" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                             <rect width="24" height="24" fill="#D9D9D9"/>
@@ -279,16 +288,12 @@
                     </div>
                 </div>
             </div>
-    
         </div>
     </div>
 </template>
 
 <script setup>
-import Config from "~~/composables/Config";
 import { ref , onMounted } from "vue"
-
-const config = new Config();
 const values = ref(
     {
         "@context": "https://schema.org",
@@ -344,6 +349,74 @@ const dataForCopy = ref("")
 onMounted(()=>{
     dataForCopy.value = document.getElementById("code").textContent
 })
+// for delete button 
+function deleteAll() {
+    values.value =
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "",
+        "image": "",
+        "@id": "",
+        "url": "",
+        "telephone": "",
+        "priceRange": "",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "",
+            "addressLocality": "",
+            "addressRegion": "",
+            "postalCode": "",
+            "addressCountry": ""
+        }  
+    };
+    jsonData.value =
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "",
+        "image": "",
+        "@id": "",
+        "url": "",
+        "telephone": "",
+        "priceRange": "",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "",
+            "addressLocality": "",
+            "addressRegion": "",
+            "postalCode": "",
+            "addressCountry": ""
+        }  
+    };
+    valuesGeo.value = 
+    {
+        "@type": "GeoCoordinates",
+        "latitude": "",
+        "longitude": ""
+    }
+    allHoursOppeningOk.value = false
+    hoursOppeningNumber.value = 0
+    valuesOppening.value = [
+    ]
+    socialAccountValue.value = {
+    Facbook: "",
+    Twitter: "",
+    Instagram: "",
+    YouTube: "",
+    Linkdln: "",
+    Pinterest: "",
+    SoundCloud: "",
+    Wikipedia: "",
+    Github: "",
+    Website: "",
+    };
+    departmentNumber = 0
+    valuesDepartment = [
+
+    ];
+
+}
 
 // for jobs
 const specificJobsOk = ref(false)
@@ -1221,57 +1294,10 @@ function changeLongitude() {
 const allHoursOppeningOk = ref(false)
 const hoursOppeningNumber = ref(0)
 const days = ref([
-    [
-    {
-        name: "saturday",
-        is_checked: false,
-        value: "saturday",
-        title: "شنبه"
-    },
-    {
-        name: "sunday",
-        is_checked: false,
-        value: "sunday",
-        title: "یک شنبه"
-    },
-    {
-        name: "monday",
-        is_checked: false,
-        value: "monday",
-        title: "دوشنبه"
-    },
-    {
-        name: "tuesday",
-        is_checked: false,
-        value: "tuesday",
-        title: "سه شنبه"
-    },
-    {
-        name: "wendsday",
-        is_checked: false,
-        value: "wendsday",
-        title: "چهارشنبه"
-    },
-    {
-        name: "thursday",
-        is_checked: false,
-        value: "thursday",
-        title: "پنج شنبه"
-    },
-    {
-        name: "friday",
-        is_checked: false,
-        value: "friday",
-        title: "جمعه"
-    },
-    ]
+
 ])
 function change24Hours() {
-    if (allHoursOppeningOk.value == false) {
-        allHoursOppeningOk.value = true
-    }else{
-        allHoursOppeningOk.value = false
-    }
+    allHoursOppeningOk.value = !allHoursOppeningOk.value
 }
 const valuesOppening = ref([
 ]
@@ -1286,7 +1312,7 @@ function addOpenHours() {
         "opens": "",
         "closes": ""
     }
-    days.value[hoursOppeningNumber.value] = 
+    days.value[hoursOppeningNumber.value-1] = 
     [
     {
         name: "saturday",
@@ -1341,7 +1367,14 @@ function addOpenHours() {
         jsonData.value = newJson
         jsonData.value.openingHoursSpecification = valuesOppening.value
     }else{
-        jsonData.value.openingHoursSpecification[hoursOppeningNumber.value-1] = valuesOppening.value[hoursOppeningNumber.value-1]
+        jsonData.value.openingHoursSpecification[hoursOppeningNumber.value-1] =     
+        {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+        ],
+        "opens": "",
+        "closes": ""
+    }
     }
 }
 function deleteOneOpenHour(taskIndex){
@@ -1361,63 +1394,79 @@ function changeOpenHour(taskIndex) {
 function changecloseHour(taskIndex) {
     jsonData.value.openingHoursSpecification[taskIndex].closes = valuesOppening.value[taskIndex].closes
 }
-function changeDays(el , taskIndex) {
-    // valuesOppening.value[taskIndex].dayOfWeek.push(el.name)
-    jsonData.value.openingHoursSpecification[taskIndex].dayOfWeek.push(el.name)
+function changeDays(day , taskIndex) {
+    if(!jsonData.value.openingHoursSpecification[taskIndex].dayOfWeek.day){
+        valuesOppening.value[taskIndex].dayOfWeek.push(day)
+        jsonData.value.openingHoursSpecification[taskIndex].dayOfWeek.push(day)
+    }else{
+        delete jsonData.value.openingHoursSpecification[taskIndex].dayOfWeek.day
+    }
+
+    // jsonData.value.openingHoursSpecification[taskIndex].dayOfWeek.pop()
 }
 // soial
-const socialAccount = ref({
-    Facbook: {
+const socialAccount = ref([
+    {
+        name: "Facbook",
         is_checked: false,
         value: "Facbook",
         title: "فیسبوک"
     },
-    Twitter: {
+    {
+        name: "Twitter",
         is_checked: false,
         value: "Twitter",
         title: "توییتر"
     },
-    Instagram: {
+    {
+        name: "Instagram",
         is_checked: false,
         value: "Instagram",
         title: "اینستاگرام"
     },
-    YouTube: {
+    {
+        name: "YouTube",
         is_checked: false,
         value: "YouTube",
         title: "یوتیوب"
     },
-    Linkdln: {
+    {
+        name: "Linkdln",
         is_checked: false,
         value: "Linkdln",
         title: "لینکدن"
     },
-    Pinterest: {
+    {
+        name: "Pinterest",
         is_checked: false,
         value: "Pinterest",
         title: "پینترست"
     },
-    SoundCloud: {
+    {
+        name: "SoundCloud",
         is_checked: false,
         value: "SoundCloud",
         title: "سند کلود"
     },
-    Wikipedia: {
+    {
+        name: "Wikipedia",
         is_checked: false,
         value: "Wikipedia",
         title: "ویکی پدیا"
     },
-    Github: {
+    {
+        name: "Github",
         is_checked: false,
         value: "Github",
         title: "گیت هاب"
     },
-    Website: {
+    {
+        name: "Website",
         is_checked: false,
         value: "Website",
         title: "وب سایت"
     },
-});
+]);
 const socialAccountValue = ref({
     Facbook: "",
     Twitter: "",
@@ -1431,7 +1480,7 @@ const socialAccountValue = ref({
     Website: "",
 });
 function changeSocialAccount(el , index){
-    if (!socialAccount.value[el].is_checked){
+    if (!socialAccount.value[index].is_checked){
         if(!jsonData.value.sameAs){
             let newJson = []
             newJson = addElementToObject(jsonData.value, "sameAs" , "address");
@@ -2239,17 +2288,11 @@ const departmentJobs = ref({
     },
 })
 const valuesDepartment = ref([
-    {
-        "@type": "",
-        "name": "",
-        "image": "",
-        "telephone": "" 
-    }
-    ]
-)
+
+]);
 function addDepartment() {
     departmentNumber.value ++
-    valuesDepartment.value[departmentNumber] =     
+    valuesDepartment.value[departmentNumber.value-1] =     
     {
         "@type": "",
         "name": "",
@@ -2267,13 +2310,26 @@ function addDepartment() {
             newJson = addElementToObject(jsonData.value, "department", "address");
         }
         jsonData.value = newJson
-        jsonData.value.department = valuesDepartment.value
+        jsonData.value.department =[     
+        {
+            "@type": "",
+            "name": "",
+            "image": "",
+            "telephone": "" 
+        }
+        ]
     }else{
-        jsonData.value.department[departmentNumber.value-1] = valuesDepartment.value[departmentNumber.value-1]
+        jsonData.value.department[departmentNumber.value-1] =         
+        {
+            "@type": "",
+            "name": "",
+            "image": "",
+            "telephone": "" 
+        }
     }
 }
 function changeDepartmentJobs(el) {
-    jsonData.value.department[departmentNumber-1]["@type"] = el
+    jsonData.value.department[departmentNumber.value-1]["@type"] = el
     for (let job in departmentJobs.value) {
         if(job == el){
             departmentJobs.value[job].is_checked = true
@@ -2288,50 +2344,25 @@ function changeDepartmentJobs(el) {
         }
     }
 }
-function changeDepartmentName() {
-    jsonData.value.department[departmentNumber-1].name = valuesDepartment.value[departmentNumber-1].name
+function changeDepartmentName(taskIndex) {
+    jsonData.value.department[taskIndex].name = valuesDepartment.value[taskIndex].name
 }
-function changeDepartmentImage() {
-    jsonData.value.department[departmentNumber-1].image = valuesDepartment.value[departmentNumber-1].image
+function changeDepartmentImage(taskIndex) {
+    jsonData.value.department[taskIndex].image = valuesDepartment.value[taskIndex].image
 }
-function changeDepartmentTelephone() {
-    jsonData.value.department[departmentNumber-1].telephone = valuesDepartment.value[departmentNumber-1].telephone
+function changeDepartmentTelephone(taskIndex) {
+    jsonData.value.department[taskIndex].telephone = valuesDepartment.value[taskIndex].telephone
 }
-// // for delete button //
-// function deleteQuestions() {
-//     imageNumber.value = 1
-//     valuesVideo.value = 
-//     {
-//         "@context": "https://schema.org",
-//         "@type": "VideoObject",
-//         "name": "1",
-//         "description": "2",
-//         "thumbnailUrl": [],
-//         "uploadDate": "",
-//         "duration": ""
-//     };
-//     videoDuration.value = {
-//     min : "" ,
-//     sec : ""
-//     };
-//     jsonData.value =
-//     {
-//         "@context": "https://schema.org",
-//         "@type": "VideoObject",
-//         "name": "1",
-//         "description": "2",
-//         "thumbnailUrl": "",
-//         "uploadDate": "",
-//         "duration": ""
-//     };
-//     contentUrl.value = ""
-//     embedUrl.value = ""
-//     seekTargetUrl.value = ""
-//     potentialAction.value =
-//     {
-//         "@type": "SeekToAction",
-//         "target": "={seek_to_second_number}",
-//         "startOffset-input": "required name=seek_to_second_number"
-//     }
-// }
+function deleteOneDepartment(taskIndex){
+    if (departmentNumber.value > 1) {
+        departmentNumber.value --
+        valuesDepartment.value.splice(taskIndex, 1)
+        jsonData.value.department.splice(taskIndex, 1)
+    }else{
+        departmentNumber.value --
+        jsonData.value.department.splice(taskIndex, 1)
+        delete jsonData.value.department
+        valuesDepartment.value.splice(taskIndex, 1)
+    }
+}
 </script>
