@@ -53,12 +53,11 @@
               width="24"
               height="24"
             >
-              <rect width="24" height="24" fill="#D9D9D9" />
+              <rect width="24" height="24" />
             </mask>
             <g mask="url(#mask0_6223_9102)">
               <path
                 d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                fill="white"
               />
             </g>
           </svg>
@@ -66,7 +65,7 @@
         </button>
       </div>
       <!-- sort and filter -->
-      <div class="w-full h-20 flex items-end justify-between px-5">
+      <div class="w-full h-20 flex items-end justify-between px-5" v-if="false">
         <select
           name=""
           id=""
@@ -87,13 +86,16 @@
         <button class="w-[72px] h-10 btn-secondary">اعمال</button>
       </div>
       <!-- item -->
-      <div class="w-full h-[672px] px-5 flex items-center justify-center bg-white mt-7">
+      <div
+        class="w-full max-h-[660px] h-fit px-5 flex items-center justify-center bg-white mt-7"
+      >
         <div
           class="w-full h-full rounded-lg border border-base-400 overflow-hidden text-sm"
+          v-if="Boolean(Object.keys(data).length)"
         >
           <!-- Guide bar -->
           <table class="w-full h-auto bg-base-200 overflow-y-scroll" dir="rtl">
-            <tr class="w-full h-[61px]">
+            <tr class="w-full h-[60px]">
               <td class="h-[60px] w-[78px] text-center border-l border-base-400">
                 انتخاب
               </td>
@@ -114,9 +116,9 @@
             </tr>
           </table>
           <!-- Map on data -->
-          <div dir="ltr" class="w-full h-auto max-h-[672px] overflow-y-scroll">
+          <div dir="ltr" class="w-full h-auto max-h-[600px] overflow-y-scroll">
             <table class="w-full h-auto overflow-auto" dir="rtl">
-              <tr v-for="index in 11" :key="index" class="w-full h-[61px]">
+              <tr v-for="(page, index) in data" :key="index" class="w-full h-[60px]">
                 <td
                   class="h-[60px] w-[72px] text-center border-l border-base-400 border-b"
                 >
@@ -125,21 +127,22 @@
                 <td
                   class="h-[60px] w-[49px] text-center border-l border-base-400 border-b"
                 >
-                  {{ index }}
+                  {{ index + 1 }}
                 </td>
                 <td
                   class="h-[60px] w-[246px] text-center border-l border-base-400 border-b"
                   dir="ltr"
                 >
-                  https://segmento.ir/google-indexer/
+                  {{ page.link }}
                 </td>
                 <td
                   class="h-[60px] w-[197px] text-center border-l border-base-400 border-b"
                 >
-                  <div class="w-full h-full flex items-center justify-center">
-                    <button
-                      class="w-16 h-10 rounded-lg bg-base-250 text-[#488CDA] flex items-center justify-center"
-                    >
+                  <div
+                    class="w-full h-full flex items-center justify-center"
+                    v-if="page.positions_avrage === null"
+                  >
+                    <button class="w-16 h-10 btn-secondary" disabled>
                       <svg
                         width="24"
                         height="24"
@@ -156,34 +159,49 @@
                           width="24"
                           height="24"
                         >
-                          <rect width="24" height="24" fill="#D9D9D9" />
+                          <rect width="24" height="24" />
                         </mask>
                         <g mask="url(#mask0_6223_2719)">
                           <path
                             d="M12 18.75C11.7833 18.75 11.6043 18.6793 11.463 18.538C11.321 18.396 11.25 18.2167 11.25 18V12.75H6C5.78333 12.75 5.60433 12.679 5.463 12.537C5.321 12.3957 5.25 12.2167 5.25 12C5.25 11.7833 5.321 11.604 5.463 11.462C5.60433 11.3207 5.78333 11.25 6 11.25H11.25V6C11.25 5.78333 11.321 5.60433 11.463 5.463C11.6043 5.321 11.7833 5.25 12 5.25C12.2167 5.25 12.396 5.321 12.538 5.463C12.6793 5.60433 12.75 5.78333 12.75 6V11.25H18C18.2167 11.25 18.396 11.3207 18.538 11.462C18.6793 11.604 18.75 11.7833 18.75 12C18.75 12.2167 18.6793 12.3957 18.538 12.537C18.396 12.679 18.2167 12.75 18 12.75H12.75V18C12.75 18.2167 12.6793 18.396 12.538 18.538C12.396 18.6793 12.2167 18.75 12 18.75Z"
-                            fill="#488CDA"
                           />
                         </g>
                       </svg>
                     </button>
                   </div>
+                  <div v-else-if="page.positions_avrage === 0">بدون رتبه</div>
+                  <div v-else>
+                    {{ page.positions_avrage }}
+                  </div>
                 </td>
                 <td
                   class="h-[60px] w-[147px] text-center border-l border-base-400 border-b"
+                  dir="ltr"
                 >
-                  1401/02/20
+                  <span v-if="page.updated_at === null"> بدون دیتا </span>
+                  <span v-else>
+                    {{
+                      jalaliMoment(page.updated_at, "YYYY-MM-DD HH:mm:ss").format(
+                        "jYYYY/jMM/jDD"
+                      )
+                    }}
+                  </span>
                 </td>
                 <td
                   class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6"
                 >
-                  <p>{{ 80 }} درصد</p>
+                  <p>{{ page.page_status }} درصد</p>
                   <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
                     <div
                       class="h-[10px] rounded-xl"
                       :style="{
-                        width: '80%',
+                        width: `${page.page_status}%`,
                         backgroundColor:
-                          80 <= 25 ? '#F35242' : 80 <= 50 ? '#FFCE47' : '#10CCAE',
+                          page.page_status <= 25
+                            ? '#F35242'
+                            : page.page_status <= 60
+                            ? '#FFCE47'
+                            : '#10CCAE',
                       }"
                     ></div>
                   </div>
@@ -191,7 +209,7 @@
                 <td class="h-[60px] w-[76px] text-center border-base-400 border-b">
                   <div class="w-full h-full flex items-center justify-center">
                     <NuxtLink
-                      :to="`/money-pages/${index}`"
+                      :to="`/money-pages/${page.uuid}`"
                       class="w-16 h-10 btn-secondary"
                     >
                       <svg
@@ -225,9 +243,29 @@
             </table>
           </div>
         </div>
+        <div
+          class="flex flex-col pt-2 border border-base-400 rounded-[3px] text-primary-disabled h-full w-full"
+          v-else
+        >
+          <div class="flex flex-col items-center justify-center w-full h-full gap-3">
+            <svg
+              width="109"
+              height="108"
+              viewBox="0 0 109 108"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M29.2317 84.584C30.4566 84.584 31.5284 84.1512 32.4471 83.2856C33.3657 82.4159 33.8251 81.3176 33.8251 79.9906V49.3685C33.8251 48.0415 33.3657 46.9432 32.4471 46.0735C31.5284 45.208 30.4566 44.7752 29.2317 44.7752C27.9048 44.7752 26.8085 45.208 25.9429 46.0735C25.0732 46.9432 24.6384 48.0415 24.6384 49.3685V79.9906C24.6384 81.3176 25.0732 82.4159 25.9429 83.2856C26.8085 84.1512 27.9048 84.584 29.2317 84.584ZM52.9639 84.584C54.2909 84.584 55.3892 84.1512 56.2589 83.2856C57.1244 82.4159 57.5572 81.3176 57.5572 79.9906V30.9952C57.5572 29.6682 57.1244 28.572 56.2589 27.7064C55.3892 26.8367 54.2909 26.4019 52.9639 26.4019C51.6369 26.4019 50.5407 26.8367 49.6751 27.7064C48.8054 28.572 48.3706 29.6682 48.3706 30.9952V79.9906C48.3706 81.3176 48.8054 82.4159 49.6751 83.2856C50.5407 84.1512 51.6369 84.584 52.9639 84.584ZM76.6961 84.584C78.023 84.584 79.1213 84.1512 79.991 83.2856C80.8566 82.4159 81.2894 81.3176 81.2894 79.9906V67.7418C81.2894 66.4148 80.8566 65.3165 79.991 64.4468C79.1213 63.5812 78.023 63.1485 76.6961 63.1485C75.4712 63.1485 74.3994 63.5812 73.4808 64.4468C72.5621 65.3165 72.1028 66.4148 72.1028 67.7418V79.9906C72.1028 81.3176 72.5621 82.4159 73.4808 83.2856C74.3994 84.1512 75.4712 84.584 76.6961 84.584ZM11.9302 107.551C8.86801 107.551 6.26513 106.479 4.12158 104.335C1.97803 102.192 0.90625 99.5888 0.90625 96.5266V14.4592C0.90625 11.397 1.97803 8.79414 4.12158 6.65059C6.26513 4.50704 8.86801 3.43526 11.9302 3.43526H63.3754C64.7024 3.43526 65.8007 3.86805 66.6704 4.73364C67.536 5.60331 67.9688 6.70162 67.9688 8.02858C67.9688 9.35554 67.536 10.4518 66.6704 11.3174C65.8007 12.1871 64.7024 12.6219 63.3754 12.6219H11.9302C11.4199 12.6219 10.9871 12.8016 10.6318 13.1609C10.2725 13.5161 10.0929 13.9489 10.0929 14.4592V96.5266C10.0929 97.037 10.2725 97.4718 10.6318 97.8311C10.9871 98.1863 11.4199 98.3639 11.9302 98.3639H93.9976C94.508 98.3639 94.9428 98.1863 95.3021 97.8311C95.6573 97.4718 95.8349 97.037 95.8349 96.5266V45.0814C95.8349 43.7544 96.2677 42.6561 97.1333 41.7864C98.003 40.9209 99.1013 40.4881 100.428 40.4881C101.755 40.4881 102.854 40.9209 103.723 41.7864C104.589 42.6561 105.022 43.7544 105.022 45.0814V96.5266C105.022 99.5888 103.95 102.192 101.806 104.335C99.6627 106.479 97.0598 107.551 93.9976 107.551H11.9302ZM91.2416 34.0574C89.9146 34.0574 88.8163 33.6226 87.9466 32.7529C87.0811 31.8873 86.6483 30.791 86.6483 29.4641V21.8086H78.9927C77.6658 21.8086 76.5695 21.3737 75.7039 20.504C74.8343 19.6385 74.3994 18.5422 74.3994 17.2152C74.3994 15.8883 74.8343 14.792 75.7039 13.9264C76.5695 13.0567 77.6658 12.6219 78.9927 12.6219H86.6483V4.96637C86.6483 3.63941 87.0811 2.54109 87.9466 1.67143C88.8163 0.805839 89.9146 0.373047 91.2416 0.373047C92.5686 0.373047 93.6669 0.805839 94.5365 1.67143C95.4021 2.54109 95.8349 3.63941 95.8349 4.96637V12.6219H103.49C104.817 12.6219 105.916 13.0567 106.785 13.9264C107.651 14.792 108.084 15.8883 108.084 17.2152C108.084 18.5422 107.651 19.6385 106.785 20.504C105.916 21.3737 104.817 21.8086 103.49 21.8086H95.8349V29.4641C95.8349 30.791 95.4021 31.8873 94.5365 32.7529C93.6669 33.6226 92.5686 34.0574 91.2416 34.0574Z"
+                fill="#D9D9D9"
+              />
+            </svg>
+            <span class="text-base-350">test</span>
+          </div>
+        </div>
       </div>
       <!-- stop button -->
-      <div class="w-full h-24 flex items-center justify-end px-5">
+      <div class="w-full h-24 flex items-center justify-end px-5" v-if="false">
         <button class="w-[156px] h-10 btn-danger">
           <svg
             width="16"
@@ -250,9 +288,27 @@
 
 <script setup>
 import Config from "~~/composables/Config";
+import jalaliMoment from "jalali-moment";
 import Request from "~~/Api/Request";
 
 const request = new Request("v1");
 const current_page = "pages/money-pages";
 const config = new Config();
+const data = ref({});
+
+async function load_data() {
+  let res = await request
+    .get("money-pages")
+    .then((res) => {
+      data.value = res.data;
+      console.log(data.value);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+onBeforeMount(() => {
+  load_data();
+});
 </script>
