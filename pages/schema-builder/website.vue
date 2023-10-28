@@ -86,7 +86,7 @@
                 </div>
                 <div class="w-full h-full" >
                     <div id="code" ref="code" class="w-full min-h-[500px]">
-                        <SchemaCode  :jsonData="jsonData" />
+                        <JsonPrettify  :jsonData="jsonData" />
                     </div>
                 </div>
             </div>

@@ -181,8 +181,66 @@
                         افزودن مرحله   
                     </button>
                 </div>
-
-          
+                <!-- aggregateRating start -->
+                <div class="w-full flex gap-3">
+                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                        <span class="text-sm" >مجموع رتبه</span>
+                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"  id="totalTime"  @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue"/>
+                    </div>
+                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                        <span class="text-sm">تعداد رتبه</span>
+                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="price" @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount"/>
+                    </div>
+                </div>
+                <div class="w-full flex gap-3">
+                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                        <span class="text-sm" >بالاترین رتبه</span>
+                        <InputNumber id="totalTime" @input="changeHighestRating()" v-model="valuesAggregateRating.bestRating"/>
+                    </div>
+                    <div class="w-[40%] h-[45px] flex items-center gap-6">
+                        <span class="text-sm">پایین ترین رتبه</span>
+                        <InputNumber id="price" @input="changeLowestRating()" v-model="valuesAggregateRating.worstRating"/>
+                    </div>
+                </div>
+                <!-- aggregateRating end -->
+                <!-- _______________________________________ -->
+                <!-- review start -->
+                <div class="w-full flex flex-col gap-2" v-if="reviewNumber>0" v-for="(value , index) in valuesReview" :key="index" >
+                    <div class="w-full flex items-center gap-6" >
+                        <InputText  class="w-[80%] align-start" style="width: 80%;" placeholder="عنوان بررسی" @keyup="changeReviewName(index)" v-model="valuesReview[index].name" />
+                        <button @click="deleteOneReview(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                            ✕
+                        </button>
+                    </div>
+                    <div class="w-[80%] h-full align-start" >
+                        <InputTextArea class="h-36" @keyup="changeReviewBody(index)" placeholder=" توضیحات محصول" v-model="valuesReview[index].reviewBody" />
+                    </div>
+                    <div class="w-[80%] flex gap-3">
+                        <div class="w-[45%] h-[45px] flex items-center gap-6">
+                            <span class="text-sm" >رتبه</span>
+                            <InputNumber id="totalTime"  @input="changeReviewRating(index)" v-model="valuesReview[index].reviewRating.ratingValue" :min="valuesAggregateRating.worstRating ? valuesAggregateRating.worstRating : 0" :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0"/>
+                        </div>
+                        <div class="w-[55%] h-[45px] flex items-center gap-6">
+                            <span class="text-sm w-[80px]">تاریخ انتشار</span>
+                            <InputDate class="w-[140px]" id="date" @change="changeReviewDatePublished(index)" v-model="valuesReview[index].datePublished"/>
+                        </div>
+                    </div>
+                    <div class="w-[80%] flex gap-3">
+                        <div class="w-[35%]" >
+                            <InputText  class="w-full align-start" placeholder=" نام نویسنده" @keyup="changeReviewAuthorName(index)" v-model="valuesReview[index].author.name" />
+                        </div>
+                        <div class="w-[62%]" >
+                            <InputText  class="w-full align-start" placeholder=" ناشر" @keyup="changePublisherName()" v-model="valuesReview[index].publisher.name" />
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-primary bg-[#F2F5F7] px-5 text-[#488CDA]" @click="addReview">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    افزودن بررسی 
+                </button>
+                <!-- review end -->
             </div>
             <!-- _______________________________________ -->
             <!-- left part -->
@@ -222,7 +280,7 @@
                 </div>
                 <div class="w-full h-full" >
                     <div id="code" ref="code" class="w-full min-h-[500px]">
-                        <SchemaCode  :jsonData="jsonData" />
+                        <JsonPrettify  :jsonData="jsonData" />
                     </div>
                 </div>
             </div>
@@ -599,6 +657,160 @@ function changeStepImage (taskIndex) {
         jsonData.value.recipeInstructions[taskIndex].image = valuesStep.value[taskIndex].image
     }
 }
-
-
+// for aggregate rating
+const aggregateAllow = ref(false)
+const valuesAggregateRating = ref(
+    {
+    "@type": "AggregateRating",
+    "ratingValue": "",
+    "ratingCount": "",
+    "bestRating": "",
+    "worstRating": ""
+  },
+)
+function addAggregateRating(){
+    if(!jsonData.value.aggregateRating){
+        let newJson = {}
+        if(jsonData.value.mpn){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "mpn");
+        }else if(jsonData.value.gtin14){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin14");
+        }else if(jsonData.value.gtin13){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin13");
+        }else if(jsonData.value.gtin8){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin8");
+        }else if(jsonData.value.sku){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "sku");
+        }else if(jsonData.value.brand){
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "brand");
+        }else{
+            newJson = addElementToObject(jsonData.value, "aggregateRating", "image");
+        }
+        jsonData.value = newJson
+        jsonData.value.aggregateRating = valuesAggregateRating.value
+    }
+}
+function changeAggregateRating() {
+    addAggregateRating()
+    aggregateAllow.value = true
+    jsonData.value.aggregateRating.ratingValue = valuesAggregateRating.value.ratingValue
+    if (!valuesAggregateRating.value.ratingValue) {
+        delete jsonData.value.aggregateRating
+    }
+}
+function changeNumberOfRating() {
+    if(jsonData.value.aggregateRating){
+        addAggregateRating()
+        jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount
+    }
+}
+function changeHighestRating() {
+    if(jsonData.value.aggregateRating){
+        addAggregateRating()
+        jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating
+    }
+}
+function changeLowestRating() {
+    if(jsonData.value.aggregateRating){
+        addAggregateRating()
+        jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating
+    }
+}
+// for review
+const readOnlyOk= ref(false)
+const reviewNumber= ref(0)
+const valuesReview = ref([
+]);
+const valuesPublisher = ref(
+    {"@type": "Organization", "name": ""}
+)
+function deleteOneReview(taskIndex){
+    if (reviewNumber.value > 1) {
+        reviewNumber.value --
+        valuesReview.value.splice(taskIndex, 1)
+    }else{
+        reviewNumber.value --
+        jsonData.value.review.splice(taskIndex, 1)
+        delete jsonData.value.review
+        valuesReview.value.splice(taskIndex, 1)
+    }
+}
+function addReview() {
+    reviewNumber.value ++
+    valuesReview.value[reviewNumber.value-1] = 
+    {
+        "@type": "Review",
+        "name": "",
+        "reviewBody": "",
+        "datePublished":"",
+        "reviewRating":{
+            "@type": "Rating",
+            "ratingValue": "",
+            "bestRating": "",
+            "worstRating": ""
+        },
+        "author": {"@type": "Person", "name": ""},
+        "publisher": {"@type": "Organization", "name": ""}
+    }
+    let newJson = {}
+    if(!jsonData.value.review){
+        if(jsonData.value.aggregateRating){
+            newJson = addElementToObject(jsonData.value, "review", "aggregateRating");
+        }else if(jsonData.value.mpn){
+            newJson = addElementToObject(jsonData.value, "review", "mpn");
+        }else if(jsonData.value.gtin14){
+            newJson = addElementToObject(jsonData.value, "review", "gtin14");
+        }else if(jsonData.value.gtin13){
+            newJson = addElementToObject(jsonData.value, "review", "gtin13");
+        }else if(jsonData.value.gtin8){
+            newJson = addElementToObject(jsonData.value, "review", "gtin8");
+        }else if(jsonData.value.sku){
+            newJson = addElementToObject(jsonData.value, "review", "sku");
+        }else if(jsonData.value.brand){
+            newJson = addElementToObject(jsonData.value, "review", "brand");
+        }else{
+            newJson = addElementToObject(jsonData.value, "review", "image");
+        }
+        jsonData.value = newJson
+        jsonData.value.review = valuesReview.value
+    }else{
+        jsonData.value.review[reviewNumber.value-1] = valuesReview.value[reviewNumber.value-1]
+    }
+}
+function changeReviewName(taskIndex) {
+    jsonData.value.review[taskIndex].name = valuesReview.value[taskIndex].name
+}
+function changeReviewBody(taskIndex) {
+    jsonData.value.review[taskIndex].reviewBody = valuesReview.value[taskIndex].reviewBody
+}
+function changeReviewRating(taskIndex) {
+    if (valuesReview.value[taskIndex].reviewRating.ratingValue) {
+        readOnlyOk.value = true
+    }else{
+        readOnlyOk.value = false
+    }
+    addAggregateRating()
+    jsonData.value.review[taskIndex].reviewRating.ratingValue = valuesReview.value[taskIndex].reviewRating.ratingValue
+    let sum = 0
+    let sumRatingNumber = 0
+    for (let i = 0; i < valuesReview.value.length; i++) {
+        sum += Number(valuesReview.value[i].reviewRating.ratingValue)
+        if(valuesReview.value[i].reviewRating.ratingValue){
+            sumRatingNumber ++
+        }
+    }
+    jsonData.value.aggregateRating.ratingValue = sum/sumRatingNumber
+    jsonData.value.aggregateRating.ratingCount = sumRatingNumber
+    valuesAggregateRating.value.ratingValue = sum/sumRatingNumber
+    valuesAggregateRating.value.ratingCount = sumRatingNumber
+}
+function changeReviewDatePublished(taskIndex) {
+    jsonData.value.review[taskIndex].datePublished = valuesReview.value[taskIndex].datePublished
+}
+function changeReviewAuthorName(taskIndex) {
+    jsonData.value.review[taskIndex].author.name = valuesReview.value[taskIndex].author.name
+}
+function changePublisherName(taskIndex) {
+    jsonData.value.review[taskIndex].publisher.name = valuesReview.value[taskIndex].publisher.name
+}
 </script>

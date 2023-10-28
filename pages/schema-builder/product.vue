@@ -69,20 +69,8 @@
                     </div>
                 </div>
                 <div  class="w-full flex gap-[10%] flex-wrap ">
-                    <div class="w-[45%]" v-if="identifications.sku.is_checked" >
-                        <InputText placeholder="sku" @keyup="changeSkuValue()" v-model="skuValue" />
-                    </div>
-                    <div class="w-[45%]" v-if="identifications.gtin8.is_checked" >
-                        <InputText placeholder="gtin8" @keyup="changeGtin8Value()" v-model="gtin8Value" />
-                    </div>
-                    <div class="w-[45%]" v-if="identifications.gtin13.is_checked" >
-                        <InputText placeholder="gtin13" @keyup="changeGtin13Value()" v-model="gtin13Value" />
-                    </div>
-                    <div class="w-[45%]" v-if="identifications.gtin14.is_checked" >
-                        <InputText placeholder="gtin14" @keyup="changeGtin14Value()" v-model="gtin14Value" />
-                    </div>
-                    <div class="w-[45%]" v-if="identifications.mpn.is_checked" >
-                        <InputText placeholder="mpn" @keyup="changeMpnValue()" v-model="mpnValue" />
+                    <div class="w-[45%]"  v-for="(element , index) in Object.keys(identifications)" :key="index" >
+                        <InputText v-if="identifications[element].is_checked" :placeholder=element @keyup="changeIdentificationValue(element)" v-model="identificationValue[element]" />
                     </div>
                 </div>
                 <!-- identification end -->
@@ -103,7 +91,7 @@
                             </DropdownFinalDropDown>
                         </div>
                         <div class="w-[45%] h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
-                            <DropdownFinalDropDown class="z-index-[1100]">
+                            <DropdownFinalDropDown class="z-index-[1100]" :disabled="offer.noOffer.is_checked">
                                 <template v-slot:title>
                                     <span> واحد پول</span>
                                 </template>
@@ -176,11 +164,11 @@
                 <div class="w-full flex gap-3">
                     <div class="w-[40%] h-[45px] flex items-center gap-6">
                         <span class="text-sm" >مجموع رتبه</span>
-                        <InputNumber id="totalTime"  @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue"/>
+                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"  id="totalTime"  @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue"/>
                     </div>
                     <div class="w-[40%] h-[45px] flex items-center gap-6">
                         <span class="text-sm">تعداد رتبه</span>
-                        <InputNumber id="price" @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount"/>
+                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="price" @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount"/>
                     </div>
                 </div>
                 <div class="w-full flex gap-3">
@@ -270,7 +258,7 @@
                 </div>
                 <div class="w-full h-full" >
                     <div id="code" ref="code" class="w-full min-h-[500px]">
-                        <SchemaCode  :jsonData="jsonData" />
+                        <JsonPrettify  :jsonData="jsonData" />
                     </div>
                 </div>
             </div>
@@ -333,6 +321,13 @@ function changeBrandName() {
     jsonData.value.brand = valuesBrand.value
 }
 // for identification
+const identificationValue = ref({
+    sku : "",
+    gtin8 : "",
+    gtin13 : "",
+    gtin14 : "",
+    mpn : ""
+})
 const identifications = ref({
     sku: {
         is_checked: false,
@@ -365,20 +360,8 @@ function changeIdentification(el){
         delete jsonData.value[el]
     }
 }
-function changeSkuValue() {
-   jsonData.value.sku = skuValue.value
-}
-function changeGtin8Value() {
-   jsonData.value.gtin8 = gtin8Value.value
-}
-function changeGtin13Value() {
-   jsonData.value.gtin13 = gtin13Value.value
-}
-function changeGtin14Value() {
-   jsonData.value.gtin14 = gtin14Value.value
-}
-function changeMpnValue() {
-   jsonData.value.mpn = mpnValue.value
+function changeIdentificationValue(el) {
+   jsonData.value[el] = identificationValue.value[el]
 }
 // for offer
 const offer = ref({
@@ -391,12 +374,19 @@ const offer = ref({
         value: "offer"
     },
     noOffer: {
-        is_checked: false,
+        is_checked: true,
         value: "euro"
     },
 });
 function changeOffer(el) {
     if (el == "aggregateOffer") {
+        for (let i in offer.value) {
+            if(i == el){
+                offer.value[i].is_checked = true
+            }else{
+                offer.value[i].is_checked = false
+            }
+        }
         aggregateOffer.value = true
         normalOffer.value = false
         let newJson = {}
@@ -408,6 +398,13 @@ function changeOffer(el) {
         jsonData.value = newJson
         jsonData.value.offers = valuesAggregateOffer.value
     }else if (el == "offer"){
+        for (let i in offer.value) {
+            if(i == el){
+                offer.value[i].is_checked = true
+            }else{
+                offer.value[i].is_checked = false
+            }
+        }
         normalOffer.value = true
         aggregateOffer.value = false
         let newJson = {}
@@ -419,6 +416,13 @@ function changeOffer(el) {
         jsonData.value = newJson
         jsonData.value.offers = valuesNormalOffer.value
     }else{
+        for (let i in offer.value) {
+            if(i == el){
+                offer.value[i].is_checked = true
+            }else{
+                offer.value[i].is_checked = false
+            }
+        }
         normalOffer.value = false
         aggregateOffer.value = false
         if (jsonData.value.offers) {
@@ -660,6 +664,7 @@ function changeLowestRating() {
     }
 }
 // for review
+const readOnlyOk= ref(false)
 const reviewNumber= ref(0)
 const valuesReview = ref([
 ]);
@@ -726,6 +731,11 @@ function changeReviewBody(taskIndex) {
     jsonData.value.review[taskIndex].reviewBody = valuesReview.value[taskIndex].reviewBody
 }
 function changeReviewRating(taskIndex) {
+    if (valuesReview.value[taskIndex].reviewRating.ratingValue) {
+        readOnlyOk.value = true
+    }else{
+        readOnlyOk.value = false
+    }
     addAggregateRating()
     jsonData.value.review[taskIndex].reviewRating.ratingValue = valuesReview.value[taskIndex].reviewRating.ratingValue
     let sum = 0
@@ -738,6 +748,8 @@ function changeReviewRating(taskIndex) {
     }
     jsonData.value.aggregateRating.ratingValue = sum/sumRatingNumber
     jsonData.value.aggregateRating.ratingCount = sumRatingNumber
+    valuesAggregateRating.value.ratingValue = sum/sumRatingNumber
+    valuesAggregateRating.value.ratingCount = sumRatingNumber
 }
 function changeDatePublished(taskIndex) {
     jsonData.value.review[taskIndex].datePublished = valuesReview.value[taskIndex].datePublished
