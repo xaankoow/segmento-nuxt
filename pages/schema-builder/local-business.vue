@@ -197,28 +197,28 @@
                                     <span>نوع کسب و کار شما</span>
                                 </template>
                                 <template v-slot:option  >
-                                    <InputRadio v-for="(element , index) in Object.keys(departmentJobs)" :key="index" v-model="departmentJobs[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs[element].title }}</InputRadio>
+                                    <InputRadio v-for="(element , indexjob) in Object.keys(departmentJobs)" :key="indexjob" v-model="departmentJobs[element].is_checked" @click="changeDepartmentJobs(element , index)" :id="element+index+'department'" :name="departmentJobs" >{{ departmentJobs[element].title }}</InputRadio>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
                         <div class="w-[45%] h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
-                            <DropdownFinalDropDown class="z-index-[1100]" :disabled="!specificDepartmentJobsOk">
+                            <DropdownFinalDropDown class="z-index-[1100]" :disabled="!specificDepartmentJobsOk[index]">
                                 <template v-slot:title>
                                     <span>عنوان کسب و کار شما</span>
                                 </template>
                                 <template v-slot:option>
-                                    <InputRadio v-if="departmentJobs.AutomotiveBusiness.is_checked" v-for="(element , index) in Object.keys(departmentJobs.AutomotiveBusiness.specificTypes)" :key="index" v-model="departmentJobs.AutomotiveBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.AutomotiveBusiness.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.EmergencyService.is_checked" v-for="(element , index) in Object.keys(departmentJobs.EmergencyService.specificTypes)" :key="index" v-model="departmentJobs.EmergencyService.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.EmergencyService.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.EntertainmentBusiness.is_checked" v-for="(element , index) in Object.keys(departmentJobs.EntertainmentBusiness.specificTypes)" :key="index" v-model="departmentJobs.EntertainmentBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.EntertainmentBusiness.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.GovernmentOffice.is_checked" v-for="(element , index) in Object.keys(departmentJobs.GovernmentOffice.specificTypes)" :key="index" v-model="departmentJobs.GovernmentOffice.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.GovernmentOffice.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.FinancialService.is_checked" v-for="(element , index) in Object.keys(departmentJobs.FinancialService.specificTypes)" :key="index" v-model="departmentJobs.FinancialService.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.FinancialService.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.FoodEstablishment.is_checked" v-for="(element , index) in Object.keys(departmentJobs.FoodEstablishment.specificTypes)" :key="index" v-model="departmentJobs.FoodEstablishment.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.FoodEstablishment.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.HomeAndConstructionBusiness.is_checked" v-for="(element , index) in Object.keys(departmentJobs.HomeAndConstructionBusiness.specificTypes)" :key="index" v-model="departmentJobs.HomeAndConstructionBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="jobs" >{{ departmentJobs.HomeAndConstructionBusiness.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.LegalService.is_checked" v-for="(element , index) in Object.keys(departmentJobs.LegalService.specificTypes)" :key="index" v-model="departmentJobs.LegalService.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.LegalService.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.LodgingBusiness.is_checked" v-for="(element , index) in Object.keys(departmentJobs.LodgingBusiness.specificTypes)" :key="index" v-model="departmentJobs.LodgingBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.LodgingBusiness.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.MedicalBusiness.is_checked" v-for="(element , index) in Object.keys(departmentJobs.MedicalBusiness.specificTypes)" :key="index" v-model="departmentJobs.MedicalBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.MedicalBusiness.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.SportsActivityLocation.is_checked" v-for="(element , index) in Object.keys(departmentJobs.SportsActivityLocation.specificTypes)" :key="index" v-model="departmentJobs.SportsActivityLocation.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="jobs" >{{ departmentJobs.SportsActivityLocation.specificTypes[element].title }}</InputRadio>
-                                    <InputRadio v-if="departmentJobs.Store.is_checked" v-for="(element , index) in Object.keys(departmentJobs.Store.specificTypes)" :key="index" v-model="departmentJobs.Store.specificTypes[element].is_checked" @click="changeDepartmentJobs(element)" :id="element" :name="departmentJobs" >{{ departmentJobs.Store.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.AutomotiveBusiness.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.AutomotiveBusiness.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.AutomotiveBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element , index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.AutomotiveBusiness.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.EmergencyService.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.EmergencyService.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.EmergencyService.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.EmergencyService.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.EntertainmentBusiness.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.EntertainmentBusiness.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.EntertainmentBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.EntertainmentBusiness.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.GovernmentOffice.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.GovernmentOffice.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.GovernmentOffice.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.GovernmentOffice.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.FinancialService.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.FinancialService.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.FinancialService.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.FinancialService.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.FoodEstablishment.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.FoodEstablishment.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.FoodEstablishment.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.FoodEstablishment.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.HomeAndConstructionBusiness.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.HomeAndConstructionBusiness.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.HomeAndConstructionBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="jobs" >{{ departmentJobs.HomeAndConstructionBusiness.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.LegalService.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.LegalService.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.LegalService.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.LegalService.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.LodgingBusiness.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.LodgingBusiness.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.LodgingBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.LodgingBusiness.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.MedicalBusiness.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.MedicalBusiness.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.MedicalBusiness.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.MedicalBusiness.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.SportsActivityLocation.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.SportsActivityLocation.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.SportsActivityLocation.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="jobs" >{{ departmentJobs.SportsActivityLocation.specificTypes[element].title }}</InputRadio>
+                                    <InputRadio v-if="departmentJobs.Store.is_checked" v-for="(element , indexSpeceficJob) in Object.keys(departmentJobs.Store.specificTypes)" :key="indexSpeceficJob" v-model="departmentJobs.Store.specificTypes[element].is_checked" @click="changeDepartmentJobs(element, index)" :id="element+index" :name="departmentJobs" >{{ departmentJobs.Store.specificTypes[element].title }}</InputRadio>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
@@ -419,7 +419,7 @@ function deleteAll() {
 }
 
 // for jobs
-const specificJobsOk = ref(false)
+const specificJobsOk = ref([])
 const specificJobs = ["AutomotiveBusiness", "EmergencyService", "EntertainmentBusiness",
 "FinancialService", "GovernmentOffice", "FoodEstablishment", "HomeAndConstructionBusiness",
 "LegalService", "LodgingBusiness", "MedicalBusiness", "SportsActivityLocation", "store"]
@@ -1497,7 +1497,7 @@ function changeSocialAccountValue(el , index) {
 }
 // for department
 const departmentNumber = ref(0)
-const specificDepartmentJobsOk = ref(false)
+const specificDepartmentJobsOk = ref([])
 const specificDepartmentJobs = ["AutomotiveBusiness", "EmergencyService", "EntertainmentBusiness",
 "FinancialService", "GovernmentOffice", "FoodEstablishment", "HomeAndConstructionBusiness",
 "LegalService", "LodgingBusiness", "MedicalBusiness", "SportsActivityLocation", "store"]
@@ -2292,6 +2292,7 @@ const valuesDepartment = ref([
 ]);
 function addDepartment() {
     departmentNumber.value ++
+    specificDepartmentJobsOk.value[departmentNumber.value-1] = false
     valuesDepartment.value[departmentNumber.value-1] =     
     {
         "@type": "",
@@ -2328,8 +2329,8 @@ function addDepartment() {
         }
     }
 }
-function changeDepartmentJobs(el) {
-    jsonData.value.department[departmentNumber.value-1]["@type"] = el
+function changeDepartmentJobs(el , taskIndex) {
+    jsonData.value.department[taskIndex]["@type"] = el
     for (let job in departmentJobs.value) {
         if(job == el){
             departmentJobs.value[job].is_checked = true
@@ -2337,10 +2338,11 @@ function changeDepartmentJobs(el) {
             departmentJobs.value[job].is_checked = false
         }
     }
-    specificDepartmentJobsOk.value = false
+    
+    specificDepartmentJobsOk.value[taskIndex] = false
     for (let specificDepartmentJob in specificDepartmentJobs){
         if(specificDepartmentJobs[specificDepartmentJob] == el){
-            specificDepartmentJobsOk.value = true
+            specificDepartmentJobsOk.value[taskIndex] = true
         }
     }
 }
