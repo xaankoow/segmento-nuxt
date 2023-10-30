@@ -62,7 +62,7 @@ const props = defineProps({
   },
   textValue: {
     type: String,
-    default: 10,
+    default: "",
   },
   textColor: {
     type: String,
