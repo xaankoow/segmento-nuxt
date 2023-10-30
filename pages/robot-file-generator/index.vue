@@ -51,7 +51,7 @@
                           <span class="text-sm">شامل همه ربات موتورهای جستجو</span>
                       </template>
                       <template v-slot:option >
-                          <InputRadio v-for="(element , index) in Object.keys(bots)" :key="index" v-model="bots[element].is_checked" @click="changeIdentification(element , index)" :id="element" name="bot" >{{ bots[element].title }}</InputRadio>
+                          <InputRadio v-for="(element , index) in Object.keys(bots)" :key="index" v-model="bots[element].is_checked" @click="changeSlectedBot(element)" :id="element" name="bot" >{{ bots[element].title }}</InputRadio>
                       </template>
                   </DropdownFinalDropDown>
                 <!-- <template v-slot:content>
@@ -122,7 +122,7 @@
             <!-- first box -->
             <div class="resultBox w-full min-h-[150px] mr-4 border border-dashed border-[#0A65CD] bg-[#F2F5F7] rounded-[10px] p-2">
               <span class="flex items-center gap-1 text-[13px] ">
-                <div v-show="textValue.length>0 && textValue?.includes('*')">
+                <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                               height="24">
@@ -135,10 +135,10 @@
                         </g>
                         </svg>
                 </div>
-                  <span class="flow-root text-[13px]" v-show="textValue.length>0 && textValue?.includes('*')">شامل تمامی ربات ها</span>
+                  <span class="flow-root text-[13px]">شامل تمامی ربات ها</span>
               </span>
               <span class="flex items-center gap-1 text-[13px] ">
-                <div v-show="textValue.length>0 && textValue?.includes('$')">
+                <div >
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                               height="24">
@@ -151,8 +151,7 @@
                         </g>
                         </svg>
                 </div>
-                <span class="flow-root text-[13px]"
-                      v-show="textValue.length>0 && textValue?.includes('$')"> شامل علامت $</span>
+                <span class="flow-root text-[13px]" > شامل علامت $</span>
               </span>
               <!--            <span class="flow-root text-[13px] px-[30px]">4.تمام آدرس های بعد از آن خزش نشود</span>-->
             </div>
@@ -171,7 +170,7 @@
                         <span class="text-sm">مجاز</span>
                     </template>
                     <template v-slot:option >
-                        <InputRadio v-for="(element , index) in Object.keys(botsOptions)" :key="index" v-model="botsOptions[element].is_checked" @click="changeIdentification(element , index)" :id="element" name="botsOptions" >{{ botsOptions[element].title }}</InputRadio>
+                        <InputRadio v-for="(element , index) in Object.keys(botsOptions)" :key="index" v-model="botsOptions[element].is_checked" @click="changeSlectedValue(element)" :id="element" name="botsOptions" >{{ botsOptions[element].title }}</InputRadio>
                     </template>
                 </DropdownFinalDropDown>
               </div>
@@ -201,8 +200,8 @@
                 <div class="flex flex-col gap-1">
                   <span class="text-[#002145] text-[12px] font-normal px-2.5 text-sm ">درج لینک</span>
                   <div class="flex h-[45px] items-center align-center gap-5 relative">
-                    <InputText type="text" class="h-max py-[10px] ltr" v-model="textValue" />
-                    <button @click="setItem('ads','مجاز',textValue)" class="add bg-[#F2F5F7] p-1 px-2 rounded-[3px] absolute right-[6px] cursor-pointer">
+                    <InputText type="text" class="h-max py-[10px] ltr" @keyup="translateCommandValue()" v-model="commandValue" />
+                    <button @click="addCommand()" class="add bg-[#F2F5F7] p-1 px-2 rounded-[3px] absolute right-[6px] cursor-pointer">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                         <mask id="mask0_36_60" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
                           <rect y="0.5" width="24" height="24" fill="#D9D9D9"/>
@@ -248,37 +247,47 @@
               <!--              1.خود این آدرس-->
               <!--            </span>-->
               <!--            <span class="text-[13px] px-[30px]">2.تمام آدرس های بعد از آن خزش نشود</span>-->
-              <div class="flex flex-col" v-for="report in reportRes">
+              <!-- //////////////////////////////////////////////////////////////////////// -->
+              <!-- <div class="flex flex-col" v-for="report in reportRes">
                 <span class="flex items-center gap-2.5">
                   <div>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none">
-                                        <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0"
-                                              y="0" width="24"
-                                              height="24">
-                                        <rect width="24" height="24" fill="#D9D9D9"/>
-                                        </mask>
-                                        <g mask="url(#mask0_30_1381)">
-                                        <path
-                                          d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
-                                          fill="#FFCE47"/>
-                                        </g>
-                                        </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0"
+                        y="0" width="24"
+                        height="24">
+                        <rect width="24" height="24" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_30_1381)">
+                        <path
+                        d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
+                        fill="#FFCE47"/>
+                      </g>
+                    </svg>
                   </div>
                   {{ ` لینک مورد نظر: ${report.val}` }}</span>
                 <span>{{ report.startFlag ? 'فاقد حرف *' : '' }}</span>
                 <span>{{ report.dFlag ? 'فاقد حرف $' : '' }}</span>
                 <span>{{ report.slashFlag ? 'فاقد حرف /' : '' }}</span>
-              </div>
+              </div> -->
             </div>
           </div>
           <!-- botton left -->
           <div class="w-1/2 h-fit flex flex-col ml-4">
             <!-- show detail box -->
             <div class="resultBox min-h-[209px] border mr-4 border-solid border-base-400 bg-[#FCFCFB] rounded-[10px] p-[15px] flex flex-col gap-2.5 ltr">
-              <div class="flex flex-col" v-for="item in linkRef">
-                <span>userAgent:{{ item.key1 }}</span>
-                <span>{{ item.key2 === 1 ? `allow: ${item.value}` : `disAllow: ${item.value}` }}</span>
+              <div class="flex flex-col">
+                <div v-if="botsValue[AllBots]">
+                  <span>userAgent: "allBots"</span>
+                  <span v-for="item in botsValue[AllBots]">{{ item }}</span>
+                </div>
+                <div v-if="botsValue[APIsGoogle]">
+                  <span>userAgent: "allBots"</span>
+                  <span v-for="item in botsValue[APIsGoogle]">{{ item }}</span>
+                </div>
+                <div v-if="botsValue[AdsBotMobileWebAndroid]">
+                  <span>userAgent: "allBots"</span>
+                  <span v-for="item in botsValue[AdsBotMobileWebAndroid]">{{ item }}</span>
+                </div>
               </div>
             </div>
             <!-- buttons -->
@@ -318,11 +327,13 @@
 </template>
 
 <script setup>
-const selectedValue = ref("مجاز");
-const textValue = ref('');
-const linkRef = ref();
-const links = [];
-const reportRes = ref()
+// const textValue = ref('');
+// const linkRef = ref();
+// const links = [];
+// const reportRes = ref()
+const selectedValue = ref("allow");
+const selectedBot = ref("");
+const commandValue = ref("");
 
 const bots = ref({
     AllBots: {
@@ -340,104 +351,133 @@ const bots = ref({
         value: "AdsBotMobileWebAndroid",
         title: "AdsBot Mobile Web Android"
     },
-    AdsBotMobileWeb: {
-        is_checked: false,
-        value: "AdsBotMobileWeb",
-        title: "AdsBot Mobile Web"
-    },
-    AdsBot: {
-        is_checked: false,
-        value: "AdsBot",
-        title: "AdsBot"
-    },
-    AdsSense: {
-        is_checked: false,
-        value: "AdsSense",
-        title: "AdsSense"
-    },
-    GooglebotImage: {
-        is_checked: false,
-        value: "GooglebotImage",
-        title: "Googlebot Image"
-    },
-    GooglebotNews: {
-        is_checked: false,
-        value: "GooglebotNews",
-        title: "Googlebot News"
-    },
-    GooglebotVideo: {
-        is_checked: false,
-        value: "GooglebotVideo",
-        title: "Googlebot Video"
-    },
-    GooglebotDesktop: {
-        is_checked: false,
-        value: "GooglebotDesktop",
-        title: "Googlebot Desktop"
-    },
-    GooglebotSmartphone: {
-        is_checked: false,
-        value: "GooglebotSmartphone",
-        title: "Googlebot Smartphone"
-    },
-    Bingbot: {
-        is_checked: false,
-        value: "Bingbot",
-        title: "Bingbot"
-    },
-})
+  })
+    // AdsBotMobileWeb: {
+    //     is_checked: false,
+    //     value: "AdsBotMobileWeb",
+    //     title: "AdsBot Mobile Web"
+    // },
+    // AdsBot: {
+    //     is_checked: false,
+    //     value: "AdsBot",
+    //     title: "AdsBot"
+    // },
+    // AdsSense: {
+    //     is_checked: false,
+    //     value: "AdsSense",
+    //     title: "AdsSense"
+    // },
+    // GooglebotImage: {
+    //     is_checked: false,
+    //     value: "GooglebotImage",
+    //     title: "Googlebot Image"
+    // },
+    // GooglebotNews: {
+    //     is_checked: false,
+    //     value: "GooglebotNews",
+    //     title: "Googlebot News"
+    // },
+    // GooglebotVideo: {
+    //     is_checked: false,
+    //     value: "GooglebotVideo",
+    //     title: "Googlebot Video"
+    // },
+    // GooglebotDesktop: {
+    //     is_checked: false,
+    //     value: "GooglebotDesktop",
+    //     title: "Googlebot Desktop"
+    // },
+    // GooglebotSmartphone: {
+    //     is_checked: false,
+    //     value: "GooglebotSmartphone",
+    //     title: "Googlebot Smartphone"
+    // },
+    // Bingbot: {
+    //     is_checked: false,
+    //     value: "Bingbot",
+    //     title: "Bingbot"
+    // },
+
 const botsOptions = ref({
   allow: {
         is_checked: true,
         value: "allow",
         title: "مجاز"
   },
-  NotAllow: {
+  disAllow: {
       is_checked: false,
-      value: "NotAllow",
+      value: "disAllow",
       title: "غیرمجاز"
   },
 })
+const botsValue = ref({
+    AllBots: [],
+    APIsGoogle: [],
+    AdsBotMobileWebAndroid: [],
+  })
 
-
-const
-  setItem = (robot, permission, text) => {
-    linkRef.value = ""
-    let res = {
-      value: text,
-      key1: "ads",
-      key2: "1"
+function changeSlectedBot(el){
+  selectedBot.value = el
+}
+function changeSlectedValue(el){
+  selectedValue.value = el
+}
+function addCommand(){
+  if (commandValue.value) {
+    if (selectedValue.value == "allow") {
+      botsValue.value[selectedBot.value].push("allow:"+commandValue.value)
+      commandValue.value = ""
+    }else{
+      botsValue.value[selectedBot.value].push("disAllow:"+commandValue.value)
+      commandValue.value = ""
     }
-    links.push(res)
-    linkRef.value = links
-
-    console.log(links)
   }
 
-const checkRule = () => {
-  debugger
-  let report = [];
-  links.forEach((i, index) => {
-    const item = {
-      val: i.value,
-      startFlag: false,
-      dFlag: false,
-      slashFlag: false
-    };
-    if (!i.value.includes("*")) {
-      item.startFlag = true;
-    }
-    if (!i.value.includes("/")) {
-      item.slashFlag = true;
-    }
-    if (!i.value.includes("$")) {
-      item.dFlag = true;
-    }
-    report.push(item);
-  });
-  reportRes.value = report;
-  console.log(report)
 }
+// function translate() {
+  
+// }
+function translateCommandValue() {
+  
+}
+
+// const setItem = (robot, permission, text) => {
+//     linkRef.value = ""
+//     let res = {
+//       value: text,
+//       key1: "ads",
+//       key2: "1"
+//     }
+//     links.push(res)
+//     linkRef.value = links
+
+//     console.log(links)
+//   }
+
+// const checkRule = () => {
+//   debugger
+//   let report = [];
+//   links.forEach((i, index) => {
+//     const item = {
+//       val: i.value,
+//       startFlag: false,
+//       dFlag: false,
+//       slashFlag: false
+//     };
+//     if (!i.value.includes("*")) {
+//       item.startFlag = true;
+//     }
+//     if (!i.value.includes("/")) {
+//       item.slashFlag = true;
+//     }
+//     if (!i.value.includes("$")) {
+//       item.dFlag = true;
+//     }
+//     report.push(item);
+//   });
+//   reportRes.value = report;
+//   console.log(report)
+// }
 </script>
 
 <style scoped>
