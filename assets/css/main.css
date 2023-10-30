@@ -52,10 +52,6 @@
   }
 }
 
-.circleChart {
-  stroke-width: 4px;
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 7px;

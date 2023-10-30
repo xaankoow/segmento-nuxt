@@ -1,34 +1,5 @@
-<template>
-  <div
-    :class="`h-${size} bg-[#10CCAE33] rounded-full flex items-center justify-center bottom-2 border-4 border-base-400 text-white relative`"
-    :style="`background-color: ${bg}; --value:${value}; width:${size};height:${size};`"
-  >
-    <div class="text-center">
-      <p :style="{ color: textColor, fontSize: fontSize }">{{ remained }}</p>
-      <p :style="{ color: textColor, fontSize: fontSizeText }">
-        {{ textValue }}
-      </p>
-    </div>
-    <div class="absolute">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        class="absolute -right-[72px] -top-[69px] w-36 h-36 -rotate-90"
-      >
-        <circle
-          cx="75"
-          cy="72"
-          :r="sizeCircle"
-          stroke-linecap="round"
-          class="circleChart fill-none"
-          :style="{ stroke: color, ...circleStyle }"
-        />
-      </svg>
-    </div>
-  </div>
-</template>
-
 <script setup>
+// TODO: about this componen, I have to redesign it!
 import { computed } from "vue";
 
 const props = defineProps({
@@ -45,8 +16,8 @@ const props = defineProps({
     default: "#10CCAE",
   },
   bg: {
-    type: String,
-    default: "#10CCAE33",
+    type: [String, Boolean],
+    default: false,
   },
   size: {
     type: String,
@@ -72,6 +43,14 @@ const props = defineProps({
     type: String,
     default: "8px",
   },
+  strokeSize: {
+    type: String,
+    default: "8px",
+  },
+  backStrokeSize: {
+    type: [String, Boolean],
+    default: false,
+  },
 });
 
 const circleStyle = computed(() => {
@@ -83,3 +62,40 @@ const circleStyle = computed(() => {
   };
 });
 </script>
+
+<template>
+  <div
+    :class="`h-${size} relative rounded-full flex items-center justify-center bottom-2 ${
+      !bg ? 'border-base-400' : ''
+    } text-white relative`"
+    :style="`background-color: ${
+      bg !== false ? bg : 'white'
+    }; --value:${value}; width:${size};height:${size}; border-width: ${
+      !backStrokeSize ? strokeSize : backStrokeSize
+    };`"
+  >
+    <div class="text-center">
+      <p :style="{ color: textColor, fontSize: fontSize }">{{ remained }}</p>
+      <p :style="{ color: textColor, fontSize: fontSizeText }">
+        {{ textValue }}
+      </p>
+    </div>
+    <div class="absolute flex items-center justify-center w-full h-full">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        class="absolute w-36 h-36 -rotate-90"
+      >
+        <circle
+          cx="75"
+          cy="75"
+          :r="sizeCircle"
+          stroke-linecap="round"
+          class="fill-none"
+          :style="{ stroke: color, ...circleStyle, strokeWidth: props.strokeSize }"
+        />
+      </svg>
+    </div>
+  </div>
+</template>
+<style scoped></style>
