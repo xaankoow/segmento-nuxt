@@ -75,18 +75,20 @@
             </svg>
           </div>
           <div class="flex flex-col justify-between h-full w-1/2 py-4">
-            <span class="text-xl">شرکت زانکو نویان Xaankoo Noyan</span>
-            <p class="font-thin text-base-500">
-              شرکت زانکو نویان Xaankoo Noyan - ارائه محصولات نوآور برای افزایش بهره‌وری
-              شرکت‌ها، کارکنان و تیم‌ها
-            </p>
-            <NuxtLink
-              to="https://xaankoo.com/"
-              class="text-primary flex justify-end"
-              style="direction: ltr"
-            >
-              https://xaankoo.com/</NuxtLink
-            >
+            <div class="flex justify-start">
+              <span class="text-xl">شرکت زانکو نویان Xaankoo Noyan</span>
+            </div>
+            <div class="flex justify-start">
+              <p class="font-thin text-base-500">
+                شرکت زانکو نویان Xaankoo Noyan - ارائه محصولات نوآور برای افزایش بهره‌وری
+                شرکت‌ها، کارکنان و تیم‌ها
+              </p>
+            </div>
+            <div class="flex justify-end">
+              <a :href="data.link" class="text-primary" dir="ltr">
+                {{ data.link }}
+              </a>
+            </div>
           </div>
           <ToolsSplitHorizontal class="h-full my-2" />
           <div class="border rounded-md h-40 w-64"></div>
@@ -351,11 +353,21 @@
           <!-- radial analyze -->
           <div class="flex flex-row justify-evenly my-4 items-center">
             <div class="flex flex-col items-center gap-4">
-              <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <!-- TODO : Fix this line after update RadialProgress component 
-                <RadialProgress :value="80" />
-                -->
-                <svg
+              <span class="w-32 h-32 mask flex items-center justify-center">
+                <!-- TODO : Fix this line after update RadialProgress component  -->
+                <ProgressRadial
+                  :value="8"
+                  :remained="6"
+                  color="#0A65CD"
+                  bg="#0A65CD30"
+                  size="8rem"
+                  fontSize="24px"
+                  fontSizeText="10px"
+                  textColor="#000000"
+                  :sizeCircle="62"
+                ></ProgressRadial>
+
+                <!-- <svg
                   width="120"
                   height="120"
                   viewBox="0 0 120 120"
@@ -371,7 +383,7 @@
                     d="M57.4703 71H40.6976V68.66L49.5503 58.8255C50.8703 57.3309 51.7758 56.12 52.2667 55.1927C52.7685 54.2545 53.0194 53.2891 53.0194 52.2964C53.0194 50.9655 52.6158 49.8745 51.8085 49.0236C51.0012 48.1618 49.9212 47.7309 48.5685 47.7309C46.9539 47.7309 45.6994 48.1891 44.8049 49.1055C43.9103 50.0218 43.463 51.3036 43.463 52.9509H40.2067C40.2067 50.5945 40.9649 48.6909 42.4812 47.24C43.9976 45.7782 46.0267 45.0473 48.5685 45.0473C50.9467 45.0473 52.8285 45.6745 54.2139 46.9291C55.5994 48.1727 56.2921 49.8309 56.2921 51.9036C56.2921 54.4236 54.683 57.4236 51.4649 60.9036L44.6249 68.3491H57.4703V71ZM65.6415 56.6164H68.0797C69.6179 56.5945 70.8233 56.1909 71.6961 55.4055C72.5797 54.62 73.0215 53.5618 73.0215 52.2309C73.0215 49.2309 71.527 47.7309 68.5379 47.7309C67.1306 47.7309 66.007 48.1345 65.167 48.9418C64.3379 49.7382 63.9233 50.7964 63.9233 52.1164H60.667C60.667 50.0873 61.4088 48.4018 62.8924 47.06C64.3761 45.7182 66.2579 45.0473 68.5379 45.0473C70.9488 45.0473 72.8415 45.6909 74.2161 46.9782C75.5906 48.2545 76.2779 50.0273 76.2779 52.2964C76.2779 53.4091 75.9179 54.4891 75.1979 55.5364C74.4779 56.5727 73.4961 57.3527 72.2524 57.8764C73.6597 58.3127 74.7452 59.0491 75.5088 60.0855C76.2724 61.1109 76.6542 62.3709 76.6542 63.8655C76.6542 66.1564 75.9015 67.9782 74.3961 69.3309C72.9015 70.6727 70.9542 71.3436 68.5542 71.3436C66.1542 71.3436 64.2015 70.6945 62.6961 69.3964C61.1906 68.0982 60.4379 66.38 60.4379 64.2418H63.7106C63.7106 65.5945 64.147 66.6745 65.0197 67.4818C65.9033 68.2891 67.0815 68.6927 68.5542 68.6927C70.1252 68.6927 71.3252 68.2836 72.1542 67.4655C72.9942 66.6473 73.4142 65.4691 73.4142 63.9309C73.4142 62.4473 72.9561 61.3073 72.0397 60.5109C71.1233 59.7145 69.8033 59.3 68.0797 59.2673H65.6415V56.6164Z"
                     fill="#F35242"
                   />
-                </svg>
+                </svg> -->
               </span>
               <span>{{
                 config.by_route(`${current_page}/single/sections/page-speed/function`)
@@ -1006,12 +1018,40 @@
 import Config from "~~/composables/Config";
 import Request from "~~/Api/Request";
 
+const route = useRoute();
 const request = new Request("v1");
 const current_page = "pages/money-pages";
 const config = new Config();
-
 const technical_section = `${current_page}/single/sections/technical-analysis`;
 const chart_section = `${current_page}/single/sections/chart`;
 const filter_section = `${current_page}/single/sections/filter`;
 const table_section = `${current_page}/single/sections/table`;
+const data = ref({});
+const last_analysis = ref("");
+
+async function load_data() {
+  if (!route.query.page) {
+    navigateTo("/money-pages");
+  } else {
+    let res = await request
+      .get("money-pages/single", { page_uuid: route.query.page })
+      .then((res) => {
+        if (res.ok) {
+          data.value = res.data;
+          last_analysis.value = Object.keys(data.value.analitics).at(0);
+          console.log(data.value);
+        } else {
+          navigateTo("/money-pages");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        navigateTo("/money-pages");
+      });
+  }
+}
+
+onBeforeMount(() => {
+  load_data();
+});
 </script>
