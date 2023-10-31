@@ -121,7 +121,7 @@
             </div>
             <!-- first box -->
             <div class="resultBox w-full min-h-[150px] mr-4 border border-dashed border-[#0A65CD] bg-[#F2F5F7] rounded-[10px] p-2">
-              <span class="flex items-center gap-1 text-[13px] ">
+              <span class="flex items-center gap-1 text-xs" v-show="translatevalueAllBots.allow || translatevalueAllBots.disAllow">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -135,25 +135,10 @@
                         </g>
                         </svg>
                 </div>
-                  <span class="flow-root text-[13px]">شامل تمامی ربات ها</span>
+                <span v-if="selectedValue == 'allow'">  امکان دسترسی : </span>
+                <span v-if="selectedValue == 'disAllow'">  عدم دسترسی : </span>
+                <span v-if="onlineTraslateValue"> {{ onlineTraslateValue }} </span>
               </span>
-              <span class="flex items-center gap-1 text-[13px] ">
-                <div >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                              height="24">
-                        <rect width="24" height="24" fill="#D9D9D9"/>
-                        </mask>
-                        <g mask="url(#mask0_30_1381)">
-                        <path
-                          d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
-                          fill="#FFCE47"/>
-                        </g>
-                        </svg>
-                </div>
-                <span class="flow-root text-[13px]" > شامل علامت $</span>
-              </span>
-              <!--            <span class="flow-root text-[13px] px-[30px]">4.تمام آدرس های بعد از آن خزش نشود</span>-->
             </div>
           </div>
           <!-- top left -->
@@ -167,7 +152,8 @@
               <div class="combo h-[45px] mx-4 text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
                 <DropdownFinalDropDown class="z-index-[1100]">
                     <template v-slot:title>
-                        <span class="text-sm">مجاز</span>
+                        <span class="text-sm" v-if="selectedValue == 'allow'">مجاز</span>
+                        <span class="text-sm" v-if="selectedValue == 'disAllow'">غیر مجاز</span>
                     </template>
                     <template v-slot:option >
                         <InputRadio v-for="(element , index) in Object.keys(botsOptions)" :key="index" v-model="botsOptions[element].is_checked" @click="changeSlectedValue(element)" :id="element" name="botsOptions" >{{ botsOptions[element].title }}</InputRadio>
@@ -219,80 +205,111 @@
             </div>
           </div>
         </div>
-
-        <!--  -->
+        <!-- ------------------------------- -->
         <div class="border w-full"></div>
-        <!--  -->
-
+        <!-- ------------------------------- -->
         <!-- botton -->
         <div class="w-full h-fit flex gap-[8%]">
           <!-- botton right -->
           <div class="w-1/2 h-fit flex flex-col">
             <!-- secend box -->
             <div class="resultBox w-full min-h-[209px] mr-4 border border-dashed border-[#0A65CD] bg-[#F2F5F7] rounded-[10px] p-2">
-              <!--            <span class="flex items-center gap-1 text-[13px] ">-->
-              <!--              <div>-->
-              <!--                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">-->
-              <!--                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"-->
-              <!--                            height="24">-->
-              <!--                      <rect width="24" height="24" fill="#D9D9D9"/>-->
-              <!--                      </mask>-->
-              <!--                      <g mask="url(#mask0_30_1381)">-->
-              <!--                      <path-->
-              <!--                        d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"-->
-              <!--                        fill="#FFCE47"/>-->
-              <!--                      </g>-->
-              <!--                      </svg>-->
-              <!--              </div>-->
-              <!--              1.خود این آدرس-->
-              <!--            </span>-->
-              <!--            <span class="text-[13px] px-[30px]">2.تمام آدرس های بعد از آن خزش نشود</span>-->
-              <!-- //////////////////////////////////////////////////////////////////////// -->
-              <!-- <div class="flex flex-col" v-for="report in reportRes">
-                <span class="flex items-center gap-2.5">
-                  <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0"
-                        y="0" width="24"
-                        height="24">
-                        <rect width="24" height="24" fill="#D9D9D9"/>
+              <span class="flex flex-col text-start items-start gap-1 text-[13px]" v-show="translatevalueAllBots.allow || translatevalueAllBots.disAllow">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                            height="24">
+                      <rect width="24" height="24" fill="#D9D9D9"/>
                       </mask>
                       <g mask="url(#mask0_30_1381)">
-                        <path
+                      <path
                         d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
                         fill="#FFCE47"/>
                       </g>
                     </svg>
-                  </div>
-                  {{ ` لینک مورد نظر: ${report.val}` }}</span>
-                <span>{{ report.startFlag ? 'فاقد حرف *' : '' }}</span>
-                <span>{{ report.dFlag ? 'فاقد حرف $' : '' }}</span>
-                <span>{{ report.slashFlag ? 'فاقد حرف /' : '' }}</span>
-              </div> -->
+                </div>
+                <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAllBots.bot }}</span>
+                <span class="text-xs" v-show="translatevalueAllBots.allow">  امکان دسترسی : </span>
+                <span class="text-xs" v-show="translatevalueAllBots.allow" v-for="(value , index) in translatevalueAllBots.allow" :key="index"> 
+                {{ value }}
+                </span>
+                <span class="text-xs" v-show="translatevalueAllBots.disAllow">  عدم دسترسی : </span>
+                <span class="text-xs" v-show="translatevalueAllBots.disAllow" v-for="(value , index) in translatevalueAllBots.disAllow" :key="index"> 
+                {{ value }}
+                </span>
+              </span>
+              <span class="flex flex-col text-start items-start gap-1 text-[13px]" v-show="translatevalueAPIsGoogle.allow || translatevalueAPIsGoogle.disAllow">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                            height="24">
+                      <rect width="24" height="24" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_30_1381)">
+                      <path
+                        d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
+                        fill="#FFCE47"/>
+                      </g>
+                    </svg>
+                </div>
+                <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAPIsGoogle.bot }}</span>
+                <span class="text-xs" v-show="translatevalueAPIsGoogle.allow">  امکان دسترسی : </span>
+                <span class="text-xs" v-show="translatevalueAPIsGoogle.allow" v-for="(value , index) in translatevalueAPIsGoogle.allow" :key="index"> 
+                {{ value }}
+                </span>
+                <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow">  عدم دسترسی : </span>
+                <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow" v-for="(value , index) in translatevalueAPIsGoogle.disAllow" :key="index"> 
+                {{ value }}
+                </span>
+              </span>
+              <span class="flex flex-col text-start items-start gap-1 text-[13px]" v-show="translatevalueAdsBotMobileWebAndroid.allow || translatevalueAllBots.disAllow">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                            height="24">
+                      <rect width="24" height="24" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_30_1381)">
+                      <path
+                        d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
+                        fill="#FFCE47"/>
+                      </g>
+                    </svg>
+                </div>
+                <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAdsBotMobileWebAndroid.bot }}</span>
+                <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow">  امکان دسترسی : </span>
+                <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.allow" :key="index"> 
+                {{ value }}
+                </span>
+                <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow">  عدم دسترسی : </span>
+                <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.disAllow" :key="index"> 
+                {{ value }}
+                </span>
+              </span>
             </div>
           </div>
           <!-- botton left -->
           <div class="w-1/2 h-fit flex flex-col ml-4">
             <!-- show detail box -->
             <div class="resultBox min-h-[209px] border mr-4 border-solid border-base-400 bg-[#FCFCFB] rounded-[10px] p-[15px] flex flex-col gap-2.5 ltr">
-              <div class="flex flex-col">
-                <div v-if="botsValue[AllBots]">
-                  <span>userAgent: "allBots"</span>
-                  <span v-for="item in botsValue[AllBots]">{{ item }}</span>
+              <div class="flex flex-col gap-2">
+                <div v-show="botsValue.AllBots.length > 0" class="w-full flex flex-col text-xs">
+                  <span>user-agent: allBots</span>
+                  <span v-for="item in botsValue.AllBots">{{ item }}</span>
                 </div>
-                <div v-if="botsValue[APIsGoogle]">
-                  <span>userAgent: "allBots"</span>
-                  <span v-for="item in botsValue[APIsGoogle]">{{ item }}</span>
+                <div v-show="botsValue.APIsGoogle.length > 0" class="w-full flex flex-col text-xs">
+                  <span>user-agent: APIsGoogle</span>
+                  <span v-for="item in botsValue.APIsGoogle">{{ item }}</span>
                 </div>
-                <div v-if="botsValue[AdsBotMobileWebAndroid]">
-                  <span>userAgent: "allBots"</span>
+                <div v-show="botsValue.AdsBotMobileWebAndroid.length > 0" class="w-full flex flex-col text-xs">
+                  <span>user-agent: AdsBotMobileWebAndroid</span>
                   <span v-for="item in botsValue[AdsBotMobileWebAndroid]">{{ item }}</span>
                 </div>
               </div>
             </div>
             <!-- buttons -->
             <div class="text-left flex flex-row-reverse gap-2.5">
-              <button @click="checkRule" class="py-[8px] px-[20px] my-[15px] rounded-[9px]  bg-[#0A65CD] text-[#FFFFFF] text-sm flex gap-2.5 items-center">
+              <button @click="convert_to_txt()" class="py-[8px] px-[20px] my-[15px] rounded-[9px]  bg-[#0A65CD] text-[#FFFFFF] text-sm flex gap-2.5 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <mask id="mask0_36_80" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                     <rect width="24" height="24" fill="#D9D9D9"/>
@@ -331,13 +348,23 @@
 // const linkRef = ref();
 // const links = [];
 // const reportRes = ref()
-const selectedValue = ref("allow");
 const selectedBot = ref("");
+const selectedValue = ref("");
 const commandValue = ref("");
+const onlineTraslateValue = ref("");
+const translatevalueAllBots = ref({
+  bot :" همه ربات ها",
+})
+const translatevalueAPIsGoogle = ref({
+  bot :" همه ربات های ای پی آی",
+})
+const translatevalueAdsBotMobileWebAndroid = ref({
+  bot :" همه ربات های انروید",
+})
 
 const bots = ref({
     AllBots: {
-        is_checked: false,
+        is_checked: true,
         value: "AllBots",
         title: "All Bots"
     },
@@ -351,8 +378,290 @@ const bots = ref({
         value: "AdsBotMobileWebAndroid",
         title: "AdsBot Mobile Web Android"
     },
-  })
-    // AdsBotMobileWeb: {
+})
+const botsOptions = ref({
+  allow: {
+        is_checked: true,
+        value: "allow",
+        title: "مجاز"
+  },
+  disAllow: {
+      is_checked: false,
+      value: "disAllow",
+      title: "غیرمجاز"
+  },
+})
+const botsValue = ref({
+    AllBots: [],
+    APIsGoogle: [],
+    AdsBotMobileWebAndroid: [],
+})
+
+function changeSlectedBot(el){
+  selectedBot.value = el
+}
+function changeSlectedValue(el){
+  selectedValue.value = el
+}
+
+const regexCheckMainWord = (inputWord) => {
+  const regexPattern = /(?<=[*$/]|^)\w+(?=[*$/]|$)/;
+  const match = inputWord.match(regexPattern);
+  if (match) {
+    return match[0];
+  }else {
+    return null;
+  }
+};
+const regexCheck1st = (inputWord) => {
+  const regexPattern = /^[*$/]/;
+  const match = regexPattern.exec(inputWord);
+  if (match) {
+    return match[0];
+  }else {
+    return null;
+  }
+};
+const regexCheck2nd = (inputWord) => {
+  let newWord = inputWord.slice(1);
+  let regexPattern = /^[*$/]/;
+  let match = regexPattern.exec(newWord);
+  if (match) {
+    return match[0];
+  }else {
+    return null;
+  }
+};
+const regexCheckLast = (inputWord) => {
+  const regexPattern = /(?:\w+)([*$/])(?![*$/])$/;
+  const match = regexPattern.exec(inputWord);
+  if (match) {
+    return match[1];
+  }else {
+    return null;
+  }
+};
+function translateCommandValue() {
+  let maincharacter = regexCheckMainWord(commandValue.value)
+  let firstcharacter = regexCheck1st(commandValue.value)
+  let secendcharacter = regexCheck2nd(commandValue.value)
+  let lastcharacter = regexCheckLast(commandValue.value)
+  if (firstcharacter == "/"){
+    if (lastcharacter == "/"){
+      onlineTraslateValue.value = ` به ${maincharacter}`
+    }else if(maincharacter == null){
+      onlineTraslateValue.value = `به همه چیز`
+    }else{onlineTraslateValue.value = "کد وارد شده صحیح نیست"}
+  }else if(firstcharacter == "*"){
+    if (lastcharacter == "/"){
+      onlineTraslateValue.value = `هر آدرسی که در انتها به ${maincharacter} ختم شود`
+    }else if (secendcharacter == "/"){
+      onlineTraslateValue.value = `هر صفحه ای که با${maincharacter}شروع میشود.از جمله صفحه اصلی ${maincharacter}`
+    }else if(lastcharacter == "$"){
+      onlineTraslateValue.value = `به صفحاتی که در آدرس خود ${maincharacter} دارند.`
+    }else{onlineTraslateValue.value = "کد وارد شده صحیح نیست"}
+  }else if (firstcharacter == null){
+    if (lastcharacter == "$"){
+      `به صفحاتی که در انتهای آدرس خود ${maincharacter} دارند.`
+    }else{onlineTraslateValue.value = "کد وارد شده صحیح نیست"}
+  }else{onlineTraslateValue.value = "کد وارد شده صحیح نیست"}
+}
+function addCommand(){
+  if (selectedBot.value && selectedValue.value) {
+    // put Code
+    if (commandValue.value) {
+      if (selectedValue.value == "allow") {
+        botsValue.value[selectedBot.value].push("allow:"+commandValue.value)
+        commandValue.value = ""
+      }else{
+        botsValue.value[selectedBot.value].push("disAllow:"+commandValue.value)
+        commandValue.value = ""
+      }
+    }
+    // put translate
+    if(selectedBot.value == "AllBots"){
+      if (selectedValue.value == "allow"){
+        if (!translatevalueAllBots.value.allow) {
+          translatevalueAllBots.value.allow = []
+        }
+        translatevalueAllBots.value.allow.push(onlineTraslateValue.value)
+      }else{
+        if (!translatevalueAllBots.value.disAllow) {
+          translatevalueAllBots.value.disAllow = []
+        }
+        translatevalueAllBots.value.disAllow.push(onlineTraslateValue.value)
+      }
+    }else if(selectedBot.value == "APIsGoogle"){
+      if (selectedValue.value == "allow"){
+        if (!translatevalueAPIsGoogle.value.allow) {
+          translatevalueAPIsGoogle.value.allow = []
+        }
+        translatevalueAPIsGoogle.value.allow.push(onlineTraslateValue.value)
+      }else{
+        if (!translatevalueAPIsGoogle.value.disAllow) {
+          translatevalueAPIsGoogle.value.allow = []
+        }
+        translatevalueAPIsGoogle.value.disAllow.push(onlineTraslateValue.value)
+      }
+    }else{
+      if (selectedValue.value == "allow"){
+        if (!translatevalueAdsBotMobileWebAndroid.value.allow) {
+          translatevalueAdsBotMobileWebAndroid.value.allow = []
+        }
+        translatevalueAdsBotMobileWebAndroid.value.allow.push(onlineTraslateValue.value)
+      }else{
+        if (!translatevalueAdsBotMobileWebAndroid.value.disAllow) {
+          translatevalueAdsBotMobileWebAndroid.value.disAllow = []
+        }
+        translatevalueAdsBotMobileWebAndroid.value.disAllow.push(onlineTraslateValue.value)
+      }
+    }
+  }else{
+    alert("please select bot and value")
+  }
+}
+// for buttom
+import jalaliMoment from "jalali-moment";
+const domains = ref("");
+const urls = ref("");
+
+const convertToText = (text, filename) => {
+  const blob = new Blob([text], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+  URL.revokeObjectURL(url);
+};
+
+const format_domains = (domains) => {
+  domains = domains.split("\n");
+  domains.forEach((element, index) => {
+    element = element.replace(/(www\.|https?:\/\/)/g, "");
+    element = element.replace(/^\/|\/$/g, "");
+    element = element.trim();
+    element = element.split("/")[0];
+    element = element.toLowerCase();
+    domains[index] = element;
+  });
+  domains = [...new Set(domains)];
+  domains = domains.filter((domain) => domain !== "");
+  let domainRegex = /^([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-z]{2,}$/;
+  let wrong_domains = domains.filter((str) => !domainRegex.test(str));
+  domains = domains.filter((str) => domainRegex.test(str));
+  return [
+    domains.join("\n"),
+    domains.length,
+    `# ${wrong_domains.join("\n# ")}`,
+    wrong_domains.length,
+  ];
+};
+
+const format_urls = (urls) => {
+  urls = urls.split("\n");
+  urls.forEach((element, index) => {
+    element = element.replace(/^\/|\/$/g, "");
+    element = element.toLowerCase();
+    urls[index] = element.trim();
+  });
+  urls = [...new Set(urls)];
+  urls = urls.filter((domain) => domain !== "");
+  let urlRegex = /^(http(s)?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?)$/;
+  let wrong_urls = urls.filter((str) => !urlRegex.test(str));
+  urls = urls.filter((str) => urlRegex.test(str));
+  return [
+    urls.join("\n"),
+    urls.length,
+    `# ${wrong_urls.join("\n# ")}`,
+    wrong_urls.length,
+  ];
+};
+
+const convert_to_txt = () => {
+  let formattedDate = jalaliMoment().locale("fa").format("YYYYMMDD");
+  let domains_list = format_domains(domains.value);
+  let urls_list = format_urls(urls.value);
+  domains_list[0] = `domain:${domains_list[0].split("\n").join("\ndomain:")}`;
+  convertToText(
+    `# https://app.segmento.ir/disavow-builder\n\n# Domains to disavow:${
+      domains_list[1] > 0 ? `\n${domains_list[0]}` : ""
+    }\n\n# Pages to disavow:${urls_list[1] > 0 ? `\n${urls_list[0]}` : ""}${
+      domains_list[3] > 0 ? `\n\n# Wrong domains:\n${domains_list[2]}` : ""
+    }${urls_list[3] > 0 ? `\n\n# Wrong URLs:\n${urls_list[2]}` : ""}`,
+    `disavow-smp-${formattedDate}-d${domains_list[1]}-p${urls_list[1]}`
+  );
+};
+// function translateCommandValue() {
+//   let maincharacter = regexCheckMainWord(commandValue.value)
+//   let firstcharacter = regexCheck1st(commandValue.value)
+//   let secendcharacter = regexCheck2nd(commandValue.value)
+//   if (firstcharacter == "*"){
+//     if (secendcharacter == "/"){
+//       onlineTraslateValue.value = `هر صفحه ای که با${maincharacter}شروع میشود.از جمله خود صفحه اصلی ${maincharacter}`
+//     }else if (secendcharacter == "$"){
+//       onlineTraslateValue.value = `هر صفحه ای که با${maincharacter}شروع میشود.به جز صفحه اصلی ${maincharacter}`
+//     }else{
+//       onlineTraslateValue.value = `هر صفحه ای که با${maincharacter}شروع میشود.از جمله خود صفحه اصلی ${maincharacter}`
+//     }
+//   }else if (firstcharacter == "/"){
+//     if (secendcharacter == "/"){
+//       onlineTraslateValue.value = `هر صفحه ای که با${maincharacter}شروع میشود.از جمله خود صفحه اصلی ${maincharacter}`
+//     }else{
+//       onlineTraslateValue.value = `به صفحه  ${maincharacter}`
+//     }
+//   }else if (firstcharacter == "$"){
+//     if (secendcharacter == "/"){
+//       onlineTraslateValue.value = `هر صفحه ای که با${maincharacter}شروع میشود.از جمله خود صفحه اصلی ${maincharacter}`
+//     }else if (secendcharacter == "*"){
+//       onlineTraslateValue.value = `هر صفحه ای که با${maincharacter}شروع میشود.به جز صفحه اصلی ${maincharacter}`
+//     }else{
+//       onlineTraslateValue.value = `هر صفحه ای که با${maincharacter}شروع میشود.از جمله خود صفحه اصلی ${maincharacter}`
+//     }
+//   }else{
+//     alert("error")
+//   }
+// }
+// const setItem = (robot, permission, text) => {
+//     linkRef.value = ""
+//     let res = {
+//       value: text,
+//       key1: "ads",
+//       key2: "1"
+//     }
+//     links.push(res)
+//     linkRef.value = links
+
+//     console.log(links)
+//   }
+
+// const checkRule = () => {
+//   debugger
+//   let report = [];
+//   links.forEach((i, index) => {
+//     const item = {
+//       val: i.value,
+//       startFlag: false,
+//       dFlag: false,
+//       slashFlag: false
+//     };
+//     if (!i.value.includes("*")) {
+//       item.startFlag = true;
+//     }
+//     if (!i.value.includes("/")) {
+//       item.slashFlag = true;
+//     }
+//     if (!i.value.includes("$")) {
+//       item.dFlag = true;
+//     }
+//     report.push(item);
+//   });
+//   reportRes.value = report;
+//   console.log(report)
+// }
+
+
+ // AdsBotMobileWeb: {
     //     is_checked: false,
     //     value: "AdsBotMobileWeb",
     //     title: "AdsBot Mobile Web"
@@ -397,87 +706,6 @@ const bots = ref({
     //     value: "Bingbot",
     //     title: "Bingbot"
     // },
-
-const botsOptions = ref({
-  allow: {
-        is_checked: true,
-        value: "allow",
-        title: "مجاز"
-  },
-  disAllow: {
-      is_checked: false,
-      value: "disAllow",
-      title: "غیرمجاز"
-  },
-})
-const botsValue = ref({
-    AllBots: [],
-    APIsGoogle: [],
-    AdsBotMobileWebAndroid: [],
-  })
-
-function changeSlectedBot(el){
-  selectedBot.value = el
-}
-function changeSlectedValue(el){
-  selectedValue.value = el
-}
-function addCommand(){
-  if (commandValue.value) {
-    if (selectedValue.value == "allow") {
-      botsValue.value[selectedBot.value].push("allow:"+commandValue.value)
-      commandValue.value = ""
-    }else{
-      botsValue.value[selectedBot.value].push("disAllow:"+commandValue.value)
-      commandValue.value = ""
-    }
-  }
-
-}
-// function translate() {
-  
-// }
-function translateCommandValue() {
-  
-}
-
-// const setItem = (robot, permission, text) => {
-//     linkRef.value = ""
-//     let res = {
-//       value: text,
-//       key1: "ads",
-//       key2: "1"
-//     }
-//     links.push(res)
-//     linkRef.value = links
-
-//     console.log(links)
-//   }
-
-// const checkRule = () => {
-//   debugger
-//   let report = [];
-//   links.forEach((i, index) => {
-//     const item = {
-//       val: i.value,
-//       startFlag: false,
-//       dFlag: false,
-//       slashFlag: false
-//     };
-//     if (!i.value.includes("*")) {
-//       item.startFlag = true;
-//     }
-//     if (!i.value.includes("/")) {
-//       item.slashFlag = true;
-//     }
-//     if (!i.value.includes("$")) {
-//       item.dFlag = true;
-//     }
-//     report.push(item);
-//   });
-//   reportRes.value = report;
-//   console.log(report)
-// }
 </script>
 
 <style scoped>
