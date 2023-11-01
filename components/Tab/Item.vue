@@ -1,10 +1,9 @@
 <template>
   <NuxtLink :to="to ?? ''"
-    class="flex flex-col justify-between h-full px-2 rounded-sm text-base-300"
-    :class="active ? 'text-primary' : 'text-base-300'">
+    class="flex flex-col justify-between h-full px-2 rounded-sm">
     <div
-      class="flex flex-col justify-center h-full px-2 rounded-sm text-base-300"
-      :class="active ? 'text-primary' : 'text-base-300'">
+      class="flex flex-col justify-center h-full px-2 rounded-sm text-sm"
+      :class="active ? 'text-primary' : 'text-[#354a60]'">
       <span>
         <slot>
         </slot>
