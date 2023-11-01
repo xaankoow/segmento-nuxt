@@ -40,7 +40,7 @@
                                 "title": "سئو",
                                 "fields": {
                                     "keyword-research": "تحقیق کلمه کلیدی",
-                                    "google-suggested-words": "کلمات پیشنهادی گوگل",
+                                    "google-suggest": "کلمات پیشنهادی گوگل",
                                     "google-title-builder": "عنوان‌ساز گوگل"
                                 }
                             },
@@ -119,6 +119,7 @@
             },
             "rank-tracker": {
                 "title": "اپلیکیشن رتبه‌سنج",
+                "accordion": "technical-seo",
                 "header": {
                     "tabs": [
                         "نمای کلی",
@@ -291,14 +292,15 @@
             },
             "keyword-research": {
                 "title": "اپلیکیشن تحقیق کلمه کلیدی",
+                "accordion": "seo",
                 "search": {
-                    "title": "جستجو",
+                    "title": "جست‌وجو",
                     "sentence": [
                         "",
                         "تعداد نتایج: [count] عبارت"
                     ],
-                    "word": "جستجو کلمه کلیدی",
-                    "alphabet": "جستجو بر اساس حروف الفبا"
+                    "word": "جست‌وجو کلمه کلیدی",
+                    "alphabet": "جست‌وجو بر اساس حروف الفبا"
                 },
                 "my-lists": "لیست‌های من",
                 "place-holder": "درج کلمه کلیدی",
@@ -314,16 +316,17 @@
                     "empty": "اطلاعاتی برای نمایش وجود ندارد!"
                 }
             },
-            "google-suggested-words": {
+            "google-suggest": {
                 "title": "اپلیکیشن کلمات پیشنهادی گوگل",
+                "accordion": "seo",
                 "search": {
-                    "title": "جستجو",
+                    "title": "جست‌وجو",
                     "sentence": [
                         "",
                         "تعداد نتایج: [count] عبارت"
                     ],
-                    "word": "جستجو کلمه کلیدی",
-                    "alphabet": "جستجو بر اساس حروف الفبا"
+                    "word": "جست‌وجو کلمه کلیدی",
+                    "alphabet": "جست‌وجو بر اساس حروف الفبا"
                 },
                 "my-lists": "لیست‌های من",
                 "place-holder": "درج کلمه کلیدی",
@@ -340,13 +343,16 @@
                 }
             },
             "serp-preview": {
-                "title": "اپلیکیشن پیش‌نمایش سرپ"
+                "title": "اپلیکیشن پیش‌نمایش سرپ",
+                "accordion": "technical-seo"
             },
             "g-ads-preview": {
-                "title": "اپلیکیشن پیش‌نمایش گوگل‌ادز"
+                "title": "اپلیکیشن پیش‌نمایش گوگل‌ادز",
+                "accordion": "technical-seo"
             },
             "disavow-builder": {
                 "title": "سازنده فایل Disavow",
+                "accordion": "technical-seo",
                 "tabs": {
                     "generate": "ساخت فایل جدید",
                     "my-files": "فایل‌های من"
@@ -371,14 +377,15 @@
             },
             "google-title-builder": {
                 "title": "اپلیکیشن عنوان‌ساز گوگل",
+                "accordion": "seo",
                 "search": {
-                    "title": "جستجو",
+                    "title": "جست‌وجو",
                     "sentence": [
                         "",
                         "تعداد نتایج: [count] عبارت"
                     ],
-                    "word": "جستجو کلمه کلیدی",
-                    "alphabet": "جستجو بر اساس حروف الفبا"
+                    "word": "جست‌وجو کلمه کلیدی",
+                    "alphabet": "جست‌وجو بر اساس حروف الفبا"
                 },
                 "my-lists": "لیست‌های من",
                 "place-holder": "درج کلمه کلیدی",
@@ -397,14 +404,15 @@
             },
             "idea-generator": {
                 "title": "اپلیکیشن ایده‌ساز",
+                "accordion": "content-creation",
                 "search": {
-                    "title": "جستجو",
+                    "title": "جست‌وجو",
                     "sentence": [
                         "",
                         "[count] پیشنهاد ایده تولید محتوا برای شما"
                     ],
-                    "word": "جستجو کلمه کلیدی",
-                    "alphabet": "جستجو بر اساس حروف الفبا"
+                    "word": "جست‌وجو کلمه کلیدی",
+                    "alphabet": "جست‌وجو بر اساس حروف الفبا"
                 },
                 "my-list": "لیست‌های من",
                 "place-holder": "برای نمونه (کتاب)",
@@ -422,6 +430,7 @@
             },
             "title-copy-writer": {
                 "title": "اپلیکیشن کپی‌رایتینگ عنوان",
+                "accordion": "content-creation",
                 "buttons": {
                     "create": "تولید عنوان",
                     "copy-subjects": "کپی موضوعات"
@@ -437,6 +446,7 @@
             },
             "bulk-copy-writer": {
                 "title": "اپلیکیشن کپی‌رایتینگ انبوه",
+                "accordion": "content-creation",
                 "buttons": {
                     "create": "تولید عنوان",
                     "copy-subjects": "کپی موضوعات",
@@ -456,6 +466,7 @@
             "money-pages": {
                 "single": {
                     "title": "صفحات تجاری",
+                    "accordion": "seo",
                     "tabs": {
                         "business": "صفحات تجاری",
                         "reports": "آمار و گزارش"
