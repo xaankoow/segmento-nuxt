@@ -61,7 +61,6 @@ function copy(content) {
   try {
     // Copy the selected text to the clipboard
     document.execCommand("copy");
-    console.log("Text copied to clipboard!");
   } catch (err) {
     console.error("Unable to copy text:", err);
   }

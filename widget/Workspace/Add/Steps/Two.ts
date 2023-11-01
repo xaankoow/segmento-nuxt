@@ -10,7 +10,7 @@ import Three from "./Three";
 export default class Two {
   public static isGenerate = false;
   protected static config = new Config();
-  protected static readonly current_page = 'pages/workspace/add';
+  protected static readonly current_page = "pages/workspace/add";
   protected static readonly steps_section = `${this.current_page}/steps`;
   protected static popup_id = "";
   protected static parent_id = "";
@@ -24,7 +24,6 @@ export default class Two {
     let header = this.header();
     let content = this.content();
 
-
     container.appendChild(header);
     container.appendChild(content);
     popup.appendChild(container);
@@ -33,7 +32,16 @@ export default class Two {
 
   protected static container() {
     let element = document.createElement("div");
-    element.classList.add("flex", "flex-col", "gap-6", "w-[53.875rem]", "rounded-md", "py-4", "shadow-md", "bg-base-100");
+    element.classList.add(
+      "flex",
+      "flex-col",
+      "gap-6",
+      "w-[53.875rem]",
+      "rounded-md",
+      "py-4",
+      "shadow-md",
+      "bg-base-100"
+    );
     element.id = UuidGenerator.generate();
     return element;
   }
@@ -61,9 +69,16 @@ export default class Two {
             </svg>
         </span>`;
 
-    let button = document.createElement('button');
+    let button = document.createElement("button");
     button.id = `${this.popup_id}-button`;
-    button.classList.add('bg-error/10', 'p-1', 'rounded-sm', 'hover:bg-error/25', 'transition-all', 'duration-200');
+    button.classList.add(
+      "bg-error/10",
+      "p-1",
+      "rounded-sm",
+      "hover:bg-error/25",
+      "transition-all",
+      "duration-200"
+    );
     button.innerHTML = `
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
             <path
@@ -72,16 +87,15 @@ export default class Two {
         </svg>`;
     button.onclick = function (e) {
       let button = e.target as HTMLElement;
-      let remove_id = button.id.split('-')[0];
+      let remove_id = button.id.split("-")[0];
       HTMLController.remove_element(remove_id);
-    }
+    };
 
     header.appendChild(title);
     header.appendChild(button);
 
     return header;
   }
-
 
   protected static content() {
     let element = document.createElement("div");
@@ -91,7 +105,18 @@ export default class Two {
     let panel = document.createElement("div");
     let panel_id = UuidGenerator.generate();
     panel.id = panel_id;
-    panel.classList.add("flex", "flex-col", "gap-3", "text-sm", "px-3", "w-full", "max-h-56", "h-fit", "overflow-auto", "border-b");
+    panel.classList.add(
+      "flex",
+      "flex-col",
+      "gap-3",
+      "text-sm",
+      "px-3",
+      "w-full",
+      "max-h-56",
+      "h-fit",
+      "overflow-auto",
+      "border-b"
+    );
     panel.appendChild(PagePanel.render(panel_id));
 
     let register = this.register(panel_id);
@@ -99,7 +124,7 @@ export default class Two {
     element.appendChild(hr);
     element.appendChild(panel);
     element.appendChild(this.add_page_panel(panel_id));
-    element.appendChild(document.createElement("hr"))
+    element.appendChild(document.createElement("hr"));
     element.appendChild(register);
     return element;
   }
@@ -144,20 +169,34 @@ export default class Two {
         <div class="w-2/5 flex items-center justify-center">
           <img src="/images/step_two_add_site.png" class="w-40 h-44" />
         </div>
-      </div>`
+      </div>`;
 
     return element;
   }
 
-
   protected static register(panel_id) {
     let element = document.createElement("div");
-    element.classList.add("flex", "flex-row", "items-center", "justify-between", "mb-2", "mx-4");
+    element.classList.add(
+      "flex",
+      "flex-row",
+      "items-center",
+      "justify-between",
+      "mb-2",
+      "mx-4"
+    );
 
     let space = document.createElement("span");
     space.classList.add("w-28");
     let button = document.createElement("button");
-    button.classList.add("btn-secondary", "flex", "flex-row", "items-center", "gap-4", "w-28", "justify-center");
+    button.classList.add(
+      "btn-secondary",
+      "flex",
+      "flex-row",
+      "items-center",
+      "gap-4",
+      "w-28",
+      "justify-center"
+    );
     button.id = `${this.popup_id}-button`;
     button.innerHTML = `
         <span> ${this.config.by_route(this.current_page).buttons.finish}</span>
@@ -173,42 +212,48 @@ export default class Two {
         `;
     button.onclick = async function (e) {
       let btn = e.target as HTMLElement;
-      let popup_id = btn.id.split('-')[0];
+      let popup_id = btn.id.split("-")[0];
       let request = new Request();
       let form = [];
 
       let pages = document.getElementsByName("input-page");
       let keywords = document.getElementsByName("input-keyword");
 
-      pages.forEach(page => {
-        let id = page.id.split('-')[0];
+      pages.forEach((page) => {
+        let id = page.id.split("-")[0];
         let keys = [];
 
-        keywords.forEach(key => {
+        keywords.forEach((key) => {
           key = key as HTMLInputElement;
           if (key.className.includes(id)) {
-            keys.push(key.value)
+            keys.push(key.value);
           }
         });
         let the_page = {
           slug: page.value,
           is_money_page: false,
           is_lighthouse: false,
-          keywords: keys
-        }
+          keywords: keys,
+        };
         form.push(the_page);
-      })
+      });
 
-      let response = await request.post(`workspaces/${CacheStore.workspace_uuid()}/add_page`, { pages: form });
-      if (response.status_code() < 300) {
-        if (response.status()) {
-          console.log(HTMLController.remove_element(popup_id));
-        }
-      }
-    }
+      let response = await request.post(
+        `workspaces/${CacheStore.workspace_uuid()}/add_page`,
+        { pages: form }
+      );
+    };
 
     let btn_next = document.createElement("button");
-    btn_next.classList.add("btn-primary", "flex", "flex-row", "items-center", "gap-4", "w-28", "justify-center");
+    btn_next.classList.add(
+      "btn-primary",
+      "flex",
+      "flex-row",
+      "items-center",
+      "gap-4",
+      "w-28",
+      "justify-center"
+    );
     btn_next.id = `${this.parent_id}-button-${this.popup_id}`;
     btn_next.innerHTML = `
         <span> ${this.config.by_route(this.current_page).buttons.next}</span>
@@ -224,44 +269,45 @@ export default class Two {
     `;
     btn_next.onclick = async function (e) {
       let btn = e.target as HTMLElement;
-      let popup_id = btn.id.split('-')[2];
+      let popup_id = btn.id.split("-")[2];
       let request = new Request();
       let form = [];
-      let ids = btn.id.split('-');
+      let ids = btn.id.split("-");
       let pages = document.getElementsByName("input-page");
       let keywords = document.getElementsByName("input-keyword");
 
-      pages.forEach(page => {
-        let id = page.id.split('-')[0];
+      pages.forEach((page) => {
+        let id = page.id.split("-")[0];
         let keys = [];
 
-        keywords.forEach(key => {
+        keywords.forEach((key) => {
           key = key as HTMLInputElement;
           if (key.className.includes(id)) {
-            keys.push(key.value)
+            keys.push(key.value);
           }
         });
         let the_page = {
           slug: page.value,
           is_money_page: false,
           is_lighthouse: false,
-          keywords: keys
-        }
+          keywords: keys,
+        };
         form.push(the_page);
-      })
+      });
 
-      let response = await request.post(`workspaces/${CacheStore.workspace_uuid()}/add_page`, { pages: form });
+      let response = await request.post(
+        `workspaces/${CacheStore.workspace_uuid()}/add_page`,
+        { pages: form }
+      );
       if (response.status_code() < 300) {
         if (response.status()) {
-          console.log(ids, popup_id);
-          document.getElementById("page")!.appendChild(
-            Three.render("page", response.data().website.pages));
-            HTMLController.remove_element(popup_id);
+          document
+            .getElementById("page")!
+            .appendChild(Three.render("page", response.data().website.pages));
+          HTMLController.remove_element(popup_id);
         }
       }
-    }
-
-    console.log(btn_next.id);
+    };
 
     element.appendChild(space);
     element.appendChild(button);
@@ -272,19 +318,31 @@ export default class Two {
 
   protected static add_page_panel(panel_id: string) {
     let element = document.createElement("div");
-    element.classList.add("flex", "flex-row", "items-center", "w-full", "p-3", "text-base-300", "gap-4");
+    element.classList.add(
+      "flex",
+      "flex-row",
+      "items-center",
+      "w-full",
+      "p-3",
+      "text-base-300",
+      "gap-4"
+    );
     let label = document.createElement("span");
-    label.innerText = `${this.config.by_route(this.steps_section)[1].meta_description}`;
+    label.innerText = `${
+      this.config.by_route(this.steps_section)[1].meta_description
+    }`;
     let button = document.createElement("button");
     button.classList.add("btn-secondary");
-    button.innerText = `${this.config.by_route(this.steps_section)[1].button.add_page}`;
+    button.innerText = `${
+      this.config.by_route(this.steps_section)[1].button.add_page
+    }`;
 
     button.onclick = function (e) {
       let page_panel = PagePanel.render(panel_id);
       let panel = document.getElementById(panel_id);
 
       panel!.appendChild(page_panel);
-    }
+    };
 
     element.appendChild(label);
     element.appendChild(button);

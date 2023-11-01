@@ -5,7 +5,7 @@
         <slot></slot>
       </span>
     </span>
-    <span :class="active ? 'text-primary' : ''">
+    <span :dir="label_direction" :class="active ? 'text-primary' : ''">
       {{ label }}
     </span>
   </div>
@@ -19,7 +19,11 @@ const props = defineProps({
   },
   label: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
+  label_direction: {
+    type: String,
+    default: "rtl",
+  },
 });
 </script>
