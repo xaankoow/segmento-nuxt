@@ -15,8 +15,7 @@
   }
 
   .custom_input_box {
-    @apply relative text-base-content [&>input]:w-full [&>label]:absolute [&>label]:right-2 [&>label]:top-3 [&>label]:transition-all [&>label]:duration-300 [&>label]:transform [&>label]:text-xs
-        [&>label]:cursor-text [&>label]:pointer-events-none;
+    @apply relative text-base-content [&>input]:w-full [&>label]:absolute [&>label]:right-2 [&>label]:top-3 [&>label]:transition-all [&>label]:duration-300 [&>label]:transform [&>label]:text-xs [&>label]:cursor-text [&>label]:pointer-events-none;
   }
 
   input {
@@ -28,14 +27,16 @@
   }
 
   .btn-primary {
-    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-primary text-primary-text [&>svg]:fill-primary-text  hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled disabled:cursor-default;
+    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-primary text-primary-text [&>svg]:fill-primary-text hover:bg-primary-hover active:bg-primary-active focus:bg-primary-active disabled:bg-primary-disabled disabled:cursor-default;
   }
 
   .btn-secondary {
-    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-secondary  text-secondary-text [&>svg]:fill-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled disabled:cursor-default;
+    @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-secondary text-secondary-text [&>svg]:fill-secondary-text hover:text-white hover:bg-secondary-hover active:text-white active:bg-secondary-active focus:text-white focus:bg-secondary-active disabled:text-white disabled:bg-secondary-disabled disabled:cursor-default;
   }
 
-  .btn-secondary:hover svg, .btn-secondary:focus svg, .btn-secondary:active svg {
+  .btn-secondary:hover svg,
+  .btn-secondary:focus svg,
+  .btn-secondary:active svg {
     @apply fill-white;
   }
 
@@ -72,4 +73,21 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #aaaaaa;
+}
+
+
+/* vue-json-pretty components styles */
+.vjs-tree-node:hover {
+  background: none !important;
+  font-family: monospace;
+}
+
+.vjs-value-string {
+  @apply !text-base-content
+}
+
+.vjs-tree {
+  font-family: monospace !important;
+  font-size: 12px !important;
+  text-align: left !important;
 }
