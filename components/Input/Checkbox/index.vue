@@ -7,7 +7,7 @@ const props = defineProps({
   name: { type: String },
   id: {},
   value: { type: String },
-  dir: { type: String, default: false },
+  dir: { type: String, default: 'rtl' },
 });
 if (props.dir) {
   const dir = props.dir;
