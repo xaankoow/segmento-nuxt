@@ -103,23 +103,37 @@
             </svg>
             حذف
           </button>
-          <a class="btn-primary px-4" href="https://www.google.com" target="_blank">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+          <form
+            method="post"
+            target="_blank"
+            action="https://search.google.com/test/rich-results"
+          >
+            <button
+              class="btn-primary px-4"
+              type="submit"
+              id="validate_schema2"
+              href="https://www.google.com"
+              target="_blank"
             >
-              <path
-                d="M1.99998 17.5C1.36665 17.5 0.912651 17.2167 0.637985 16.65C0.362651 16.0833 0.424985 15.55 0.824985 15.05L6.49998 8.175V2H5.29998C5.09999 2 4.92498 1.929 4.77498 1.787C4.62498 1.64567 4.54998 1.46667 4.54998 1.25C4.54998 1.03333 4.62498 0.854 4.77498 0.712C4.92498 0.570667 5.09999 0.5 5.29998 0.5H12.7C12.9 0.5 13.075 0.570667 13.225 0.712C13.375 0.854 13.45 1.03333 13.45 1.25C13.45 1.46667 13.375 1.64567 13.225 1.787C13.075 1.929 12.9 2 12.7 2H11.5V8.175L17.175 15.05C17.575 15.5333 17.6377 16.0623 17.363 16.637C17.0877 17.2123 16.6333 17.5 16 17.5H1.99998ZM1.99998 16H16L9.99998 8.7V2H7.99998V8.7L1.99998 16Z"
-                fill="white"
-              />
-            </svg>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.99998 17.5C1.36665 17.5 0.912651 17.2167 0.637985 16.65C0.362651 16.0833 0.424985 15.55 0.824985 15.05L6.49998 8.175V2H5.29998C5.09999 2 4.92498 1.929 4.77498 1.787C4.62498 1.64567 4.54998 1.46667 4.54998 1.25C4.54998 1.03333 4.62498 0.854 4.77498 0.712C4.92498 0.570667 5.09999 0.5 5.29998 0.5H12.7C12.9 0.5 13.075 0.570667 13.225 0.712C13.375 0.854 13.45 1.03333 13.45 1.25C13.45 1.46667 13.375 1.64567 13.225 1.787C13.075 1.929 12.9 2 12.7 2H11.5V8.175L17.175 15.05C17.575 15.5333 17.6377 16.0623 17.363 16.637C17.0877 17.2123 16.6333 17.5 16 17.5H1.99998ZM1.99998 16H16L9.99998 8.7V2H7.99998V8.7L1.99998 16Z"
+                  fill="white"
+                />
+              </svg>
 
-            آزمایش
-          </a>
-          <Copy class="btn-primary px-4" :content="dataForCopy">
+              آزمایش
+            </button>
+
+            <textarea :value="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`" name="code_snippet" class="hidden"></textarea>
+          </form>
+          <Copy class="btn-primary px-4" :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
             <svg
               width="24"
               height="24"
