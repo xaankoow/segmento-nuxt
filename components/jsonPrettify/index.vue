@@ -36,27 +36,13 @@ onUpdated(() => {
 </style>
 
 <template>
-  <div class="flex w-full h-fit border-solid border border-[#D9D9D9] rounded-[3px]">
-    <div id="codeContainer" class="w-[93%] h-auto bg-base-200 px-8 py-2" dir="ltr">
-      <div class="text-[12px] h-[20px] flex flex-row items-center font-mono">
+  <div class="flex w-full h-fit border-solid border border-[#D9D9D9] rounded-[3px] font-mono" dir="ltr">
+    <div id="codeContainer" class="w-full h-auto bg-base-200 p-2" >
+      <div class="text-[12px] h-[20px] flex flex-row items-center ">
         <span> &lt;script type="application/ld+json"&gt;</span>
       </div>
       <json-pretty :showLine="false" :data="jsonData"></json-pretty>
-      <pre class="font-mono text-[12px] h-[20px]">&lt;/script&gt;</pre>
-    </div>
-    <div
-      class="w-[7%] bg-base-250 flex flex-col justify-start items-center py-2"
-      :class="`h-[${linesSum.length * 20}px]`"
-    >
-      <span
-        v-for="line in linesSum"
-        :key="line"
-        class="text-base-content w-6 h-[20px] text-xs flex flex-row justify-center items-center"
-      >
-        <span class="h-full flex justify-center items-center font-mono">
-          {{ line }}
-        </span>
-      </span>
+      <pre class=" text-[12px] h-[20px]">&lt;/script&gt;</pre>
     </div>
   </div>
 </template>

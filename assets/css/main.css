@@ -83,6 +83,7 @@
 }
 
 .vjs-value-string {
+  font-size: 12px !important;
   @apply !text-base-content
 }
 
