@@ -1,7 +1,6 @@
 <template>
     <input
         min="2018-01-01"
-        :id="id"
         type="date"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
@@ -10,6 +9,6 @@
 </template>
 
 <script setup>
-defineProps(["modelValue" , "id"]);
+defineProps(["modelValue"]);
 defineEmits(["update:modelValue"]);
 </script>
