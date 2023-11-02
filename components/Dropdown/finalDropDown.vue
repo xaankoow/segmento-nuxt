@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full h-full inline-block relative group">
+    <div class="w-full h-10 inline-block relative group">
         <!-- header -->
-        <div class="h-full w-full flex justify-between px-2 flex items-center">
+        <div class="h-full w-full flex justify-between px-2 items-center">
             <span :class="disabled ? 'text-gray-400' : ''">
                 <slot name="title"></slot>
             </span>
@@ -10,10 +10,12 @@
             </svg>
         </div>
         <!-- content -->
-        <div class="hidden w-full max-h-[200px] overflow-scroll top-[43px] flex-col gap-4 py-2 text-center border border-base-400 rounded rounded-t-none bg-[#FCFCFB] absolute z-[2000]"
-        :class="disabled ? '' : 'group-hover:flex'"
+        <div class="hidden w-full top-10 pt-2 absolute z-[2000]"
+        :class="disabled ? '' : 'group-hover:flex'">
+        <div class="w-full max-h-48 overflow-y-auto flex-col gap-4 text-center border border-base-400 rounded bg-base-200"
         :name=props.title>
             <slot name="option"></slot>
+        </div>
         </div>
     </div>
 </template>
