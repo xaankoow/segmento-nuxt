@@ -81,7 +81,7 @@
                     </div>
                     <div class="w-[50%] h-[45px] flex items-center gap-2">
                         <span class="text-sm w-fit" >تاریخ انتشار</span>
-                        <InputDate class="w-[160px]" @change="changeDatePublished()" :id="uploadDate" v-model="values.datePublished"></InputDate>
+                        <InputDate class="w-[160px]" @change="changeDatePublished()" id="uploadDate" v-model="values.datePublished"></InputDate>
                     </div>
                 </div>
                 
@@ -104,11 +104,7 @@
                                 <span> نوع غذا</span>
                             </template>
                             <template v-slot:option >
-                                <InputRadio v-for="(element , index) in Object.keys(recipeCategory)" :key="index" v-model="recipeCategory[element].is_checked" @click="changeRecipeCategory(element)" :id="element" :name="currency" >{{ recipeCategory[element].title }}</InputRadio>
-                                <!-- <InputRadio @click="changeRecipeCategory('appetizer')" :id="appetizer" :name="food" class="text-base-500 cursor-pointer">پیش غذا </InputRadio>
-                                <InputRadio @click="changeRecipeCategory('entree')" :id="entree" :name="food" class="text-base-500 cursor-pointer">غذا اصلی</InputRadio>
-                                <InputRadio @click="changeRecipeCategory('dessert')" :id="dessert" :name="food" class="text-base-500 cursor-pointer">دسر</InputRadio>
-                                <InputRadio @click="changeRecipeCategory('not specified')" :id="notSpecified" :name="food" class="text-base-500 cursor-pointer">هیچکدام</InputRadio> -->
+                                <InputRadio v-for="(element , index) in Object.keys(recipeCategory)" :key="index" v-model="recipeCategory[element].is_checked" @click="changeRecipeCategory(element)" :id="element" name="currency" >{{ recipeCategory[element].title }}</InputRadio>
                             </template>
                         </DropdownFinalDropDown>
                     </div>
@@ -652,19 +648,15 @@ function addIngredient () {
     jsonData.value.recipeIngredient = valuesIngredient.value
 }
 function deleteOneIngredient(taskIndex){
-    console.log(ingredientNumber.value);
     if (ingredientNumber.value > 1) {
         ingredientNumber.value --
         // jsonData.value.recipeIngredient.splice(taskIndex, 1)
         valuesIngredient.value.splice(taskIndex, 1)
-        console.log(ingredientNumber.value);
     }else{
         ingredientNumber.value --
         jsonData.value.recipeIngredient.splice(taskIndex, 1)
         valuesIngredient.value.splice(taskIndex, 1)
-        console.log(ingredientNumber.value);
     }
-    console.log(ingredientNumber.value);
 }
 function changeIngredient (taskIndex) {
     if(ingredientNumber.value == 1){

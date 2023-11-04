@@ -55,16 +55,16 @@
                 </div>
                 <div class="w-[60%] h-[45px] flex items-center gap-2">
                     <span class="text-sm w-fit" >تاریخ انتشار</span>
-                    <InputDate class="w-[160px]" @change="changeUploadDate" :id="uploadDate" v-model="valuesVideo.uploadDate"></InputDate>
+                    <InputDate class="w-[160px]" @change="changeUploadDate" id="uploadDate" v-model="valuesVideo.uploadDate"></InputDate>
                 </div>
                 <div v-if="imageNumber == 1" >
                     <div class="w-full" >
                         <InputURL class="w-full align-start" placeholder="آدرس  تصویر بندانگشتی" @keyup="changeimage(0)" v-model="valuesVideo.thumbnailUrl[0]" />
                     </div>
                 </div>
-                <div v-if="imageNumber > 1" v-for="(value , index) in valuesVideo.thumbnailUrl" :key="index">
+                <div v-if="imageNumber > 1" v-for="(value , index) in imageNumber" :key="index">
                     <div class="w-full flex items-center gap-2" >
-                        <InputURL class="w-[80%] align-start" style="width: 80%;" placeholder="آدرس وب سایت" @keyup="changeimage(index)" v-model="valuesVideo.thumbnailUrl[index]" />
+                        <InputURL class="w-[80%] align-start" style="width: 80%;" placeholder="آدرس  تصویر بندانگشتی" @keyup="changeimage(index)" v-model="valuesVideo.thumbnailUrl[index]" />
                         <button @click="deleteOneImage(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕  
                         </button>
@@ -145,7 +145,7 @@ const valuesVideo = ref(
         "@type": "VideoObject",
         "name": "",
         "description": "",
-        "thumbnailUrl": [],
+        "thumbnailUrl": [""],
         "uploadDate": "",
         "duration": ""
     }
@@ -256,9 +256,9 @@ function changeimage(taskIndex) {
 }
 function deleteOneImage(taskIndex){
     if (imageNumber.value > 1) {
-        imageNumber.value --
+        imageNumber.value--;
+        // valuesVideo.value["thumbnailUrl"].splice(taskIndex, 1)
         jsonData.value.thumbnailUrl.splice(taskIndex, 1)
-        valuesVideo.value.splice(taskIndex, 1)
     }
 }
 const contentUrl = ref("")

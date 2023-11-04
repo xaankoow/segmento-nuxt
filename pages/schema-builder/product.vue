@@ -84,7 +84,7 @@
                             v-model="identificationValue[element.name]" />
                     </div>
                 </div>
-                <!-- identification end v-if="identifications[element].is_checked" -->
+                <!-- identification end -->
                 <!-- _______________________________________ -->
                 <!-- offer start -->
                 <div class="w-full flex flex-col gap-2">
@@ -107,7 +107,7 @@
                             </DropdownFinalDropDown>
                         </div>
                         <div class="w-full h-10 text-start align-center border border-base-400 rounded-[3px] ">
-                            <DropdownFinalDropDown :disabled="offer.noOffer.is_checked">
+                            <DropdownFinalDropDown :disabled="offer.noOffer.is_checked && offer.noOffer.is_checked == 'none' ">
                                 <template v-slot:title>
                                     {{ currency[jsonData.offers?.priceCurrency]?.title ?? "واحد پول" }}
                                 </template>
@@ -187,7 +187,7 @@
                     <div v-if="normalOffer" class="grid grid-cols-2 gap-2">
                         <div class="w-full h-10 flex items-center gap-2">
                             <span class="text-sm w-48">تاریخ تخفیف</span>
-                            <InputDate class="w-full" @change="changeNormalOfferDate" :id="priceValidUntil"
+                            <InputDate class="w-full" @change="changeNormalOfferDate" id="priceValid"
                                 v-model="valuesNormalOffer.priceValidUntil"></InputDate>
                         </div>
                     </div>

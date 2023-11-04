@@ -239,7 +239,6 @@ function deleteOneQuestion(taskIndex) {
 // for inputs //
 function changeQuestionName(taskIndex) {
   jsonData.value.mainEntity[taskIndex].name = values.value[taskIndex].question;
-  console.log(taskIndex);
 }
 function changeAnswer(taskIndex) {
   jsonData.value.mainEntity[taskIndex].acceptedAnswer.text =
