@@ -141,7 +141,7 @@
 										<span>روزهای کاری</span>
 									</template>
 									<template v-slot:option>
-										<div class="gap-2 py-1">
+										<div class="gap-2">
 											<InputCheckbox v-for="(day, day_index) in days[week_index]"
 												v-model="days[week_index][day_index].is_checked"
 												@change="changeDays(week_index)" :id="`week_${week_index}_${day.name}`"
@@ -183,7 +183,7 @@
 								<span>اکانت در شبکه های اجتماعی</span>
 							</template>
 							<template v-slot:option>
-								<div class="gap-2 py-1 grid grid-cols-2">
+								<div class="gap-2 grid grid-cols-2">
 									<InputCheckbox v-for="(element, index) in Object.keys(socialAccount)" :key="index"
 										v-model="socialAccount[element].is_checked"
 										@change="updateSocialAccountValue()" :id="element">
@@ -213,7 +213,7 @@
 									}} </span>
 								</template>
 								<template v-slot:option>
-									<div class="gap-2 py-1">
+									<div class="gap-2">
 										<InputRadio v-for="(element, indexjob) in Object.keys(departmentJobs)"
 											:key="indexjob" v-model="departmentJobs[element].is_checked"
 											@click="changeDepartmentJobs(department_index, element, true)"
