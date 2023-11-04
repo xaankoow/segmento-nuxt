@@ -31,8 +31,9 @@
 								<span> {{ jobs[current_job]?.title ?? 'نوع کسب و کار شما' }} </span>
 							</template>
 							<template v-slot:option>
-								<InputRadio v-for="(element, index) in Object.keys(jobs)" :key="index" v-model="jobs[element].is_checked"
-									@click="changeJobs(element, true)" :id="element" name="jobs">
+								<InputRadio v-for="(element, index) in Object.keys(jobs)" :key="index"
+									v-model="jobs[element].is_checked" @click="changeJobs(element, true)" :id="element"
+									name="jobs">
 									{{ jobs[element].title }}
 								</InputRadio>
 							</template>
@@ -46,8 +47,8 @@
 							</template>
 							<template v-slot:option>
 								<InputRadio v-if="jobs[current_job]?.specificTypes"
-									v-for="(element, index) in Object.keys(jobs[current_job]?.specificTypes ?? {})" :key="index"
-									@click="changeJobs(element)" :id="`${current_job}_${element}`" name="jobs">
+									v-for="(element, index) in Object.keys(jobs[current_job]?.specificTypes ?? {})"
+									:key="index" @click="changeJobs(element)" :id="`${current_job}_${element}`" name="jobs">
 									{{ jobs[current_job]?.specificTypes[element]?.title }}
 								</InputRadio>
 							</template>
@@ -67,7 +68,7 @@
 				<div class="w-full flex flex-col gap-2">
 					<div class="w-full">
 						<InputURL class="w-full text-left placeholder:text-right" dir="ltr" placeholder="آیدی تصویر (لینک)"
-							@keyup="changeId" v-model="values.id" />
+							v-model="jsonData['@id']" />
 					</div>
 					<div class="w-full">
 						<InputURL class="w-full text-left placeholder:text-right" dir="ltr" placeholder="آدرس وب سایت"
@@ -76,8 +77,8 @@
 				</div>
 				<div class="w-full flex gap-2">
 					<div class="w-[40%] h-10 flex items-center gap-2">
-						<InputText class="text-left placeholder:text-right" dir="ltr" id="numberNumber" placeholder="شماره تلفن"
-							@input="changeTelephone()" v-model="values.telephone" />
+						<InputText class="text-left placeholder:text-right" dir="ltr" id="numberNumber"
+							placeholder="شماره تلفن" @input="changeTelephone()" v-model="values.telephone" />
 					</div>
 					<div class="w-[60%] h-10 flex items-center gap-2">
 						<span class="text-sm max-w-1/2 min-w-fit">محدوده قیمت به تومان:</span>
@@ -115,33 +116,39 @@
 				<!-- geo -->
 				<div class="w-full flex gap-2">
 					<div class="w-1/2 h-10 flex items-center">
-						<InputText class="text-left placeholder:text-right" id="Latitude" dir="ltr" placeholder="طول جغرافیایی"
-							@input="changeLatitude()" v-model="valuesGeo.latitude" />
+						<InputText class="text-left placeholder:text-right" id="Latitude" dir="ltr"
+							placeholder="طول جغرافیایی" @input="changeLatitude()" v-model="valuesGeo.latitude" />
 					</div>
 					<div class="w-1/2 h-10 flex items-center">
-						<InputText class="text-left placeholder:text-right" id="Longitude" dir="ltr" placeholder="عرض جغرافیایی"
-							@input="changeLongitude()" v-model="valuesGeo.longitude" />
+						<InputText class="text-left placeholder:text-right" id="Longitude" dir="ltr"
+							placeholder="عرض جغرافیایی" @input="changeLongitude()" v-model="valuesGeo.longitude" />
 					</div>
 				</div>
 				<!-- oppening time -->
 				<div class="w-full flex flex-col gap-2">
 					<div class="w-full">
-						<!-- <InputCheckbox :id="hoursOppening" name="hoursOppening" v-model="allHoursOppeningOk" @click="change24Hours()">باز بودن به صورت 24 ساعته در 7 روز هفته</InputCheckbox> -->
+						<InputCheckbox name="24in7" v-model="allHoursOppeningOk" @click="change24Hours()">
+							باز بودن به صورت 24 ساعته در 7 روز هفته
+						</InputCheckbox>
 					</div>
-					<div class="w-full flex flex-col gap-2">
-						<div class="w-full flex gap-2 items-center" v-for="(week, week_index) in jsonData.openingHoursSpecification"
-							:key="week_index">
+					<div class="w-full flex flex-col gap-2"
+						v-if="!allHoursOppeningOk && jsonData.openingHoursSpecification">
+						<div class="w-full flex gap-2 items-center"
+							v-for="(week, week_index) in jsonData.openingHoursSpecification" :key="week_index">
 							<div class="w-1/3 h-10 text-start align-center border border-base-400 rounded">
 								<DropdownFinalDropDown>
 									<template v-slot:title>
 										<span>روزهای کاری</span>
 									</template>
 									<template v-slot:option>
-										<InputCheckbox v-for="(day, day_index) in days[week_index]"
-											v-model="days[week_index][day_index].is_checked" @change="changeDays(week_index)"
-											:id="`week_${week_index}_${day.name}`" :name="`week_${week_index}_${day.name}`">
-											{{ day.title }}
-										</InputCheckbox>
+										<div class="gap-2 py-1">
+											<InputCheckbox v-for="(day, day_index) in days[week_index]"
+												v-model="days[week_index][day_index].is_checked"
+												@change="changeDays(week_index)" :id="`week_${week_index}_${day.name}`"
+												:name="`week_${week_index}_${day.name}`">
+												{{ day.title }}
+											</InputCheckbox>
+										</div>
 									</template>
 								</DropdownFinalDropDown>
 							</div>
@@ -170,130 +177,77 @@
 				</div>
 				<!-- soial -->
 				<div class="w-full flex flex-col gap-2">
-					<div class="w-[45%] h-10 text-start align-center border border-base-400 rounded">
+					<div class="w-1/2 h-10 text-start align-center border border-base-400">
 						<DropdownFinalDropDown>
 							<template v-slot:title>
 								<span>اکانت در شبکه های اجتماعی</span>
 							</template>
 							<template v-slot:option>
-								<InputCheckbox v-for="(element, index) in Object.keys(socialAccount)" :key="index"
-									v-model="socialAccount[element].is_checked" @click="changeSocialAccount(element, index)" :id="element">
-									{{ socialAccount[element].title }}</InputCheckbox>
+								<div class="gap-2 py-1 grid grid-cols-2">
+									<InputCheckbox v-for="(element, index) in Object.keys(socialAccount)" :key="index"
+										v-model="socialAccount[element].is_checked"
+										@change="updateSocialAccountValue()" :id="element">
+										{{ socialAccount[element].title }}</InputCheckbox>
+								</div>
 							</template>
 						</DropdownFinalDropDown>
 					</div>
-					<div class="w-full flex gap-[10%] flex-wrap">
-						<div class="w-[45%] mb-2" v-for="(element, index) in socialAccount.filter(
-							(el) => el.is_checked == true
-						)" :key="index">
-							<InputText :placeholder="element.name" @keyup="changeSocialAccountValue(element.name, index)"
+					<div class="w-full grid gap-2 grid-cols-2">
+						<div class="w-full" v-for="(element, index) in socialAccount.filter((el) => el.is_checked == true)"
+							:key="index">
+							<InputText :placeholder="`لینک ${element.title}`"
+								@input="updateSocialAccountValue()"
 								v-model="socialAccountValue[element.name]" />
 						</div>
 					</div>
 				</div>
 				<!-- department -->
 				<div class="w-full flex flex-col gap-2 border-r-2 border-[#D9D9D9] pr-2" v-if="departmentNumber"
-					v-for="(value, index) in departmentNumber" :key="index">
+					v-for="(value, department_index) in departmentNumber" :key="department_index">
 					<!-- department jobs -->
 					<div class="flex gap-2 items-center">
-						<div class="w-[45%] h-10 text-start align-center border border-base-400 rounded">
+						<div class="w-1/2 h-10 text-start align-center border border-base-400">
 							<DropdownFinalDropDown class="h-[200px]">
 								<template v-slot:title>
-									<span>نوع کسب و کار شما</span>
+									<span> {{ departmentJobs[departmentJob[department_index]]?.title ?? 'نوع کسب و کار شما'
+									}} </span>
 								</template>
 								<template v-slot:option>
-									<InputRadio v-for="(element, indexjob) in Object.keys(departmentJobs)" :key="indexjob"
-										v-model="departmentJobs[element].is_checked" @click="changeDepartmentJobs(element, index)"
-										:id="element + index + 'department'" name="departmentJobs">{{ departmentJobs[element].title }}
-									</InputRadio>
+									<div class="gap-2 py-1">
+										<InputRadio v-for="(element, indexjob) in Object.keys(departmentJobs)"
+											:key="indexjob" v-model="departmentJobs[element].is_checked"
+											@click="changeDepartmentJobs(department_index, element, true)"
+											:id="element + department_index + 'department'" name="departmentJobs">
+											{{ departmentJobs[element].title }}
+										</InputRadio>
+									</div>
 								</template>
 							</DropdownFinalDropDown>
 						</div>
-						<div class="w-[45%] h-10 text-start align-center border border-base-400 rounded">
-							<DropdownFinalDropDown :disabled="!specificDepartmentJobsOk[index]">
+						<div class="w-1/2 h-10 text-start align-center border border-base-400">
+							<DropdownFinalDropDown
+								:disabled="Object.keys(departmentJobs[departmentJob[department_index]]?.specificTypes ?? {})?.length > 0 ? false : true">
 								<template v-slot:title>
-									<span>عنوان کسب و کار شما</span>
+									<span>
+										{{
+											departmentJobs[departmentJob[department_index]]?.specificTypes?.[departmentJobChild[department_index]]?.title
+											|| 'نوع کسب و کار شما' }}
+									</span>
 								</template>
 								<template v-slot:option>
-									<InputRadio v-if="departmentJobs.AutomotiveBusiness.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.AutomotiveBusiness.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.AutomotiveBusiness.specificTypes[element].is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.AutomotiveBusiness.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.EmergencyService.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.EmergencyService.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.EmergencyService.specificTypes[element].is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.EmergencyService.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.EntertainmentBusiness.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.EntertainmentBusiness.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.EntertainmentBusiness.specificTypes[element]
-			.is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.EntertainmentBusiness.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.GovernmentOffice.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.GovernmentOffice.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.GovernmentOffice.specificTypes[element].is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.GovernmentOffice.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.FinancialService.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.FinancialService.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.FinancialService.specificTypes[element].is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.FinancialService.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.FoodEstablishment.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.FoodEstablishment.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.FoodEstablishment.specificTypes[element].is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.FoodEstablishment.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.HomeAndConstructionBusiness.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.HomeAndConstructionBusiness.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.HomeAndConstructionBusiness.specificTypes[element]
-			.is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="jobs">{{
-		departmentJobs.HomeAndConstructionBusiness.specificTypes[element]
-			.title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.LegalService.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.LegalService.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.LegalService.specificTypes[element].is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.LegalService.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.LodgingBusiness.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.LodgingBusiness.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.LodgingBusiness.specificTypes[element].is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.LodgingBusiness.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.MedicalBusiness.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.MedicalBusiness.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.MedicalBusiness.specificTypes[element].is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-		departmentJobs.MedicalBusiness.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.SportsActivityLocation.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-												departmentJobs.SportsActivityLocation.specificTypes
-											)" :key="indexSpeceficJob" v-model="departmentJobs.SportsActivityLocation.specificTypes[element]
-			.is_checked
-			" @click="changeDepartmentJobs(element, index)" :id="element + index" name="jobs">{{
-		departmentJobs.SportsActivityLocation.specificTypes[element].title
-	}}</InputRadio>
-									<InputRadio v-if="departmentJobs.Store.is_checked" v-for="(element, indexSpeceficJob) in Object.keys(
-										departmentJobs.Store.specificTypes
-									)" :key="indexSpeceficJob" v-model="departmentJobs.Store.specificTypes[element].is_checked"
-										@click="changeDepartmentJobs(element, index)" :id="element + index" name="departmentJobs">{{
-											departmentJobs.Store.specificTypes[element].title }}</InputRadio>
+									<div class="gap-2 py-1">
+										<InputRadio v-if="departmentJobs[departmentJob[department_index]]?.specificTypes"
+											v-for="(jobchild, indexjobchild) in Object.keys(departmentJobs[departmentJob[department_index]].specificTypes ?? {})"
+											:key="indexjobchild" @click="changeDepartmentJobs(department_index, jobchild)"
+											:id="`dep_jobchild_${department_index}_${jobchild}`" name="departmentJobs">
+											{{ departmentJobs[departmentJob[department_index]].specificTypes[jobchild].title
+											}}
+										</InputRadio>
+									</div>
 								</template>
 							</DropdownFinalDropDown>
 						</div>
-						<button @click="deleteOneDepartment(index)"
+						<button @click="deleteOneDepartment(department_index)"
 							class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
 							✕
 						</button>
@@ -301,22 +255,22 @@
 					<!-- department details -->
 					<div class="flex gap-2">
 						<div class="w-1/3">
-							<InputText class="w-full align-start" placeholder="نام" @keyup="changeDepartmentName(index)"
-								v-model="valuesDepartment[index].name" />
+							<InputText class="w-full" placeholder="نام"
+								v-model="jsonData.department[department_index].name" />
 						</div>
 						<div class="w-1/3">
-							<InputURL class="w-full align-start" placeholder="لینک تصویر" @keyup="changeDepartmentImage(index)"
-								v-model="valuesDepartment[index].image" />
+							<InputURL class="text-left placeholder:text-right" dir="ltr" placeholder="لینک تصویر"
+								v-model="jsonData.department[department_index].image" />
 						</div>
 						<div class="w-1/3 h-10 flex items-center gap-2">
-							<InputText id="numberNumber" placeholder="شماره تلفن" @input="changeDepartmentTelephone(index)"
-								v-model="valuesDepartment[index].telephone" />
+							<InputText class="text-left placeholder:text-right" dir="ltr" id="numberNumber"
+								placeholder="شماره تلفن" v-model="jsonData.department[department_index].telephone" />
 						</div>
 					</div>
 				</div>
 				<button class="btn-secondary" @click="addDepartment">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-						class="w-6 h-6">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+						stroke="currentColor" class="w-6 h-6">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 					</svg>
 					افزودن دپارتمان
@@ -329,8 +283,8 @@
 				<div class="flex gap-2 w-full">
 					<button @click="deleteAll" class="btn-primary px-4">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<mask id="mask0_162_227" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-								height="24">
+							<mask id="mask0_162_227" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
+								width="24" height="24">
 								<rect width="24" height="24" fill="#D9D9D9" />
 							</mask>
 							<g mask="url(#mask0_162_227)">
@@ -341,28 +295,34 @@
 						</svg>
 						حذف
 					</button>
-					<a class="btn-primary px-4" href="https://www.google.com" target="_blank">
-						<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path
-								d="M1.99998 17.5C1.36665 17.5 0.912651 17.2167 0.637985 16.65C0.362651 16.0833 0.424985 15.55 0.824985 15.05L6.49998 8.175V2H5.29998C5.09999 2 4.92498 1.929 4.77498 1.787C4.62498 1.64567 4.54998 1.46667 4.54998 1.25C4.54998 1.03333 4.62498 0.854 4.77498 0.712C4.92498 0.570667 5.09999 0.5 5.29998 0.5H12.7C12.9 0.5 13.075 0.570667 13.225 0.712C13.375 0.854 13.45 1.03333 13.45 1.25C13.45 1.46667 13.375 1.64567 13.225 1.787C13.075 1.929 12.9 2 12.7 2H11.5V8.175L17.175 15.05C17.575 15.5333 17.6377 16.0623 17.363 16.637C17.0877 17.2123 16.6333 17.5 16 17.5H1.99998ZM1.99998 16H16L9.99998 8.7V2H7.99998V8.7L1.99998 16Z"
-								fill="white" />
-						</svg>
+					<form method="post" target="_blank" action="https://search.google.com/test/rich-results">
+						<button class="btn-primary px-4" type="submit" id="validate_schema2" href="https://www.google.com"
+							target="_blank">
+							<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M1.99998 17.5C1.36665 17.5 0.912651 17.2167 0.637985 16.65C0.362651 16.0833 0.424985 15.55 0.824985 15.05L6.49998 8.175V2H5.29998C5.09999 2 4.92498 1.929 4.77498 1.787C4.62498 1.64567 4.54998 1.46667 4.54998 1.25C4.54998 1.03333 4.62498 0.854 4.77498 0.712C4.92498 0.570667 5.09999 0.5 5.29998 0.5H12.7C12.9 0.5 13.075 0.570667 13.225 0.712C13.375 0.854 13.45 1.03333 13.45 1.25C13.45 1.46667 13.375 1.64567 13.225 1.787C13.075 1.929 12.9 2 12.7 2H11.5V8.175L17.175 15.05C17.575 15.5333 17.6377 16.0623 17.363 16.637C17.0877 17.2123 16.6333 17.5 16 17.5H1.99998ZM1.99998 16H16L9.99998 8.7V2H7.99998V8.7L1.99998 16Z"
+									fill="white" />
+							</svg>
 
-						آزمایش
-					</a>
-					<Copy class="btn-primary px-4" :content="dataForCopy">
+							آزمایش
+						</button>
+
+						<textarea :value="`<script type='application/ld+json'>${JSON.stringify(
+							jsonData
+						)}</script>`" name="code_snippet" class="hidden"></textarea>
+					</form>
+					<Copy class="btn-primary px-4"
+						:content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<mask id="mask0_164_21" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-								height="24">
-								<rect width="24" height="24" fill="#D9D9D9" />
+							<mask id="mask0_164_21" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
+								width="24" height="24">
+								<rect width="24" height="24" />
 							</mask>
 							<g mask="url(#mask0_164_21)">
 								<path
-									d="M9.24995 17.7998C8.74995 17.7998 8.32495 17.6248 7.97495 17.2748C7.62495 16.9248 7.44995 16.4998 7.44995 15.9998V4.6248C7.44995 4.10814 7.62495 3.6748 7.97495 3.3248C8.32495 2.9748 8.74995 2.7998 9.24995 2.7998H17.625C18.1416 2.7998 18.575 2.9748 18.925 3.3248C19.275 3.6748 19.45 4.10814 19.45 4.6248V15.9998C19.45 16.4998 19.275 16.9248 18.925 17.2748C18.575 17.6248 18.1416 17.7998 17.625 17.7998H9.24995ZM9.24995 16.2998H17.625C17.7083 16.2998 17.7833 16.2705 17.85 16.2118C17.9166 16.1538 17.95 16.0831 17.95 15.9998V4.6248C17.95 4.54147 17.9166 4.46647 17.85 4.3998C17.7833 4.33314 17.7083 4.2998 17.625 4.2998H9.24995C9.16662 4.2998 9.09595 4.33314 9.03795 4.3998C8.97928 4.46647 8.94995 4.54147 8.94995 4.6248V15.9998C8.94995 16.0831 8.97928 16.1538 9.03795 16.2118C9.09595 16.2705 9.16662 16.2998 9.24995 16.2998ZM5.74995 21.2998C5.24995 21.2998 4.82495 21.1248 4.47495 20.7748C4.12495 20.4248 3.94995 19.9998 3.94995 19.4998V6.7998H5.44995V19.4998C5.44995 19.5831 5.47895 19.6538 5.53695 19.7118C5.59562 19.7705 5.66662 19.7998 5.74995 19.7998H15.45V21.2998H5.74995Z"
-									fill="white" />
+									d="M9.24995 17.7998C8.74995 17.7998 8.32495 17.6248 7.97495 17.2748C7.62495 16.9248 7.44995 16.4998 7.44995 15.9998V4.6248C7.44995 4.10814 7.62495 3.6748 7.97495 3.3248C8.32495 2.9748 8.74995 2.7998 9.24995 2.7998H17.625C18.1416 2.7998 18.575 2.9748 18.925 3.3248C19.275 3.6748 19.45 4.10814 19.45 4.6248V15.9998C19.45 16.4998 19.275 16.9248 18.925 17.2748C18.575 17.6248 18.1416 17.7998 17.625 17.7998H9.24995ZM9.24995 16.2998H17.625C17.7083 16.2998 17.7833 16.2705 17.85 16.2118C17.9166 16.1538 17.95 16.0831 17.95 15.9998V4.6248C17.95 4.54147 17.9166 4.46647 17.85 4.3998C17.7833 4.33314 17.7083 4.2998 17.625 4.2998H9.24995C9.16662 4.2998 9.09595 4.33314 9.03795 4.3998C8.97928 4.46647 8.94995 4.54147 8.94995 4.6248V15.9998C8.94995 16.0831 8.97928 16.1538 9.03795 16.2118C9.09595 16.2705 9.16662 16.2998 9.24995 16.2998ZM5.74995 21.2998C5.24995 21.2998 4.82495 21.1248 4.47495 20.7748C4.12495 20.4248 3.94995 19.9998 3.94995 19.4998V6.7998H5.44995V19.4998C5.44995 19.5831 5.47895 19.6538 5.53695 19.7118C5.59562 19.7705 5.66662 19.7998 5.74995 19.7998H15.45V21.2998H5.74995Z" />
 							</g>
 						</svg>
-
 						کپی
 					</Copy>
 				</div>
@@ -377,7 +337,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
 const current_job = ref("");
 const current_job_child = ref("");
 const values = ref({
@@ -424,13 +383,13 @@ function addElementToObject(object, newProperty, beforNewProperty) {
 	}
 	return newObject;
 }
-// // for copy button //
-const dataForCopy = ref("");
-onMounted(() => {
-	dataForCopy.value = document.getElementById("code").textContent;
-});
+
 // for delete button
 function deleteAll() {
+	current_job.value = "";
+	current_job_child.value = "";
+	departmentJob.value = "";
+	departmentJobChild.value = "";
 	values.value = {
 		"@context": "https://schema.org",
 		"@type": "LocalBusiness",
@@ -471,8 +430,6 @@ function deleteAll() {
 		longitude: "",
 	};
 	allHoursOppeningOk.value = false;
-	hoursOppeningNumber.value = 0;
-	valuesOppening.value = [];
 	socialAccountValue.value = {
 		Facbook: "",
 		Twitter: "",
@@ -485,8 +442,8 @@ function deleteAll() {
 		Github: "",
 		Website: "",
 	};
-	departmentNumber = 0;
-	valuesDepartment = [];
+	departmentNumber.value = 0;
+	valuesDepartment.value = [];
 }
 
 // for jobs
@@ -1307,9 +1264,6 @@ function changeName() {
 function changeImage() {
 	jsonData.value.image = values.value.image;
 }
-function changeId() {
-	jsonData.value.id = values.value.id;
-}
 function changeUrl() {
 	jsonData.value.url = values.value.url;
 }
@@ -1355,6 +1309,10 @@ function changeLatitude() {
 	} else {
 		jsonData.value.geo.latitude = valuesGeo.value.latitude;
 	}
+
+	if (jsonData.value.geo.latitude == "" && jsonData.value.geo.longitude == "") {
+		delete jsonData.value.geo;
+	}
 }
 function changeLongitude() {
 	if (!jsonData.value.geo) {
@@ -1366,13 +1324,34 @@ function changeLongitude() {
 	} else {
 		jsonData.value.geo.longitude = valuesGeo.value.longitude;
 	}
+
+	if (jsonData.value.geo.latitude == "" && jsonData.value.geo.longitude == "") {
+		delete jsonData.value.geo;
+	}
 }
 // for oppening hours
 const allHoursOppeningOk = ref(false);
-const hoursOppeningNumber = ref(0);
 const days = ref([]);
 function change24Hours() {
 	allHoursOppeningOk.value = !allHoursOppeningOk.value;
+	if (allHoursOppeningOk.value) {
+		jsonData.value.openingHoursSpecification = {
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": [
+				"Monday",
+				"Tuesday",
+				"Wednesday",
+				"Thursday",
+				"Friday",
+				"Saturday",
+				"Sunday"
+			],
+			"opens": "00:00",
+			"closes": "23:59"
+		};
+	} else {
+		delete jsonData.value.openingHoursSpecification;
+	}
 }
 
 function addOpenHours() {
@@ -1448,17 +1427,11 @@ function addOpenHours() {
 	}
 }
 function deleteOneOpenHour(index) {
-	if (jsonData.value.openingHoursSpecification.length == 1) {
+	delete jsonData.value.openingHoursSpecification.splice(index, 1);
+	delete days.value.splice(index, 1);
+	if (jsonData.value.openingHoursSpecification.length == 0) {
 		delete jsonData.value.openingHoursSpecification;
 		days.value = [];
-	} else {
-		let openingHoursSpecification = jsonData.value.openingHoursSpecification;
-		delete openingHoursSpecification[index];
-
-		delete jsonData.value.openingHoursSpecification;
-		jsonData.value.openingHoursSpecification = openingHoursSpecification;
-		// days.value = [];
-		delete days.value[index];
 	}
 }
 
@@ -1471,6 +1444,7 @@ const changeDays = (week) => {
 	});
 
 }
+
 // soial
 const socialAccount = ref([
 	{
@@ -1501,7 +1475,7 @@ const socialAccount = ref([
 		name: "Linkdln",
 		is_checked: false,
 		value: "Linkdln",
-		title: "لینکدن",
+		title: "لینکدین",
 	},
 	{
 		name: "Pinterest",
@@ -1513,7 +1487,7 @@ const socialAccount = ref([
 		name: "SoundCloud",
 		is_checked: false,
 		value: "SoundCloud",
-		title: "سند کلود",
+		title: "ساند کلود",
 	},
 	{
 		name: "Wikipedia",
@@ -1546,21 +1520,13 @@ const socialAccountValue = ref({
 	Github: "",
 	Website: "",
 });
-function changeSocialAccount(el, index) {
-	if (!socialAccount.value[index].is_checked) {
-		if (!jsonData.value.sameAs) {
-			let newJson = [];
-			newJson = addElementToObject(jsonData.value, "sameAs", "address");
-			jsonData.value = newJson;
-			jsonData.value.sameAs = [];
-		}
-		jsonData.value.sameAs[index] = "";
+
+function updateSocialAccountValue() {
+	if (socialAccount.value.filter((account => account.is_checked)).length === 0) {
+		delete jsonData.value.sameAs
 	} else {
-		delete jsonData.value.sameAs[index];
+		jsonData.value.sameAs = socialAccount.value.filter((account => account.is_checked)).map(account => socialAccountValue.value[account.name]);
 	}
-}
-function changeSocialAccountValue(el, index) {
-	jsonData.value.sameAs[index] = socialAccountValue.value[el];
 }
 // for department
 const departmentNumber = ref(0);
@@ -1579,6 +1545,8 @@ const specificDepartmentJobs = [
 	"SportsActivityLocation",
 	"store",
 ];
+const departmentJob = ref([])
+const departmentJobChild = ref([])
 const departmentJobs = ref({
 	AnimalShelter: {
 		is_checked: false,
@@ -2353,7 +2321,10 @@ const departmentJobs = ref({
 	},
 });
 const valuesDepartment = ref([]);
+
 function addDepartment() {
+	departmentJob.value.push("")
+	departmentJobChild.value.push("")
 	departmentNumber.value++;
 	specificDepartmentJobsOk.value[departmentNumber.value - 1] = false;
 	valuesDepartment.value[departmentNumber.value - 1] = {
@@ -2393,8 +2364,16 @@ function addDepartment() {
 		};
 	}
 }
-function changeDepartmentJobs(el, taskIndex) {
-	jsonData.value.department[taskIndex]["@type"] = el;
+
+function changeDepartmentJobs(index, el, is_parent = false) {
+	jsonData.value.department[index]["@type"] = el;
+	if (is_parent) {
+		departmentJob.value[index] = el
+		departmentJobChild.value[index] = "";
+	} else {
+		departmentJobChild.value[index] = el;
+	}
+
 	for (let job in departmentJobs.value) {
 		if (job == el) {
 			departmentJobs.value[job].is_checked = true;
@@ -2403,33 +2382,26 @@ function changeDepartmentJobs(el, taskIndex) {
 		}
 	}
 
-	specificDepartmentJobsOk.value[taskIndex] = false;
+	specificDepartmentJobsOk.value[index] = false;
 	for (let specificDepartmentJob in specificDepartmentJobs) {
 		if (specificDepartmentJobs[specificDepartmentJob] == el) {
-			specificDepartmentJobsOk.value[taskIndex] = true;
+			specificDepartmentJobsOk.value[index] = true;
 		}
 	}
 }
-function changeDepartmentName(taskIndex) {
-	jsonData.value.department[taskIndex].name = valuesDepartment.value[taskIndex].name;
-}
-function changeDepartmentImage(taskIndex) {
-	jsonData.value.department[taskIndex].image = valuesDepartment.value[taskIndex].image;
-}
-function changeDepartmentTelephone(taskIndex) {
-	jsonData.value.department[taskIndex].telephone =
-		valuesDepartment.value[taskIndex].telephone;
-}
-function deleteOneDepartment(taskIndex) {
+
+function deleteOneDepartment(index) {
+	departmentJob.value.splice(index, 1);
+	departmentJobChild.value.splice(index, 1);
 	if (departmentNumber.value > 1) {
 		departmentNumber.value--;
-		valuesDepartment.value.splice(taskIndex, 1);
-		jsonData.value.department.splice(taskIndex, 1);
+		valuesDepartment.value.splice(index, 1);
+		jsonData.value.department.splice(index, 1);
 	} else {
 		departmentNumber.value--;
-		jsonData.value.department.splice(taskIndex, 1);
+		jsonData.value.department.splice(index, 1);
 		delete jsonData.value.department;
-		valuesDepartment.value.splice(taskIndex, 1);
+		valuesDepartment.value.splice(index, 1);
 	}
 }
 </script>
