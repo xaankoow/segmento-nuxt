@@ -26,11 +26,11 @@
     </div>
     <!-- content -->
     <div
-      class="hidden w-full top-10 pt-2 absolute z-[2000] group-hover:flex"
+      class="hidden w-full top-10 pt-[2px] absolute z-[2000] group-hover:flex"
       v-if="!disabled"
     >
       <div
-        class="w-full max-h-48 overflow-y-auto flex-col gap-4 text-center border border-base-400 rounded bg-base-200"
+        class="w-full max-h-48 overflow-y-auto flex-col gap-2 text-center border border-base-400 rounded-[3px] bg-base-200 py-2"
         :name="props.title"
       >
         <slot name="option"></slot>
