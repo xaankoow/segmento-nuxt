@@ -2,7 +2,7 @@
   <div class="w-full h-full inline-block relative group">
     <!-- header -->
     <div class="h-full w-full flex justify-between px-2 items-center">
-      <span :class="disabled ? 'text-gray-400' : ''">
+      <span class="text-sm" :class="disabled ? 'text-gray-400' : ''">
         <slot name="title"></slot>
       </span>
       <span class="">
