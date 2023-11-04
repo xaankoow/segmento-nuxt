@@ -231,14 +231,23 @@
                         "رقبا"
                     ]
                 },
-                "how-to": {
-                    "title": "How to Schema Builder"
-                },
                 "faq": {
                     "title": "FAQ Schema Builder"
                 },
+                "how-to": {
+                    "title": "How to Schema Builder"
+                },
+                "local-business": {
+                    "title": "local business Schema Builder"
+                },
                 "product": {
                     "title": "Product Schema Builder"
+                },
+                "recipe": {
+                    "title": "Recipe Schema Builder"
+                },
+                "video": {
+                    "title": "Video Schema Builder"
                 },
                 "website": {
                     "title": "Website Schema Builder"
