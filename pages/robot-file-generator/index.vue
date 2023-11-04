@@ -54,70 +54,6 @@
                           <InputRadio v-for="(element , index) in Object.keys(bots)" :key="index" v-model="bots[element].is_checked" @click="changeSlectedBot(element)" :id="element" name="bot" >{{ bots[element].title }}</InputRadio>
                       </template>
                   </DropdownFinalDropDown>
-                <!-- <template v-slot:content>
-                  <div class="parent flex ltr  items-center gap-[7px] w-full flex-col">
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">All Bots</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">APIs-Google</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">AdsBot Mobile Web Android</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">AdsBot Mobile Web</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">AdsBot</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">AdsSense</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">Googlebot Image</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">Googlebot News</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">Googlebot Video</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">Googlebot Desktop</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">Googlebot Smartphone</input-radio>
-                      </div>
-                    </div>
-                    <div class="w-full">
-                      <div class="w-max">
-                        <input-radio name="rdoRobots">Bingbot</input-radio>
-                      </div>
-                    </div>
-                  </div>
-                </template> -->
             </div>
             <!-- first box -->
             <div class="resultBox w-full min-h-[150px] mr-4 border border-dashed border-[#0A65CD] bg-[#F2F5F7] rounded-[10px] p-2">
@@ -160,25 +96,6 @@
                     </template>
                 </DropdownFinalDropDown>
               </div>
-                <!-- <input-select class="border rounded-[2px]">
-                  <template v-slot:title>
-                    <span>مجاز</span>
-                  </template>
-                  <template v-slot:content>
-                    <div class="parent flex  items-center gap-[7px] w-full flex-col cursor-pointer">
-                      <div class="w-full">
-                        <div class="w-max">
-                          <input-radio name="rdoPermission" :value="selectedValue">مجاز</input-radio>
-                        </div>
-                      </div>
-                      <div class="w-full">
-                        <div class="w-max">
-                          <input-radio :value="test" name="rdoPermission">منع</input-radio>
-                        </div>
-                      </div>
-                    </div>
-                  </template>
-                </input-select> -->
             </div>
             <!-- enter link -->
             <div class="links w-full">
@@ -344,10 +261,6 @@
 </template>
 
 <script setup>
-// const textValue = ref('');
-// const linkRef = ref();
-// const links = [];
-// const reportRes = ref()
 const selectedBot = ref("");
 const selectedValue = ref("");
 const commandValue = ref("");
@@ -621,43 +534,6 @@ const convert_to_txt = () => {
 //   }else{
 //     alert("error")
 //   }
-// }
-// const setItem = (robot, permission, text) => {
-//     linkRef.value = ""
-//     let res = {
-//       value: text,
-//       key1: "ads",
-//       key2: "1"
-//     }
-//     links.push(res)
-//     linkRef.value = links
-
-//     console.log(links)
-//   }
-
-// const checkRule = () => {
-//   debugger
-//   let report = [];
-//   links.forEach((i, index) => {
-//     const item = {
-//       val: i.value,
-//       startFlag: false,
-//       dFlag: false,
-//       slashFlag: false
-//     };
-//     if (!i.value.includes("*")) {
-//       item.startFlag = true;
-//     }
-//     if (!i.value.includes("/")) {
-//       item.slashFlag = true;
-//     }
-//     if (!i.value.includes("$")) {
-//       item.dFlag = true;
-//     }
-//     report.push(item);
-//   });
-//   reportRes.value = report;
-//   console.log(report)
 // }
 
 
