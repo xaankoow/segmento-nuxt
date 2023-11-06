@@ -90,9 +90,6 @@
                   >{{ currency[element].title }}</InputRadio
                 >
               </template>
-              <!-- <InputRadio @click="changeCurrencyCurrency('rial')" :name="Currency" :id="rial" :value="rial" >ریال</InputRadio>
-                            <InputRadio @click="changeCurrencyCurrency('dollar')" :name="Currency" :id="usDollar" :value="usDollar" >دلار آمریکا</InputRadio>
-                            <InputRadio @click="changeCurrencyCurrency('euro')" :name="Currency" :id="euro" :value="euro">یورو</InputRadio> -->
             </DropdownFinalDropDown>
           </div>
         </div>
@@ -400,12 +397,12 @@ function deleteAll() {
       totalTime: "",
     },
   ];
-  valuesCurrency.value = ref({
+  valuesCurrency.value = {
     currency: "",
     value: "",
-  });
-  valuesSupply.value = ref([]);
-  valuesTools.value = ref([]);
+  };
+  valuesSupply.value = [];
+  valuesTools.value = [];
   valuesStep.value.splice(1, valuesStep.value.length);
   valuesStep.value[0].text = "";
   valuesStep.value[0].image = "";
