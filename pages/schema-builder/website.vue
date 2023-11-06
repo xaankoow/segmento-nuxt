@@ -36,16 +36,16 @@
             <!-- _______________________________________ -->
             <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                     <div class="w-full" >
-                        <InputText class="w-full align-start" placeholder="نام وب سایت" @keyup="changeWebSiteName()" v-model="values.name" />
+                        <InputText class="w-full align-start" placeholder="نام وب سایت" @input="changeWebSiteName()" v-model="values.name" />
                     </div>
                     <div class="w-full" >
-                        <InputURL class="w-full align-start" placeholder="آدرس وب سایت" @keyup="changeWebSiteURL()" v-model="values.url" />
+                        <InputURL class="w-full align-start" placeholder="آدرس وب سایت" @input="changeWebSiteURL()" v-model="values.url" />
                     </div>
                     <div class="w-full" >
-                        <InputURL class="w-full align-start" placeholder="آدرس صفحه جستجو وب سایت" @keyup="changeInternalURL()" v-model="values.target" />
+                        <InputURL class="w-full align-start" placeholder="آدرس صفحه جستجو وب سایت" @input="changeInternalURL()" v-model="values.target" />
                     </div>
                     <div class="w-full" >
-                        <InputURL class="w-full align-start" placeholder="Optional: string in the search URL after the query" @keyup="changeInternalURLString()" v-model="values.targetQuery" />
+                        <InputURL class="w-full align-start" placeholder="Optional: string in the search URL after the query" @input="changeInternalURLString()" v-model="values.targetQuery" />
                     </div>
             </div>
             <!-- _______________________________________ -->

@@ -37,22 +37,22 @@
             <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <div class="flex flex-col gap-2">
                     <div class="w-full" >
-                        <InputText class="w-full align-start" placeholder="عنوان رسیپ" @keyup="changeName(0)" v-model="values.name" />
+                        <InputText class="w-full align-start" placeholder="عنوان رسیپ" @input="changeName(0)" v-model="values.name" />
                     </div>
                     <div class="w-full h-full align-start" >
-                        <InputTextArea class="h-36 w-full" @keyup="changeDescription(0)" placeholder="توضیحات رسیپ" v-model="values.description" />
+                        <InputTextArea class="h-36 w-full" @input="changeDescription(0)" placeholder="توضیحات رسیپ" v-model="values.description" />
                     </div>
                     <div class="w-full" >
-                        <InputText class="w-full align-start" placeholder="کلمات کلیدی" @keyup="changeKeywords(0)" v-model="values.keywords" />
+                        <InputText class="w-full align-start" placeholder="کلمات کلیدی" @input="changeKeywords(0)" v-model="values.keywords" />
                     </div>
                 </div>
 
                 <div v-if="imageNumber == 1" >
                     <div class="w-full" >
-                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @keyup="changeimage(0)" v-model="values.image[0]" />
+                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @input="changeimage(0)" v-model="values.image[0]" />
                     </div>
                 </div>
-                <div v-if="imageNumber > 1" v-for="(value , index) in values.image" :key="index">
+                <div v-if="imageNumber > 1" v-for="(value , index) in imageNumber" :key="index">
                     <div class="w-full flex items-center gap-2" >
                         <InputURL class="w-[80%] align-start" placeholder="آدرس تصویر " @keyup="changeimage(index)" v-model="values.image[index]" />
                         <button @click="deleteOneImage(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
@@ -69,15 +69,15 @@
 
                 <div class="w-full flex gap-2">
                     <div class="w-1/2" >
-                        <InputURL class="w-full align-start" placeholder="لینک ویدیو" @keyup="changecontentUrl()" v-model="valuesVideo.contentUrl" />
+                        <InputURL class="w-full align-start" placeholder="لینک ویدیو" @input="changecontentUrl()" v-model="valuesVideo.contentUrl" />
                     </div>
                     <div class="w-1/2" >
-                        <InputURL class="w-full align-start" placeholder="embed Url" @keyup="changeEmberUrl()" v-model="valuesVideo.embedUrl" />
+                        <InputURL class="w-full align-start" placeholder="embed Url" @input="changeEmberUrl()" v-model="valuesVideo.embedUrl" />
                     </div>
                 </div>
                 <div class="w-full flex gap-2">
                     <div class="w-[50%]" >
-                        <InputText class="w-full align-start" placeholder="نام سازنده" @keyup="changeAuthorName()" v-model="values.author.name" />
+                        <InputText class="w-full align-start" placeholder="نام سازنده" @input="changeAuthorName()" v-model="values.author.name" />
                     </div>
                     <div class="w-[50%] h-[45px] flex items-center gap-2">
                         <span class="text-sm w-fit" >تاریخ انتشار</span>
@@ -109,7 +109,7 @@
                         </DropdownFinalDropDown>
                     </div>
                     <div class="w-1/2" >
-                        <InputText class="w-1/2 align-start" placeholder="نام غذا" @keyup="changeRecipeCuisine()" v-model="values.recipeCuisine" />
+                        <InputText class="w-1/2 align-start" placeholder="نام غذا" @input="changeRecipeCuisine()" v-model="values.recipeCuisine" />
                     </div>
                 </div>   
                 <div class="w-full">
@@ -121,7 +121,7 @@
                 <!-- nutrition -->
                 <div class="w-full flex gap-2 ">
                     <div class="w-[30%]" >
-                        <InputText class="w-[40%] align-start" placeholder="انداه وعده" @keyup="changeServingSize()" v-model="values.nutrition.servingSize" />
+                        <InputText class="w-[40%] align-start" placeholder="انداه وعده" @input="changeServingSize()" v-model="values.nutrition.servingSize" />
                     </div>
                     <div class="w-[35%] h-[45px] flex items-center gap-2">
                         <span class="text-sm" >میزان کالری</span>
@@ -136,7 +136,7 @@
                 <div class="w-full flex flex-col gap-2 ">
                     <div class="w-full flex flex-col items-center gap-2" v-for="(value , index) in valuesIngredient" :key="index">
                         <div class="w-full flex items-center gap-2" >
-                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="ماده تشکیل دهنده " @keyup="changeIngredient(index)" v-model="valuesIngredient[index]" />
+                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="ماده تشکیل دهنده " @input="changeIngredient(index)" v-model="valuesIngredient[index]" />
                             <button @click="deleteOneIngredient(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                                 ✕  
                             </button>
@@ -153,20 +153,20 @@
                 <div class="w-full flex flex-col gap-2 ">
                     <div class="w-full flex flex-col gap-2" v-for="(value , index) in valuesStep" :key="index">
                         <div class="w-full flex items-center gap-2" >
-                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="مرحله" @keyup="changeStepName(index)" v-model="valuesStep[index].name" />
+                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="مرحله" @input="changeStepName(index)" v-model="valuesStep[index].name" />
                             <button @click="deleteOneStep(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                                 ✕  
                             </button>
                         </div>
                         <div class="w-[80%] h-full align-start" >
-                            <InputTextArea class="h-36 w-full" @keyup="changeStepText(index)" placeholder="توضیحات " v-model="valuesStep[index].text" />
+                            <InputTextArea class="h-36 w-full" @input="changeStepText(index)" placeholder="توضیحات " v-model="valuesStep[index].text" />
                         </div>
                         <div class="w-[80%] flex gap-2">
                             <div class="w-1/2" >
-                                <InputURL class="w-full align-start" placeholder="لینک " @keyup="changeStepUrl(index)" v-model="valuesStep[index].url" />
+                                <InputURL class="w-full align-start" placeholder="لینک " @input="changeStepUrl(index)" v-model="valuesStep[index].url" />
                             </div>
                             <div class="w-1/2" >
-                                <InputURL class="w-full align-start" placeholder="آدرس تصویر" @keyup="changeStepImage(index)" v-model="valuesStep[index].image" />
+                                <InputURL class="w-full align-start" placeholder="آدرس تصویر" @input="changeStepImage(index)" v-model="valuesStep[index].image" />
                             </div>
                         </div>
                     </div>
@@ -203,13 +203,13 @@
                 <!-- review start -->
                 <div class="w-full flex flex-col gap-2" v-if="reviewNumber>0" v-for="(value , index) in valuesReview" :key="index" >
                     <div class="w-full flex items-center gap-6" >
-                        <InputText  class="w-[80%] align-start" style="width: 80%;" placeholder="عنوان بررسی" @keyup="changeReviewName(index)" v-model="valuesReview[index].name" />
+                        <InputText  class="w-[80%] align-start" style="width: 80%;" placeholder="عنوان بررسی" @input="changeReviewName(index)" v-model="valuesReview[index].name" />
                         <button @click="deleteOneReview(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕
                         </button>
                     </div>
                     <div class="w-[80%] h-full align-start" >
-                        <InputTextArea class="h-36" @keyup="changeReviewBody(index)" placeholder=" توضیحات محصول" v-model="valuesReview[index].reviewBody" />
+                        <InputTextArea class="h-36" @input="changeReviewBody(index)" placeholder=" توضیحات محصول" v-model="valuesReview[index].reviewBody" />
                     </div>
                     <div class="w-[80%] flex gap-3">
                         <div class="w-[45%] h-[45px] flex items-center gap-6">
@@ -223,10 +223,10 @@
                     </div>
                     <div class="w-[80%] flex gap-3">
                         <div class="w-[35%]" >
-                            <InputText  class="w-full align-start" placeholder=" نام نویسنده" @keyup="changeReviewAuthorName(index)" v-model="valuesReview[index].author.name" />
+                            <InputText  class="w-full align-start" placeholder=" نام نویسنده" @input="changeReviewAuthorName(index)" v-model="valuesReview[index].author.name" />
                         </div>
                         <div class="w-[62%]" >
-                            <InputText  class="w-full align-start" placeholder=" ناشر" @keyup="changePublisherName()" v-model="valuesReview[index].publisher.name" />
+                            <InputText  class="w-full align-start" placeholder=" ناشر" @input="changePublisherName(index)" v-model="valuesPublisher[index].name" />
                         </div>
                     </div>
                 </div>
@@ -495,15 +495,18 @@ function changeimage(taskIndex) {
         valuesVideo.value.image = values.value.image[0]
     }else{
         jsonData.value.image[taskIndex] = values.value.image[taskIndex]
-        valuesVideo.value.image[taskIndex] = values.value.image[taskIndex]
+        valuesVideo.value.thumbnailUrl[taskIndex] = values.value.image[taskIndex]
     }
 }
 function deleteOneImage(taskIndex){
     if (imageNumber.value > 1) {
         imageNumber.value --
         jsonData.value.image.splice(taskIndex, 1)
-        values.value.splice(taskIndex, 1)
-        valuesVideo.value.splice(taskIndex, 1)
+        if (jsonData.value.video) {
+            jsonData.value.video.thumbnailUrl.splice(taskIndex, 1)
+        }
+        // values.value.splice(taskIndex, 1)
+        // valuesVideo.value.splice(taskIndex, 1)
     }
 }
 // for url
@@ -516,6 +519,9 @@ function changecontentUrl() {
     }else{
         jsonData.value.video.contentUrl = valuesVideo.value.contentUrl
     }
+    if (valuesVideo.value.contentUrl == "" && valuesVideo.value.embedUrl == "") {
+        delete jsonData.value.video
+    }
 }
 function changeEmberUrl() {
     if(!jsonData.value.video){
@@ -525,6 +531,9 @@ function changeEmberUrl() {
     jsonData.value.video = valuesVideo.value
     }else{
         jsonData.value.video.embedUrl = valuesVideo.value.embedUrl
+    }
+    if (valuesVideo.value.contentUrl == "" && valuesVideo.value.embedUrl == "") {
+        delete jsonData.value.video
     }
 }
 // for Author and date
@@ -610,6 +619,9 @@ function changeRecipeYield() {
         jsonData.value = newJson
     }
     jsonData.value.recipeYield = values.value.recipeYield
+    if (values.value.recipeYield == "") {
+        delete jsonData.value.recipeYield
+    }
 }
 // for nutrition
 function changeServingSize() {
@@ -619,6 +631,9 @@ function changeServingSize() {
         jsonData.value.nutrition = newJson
     }
     jsonData.value.nutrition.servingSize = values.value.nutrition.servingSize
+    if (values.value.nutrition.servingSize == "") {
+        delete jsonData.value.nutrition.servingSize
+    }
 }
 function changecalories() {
     jsonData.value.nutrition.calories = values.value.nutrition.calories
@@ -630,6 +645,9 @@ function changeFatContent() {
         jsonData.value.nutrition = newJson
     }
     jsonData.value.nutrition.fatContent = values.value.nutrition.fatContent
+    if (values.value.nutrition.fatContent == "") {
+        delete jsonData.value.nutrition.fatContent
+    }
 }
 // for Ingredient
 const ingredientNumber = ref(0)
@@ -796,7 +814,9 @@ const reviewNumber= ref(0)
 const valuesReview = ref([
 ]);
 const valuesPublisher = ref(
-    {"@type": "Organization", "name": ""}
+    [
+        {"@type": "Organization", "name": ""}
+    ]
 )
 function deleteOneReview(taskIndex){
     if (reviewNumber.value > 1) {
@@ -824,26 +844,16 @@ function addReview() {
             "worstRating": ""
         },
         "author": {"@type": "Person", "name": ""},
-        "publisher": {"@type": "Organization", "name": ""}
     }
+    valuesPublisher.value[reviewNumber.value-1] = { "@type": "Organization", "name": "" }
     let newJson = {}
     if(!jsonData.value.review){
         if(jsonData.value.aggregateRating){
             newJson = addElementToObject(jsonData.value, "review", "aggregateRating");
-        }else if(jsonData.value.mpn){
-            newJson = addElementToObject(jsonData.value, "review", "mpn");
-        }else if(jsonData.value.gtin14){
-            newJson = addElementToObject(jsonData.value, "review", "gtin14");
-        }else if(jsonData.value.gtin13){
-            newJson = addElementToObject(jsonData.value, "review", "gtin13");
-        }else if(jsonData.value.gtin8){
-            newJson = addElementToObject(jsonData.value, "review", "gtin8");
-        }else if(jsonData.value.sku){
-            newJson = addElementToObject(jsonData.value, "review", "sku");
-        }else if(jsonData.value.brand){
-            newJson = addElementToObject(jsonData.value, "review", "brand");
+        }else if(jsonData.value.recipeInstructions){
+            newJson = addElementToObject(jsonData.value, "review", "recipeInstructions");
         }else{
-            newJson = addElementToObject(jsonData.value, "review", "image");
+            newJson = addElementToObject(jsonData.value, "review", "nutrition");
         }
         jsonData.value = newJson
         jsonData.value.review = valuesReview.value
@@ -885,6 +895,15 @@ function changeReviewAuthorName(taskIndex) {
     jsonData.value.review[taskIndex].author.name = valuesReview.value[taskIndex].author.name
 }
 function changePublisherName(taskIndex) {
-    jsonData.value.review[taskIndex].publisher.name = valuesReview.value[taskIndex].publisher.name
+    if (!jsonData.value.review[taskIndex].publisher) {
+        let newJson = {}
+        newJson = addElementToObject(jsonData.value.review[taskIndex], "publisher", "author");
+        jsonData.value.review[taskIndex] = newJson
+        jsonData.value.review[taskIndex].publisher = valuesPublisher.value[taskIndex]
+    }
+    jsonData.value.review[taskIndex].publisher.name = valuesPublisher.value[taskIndex].name
+    if(valuesPublisher.value[taskIndex].name == ""){
+        delete jsonData.value.review[taskIndex].publisher
+    }
 }
 </script>

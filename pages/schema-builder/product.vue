@@ -257,7 +257,7 @@
                         </div>
                         <div class="w-1/2">
                             <InputText class="w-full align-start" placeholder="ناشر"
-                                v-model="jsonData.review[index].publisher.name" />
+                            @keyup="changePublisherName(index)" v-model="valuesPublisher[index].name" />
                         </div>
                     </div>
                 </div>
@@ -438,7 +438,7 @@ function changeProductDescription() {
     jsonData.value = newJson
     jsonData.value.description = valuesProduct.value.description
 
-    if (jsonData.value.description === "") {
+    if (valuesProduct.value.description == "") {
         delete jsonData.value.description;
     }
 }
@@ -829,7 +829,9 @@ const reviewNumber = ref(0)
 const valuesReview = ref([
 ]);
 const valuesPublisher = ref(
-    { "@type": "Organization", "name": "" }
+    [
+        { "@type": "Organization", "name": "" }
+    ]
 )
 function deleteOneReview(taskIndex) {
     if (reviewNumber.value > 1) {
@@ -857,8 +859,8 @@ function addReview() {
             "worstRating": ""
         },
         "author": { "@type": "Person", "name": "" },
-        "publisher": { "@type": "Organization", "name": "" }
     }
+    valuesPublisher.value[reviewNumber.value-1] = { "@type": "Organization", "name": "" }
     let newJson = {}
     if (!jsonData.value.review) {
         if (jsonData.value.aggregateRating) {
@@ -918,6 +920,15 @@ function changeAuthorName(taskIndex) {
     jsonData.value.review[taskIndex].author.name = valuesReview.value[taskIndex].author.name
 }
 function changePublisherName(taskIndex) {
-    jsonData.value.review[taskIndex].publisher.name = valuesReview.value[taskIndex].publisher.name
+    if (!jsonData.value.review[taskIndex].publisher) {
+        let newJson = {}
+        newJson = addElementToObject(jsonData.value.review[taskIndex], "publisher", "author");
+        jsonData.value.review[taskIndex] = newJson
+        jsonData.value.review[taskIndex].publisher = valuesPublisher.value[taskIndex]
+    }
+    jsonData.value.review[taskIndex].publisher.name = valuesPublisher.value[taskIndex].name
+    if(valuesPublisher.value[taskIndex].name == ""){
+        delete jsonData.value.review[taskIndex].publisher
+    }
 }
 </script>

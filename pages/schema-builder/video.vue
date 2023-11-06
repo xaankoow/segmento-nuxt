@@ -37,10 +37,10 @@
             <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <div class="flex flex-col gap-2">
                     <div class="w-full" >
-                        <InputText class="w-full align-start" placeholder="عنوان ویدیو" @keyup="changeVideoName(0)" v-model="valuesVideo.name" />
+                        <InputText class="w-full align-start" placeholder="عنوان ویدیو" @input="changeVideoName(0)" v-model="valuesVideo.name" />
                     </div>
                     <div class="w-full h-full align-start" >
-                        <InputTextArea class="h-36 w-full" @keyup="changeVideoDescription(0)" placeholder="توضیحات ویدیو" v-model="valuesVideo.description" />
+                        <InputTextArea class="h-36 w-full" @input="changeVideoDescription(0)" placeholder="توضیحات ویدیو" v-model="valuesVideo.description" />
                     </div>
                 </div>
                 <div class="w-full flex ">
@@ -59,12 +59,12 @@
                 </div>
                 <div v-if="imageNumber == 1" >
                     <div class="w-full" >
-                        <InputURL class="w-full align-start" placeholder="آدرس  تصویر بندانگشتی" @keyup="changeimage(0)" v-model="valuesVideo.thumbnailUrl[0]" />
+                        <InputURL class="w-full align-start" placeholder="آدرس  تصویر بندانگشتی" @input="changeimage(0)" v-model="valuesVideo.thumbnailUrl[0]" />
                     </div>
                 </div>
                 <div v-if="imageNumber > 1" v-for="(value , index) in imageNumber" :key="index">
                     <div class="w-full flex items-center gap-2" >
-                        <InputURL class="w-[80%] align-start" style="width: 80%;" placeholder="آدرس  تصویر بندانگشتی" @keyup="changeimage(index)" v-model="valuesVideo.thumbnailUrl[index]" />
+                        <InputURL class="w-[80%] align-start" style="width: 80%;" placeholder="آدرس  تصویر بندانگشتی" @input="changeimage(index)" v-model="valuesVideo.thumbnailUrl[index]" />
                         <button @click="deleteOneImage(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕  
                         </button>
@@ -78,15 +78,15 @@
                 </button>
                 <div class="w-full flex gap-2">
                     <div class="w-1/2" >
-                        <InputURL class="w-full align-start" placeholder="لینک محتوی" @keyup="changecontentUrl()" v-model="contentUrl" />
+                        <InputURL class="w-full align-start" placeholder="لینک محتوی" @input="changecontentUrl()" v-model="contentUrl" />
                     </div>
                     <div class="w-1/2" >
-                        <InputURL class="w-full align-start" placeholder="embed Url" @keyup="changeEmbedUrl()" v-model="embedUrl" />
+                        <InputURL class="w-full align-start" placeholder="embed Url" @input="changeEmbedUrl()" v-model="embedUrl" />
                     </div>
                 </div>
                 <div>
                     <div class="w-full" >
-                        <InputURL class="w-full align-start" placeholder="seek toAction Target Url" @keyup="changeSeekTarget()" v-model="seekTargetUrl" />
+                        <InputURL class="w-full align-start" placeholder="seek toAction Target Url" @input="changeSeekTarget()" v-model="seekTargetUrl" />
                     </div>
                 </div>
             </div>
@@ -186,8 +186,8 @@ function deleteAll() {
     {
         "@context": "https://schema.org",
         "@type": "VideoObject",
-        "name": "1",
-        "description": "2",
+        "name": "",
+        "description": "",
         "thumbnailUrl": [],
         "uploadDate": "",
         "duration": ""
@@ -276,6 +276,9 @@ function changecontentUrl() {
     newJson = addElementToObject(jsonData.value, "contentUrl", "duration");
     jsonData.value = newJson
     jsonData.value.contentUrl = contentUrl.value
+    if(contentUrl.value == ""){
+        delete jsonData.value.contentUrl
+    }
 }
 function changeEmbedUrl() {
     let newJson = {}
@@ -286,6 +289,9 @@ function changeEmbedUrl() {
     }
     jsonData.value = newJson
     jsonData.value.embedUrl = embedUrl.value
+    if(embedUrl.value == ""){
+        delete jsonData.value.embedUrl
+    }
 }
 function changeSeekTarget() {
     let newJson = {}
@@ -299,5 +305,8 @@ function changeSeekTarget() {
     jsonData.value = newJson
     potentialAction.value.target = seekTargetUrl.value + "={seek_to_second_number}"
     jsonData.value.potentialAction = potentialAction.value
+    if(potentialAction.value == ""){
+        delete jsonData.value.potentialAction
+    }
 }
 </script>
