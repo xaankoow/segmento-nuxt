@@ -35,21 +35,21 @@
       part 3 (show details)
       چارت نمایش اطلاعات (بصورت استاتیک)
       _________________________________________ -->
-      <div class="h-fit w-full mb-2 p-2 " v-if="showDetailAgreement">
+      <div class="h-fit w-full pb-2" v-if="showDetailAgreement">
           <div
             class="w-full h-auto bg-white py-5 mb-2 rounded-[3px] border border-base-400 flex items-center justify-center"
             v-for="(phrase , index) in results" :key="phrase" >
             <div class="min-w-fit h-full text-base-content flex items-center justify-center flex-col relative">
               <div class="w-full pr-5 border-r-2 border-primary px-2 text-base" v-if="phrase.type.name == 'QUESTION'">
-                 موضوعات سوالی  برای <b>{{ form.keyword }}</b>
+                 موضوعات سوالی  برای <b>{{ current_keyword }}</b>
               </div>
               <div class="w-full pr-5 border-r-2 border-primary px-2 text-base" v-if="phrase.type.name == 'COMPARISON'">
-                 موضوعات مقایسه ای  برای <b>{{ form.keyword }}</b>
+                 موضوعات مقایسه ای  برای <b>{{ current_keyword }}</b>
               </div>
               <div class="w-full pr-5 border-r-2 border-primary px-2 text-base" v-if="phrase.type.name == 'OTHER'">
-                 موضوعات متفرقه  برای <b>{{ form.keyword }}</b>
+                 موضوعات متفرقه  برای <b>{{ current_keyword }}</b>
               </div>
-              <div class="absolute top-8 right-5 w-fit">
+              <div class="absolute top-8 right-5 w-fit" v-if="DEV_ENV">
                 <CopyArray :content="phrase.content" class="btn-secondary">
                   <svg
                     width="17"
@@ -68,7 +68,7 @@
             </div>
             <DiagramTree class="w-full h-full " :phrase="phrase" />
           </div>
-          <CopyArray class="btn-primary" :content="copy_all_content(results)">
+          <CopyArray class="btn-primary" :content="copy_all_content(results)" v-if="DEV_ENV">
             <svg
               width="17"
               height="20"
@@ -92,10 +92,13 @@ import { ref } from "vue";
 import Config from "~~/composables/Config";
 import Request from "~~/Api/Request";
 
+const runtimeConfig = useRuntimeConfig();
+const DEV_ENV = runtimeConfig.public.DEV_ENV;
 const config = new Config();
 const current_page = "pages/title-copy-writer";
 const request = new Request("v1");
 const results = ref("");
+const current_keyword = ref("");
 const showDetailAgreement = ref(false);
 const form = ref({
   keyword: "",
@@ -112,6 +115,7 @@ async function submitData() {
   let res = await request.get("copy-writer/write", form.value).then(res => {
     results.value = res.data;
     showDetailAgreement.value = true
+    current_keyword.value = form.value.keyword
     console.log(results.value);
   });
 }
