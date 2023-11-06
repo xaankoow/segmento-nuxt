@@ -71,7 +71,7 @@
 							v-model="jsonData['@id']" />
 					</div>
 					<div class="w-full">
-						<InputURL class="w-full text-left placeholder:text-right" dir="ltr" placeholder="آدرس وب سایت"
+						<InputURL class="w-full text-left placeholder:text-right" dir="ltr" placeholder="آدرس وب‌سایت"
 							@keyup="changeUrl" v-model="values.url" />
 					</div>
 				</div>
@@ -1487,7 +1487,7 @@ const socialAccount = ref([
 		name: "SoundCloud",
 		is_checked: false,
 		value: "SoundCloud",
-		title: "ساند کلود",
+		title: "ساند کلاد",
 	},
 	{
 		name: "Wikipedia",
@@ -1505,7 +1505,7 @@ const socialAccount = ref([
 		name: "Website",
 		is_checked: false,
 		value: "Website",
-		title: "وب سایت",
+		title: "وب‌سایت",
 	},
 ]);
 const socialAccountValue = ref({

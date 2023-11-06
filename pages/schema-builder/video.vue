@@ -305,7 +305,7 @@ function changeSeekTarget() {
     jsonData.value = newJson
     potentialAction.value.target = seekTargetUrl.value + "={seek_to_second_number}"
     jsonData.value.potentialAction = potentialAction.value
-    if(potentialAction.value == ""){
+    if(seekTargetUrl.value == ""){
         delete jsonData.value.potentialAction
     }
 }

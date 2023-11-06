@@ -590,7 +590,7 @@ function changeRecipeCategory(el) {
     }
     values.value.recipeCategory = el
     jsonData.value.recipeCategory = el
-    if(el == notSpecified){
+    if(el == "notSpecified"){
         delete jsonData.value.recipeCategory
     }
 }
