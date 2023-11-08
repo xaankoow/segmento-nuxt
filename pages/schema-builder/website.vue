@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full h-auto rounded">
+    <div class="w-full h-full">
         <!-- Tabs -->
-        <div class="flex flex-row items-center gap-3 text-xs px-2 py-4 h-[7%] bg-base-200">
+        <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
             <TabItem to="/schema-builder/faq" :active="false">
                 FAQ page
             </TabItem>
@@ -111,7 +111,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>

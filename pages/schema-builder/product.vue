@@ -756,10 +756,10 @@ function changeItemCondition(el) {
     }
 }
 function changeNormalOfferImage() {
-    jsonData.value.offer.url = valuesNormalOffer.value.url
+    jsonData.value.offers.url = valuesNormalOffer.value.url
 }
 function changeNormalOfferPrice() {
-    jsonData.value.offer.price = valuesNormalOffer.value.price
+    jsonData.value.offers.price = valuesNormalOffer.value.price
 }
 function changeNormalOfferDate() {
     jsonData.value.offer.priceValidUntil = valuesNormalOffer.value.priceValidUntil

@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full h-auto">
+    <div class="w-full h-full">
         <!-- Tabs -->
-        <div class="flex flex-row items-center gap-3 text-xs px-2 py-4 h-[10%] bg-base-200">
+        <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
             <TabItem to="/schema-builder/faq" :active="false">
                 FAQ page
             </TabItem>
@@ -711,8 +711,10 @@ function addIngredient() {
         let newJson = {}
         newJson = addElementToObject(jsonData.value, "recipeIngredient", "nutrition");
         jsonData.value = newJson
+    }else{
+        jsonData.value.recipeIngredient = valuesIngredient.value
     }
-    jsonData.value.recipeIngredient = valuesIngredient.value
+    
 }
 function deleteOneIngredient(taskIndex) {
     if (ingredientNumber.value > 1) {
@@ -721,7 +723,8 @@ function deleteOneIngredient(taskIndex) {
         valuesIngredient.value.splice(taskIndex, 1)
     } else {
         ingredientNumber.value--
-        jsonData.value.recipeIngredient.splice(taskIndex, 1)
+        delete jsonData.value.recipeIngredient
+        // jsonData.value.recipeIngredient.splice(taskIndex, 1)
         valuesIngredient.value.splice(taskIndex, 1)
     }
 }
