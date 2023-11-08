@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
 import Config from "~~/composables/Config";
 
 const cn = new Config();

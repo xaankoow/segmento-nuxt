@@ -90,7 +90,7 @@
                 {{ subjectValue }} برای <b>{{ phrase.keyword }}</b>
               </div>
               <div class="absolute top-8 right-5 w-fit">
-                <CopyArray :content="phrase.content" class="btn-secondary">
+                <CopyArray v-if="DEV_ENV" :content="phrase.content" class="btn-secondary">
                   <svg
                     width="17"
                     height="20"
@@ -108,7 +108,11 @@
             </div>
             <DiagramTree class="w-full h-full" :phrase="phrase" />
           </div>
-          <CopyArray class="btn-primary" :content="copy_all_content(results)">
+          <CopyArray
+            class="btn-primary"
+            :content="copy_all_content(results)"
+            v-if="DEV_ENV"
+          >
             <svg
               width="17"
               height="20"
@@ -130,8 +134,9 @@
 
 <script setup>
 import Request from "~~/Api/Request";
-import { ref, onMounted } from "vue";
 
+const runtimeConfig = useRuntimeConfig();
+const DEV_ENV = runtimeConfig.public.DEV_ENV;
 const topic = ref("topic");
 const request = new Request("v1");
 const textareaValue = ref("");

@@ -39,6 +39,7 @@
                             "seo": {
                                 "title": "سئو",
                                 "fields": {
+                                    "money-pages": "صفحات تجاری",
                                     "keyword-research": "تحقیق کلمه کلیدی",
                                     "google-suggest": "کلمات پیشنهادی گوگل",
                                     "google-title-builder": "عنوان‌ساز گوگل"
@@ -441,6 +442,12 @@
                 }
             },
             "money-pages": {
+                "title": "صفحات تجاری",
+                "accordion": "seo",
+                "tabs": {
+                    "list": "لیست صفحات",
+                    "analytics": "آمار و گزارش"
+                },
                 "single": {
                     "title": "صفحات تجاری",
                     "accordion": "seo",

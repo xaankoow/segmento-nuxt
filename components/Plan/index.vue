@@ -38,7 +38,7 @@
       <!-- pricing -->
       <div class="flex flex-col w-full items-center gap-6">
         <!-- price -->
-        <div class="flex flex-col items-center gap-3 w-11/12">
+        <div class="flex flex-col align-center justify-end gap-2 h-14 w-11/12 pb-1">
           <!-- full price -->
           <del
             :class="
@@ -75,13 +75,17 @@
         <form
           @submit.prevent="check_discount()"
           class="relative flex flex-row items-center w-11/12 mx-auto"
+          :class="{
+            'border-error': !discount_error.ok,
+            'border-b-primary-hover': discount_error.ok,
+          }"
         >
           <input
             type="text"
-            class="w-full rounded-[3px] border-[1.5px] text-xs"
+            class="w-full rounded-[3px] border-1 border-b-2 text-xs"
             @focus="text_box_focus(true)"
             @blur="text_box_focus(false)"
-            :class="discount_error.ok ? 'border-b-primary-hover' : ''"
+            :class="textbox_border_check(discount_error.ok ?? null)"
             v-model="form.discount"
           />
           <span
@@ -89,12 +93,9 @@
             :class="text_box_focus() ? '-top-5' : 'top-2'"
             >کد تخفیف</span
           >
-          <span
-            class="absolute text-xs -top-5 left-0 text-error"
-            :class="!discount_error.ok ? 'flex' : 'hidden'"
-          >
+          <!-- <span class="absolute text-xs -top-5 left-0 text-error" :class="!discount_error.ok ? 'flex' : 'hidden'">
             {{ discount_error.message }}
-          </span>
+          </span> -->
           <button
             type="submit"
             class="absolute text-lg text-primary font-semibold left-4 h-fit w-fit rotate-180 font-mono"
@@ -173,4 +174,10 @@ async function check_discount() {
   discount_error.value.message = response.message;
   discount_error.value.ok = response.ok;
 }
+
+const textbox_border_check = (state) => {
+  if (state === null) return "";
+  else if (state) return "border-b-primary-hover";
+  else return "border-b-danger";
+};
 </script>
