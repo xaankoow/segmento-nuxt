@@ -57,7 +57,7 @@
             </div>
             <!-- first box -->
             <div class="resultBox w-full min-h-[150px] mr-4 border border-dashed border-[#0A65CD] bg-[#F2F5F7] rounded-[10px] p-2">
-              <span class="flex items-center gap-1 text-xs" v-show="translatevalueAllBots.allow || translatevalueAllBots.disAllow">
+              <span class="flex items-start gap-3 text-xs" v-show="translatevalueAllBots.allow || translatevalueAllBots.disAllow">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -69,11 +69,13 @@
                           d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
                           fill="#FFCE47"/>
                         </g>
-                        </svg>
+                  </svg>
                 </div>
-                <span v-if="selectedValue == 'allow'">  امکان دسترسی : </span>
-                <span v-if="selectedValue == 'disAllow'">  عدم دسترسی : </span>
-                <span v-if="onlineTraslateValue"> {{ onlineTraslateValue }} </span>
+                <div class="flex flex-col items-start gap-1 mt-1 text-xs">
+                  <span v-if="selectedValue == 'allow'">  امکان دسترسی : </span>
+                  <span v-if="selectedValue == 'disAllow'">  عدم دسترسی : </span>
+                  <span v-if="onlineTraslateValue"> {{ onlineTraslateValue }} </span>
+                </div>
               </span>
             </div>
           </div>
@@ -103,7 +105,7 @@
                 <div class="flex flex-col gap-1">
                   <span class="text-[#002145] text-[12px] font-normal px-2.5 text-sm ">درج لینک</span>
                   <div class="flex h-[45px] items-center align-center gap-5 relative">
-                    <InputText type="text" class="h-max py-[10px] ltr" @keyup="translateCommandValue()" v-model="commandValue" />
+                    <InputText type="text" class="h-max py-[10px] ltr" @input="translateCommandValue()" v-model="commandValue" />
                     <button @click="addCommand()" class="add bg-[#F2F5F7] p-1 px-2 rounded-[3px] absolute right-[6px] cursor-pointer">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                         <mask id="mask0_36_60" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
@@ -131,7 +133,7 @@
           <div class="w-1/2 h-fit flex flex-col">
             <!-- secend box -->
             <div class="resultBox w-full min-h-[209px] mr-4 border border-dashed border-[#0A65CD] bg-[#F2F5F7] rounded-[10px] p-2">
-              <span class="flex flex-col text-start items-start gap-1 text-[13px]" v-show="translatevalueAllBots.allow || translatevalueAllBots.disAllow">
+              <span class="flex flex text-start items-start gap-3 text-[13px]" v-show="translatevalueAllBots.allow || translatevalueAllBots.disAllow">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -143,19 +145,21 @@
                         d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
                         fill="#FFCE47"/>
                       </g>
-                    </svg>
+                  </svg>
                 </div>
-                <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAllBots.bot }}</span>
-                <span class="text-xs" v-show="translatevalueAllBots.allow">  امکان دسترسی : </span>
-                <span class="text-xs" v-show="translatevalueAllBots.allow" v-for="(value , index) in translatevalueAllBots.allow" :key="index"> 
-                {{ value }}
-                </span>
-                <span class="text-xs" v-show="translatevalueAllBots.disAllow">  عدم دسترسی : </span>
-                <span class="text-xs" v-show="translatevalueAllBots.disAllow" v-for="(value , index) in translatevalueAllBots.disAllow" :key="index"> 
-                {{ value }}
-                </span>
+                <div class="flex flex-col items-start gap-1 mt-1 text-xs">
+                  <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAllBots.bot }}</span>
+                  <span class="text-xs" v-show="translatevalueAllBots.allow">  امکان دسترسی : </span>
+                  <span class="text-xs" v-show="translatevalueAllBots.allow" v-for="(value , index) in translatevalueAllBots.allow" :key="index"> 
+                    {{ value }}
+                  </span>
+                  <span class="text-xs" v-show="translatevalueAllBots.disAllow">  عدم دسترسی : </span>
+                  <span class="text-xs" v-show="translatevalueAllBots.disAllow" v-for="(value , index) in translatevalueAllBots.disAllow" :key="index"> 
+                    {{ value }}
+                  </span>
+                </div>
               </span>
-              <span class="flex flex-col text-start items-start gap-1 text-[13px]" v-show="translatevalueAPIsGoogle.allow || translatevalueAPIsGoogle.disAllow">
+              <span class="flex flex text-start items-start gap-3 text-[13px]" v-show="translatevalueAPIsGoogle.allow || translatevalueAPIsGoogle.disAllow">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -167,17 +171,19 @@
                         d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
                         fill="#FFCE47"/>
                       </g>
-                    </svg>
+                  </svg>
                 </div>
-                <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAPIsGoogle.bot }}</span>
-                <span class="text-xs" v-show="translatevalueAPIsGoogle.allow">  امکان دسترسی : </span>
-                <span class="text-xs" v-show="translatevalueAPIsGoogle.allow" v-for="(value , index) in translatevalueAPIsGoogle.allow" :key="index"> 
-                {{ value }}
-                </span>
-                <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow">  عدم دسترسی : </span>
-                <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow" v-for="(value , index) in translatevalueAPIsGoogle.disAllow" :key="index"> 
-                {{ value }}
-                </span>
+                <div class="flex flex-col items-start gap-1 mt-1 text-xs">
+                  <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAPIsGoogle.bot }}</span>
+                  <span class="text-xs" v-show="translatevalueAPIsGoogle.allow">  امکان دسترسی : </span>
+                  <span class="text-xs" v-show="translatevalueAPIsGoogle.allow" v-for="(value , index) in translatevalueAPIsGoogle.allow" :key="index"> 
+                  {{ value }}
+                  </span>
+                  <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow">  عدم دسترسی : </span>
+                  <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow" v-for="(value , index) in translatevalueAPIsGoogle.disAllow" :key="index"> 
+                  {{ value }}
+                  </span>
+                </div>
               </span>
               <span class="flex flex-col text-start items-start gap-1 text-[13px]" v-show="translatevalueAdsBotMobileWebAndroid.allow || translatevalueAllBots.disAllow">
                 <div>
@@ -191,17 +197,19 @@
                         d="M12 13.075C12.2167 13.075 12.396 13.004 12.538 12.862C12.6793 12.7207 12.75 12.5417 12.75 12.325V7.8C12.75 7.6 12.6793 7.429 12.538 7.287C12.396 7.14567 12.2167 7.075 12 7.075C11.7833 7.075 11.6043 7.14567 11.463 7.287C11.321 7.429 11.25 7.60833 11.25 7.825V12.35C11.25 12.55 11.321 12.7207 11.463 12.862C11.6043 13.004 11.7833 13.075 12 13.075ZM12 16.725C12.2333 16.725 12.425 16.65 12.575 16.5C12.725 16.35 12.8 16.1583 12.8 15.925C12.8 15.6917 12.725 15.5 12.575 15.35C12.425 15.2 12.2333 15.125 12 15.125C11.7667 15.125 11.575 15.2 11.425 15.35C11.275 15.5 11.2 15.6917 11.2 15.925C11.2 16.1583 11.275 16.35 11.425 16.5C11.575 16.65 11.7667 16.725 12 16.725ZM12 21.5C10.6833 21.5 9.446 21.25 8.288 20.75C7.12933 20.25 6.125 19.575 5.275 18.725C4.425 17.875 3.75 16.8707 3.25 15.712C2.75 14.554 2.5 13.3167 2.5 12C2.5 10.6833 2.75 9.44567 3.25 8.287C3.75 7.129 4.425 6.125 5.275 5.275C6.125 4.425 7.12933 3.75 8.288 3.25C9.446 2.75 10.6833 2.5 12 2.5C13.3167 2.5 14.5543 2.75 15.713 3.25C16.871 3.75 17.875 4.425 18.725 5.275C19.575 6.125 20.25 7.129 20.75 8.287C21.25 9.44567 21.5 10.6833 21.5 12C21.5 13.3167 21.25 14.554 20.75 15.712C20.25 16.8707 19.575 17.875 18.725 18.725C17.875 19.575 16.871 20.25 15.713 20.75C14.5543 21.25 13.3167 21.5 12 21.5ZM12 20C14.2167 20 16.1043 19.221 17.663 17.663C19.221 16.1043 20 14.2167 20 12C20 9.78333 19.221 7.89567 17.663 6.337C16.1043 4.779 14.2167 4 12 4C9.78333 4 7.896 4.779 6.338 6.337C4.77933 7.89567 4 9.78333 4 12C4 14.2167 4.77933 16.1043 6.338 17.663C7.896 19.221 9.78333 20 12 20Z"
                         fill="#FFCE47"/>
                       </g>
-                    </svg>
+                  </svg>
                 </div>
-                <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAdsBotMobileWebAndroid.bot }}</span>
-                <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow">  امکان دسترسی : </span>
-                <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.allow" :key="index"> 
-                {{ value }}
-                </span>
-                <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow">  عدم دسترسی : </span>
-                <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.disAllow" :key="index"> 
-                {{ value }}
-                </span>
+                <div class="flex flex-col items-start gap-1 mt-1 text-xs">
+                  <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAdsBotMobileWebAndroid.bot }}</span>
+                  <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow">  امکان دسترسی : </span>
+                  <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.allow" :key="index"> 
+                  {{ value }}
+                  </span>
+                  <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow">  عدم دسترسی : </span>
+                  <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.disAllow" :key="index"> 
+                  {{ value }}
+                  </span>
+                </div>
               </span>
             </div>
           </div>
@@ -220,7 +228,7 @@
                 </div>
                 <div v-show="botsValue.AdsBotMobileWebAndroid.length > 0" class="w-full flex flex-col text-xs">
                   <span>user-agent: AdsBotMobileWebAndroid</span>
-                  <span v-for="item in botsValue[AdsBotMobileWebAndroid]">{{ item }}</span>
+                  <span v-for="item in botsValue['AdsBotMobileWebAndroid']">{{ item }}</span>
                 </div>
               </div>
             </div>
@@ -412,7 +420,7 @@ function addCommand(){
         translatevalueAPIsGoogle.value.allow.push(onlineTraslateValue.value)
       }else{
         if (!translatevalueAPIsGoogle.value.disAllow) {
-          translatevalueAPIsGoogle.value.allow = []
+          translatevalueAPIsGoogle.value.disAllow = []
         }
         translatevalueAPIsGoogle.value.disAllow.push(onlineTraslateValue.value)
       }
