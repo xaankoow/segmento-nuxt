@@ -311,9 +311,7 @@
           </form>
           <Copy
             class="btn-primary px-4"
-            :content="`<script type='application/ld+json'>${JSON.stringify(
-              jsonData
-            )}</script>`"
+            :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`"
           >
             <svg
               width="24"
