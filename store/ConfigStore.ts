@@ -1,20 +1,28 @@
-import Plan from "~~/interfaces/Models/Config/Plan";
 import Workspace from "~~/interfaces/Models/Config/Workspace";
 import Wallet from "~~/interfaces/Models/Wallet";
 import Limit from "~~/interfaces/Models/Config/Limit";
 import User from "~~/interfaces/User";
 import Request from "~~/Api/Request";
+import Plan from '~/interfaces/Plan';
+import { usePlanStore } from '~/store/plan';
+
 
 export default class ConfigStore {
-  static init(data: any): Boolean {
+  static init(data: any): boolean {
     const promises = [];
     promises.push(ConfigStore.set_token(data.token));
     promises.push(ConfigStore.set_user(JSON.stringify(data.user)));
-    promises.push(ConfigStore.set_plan(JSON.stringify(data.plan)));
     promises.push(ConfigStore.set_wallets(JSON.stringify(data.wallets)));
     promises.push(ConfigStore.set_workspaces(JSON.stringify(data.workspaces)));
     promises.push(ConfigStore.set_roles(JSON.stringify(data.workspaces)));
-    promises.push(ConfigStore.set_limits(JSON.stringify(data.limits)));
+
+    const parsedPlan: Plan = typeof data.plan === 'string' ? JSON.parse(data.plan) : data.plan;
+    const planStore = usePlanStore();
+    planStore.updatePlanData(parsedPlan);
+
+    const parsedLimits: Limit[] = typeof data.limits === 'string' ? JSON.parse(data.limits) : data.limits;
+    const limitsStore = useLimitsStore();
+    limitsStore.updateLimitsData(parsedLimits);
 
     // Wait for all promises to resolve
     Promise.all(promises)

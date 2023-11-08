@@ -734,7 +734,9 @@
 <script setup>
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
+import { usePlanStore } from "~/store/plan";
 
+const plan = usePlanStore();
 const isPopupVisible = ref(false);
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
@@ -755,11 +757,10 @@ const reload_store = () => {
         name: ConfigStore.user().name,
         wallet: ConfigStore.wallets()[0].balance ?? 0,
         subscription:
-          cn.by_route(`constants/plans/${ConfigStore.plan().plan.name}`) +
+          cn.by_route(`constants/plans/${plan.plan.name}`) +
           " " +
-          cn.by_route(`constants/packages/${ConfigStore.plan().plan.package}`),
+          cn.by_route(`constants/packages/${plan.plan.package}`),
       };
-
       workspaces.value = ConfigStore.workspaces();
     })
     .catch((error) => {
