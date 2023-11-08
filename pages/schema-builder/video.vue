@@ -45,32 +45,26 @@
                             v-model="valuesVideo.description" />
                     </div>
                 </div>
-                <div class="w-full flex ">
-                    <div class="w-[40%] h-[45px] flex items-center gap-2">
+                <div class="w-full flex flex-row gap-2">
+                    <div class="w-1/4 h-10 flex items-center gap-2">
                         <span class="text-sm">دقیقه</span>
-                        <InputNumber id="min" @input="changeVideoMin()" v-model="videoDuration.min" />
+                        <InputNumber class="w-full" id="min" @input="changeVideoMin()" v-model="videoDuration.min" />
                     </div>
-                    <div class="w-[40%] h-[45px] flex items-center gap-2">
+                    <div class="w-1/4 h-10 flex items-center gap-2">
                         <span class="text-sm">ثانیه</span>
-                        <InputNumber id="sec" @input="changeVideoSec()" v-model="videoDuration.sec" />
+                        <InputNumber class="w-full" id="sec" @input="changeVideoSec()" v-model="videoDuration.sec" />
+                    </div>
+                    <div class="w-2/4 h-10 flex items-center gap-2">
+                        <span class="text-sm w-28">تاریخ انتشار</span>
+                        <InputDate class="w-full" @change="changeUploadDate" id="uploadDate"
+                            v-model="valuesVideo.uploadDate"></InputDate>
                     </div>
                 </div>
-                <div class="w-[60%] h-[45px] flex items-center gap-2">
-                    <span class="text-sm w-fit">تاریخ انتشار</span>
-                    <InputDate class="w-[160px]" @change="changeUploadDate" id="uploadDate"
-                        v-model="valuesVideo.uploadDate"></InputDate>
-                </div>
-                <div v-if="imageNumber == 1">
-                    <div class="w-full">
-                        <InputURL class="w-full align-start" placeholder="آدرس  تصویر بندانگشتی" @input="changeimage(0)"
-                            v-model="valuesVideo.thumbnailUrl[0]" />
-                    </div>
-                </div>
-                <div v-if="imageNumber > 1" v-for="(value, index) in imageNumber" :key="index">
+                <div v-for="(value, index) in imageNumber" :key="index">
                     <div class="w-full flex items-center gap-2">
-                        <InputURL class="w-[80%] align-start" style="width: 80%;" placeholder="آدرس  تصویر بندانگشتی"
+                        <InputURL class="w-full align-start" placeholder="آدرس  تصویر"
                             @input="changeimage(index)" v-model="valuesVideo.thumbnailUrl[index]" />
-                        <button @click="deleteOneImage(index)"
+                        <button @click="deleteOneImage(index)" v-if="imageNumber > 1"
                             class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕
                         </button>
@@ -81,21 +75,21 @@
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    افزودن تصویر بندانگشتی
+                    افزودن تصویر
                 </button>
                 <div class="w-full flex gap-2">
                     <div class="w-1/2">
-                        <InputURL class="w-full align-start" placeholder="لینک محتوی" @input="changecontentUrl()"
+                        <InputURL class="w-full align-start" placeholder="لینک محتوا" @input="changecontentUrl()"
                             v-model="contentUrl" />
                     </div>
                     <div class="w-1/2">
-                        <InputURL class="w-full align-start" placeholder="embed Url" @input="changeEmbedUrl()"
+                        <InputURL class="w-full align-start" placeholder="آدرس درج embed" @input="changeEmbedUrl()"
                             v-model="embedUrl" />
                     </div>
                 </div>
                 <div>
                     <div class="w-full">
-                        <InputURL class="w-full align-start" placeholder="seek toAction Target Url"
+                        <InputURL class="w-full align-start" placeholder="آدرس دقیق میزان پخش ویدئو"
                             @input="changeSeekTarget()" v-model="seekTargetUrl" />
                     </div>
                 </div>

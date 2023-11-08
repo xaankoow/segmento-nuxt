@@ -37,11 +37,11 @@
             <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <div class="flex flex-col gap-2">
                     <div class="w-full">
-                        <InputText class="w-full align-start" placeholder="عنوان رسیپ" @input="changeName(0)"
+                        <InputText class="w-full align-start" placeholder="عنوان دستور پخت" @input="changeName(0)"
                             v-model="values.name" />
                     </div>
                     <div class="w-full h-full align-start">
-                        <InputTextArea class="h-36 w-full" @input="changeDescription(0)" placeholder="توضیحات رسیپ"
+                        <InputTextArea class="h-36 w-full" @input="changeDescription(0)" placeholder="توضیحات دستور پخت"
                             v-model="values.description" />
                     </div>
                     <div class="w-full">
@@ -50,17 +50,11 @@
                     </div>
                 </div>
 
-                <div v-if="imageNumber == 1">
-                    <div class="w-full">
-                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @input="changeimage(0)"
-                            v-model="values.image[0]" />
-                    </div>
-                </div>
-                <div v-if="imageNumber > 1" v-for="(value, index) in imageNumber" :key="index">
+                <div v-for="(value, index) in imageNumber" :key="index">
                     <div class="w-full flex items-center gap-2">
-                        <InputURL class="w-[80%] align-start" placeholder="آدرس تصویر " @keyup="changeimage(index)"
+                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @keyup="changeimage(index)"
                             v-model="values.image[index]" />
-                        <button @click="deleteOneImage(index)"
+                        <button @click="deleteOneImage(index)" v-if="imageNumber > 1"
                             class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕
                         </button>
@@ -74,46 +68,45 @@
                     افزودن تصویر
                 </button>
 
-                <div class="w-full flex gap-2">
-                    <div class="w-1/2">
-                        <InputURL class="w-full align-start" placeholder="لینک ویدیو" @input="changecontentUrl()"
+                <div class="w-full grid grid-cols-2 gap-2">
+                    <div class="w-full">
+                        <InputURL class="w-full" placeholder="لینک ویدیو" @input="changecontentUrl()"
                             v-model="valuesVideo.contentUrl" />
                     </div>
-                    <div class="w-1/2">
-                        <InputURL class="w-full align-start" placeholder="embed Url" @input="changeEmberUrl()"
+                    <div class="w-full">
+                        <InputURL class="w-full" placeholder="آدرس درج embed" @input="changeEmberUrl()"
                             v-model="valuesVideo.embedUrl" />
                     </div>
-                </div>
-                <div class="w-full flex gap-2">
-                    <div class="w-[50%]">
-                        <InputText class="w-full align-start" placeholder="نام سازنده" @input="changeAuthorName()"
+                    <div class="w-full">
+                        <InputText class="w-full h-10" placeholder="نام سازنده" @input="changeAuthorName()"
                             v-model="values.author.name" />
                     </div>
-                    <div class="w-[50%] h-[45px] flex items-center gap-2">
-                        <span class="text-sm w-fit">تاریخ انتشار</span>
-                        <InputDate class="w-[160px]" @change="changeDatePublished()" id="uploadDate"
+                    <div class="w-full h-10 flex items-center gap-2">
+                        <span class="text-sm w-28">تاریخ انتشار</span>
+                        <InputDate class="w-full h-10" @change="changeDatePublished()" id="uploadDate"
                             v-model="values.datePublished"></InputDate>
                     </div>
                 </div>
 
                 <!-- time spending -->
-                <div class="w-full flex ">
-                    <div class="w-[50%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm">آماده سازی(دقیقه)</span>
-                        <InputNumber id="min" @input="changePrepTime()" v-model="values.prepTime" />
+                <div class="w-full grid grid-cols-2 gap-2">
+                    <div class="w-full h-10 flex items-center gap-2">
+                        <span class="text-sm w-52">آماده سازی(دقیقه)</span>
+                        <InputNumber dir="ltr" class="w-full" id="min" @input="changePrepTime()"
+                            v-model="values.prepTime" />
                     </div>
-                    <div class="w-[50%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm">پختن(دقیقه)</span>
-                        <InputNumber id="sec" @input="changecookTime()" v-model="values.cookTime" />
+                    <div class="w-full h-10 flex items-center gap-2">
+                        <span class="text-sm w-28">پختن(دقیقه)</span>
+                        <InputNumber dir="ltr" class="w-full" id="sec" @input="changecookTime()"
+                            v-model="values.cookTime" />
                     </div>
                 </div>
                 <!-- food -->
                 <div class="w-full flex gap-2">
-                    <div
-                        class="w-1/2 h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
-                        <DropdownFinalDropDown class="z-index-[1100]">
+                    <div class="w-1/2 h-10 text-start align-center border border-base-400 rounded-3px">
+                        <DropdownFinalDropDown>
                             <template v-slot:title>
-                                <span> نوع غذا</span>
+                                <span>نوع غذا</span>
                             </template>
                             <template v-slot:option>
                                 <InputRadio v-for="(element, index) in Object.keys(recipeCategory)" :key="index"
@@ -127,25 +120,27 @@
                             v-model="values.recipeCuisine" />
                     </div>
                 </div>
-                <div class="w-full">
-                    <div class="w-[60%] h-[45px] flex items-center gap-2">
-                        <span class="text-sm">قابل سرو برای چند نفر</span>
-                        <InputNumber id="sec" @input="changeRecipeYield()" v-model="values.recipeYield" />
+                <div class="w-full grid grid-cols-2 gap-2">
+                    <div class="w-full h-10 flex items-center gap-2">
+                        <span class="text-sm w-72">قابل سرو برای چند نفر</span>
+                        <InputNumber dir="ltr" class="w-full" id="sec" @input="changeRecipeYield()"
+                            v-model="values.recipeYield" />
                     </div>
                 </div>
                 <!-- nutrition -->
                 <div class="w-full flex gap-2 ">
-                    <div class="w-[30%]">
-                        <InputText class="w-[40%] align-start" placeholder="انداه وعده" @input="changeServingSize()"
+                    <div class="w-[40%] h-10 flex items-center gap-2">
+                        <span class="text-sm w-24">انداه وعده</span>
+                        <InputText class="w-full align-start" @input="changeServingSize()"
                             v-model="values.nutrition.servingSize" />
                     </div>
-                    <div class="w-[35%] h-[45px] flex items-center gap-2">
-                        <span class="text-sm">میزان کالری</span>
-                        <InputNumber id="min" @input="changecalories()" v-model="values.nutrition.calories" />
+                    <div class="w-[30%] h-10 flex items-center gap-2">
+                        <span class="text-sm w-36">میزان کالری</span>
+                        <InputNumber class="w-full" id="min" @input="changecalories()" v-model="values.nutrition.calories" />
                     </div>
-                    <div class="w-[35%] h-[45px] flex items-center gap-2">
-                        <span class="text-sm">میزان چربی</span>
-                        <InputNumber id="sec" @input="changeFatContent()" v-model="values.nutrition.fatContent" />
+                    <div class="w-[30%] h-10 flex items-center gap-2">
+                        <span class="text-sm w-36">میزان چربی</span>
+                        <InputNumber class="w-full" id="sec" @input="changeFatContent()" v-model="values.nutrition.fatContent" />
                     </div>
                 </div>
                 <!-- Ingredient -->
@@ -153,7 +148,7 @@
                     <div class="w-full flex flex-col items-center gap-2" v-for="(value, index) in valuesIngredient"
                         :key="index">
                         <div class="w-full flex items-center gap-2">
-                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="ماده تشکیل دهنده "
+                            <InputText class="w-full align-start" placeholder="ماده تشکیل دهنده "
                                 @input="changeIngredient(index)" v-model="valuesIngredient[index]" />
                             <button @click="deleteOneIngredient(index)"
                                 class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
@@ -173,18 +168,18 @@
                 <div class="w-full flex flex-col gap-2 ">
                     <div class="w-full flex flex-col gap-2" v-for="(value, index) in valuesStep" :key="index">
                         <div class="w-full flex items-center gap-2">
-                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="مرحله"
+                            <InputText class="w-full align-start" placeholder="مرحله"
                                 @input="changeStepName(index)" v-model="valuesStep[index].name" />
                             <button @click="deleteOneStep(index)"
                                 class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                                 ✕
                             </button>
                         </div>
-                        <div class="w-[80%] h-full align-start">
+                        <div class="w-full h-full align-start">
                             <InputTextArea class="h-36 w-full" @input="changeStepText(index)" placeholder="توضیحات "
                                 v-model="valuesStep[index].text" />
                         </div>
-                        <div class="w-[80%] flex gap-2">
+                        <div class="w-full flex gap-2">
                             <div class="w-1/2">
                                 <InputURL class="w-full align-start" placeholder="لینک " @input="changeStepUrl(index)"
                                     v-model="valuesStep[index].url" />
@@ -204,27 +199,25 @@
                     </button>
                 </div>
                 <!-- aggregateRating start -->
-                <div class="w-full flex gap-3">
-                    <div class="w-[40%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm">مجموع رتبه</span>
-                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="totalTime"
+                <div class="w-full grid grid-cols-2 gap-2">
+                    <div class="w-full h-10 flex items-center gap-2">
+                        <span class="text-sm w-40">مجموع رتبه</span>
+                        <InputNumber class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="totalTime"
                             @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue" />
                     </div>
-                    <div class="w-[40%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm">تعداد رتبه</span>
-                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="price"
+                    <div class="w-full h-10 flex items-center gap-2">
+                        <span class="text-sm w-40">تعداد رتبه</span>
+                        <InputNumber class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="price"
                             @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount" />
                     </div>
-                </div>
-                <div class="w-full flex gap-3">
-                    <div class="w-[40%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm">بالاترین رتبه</span>
-                        <InputNumber id="totalTime" @input="changeHighestRating()"
+                    <div class="w-full h-10 flex items-center gap-2">
+                        <span class="text-sm w-40">بالاترین رتبه</span>
+                        <InputNumber class="w-full" id="totalTime" @input="changeHighestRating()"
                             v-model="valuesAggregateRating.bestRating" />
                     </div>
-                    <div class="w-[40%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm">پایین ترین رتبه</span>
-                        <InputNumber id="price" @input="changeLowestRating()" v-model="valuesAggregateRating.worstRating" />
+                    <div class="w-full h-10 flex items-center gap-2">
+                        <span class="text-sm w-40">پایین ترین رتبه</span>
+                        <InputNumber class="w-full" id="price" @input="changeLowestRating()" v-model="valuesAggregateRating.worstRating" />
                     </div>
                 </div>
                 <!-- aggregateRating end -->
@@ -232,38 +225,38 @@
                 <!-- review start -->
                 <div class="w-full flex flex-col gap-2" v-if="reviewNumber > 0" v-for="(value, index) in valuesReview"
                     :key="index">
-                    <div class="w-full flex items-center gap-6">
-                        <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="عنوان بررسی"
+                    <div class="w-full flex items-center gap-2">
+                        <InputText class="w-full align-start" placeholder="عنوان بررسی"
                             @input="changeReviewName(index)" v-model="valuesReview[index].name" />
                         <button @click="deleteOneReview(index)"
                             class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕
                         </button>
                     </div>
-                    <div class="w-[80%] h-full align-start">
+                    <div class="w-full h-full align-start">
                         <InputTextArea class="h-36" @input="changeReviewBody(index)" placeholder=" توضیحات محصول"
                             v-model="valuesReview[index].reviewBody" />
                     </div>
-                    <div class="w-[80%] flex gap-3">
-                        <div class="w-[45%] h-[45px] flex items-center gap-6">
+                    <div class="w-full flex gap-2">
+                        <div class="w-[35%] h-10 flex items-center gap-2">
                             <span class="text-sm">رتبه</span>
-                            <InputNumber id="totalTime" @input="changeReviewRating(index)"
+                            <InputNumber class="w-full" id="totalTime" @input="changeReviewRating(index)"
                                 v-model="valuesReview[index].reviewRating.ratingValue"
                                 :min="valuesAggregateRating.worstRating ? valuesAggregateRating.worstRating : 0"
                                 :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0" />
                         </div>
-                        <div class="w-[55%] h-[45px] flex items-center gap-6">
-                            <span class="text-sm w-[80px]">تاریخ انتشار</span>
-                            <InputDate class="w-[140px]" id="date" @change="changeReviewDatePublished(index)"
+                        <div class="w-[65%] h-10 flex items-center gap-2">
+                            <span class="text-sm w-24">تاریخ انتشار</span>
+                            <InputDate class="w-full" id="date" @change="changeReviewDatePublished(index)"
                                 v-model="valuesReview[index].datePublished" />
                         </div>
                     </div>
-                    <div class="w-[80%] flex gap-3">
+                    <div class="w-full flex gap-2">
                         <div class="w-[35%]">
                             <InputText class="w-full align-start" placeholder=" نام نویسنده"
                                 @input="changeReviewAuthorName(index)" v-model="valuesReview[index].author.name" />
                         </div>
-                        <div class="w-[62%]">
+                        <div class="w-[65%]">
                             <InputText class="w-full align-start" placeholder=" ناشر" @input="changePublisherName(index)"
                                 v-model="valuesPublisher[index].name" />
                         </div>
