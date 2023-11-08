@@ -121,7 +121,7 @@
         <div class="w-full h-auto flex flex-wrap justify-between items-center">
           <div
             class="w-[48%] h-[111px] py-3 flex border border-base-400 rounded mt-[38px]"
-            v-for="limit in limits"
+            v-for="limit in limits.list"
             :class="
               config.by_route(`${current_page}/limits-list/${limit.feature}`) ===
               'undefined'
@@ -195,11 +195,14 @@ import Config from "~~/composables/Config";
 import Request from "~~/Api/Request";
 import ConfigStore from "~~/store/ConfigStore";
 import jalaliMoment from "jalali-moment";
+import { usePlanStore } from "~/store/plan";
+import { useLimitsStore } from "~/store/limits";
 
+const plan = usePlanStore();
+const limits = useLimitsStore();
 const current_page = "pages/subscription-status";
 const config = new Config();
 const request = new Request("v1");
-const limits = ref([]);
 const auth = ref({
   subscription: "",
   expire_at: "",
@@ -211,24 +214,19 @@ const auth = ref({
 onBeforeMount(() => {
   auth.value = {
     subscription: `${config.by_route(
-      `constants/plans/${ConfigStore.plan().plan.name}`
-    )} ${config.by_route(`constants/packages/${ConfigStore.plan().plan.package}`)}`,
-    expire_at: `${jalaliMoment(
-      ConfigStore.plan().expire_at,
-      "YYYY-MM-DD HH:mm:ss"
-    ).format("jYYYY/jMM/jDD")}`,
-    started_at: `${jalaliMoment(ConfigStore.plan().created_at).format("jYYYY/jMM/jDD")}`,
+      `constants/plans/${plan.plan.name}`
+    )} ${config.by_route(`constants/packages/${plan.plan.package}`)}`,
+    expire_at: `${jalaliMoment(plan.expire_at, "YYYY-MM-DD HH:mm:ss").format(
+      "jYYYY/jMM/jDD"
+    )}`,
+    started_at: `${jalaliMoment(plan.created_at).format("jYYYY/jMM/jDD")}`,
     full_time: Math.floor(
-      (new Date(ConfigStore.plan().expire_at) - new Date(ConfigStore.plan().created_at)) /
-        (1000 * 60 * 60 * 24)
+      (new Date(plan.expire_at) - new Date(plan.created_at)) / (1000 * 60 * 60 * 24)
     ),
     remained_days: Math.floor(
-      (new Date(ConfigStore.plan().expire_at) - new Date()) / (1000 * 60 * 60 * 24)
+      (new Date(plan.expire_at) - new Date()) / (1000 * 60 * 60 * 24)
     ),
   };
-});
-
-onBeforeMount(() => {
   collect_limits();
 });
 
@@ -236,7 +234,7 @@ async function collect_limits() {
   let response = await request
     .get("profile/limits")
     .then((response) => {
-      limits.value = response.data;
+      limits.updateLimitsData(response.data);
     })
     .catch((err) => {
       // TODO send error message
