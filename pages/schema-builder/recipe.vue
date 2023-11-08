@@ -1,240 +1,280 @@
 <template>
     <div class="w-full h-auto">
-            <!-- Tabs -->
-            <div class="flex flex-row items-center gap-3 text-xs px-2 py-4 h-[10%] bg-base-200">
-                <TabItem to="/schema-builder/faq" :active="false">
-                     FAQ page
-                </TabItem>
-                <TabSeparator></TabSeparator>
-                <TabItem to="/schema-builder/how-to" :active="false">
-                    How to
-                </TabItem>
-                <TabSeparator></TabSeparator>
-                <TabItem to="/schema-builder/local-business" :active="false">
-                    Local Business
-                </TabItem>
-                <TabSeparator></TabSeparator>
-                <TabItem to="/schema-builder/product" :active="false">
-                    Product
-                </TabItem>
-                <TabSeparator></TabSeparator>
-                <TabItem to="/schema-builder/recipe" :active="true">
-                    Recipe
-                </TabItem>
-                <TabSeparator></TabSeparator>
-                <TabItem to="/schema-builder/video" :active="false">
-                    video
-                </TabItem>
-                <TabSeparator></TabSeparator>
-                <TabItem to="/schema-builder/website" :active="false">
-                    Website
-                </TabItem>
-            </div>
-            <div class="flex justify-start items-start gap-2 w-full h-full p-2" >
+        <!-- Tabs -->
+        <div class="flex flex-row items-center gap-3 text-xs px-2 py-4 h-[10%] bg-base-200">
+            <TabItem to="/schema-builder/faq" :active="false">
+                FAQ page
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/how-to" :active="false">
+                How to
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/local-business" :active="false">
+                Local Business
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/product" :active="false">
+                Product
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/recipe" :active="true">
+                Recipe
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/video" :active="false">
+                video
+            </TabItem>
+            <TabSeparator></TabSeparator>
+            <TabItem to="/schema-builder/website" :active="false">
+                Website
+            </TabItem>
+        </div>
+        <div class="flex justify-start items-start gap-2 w-full h-full p-2">
             <!-- _______________________________________ -->
             <!-- right part -->
             <!-- _______________________________________ -->
             <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <div class="flex flex-col gap-2">
-                    <div class="w-full" >
-                        <InputText class="w-full align-start" placeholder="عنوان رسیپ" @input="changeName(0)" v-model="values.name" />
+                    <div class="w-full">
+                        <InputText class="w-full align-start" placeholder="عنوان رسیپ" @input="changeName(0)"
+                            v-model="values.name" />
                     </div>
-                    <div class="w-full h-full align-start" >
-                        <InputTextArea class="h-36 w-full" @input="changeDescription(0)" placeholder="توضیحات رسیپ" v-model="values.description" />
+                    <div class="w-full h-full align-start">
+                        <InputTextArea class="h-36 w-full" @input="changeDescription(0)" placeholder="توضیحات رسیپ"
+                            v-model="values.description" />
                     </div>
-                    <div class="w-full" >
-                        <InputText class="w-full align-start" placeholder="کلمات کلیدی" @input="changeKeywords(0)" v-model="values.keywords" />
+                    <div class="w-full">
+                        <InputText class="w-full align-start" placeholder="کلمات کلیدی" @input="changeKeywords(0)"
+                            v-model="values.keywords" />
                     </div>
                 </div>
 
-                <div v-if="imageNumber == 1" >
-                    <div class="w-full" >
-                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @input="changeimage(0)" v-model="values.image[0]" />
+                <div v-if="imageNumber == 1">
+                    <div class="w-full">
+                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @input="changeimage(0)"
+                            v-model="values.image[0]" />
                     </div>
                 </div>
-                <div v-if="imageNumber > 1" v-for="(value , index) in imageNumber" :key="index">
-                    <div class="w-full flex items-center gap-2" >
-                        <InputURL class="w-[80%] align-start" placeholder="آدرس تصویر " @keyup="changeimage(index)" v-model="values.image[index]" />
-                        <button @click="deleteOneImage(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
-                            ✕  
+                <div v-if="imageNumber > 1" v-for="(value, index) in imageNumber" :key="index">
+                    <div class="w-full flex items-center gap-2">
+                        <InputURL class="w-[80%] align-start" placeholder="آدرس تصویر " @keyup="changeimage(index)"
+                            v-model="values.image[index]" />
+                        <button @click="deleteOneImage(index)"
+                            class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                            ✕
                         </button>
                     </div>
                 </div>
                 <button class="btn-secondary" @click="addImage">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    افزودن تصویر 
+                    افزودن تصویر
                 </button>
 
                 <div class="w-full flex gap-2">
-                    <div class="w-1/2" >
-                        <InputURL class="w-full align-start" placeholder="لینک ویدیو" @input="changecontentUrl()" v-model="valuesVideo.contentUrl" />
+                    <div class="w-1/2">
+                        <InputURL class="w-full align-start" placeholder="لینک ویدیو" @input="changecontentUrl()"
+                            v-model="valuesVideo.contentUrl" />
                     </div>
-                    <div class="w-1/2" >
-                        <InputURL class="w-full align-start" placeholder="embed Url" @input="changeEmberUrl()" v-model="valuesVideo.embedUrl" />
+                    <div class="w-1/2">
+                        <InputURL class="w-full align-start" placeholder="embed Url" @input="changeEmberUrl()"
+                            v-model="valuesVideo.embedUrl" />
                     </div>
                 </div>
                 <div class="w-full flex gap-2">
-                    <div class="w-[50%]" >
-                        <InputText class="w-full align-start" placeholder="نام سازنده" @input="changeAuthorName()" v-model="values.author.name" />
+                    <div class="w-[50%]">
+                        <InputText class="w-full align-start" placeholder="نام سازنده" @input="changeAuthorName()"
+                            v-model="values.author.name" />
                     </div>
                     <div class="w-[50%] h-[45px] flex items-center gap-2">
-                        <span class="text-sm w-fit" >تاریخ انتشار</span>
-                        <InputDate class="w-[160px]" @change="changeDatePublished()" id="uploadDate" v-model="values.datePublished"></InputDate>
+                        <span class="text-sm w-fit">تاریخ انتشار</span>
+                        <InputDate class="w-[160px]" @change="changeDatePublished()" id="uploadDate"
+                            v-model="values.datePublished"></InputDate>
                     </div>
                 </div>
-                
+
                 <!-- time spending -->
                 <div class="w-full flex ">
                     <div class="w-[50%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm" >آماده سازی(دقیقه)</span>
-                        <InputNumber id="min"  @input="changePrepTime()" v-model="values.prepTime"/>
+                        <span class="text-sm">آماده سازی(دقیقه)</span>
+                        <InputNumber id="min" @input="changePrepTime()" v-model="values.prepTime" />
                     </div>
                     <div class="w-[50%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm" >پختن(دقیقه)</span>
-                        <InputNumber id="sec"  @input="changecookTime()" v-model="values.cookTime"/>
+                        <span class="text-sm">پختن(دقیقه)</span>
+                        <InputNumber id="sec" @input="changecookTime()" v-model="values.cookTime" />
                     </div>
                 </div>
                 <!-- food -->
                 <div class="w-full flex gap-2">
-                    <div class="w-1/2 h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
+                    <div
+                        class="w-1/2 h-[45px] text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
                         <DropdownFinalDropDown class="z-index-[1100]">
                             <template v-slot:title>
                                 <span> نوع غذا</span>
                             </template>
-                            <template v-slot:option >
-                                <InputRadio v-for="(element , index) in Object.keys(recipeCategory)" :key="index" v-model="recipeCategory[element].is_checked" @click="changeRecipeCategory(element)" :id="element" name="currency" >{{ recipeCategory[element].title }}</InputRadio>
+                            <template v-slot:option>
+                                <InputRadio v-for="(element, index) in Object.keys(recipeCategory)" :key="index"
+                                    v-model="recipeCategory[element].is_checked" @click="changeRecipeCategory(element)"
+                                    :id="element" name="currency">{{ recipeCategory[element].title }}</InputRadio>
                             </template>
                         </DropdownFinalDropDown>
                     </div>
-                    <div class="w-1/2" >
-                        <InputText class="w-1/2 align-start" placeholder="نام غذا" @input="changeRecipeCuisine()" v-model="values.recipeCuisine" />
+                    <div class="w-1/2">
+                        <InputText class="w-1/2 align-start" placeholder="نام غذا" @input="changeRecipeCuisine()"
+                            v-model="values.recipeCuisine" />
                     </div>
-                </div>   
+                </div>
                 <div class="w-full">
                     <div class="w-[60%] h-[45px] flex items-center gap-2">
-                        <span class="text-sm" >قابل سرو برای چند نفر</span>
-                        <InputNumber id="sec"  @input="changeRecipeYield()" v-model="values.recipeYield"/>
+                        <span class="text-sm">قابل سرو برای چند نفر</span>
+                        <InputNumber id="sec" @input="changeRecipeYield()" v-model="values.recipeYield" />
                     </div>
                 </div>
                 <!-- nutrition -->
                 <div class="w-full flex gap-2 ">
-                    <div class="w-[30%]" >
-                        <InputText class="w-[40%] align-start" placeholder="انداه وعده" @input="changeServingSize()" v-model="values.nutrition.servingSize" />
+                    <div class="w-[30%]">
+                        <InputText class="w-[40%] align-start" placeholder="انداه وعده" @input="changeServingSize()"
+                            v-model="values.nutrition.servingSize" />
                     </div>
                     <div class="w-[35%] h-[45px] flex items-center gap-2">
-                        <span class="text-sm" >میزان کالری</span>
-                        <InputNumber id="min"  @input="changecalories()" v-model="values.nutrition.calories"/>
+                        <span class="text-sm">میزان کالری</span>
+                        <InputNumber id="min" @input="changecalories()" v-model="values.nutrition.calories" />
                     </div>
                     <div class="w-[35%] h-[45px] flex items-center gap-2">
-                        <span class="text-sm" >میزان چربی</span>
-                        <InputNumber id="sec"  @input="changeFatContent()" v-model="values.nutrition.fatContent"/>
+                        <span class="text-sm">میزان چربی</span>
+                        <InputNumber id="sec" @input="changeFatContent()" v-model="values.nutrition.fatContent" />
                     </div>
                 </div>
                 <!-- Ingredient -->
                 <div class="w-full flex flex-col gap-2 ">
-                    <div class="w-full flex flex-col items-center gap-2" v-for="(value , index) in valuesIngredient" :key="index">
-                        <div class="w-full flex items-center gap-2" >
-                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="ماده تشکیل دهنده " @input="changeIngredient(index)" v-model="valuesIngredient[index]" />
-                            <button @click="deleteOneIngredient(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
-                                ✕  
+                    <div class="w-full flex flex-col items-center gap-2" v-for="(value, index) in valuesIngredient"
+                        :key="index">
+                        <div class="w-full flex items-center gap-2">
+                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="ماده تشکیل دهنده "
+                                @input="changeIngredient(index)" v-model="valuesIngredient[index]" />
+                            <button @click="deleteOneIngredient(index)"
+                                class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                                ✕
                             </button>
                         </div>
                     </div>
                     <button class="btn-secondary" @click="addIngredient">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        افزودن مواد تشکیل دهنده 
+                        افزودن مواد تشکیل دهنده
                     </button>
                 </div>
                 <!-- step -->
                 <div class="w-full flex flex-col gap-2 ">
-                    <div class="w-full flex flex-col gap-2" v-for="(value , index) in valuesStep" :key="index">
-                        <div class="w-full flex items-center gap-2" >
-                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="مرحله" @input="changeStepName(index)" v-model="valuesStep[index].name" />
-                            <button @click="deleteOneStep(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
-                                ✕  
+                    <div class="w-full flex flex-col gap-2" v-for="(value, index) in valuesStep" :key="index">
+                        <div class="w-full flex items-center gap-2">
+                            <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="مرحله"
+                                @input="changeStepName(index)" v-model="valuesStep[index].name" />
+                            <button @click="deleteOneStep(index)"
+                                class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                                ✕
                             </button>
                         </div>
-                        <div class="w-[80%] h-full align-start" >
-                            <InputTextArea class="h-36 w-full" @input="changeStepText(index)" placeholder="توضیحات " v-model="valuesStep[index].text" />
+                        <div class="w-[80%] h-full align-start">
+                            <InputTextArea class="h-36 w-full" @input="changeStepText(index)" placeholder="توضیحات "
+                                v-model="valuesStep[index].text" />
                         </div>
                         <div class="w-[80%] flex gap-2">
-                            <div class="w-1/2" >
-                                <InputURL class="w-full align-start" placeholder="لینک " @input="changeStepUrl(index)" v-model="valuesStep[index].url" />
+                            <div class="w-1/2">
+                                <InputURL class="w-full align-start" placeholder="لینک " @input="changeStepUrl(index)"
+                                    v-model="valuesStep[index].url" />
                             </div>
-                            <div class="w-1/2" >
-                                <InputURL class="w-full align-start" placeholder="آدرس تصویر" @input="changeStepImage(index)" v-model="valuesStep[index].image" />
+                            <div class="w-1/2">
+                                <InputURL class="w-full align-start" placeholder="آدرس تصویر"
+                                    @input="changeStepImage(index)" v-model="valuesStep[index].image" />
                             </div>
                         </div>
                     </div>
                     <button class="btn-secondary" @click="addStep">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        افزودن مرحله   
+                        افزودن مرحله
                     </button>
                 </div>
                 <!-- aggregateRating start -->
                 <div class="w-full flex gap-3">
                     <div class="w-[40%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm" >مجموع رتبه</span>
-                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"  id="totalTime"  @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue"/>
+                        <span class="text-sm">مجموع رتبه</span>
+                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="totalTime"
+                            @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue" />
                     </div>
                     <div class="w-[40%] h-[45px] flex items-center gap-6">
                         <span class="text-sm">تعداد رتبه</span>
-                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="price" @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount"/>
+                        <InputNumber :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="price"
+                            @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount" />
                     </div>
                 </div>
                 <div class="w-full flex gap-3">
                     <div class="w-[40%] h-[45px] flex items-center gap-6">
-                        <span class="text-sm" >بالاترین رتبه</span>
-                        <InputNumber id="totalTime" @input="changeHighestRating()" v-model="valuesAggregateRating.bestRating"/>
+                        <span class="text-sm">بالاترین رتبه</span>
+                        <InputNumber id="totalTime" @input="changeHighestRating()"
+                            v-model="valuesAggregateRating.bestRating" />
                     </div>
                     <div class="w-[40%] h-[45px] flex items-center gap-6">
                         <span class="text-sm">پایین ترین رتبه</span>
-                        <InputNumber id="price" @input="changeLowestRating()" v-model="valuesAggregateRating.worstRating"/>
+                        <InputNumber id="price" @input="changeLowestRating()" v-model="valuesAggregateRating.worstRating" />
                     </div>
                 </div>
                 <!-- aggregateRating end -->
                 <!-- _______________________________________ -->
                 <!-- review start -->
-                <div class="w-full flex flex-col gap-2" v-if="reviewNumber>0" v-for="(value , index) in valuesReview" :key="index" >
-                    <div class="w-full flex items-center gap-6" >
-                        <InputText  class="w-[80%] align-start" style="width: 80%;" placeholder="عنوان بررسی" @input="changeReviewName(index)" v-model="valuesReview[index].name" />
-                        <button @click="deleteOneReview(index)" class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                <div class="w-full flex flex-col gap-2" v-if="reviewNumber > 0" v-for="(value, index) in valuesReview"
+                    :key="index">
+                    <div class="w-full flex items-center gap-6">
+                        <InputText class="w-[80%] align-start" style="width: 80%;" placeholder="عنوان بررسی"
+                            @input="changeReviewName(index)" v-model="valuesReview[index].name" />
+                        <button @click="deleteOneReview(index)"
+                            class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕
                         </button>
                     </div>
-                    <div class="w-[80%] h-full align-start" >
-                        <InputTextArea class="h-36" @input="changeReviewBody(index)" placeholder=" توضیحات محصول" v-model="valuesReview[index].reviewBody" />
+                    <div class="w-[80%] h-full align-start">
+                        <InputTextArea class="h-36" @input="changeReviewBody(index)" placeholder=" توضیحات محصول"
+                            v-model="valuesReview[index].reviewBody" />
                     </div>
                     <div class="w-[80%] flex gap-3">
                         <div class="w-[45%] h-[45px] flex items-center gap-6">
-                            <span class="text-sm" >رتبه</span>
-                            <InputNumber id="totalTime"  @input="changeReviewRating(index)" v-model="valuesReview[index].reviewRating.ratingValue" :min="valuesAggregateRating.worstRating ? valuesAggregateRating.worstRating : 0" :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0"/>
+                            <span class="text-sm">رتبه</span>
+                            <InputNumber id="totalTime" @input="changeReviewRating(index)"
+                                v-model="valuesReview[index].reviewRating.ratingValue"
+                                :min="valuesAggregateRating.worstRating ? valuesAggregateRating.worstRating : 0"
+                                :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0" />
                         </div>
                         <div class="w-[55%] h-[45px] flex items-center gap-6">
                             <span class="text-sm w-[80px]">تاریخ انتشار</span>
-                            <InputDate class="w-[140px]" id="date" @change="changeReviewDatePublished(index)" v-model="valuesReview[index].datePublished"/>
+                            <InputDate class="w-[140px]" id="date" @change="changeReviewDatePublished(index)"
+                                v-model="valuesReview[index].datePublished" />
                         </div>
                     </div>
                     <div class="w-[80%] flex gap-3">
-                        <div class="w-[35%]" >
-                            <InputText  class="w-full align-start" placeholder=" نام نویسنده" @input="changeReviewAuthorName(index)" v-model="valuesReview[index].author.name" />
+                        <div class="w-[35%]">
+                            <InputText class="w-full align-start" placeholder=" نام نویسنده"
+                                @input="changeReviewAuthorName(index)" v-model="valuesReview[index].author.name" />
                         </div>
-                        <div class="w-[62%]" >
-                            <InputText  class="w-full align-start" placeholder=" ناشر" @input="changePublisherName(index)" v-model="valuesPublisher[index].name" />
+                        <div class="w-[62%]">
+                            <InputText class="w-full align-start" placeholder=" ناشر" @input="changePublisherName(index)"
+                                v-model="valuesPublisher[index].name" />
                         </div>
                     </div>
                 </div>
                 <button class="btn-secondary" @click="addReview">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    افزودن بررسی 
+                    افزودن بررسی
                 </button>
                 <!-- review end -->
             </div>
@@ -242,58 +282,57 @@
             <!-- left part -->
             <!-- _______________________________________ -->
             <div class="w-1/2 flex flex-col gap-2">
-                <div class="flex gap-2 w-full" >
-                    <button @click="deleteAll" class="btn-primary px-4" >
+                <div class="flex gap-2 w-full">
+                    <button @click="deleteAll" class="btn-primary px-4">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                            <rect width="24" height="24" fill="#D9D9D9"/>
+                            <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
+                                width="24" height="24">
+                                <rect width="24" height="24" fill="#D9D9D9" />
                             </mask>
                             <g mask="url(#mask0_162_227)">
-                            <path d="M7.3 20.5C6.8 20.5 6.375 20.325 6.025 19.975C5.675 19.625 5.5 19.2 5.5 18.7V6H4.5V4.5H9V3.625H15V4.5H19.5V6H18.5V18.7C18.5 19.2 18.325 19.625 17.975 19.975C17.625 20.325 17.2 20.5 16.7 20.5H7.3ZM17 6H7V18.7C7 18.7667 7.03333 18.8333 7.1 18.9C7.16667 18.9667 7.23333 19 7.3 19H16.7C16.7667 19 16.8333 18.9667 16.9 18.9C16.9667 18.8333 17 18.7667 17 18.7V6ZM9.4 17H10.9V8H9.4V17ZM13.1 17H14.6V8H13.1V17Z" fill="white"/>
+                                <path
+                                    d="M7.3 20.5C6.8 20.5 6.375 20.325 6.025 19.975C5.675 19.625 5.5 19.2 5.5 18.7V6H4.5V4.5H9V3.625H15V4.5H19.5V6H18.5V18.7C18.5 19.2 18.325 19.625 17.975 19.975C17.625 20.325 17.2 20.5 16.7 20.5H7.3ZM17 6H7V18.7C7 18.7667 7.03333 18.8333 7.1 18.9C7.16667 18.9667 7.23333 19 7.3 19H16.7C16.7667 19 16.8333 18.9667 16.9 18.9C16.9667 18.8333 17 18.7667 17 18.7V6ZM9.4 17H10.9V8H9.4V17ZM13.1 17H14.6V8H13.1V17Z"
+                                    fill="white" />
                             </g>
                         </svg>
-                        حذف 
+                        حذف
                     </button>
-                    <a class="btn-primary px-4" href="https://www.google.com" target="_blank">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.99998 17.5C1.36665 17.5 0.912651 17.2167 0.637985 16.65C0.362651 16.0833 0.424985 15.55 0.824985 15.05L6.49998 8.175V2H5.29998C5.09999 2 4.92498 1.929 4.77498 1.787C4.62498 1.64567 4.54998 1.46667 4.54998 1.25C4.54998 1.03333 4.62498 0.854 4.77498 0.712C4.92498 0.570667 5.09999 0.5 5.29998 0.5H12.7C12.9 0.5 13.075 0.570667 13.225 0.712C13.375 0.854 13.45 1.03333 13.45 1.25C13.45 1.46667 13.375 1.64567 13.225 1.787C13.075 1.929 12.9 2 12.7 2H11.5V8.175L17.175 15.05C17.575 15.5333 17.6377 16.0623 17.363 16.637C17.0877 17.2123 16.6333 17.5 16 17.5H1.99998ZM1.99998 16H16L9.99998 8.7V2H7.99998V8.7L1.99998 16Z" fill="white"/>
-                        </svg>
-    
-                        آزمایش 
-                    </a>
-                    <Copy class="btn-primary px-4" :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
-                        <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        >
-                        <mask
-                            id="mask0_164_21"
-                            style="mask-type: alpha"
-                            maskUnits="userSpaceOnUse"
-                            x="0"
-                            y="0"
-                            width="24"
-                            height="24"
-                        >
-                            <rect width="24" height="24" fill="#D9D9D9" />
-                        </mask>
-                        <g mask="url(#mask0_164_21)">
-                            <path
-                            d="M9.24995 17.7998C8.74995 17.7998 8.32495 17.6248 7.97495 17.2748C7.62495 16.9248 7.44995 16.4998 7.44995 15.9998V4.6248C7.44995 4.10814 7.62495 3.6748 7.97495 3.3248C8.32495 2.9748 8.74995 2.7998 9.24995 2.7998H17.625C18.1416 2.7998 18.575 2.9748 18.925 3.3248C19.275 3.6748 19.45 4.10814 19.45 4.6248V15.9998C19.45 16.4998 19.275 16.9248 18.925 17.2748C18.575 17.6248 18.1416 17.7998 17.625 17.7998H9.24995ZM9.24995 16.2998H17.625C17.7083 16.2998 17.7833 16.2705 17.85 16.2118C17.9166 16.1538 17.95 16.0831 17.95 15.9998V4.6248C17.95 4.54147 17.9166 4.46647 17.85 4.3998C17.7833 4.33314 17.7083 4.2998 17.625 4.2998H9.24995C9.16662 4.2998 9.09595 4.33314 9.03795 4.3998C8.97928 4.46647 8.94995 4.54147 8.94995 4.6248V15.9998C8.94995 16.0831 8.97928 16.1538 9.03795 16.2118C9.09595 16.2705 9.16662 16.2998 9.24995 16.2998ZM5.74995 21.2998C5.24995 21.2998 4.82495 21.1248 4.47495 20.7748C4.12495 20.4248 3.94995 19.9998 3.94995 19.4998V6.7998H5.44995V19.4998C5.44995 19.5831 5.47895 19.6538 5.53695 19.7118C5.59562 19.7705 5.66662 19.7998 5.74995 19.7998H15.45V21.2998H5.74995Z"
-                            fill="white"
-                            />
-                        </g>
+                    <form method="post" target="_blank" action="https://search.google.com/test/rich-results">
+                        <button class="btn-primary px-4" type="submit" id="validate_schema2" href="https://www.google.com"
+                            target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.99998 17.5C1.36665 17.5 0.912651 17.2167 0.637985 16.65C0.362651 16.0833 0.424985 15.55 0.824985 15.05L6.49998 8.175V2H5.29998C5.09999 2 4.92498 1.929 4.77498 1.787C4.62498 1.64567 4.54998 1.46667 4.54998 1.25C4.54998 1.03333 4.62498 0.854 4.77498 0.712C4.92498 0.570667 5.09999 0.5 5.29998 0.5H12.7C12.9 0.5 13.075 0.570667 13.225 0.712C13.375 0.854 13.45 1.03333 13.45 1.25C13.45 1.46667 13.375 1.64567 13.225 1.787C13.075 1.929 12.9 2 12.7 2H11.5V8.175L17.175 15.05C17.575 15.5333 17.6377 16.0623 17.363 16.637C17.0877 17.2123 16.6333 17.5 16 17.5H1.99998ZM1.99998 16H16L9.99998 8.7V2H7.99998V8.7L1.99998 16Z"
+                                    fill="white" />
+                            </svg>
+
+                            آزمایش
+                        </button>
+
+                        <textarea :value="`<script type='application/ld+json'>${JSON.stringify(
+                            jsonData
+                        )}</script>`" name="code_snippet" class="hidden"></textarea>
+                    </form>
+                    <Copy class="btn-primary px-4"
+                        :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <mask id="mask0_164_21" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
+                                width="24" height="24">
+                                <rect width="24" height="24" fill="#D9D9D9" />
+                            </mask>
+                            <g mask="url(#mask0_164_21)">
+                                <path
+                                    d="M9.24995 17.7998C8.74995 17.7998 8.32495 17.6248 7.97495 17.2748C7.62495 16.9248 7.44995 16.4998 7.44995 15.9998V4.6248C7.44995 4.10814 7.62495 3.6748 7.97495 3.3248C8.32495 2.9748 8.74995 2.7998 9.24995 2.7998H17.625C18.1416 2.7998 18.575 2.9748 18.925 3.3248C19.275 3.6748 19.45 4.10814 19.45 4.6248V15.9998C19.45 16.4998 19.275 16.9248 18.925 17.2748C18.575 17.6248 18.1416 17.7998 17.625 17.7998H9.24995ZM9.24995 16.2998H17.625C17.7083 16.2998 17.7833 16.2705 17.85 16.2118C17.9166 16.1538 17.95 16.0831 17.95 15.9998V4.6248C17.95 4.54147 17.9166 4.46647 17.85 4.3998C17.7833 4.33314 17.7083 4.2998 17.625 4.2998H9.24995C9.16662 4.2998 9.09595 4.33314 9.03795 4.3998C8.97928 4.46647 8.94995 4.54147 8.94995 4.6248V15.9998C8.94995 16.0831 8.97928 16.1538 9.03795 16.2118C9.09595 16.2705 9.16662 16.2998 9.24995 16.2998ZM5.74995 21.2998C5.24995 21.2998 4.82495 21.1248 4.47495 20.7748C4.12495 20.4248 3.94995 19.9998 3.94995 19.4998V6.7998H5.44995V19.4998C5.44995 19.5831 5.47895 19.6538 5.53695 19.7118C5.59562 19.7705 5.66662 19.7998 5.74995 19.7998H15.45V21.2998H5.74995Z"
+                                    fill="white" />
+                            </g>
                         </svg>
 
                         کپی
                     </Copy>
                 </div>
-                <div class="w-full h-full" >
+                <div class="w-full h-full">
                     <div id="code" ref="code" class="w-full min-h-[500px]">
-                        <JsonPrettify  :jsonData="jsonData" />
+                        <JsonPrettify :jsonData="jsonData" />
                     </div>
                 </div>
             </div>
@@ -302,12 +341,12 @@
 </template>
     
 <script setup>
-import { ref , onMounted } from "vue"
+import { ref, onMounted } from "vue"
 
 const values = ref(
     {
-        "@context": "https://schema.org/", 
-        "@type": "Recipe", 
+        "@context": "https://schema.org/",
+        "@type": "Recipe",
         "name": "",
         "image": [],
         "description": "",
@@ -318,17 +357,17 @@ const values = ref(
         },
         "datePublished": "",
         "prepTime": "",
-        "cookTime": "", 
+        "cookTime": "",
         "totalTime": "",
-        "recipeCategory": "", 
-        "recipeCuisine": "", 
+        "recipeCategory": "",
+        "recipeCuisine": "",
         "recipeYield": "",
         "nutrition": {
             "@type": "NutritionInformation",
             "servingSize": "",
             "calories": "",
             "fatContent": ""
-        }  
+        }
     }
 );
 const valuesVideo = ref(
@@ -337,15 +376,15 @@ const valuesVideo = ref(
         "name": "",
         "description": "",
         "thumbnailUrl": "",
-        "uploadDate": "", 
+        "uploadDate": "",
         "contentUrl": "",
         "embedUrl": ""
     }
 )
 const jsonData = ref(
     {
-        "@context": "https://schema.org/", 
-        "@type": "Recipe", 
+        "@context": "https://schema.org/",
+        "@type": "Recipe",
         "name": "",
         "image": "",
         "description": "",
@@ -356,12 +395,12 @@ const jsonData = ref(
         },
         "datePublished": "",
         "prepTime": "",
-        "cookTime": "", 
-        "totalTime": "", 
+        "cookTime": "",
+        "totalTime": "",
         "nutrition": {
             "@type": "NutritionInformation",
             "calories": ""
-        }  
+        }
     }
 );
 function addElementToObject(object, newProperty, beforNewProperty) {
@@ -369,22 +408,22 @@ function addElementToObject(object, newProperty, beforNewProperty) {
     for (const property in object) {
         newObject[property] = object[property];
         if (property === beforNewProperty) {
-        newObject[newProperty] = newProperty;
+            newObject[newProperty] = newProperty;
         }
     }
     return newObject;
 }
 // for copy button //
 const dataForCopy = ref("")
-onMounted(()=>{
+onMounted(() => {
     dataForCopy.value = document.getElementById("code").textContent
 })
 // for delete button //
 function deleteAll() {
     values.value =
     {
-        "@context": "https://schema.org/", 
-        "@type": "Recipe", 
+        "@context": "https://schema.org/",
+        "@type": "Recipe",
         "name": "",
         "image": [],
         "description": "",
@@ -395,32 +434,32 @@ function deleteAll() {
         },
         "datePublished": "",
         "prepTime": "",
-        "cookTime": "", 
+        "cookTime": "",
         "totalTime": "",
-        "recipeCategory": "", 
-        "recipeCuisine": "", 
+        "recipeCategory": "",
+        "recipeCuisine": "",
         "recipeYield": "",
         "nutrition": {
             "@type": "NutritionInformation",
             "servingSize": "",
             "calories": "",
             "fatContent": ""
-        }  
+        }
     };
-    valuesVideo.value = 
+    valuesVideo.value =
     {
         "@type": "VideoObject",
         "name": "",
         "description": "",
         "thumbnailUrl": "",
-        "uploadDate": "", 
+        "uploadDate": "",
         "contentUrl": "",
         "embedUrl": ""
     }
-    jsonData.value = 
+    jsonData.value =
     {
-        "@context": "https://schema.org/", 
-        "@type": "Recipe", 
+        "@context": "https://schema.org/",
+        "@type": "Recipe",
         "name": "",
         "image": "",
         "description": "",
@@ -431,12 +470,12 @@ function deleteAll() {
         },
         "datePublished": "",
         "prepTime": "",
-        "cookTime": "", 
-        "totalTime": "", 
+        "cookTime": "",
+        "totalTime": "",
         "nutrition": {
             "@type": "NutritionInformation",
             "calories": ""
-        }  
+        }
     };
     imageNumber.value = 1
     ingredientNumber.value = 0
@@ -448,20 +487,20 @@ function deleteAll() {
 
     ]
     aggregateAllow.value = false
-    valuesAggregateRating.value = 
+    valuesAggregateRating.value =
     {
-    "@type": "AggregateRating",
-    "ratingValue": "",
-    "ratingCount": "",
-    "bestRating": "",
-    "worstRating": ""
+        "@type": "AggregateRating",
+        "ratingValue": "",
+        "ratingCount": "",
+        "bestRating": "",
+        "worstRating": ""
     },
-    readOnlyOk.value = false
+        readOnlyOk.value = false
     reviewNumber.value = 0
     valuesReview.value = [
     ];
     valuesPublisher.value =
-    {"@type": "Organization", "name": ""}
+        { "@type": "Organization", "name": "" }
 }
 // for details //
 // function deleteQuestions() {
@@ -501,23 +540,23 @@ function changeKeywords() {
 // for image
 const imageNumber = ref(1)
 function addImage() {
-    imageNumber.value ++
-    values.value.image[imageNumber.value-1] = ""
+    imageNumber.value++
+    values.value.image[imageNumber.value - 1] = ""
     jsonData.value.image = values.value.image
     valuesVideo.value.thumbnailUrl = values.value.image
 }
 function changeimage(taskIndex) {
-    if(imageNumber.value == 1){
+    if (imageNumber.value == 1) {
         jsonData.value.image = values.value.image[0]
         valuesVideo.value.image = values.value.image[0]
-    }else{
+    } else {
         jsonData.value.image[taskIndex] = values.value.image[taskIndex]
         valuesVideo.value.thumbnailUrl[taskIndex] = values.value.image[taskIndex]
     }
 }
-function deleteOneImage(taskIndex){
+function deleteOneImage(taskIndex) {
     if (imageNumber.value > 1) {
-        imageNumber.value --
+        imageNumber.value--
         jsonData.value.image.splice(taskIndex, 1)
         if (jsonData.value.video) {
             jsonData.value.video.thumbnailUrl.splice(taskIndex, 1)
@@ -528,12 +567,12 @@ function deleteOneImage(taskIndex){
 }
 // for url
 function changecontentUrl() {
-    if(!jsonData.value.video){
-    let newJson = {}
-    newJson = addElementToObject(jsonData.value, "video", "nutrition");
-    jsonData.value = newJson
-    jsonData.value.video = valuesVideo.value
-    }else{
+    if (!jsonData.value.video) {
+        let newJson = {}
+        newJson = addElementToObject(jsonData.value, "video", "nutrition");
+        jsonData.value = newJson
+        jsonData.value.video = valuesVideo.value
+    } else {
         jsonData.value.video.contentUrl = valuesVideo.value.contentUrl
     }
     if (valuesVideo.value.contentUrl == "" && valuesVideo.value.embedUrl == "") {
@@ -541,12 +580,12 @@ function changecontentUrl() {
     }
 }
 function changeEmberUrl() {
-    if(!jsonData.value.video){
-    let newJson = {}
-    newJson = addElementToObject(jsonData.value, "video", "nutrition");
-    jsonData.value = newJson
-    jsonData.value.video = valuesVideo.value
-    }else{
+    if (!jsonData.value.video) {
+        let newJson = {}
+        newJson = addElementToObject(jsonData.value, "video", "nutrition");
+        jsonData.value = newJson
+        jsonData.value.video = valuesVideo.value
+    } else {
         jsonData.value.video.embedUrl = valuesVideo.value.embedUrl
     }
     if (valuesVideo.value.contentUrl == "" && valuesVideo.value.embedUrl == "") {
@@ -564,14 +603,14 @@ function changeDatePublished() {
 // time spending
 function changePrepTime() {
     jsonData.value.prepTime = values.value.prepTime
-    if(values.value.cookTime){
+    if (values.value.cookTime) {
         values.value.totalTime = Number(values.value.cookTime) + Number(values.value.prepTime)
         jsonData.value.totalTime = values.value.totalTime
     }
 }
 function changecookTime() {
     jsonData.value.cookTime = values.value.cookTime
-    if(values.value.prepTime){
+    if (values.value.prepTime) {
         values.value.totalTime = Number(values.value.cookTime) + Number(values.value.prepTime)
         jsonData.value.totalTime = values.value.totalTime
     }
@@ -600,37 +639,37 @@ const recipeCategory = ref({
     },
 })
 function changeRecipeCategory(el) {
-    if(!jsonData.value.recipeCategory){
+    if (!jsonData.value.recipeCategory) {
         let newJson = {}
         newJson = addElementToObject(jsonData.value, "recipeCategory", "totalTime");
         jsonData.value = newJson
     }
     values.value.recipeCategory = el
     jsonData.value.recipeCategory = el
-    if(el == "notSpecified"){
+    if (el == "notSpecified") {
         delete jsonData.value.recipeCategory
     }
 }
 function changeRecipeCuisine() {
-    if(!jsonData.value.recipeCuisine){
+    if (!jsonData.value.recipeCuisine) {
         let newJson = {}
-        if(jsonData.value.recipeCategory){
+        if (jsonData.value.recipeCategory) {
             newJson = addElementToObject(jsonData.value, "recipeCuisine", "recipeCategory");
-        }else {
-        newJson = addElementToObject(jsonData.value, "recipeCuisine", "totalTime");
+        } else {
+            newJson = addElementToObject(jsonData.value, "recipeCuisine", "totalTime");
         }
         jsonData.value = newJson
     }
-    jsonData.value.recipeCuisine= values.value.recipeCuisine
+    jsonData.value.recipeCuisine = values.value.recipeCuisine
 }
 function changeRecipeYield() {
-    if(!jsonData.value.recipeYield){
+    if (!jsonData.value.recipeYield) {
         let newJson = {}
-        if(jsonData.value.recipeCuisine){
+        if (jsonData.value.recipeCuisine) {
             newJson = addElementToObject(jsonData.value, "recipeYield", "recipeCuisine");
-        }else if(jsonData.value.recipeCategory) {
+        } else if (jsonData.value.recipeCategory) {
             newJson = addElementToObject(jsonData.value, "recipeYield", "recipeCategory");
-        }else{
+        } else {
             newJson = addElementToObject(jsonData.value, "recipeYield", "totalTime");
         }
         jsonData.value = newJson
@@ -642,7 +681,7 @@ function changeRecipeYield() {
 }
 // for nutrition
 function changeServingSize() {
-    if(!jsonData.value.nutrition.servingSize){
+    if (!jsonData.value.nutrition.servingSize) {
         let newJson = {}
         newJson = addElementToObject(jsonData.value.nutrition, "servingSize", "@type");
         jsonData.value.nutrition = newJson
@@ -656,7 +695,7 @@ function changecalories() {
     jsonData.value.nutrition.calories = values.value.nutrition.calories
 }
 function changeFatContent() {
-    if(!jsonData.value.nutrition.fatContent){
+    if (!jsonData.value.nutrition.fatContent) {
         let newJson = {}
         newJson = addElementToObject(jsonData.value.nutrition, "fatContent", "calories");
         jsonData.value.nutrition = newJson
@@ -672,31 +711,31 @@ const valuesIngredient = ref([
 
 ]
 )
-function addIngredient () {
-    ingredientNumber.value ++
-    valuesIngredient.value[ingredientNumber.value-1] = ""
-    if(!jsonData.value.recipeIngredient){
+function addIngredient() {
+    ingredientNumber.value++
+    valuesIngredient.value[ingredientNumber.value - 1] = ""
+    if (!jsonData.value.recipeIngredient) {
         let newJson = {}
         newJson = addElementToObject(jsonData.value, "recipeIngredient", "nutrition");
         jsonData.value = newJson
     }
     jsonData.value.recipeIngredient = valuesIngredient.value
 }
-function deleteOneIngredient(taskIndex){
+function deleteOneIngredient(taskIndex) {
     if (ingredientNumber.value > 1) {
-        ingredientNumber.value --
+        ingredientNumber.value--
         // jsonData.value.recipeIngredient.splice(taskIndex, 1)
         valuesIngredient.value.splice(taskIndex, 1)
-    }else{
-        ingredientNumber.value --
+    } else {
+        ingredientNumber.value--
         jsonData.value.recipeIngredient.splice(taskIndex, 1)
         valuesIngredient.value.splice(taskIndex, 1)
     }
 }
-function changeIngredient (taskIndex) {
-    if(ingredientNumber.value == 1){
+function changeIngredient(taskIndex) {
+    if (ingredientNumber.value == 1) {
         jsonData.value.recipeIngredient = valuesIngredient.value[0]
-    }else{
+    } else {
         jsonData.value.recipeIngredient[taskIndex] = valuesIngredient.value[taskIndex]
     }
 }
@@ -706,9 +745,9 @@ const valuesStep = ref([
 
 ]
 )
-function addStep () {
-    stepNumber.value ++
-    valuesStep.value[stepNumber.value-1] = 
+function addStep() {
+    stepNumber.value++
+    valuesStep.value[stepNumber.value - 1] =
     {
         "@type": "HowToStep",
         "name": "",
@@ -716,53 +755,53 @@ function addStep () {
         "url": "",
         "image": ""
     }
-    if(!jsonData.value.recipeInstructions){
+    if (!jsonData.value.recipeInstructions) {
         let newJson = {}
-        if(jsonData.value.recipeIngredient){
+        if (jsonData.value.recipeIngredient) {
             newJson = addElementToObject(jsonData.value, "recipeInstructions", "recipeIngredient");
-        }else{
+        } else {
             newJson = addElementToObject(jsonData.value, "recipeInstructions", "nutrition");
         }
         jsonData.value = newJson
     }
     jsonData.value.recipeInstructions = valuesStep.value
 }
-function deleteOneStep(taskIndex){
+function deleteOneStep(taskIndex) {
     if (stepNumber.value > 1) {
-        stepNumber.value --
+        stepNumber.value--
         valuesStep.value.splice(taskIndex, 1)
-    }else{
-        stepNumber.value --
+    } else {
+        stepNumber.value--
         jsonData.value.recipeInstructions.splice(taskIndex, 1)
         delete jsonData.value.recipeInstructions
         valuesStep.value.splice(taskIndex, 1)
     }
 }
-function changeStepName (taskIndex) {
-    if(stepNumber.value == 1){
+function changeStepName(taskIndex) {
+    if (stepNumber.value == 1) {
         jsonData.value.recipeInstructions.name = valuesStep.value[0].name
-    }else{
+    } else {
         jsonData.value.recipeInstructions[taskIndex].name = valuesStep.value[taskIndex].name
     }
 }
-function changeStepText (taskIndex) {
-    if(stepNumber.value == 1){
+function changeStepText(taskIndex) {
+    if (stepNumber.value == 1) {
         jsonData.value.recipeInstructions.text = valuesStep.value[0].text
-    }else{
+    } else {
         jsonData.value.recipeInstructions[taskIndex].text = valuesStep.value[taskIndex].text
     }
 }
-function changeStepUrl (taskIndex) {
-    if(stepNumber.value == 1){
+function changeStepUrl(taskIndex) {
+    if (stepNumber.value == 1) {
         jsonData.value.recipeInstructions.url = valuesStep.value[0].url
-    }else{
+    } else {
         jsonData.value.recipeInstructions[taskIndex].url = valuesStep.value[taskIndex].url
     }
 }
-function changeStepImage (taskIndex) {
-    if(stepNumber.value == 1){
+function changeStepImage(taskIndex) {
+    if (stepNumber.value == 1) {
         jsonData.value.recipeInstructions.image = valuesStep.value[0].image
-    }else{
+    } else {
         jsonData.value.recipeInstructions[taskIndex].image = valuesStep.value[taskIndex].image
     }
 }
@@ -770,29 +809,29 @@ function changeStepImage (taskIndex) {
 const aggregateAllow = ref(false)
 const valuesAggregateRating = ref(
     {
-    "@type": "AggregateRating",
-    "ratingValue": "",
-    "ratingCount": "",
-    "bestRating": "",
-    "worstRating": ""
-  },
+        "@type": "AggregateRating",
+        "ratingValue": "",
+        "ratingCount": "",
+        "bestRating": "",
+        "worstRating": ""
+    },
 )
-function addAggregateRating(){
-    if(!jsonData.value.aggregateRating){
+function addAggregateRating() {
+    if (!jsonData.value.aggregateRating) {
         let newJson = {}
-        if(jsonData.value.mpn){
+        if (jsonData.value.mpn) {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "mpn");
-        }else if(jsonData.value.gtin14){
+        } else if (jsonData.value.gtin14) {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin14");
-        }else if(jsonData.value.gtin13){
+        } else if (jsonData.value.gtin13) {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin13");
-        }else if(jsonData.value.gtin8){
+        } else if (jsonData.value.gtin8) {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "gtin8");
-        }else if(jsonData.value.sku){
+        } else if (jsonData.value.sku) {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "sku");
-        }else if(jsonData.value.brand){
+        } else if (jsonData.value.brand) {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "brand");
-        }else{
+        } else {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "image");
         }
         jsonData.value = newJson
@@ -808,74 +847,74 @@ function changeAggregateRating() {
     }
 }
 function changeNumberOfRating() {
-    if(jsonData.value.aggregateRating){
+    if (jsonData.value.aggregateRating) {
         addAggregateRating()
         jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount
     }
 }
 function changeHighestRating() {
-    if(jsonData.value.aggregateRating){
+    if (jsonData.value.aggregateRating) {
         addAggregateRating()
         jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating
     }
 }
 function changeLowestRating() {
-    if(jsonData.value.aggregateRating){
+    if (jsonData.value.aggregateRating) {
         addAggregateRating()
         jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating
     }
 }
 // for review
-const readOnlyOk= ref(false)
-const reviewNumber= ref(0)
+const readOnlyOk = ref(false)
+const reviewNumber = ref(0)
 const valuesReview = ref([
 ]);
 const valuesPublisher = ref(
     [
-        {"@type": "Organization", "name": ""}
+        { "@type": "Organization", "name": "" }
     ]
 )
-function deleteOneReview(taskIndex){
+function deleteOneReview(taskIndex) {
     if (reviewNumber.value > 1) {
-        reviewNumber.value --
+        reviewNumber.value--
         valuesReview.value.splice(taskIndex, 1)
-    }else{
-        reviewNumber.value --
+    } else {
+        reviewNumber.value--
         jsonData.value.review.splice(taskIndex, 1)
         delete jsonData.value.review
         valuesReview.value.splice(taskIndex, 1)
     }
 }
 function addReview() {
-    reviewNumber.value ++
-    valuesReview.value[reviewNumber.value-1] = 
+    reviewNumber.value++
+    valuesReview.value[reviewNumber.value - 1] =
     {
         "@type": "Review",
         "name": "",
         "reviewBody": "",
-        "datePublished":"",
-        "reviewRating":{
+        "datePublished": "",
+        "reviewRating": {
             "@type": "Rating",
             "ratingValue": "",
             "bestRating": "",
             "worstRating": ""
         },
-        "author": {"@type": "Person", "name": ""},
+        "author": { "@type": "Person", "name": "" },
     }
-    valuesPublisher.value[reviewNumber.value-1] = { "@type": "Organization", "name": "" }
+    valuesPublisher.value[reviewNumber.value - 1] = { "@type": "Organization", "name": "" }
     let newJson = {}
-    if(!jsonData.value.review){
-        if(jsonData.value.aggregateRating){
+    if (!jsonData.value.review) {
+        if (jsonData.value.aggregateRating) {
             newJson = addElementToObject(jsonData.value, "review", "aggregateRating");
-        }else if(jsonData.value.recipeInstructions){
+        } else if (jsonData.value.recipeInstructions) {
             newJson = addElementToObject(jsonData.value, "review", "recipeInstructions");
-        }else{
+        } else {
             newJson = addElementToObject(jsonData.value, "review", "nutrition");
         }
         jsonData.value = newJson
         jsonData.value.review = valuesReview.value
-    }else{
-        jsonData.value.review[reviewNumber.value-1] = valuesReview.value[reviewNumber.value-1]
+    } else {
+        jsonData.value.review[reviewNumber.value - 1] = valuesReview.value[reviewNumber.value - 1]
     }
 }
 function changeReviewName(taskIndex) {
@@ -887,7 +926,7 @@ function changeReviewBody(taskIndex) {
 function changeReviewRating(taskIndex) {
     if (valuesReview.value[taskIndex].reviewRating.ratingValue) {
         readOnlyOk.value = true
-    }else{
+    } else {
         readOnlyOk.value = false
     }
     addAggregateRating()
@@ -896,13 +935,13 @@ function changeReviewRating(taskIndex) {
     let sumRatingNumber = 0
     for (let i = 0; i < valuesReview.value.length; i++) {
         sum += Number(valuesReview.value[i].reviewRating.ratingValue)
-        if(valuesReview.value[i].reviewRating.ratingValue){
-            sumRatingNumber ++
+        if (valuesReview.value[i].reviewRating.ratingValue) {
+            sumRatingNumber++
         }
     }
-    jsonData.value.aggregateRating.ratingValue = sum/sumRatingNumber
+    jsonData.value.aggregateRating.ratingValue = sum / sumRatingNumber
     jsonData.value.aggregateRating.ratingCount = sumRatingNumber
-    valuesAggregateRating.value.ratingValue = sum/sumRatingNumber
+    valuesAggregateRating.value.ratingValue = sum / sumRatingNumber
     valuesAggregateRating.value.ratingCount = sumRatingNumber
 }
 function changeReviewDatePublished(taskIndex) {
@@ -919,7 +958,7 @@ function changePublisherName(taskIndex) {
         jsonData.value.review[taskIndex].publisher = valuesPublisher.value[taskIndex]
     }
     jsonData.value.review[taskIndex].publisher.name = valuesPublisher.value[taskIndex].name
-    if(valuesPublisher.value[taskIndex].name == ""){
+    if (valuesPublisher.value[taskIndex].name == "") {
         delete jsonData.value.review[taskIndex].publisher
     }
 }
