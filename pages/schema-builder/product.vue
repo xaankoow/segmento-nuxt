@@ -179,7 +179,7 @@
                                 <template v-slot:option>
                                     <InputRadio v-for="(element, index) in Object.keys(conditionStuff)" :key="index"
                                         v-model="conditionStuff[element].is_checked" @click="changeItemCondition(element)"
-                                        :id="element" name="stuff">{{ conditionStuff[element].title }}</InputRadio>
+                                        :id="element+'Condition'" name="stuff">{{ conditionStuff[element].title }}</InputRadio>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
