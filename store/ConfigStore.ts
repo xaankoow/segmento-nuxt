@@ -115,7 +115,16 @@ export default class ConfigStore {
     return String(useCookie("token").value);
   }
 
+  public static set_current_site(current_site: any) {
+    useCookie("current_site").value = current_site;
+  }
+
+  public static current_site(): String {
+    return String(useCookie("current_site").value);
+  }
+
   public static logout() {
     this.set_token(null);
+    this.set_current_site(null);
   }
 }
