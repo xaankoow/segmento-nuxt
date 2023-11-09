@@ -9,11 +9,7 @@
               <div
                 class="rounded-full w-[84px] h-[84px] overflow-hidden flex items-center justify-center"
               >
-                <img
-                  :src="ConfigStore.user().img"
-                  alt="profile image"
-                  class="w-full h-full"
-                />
+                <img :src="user.img" alt="profile image" class="w-full h-full" />
               </div>
               <button
                 class="w-6 h-6 rounded-full bg-primary flex items-center justify-center border-2 border-white absolute bottom-2 right-2"
@@ -37,7 +33,7 @@
               style="font-size: 1.25rem"
             >
               <div class="h-[50%] w-full flex items-center justify-start">
-                {{ ConfigStore.user().name }}
+                {{ user.name }}
                 <span
                   class="w-[66px] h-[21px] bg-warning rounded-[30px] text-[10px] flex items-center justify-center mr-2"
                 >
@@ -47,7 +43,7 @@
                 </span>
               </div>
               <div class="h-[50%] w-full text-xs flex items-center justify-start">
-                {{ ConfigStore.user().email.value }}
+                {{ user.email.value }}
               </div>
             </div>
           </div>
@@ -98,7 +94,7 @@
                 class="w-full"
                 placeholder="نام و نام خانوادگی"
                 type="text"
-                :value="`${ConfigStore.user().name}`"
+                :value="`${user.name}`"
                 disabled
               />
             </div>
@@ -120,8 +116,8 @@
 import Auth from "/middlewares/Auth";
 import ConfigStore from "/store/ConfigStore";
 import Config from "/composables/Config";
-import { usePlanStore } from "~/store/plan";
 
+const user = useUserStore();
 const plan = usePlanStore();
 const config = new Config();
 

@@ -734,9 +734,9 @@
 <script setup>
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
-import { usePlanStore } from "~/store/plan";
 
 const plan = usePlanStore();
+const user = useUserStore();
 const isPopupVisible = ref(false);
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
@@ -754,7 +754,7 @@ const reload_store = () => {
   ConfigStore.reload()
     .then(() => {
       auth.value = {
-        name: ConfigStore.user().name,
+        name: user.name,
         wallet: ConfigStore.wallets()[0].balance ?? 0,
         subscription:
           cn.by_route(`constants/plans/${plan.plan.name}`) +
