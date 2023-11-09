@@ -3,7 +3,6 @@ import User from "~~/interfaces/User";
 export const useUserStore = defineStore({
   id: "user",
   state: () => ({
-    uuid: "",
     name: "",
     img: "",
     email: {
