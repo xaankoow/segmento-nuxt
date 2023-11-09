@@ -107,7 +107,7 @@
                             </DropdownFinalDropDown>
                         </div>
                         <div class="w-full h-10 text-start align-center border border-base-400 rounded-[3px] ">
-                            <DropdownFinalDropDown :disabled="offer.noOffer.is_checked && offer.noOffer.is_checked == 'none' ">
+                            <DropdownFinalDropDown :disabled="Boolean(offer.noOffer.is_checked)">
                                 <template v-slot:title>
                                     {{ currency[jsonData.offers?.priceCurrency]?.title ?? "واحد پول" }}
                                 </template>
