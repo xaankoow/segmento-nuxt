@@ -52,7 +52,7 @@
 
                 <div v-for="(value, index) in imageNumber" :key="index">
                     <div class="w-full flex items-center gap-2">
-                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @keyup="changeimage(index)"
+                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @input="changeimage(index)"
                             v-model="values.image[index]" />
                         <button @click="deleteOneImage(index)" v-if="imageNumber > 1"
                             class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">

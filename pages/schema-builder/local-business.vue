@@ -58,11 +58,11 @@
 				<!-- details -->
 				<div class="flex gap-2">
 					<div class="w-1/2">
-						<InputText class="w-full align-start" placeholder="نام" @keyup="changeName" v-model="values.name" />
+						<InputText class="w-full align-start" placeholder="نام" @input="changeName" v-model="values.name" />
 					</div>
 					<div class="w-1/2">
 						<InputURL class="w-full text-left placeholder:text-right" dir="ltr" placeholder="لینک تصویر"
-							@keyup="changeImage" v-model="values.image" />
+							@input="changeImage" v-model="values.image" />
 					</div>
 				</div>
 				<div class="w-full flex flex-col gap-2">
@@ -72,7 +72,7 @@
 					</div>
 					<div class="w-full">
 						<InputURL class="w-full text-left placeholder:text-right" dir="ltr" placeholder="آدرس وب‌سایت"
-							@keyup="changeUrl" v-model="values.url" />
+							@input="changeUrl" v-model="values.url" />
 					</div>
 				</div>
 				<div class="w-full flex gap-2">
@@ -185,8 +185,8 @@
 							<template v-slot:option>
 								<div class="gap-2 grid grid-cols-2">
 									<InputCheckbox v-for="(element, index) in Object.keys(socialAccount)" :key="index"
-										v-model="socialAccount[element].is_checked"
-										@change="updateSocialAccountValue()" :id="element">
+										v-model="socialAccount[element].is_checked" @change="updateSocialAccountValue()"
+										:id="element">
 										{{ socialAccount[element].title }}</InputCheckbox>
 								</div>
 							</template>
@@ -195,8 +195,7 @@
 					<div class="w-full grid gap-2 grid-cols-2">
 						<div class="w-full" v-for="(element, index) in socialAccount.filter((el) => el.is_checked == true)"
 							:key="index">
-							<InputText :placeholder="`لینک ${element.title}`"
-								@input="updateSocialAccountValue()"
+							<InputText :placeholder="`لینک ${element.title}`" @input="updateSocialAccountValue()"
 								v-model="socialAccountValue[element.name]" />
 						</div>
 					</div>
@@ -339,6 +338,7 @@
 <script setup>
 const current_job = ref("");
 const current_job_child = ref("");
+const days = ref([]);
 const values = ref({
 	"@context": "https://schema.org",
 	"@type": "LocalBusiness",
@@ -390,6 +390,7 @@ function deleteAll() {
 	current_job_child.value = "";
 	departmentJob.value = "";
 	departmentJobChild.value = "";
+	days.value = [];
 	values.value = {
 		"@context": "https://schema.org",
 		"@type": "LocalBusiness",
@@ -1331,7 +1332,6 @@ function changeLongitude() {
 }
 // for oppening hours
 const allHoursOppeningOk = ref(false);
-const days = ref([]);
 function change24Hours() {
 	allHoursOppeningOk.value = !allHoursOppeningOk.value;
 	if (allHoursOppeningOk.value) {

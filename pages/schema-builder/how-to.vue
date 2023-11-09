@@ -25,7 +25,7 @@
         <div class="w-full h-10">
           <InputText
             placeholder="نام"
-            @keyup="changeDescriptionName()"
+            @input="changeDescriptionName()"
             v-model="valuesDescription.name"
             class="h-10"
           />
@@ -33,7 +33,7 @@
         <div class="w-full h-fit align-start">
           <InputTextArea
             class="h-32"
-            @keyup="changeDescriptionDescription()"
+            @input="changeDescriptionDescription()"
             placeholder="توضیحات"
             v-model="valuesDescription.description"
           />
@@ -42,7 +42,7 @@
           <InputURL
             placeholder="آدرس تصویر"
             id="descriptionImageUrl"
-            @keyup="changeDescriptionImage()"
+            @input="changeDescriptionImage()"
             v-model="valuesDescription.image"
             class="text-left placeholder:text-right"
             dir="ltr"
@@ -105,7 +105,7 @@
           <InputText
             class="w-full"
             :placeholder="`موجودی ${index + 1}`"
-            @keyup="changeSupplyName(index)"
+            @input="changeSupplyName(index)"
             v-model="valuesSupply[index].name"
           />
           <button
@@ -144,7 +144,7 @@
           <InputText
             class="w-full"
             :placeholder="`ابزار ${index + 1}`"
-            @keyup="changeToolsName(index)"
+            @input="changeToolsName(index)"
             v-model="valuesTools[index].name"
           />
           <button
@@ -183,7 +183,7 @@
             <InputText
               class="w-full align-start"
               :placeholder="`قدم ${index + 1}`"
-              @keyup="changeStepText(index)"
+              @input="changeStepText(index)"
               v-model="valuesStep[index].text"
             />
             <button
@@ -197,7 +197,7 @@
           <div class="w-full">
             <InputURL
               placeholder="آدرس تصویر"
-              @keyup="changeStepImage(index)"
+              @input="changeStepImage(index)"
               v-model="valuesStep[index].image"
               class="text-left placeholder:text-right"
               dir="ltr"
@@ -207,7 +207,7 @@
             <div class="w-full">
               <InputURL
                 placeholder="آدرس"
-                @keyup="changeStepAddress(index)"
+                @input="changeStepAddress(index)"
                 v-model="valuesStep[index].address"
                 class="text-left placeholder:text-right"
                 dir="ltr"
@@ -216,7 +216,7 @@
             <div class="w-[35%]">
               <InputText
                 placeholder="نام"
-                @keyup="changeStepName(index)"
+                @input="changeStepName(index)"
                 v-model="valuesStep[index].name"
               />
             </div>

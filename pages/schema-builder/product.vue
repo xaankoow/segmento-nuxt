@@ -37,14 +37,14 @@
             <div class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <!-- Product start -->
                 <div class="w-full ">
-                    <InputText placeholder="نام محصول" @keyup="changeProductName()" v-model="valuesProduct.name" />
+                    <InputText placeholder="نام محصول" @input="changeProductName()" v-model="valuesProduct.name" />
                 </div>
                 <div class="w-full ">
-                    <InputURL placeholder="لینک تصویر" id="descriptionImageUrl" @keyup="changeProductImage()"
+                    <InputURL placeholder="لینک تصویر" id="descriptionImageUrl" @input="changeProductImage()"
                         v-model="valuesProduct.image" />
                 </div>
                 <div class="w-full align-start">
-                    <InputTextArea class="h-36" @keyup="changeProductDescription()" placeholder="توضیحات محصول"
+                    <InputTextArea class="h-36" @input="changeProductDescription()" placeholder="توضیحات محصول"
                         v-model="valuesProduct.description" />
                 </div>
                 <!-- Product end -->
@@ -52,7 +52,7 @@
                 <!-- brand start -->
                 <div class=" w-full flex gap-2">
                     <div class="w-1/2 ">
-                        <InputURL placeholder="برند محصول" @keyup="changeBrandName()" v-model="valuesBrand.name" />
+                        <InputURL placeholder="برند محصول" @input="changeBrandName()" v-model="valuesBrand.name" />
                     </div>
                     <!-- brand end -->
                     <!-- _______________________________________ -->
@@ -80,7 +80,7 @@
                     v-if="identifications.filter((el) => el.is_checked == true).length > 0">
                     <div class="w-full" v-for="(element, index) in identifications.filter((el) => el.is_checked == true)"
                         :key="index">
-                        <InputText dir="ltr" :placeholder=element.name @keyup="changeIdentificationValue(element.name)"
+                        <InputText dir="ltr" :placeholder=element.name @input="changeIdentificationValue(element.name)"
                             v-model="identificationValue[element.name]" />
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                     <div v-if="aggregateOffer" class="w-full flex gap-2">
                         <div class="w-1/2 ">
                             <InputURL class="text-left placeholder:text-right" dir="ltr" placeholder="لینک صفحه تخفیف"
-                                id="offerImageUrl" @keyup="changeAggregateOfferImage()"
+                                id="offerImageUrl" @input="changeAggregateOfferImage()"
                                 v-model="valuesAggregateOffer.url" />
                         </div>
                         <div class="w-1/2 h-10 flex items-center gap-2">
@@ -148,7 +148,7 @@
                     <div v-if="normalOffer" class="w-full flex gap-2">
                         <div class="w-1/2">
                             <InputURL class="text-left placeholder:text-right" dir="ltr" placeholder="لینک صفحه تخفیف"
-                                id="offerImageUrl" @keyup="changeNormalOfferImage()" v-model="valuesNormalOffer.url" />
+                                id="offerImageUrl" @input="changeNormalOfferImage()" v-model="valuesNormalOffer.url" />
                         </div>
                         <div class="w-1/2 h-10 flex items-center gap-2">
                             <span class="text-sm w-20">قیمت</span>
@@ -226,14 +226,14 @@
                     :key="index">
                     <div class="w-full flex items-center gap-2">
                         <InputText class="w-full align-start" placeholder="عنوان بررسی"
-                            @keyup="changeReviewName(index)" v-model="valuesReview[index].name" />
+                            @input="changeReviewName(index)" v-model="valuesReview[index].name" />
                         <button @click="deleteOneReview(index)"
                             class="w-[20px] h-[20px] flex items-center justify-center rounded-[3px]-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕
                         </button>
                     </div>
                     <div class="w-full h-full align-start">
-                        <InputTextArea class="h-36" @keyup="changeReviewBody(index)" placeholder="توضیحات محصول"
+                        <InputTextArea class="h-36" @input="changeReviewBody(index)" placeholder="توضیحات محصول"
                             v-model="valuesReview[index].reviewBody" />
                     </div>
                     <div class="w-full flex gap-2">
@@ -253,11 +253,11 @@
                     <div class="w-full flex gap-2">
                         <div class="w-1/2">
                             <InputText class="w-full align-start" placeholder=" نام نویسنده"
-                                @keyup="changeAuthorName(index)" v-model="valuesReview[index].author.name" />
+                                @input="changeAuthorName(index)" v-model="valuesReview[index].author.name" />
                         </div>
                         <div class="w-1/2">
                             <InputText class="w-full align-start" placeholder="ناشر"
-                            @keyup="changePublisherName(index)" v-model="valuesPublisher[index].name" />
+                            @input="changePublisherName(index)" v-model="valuesPublisher[index].name" />
                         </div>
                     </div>
                 </div>

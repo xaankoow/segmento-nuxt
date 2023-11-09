@@ -31,7 +31,7 @@
             <InputText
               class="w-full align-start"
               :placeholder="`پرسش #${index+1}`"
-              @keyup="changeQuestionName(index)"
+              @input="changeQuestionName(index)"
               v-model="values[index].question"
             />
             <div v-if="values.length > 1" class="w-fit h-fit ">
@@ -46,7 +46,7 @@
           <div class="w-full h-full align-start">
             <InputTextArea
               class="h-36 w-full"
-              @keyup="changeAnswer(index)"
+              @input="changeAnswer(index)"
               placeholder="پاسخ"
               v-model="values[index].answer"
             />
