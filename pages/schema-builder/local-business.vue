@@ -444,7 +444,10 @@ function deleteAll() {
 		Website: "",
 	};
 	departmentNumber.value = 0;
+	specificDepartmentJobsOk.value = [];
 	valuesDepartment.value = [];
+	departmentJob.value = [];
+	departmentJobChild.value = [];
 }
 
 // for jobs
