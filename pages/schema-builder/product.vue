@@ -521,7 +521,7 @@ const offer = ref({
     },
     noOffer: {
         is_checked: true,
-        value: "euro"
+        value: "noOffer"
     },
 });
 function changeOffer(el) {
