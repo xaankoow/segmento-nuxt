@@ -1,11 +1,10 @@
 <template>
-    <div class="rounded-full flex items-center justify-center bottom-2 relative">
+    <div class="rounded-full flex items-center justify-center bottom-2">
       <div class="text-center">
         <slot name="content"></slot>
       </div>
-      <div class="absolute">
-        <svg
-          xmlns="http://www.w3.org/2000/svg" version="1.1" class="absolute -right-[72px] -top-[69px] w-36 h-36 -rotate-90">
+      <div class="">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="-rotate-90 w-[140px] h-[140px]">
           <circle
             cx="75"
             cy="72"
