@@ -220,7 +220,7 @@
                   </template>
 
                   <ul class="text-sm px-3 pt-2">
-                    <li v-for="workspace in workspaces" :key="workspace.uuid">
+                    <li v-for="workspace in Sites.list" :key="workspace.uuid">
                       <SvgLabeled
                         :label="workspace.website"
                         label_direction="ltr"
@@ -735,6 +735,10 @@
 import Config from "../composables/Config";
 import ConfigStore from "../store/ConfigStore";
 
+const plan = usePlanStore();
+const user = useUserStore();
+const Sites = useSitesStore();
+const Wallets = useWalletsStore();
 const isPopupVisible = ref(false);
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
@@ -752,15 +756,13 @@ const reload_store = () => {
   ConfigStore.reload()
     .then(() => {
       auth.value = {
-        name: ConfigStore.user().name,
-        wallet: ConfigStore.wallets()[0].balance ?? 0,
+        name: user.name,
+        wallet: Wallets.list[0].balance ?? 0,
         subscription:
-          cn.by_route(`constants/plans/${ConfigStore.plan().plan.name}`) +
+          cn.by_route(`constants/plans/${plan.plan.name}`) +
           " " +
-          cn.by_route(`constants/packages/${ConfigStore.plan().plan.package}`),
+          cn.by_route(`constants/packages/${plan.plan.package}`),
       };
-
-      workspaces.value = ConfigStore.workspaces();
     })
     .catch((error) => {
       console.error("Error reloading store:", error);
@@ -775,7 +777,6 @@ const auth = ref({
 
 onBeforeMount(() => {
   active_section.value = route.path.split("/")[1].toLowerCase();
-  // console.log(active_section.value);
   active_accordion.value =
     cn.by_route(`pages/${route.path.split("/")[1].toLowerCase()}/accordion`) ?? "";
   reload_store();
