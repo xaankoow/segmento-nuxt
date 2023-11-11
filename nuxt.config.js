@@ -18,10 +18,13 @@ export default defineNuxtConfig({
     "@/assets/Fonts/YekanWebFonts/css/fontiran.css",
     "@/assets/css/main.css",
     "@mdi/font/css/materialdesignicons.min.css",
+    'vue-json-pretty/lib/styles.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
