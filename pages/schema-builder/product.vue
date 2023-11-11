@@ -384,6 +384,9 @@ function deleteAll() {
         gtin14: "",
         mpn: ""
     }
+    offer.value.aggregateOffer.is_checked = false
+    offer.value.offer.is_checked = false
+    offer.value.noOffer.is_checked = true
     aggregateOffer.value = false
     valuesAggregateOffer.value =
     {

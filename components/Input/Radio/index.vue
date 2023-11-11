@@ -20,7 +20,8 @@ defineEmits(["update:modelValue"]);
       :name="name"
       :id="id"
       :value="value ?? id"
-      @change="$emit('update:modelValue', $event.target.value)"
+      :checked="modelValue"
+      @change="$emit('update:modelValue', $event.target.checked)"
     />
     <label
       class="w-full h-full relative flex flex-row items-center cursor-pointer"
