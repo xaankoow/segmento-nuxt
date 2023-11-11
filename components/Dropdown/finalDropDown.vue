@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full inline-block relative group">
+  <div class="w-full h-10 inline-block relative group rounded-[3px] border border-base-400">
     <!-- header -->
     <div class="h-full w-full flex justify-between px-2 items-center">
       <span class="text-sm" :class="disabled ? 'text-gray-400' : ''">
