@@ -12,7 +12,7 @@
       <TabSeparator></TabSeparator>
       <TabItem to="./recipe" :active="false"> Recipe </TabItem>
       <TabSeparator></TabSeparator>
-      <TabItem to="./video" :active="false"> video </TabItem>
+      <TabItem to="./video" :active="false"> Video </TabItem>
       <TabSeparator></TabSeparator>
       <TabItem to="./website" :active="false"> Website </TabItem>
     </div>
@@ -22,7 +22,7 @@
       <!-- _______________________________________ -->
       <div class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
         <!-- description start -->
-        <div class="w-full h-10">
+        <div class="w-full">
           <InputText
             placeholder="نام"
             @input="changeDescriptionName()"
@@ -38,7 +38,7 @@
             v-model="valuesDescription.description"
           />
         </div>
-        <div class="w-full">
+        <div class="w-full h-10">
           <InputURL
             placeholder="آدرس تصویر"
             id="descriptionImageUrl"
@@ -49,7 +49,7 @@
           />
         </div>
         <div class="w-full flex gap-2">
-          <div class="w-[30%] h-[45px] flex items-center gap-2">
+          <div class="w-[30%] h-10 flex items-center gap-2">
             <span class="w-40 text-sm">مجموع زمان</span>
             <InputNumber
               id="totalTime"
@@ -62,7 +62,7 @@
           <!-- description end -->
           <!-- _______________________________________ -->
           <!-- Currency start -->
-          <div class="w-[30%] h-[45px] flex items-center gap-2">
+          <div class="w-[30%] h-10 flex items-center gap-2">
             <span class="w-56 text-sm">قیمت تخمینی</span>
             <InputNumber
               id="price"
@@ -73,7 +73,7 @@
             />
           </div>
           <div
-            class="w-2/5 h-[45px] text-start align-center border border-base-400 rounded z-index-[1100]"
+            class="w-2/5 h-10 text-start align-center"
           >
             <DropdownFinalDropDown class="z-index-[1100] h-10">
               <template v-slot:title>
@@ -112,7 +112,7 @@
           />
           <button
             @click="deleteOneSupply(index)"
-            class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]"
+            class="w-[20px] h-[20px] btn-danger-icon"
           >
             ✕
           </button>
@@ -151,7 +151,7 @@
           />
           <button
             @click="deleteOneTool(index)"
-            class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]"
+            class="w-[20px] h-[20px] btn-danger-icon"
           >
             ✕
           </button>
@@ -191,7 +191,7 @@
             <button
               v-if="valuesStep.length > 1"
               @click="deleteOneStep(index)"
-              class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]"
+              class="w-[20px] h-[20px] btn-danger-icon"
             >
               ✕
             </button>
@@ -313,7 +313,9 @@
           </form>
           <Copy
             class="btn-primary px-4"
-            :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`"
+            :content="`<script type='application/ld+json'>${JSON.stringify(
+              jsonData
+            )}</script>`"
           >
             <svg
               width="24"
@@ -397,12 +399,12 @@ function deleteAll() {
       totalTime: "",
     },
   ];
-  currency.value.IRR.is_checked = false
-  currency.value.USD.is_checked = false
-  currency.value.GBP.is_checked = false
-  currency.value.EUR.is_checked = false
-  currency.value.AED.is_checked = false
-  currency.value.IRR.is_checked = false
+  currency.value.IRR.is_checked = false;
+  currency.value.USD.is_checked = false;
+  currency.value.GBP.is_checked = false;
+  currency.value.EUR.is_checked = false;
+  currency.value.AED.is_checked = false;
+  currency.value.IRR.is_checked = false;
   valuesCurrency.value = {
     currency: "",
     value: "",

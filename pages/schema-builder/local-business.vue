@@ -14,7 +14,7 @@
 			<TabSeparator></TabSeparator>
 			<TabItem to="/schema-builder/recipe" :active="false"> Recipe </TabItem>
 			<TabSeparator></TabSeparator>
-			<TabItem to="/schema-builder/video" :active="false"> video </TabItem>
+			<TabItem to="/schema-builder/video" :active="false"> Video </TabItem>
 			<TabSeparator></TabSeparator>
 			<TabItem to="/schema-builder/website" :active="false"> Website </TabItem>
 		</div>
@@ -25,10 +25,10 @@
 			<div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
 				<!-- jobs -->
 				<div class="flex gap-2">
-					<div class="w-1/2 h-10 text-start align-center border border-base-400 rounded">
+					<div class="w-1/2 h-10 text-start align-center">
 						<DropdownFinalDropDown>
 							<template v-slot:title>
-								<span> {{ jobs[current_job]?.title ?? 'نوع کسب و کار شما' }} </span>
+								<span> {{ jobs[current_job]?.title ?? "نوع کسب و کار شما" }} </span>
 							</template>
 							<template v-slot:option>
 								<InputRadio v-for="(element, index) in Object.keys(jobs)" :key="index"
@@ -39,18 +39,23 @@
 							</template>
 						</DropdownFinalDropDown>
 					</div>
-					<div class="w-1/2 h-10 text-start align-center border border-base-400">
-						<DropdownFinalDropDown
-							:disabled="Object.keys(jobs[current_job]?.specificTypes ?? {})?.length > 0 ? false : true">
+					<div class="w-1/2 h-10 text-start align-center">
+						<DropdownFinalDropDown :disabled="Object.keys(jobs[current_job]?.specificTypes ?? {})?.length > 0
+							? false
+							: true
+							">
 							<template v-slot:title>
 								<span>
-									{{ jobs[current_job]?.specificTypes?.[current_job_child]?.title || 'نوع کسب و کار شما' }}
+									{{
+										jobs[current_job]?.specificTypes?.[current_job_child]?.title ||
+										"نوع کسب و کار شما"
+									}}
 								</span>
 							</template>
 							<template v-slot:option>
-								<InputRadio v-if="jobs[current_job]?.specificTypes"
-									v-for="(element, index) in Object.keys(jobs[current_job]?.specificTypes ?? {})"
-									:key="index" @click="changeJobs(element)" :id="`${current_job}_${element}`" name="jobs">
+								<InputRadio v-if="jobs[current_job]?.specificTypes" v-for="(element, index) in Object.keys(
+									jobs[current_job]?.specificTypes ?? {}
+								)" :key="index" @click="changeJobs(element)" :id="`${current_job}_${element}`" name="jobs">
 									{{ jobs[current_job]?.specificTypes[element]?.title }}
 								</InputRadio>
 							</template>
@@ -137,7 +142,7 @@
 						v-if="!allHoursOppeningOk && jsonData.openingHoursSpecification">
 						<div class="w-full flex gap-2 items-center"
 							v-for="(week, week_index) in jsonData.openingHoursSpecification" :key="week_index">
-							<div class="w-1/3 h-10 text-start align-center border border-base-400 rounded">
+							<div class="w-1/3 h-10 text-start align-center">
 								<DropdownFinalDropDown>
 									<template v-slot:title>
 										<span>روزهای کاری</span>
@@ -155,15 +160,16 @@
 								</DropdownFinalDropDown>
 							</div>
 							<div class="w-1/3 h-10 flex items-center">
-								<InputText id="openHour" placeholder="شروع ساعات اداری"
+								<InputText dir="ltr" class="placeholder:text-right text-left" id="openHour"
+									placeholder="شروع ساعات اداری"
 									v-model="jsonData.openingHoursSpecification[week_index].opens" />
 							</div>
 							<div class="w-1/3 h-10 flex items-center">
-								<InputText id="closeHour" placeholder="پایان (مثال:10:30)"
+								<InputText dir="ltr" class="placeholder:text-right text-left" id="closeHour"
+									placeholder="پایان (مثال:10:30)"
 									v-model="jsonData.openingHoursSpecification[week_index].closes" />
 							</div>
-							<button @click="deleteOneOpenHour(week_index)"
-								class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+							<button @click="deleteOneOpenHour(week_index)" class="w-[20px] h-[20px] btn-danger-icon">
 								✕
 							</button>
 						</div>
@@ -179,7 +185,7 @@
 				</div>
 				<!-- soial -->
 				<div class="w-full flex flex-col gap-2">
-					<div class="w-1/2 h-10 text-start align-center border border-base-400">
+					<div class="w-1/2 h-10 text-start align-center">
 						<DropdownFinalDropDown>
 							<template v-slot:title>
 								<span>اکانت در شبکه های اجتماعی</span>
@@ -195,9 +201,11 @@
 						</DropdownFinalDropDown>
 					</div>
 					<div class="w-full grid gap-2 grid-cols-2">
-						<div class="w-full" v-for="(element, index) in socialAccount.filter((el) => el.is_checked == true)"
-							:key="index">
-							<InputText :placeholder="`لینک ${element.title}`" @input="updateSocialAccountValue()"
+						<div class="w-full" v-for="(element, index) in socialAccount.filter(
+							(el) => el.is_checked == true
+						)" :key="index">
+							<InputText dir="ltr" class="placeholder:text-right text-left"
+								:placeholder="`لینک ${element.title}`" @input="updateSocialAccountValue()"
 								v-model="socialAccountValue[element.name]" />
 						</div>
 					</div>
@@ -210,8 +218,12 @@
 						<div class="w-1/2 h-10 text-start align-center border border-base-400">
 							<DropdownFinalDropDown class="h-[200px]">
 								<template v-slot:title>
-									<span> {{ departmentJobs[departmentJob[department_index]]?.title ?? 'نوع کسب و کار شما'
-									}} </span>
+									<span>
+										{{
+											departmentJobs[departmentJob[department_index]]?.title ??
+											"نوع کسب و کار شما"
+										}}
+									</span>
 								</template>
 								<template v-slot:option>
 									<div class="gap-2">
@@ -226,30 +238,40 @@
 							</DropdownFinalDropDown>
 						</div>
 						<div class="w-1/2 h-10 text-start align-center border border-base-400">
-							<DropdownFinalDropDown
-								:disabled="Object.keys(departmentJobs[departmentJob[department_index]]?.specificTypes ?? {})?.length > 0 ? false : true">
+							<DropdownFinalDropDown :disabled="Object.keys(
+								departmentJobs[departmentJob[department_index]]?.specificTypes ?? {}
+							)?.length > 0
+								? false
+								: true
+								">
 								<template v-slot:title>
 									<span>
 										{{
-											departmentJobs[departmentJob[department_index]]?.specificTypes?.[departmentJobChild[department_index]]?.title
-											|| 'نوع کسب و کار شما' }}
+											departmentJobs[departmentJob[department_index]]?.specificTypes?.[
+												departmentJobChild[department_index]
+											]?.title || "نوع کسب و کار شما"
+										}}
 									</span>
 								</template>
 								<template v-slot:option>
 									<div class="gap-2 py-1">
-										<InputRadio v-if="departmentJobs[departmentJob[department_index]]?.specificTypes"
-											v-for="(jobchild, indexjobchild) in Object.keys(departmentJobs[departmentJob[department_index]].specificTypes ?? {})"
-											:key="indexjobchild" @click="changeDepartmentJobs(department_index, jobchild)"
+										<InputRadio v-if="departmentJobs[departmentJob[department_index]]?.specificTypes
+												" v-for="(jobchild, indexjobchild) in Object.keys(
+					departmentJobs[departmentJob[department_index]].specificTypes ??
+					{}
+				)" :key="indexjobchild" @click="changeDepartmentJobs(department_index, jobchild)"
 											:id="`dep_jobchild_${department_index}_${jobchild}`" name="departmentJobs">
-											{{ departmentJobs[departmentJob[department_index]].specificTypes[jobchild].title
+											{{
+												departmentJobs[departmentJob[department_index]].specificTypes[
+													jobchild
+												].title
 											}}
 										</InputRadio>
 									</div>
 								</template>
 							</DropdownFinalDropDown>
 						</div>
-						<button @click="deleteOneDepartment(department_index)"
-							class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+						<button @click="deleteOneDepartment(department_index)" class="w-[20px] h-[20px] btn-danger-icon">
 							✕
 						</button>
 					</div>
@@ -312,8 +334,9 @@
 							jsonData
 						)}</script>`" name="code_snippet" class="hidden"></textarea>
 					</form>
-					<Copy class="btn-primary px-4"
-						:content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
+					<Copy class="btn-primary px-4" :content="`<script type='application/ld+json'>${JSON.stringify(
+						jsonData
+					)}</script>`">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<mask id="mask0_164_21" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
 								width="24" height="24">
@@ -393,7 +416,7 @@ function deleteAll() {
 	departmentJob.value = "";
 	departmentJobChild.value = "";
 	for (let job in jobs.value) {
-		jobs.value[job].is_checked = false
+		jobs.value[job].is_checked = false;
 	}
 	days.value = [];
 	values.value = {
@@ -1246,7 +1269,7 @@ const jobs = ref({
 function changeJobs(el, is_parent = false) {
 	jsonData.value["@type"] = el;
 	if (is_parent) {
-		current_job.value = el
+		current_job.value = el;
 		current_job_child.value = "";
 	} else {
 		current_job_child.value = el;
@@ -1344,17 +1367,17 @@ function change24Hours() {
 	if (allHoursOppeningOk.value) {
 		jsonData.value.openingHoursSpecification = {
 			"@type": "OpeningHoursSpecification",
-			"dayOfWeek": [
+			dayOfWeek: [
 				"Monday",
 				"Tuesday",
 				"Wednesday",
 				"Thursday",
 				"Friday",
 				"Saturday",
-				"Sunday"
+				"Sunday",
 			],
-			"opens": "00:00",
-			"closes": "23:59"
+			opens: "00:00",
+			closes: "23:59",
 		};
 	} else {
 		delete jsonData.value.openingHoursSpecification;
@@ -1418,12 +1441,14 @@ function addOpenHours() {
 			);
 		}
 		jsonData.value = newJson;
-		jsonData.value.openingHoursSpecification = [{
-			"@type": "OpeningHoursSpecification",
-			dayOfWeek: [],
-			opens: "",
-			closes: "",
-		}];
+		jsonData.value.openingHoursSpecification = [
+			{
+				"@type": "OpeningHoursSpecification",
+				dayOfWeek: [],
+				opens: "",
+				closes: "",
+			},
+		];
 	} else {
 		jsonData.value.openingHoursSpecification.push({
 			"@type": "OpeningHoursSpecification",
@@ -1444,13 +1469,12 @@ function deleteOneOpenHour(index) {
 
 const changeDays = (week) => {
 	jsonData.value.openingHoursSpecification[week].dayOfWeek = [];
-	days.value[week].forEach(element => {
+	days.value[week].forEach((element) => {
 		if (element.is_checked) {
 			jsonData.value.openingHoursSpecification[week].dayOfWeek.push(element.name);
 		}
 	});
-
-}
+};
 
 // soial
 const socialAccount = ref([
@@ -1529,10 +1553,12 @@ const socialAccountValue = ref({
 });
 
 function updateSocialAccountValue() {
-	if (socialAccount.value.filter((account => account.is_checked)).length === 0) {
-		delete jsonData.value.sameAs
+	if (socialAccount.value.filter((account) => account.is_checked).length === 0) {
+		delete jsonData.value.sameAs;
 	} else {
-		jsonData.value.sameAs = socialAccount.value.filter((account => account.is_checked)).map(account => socialAccountValue.value[account.name]);
+		jsonData.value.sameAs = socialAccount.value
+			.filter((account) => account.is_checked)
+			.map((account) => socialAccountValue.value[account.name]);
 	}
 }
 // for department
@@ -1552,8 +1578,8 @@ const specificDepartmentJobs = [
 	"SportsActivityLocation",
 	"store",
 ];
-const departmentJob = ref([])
-const departmentJobChild = ref([])
+const departmentJob = ref([]);
+const departmentJobChild = ref([]);
 const departmentJobs = ref({
 	AnimalShelter: {
 		is_checked: false,
@@ -2330,8 +2356,8 @@ const departmentJobs = ref({
 const valuesDepartment = ref([]);
 
 function addDepartment() {
-	departmentJob.value.push("")
-	departmentJobChild.value.push("")
+	departmentJob.value.push("");
+	departmentJobChild.value.push("");
 	departmentNumber.value++;
 	specificDepartmentJobsOk.value[departmentNumber.value - 1] = false;
 	valuesDepartment.value[departmentNumber.value - 1] = {
@@ -2375,7 +2401,7 @@ function addDepartment() {
 function changeDepartmentJobs(index, el, is_parent = false) {
 	jsonData.value.department[index]["@type"] = el;
 	if (is_parent) {
-		departmentJob.value[index] = el
+		departmentJob.value[index] = el;
 		departmentJobChild.value[index] = "";
 	} else {
 		departmentJobChild.value[index] = el;

@@ -2,33 +2,21 @@
     <div class="w-full h-full">
         <!-- Tabs -->
         <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
-            <TabItem to="/schema-builder/faq" :active="false">
-                FAQ page
-            </TabItem>
+            <TabItem to="/schema-builder/faq" :active="false"> FAQ page </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/how-to" :active="false">
-                How to
-            </TabItem>
+            <TabItem to="/schema-builder/how-to" :active="false"> How to </TabItem>
             <TabSeparator></TabSeparator>
             <TabItem to="/schema-builder/local-business" :active="false">
                 Local Business
             </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/product" :active="false">
-                Product
-            </TabItem>
+            <TabItem to="/schema-builder/product" :active="false"> Product </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/recipe" :active="false">
-                Recipe
-            </TabItem>
+            <TabItem to="/schema-builder/recipe" :active="false"> Recipe </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/video" :active="false">
-                video
-            </TabItem>
+            <TabItem to="/schema-builder/video" :active="false"> Video </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/website" :active="true">
-                Website
-            </TabItem>
+            <TabItem to="/schema-builder/website" :active="true"> Website </TabItem>
         </div>
         <div class="flex justify-start items-start gap-2 w-full h-[93%] p-2">
             <!-- _______________________________________ -->
@@ -36,21 +24,22 @@
             <!-- _______________________________________ -->
             <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <div class="w-full">
-                    <InputText class="w-full align-start" placeholder="نام وب‌سایت" @input="changeWebSiteName()"
-                        v-model="values.name" />
+                    <InputText class="w-full placeholder:text-right text-left" placeholder="نام وب‌سایت"
+                        @input="changeWebSiteName()" v-model="values.name" />
                 </div>
                 <div class="w-full">
-                    <InputURL class="w-full align-start" placeholder="آدرس وب‌سایت" @input="changeWebSiteURL()"
-                        v-model="values.url" />
+                    <InputURL class="w-full placeholder:text-right text-left" placeholder="آدرس وب‌سایت"
+                        @input="changeWebSiteURL()" v-model="values.url" />
                 </div>
                 <div class="w-full">
-                    <InputURL class="w-full align-start" placeholder="آدرس صفحه جستجو داخل سایت"
+                    <InputURL class="w-full placeholder:text-right text-left" placeholder="آدرس صفحه جستجو داخل سایت"
                         @input="changeInternalURL()" v-model="values.target" />
                 </div>
                 <div class="w-full">
-                    <InputURL class="w-full align-start"
+                    <InputURL :dir="values.targetQuery === '' || !Boolean(values.targetQuery) ? 'rtl' : 'ltr'"
+                        class="w-full placeholder:text-right text-left"
                         placeholder="عبارت اضافی برای افزودن به آدرس جست‌وجو (مشابه utm - اختیاری)"
-                        @input="changeInternalURLString()" v-model="values.targetQuery" />
+                        @input="changeInternalURLString()" v-model="values.targetQuery" />  
                 </div>
             </div>
             <!-- _______________________________________ -->
@@ -60,7 +49,7 @@
                 <div class="flex gap-2 w-full">
                     <button @click="deleteQuestions" class="btn-primary px-4">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
+                            <mask id="mask0_162_227" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                                 width="24" height="24">
                                 <rect width="24" height="24" fill="#D9D9D9" />
                             </mask>
@@ -88,8 +77,9 @@
                             jsonData
                         )}</script>`" name="code_snippet" class="hidden"></textarea>
                     </form>
-                    <Copy class="btn-primary px-4"
-                        :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
+                    <Copy class="btn-primary px-4" :content="`<script type='application/ld+json'>${JSON.stringify(
+                        jsonData
+                    )}</script>`">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_164_21" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                                 width="24" height="24">
@@ -114,83 +104,83 @@
         </div>
     </div>
 </template>
-    
+
 <script setup>
-import { ref, onMounted } from "vue"
+import { ref, onMounted } from "vue";
 import Config from "~~/composables/Config";
 
 const config = new Config();
 const values = ref([
     {
-        "name": "",
-        "url": "",
-        "target": "{search_term_string}",
-        "targetQuery": ""
-    }
+        name: "",
+        url: "",
+        target: "{search_term_string}",
+        targetQuery: "",
+    },
 ]);
-const jsonData = ref(
-    {
-        "@context": "https://schema.org/",
-        "@type": "WebSite",
-        "name": "",
-        "url": "",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "{search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-);
+const jsonData = ref({
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    name: "",
+    url: "",
+    potentialAction: {
+        "@type": "SearchAction",
+        target: "{search_term_string}",
+        "query-input": "required name=search_term_string",
+    },
+});
 // for copy button //
-const dataForCopy = ref("")
+const dataForCopy = ref("");
 onMounted(() => {
-    dataForCopy.value = document.getElementById("code").textContent
-})
+    dataForCopy.value = document.getElementById("code").textContent;
+});
 // for delete button //
 function deleteQuestions() {
     values.value = [
         {
-            "name": "",
-            "url": "",
-            "target": "{search_term_string}",
-            "targetQuery": ""
-        }
+            name: "",
+            url: "",
+            target: "{search_term_string}",
+            targetQuery: "",
+        },
     ];
-    jsonData.value =
-    {
+    jsonData.value = {
         "@context": "https://schema.org/",
         "@type": "WebSite",
-        "name": "",
-        "url": "",
-        "potentialAction": {
+        name: "",
+        url: "",
+        potentialAction: {
             "@type": "SearchAction",
-            "target": "{search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
+            target: "{search_term_string}",
+            "query-input": "required name=search_term_string",
+        },
+    };
 }
 // for Web site name //
 function changeWebSiteName() {
-    jsonData.value.name = values.value.name
+    jsonData.value.name = values.value.name;
 }
 // for Web site url
 function changeWebSiteURL() {
-    jsonData.value.url = values.value.url
+    jsonData.value.url = values.value.url;
 }
 // for Web site internal url
 function changeInternalURL() {
     if (values.value.targetQuery) {
-        jsonData.value.potentialAction.target = values.value.target + "{search_term_string}" + values.value.targetQuery
+        jsonData.value.potentialAction.target =
+            values.value.target + "{search_term_string}" + values.value.targetQuery;
     } else {
-        jsonData.value.potentialAction.target = values.value.target + "{search_term_string}"
+        jsonData.value.potentialAction.target = values.value.target + "{search_term_string}";
     }
 }
 // for Web site url Query
 function changeInternalURLString() {
     if (values.value.target) {
-        jsonData.value.potentialAction.target = values.value.target + "{search_term_string}" + values.value.targetQuery
+        jsonData.value.potentialAction.target =
+            values.value.target + "{search_term_string}" + values.value.targetQuery;
     } else {
-        jsonData.value.potentialAction.target = "{search_term_string}" + values.value.targetQuery
+        jsonData.value.potentialAction.target =
+            "{search_term_string}" + values.value.targetQuery;
     }
 }
 </script>

@@ -14,7 +14,7 @@
       <TabSeparator></TabSeparator>
       <TabItem to="/schema-builder/recipe" :active="false"> Recipe </TabItem>
       <TabSeparator></TabSeparator>
-      <TabItem to="/schema-builder/video" :active="false"> video </TabItem>
+      <TabItem to="/schema-builder/video" :active="false"> Video </TabItem>
       <TabSeparator></TabSeparator>
       <TabItem to="/schema-builder/website" :active="false"> Website </TabItem>
     </div>
@@ -28,16 +28,18 @@
       >
         <div class="flex flex-col gap-2" v-for="(value, index) in values" :key="value">
           <div class="w-full flex items-center gap-2">
-            <InputText
-              class="w-full align-start"
-              :placeholder="`پرسش #${index+1}`"
-              @input="changeQuestionName(index)"
-              v-model="values[index].question"
-            />
-            <div v-if="values.length > 1" class="w-fit h-fit ">
+            <div class="w-full flex items-center">
+              <InputText
+                class="w-full"
+                :placeholder="`پرسش #${index + 1}`"
+                @input="changeQuestionName(index)"
+                v-model="values[index].question"
+              />
+            </div>
+            <div v-if="values.length > 1" class="w-fit h-fit">
               <button
                 @click="deleteOneQuestion(index)"
-                class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]"
+                class="w-[20px] h-[20px] btn-danger-icon"
               >
                 ✕
               </button>
@@ -131,9 +133,20 @@
               آزمایش
             </button>
 
-            <textarea :value="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`" name="code_snippet" class="hidden"></textarea>
+            <textarea
+              :value="`<script type='application/ld+json'>${JSON.stringify(
+                jsonData
+              )}</script>`"
+              name="code_snippet"
+              class="hidden"
+            ></textarea>
           </form>
-          <Copy class="btn-primary px-4" :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
+          <Copy
+            class="btn-primary px-4"
+            :content="`<script type='application/ld+json'>${JSON.stringify(
+              jsonData
+            )}</script>`"
+          >
             <svg
               width="24"
               height="24"
@@ -235,6 +248,10 @@ function deleteOneQuestion(taskIndex) {
     jsonData.value.mainEntity.splice(taskIndex, 1);
     values.value.splice(taskIndex, 1);
   }
+
+  if (questionNumber.value === 1) {
+    jsonData.value.mainEntity = jsonData.value.mainEntity[0];
+  }
 }
 // for inputs //
 function changeQuestionName(taskIndex) {
@@ -246,18 +263,34 @@ function changeAnswer(taskIndex) {
 }
 // for add button //
 function addQuestion() {
-  questionNumber.value++;
-  (jsonData.value.mainEntity[questionNumber.value - 1] = {
-    "@type": "Question",
-    name: "",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "",
-    },
-  }),
-    (values.value[questionNumber.value - 1] = {
-      question: "",
-      answer: "",
-    });
+  if (questionNumber.value > 1) {
+    questionNumber.value++;
+    (jsonData.value.mainEntity[questionNumber.value - 1] = {
+      "@type": "Question",
+      name: "",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "",
+      },
+    }),
+      (values.value[questionNumber.value - 1] = {
+        question: "",
+        answer: "",
+      });
+  } else {
+    questionNumber.value++;
+    (jsonData.value.mainEntity[questionNumber.value - 1] = {
+      "@type": "Question",
+      name: "",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "",
+      },
+    }),
+      (values.value[questionNumber.value - 1] = {
+        question: "",
+        answer: "",
+      });
+  }
 }
 </script>
