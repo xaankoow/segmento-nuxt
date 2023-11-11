@@ -1,31 +1,25 @@
 <template>
-    <div class="rounded-full flex items-center justify-center bottom-2">
-      <div class="text-center">
-        <slot name="content"></slot>
+    <div class="rounded-full flex items-center justify-center bottom-2 relative">
+      <div class="text-center z-20 absolute">
+        <slot></slot>
       </div>
-      <div class="">
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="-rotate-90 w-[140px] h-[140px]">
+      <div class="flex items-center justify-center bg-red-400">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" :width=size :height=size class="-rotate-90">
           <circle
-            cx="75"
-            cy="72"
-            :stroke-width="strokeBgWidth"
+            :cx=(size/2)
+            :cy=(size/2)
             :stroke="strokeBgColor"
-            :r="size/2"
-            :fill="bg"
+            :stroke-width="strokeBgWidth"
+            :r="(size/2)-5"
             stroke-linecap="round"
-            class="circleChart fill-none"
-            :style="{ ...bgcircleStyle }"
           />
           <circle
-            cx="75"
-            cy="72"
-            :stroke-width="strokeWidth"
+            :cx=(size/2)
+            :cy=(size/2)
             :stroke="strokeColor"
-            :r="size/2"
-            :fill="bg"
+            :stroke-width="strokeBgZWidth"
+            :r="(size/2)-5"
             stroke-linecap="round"
-            class="circleChart fill-none"
-            :style="{ ...circleStyle }"
           />
         </svg>
       </div>
@@ -50,33 +44,25 @@ const props = defineProps({
     },
     bg: {
       type: String,
-      default: "bg-base-200",
+      default: "gray"
     },
     strokeWidth: {
       type: String,
-      default: "4px",
+      default: "40px"
     },
     strokeBgWidth: {
       type: String,
-      default: "4px",
+      default: "40px"
     },
     strokeBgColor: {
       type: String,
-      default: "#D7D7D7",
+      default: "#D7D7D7"
     },
 });
   
 const circleStyle = computed(() => {
     const circumference = 2 * Math.PI * props.size/2;
     const offset = (circumference * (100 - props.remain)) / 100;
-    return {
-      strokeDasharray: circumference,
-      strokeDashoffset: offset,
-    };
-});
-const bgcircleStyle = computed(() => {
-    const circumference = 2 * Math.PI * props.size/2;
-    const offset = -(circumference * (props.remain)) / 100;
     return {
       strokeDasharray: circumference,
       strokeDashoffset: offset,
