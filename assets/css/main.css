@@ -37,8 +37,12 @@
   .btn-danger {
     @apply flex flex-row cursor-pointer gap-2 w-fit h-fit justify-around items-center rounded-[9px] py-2 px-3 transition-all duration-200 bg-[#F3524226]  text-danger [&>svg]:fill-danger hover:text-white hover:bg-danger active:text-white active:bg-danger disabled:text-white disabled:bg-secondary-disabled disabled:cursor-default;
   }
+  
+  .btn-danger-icon {
+    @apply flex flex-row items-center justify-center font-bold text-sm text-center leading-[normal] rounded-[3px] transition-all duration-200 bg-[#F3524226]  text-danger [&>svg]:fill-danger hover:text-white hover:bg-danger active:text-white active:bg-danger disabled:text-white disabled:bg-secondary-disabled disabled:cursor-default;
+  }
 
-  .btn-secondary:hover svg, .btn-secondary:active svg, .btn-secondary:disabled svg, .btn-primary:disabled svg  {
+  .btn-secondary:hover svg, .btn-secondary:active svg, .btn-secondary:disabled svg, .btn-primary:disabled svg, .btn-danger-icon:disabled svg, .btn-danger-icon:hover svg  {
     @apply fill-white;
   }
 
