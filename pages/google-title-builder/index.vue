@@ -13,7 +13,7 @@
       <TabItem to="/google-title-builder" :active="true">
         {{ config.by_route(`${current_page}/search/title`) }}
       </TabItem>
-      <!-- <TabSeparator></TabSeparator>
+      <!-- <TabSeparator />
       <TabItem :active="false">
         {{ config.by_route(`${current_page}/my-lists`) }}
       </TabItem> -->
@@ -203,7 +203,6 @@ const config = new Config();
 const search_class = new CustomTextBox();
 const data = ref(null);
 const cache = ref(null);
-const old_alphabet_id = ref(null);
 const request = new Request("v1");
 const form = ref({
   keyword: "",
