@@ -39,7 +39,7 @@
 							</template>
 						</DropdownFinalDropDown>
 					</div>
-					<div class="w-1/2 h-10 text-start align-center border border-base-400	">
+					<div class="w-1/2 h-10 text-start align-center border border-base-400">
 						<DropdownFinalDropDown
 							:disabled="Object.keys(jobs[current_job]?.specificTypes ?? {})?.length > 0 ? false : true">
 							<template v-slot:title>
