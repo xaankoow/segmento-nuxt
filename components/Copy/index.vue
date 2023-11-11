@@ -1,5 +1,5 @@
 <template>
-  <span @click="copy(content)" class="cursor-pointer flex">
+  <span class="cursor-pointer" @click="copy(content)">
     <slot>
       <svg
         :width="width"
