@@ -52,6 +52,7 @@
                                     "g-ads-preview": "پیش‌نمایش گوگل‌ادز",
                                     "serp-preview": "پیش‌نمایش سرپ",
                                     "disavow-builder": "ساخت Disavow",
+                                    "robot-file-generator": "اپلیکیشن فایل‌ساز robots",
                                     "schema-builder": "سازنده اسکیما"
                                 }
                             }
@@ -354,6 +355,10 @@
             },
             "serp-preview": {
                 "title": "اپلیکیشن پیش‌نمایش سرپ",
+                "accordion": "technical-seo"
+            },
+            "robot-file-generator": {
+                "title": "اپلیکیشن فایل‌ساز robots",
                 "accordion": "technical-seo"
             },
             "g-ads-preview": {
