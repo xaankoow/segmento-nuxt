@@ -43,7 +43,9 @@
 						<DropdownFinalDropDown
 							:disabled="Object.keys(jobs[current_job]?.specificTypes ?? {})?.length > 0 ? false : true">
 							<template v-slot:title>
-								<span>{{ jobs[current_job]?.[current_job_child]?.title || 'نوع کسب و کار شما' }} </span>
+								<span>
+									{{ jobs[current_job]?.specificTypes?.[current_job_child]?.title || 'نوع کسب و کار شما' }}
+								</span>
 							</template>
 							<template v-slot:option>
 								<InputRadio v-if="jobs[current_job]?.specificTypes"
@@ -391,8 +393,8 @@ function deleteAll() {
 	departmentJob.value = "";
 	departmentJobChild.value = "";
 	for (let job in jobs.value) {
-        jobs.value[job].is_checked = false  
-    }
+		jobs.value[job].is_checked = false
+	}
 	days.value = [];
 	values.value = {
 		"@context": "https://schema.org",
