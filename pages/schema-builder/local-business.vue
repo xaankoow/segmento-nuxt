@@ -390,6 +390,9 @@ function deleteAll() {
 	current_job_child.value = "";
 	departmentJob.value = "";
 	departmentJobChild.value = "";
+	for (let job in jobs.value) {
+        jobs.value[job].is_checked = false  
+    }
 	days.value = [];
 	values.value = {
 		"@context": "https://schema.org",
@@ -449,7 +452,6 @@ function deleteAll() {
 	departmentJob.value = [];
 	departmentJobChild.value = [];
 }
-
 // for jobs
 const specificJobsOk = ref(false);
 const specificJobs = [

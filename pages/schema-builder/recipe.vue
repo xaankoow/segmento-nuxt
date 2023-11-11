@@ -369,7 +369,6 @@ const valuesVideo = ref(
         "name": "",
         "description": "",
         "thumbnailUrl": "",
-        "uploadDate": "",
         "contentUrl": "",
         "embedUrl": ""
     }
@@ -386,7 +385,6 @@ const jsonData = ref(
             "@type": "Person",
             "name": ""
         },
-        "datePublished": "",
         "prepTime": "",
         "cookTime": "",
         "totalTime": "",
@@ -425,7 +423,6 @@ function deleteAll() {
             "@type": "Person",
             "name": ""
         },
-        "datePublished": "",
         "prepTime": "",
         "cookTime": "",
         "totalTime": "",
@@ -593,8 +590,20 @@ function changeAuthorName() {
     jsonData.value.author.name = values.value.author.name
 }
 function changeDatePublished() {
-    jsonData.value.datePublished = values.value.datePublished
-    valuesVideo.value.uploadDate = values.value.datePublished
+    if(jsonData.value.datePublished){
+        jsonData.value.datePublished = values.value.datePublished
+        valuesVideo.value.uploadDate = values.value.datePublished
+    }else{
+        let newJson = {}
+        newJson = addElementToObject(jsonData.value, "datePublished", "author");
+        jsonData.value = newJson
+        newJson = addElementToObject(valuesVideo.value, "uploadDate", "thumbnailUrl");
+        jsonData.value.datePublished = values.value.datePublished
+        valuesVideo.value.uploadDate = values.value.datePublished
+    }
+    if(values.value.datePublished == ""){
+        delete jsonData.value.datePublished
+    }
 }
 // time spending
 function changePrepTime() {

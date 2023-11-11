@@ -182,7 +182,6 @@ const jsonData = ref(
         "description": "",
         "thumbnailUrl": "",
         "uploadDate": "",
-        "duration": ""
     });
 function addElementToObject(object, newProperty, beforNewProperty) {
     let newObject = {};
@@ -247,13 +246,24 @@ function changeUploadDate() {
     jsonData.value.uploadDate = valuesVideo.value.uploadDate
 }
 function changeVideoMin() {
+    if(!jsonData.value.duration){
+        let newJson = {}
+        newJson = addElementToObject(jsonData.value, "duration", "uploadDate");
+        jsonData.value = newJson
+    }
     if (videoDuration.value.sec) {
         jsonData.value.duration = "PT" + videoDuration.value.min + "M" + videoDuration.value.sec + "S"
     } else {
         jsonData.value.duration = "PT" + videoDuration.value.min + "M" + 0 + "S"
     }
+    
 }
 function changeVideoSec() {
+    if(!jsonData.value.duration){
+        let newJson = {}
+        newJson = addElementToObject(jsonData.value, "duration", "uploadDate");
+        jsonData.value = newJson
+    }
     if (videoDuration.value.min) {
         jsonData.value.duration = "PT" + videoDuration.value.min + "M" + videoDuration.value.sec + "S"
     } else {

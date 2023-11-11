@@ -188,7 +188,7 @@
                         <div class="w-full h-10 flex items-center gap-2">
                             <span class="text-sm w-48">تاریخ تخفیف</span>
                             <InputDate class="w-full" @change="changeNormalOfferDate" id="priceValid"
-                                v-model="valuesNormalOffer.priceValidUntil"></InputDate>
+                                v-model="priceValidUntilValue"></InputDate>
                         </div>
                     </div>
                 </div>
@@ -396,15 +396,19 @@ function deleteAll() {
         "lowPrice": "",
     }
     normalOffer.value = false
+    priceValidUntilValue.value = ""
     valuesNormalOffer.value =
     {
         "@type": "Offer",
         "url": "",
         "priceCurrency": "",
         "price": "",
-        "priceValidUntil": "",
-        "availability": "",
-        "itemCondition": ""
+    }
+    for (let stuff in avalibleStuff.value) {
+        avalibleStuff.value[stuff].is_checked = false  
+    }
+    for (let condition in conditionStuff.value) {
+        conditionStuff.value[condition].is_checked = false  
     }
     aggregateAllow.value = false
     valuesAggregateRating.value =
@@ -419,8 +423,7 @@ function deleteAll() {
     reviewNumber.value = 0
     valuesReview.value = [
     ];
-    valuesPublisher.value =
-        { "@type": "Organization", "name": "" }
+    valuesPublisher.value = { "@type": "Organization", "name": "" }
 }
 // for product //
 const valuesProduct = ref(
@@ -640,15 +643,13 @@ function changeAggregateOfferHighPrice() {
 }
 // // normal
 const normalOffer = ref(false)
+const priceValidUntilValue = ref("")
 const valuesNormalOffer = ref(
     {
         "@type": "Offer",
         "url": "",
         "priceCurrency": "",
         "price": "",
-        "priceValidUntil": "",
-        "availability": "",
-        "itemCondition": ""
     }
 )
 const avalibleStuff = ref({
@@ -731,32 +732,62 @@ const conditionStuff = ref({
     },
 })
 function changeAvailability(el) {
-    if (!jsonData.value.offers.availability) {
+    if (valuesNormalOffer.value.availability) {
+        valuesNormalOffer.value.availability = `https://schema.org/${el}`
+        jsonData.value.offers.availability = `https://schema.org/${el}`
+    }else{
         let newJson = {}
-        newJson = addElementToObject(jsonData.value, "availability", "priceValidUntil");
-        jsonData.value - newJson
+        if(valuesNormalOffer.value.priceValidUntil){
+            newJson = addElementToObject(valuesNormalOffer.value, "availability", "priceValidUntil");
+            valuesNormalOffer.value = newJson
+            newJson = addElementToObject(jsonData.value.offers, "availability", "priceValidUntil");
+            jsonData.value.offers = newJson
+        }else{
+            newJson = addElementToObject(valuesNormalOffer.value, "availability", "price");
+            valuesNormalOffer.value = newJson
+            newJson = addElementToObject(jsonData.value.offers, "availability", "price");
+            jsonData.value.offers = newJson
+        }
+        valuesNormalOffer.value.availability = `https://schema.org/${el}`
+        jsonData.value.offers.availability = `https://schema.org/${el}`
     }
-    valuesNormalOffer.value.availability = `https://schema.org/${el}`
-    jsonData.value.offers.availability = `https://schema.org/${el}`
     if (el == "notSpecified") {
         delete jsonData.value.offers.availability
+        delete valuesNormalOffer.value.availability
     }
 }
 function changeItemCondition(el) {
-    if (!jsonData.value.offers.itemCondition) {
+    if (valuesNormalOffer.value.itemCondition) {
+        valuesNormalOffer.value.itemCondition = `https://schema.org/${el}`
+        jsonData.value.offers.itemCondition = `https://schema.org/${el}`
+    }else{
         let newJson = {}
-        if (jsonData.value.offers.availability) {
-            newJson = addElementToObject(jsonData.value, "itemCondition", "availability");
-        } else {
-            newJson = addElementToObject(jsonData.value, "itemCondition", "priceValidUntil");
+        if(valuesNormalOffer.value.availability){
+            newJson = addElementToObject(valuesNormalOffer.value, "itemCondition", "availability");
+            valuesNormalOffer.value = newJson
+            newJson = addElementToObject(jsonData.value.offers, "itemCondition", "availability");
+            jsonData.value.offers = newJson
+            
+        }else if(valuesNormalOffer.value.priceValidUntil){
+            newJson = addElementToObject(valuesNormalOffer.value, "itemCondition", "priceValidUntil");
+            valuesNormalOffer.value = newJson
+            newJson = addElementToObject(jsonData.value.offers, "itemCondition", "priceValidUntil");
+            jsonData.value.offers = newJson
+        }else{
+            newJson = addElementToObject(valuesNormalOffer.value, "itemCondition", "price");
+            valuesNormalOffer.value = newJson
+            newJson = addElementToObject(jsonData.value.offers, "itemCondition", "price");
+            jsonData.value.offers = newJson
         }
-        jsonData.value = newJson
+        valuesNormalOffer.value.itemCondition = `https://schema.org/${el}`
+        jsonData.value.offers.itemCondition = `https://schema.org/${el}`
     }
-    valuesNormalOffer.value.itemCondition = `https://schema.org/${el}Condition`
-    jsonData.value.offers.itemCondition = `https://schema.org/${el}Condition`
     if (el == "notSpecified") {
         delete jsonData.value.offers.itemCondition
+        delete valuesNormalOffer.value.itemCondition
     }
+
+    
 }
 function changeNormalOfferImage() {
     jsonData.value.offers.url = valuesNormalOffer.value.url
@@ -765,7 +796,17 @@ function changeNormalOfferPrice() {
     jsonData.value.offers.price = valuesNormalOffer.value.price
 }
 function changeNormalOfferDate() {
-    jsonData.value.offer.priceValidUntil = valuesNormalOffer.value.priceValidUntil
+    if(valuesNormalOffer.priceValidUntil){
+        jsonData.value.offer.priceValidUntil = valuesNormalOffer.value.priceValidUntil
+    }else{
+        let newJson = {}
+        newJson = addElementToObject(valuesNormalOffer.value, "priceValidUntil", "price");
+        valuesNormalOffer.value = newJson
+        valuesNormalOffer.value.priceValidUntil = priceValidUntilValue
+        newJson = addElementToObject(jsonData.value.offers, "priceValidUntil", "price");
+        jsonData.value.offers =newJson
+        jsonData.value.offers.priceValidUntil = priceValidUntilValue
+    }
 }
 // for aggregate rating
 const aggregateAllow = ref(false)
