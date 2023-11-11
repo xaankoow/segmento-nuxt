@@ -24,7 +24,7 @@
             <!-- _______________________________________ -->
             <div id="inputsCard" class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <div class="w-full">
-                    <InputText class="w-full placeholder:text-right text-left" placeholder="نام وب‌سایت"
+                    <InputText class="w-full" placeholder="نام وب‌سایت"
                         @input="changeWebSiteName()" v-model="values.name" />
                 </div>
                 <div class="w-full">

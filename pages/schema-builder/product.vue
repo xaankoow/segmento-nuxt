@@ -53,7 +53,7 @@
                                 </template>
                                 <template v-slot:option>
                                     <div class="gap-2 grid grid-cols-2">
-                                        <InputCheckbox v-for="(element, index) in identifications" :key="index"
+                                        <InputCheckbox class="text-sm" v-for="(element, index) in identifications" :key="index"
                                             v-model="identifications[index].is_checked"
                                             @click="changeIdentification(element.name, index)" :id="element.name">
                                             {{ element.name }}
@@ -81,16 +81,16 @@
                         <div class="w-full h-10 text-start align-center">
                             <DropdownFinalDropDown>
                                 <template v-slot:title>
-                                    <span> نوع تخفیف</span>
+                                    <span>نوع تخفیف</span>
                                 </template>
                                 <template v-slot:option>
-                                    <div class="gap-2">
-                                        <InputRadio @click="changeOffer('none')" id="none"
+                                    <div class="gap-2 flex flex-col w-full">
+                                        <InputRadio class="text-sm" @click="changeOffer('none')" id="none"
                                             v-model="offer.noOffer.is_checked" name="offer">بدون تخفیف</InputRadio>
-                                        <InputRadio @click="changeOffer('aggregateOffer')" id="aggregateOffer"
+                                        <InputRadio class="text-sm" @click="changeOffer('aggregateOffer')" id="aggregateOffer"
                                             v-model="offer.aggregateOffer.is_checked" name="offer">تخفیف کلی
                                         </InputRadio>
-                                        <InputRadio @click="changeOffer('offer')" id="offer"
+                                        <InputRadio class="text-sm" @click="changeOffer('offer')" id="offer"
                                             v-model="offer.offer.is_checked" name="offer">تخفیف</InputRadio>
                                     </div>
                                 </template>
@@ -103,7 +103,7 @@
                                 </template>
                                 <template v-slot:option>
                                     <div class="gap-2 grid grid-cols-2">
-                                        <InputRadio v-for="(element, index) in Object.keys(currency)" :key="index"
+                                        <InputRadio class="text-sm" v-for="(element, index) in Object.keys(currency)" :key="index"
                                             v-model="currency[element].is_checked" @click="changeAggregateCurrency(element)"
                                             :id="element" name="currency">{{ currency[element].title }}</InputRadio>
                                     </div>
@@ -218,8 +218,7 @@
                     <div class="w-full flex items-center gap-2">
                         <InputText class="w-full align-start" placeholder="عنوان بررسی" @input="changeReviewName(index)"
                             v-model="valuesReview[index].name" />
-                        <button @click="deleteOneReview(index)"
-                            class="w-[20px] h-[20px] btn-danger-icon">
+                        <button @click="deleteOneReview(index)" class="w-[20px] h-[20px] btn-danger-icon">
                             ✕
                         </button>
                     </div>
@@ -232,8 +231,8 @@
                             <span class="text-sm">رتبه</span>
                             <InputNumber dir="ltr" class="w-full" id="totalTime" @input="changeReviewRating(index)"
                                 v-model="valuesReview[index].reviewRating.ratingValue" :min="valuesAggregateRating.worstRating
-                                        ? valuesAggregateRating.worstRating
-                                        : 0
+                                    ? valuesAggregateRating.worstRating
+                                    : 0
                                     " :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0
         " />
                         </div>

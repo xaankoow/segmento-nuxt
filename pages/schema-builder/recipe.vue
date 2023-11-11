@@ -97,9 +97,11 @@
                                 <span>نوع غذا</span>
                             </template>
                             <template v-slot:option>
-                                <InputRadio v-for="(element, index) in Object.keys(recipeCategory)" :key="index"
+                                <div class="gap-2 flex flex-col w-full">
+                                <InputRadio class="text-sm" v-for="(element, index) in Object.keys(recipeCategory)" :key="index"
                                     v-model="recipeCategory[element].is_checked" @click="changeRecipeCategory(element)"
                                     :id="element" name="currency">{{ recipeCategory[element].title }}</InputRadio>
+                                </div>
                             </template>
                         </DropdownFinalDropDown>
                     </div>

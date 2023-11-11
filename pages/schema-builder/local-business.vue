@@ -31,11 +31,13 @@
 								<span> {{ jobs[current_job]?.title ?? "نوع کسب و کار شما" }} </span>
 							</template>
 							<template v-slot:option>
-								<InputRadio v-for="(element, index) in Object.keys(jobs)" :key="index"
-									v-model="jobs[element].is_checked" @click="changeJobs(element, true)" :id="element"
-									name="jobs">
-									{{ jobs[element].title }}
-								</InputRadio>
+								<div class="gap-2 flex flex-col w-full">
+									<InputRadio class="text-sm" v-for="(element, index) in Object.keys(jobs)" :key="index"
+										v-model="jobs[element].is_checked" @click="changeJobs(element, true)" :id="element"
+										name="jobs">
+										{{ jobs[element].title }}
+									</InputRadio>
+								</div>
 							</template>
 						</DropdownFinalDropDown>
 					</div>
@@ -53,11 +55,13 @@
 								</span>
 							</template>
 							<template v-slot:option>
-								<InputRadio v-if="jobs[current_job]?.specificTypes" v-for="(element, index) in Object.keys(
-									jobs[current_job]?.specificTypes ?? {}
-								)" :key="index" @click="changeJobs(element)" :id="`${current_job}_${element}`" name="jobs">
-									{{ jobs[current_job]?.specificTypes[element]?.title }}
-								</InputRadio>
+								<div class="gap-2 flex flex-col w-full">
+									<InputRadio class="text-sm" v-if="jobs[current_job]?.specificTypes" v-for="(element, index) in Object.keys(
+										jobs[current_job]?.specificTypes ?? {}
+									)" :key="index" @click="changeJobs(element)" :id="`${current_job}_${element}`" name="jobs">
+										{{ jobs[current_job]?.specificTypes[element]?.title }}
+									</InputRadio>
+								</div>
 							</template>
 						</DropdownFinalDropDown>
 					</div>
@@ -192,7 +196,7 @@
 							</template>
 							<template v-slot:option>
 								<div class="gap-2 grid grid-cols-2">
-									<InputCheckbox v-for="(element, index) in Object.keys(socialAccount)" :key="index"
+									<InputCheckbox class="text-sm" v-for="(element, index) in Object.keys(socialAccount)" :key="index"
 										v-model="socialAccount[element].is_checked" @change="updateSocialAccountValue()"
 										:id="element">
 										{{ socialAccount[element].title }}</InputCheckbox>
@@ -216,19 +220,19 @@
 					<!-- department jobs -->
 					<div class="flex gap-2 items-center">
 						<div class="w-1/2 h-10 text-start align-center border border-base-400">
-							<DropdownFinalDropDown class="h-[200px]">
+							<DropdownFinalDropDown>
 								<template v-slot:title>
 									<span>
 										{{
-											departmentJobs[departmentJob[department_index]]?.title ??
-											"نوع کسب و کار شما"
+											departmentJobs[departmentJob[department_index]]?.title ?? "نوع کسب و کار شما"
 										}}
 									</span>
 								</template>
 								<template v-slot:option>
-									<div class="gap-2">
-										<InputRadio v-for="(element, indexjob) in Object.keys(departmentJobs)"
-											:key="indexjob" v-model="departmentJobs[element].is_checked"
+									<div class="gap-2 flex flex-col w-full">
+										<InputRadio class="text-sm"
+											v-for="(element, indexjob) in Object.keys(departmentJobs)" :key="indexjob"
+											v-model="departmentJobs[element].is_checked"
 											@click="changeDepartmentJobs(department_index, element, true)"
 											:id="element + department_index + 'department'" name="departmentJobs">
 											{{ departmentJobs[element].title }}
@@ -254,8 +258,8 @@
 									</span>
 								</template>
 								<template v-slot:option>
-									<div class="gap-2 py-1">
-										<InputRadio v-if="departmentJobs[departmentJob[department_index]]?.specificTypes
+									<div class="gap-2 flex flex-col w-full">
+										<InputRadio class="text-sm" v-if="departmentJobs[departmentJob[department_index]]?.specificTypes
 												" v-for="(jobchild, indexjobchild) in Object.keys(
 					departmentJobs[departmentJob[department_index]].specificTypes ??
 					{}
