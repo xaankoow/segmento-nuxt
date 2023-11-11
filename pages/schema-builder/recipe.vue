@@ -267,8 +267,8 @@
             <!-- left part -->
             <!-- _______________________________________ -->
             <div class="w-1/2 flex flex-col gap-2">
-                <div class="flex gap-2 w-full">
-                    <button @click="deleteAll" class="btn-primary px-4">
+                <div class="flex gap-2 w-full h-10">
+                    <button @click="deleteAll" class="btn-primary px-4 h-10">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_162_227" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                                 width="24" height="24">
@@ -283,7 +283,7 @@
                         حذف
                     </button>
                     <form method="post" target="_blank" action="https://search.google.com/test/rich-results">
-                        <button class="btn-primary px-4" type="submit" id="validate_schema2" href="https://www.google.com"
+                        <button class="btn-primary px-4 h-10" type="submit" id="validate_schema2" href="https://www.google.com"
                             target="_blank">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -298,7 +298,7 @@
                             jsonData
                         )}</script>`" name="code_snippet" class="hidden"></textarea>
                     </form>
-                    <Copy class="btn-primary px-4" :content="`<script type='application/ld+json'>${JSON.stringify(
+                    <Copy class="btn-primary px-4 h-10" :content="`<script type='application/ld+json'>${JSON.stringify(
                         jsonData
                     )}</script>`">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

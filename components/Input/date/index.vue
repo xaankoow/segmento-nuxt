@@ -1,5 +1,6 @@
 <template>
   <input
+    date-format="DD MMMM YYYY" 
     min="2018-01-01"
     type="date"
     :value="modelValue"
