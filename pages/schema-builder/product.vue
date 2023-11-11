@@ -30,7 +30,7 @@
                 Website
             </TabItem>
         </div>
-        <div class="flex justify-start items-start gap-2 w-full h-full p-2">
+        <div class="flex justify-start items-start gap-2 w-full h-[93%] p-2">
             <!-- _______________________________________ -->
             <!-- right part -->
             <!-- _______________________________________ -->
