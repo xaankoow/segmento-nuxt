@@ -3,7 +3,7 @@
       <div class="text-center z-20 absolute">
         <slot></slot>
       </div>
-      <div class="flex items-center justify-center bg-red-400">
+      <div class="flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" :width=size :height=size class="-rotate-90">
           <circle
             :cx=(size/2)
@@ -12,14 +12,18 @@
             :stroke-width="strokeBgWidth"
             :r="(size/2)-5"
             stroke-linecap="round"
+            class="fill-none"
+            :style="{ ...bgcircleStyle }"
           />
           <circle
             :cx=(size/2)
             :cy=(size/2)
             :stroke="strokeColor"
-            :stroke-width="strokeBgZWidth"
+            :stroke-width="strokeWidth"
             :r="(size/2)-5"
             stroke-linecap="round"
+            class="fill-none"
+            :style="{ ...circleStyle }"
           />
         </svg>
       </div>
@@ -39,20 +43,16 @@ const props = defineProps({
       required: true,
     },
     strokeColor: {
-        type: String,
-        default: "#0A65CD"
-    },
-    bg: {
       type: String,
-      default: "gray"
+      default: "#0A65CD"
     },
     strokeWidth: {
       type: String,
-      default: "40px"
+      default: "8px"
     },
     strokeBgWidth: {
       type: String,
-      default: "40px"
+      default: "8px"
     },
     strokeBgColor: {
       type: String,
@@ -63,6 +63,14 @@ const props = defineProps({
 const circleStyle = computed(() => {
     const circumference = 2 * Math.PI * props.size/2;
     const offset = (circumference * (100 - props.remain)) / 100;
+    return {
+      strokeDasharray: circumference,
+      strokeDashoffset: offset,
+    };
+});
+const bgcircleStyle = computed(() => {
+    const circumference = 2 * Math.PI * props.size/2;
+    const offset = -(circumference * (props.remain)) / 100;
     return {
       strokeDasharray: circumference,
       strokeDashoffset: offset,
