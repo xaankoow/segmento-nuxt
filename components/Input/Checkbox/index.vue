@@ -7,7 +7,7 @@ const props = defineProps({
   name: { type: String },
   id: {},
   value: { type: String },
-  dir: { type: String, default: false },
+  dir: { type: String, default: 'rtl' },
 });
 if (props.dir) {
   const dir = props.dir;
@@ -29,7 +29,7 @@ defineEmits(["update:modelValue"]);
       @change="$emit('update:modelValue', $event.target.checked)"
     />
     <label
-      class="w-full h-full p-2 relative flex flex-row items-center cursor-pointer"
+      class="w-full h-full relative flex flex-row items-center cursor-pointer"
       :class="dir == 'ltr' ? 'pl-8' : 'pr-8'"
       :for="id"
     >
