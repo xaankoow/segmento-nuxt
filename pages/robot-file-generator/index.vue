@@ -16,10 +16,7 @@
     </div>
     <div class="content py-2">
       <span class="flex items-center gap-2.5 p-2.5 w-max text-sm">
-        <div class="circle w-[19px] h-[19px] rounded-[50%] bg-[#0A65CD] flex justify-center items-center">
-          <div class="child flow-root w-[10px] h-[10px] rounded-[50%] bg-[white] border-solid"></div>
-        </div>
-          فایل ساز ربات
+        <InputRadio id="robot" v-model="robotFileGenerator" name="robot">فایل ساز ربات</InputRadio>
           <div class="helper">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
               <mask id="mask0_28_1173" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="14"
@@ -71,9 +68,9 @@
                         </g>
                   </svg>
                 </div>
-                <div class="flex flex-col items-start gap-1 mt-1 text-xs">
-                  <span v-if="selectedValue == 'allow'">  امکان دسترسی : </span>
-                  <span v-if="selectedValue == 'disAllow'">  عدم دسترسی : </span>
+                <div class="flex items-start gap-1 mt-1 text-xs">
+                  <span v-if="selectedValue == 'allow'">  امکان دسترسی</span>
+                  <span v-if="selectedValue == 'disAllow'">  عدم دسترسی</span>
                   <span v-if="onlineTraslateValue"> {{ onlineTraslateValue }} </span>
                 </div>
               </span>
@@ -90,6 +87,7 @@
               <div class="combo h-[45px] mx-4 text-start align-center border border-base-400 rounded rounded-b-none z-index-[1100]">
                 <DropdownFinalDropDown class="z-index-[1100]">
                     <template v-slot:title>
+                        <span v-if="selectedValue !== 'allow'  && selectedValue !== 'disAllow'" > انتخاب رفتار </span>
                         <span class="text-sm" v-if="selectedValue == 'allow'">مجاز</span>
                         <span class="text-sm" v-if="selectedValue == 'disAllow'">غیر مجاز</span>
                     </template>
@@ -133,7 +131,8 @@
           <div class="w-1/2 h-fit flex flex-col">
             <!-- secend box -->
             <div class="resultBox w-full min-h-[209px] mr-4 border border-dashed border-[#0A65CD] bg-[#F2F5F7] rounded-[10px] p-2">
-              <span class="flex flex text-start items-start gap-3 text-[13px]" v-show="translatevalueAllBots.allow || translatevalueAllBots.disAllow">
+              <!-- all bots -->
+              <span class="flex text-start items-start gap-3 text-[13px] mb-3" v-show="translatevalueAllBots.allow || translatevalueAllBots.disAllow">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -149,17 +148,22 @@
                 </div>
                 <div class="flex flex-col items-start gap-1 mt-1 text-xs">
                   <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAllBots.bot }}</span>
-                  <span class="text-xs" v-show="translatevalueAllBots.allow">  امکان دسترسی : </span>
-                  <span class="text-xs" v-show="translatevalueAllBots.allow" v-for="(value , index) in translatevalueAllBots.allow" :key="index"> 
-                    {{ value }}
-                  </span>
-                  <span class="text-xs" v-show="translatevalueAllBots.disAllow">  عدم دسترسی : </span>
-                  <span class="text-xs" v-show="translatevalueAllBots.disAllow" v-for="(value , index) in translatevalueAllBots.disAllow" :key="index"> 
-                    {{ value }}
-                  </span>
+                  <div class="flex items-start gap-1 mt-1 text-xs" v-for="(value , index) in translatevalueAllBots.allow" :key="index">
+                    <span class="text-xs" v-show="translatevalueAllBots.allow">  امکان دسترسی </span>
+                    <span class="text-xs" v-show="translatevalueAllBots.allow"> 
+                      {{ value }}
+                    </span>
+                  </div>
+                  <div class="flex items-start gap-1 mt-1 text-xs" v-for="(value , index) in translatevalueAllBots.disAllow" :key="index">
+                    <span class="text-xs" v-show="translatevalueAllBots.disAllow">  عدم دسترسی </span>
+                    <span class="text-xs" v-show="translatevalueAllBots.disAllow" > 
+                      {{ value }}
+                    </span>
+                  </div>
                 </div>
               </span>
-              <span class="flex flex text-start items-start gap-3 text-[13px]" v-show="translatevalueAPIsGoogle.allow || translatevalueAPIsGoogle.disAllow">
+              <!-- APIs Google -->
+              <span class="flex text-start items-start gap-3 text-[13px] mb-3" v-show="translatevalueAPIsGoogle.allow || translatevalueAPIsGoogle.disAllow">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -175,17 +179,22 @@
                 </div>
                 <div class="flex flex-col items-start gap-1 mt-1 text-xs">
                   <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAPIsGoogle.bot }}</span>
-                  <span class="text-xs" v-show="translatevalueAPIsGoogle.allow">  امکان دسترسی : </span>
-                  <span class="text-xs" v-show="translatevalueAPIsGoogle.allow" v-for="(value , index) in translatevalueAPIsGoogle.allow" :key="index"> 
-                  {{ value }}
-                  </span>
-                  <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow">  عدم دسترسی : </span>
-                  <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow" v-for="(value , index) in translatevalueAPIsGoogle.disAllow" :key="index"> 
-                  {{ value }}
-                  </span>
+                  <div class="flex items-start gap-1 mt-1 text-xs" v-for="(value , index) in translatevalueAPIsGoogle.allow" :key="index">
+                    <span class="text-xs" v-show="translatevalueAPIsGoogle.allow">  امکان دسترسی </span>
+                    <span class="text-xs" v-show="translatevalueAPIsGoogle.allow"> 
+                    {{ value }}
+                    </span>
+                  </div>
+                  <div class="flex items-start gap-1 mt-1 text-xs" v-for="(value , index) in translatevalueAPIsGoogle.disAllow" :key="index">
+                    <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow">  عدم دسترسی </span>
+                    <span class="text-xs" v-show="translatevalueAPIsGoogle.disAllow"> 
+                    {{ value }}
+                    </span>
+                  </div>
                 </div>
               </span>
-              <span class="flex flex-col text-start items-start gap-1 text-[13px]" v-show="translatevalueAdsBotMobileWebAndroid.allow || translatevalueAllBots.disAllow">
+              <!-- Ads Bot Mobile Web Android -->
+              <span class="flex flex-col text-start items-start gap-1 text-[13px]" v-show="translatevalueAdsBotMobileWebAndroid.allow || translatevalueAdsBotMobileWebAndroid.disAllow">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <mask id="mask0_30_1381" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -201,14 +210,18 @@
                 </div>
                 <div class="flex flex-col items-start gap-1 mt-1 text-xs">
                   <span class="flow-root text-[13px] text-xs">ربات خطاب شده :{{ translatevalueAdsBotMobileWebAndroid.bot }}</span>
-                  <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow">  امکان دسترسی : </span>
-                  <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.allow" :key="index"> 
-                  {{ value }}
-                  </span>
-                  <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow">  عدم دسترسی : </span>
-                  <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.disAllow" :key="index"> 
-                  {{ value }}
-                  </span>
+                  <div class="flex items-start gap-1 mt-1 text-xs" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.allow" :key="index">
+                    <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow">  امکان دسترسی </span>
+                    <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.allow"> 
+                    {{ value }}
+                    </span>
+                  </div>
+                  <div class="flex items-start gap-1 mt-1 text-xs" v-for="(value , index) in translatevalueAdsBotMobileWebAndroid.disAllow" :key="index">
+                    <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow">  عدم دسترسی </span>
+                    <span class="text-xs" v-show="translatevalueAdsBotMobileWebAndroid.disAllow" > 
+                    {{ value }}
+                    </span>
+                  </div>
                 </div>
               </span>
             </div>
@@ -269,6 +282,7 @@
 </template>
 
 <script setup>
+const robotFileGenerator = true
 const selectedBot = ref("");
 const selectedValue = ref("");
 const commandValue = ref("");
@@ -285,7 +299,7 @@ const translatevalueAdsBotMobileWebAndroid = ref({
 
 const bots = ref({
     AllBots: {
-        is_checked: true,
+        is_checked: false,
         value: "AllBots",
         title: "All Bots"
     },
@@ -302,7 +316,7 @@ const bots = ref({
 })
 const botsOptions = ref({
   allow: {
-        is_checked: true,
+        is_checked: false,
         value: "allow",
         title: "مجاز"
   },
