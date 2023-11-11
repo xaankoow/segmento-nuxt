@@ -1,13 +1,13 @@
 <template>
-  <div class="w-full h-14">
+  <div class="w-full h-14 inline-block relative">
     <!-- header -->
-    <p class="mb-2">
+    <p class="mb-2 ">
       <slot name="title"></slot>
     </p>
     <!-- content -->
-    <select class="w-full h-11 border border-base-400 rounded p-2">
+    <select @change="getValue($event)" class="w-full h-11 border border-base-400 rounded p-2" :name=props.title>
       <slot name="option">
-        <option value="" class="text-base-500">لطفا یک گزینه را انتخاب کنید</option>
+        
       </slot>
     </select>
   </div>
@@ -19,5 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  title: String,
 });
+
+function getValue(el) {
+  console.log(el);
+}
 </script>

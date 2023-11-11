@@ -20,6 +20,14 @@ export default class Request {
         return await this.send_request('POST', path, body, null);
     }
 
+    public delete = async (path: string, body: JSON|null = null) => {
+        return await this.send_request('DELETE', path, body, null);
+    }
+
+    public put = async (path: string, body: JSON|null = null) => {
+        return await this.send_request('PUT', path, body, null);
+    }
+
     protected send_request = async (method: string, path: string, body: any = null, params: any = null): Promise<ResponseModel> => {
         let result: any;
         this.pending.value = true;

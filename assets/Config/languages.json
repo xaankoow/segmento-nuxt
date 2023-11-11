@@ -39,6 +39,7 @@
                             "seo": {
                                 "title": "سئو",
                                 "fields": {
+                                    "money-pages": "صفحات تجاری",
                                     "keyword-research": "تحقیق کلمه کلیدی",
                                     "google-suggest": "کلمات پیشنهادی گوگل",
                                     "google-title-builder": "عنوان‌ساز گوگل"
@@ -51,7 +52,8 @@
                                     "g-ads-preview": "پیش‌نمایش گوگل‌ادز",
                                     "serp-preview": "پیش‌نمایش سرپ",
                                     "disavow-builder": "ساخت Disavow",
-                                    "robot-file-generator": "اپلیکیشن فایل‌ساز robots"
+                                    "robot-file-generator": "اپلیکیشن فایل‌ساز robots",
+                                    "schema-builder": "سازنده اسکیما"
                                 }
                             }
                         }
@@ -220,6 +222,37 @@
                     },
                     "compare": "مقایسه بر اساس",
                     "rank": "رتبه [rank]"
+                }
+            },
+            "schema-builder": {
+                "title": "اپلیکیشن رتبه‌سنج",
+                "header": {
+                    "tabs": [
+                        "نمای کلی",
+                        "کلمات کلیدی",
+                        "رقبا"
+                    ]
+                },
+                "faq": {
+                    "title": "FAQ Schema Builder"
+                },
+                "how-to": {
+                    "title": "How to Schema Builder"
+                },
+                "local-business": {
+                    "title": "local business Schema Builder"
+                },
+                "product": {
+                    "title": "Product Schema Builder"
+                },
+                "recipe": {
+                    "title": "Recipe Schema Builder"
+                },
+                "video": {
+                    "title": "Video Schema Builder"
+                },
+                "website": {
+                    "title": "Website Schema Builder"
                 }
             },
             "auth": {
@@ -446,6 +479,12 @@
                 }
             },
             "money-pages": {
+                "title": "صفحات تجاری",
+                "accordion": "seo",
+                "tabs": {
+                    "list": "لیست صفحات",
+                    "analytics": "آمار و گزارش"
+                },
                 "single": {
                     "title": "صفحات تجاری",
                     "accordion": "seo",

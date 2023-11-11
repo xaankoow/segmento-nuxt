@@ -1,243 +1,155 @@
 <!-- I kow about the ugly code! TODO: this section needs some refactor! -->
 <template>
   <!-- loading -->
-  <div v-if="request.pending.value"
-    class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center">
+  <div
+    v-if="request.pending.value"
+    class="top-0 left-0 w-full h-screen fixed z-50 bg-base-350/40 flex justify-center items-center"
+  >
     <ToolsLoading class="w-32 h-32" />
   </div>
-
-  <div class="w-full min-h-full h-full rounded-[3px]">
-    <div class="w-full h-full text-base-400 text-sm flex flex-col items-center justify-between p-2 gap-2">
-      <form @submit.prevent="creative_copy_writer_request()"
-        class="w-full flex items-center justify-center flex-col gap-2">
-        <InputText @keypress="clear()" type="text" placeholder="درج کلمه کلیدی" v-model="form.keyword"
-          class="w-full h-11 text-center" />
-        <button class="h-8 btn-primary">
+  <!-- ____________________________________
+  part 1 (key word)
+  _________________________________________ -->
+  <div class="w-full min-h-full h-full rounded-[3px] p-2">
+    <div
+      class="w-full h-full text-base-400 text-sm flex flex-col items-center justify-start gap-2"
+    >
+      <div class="w-full flex items-center justify-center flex-col gap-2">
+        <InputText
+          type="text"
+          placeholder="درج کلمه کلیدی"
+          v-model="form.keyword"
+          class="w-full h-11 text-center"
+        />
+        <button class="h-8 btn-primary" @click="submitData()">
           {{ config.by_route(`${current_page}/buttons/create`) }}
         </button>
-      </form>
-
-      <!-- empty section -->
-      <div id="title_copy_writer_questionparentempty"
-        class="w-full h-full bg-base-200 rounded-[3px] border border-base-400 flex flex-col items-center justify-center gap-3">
-        <svg width="109" height="108" viewBox="0 0 109 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+      </div>
+      <!-- ____________________________________
+      part 2 empty section
+      _________________________________________ -->
+      <div
+        v-if="!showDetailAgreement"
+        class="w-full h-full bg-base-200 rounded-[3px] border border-base-400 flex flex-col items-center justify-center gap-3 p-10"
+      >
+        <svg
+          width="109"
+          height="108"
+          viewBox="0 0 109 108"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M29.2317 84.584C30.4566 84.584 31.5284 84.1512 32.4471 83.2856C33.3657 82.4159 33.8251 81.3176 33.8251 79.9906V49.3685C33.8251 48.0415 33.3657 46.9432 32.4471 46.0735C31.5284 45.208 30.4566 44.7752 29.2317 44.7752C27.9048 44.7752 26.8085 45.208 25.9429 46.0735C25.0732 46.9432 24.6384 48.0415 24.6384 49.3685V79.9906C24.6384 81.3176 25.0732 82.4159 25.9429 83.2856C26.8085 84.1512 27.9048 84.584 29.2317 84.584ZM52.9639 84.584C54.2909 84.584 55.3892 84.1512 56.2589 83.2856C57.1244 82.4159 57.5572 81.3176 57.5572 79.9906V30.9952C57.5572 29.6682 57.1244 28.572 56.2589 27.7064C55.3892 26.8367 54.2909 26.4019 52.9639 26.4019C51.6369 26.4019 50.5407 26.8367 49.6751 27.7064C48.8054 28.572 48.3706 29.6682 48.3706 30.9952V79.9906C48.3706 81.3176 48.8054 82.4159 49.6751 83.2856C50.5407 84.1512 51.6369 84.584 52.9639 84.584ZM76.6961 84.584C78.023 84.584 79.1213 84.1512 79.991 83.2856C80.8566 82.4159 81.2894 81.3176 81.2894 79.9906V67.7418C81.2894 66.4148 80.8566 65.3165 79.991 64.4468C79.1213 63.5812 78.023 63.1485 76.6961 63.1485C75.4712 63.1485 74.3994 63.5812 73.4808 64.4468C72.5621 65.3165 72.1028 66.4148 72.1028 67.7418V79.9906C72.1028 81.3176 72.5621 82.4159 73.4808 83.2856C74.3994 84.1512 75.4712 84.584 76.6961 84.584ZM11.9302 107.551C8.86801 107.551 6.26513 106.479 4.12158 104.335C1.97803 102.192 0.90625 99.5888 0.90625 96.5266V14.4592C0.90625 11.397 1.97803 8.79414 4.12158 6.65059C6.26513 4.50704 8.86801 3.43526 11.9302 3.43526H63.3754C64.7024 3.43526 65.8007 3.86805 66.6704 4.73364C67.536 5.60331 67.9688 6.70162 67.9688 8.02858C67.9688 9.35554 67.536 10.4518 66.6704 11.3174C65.8007 12.1871 64.7024 12.6219 63.3754 12.6219H11.9302C11.4199 12.6219 10.9871 12.8016 10.6318 13.1609C10.2725 13.5161 10.0929 13.9489 10.0929 14.4592V96.5266C10.0929 97.037 10.2725 97.4718 10.6318 97.8311C10.9871 98.1863 11.4199 98.3639 11.9302 98.3639H93.9976C94.508 98.3639 94.9428 98.1863 95.3021 97.8311C95.6573 97.4718 95.8349 97.037 95.8349 96.5266V45.0814C95.8349 43.7544 96.2677 42.6561 97.1333 41.7864C98.003 40.9209 99.1013 40.4881 100.428 40.4881C101.755 40.4881 102.854 40.9209 103.723 41.7864C104.589 42.6561 105.022 43.7544 105.022 45.0814V96.5266C105.022 99.5888 103.95 102.192 101.806 104.335C99.6627 106.479 97.0598 107.551 93.9976 107.551H11.9302ZM91.2416 34.0574C89.9146 34.0574 88.8163 33.6226 87.9466 32.7529C87.0811 31.8873 86.6483 30.791 86.6483 29.4641V21.8086H78.9927C77.6658 21.8086 76.5695 21.3737 75.7039 20.504C74.8343 19.6385 74.3994 18.5422 74.3994 17.2152C74.3994 15.8883 74.8343 14.792 75.7039 13.9264C76.5695 13.0567 77.6658 12.6219 78.9927 12.6219H86.6483V4.96637C86.6483 3.63941 87.0811 2.54109 87.9466 1.67143C88.8163 0.805839 89.9146 0.373047 91.2416 0.373047C92.5686 0.373047 93.6669 0.805839 94.5365 1.67143C95.4021 2.54109 95.8349 3.63941 95.8349 4.96637V12.6219H103.49C104.817 12.6219 105.916 13.0567 106.785 13.9264C107.651 14.792 108.084 15.8883 108.084 17.2152C108.084 18.5422 107.651 19.6385 106.785 20.504C105.916 21.3737 104.817 21.8086 103.49 21.8086H95.8349V29.4641C95.8349 30.791 95.4021 31.8873 94.5365 32.7529C93.6669 33.6226 92.5686 34.0574 91.2416 34.0574Z"
-            fill="#D9D9D9" />
+            fill="#D9D9D9"
+          />
         </svg>
         <p>
           {{ config.by_route(`${current_page}/sentences/no-data`) }}
         </p>
       </div>
-      <!-- empty section -->
-
-      <!-- Question Section -->
-      <div style="display: none;" id="title_copy_writer_questionparent"
-        class="w-full h-auto bg-white py-4 rounded-[3px] border border-base-400 flex items-center justify-center">
-        <div class="w-[20%] h-full text-base-content flex items-center justify-center flex-col text-lg">
-          <p class="mt-16 w-full border-r-2 border-dimound px-2">
-            {{ config.by_route(`${current_page}/subjects/questional`) }}
-          </p>
-          <button class="w-40 h-10 rounded-[3px] mr-2 text-sm mt-5 btn-secondary z-50">
-            <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M6.27812 15.8008C5.76146 15.8008 5.32812 15.6258 4.97812 15.2758C4.62812 14.9258 4.45312 14.5008 4.45312 14.0008V2.62578C4.45312 2.10911 4.62812 1.67578 4.97812 1.32578C5.32812 0.975781 5.76146 0.800781 6.27812 0.800781H14.6281C15.1281 0.800781 15.5575 0.979781 15.9161 1.33778C16.2741 1.69645 16.4531 2.12578 16.4531 2.62578V14.0008C16.4531 14.5008 16.2741 14.9258 15.9161 15.2758C15.5575 15.6258 15.1281 15.8008 14.6281 15.8008H6.27812ZM6.27812 14.3008H14.6281C14.7281 14.3008 14.8075 14.2714 14.8661 14.2128C14.9241 14.1548 14.9531 14.0841 14.9531 14.0008V2.62578C14.9531 2.52578 14.9241 2.44645 14.8661 2.38778C14.8075 2.32978 14.7281 2.30078 14.6281 2.30078H6.27812C6.17812 2.30078 6.09913 2.32978 6.04113 2.38778C5.98246 2.44645 5.95312 2.52578 5.95312 2.62578V14.0008C5.95312 14.0841 5.98246 14.1548 6.04113 14.2128C6.09913 14.2714 6.17812 14.3008 6.27812 14.3008ZM2.75312 19.3008C2.25312 19.3008 1.82812 19.1258 1.47812 18.7758C1.12812 18.4258 0.953125 18.0008 0.953125 17.5008V5.55078C0.953125 5.35078 1.02379 5.17578 1.16513 5.02578C1.30713 4.87578 1.48646 4.80078 1.70312 4.80078C1.90312 4.80078 2.07812 4.87578 2.22812 5.02578C2.37812 5.17578 2.45312 5.35078 2.45312 5.55078V17.5008C2.45312 17.5841 2.48213 17.6548 2.54013 17.7128C2.59879 17.7714 2.66979 17.8008 2.75312 17.8008H11.7031C11.9031 17.8008 12.0781 17.8758 12.2281 18.0258C12.3781 18.1758 12.4531 18.3508 12.4531 18.5508C12.4531 18.7674 12.3781 18.9464 12.2281 19.0878C12.0781 19.2298 11.9031 19.3008 11.7031 19.3008H2.75312Z"
-                fill="#488CDA" />
-            </svg>
-            {{ config.by_route(`components/copy/results`) }}
-          </button>
+      <!-- ____________________________________
+      part 3 (show details)
+      چارت نمایش اطلاعات (بصورت استاتیک)
+      _________________________________________ -->
+      <div class="h-fit w-full pb-2" v-if="showDetailAgreement">
+        <div
+          class="w-full h-auto bg-white py-5 mb-2 rounded-[3px] border border-base-400 flex items-center justify-center"
+          v-for="(phrase, index) in results"
+          :key="phrase"
+        >
+          <div
+            class="min-w-fit h-full text-base-content flex items-center justify-center flex-col relative"
+          >
+            <div
+              class="w-full pr-5 border-r-2 border-primary px-2 text-base"
+              v-if="phrase.type.name == 'QUESTION'"
+            >
+              موضوعات سوالی برای <b>{{ current_keyword }}</b>
+            </div>
+            <div
+              class="w-full pr-5 border-r-2 border-primary px-2 text-base"
+              v-if="phrase.type.name == 'COMPARISON'"
+            >
+              موضوعات مقایسه ای برای <b>{{ current_keyword }}</b>
+            </div>
+            <div
+              class="w-full pr-5 border-r-2 border-primary px-2 text-base"
+              v-if="phrase.type.name == 'OTHER'"
+            >
+              موضوعات متفرقه برای <b>{{ current_keyword }}</b>
+            </div>
+            <div class="absolute top-8 right-5 w-fit" v-if="DEV_ENV">
+              <CopyArray :content="phrase.content" class="btn-secondary">
+                <svg
+                  width="17"
+                  height="20"
+                  viewBox="0 0 17 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.27812 15.8008C5.76146 15.8008 5.32812 15.6258 4.97812 15.2758C4.62812 14.9258 4.45312 14.5008 4.45312 14.0008V2.62578C4.45312 2.10911 4.62812 1.67578 4.97812 1.32578C5.32812 0.975781 5.76146 0.800781 6.27812 0.800781H14.6281C15.1281 0.800781 15.5575 0.979781 15.9161 1.33778C16.2741 1.69645 16.4531 2.12578 16.4531 2.62578V14.0008C16.4531 14.5008 16.2741 14.9258 15.9161 15.2758C15.5575 15.6258 15.1281 15.8008 14.6281 15.8008H6.27812ZM6.27812 14.3008H14.6281C14.7281 14.3008 14.8075 14.2714 14.8661 14.2128C14.9241 14.1548 14.9531 14.0841 14.9531 14.0008V2.62578C14.9531 2.52578 14.9241 2.44645 14.8661 2.38778C14.8075 2.32978 14.7281 2.30078 14.6281 2.30078H6.27812C6.17812 2.30078 6.09913 2.32978 6.04113 2.38778C5.98246 2.44645 5.95312 2.52578 5.95312 2.62578V14.0008C5.95312 14.0841 5.98246 14.1548 6.04113 14.2128C6.09913 14.2714 6.17812 14.3008 6.27812 14.3008ZM2.75312 19.3008C2.25312 19.3008 1.82812 19.1258 1.47812 18.7758C1.12812 18.4258 0.953125 18.0008 0.953125 17.5008V5.55078C0.953125 5.35078 1.02379 5.17578 1.16513 5.02578C1.30713 4.87578 1.48646 4.80078 1.70312 4.80078C1.90312 4.80078 2.07812 4.87578 2.22812 5.02578C2.37812 5.17578 2.45312 5.35078 2.45312 5.55078V17.5008C2.45312 17.5841 2.48213 17.6548 2.54013 17.7128C2.59879 17.7714 2.66979 17.8008 2.75312 17.8008H11.7031C11.9031 17.8008 12.0781 17.8758 12.2281 18.0258C12.3781 18.1758 12.4531 18.3508 12.4531 18.5508C12.4531 18.7674 12.3781 18.9464 12.2281 19.0878C12.0781 19.2298 11.9031 19.3008 11.7031 19.3008H2.75312Z"
+                  />
+                </svg>
+                کپی موضوعات
+              </CopyArray>
+            </div>
+          </div>
+          <DiagramTree class="w-full h-full" :phrase="phrase" />
         </div>
-        <div class="flex relative w-[80%]">
-          <div id="title_copy_writer_question"></div>
-        </div>
+        <CopyArray
+          class="btn-primary"
+          :content="copy_all_content(results)"
+          v-if="DEV_ENV"
+        >
+          <svg
+            width="17"
+            height="20"
+            viewBox="0 0 17 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.27812 15.8008C5.76146 15.8008 5.32812 15.6258 4.97812 15.2758C4.62812 14.9258 4.45312 14.5008 4.45312 14.0008V2.62578C4.45312 2.10911 4.62812 1.67578 4.97812 1.32578C5.32812 0.975781 5.76146 0.800781 6.27812 0.800781H14.6281C15.1281 0.800781 15.5575 0.979781 15.9161 1.33778C16.2741 1.69645 16.4531 2.12578 16.4531 2.62578V14.0008C16.4531 14.5008 16.2741 14.9258 15.9161 15.2758C15.5575 15.6258 15.1281 15.8008 14.6281 15.8008H6.27812ZM6.27812 14.3008H14.6281C14.7281 14.3008 14.8075 14.2714 14.8661 14.2128C14.9241 14.1548 14.9531 14.0841 14.9531 14.0008V2.62578C14.9531 2.52578 14.9241 2.44645 14.8661 2.38778C14.8075 2.32978 14.7281 2.30078 14.6281 2.30078H6.27812C6.17812 2.30078 6.09913 2.32978 6.04113 2.38778C5.98246 2.44645 5.95312 2.52578 5.95312 2.62578V14.0008C5.95312 14.0841 5.98246 14.1548 6.04113 14.2128C6.09913 14.2714 6.17812 14.3008 6.27812 14.3008ZM2.75312 19.3008C2.25312 19.3008 1.82812 19.1258 1.47812 18.7758C1.12812 18.4258 0.953125 18.0008 0.953125 17.5008V5.55078C0.953125 5.35078 1.02379 5.17578 1.16513 5.02578C1.30713 4.87578 1.48646 4.80078 1.70312 4.80078C1.90312 4.80078 2.07812 4.87578 2.22812 5.02578C2.37812 5.17578 2.45312 5.35078 2.45312 5.55078V17.5008C2.45312 17.5841 2.48213 17.6548 2.54013 17.7128C2.59879 17.7714 2.66979 17.8008 2.75312 17.8008H11.7031C11.9031 17.8008 12.0781 17.8758 12.2281 18.0258C12.3781 18.1758 12.4531 18.3508 12.4531 18.5508C12.4531 18.7674 12.3781 18.9464 12.2281 19.0878C12.0781 19.2298 11.9031 19.3008 11.7031 19.3008H2.75312Z"
+            />
+          </svg>
+          کپی همه
+        </CopyArray>
       </div>
-      <!-- Question Section -->
-
-      <!-- Comparition Section -->
-      <div style="display: none;" id="title_copy_writer_comparisionparent"
-        class="w-full h-auto bg-white py-4 rounded-[3px] border border-base-400 flex items-center justify-center">
-        <div class="w-[20%] h-full text-base-content flex items-start justify-center flex-col text-lg">
-          <p class="mt-16 w-full border-r-2 border-dimound px-2">
-            {{ config.by_route(`${current_page}/subjects/comparision`) }}
-          </p>
-          <button class="w-40 h-10 rounded-[3px] mr-2 text-sm mt-5 btn-secondary z-50">
-            <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M6.27812 15.8008C5.76146 15.8008 5.32812 15.6258 4.97812 15.2758C4.62812 14.9258 4.45312 14.5008 4.45312 14.0008V2.62578C4.45312 2.10911 4.62812 1.67578 4.97812 1.32578C5.32812 0.975781 5.76146 0.800781 6.27812 0.800781H14.6281C15.1281 0.800781 15.5575 0.979781 15.9161 1.33778C16.2741 1.69645 16.4531 2.12578 16.4531 2.62578V14.0008C16.4531 14.5008 16.2741 14.9258 15.9161 15.2758C15.5575 15.6258 15.1281 15.8008 14.6281 15.8008H6.27812ZM6.27812 14.3008H14.6281C14.7281 14.3008 14.8075 14.2714 14.8661 14.2128C14.9241 14.1548 14.9531 14.0841 14.9531 14.0008V2.62578C14.9531 2.52578 14.9241 2.44645 14.8661 2.38778C14.8075 2.32978 14.7281 2.30078 14.6281 2.30078H6.27812C6.17812 2.30078 6.09913 2.32978 6.04113 2.38778C5.98246 2.44645 5.95312 2.52578 5.95312 2.62578V14.0008C5.95312 14.0841 5.98246 14.1548 6.04113 14.2128C6.09913 14.2714 6.17812 14.3008 6.27812 14.3008ZM2.75312 19.3008C2.25312 19.3008 1.82812 19.1258 1.47812 18.7758C1.12812 18.4258 0.953125 18.0008 0.953125 17.5008V5.55078C0.953125 5.35078 1.02379 5.17578 1.16513 5.02578C1.30713 4.87578 1.48646 4.80078 1.70312 4.80078C1.90312 4.80078 2.07812 4.87578 2.22812 5.02578C2.37812 5.17578 2.45312 5.35078 2.45312 5.55078V17.5008C2.45312 17.5841 2.48213 17.6548 2.54013 17.7128C2.59879 17.7714 2.66979 17.8008 2.75312 17.8008H11.7031C11.9031 17.8008 12.0781 17.8758 12.2281 18.0258C12.3781 18.1758 12.4531 18.3508 12.4531 18.5508C12.4531 18.7674 12.3781 18.9464 12.2281 19.0878C12.0781 19.2298 11.9031 19.3008 11.7031 19.3008H2.75312Z"
-                fill="#488CDA" />
-            </svg>
-            {{ config.by_route(`components/copy/results`) }}
-          </button>
-        </div>
-        <div class="flex relative w-[80%]">
-          <div id="title_copy_writer_comparision"></div>
-        </div>
-      </div>
-      <!-- Comparition Section -->
-
-      <!-- Other Section -->
-      <div style="display: none;" id="title_copy_writer_otherparent"
-        class="w-full h-auto bg-white py-4 rounded-[3px] border border-base-400 flex items-center justify-center">
-        <div class="w-[20%] h-full text-base-content flex items-start justify-center flex-col text-lg">
-          <p class="mt-16 w-full border-r-2 border-dimound px-2">
-            {{ config.by_route(`${current_page}/subjects/other`) }}
-          </p>
-          <button class="w-40 h-10 rounded-[3px] mr-2 text-sm mt-5 btn-secondary z-50">
-            <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M6.27812 15.8008C5.76146 15.8008 5.32812 15.6258 4.97812 15.2758C4.62812 14.9258 4.45312 14.5008 4.45312 14.0008V2.62578C4.45312 2.10911 4.62812 1.67578 4.97812 1.32578C5.32812 0.975781 5.76146 0.800781 6.27812 0.800781H14.6281C15.1281 0.800781 15.5575 0.979781 15.9161 1.33778C16.2741 1.69645 16.4531 2.12578 16.4531 2.62578V14.0008C16.4531 14.5008 16.2741 14.9258 15.9161 15.2758C15.5575 15.6258 15.1281 15.8008 14.6281 15.8008H6.27812ZM6.27812 14.3008H14.6281C14.7281 14.3008 14.8075 14.2714 14.8661 14.2128C14.9241 14.1548 14.9531 14.0841 14.9531 14.0008V2.62578C14.9531 2.52578 14.9241 2.44645 14.8661 2.38778C14.8075 2.32978 14.7281 2.30078 14.6281 2.30078H6.27812C6.17812 2.30078 6.09913 2.32978 6.04113 2.38778C5.98246 2.44645 5.95312 2.52578 5.95312 2.62578V14.0008C5.95312 14.0841 5.98246 14.1548 6.04113 14.2128C6.09913 14.2714 6.17812 14.3008 6.27812 14.3008ZM2.75312 19.3008C2.25312 19.3008 1.82812 19.1258 1.47812 18.7758C1.12812 18.4258 0.953125 18.0008 0.953125 17.5008V5.55078C0.953125 5.35078 1.02379 5.17578 1.16513 5.02578C1.30713 4.87578 1.48646 4.80078 1.70312 4.80078C1.90312 4.80078 2.07812 4.87578 2.22812 5.02578C2.37812 5.17578 2.45312 5.35078 2.45312 5.55078V17.5008C2.45312 17.5841 2.48213 17.6548 2.54013 17.7128C2.59879 17.7714 2.66979 17.8008 2.75312 17.8008H11.7031C11.9031 17.8008 12.0781 17.8758 12.2281 18.0258C12.3781 18.1758 12.4531 18.3508 12.4531 18.5508C12.4531 18.7674 12.3781 18.9464 12.2281 19.0878C12.0781 19.2298 11.9031 19.3008 11.7031 19.3008H2.75312Z"
-                fill="#488CDA" />
-            </svg>
-            {{ config.by_route(`components/copy/results`) }}
-          </button>
-        </div>
-        <div class="flex relative w-[80%]">
-          <div id="title_copy_writer_other"></div>
-        </div>
-      </div>
-      <!-- Other Section -->
-
     </div>
   </div>
 </template>
 
 <script setup>
-const data = ref({ value: null });
 import { ref } from "vue";
 import Config from "~~/composables/Config";
 import Request from "~~/Api/Request";
-import UuidGenerator from "~~/composables/UuidGenerator";
-import Konva from "konva";
 
-
+const runtimeConfig = useRuntimeConfig();
+const DEV_ENV = runtimeConfig.public.DEV_ENV;
 const config = new Config();
-const cache = ref(null);
 const current_page = "pages/title-copy-writer";
 const request = new Request("v1");
+const results = ref("");
+const current_keyword = ref("");
+const showDetailAgreement = ref(false);
 const form = ref({
   keyword: "",
   lang: "FA",
 });
-
-
-async function clear() {
-  document.getElementById('title_copy_writer_questionparent').style.display = 'none';
-  document.getElementById('title_copy_writer_comparisionparent').style.display = 'none';
-  document.getElementById('title_copy_writer_otherparent').style.display = 'none';
-  document.getElementById('title_copy_writer_questionparentempty').style.display = 'flex';
-  data.value = null;
-}
-
-async function creative_copy_writer_request() {
-  let res = await request.get("copy-writer/write", form.value);
-
-  if (res.ok) {
-    data.value = res.data;
-    cache.value = data.value;
-
-    document.getElementById('title_copy_writer_questionparent').style.display = 'flex';
-    document.getElementById('title_copy_writer_comparisionparent').style.display = 'flex';
-    document.getElementById('title_copy_writer_otherparent').style.display = 'flex';
-    document.getElementById('title_copy_writer_questionparentempty').style.display = 'none';
-    setupKonvaStage(data.value[0].content, "title_copy_writer_question", 650);
-    setupKonvaStage(data.value[1].content, "title_copy_writer_comparision", 450);
-    setupKonvaStage(data.value[2].content, "title_copy_writer_other", 600);
-  }
-}
-
-function setupKonvaStage(data, container, height) {
-  const stage = new Konva.Stage({
-    container: container,
-    width: 800,
-    height: height,
+function copy_all_content(results) {
+  let content = [];
+  results.forEach((item) => {
+    content.push(item.keyword, ...item.content, "");
   });
-
-  const circleLayer = new Konva.Layer();
-  const lineLayer = new Konva.Layer();
-
-  const rightCircle = new Konva.Circle({
-    x: stage.width() - 110,
-    y: stage.height() / 2,
-    radius: 10,
-    fill: "#7D7D7D",
-    zIndex: 1,
+  return content;
+}
+async function submitData() {
+  let res = await request.get("copy-writer/write", form.value).then((res) => {
+    results.value = res.data;
+    showDetailAgreement.value = true;
+    current_keyword.value = form.value.keyword;
   });
-
-  circleLayer.add(rightCircle);
-
-  const leftCircles = [];
-  const sceneWidth = stage.width();
-  const sceneHeight = stage.height();
-
-  for (let i = 0; i < data.length; i++) {
-    const circle = new Konva.Circle({
-      x: 500,
-      y: (sceneHeight / 10) + ((sceneHeight / 10 * 9 / data.length - 1) * i),
-
-      radius: 6,
-      fill: "#D9D9D9",
-      zIndex: 1,
-    });
-
-    leftCircles.push(circle);
-    circleLayer.add(circle);
-
-    const rect = new Konva.Rect({
-      x: circle.x() - 309,
-      y: circle.y() - 10,
-      width: 300,
-      height: 40,
-      fill: "",
-      opacity: 0.5,
-      visible: true,
-      listening: false,
-      zIndex: 200,
-    });
-
-    const group = new Konva.Group();
-    group.add(circle);
-    group.add(rect);
-
-    const text = new Konva.Text({
-      x: rect.x(),
-      y: rect.y(),
-      text: data[i],
-      fontSize: 14,
-      fill: "black",
-      width: rect.width(),
-      height: rect.height(),
-      padding: 4,
-      align: "right",
-      fontFamily: "IRANYekan",
-      fontSize: 10,
-      zIndex: 100,
-    });
-
-    group.add(text);
-    circleLayer.add(group);
-
-    const line = new Konva.Line({
-      points: [circle.x(), circle.y(), sceneWidth - 100, sceneHeight / 2],
-      stroke: "#D9D9D9",
-      strokeWidth: 1,
-      zIndex: 0,
-    });
-
-    line.on("mouseover", () => {
-      line.stroke("#0A65CD");
-      lineLayer.batchDraw();
-    });
-
-    line.on("mouseout", () => {
-      line.stroke("#D9D9D9");
-      lineLayer.batchDraw();
-    });
-
-    lineLayer.add(line);
-  }
-
-  stage.add(lineLayer);
-  stage.add(circleLayer);
-  stage.draw();
 }
 </script>

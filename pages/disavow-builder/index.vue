@@ -4,7 +4,7 @@
     <TabItem to="/disavow-builder" :active="true">
       {{ config.by_route(`${current_page}/tabs/generate`) }}
     </TabItem>
-    <!-- <TabSeparator></TabSeparator>
+    <!-- <TabSeparator />
     <TabItem :active="false">
       {{ config.by_route(`${current_page}/tabs/my-files`) }}
     </TabItem> -->

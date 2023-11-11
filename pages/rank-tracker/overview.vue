@@ -4,11 +4,11 @@
     <TabItem to="/rank-tracker/overview" :active="true">
       {{ tabs[0] }}
     </TabItem>
-    <TabSeparator></TabSeparator>
+    <TabSeparator />
     <TabItem to="/rank-tracker/keyword" :active="false">
       {{ tabs[1] }}
     </TabItem>
-    <TabSeparator></TabSeparator>
+    <TabSeparator />
     <TabItem to="/rank-tracker/competitors" :active="false">
       {{ tabs[2] }}
     </TabItem>
