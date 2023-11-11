@@ -19,6 +19,14 @@ export default class Request {
   public post = async (path: string, body: JSON | null = null) => {
     return await this.send_request("POST", path, body, null);
   };
+  
+  public delete = async (path: string, body: JSON | null = null) => {
+    return await this.send_request("DELETE", path, body, null);
+  };
+
+  public put = async (path: string, body: JSON | null = null) => {
+    return await this.send_request("PUT", path, body, null);
+  };
 
   protected send_request = async (
     method: string,
