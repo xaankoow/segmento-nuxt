@@ -488,12 +488,15 @@ function deleteAll() {
         "bestRating": "",
         "worstRating": ""
     },
-        readOnlyOk.value = false
+    readOnlyOk.value = false
     reviewNumber.value = 0
     valuesReview.value = [
     ];
-    valuesPublisher.value =
-        { "@type": "Organization", "name": "" }
+    valuesPublisher.value = { "@type": "Organization", "name": "" }
+    recipeCategory.value.appetizer.is_checked = false
+    recipeCategory.value.entree.is_checked = false
+    recipeCategory.value.dessert.is_checked = false
+    recipeCategory.value.notSpecified.is_checked = false
 }
 // for details //
 // function deleteQuestions() {

@@ -395,6 +395,12 @@ function deleteAll() {
       totalTime: "",
     },
   ];
+  currency.value.IRR.is_checked = false
+  currency.value.USD.is_checked = false
+  currency.value.GBP.is_checked = false
+  currency.value.EUR.is_checked = false
+  currency.value.AED.is_checked = false
+  currency.value.IRR.is_checked = false
   valuesCurrency.value = {
     currency: "",
     value: "",
