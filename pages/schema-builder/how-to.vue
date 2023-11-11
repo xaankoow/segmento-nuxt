@@ -54,6 +54,7 @@
             <InputNumber
               id="totalTime"
               class="w-full"
+              dir="ltr"
               @input="changeDescriptionTotalTime()"
               v-model="valuesDescription.totalTime"
             />
@@ -66,6 +67,7 @@
             <InputNumber
               id="price"
               class="w-full"
+              dir="ltr"
               @input="changeCurrencyValue()"
               v-model="valuesCurrency.value"
             />

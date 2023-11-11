@@ -136,11 +136,13 @@
                     </div>
                     <div class="w-[30%] h-10 flex items-center gap-2">
                         <span class="text-sm w-36">میزان کالری</span>
-                        <InputNumber class="w-full" id="min" @input="changecalories()" v-model="values.nutrition.calories" />
+                        <InputNumber dir="ltr" class="w-full" id="min" @input="changecalories()"
+                            v-model="values.nutrition.calories" />
                     </div>
                     <div class="w-[30%] h-10 flex items-center gap-2">
                         <span class="text-sm w-36">میزان چربی</span>
-                        <InputNumber class="w-full" id="sec" @input="changeFatContent()" v-model="values.nutrition.fatContent" />
+                        <InputNumber dir="ltr" class="w-full" id="sec" @input="changeFatContent()"
+                            v-model="values.nutrition.fatContent" />
                     </div>
                 </div>
                 <!-- Ingredient -->
@@ -168,8 +170,8 @@
                 <div class="w-full flex flex-col gap-2 ">
                     <div class="w-full flex flex-col gap-2" v-for="(value, index) in valuesStep" :key="index">
                         <div class="w-full flex items-center gap-2">
-                            <InputText class="w-full align-start" placeholder="مرحله"
-                                @input="changeStepName(index)" v-model="valuesStep[index].name" />
+                            <InputText class="w-full align-start" placeholder="مرحله" @input="changeStepName(index)"
+                                v-model="valuesStep[index].name" />
                             <button @click="deleteOneStep(index)"
                                 class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                                 ✕
@@ -202,13 +204,13 @@
                 <div class="w-full grid grid-cols-2 gap-2">
                     <div class="w-full h-10 flex items-center gap-2">
                         <span class="text-sm w-40">مجموع رتبه</span>
-                        <InputNumber class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="totalTime"
-                            @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue" />
+                        <InputNumber class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"
+                            id="totalTime" @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue" />
                     </div>
                     <div class="w-full h-10 flex items-center gap-2">
                         <span class="text-sm w-40">تعداد رتبه</span>
-                        <InputNumber class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''" id="price"
-                            @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount" />
+                        <InputNumber class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"
+                            id="price" @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount" />
                     </div>
                     <div class="w-full h-10 flex items-center gap-2">
                         <span class="text-sm w-40">بالاترین رتبه</span>
@@ -217,7 +219,8 @@
                     </div>
                     <div class="w-full h-10 flex items-center gap-2">
                         <span class="text-sm w-40">پایین ترین رتبه</span>
-                        <InputNumber class="w-full" id="price" @input="changeLowestRating()" v-model="valuesAggregateRating.worstRating" />
+                        <InputNumber class="w-full" id="price" @input="changeLowestRating()"
+                            v-model="valuesAggregateRating.worstRating" />
                     </div>
                 </div>
                 <!-- aggregateRating end -->
@@ -226,8 +229,8 @@
                 <div class="w-full flex flex-col gap-2" v-if="reviewNumber > 0" v-for="(value, index) in valuesReview"
                     :key="index">
                     <div class="w-full flex items-center gap-2">
-                        <InputText class="w-full align-start" placeholder="عنوان بررسی"
-                            @input="changeReviewName(index)" v-model="valuesReview[index].name" />
+                        <InputText class="w-full align-start" placeholder="عنوان بررسی" @input="changeReviewName(index)"
+                            v-model="valuesReview[index].name" />
                         <button @click="deleteOneReview(index)"
                             class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
                             ✕
@@ -485,7 +488,7 @@ function deleteAll() {
         "bestRating": "",
         "worstRating": ""
     },
-    readOnlyOk.value = false
+        readOnlyOk.value = false
     reviewNumber.value = 0
     valuesReview.value = [
     ];
@@ -590,10 +593,10 @@ function changeAuthorName() {
     jsonData.value.author.name = values.value.author.name
 }
 function changeDatePublished() {
-    if(jsonData.value.datePublished){
+    if (jsonData.value.datePublished) {
         jsonData.value.datePublished = values.value.datePublished
         valuesVideo.value.uploadDate = values.value.datePublished
-    }else{
+    } else {
         let newJson = {}
         newJson = addElementToObject(jsonData.value, "datePublished", "author");
         jsonData.value = newJson
@@ -601,7 +604,7 @@ function changeDatePublished() {
         jsonData.value.datePublished = values.value.datePublished
         valuesVideo.value.uploadDate = values.value.datePublished
     }
-    if(values.value.datePublished == ""){
+    if (values.value.datePublished == "") {
         delete jsonData.value.datePublished
     }
 }
@@ -723,10 +726,10 @@ function addIngredient() {
         let newJson = {}
         newJson = addElementToObject(jsonData.value, "recipeIngredient", "nutrition");
         jsonData.value = newJson
-    }else{
+    } else {
         jsonData.value.recipeIngredient = valuesIngredient.value
     }
-    
+
 }
 function deleteOneIngredient(taskIndex) {
     if (ingredientNumber.value > 1) {
