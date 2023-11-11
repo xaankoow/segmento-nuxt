@@ -15,8 +15,7 @@
   }
 
   .custom_input_box {
-    @apply relative text-base-content [&>input]:w-full [&>label]:absolute [&>label]:right-2 [&>label]:top-3 [&>label]:transition-all [&>label]:duration-300 [&>label]:transform [&>label]:text-xs
-        [&>label]:cursor-text [&>label]:pointer-events-none;
+    @apply relative text-base-content [&>input]:w-full [&>label]:absolute [&>label]:right-2 [&>label]:top-3 [&>label]:transition-all [&>label]:duration-300 [&>label]:transform [&>label]:text-xs [&>label]:cursor-text [&>label]:pointer-events-none;
   }
 
   input {
@@ -76,4 +75,22 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #aaaaaa;
+}
+
+
+/* vue-json-pretty components styles */
+.vjs-tree-node:hover {
+  background: none !important;
+  font-family: monospace;
+}
+
+.vjs-value-string {
+  font-size: 12px !important;
+  @apply !text-base-content
+}
+
+.vjs-tree {
+  font-family: monospace !important;
+  font-size: 12px !important;
+  text-align: left !important;
 }
