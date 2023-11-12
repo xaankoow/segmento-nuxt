@@ -1,4 +1,6 @@
 <template>
+  <!-- کد برای صدا کردن در والد-->
+  <!-- <ProgressCircle remain="40" size="150" bg="gray" strokeWidth="12px"></ProgressCircle> -->
     <div class="rounded-full flex items-center justify-center bottom-2 relative">
       <div class="text-center z-20 absolute">
         <slot></slot>
@@ -12,7 +14,7 @@
             :stroke-width="strokeBgWidth"
             :r="(size/2)-5"
             stroke-linecap="round"
-            class="fill-none"
+            :fill="bg"
             :style="{ ...bgcircleStyle }"
           />
           <circle
@@ -45,6 +47,10 @@ const props = defineProps({
     strokeColor: {
       type: String,
       default: "#0A65CD"
+    },
+    bg: {
+      type: String,
+      default: "white"
     },
     strokeWidth: {
       type: String,
