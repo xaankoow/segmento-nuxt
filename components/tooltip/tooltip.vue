@@ -1,12 +1,12 @@
 <template>
-  
-    <!-- <div class="w-full text-center">
-      <Tooltip side="left" bgColor="red" borderColor="blue" borderWidth="2px" class="h-fit w-fit">
-        <span>top titlewdafsdfsdf</span>
-        <template v-slot:tooltip > <p>top toolip contenttop toolip contenttop toolip contenttop toolip content</p> </template>
-      </Tooltip>
-    </div> -->
 
+  <!-- <div class="w-full text-center">
+    <Tooltip side="left" bgColor="green" borderColor="gray" borderWidth="2px" class="h-fit w-fit">
+      <span>top titlewdafsdfsdf</span>
+      <template v-slot:tooltip > <p>top toolip contenttop toolip contenttop toolip contenttop toolip content</p> </template>
+    </Tooltip>
+  </div> -->
+  
     <div class="tooltip relative inline-block items-center w-max h-max" >
         <slot></slot>
 
@@ -86,21 +86,40 @@ onUpdated(() => {
     titleValue.style.setProperty('--BorderBottomColor',"transparent")
     titleValue.style.setProperty('--BorderLeftColor',"transparent")
     titleValue.style.setProperty('--BorderRightColor',"transparent")
+    titleValue.style.setProperty('--topMargin',props.borderWidth)
+    titleValue.style.setProperty('--leftMargin',"-5px")
+    titleValue.style.setProperty('--rightMargin',"0px")
+    titleValue.style.setProperty('--bottomMargin',"0px")
+
   }else if(props.side == "bottom"){
     titleValue.style.setProperty('--BorderBottomColor',props.borderColor)
     titleValue.style.setProperty('--BorderTopColor',"transparent")
     titleValue.style.setProperty('--BorderLeftColor',"transparent")
     titleValue.style.setProperty('--BorderRightColor',"transparent")
+    titleValue.style.setProperty('--bottomMargin',props.borderWidth)
+    titleValue.style.setProperty('--leftMargin',"-5px")
+    titleValue.style.setProperty('--rightMargin',"0px")
+    titleValue.style.setProperty('--topMargin',"0px")
+    
   }else if (props.side == "left") {
     titleValue.style.setProperty('--BorderLeftColor',props.borderColor)
     titleValue.style.setProperty('--BorderTopColor',"transparent")
     titleValue.style.setProperty('--BorderBottomColor',"transparent")
     titleValue.style.setProperty('--BorderRightColor',"transparent")
+    titleValue.style.setProperty('--leftMargin',props.borderWidth)
+    titleValue.style.setProperty('--topMargin',"-5px")
+    titleValue.style.setProperty('--rightMargin',"0px")
+    titleValue.style.setProperty('--bottomMargin',"0px")
+
   }else{
     titleValue.style.setProperty('--BorderRightColor',props.borderColor)
     titleValue.style.setProperty('--BorderTopColor',"transparent")
     titleValue.style.setProperty('--BorderBottomColor',"transparent")
     titleValue.style.setProperty('--BorderLeftColor',"transparent")
+    titleValue.style.setProperty('--rightMargin',props.borderWidth)
+    titleValue.style.setProperty('--topMargin',"-5px")
+    titleValue.style.setProperty('--leftMargin',"0px")
+    titleValue.style.setProperty('--bottomMargin',"0px")
   }
 })
 </script>
