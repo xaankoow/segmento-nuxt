@@ -1,11 +1,12 @@
 <template>
 
-  <!-- <div class="w-full text-center">
-    <Tooltip side="left" bgColor="green" borderColor="gray" borderWidth="2px" class="h-fit w-fit">
-      <span>top titlewdafsdfsdf</span>
-      <template v-slot:tooltip > <p>top toolip contenttop toolip contenttop toolip contenttop toolip content</p> </template>
-    </Tooltip>
-  </div> -->
+            <!-- <div class="w-full text-center">
+              <Tooltip side="left" class="h-fit w-fit">
+                <span class="bg-red-400">wwwwww i wwwwww</span>
+                <template v-slot:tooltip> <span>top t contenttop toolip contenttop toolip contenttop toolip content</span>
+                </template>
+              </Tooltip>
+            </div> -->
   
     <div class="tooltip relative inline-block items-center w-max h-max" >
         <slot></slot>
@@ -15,8 +16,8 @@
         :class="
           side == 'top' ? `bottom-[150%] left-[50%]  after:top-[100%] after:left-[50%]`
         : side == 'bottom' ? `top-[150%] left-[50%]  after:bottom-[100%] after:left-[50%]` 
-        : side == 'left' ? `top-[-5px] right-[120%]  after:top-[50%] after:left-[100%]` 
-        : side == 'right' ? `top-[-5px] left-[120%]  after:top-[50%] after:right-[100%]`
+        : side == 'left' ? `top-[-3px] right-[120%]  after:top-[50%] after:left-[100%]` 
+        : side == 'right' ? `top-[-3px] left-[120%]  after:top-[50%] after:right-[100%]`
         :'w-fit' "
         :style="{backgroundColor:bgColor , borderWidth:borderWidth , borderColor:borderColor}"
         ><slot name="tooltip">  </slot></span>
