@@ -11,7 +11,7 @@
         <slot></slot>
 
         <span id="titleValue" class="tooltiptext invisible w-max text-white text-center border-[1px] rounded-sm p-0.5 absolute z-10
-        after:content-[''] after:absolute after:border-[5px] after:border-solid"
+        after:content-[''] after:absolute after:border-[5px] after:border-solid "
         :class="
           side == 'top' ? `bottom-[150%] left-[50%]  after:top-[100%] after:left-[50%]`
         : side == 'bottom' ? `top-[150%] left-[50%]  after:bottom-[100%] after:left-[50%]` 
@@ -43,18 +43,21 @@ const props = defineProps({
         default : "#30363d",
     }
 });
-const widthValue = ref("")
+const widthValueTop = ref("")
+const widthValueBottom = ref("")
 const heightValue = ref("")
 onMounted(() => {
   let titleValue = document.getElementById("titleValue")
-  widthValue.value = (-20-(document.getElementById("titleValue").offsetWidth/2)+'px') ;
+  widthValueTop.value = (-20-(document.getElementById("titleValue").offsetWidth/2)+'px') ;
+  widthValueBottom.value = (-18-(document.getElementById("titleValue").offsetWidth/2)+'px') ;
   heightValue.value = (-(document.getElementById("titleValue").offsetHeight)+'px');
-  if (props.side == "top" || props.side == "bottom") {
-    document.getElementById("titleValue").style.marginLeft = widthValue.value;
+  if (props.side == "top") {
+    document.getElementById("titleValue").style.marginLeft = widthValueTop.value;
+  }else if (props.side == "bottom"){
+    document.getElementById("titleValue").style.marginLeft = widthValueBottom.value;
   }else{
     document.getElementById("titleValue").style.marginLeft = "0px";
   }
-
   if (props.side == "top") {
     titleValue.style.setProperty('--BorderTopColor',props.borderColor)
     titleValue.style.setProperty('--topMargin',props.borderWidth-1)
@@ -74,10 +77,13 @@ onMounted(() => {
   } 
 })
 onUpdated(() => {
-  widthValue.value = (-(document.getElementById("titleValue").offsetWidth/2)+'px') ;
-  heightValue.value = document.getElementById("titleValue").offsetHeight;
-  if (props.side == "top" || props.side == "bottom") {
-    document.getElementById("titleValue").style.marginLeft = widthValue.value;
+  widthValueTop.value = (-(document.getElementById("titleValue").offsetWidth/2)+'px') ;
+  widthValueBottom.value = (-(document.getElementById("titleValue").offsetWidth/2)+'px') ;
+  heightValue.value = (-(document.getElementById("titleValue").offsetHeight)+'px');
+  if (props.side == "top") {
+    document.getElementById("titleValue").style.marginLeft = widthValueTop.value;
+  }else if (props.side == "bottom"){
+    document.getElementById("titleValue").style.marginLeft = widthValueBottom.value;
   }else{
     document.getElementById("titleValue").style.marginLeft = "0px";
   }
