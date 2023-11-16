@@ -57,11 +57,11 @@ onMounted(() => {
 
   if (props.side == "top") {
     titleValue.style.setProperty('--BorderTopColor',props.borderColor)
-    titleValue.style.setProperty('--topMargin',props.borderWidth)
+    titleValue.style.setProperty('--topMargin',props.borderWidth-1)
     titleValue.style.setProperty('--leftMargin',"-5px")
   }else if(props.side == "bottom"){
     titleValue.style.setProperty('--BorderBottomColor',props.borderColor)
-    titleValue.style.setProperty('--bottomMargin',props.borderWidth)
+    titleValue.style.setProperty('--bottomMargin',props.borderWidth-1)
     titleValue.style.setProperty('--leftMargin',"-5px")
   }else if (props.side == "left") {
     titleValue.style.setProperty('--BorderLeftColor',props.borderColor)
@@ -86,7 +86,7 @@ onUpdated(() => {
     titleValue.style.setProperty('--BorderBottomColor',"transparent")
     titleValue.style.setProperty('--BorderLeftColor',"transparent")
     titleValue.style.setProperty('--BorderRightColor',"transparent")
-    titleValue.style.setProperty('--topMargin',props.borderWidth)
+    titleValue.style.setProperty('--topMargin',props.borderWidth-1)
     titleValue.style.setProperty('--leftMargin',"-5px")
     titleValue.style.setProperty('--rightMargin',"0px")
     titleValue.style.setProperty('--bottomMargin',"0px")
@@ -96,7 +96,7 @@ onUpdated(() => {
     titleValue.style.setProperty('--BorderTopColor',"transparent")
     titleValue.style.setProperty('--BorderLeftColor',"transparent")
     titleValue.style.setProperty('--BorderRightColor',"transparent")
-    titleValue.style.setProperty('--bottomMargin',props.borderWidth)
+    titleValue.style.setProperty('--bottomMargin',props.borderWidth-1)
     titleValue.style.setProperty('--leftMargin',"-5px")
     titleValue.style.setProperty('--rightMargin',"0px")
     titleValue.style.setProperty('--topMargin',"0px")
