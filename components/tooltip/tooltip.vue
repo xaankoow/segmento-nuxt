@@ -2,25 +2,25 @@
 
 <!-- <div class="w-full text-center flex items-center justify-center gap-2 flex-col">
   <Tooltip id="firstTop" side="top" borderColor="darkred" bgColor="red" class="h-fit w-fit bg-[red]">
-    <span class="">wwwwww i wwwwww</span>
+    <span class="h-40">wwwwww i wwwwww</span>
     <template v-slot:tooltip> <span>top t contenttop toolip contenttop toolip contenttop toolip content</span>
     </template>
   </Tooltip>
 
   <Tooltip id="firstBottom"  side="bottom" borderColor="blue" bgColor="lightblue" class="h-fit w-fit bg-[blue]">
-    <span class="">wwwwww i wwwwww</span>
+    <span class="h-40">wwwwww i wwwwww</span>
     <template v-slot:tooltip> <span>top t contenttop toolip contenttop toolip contenttop toolip content</span>
     </template>
   </Tooltip>
 
   <Tooltip id="firstLeft" side="left" borderColor="yellow" bgColor="orange" class="h-fit w-fit bg-[orange]">
-    <span class="">wwwwww i wwwwww</span>
+    <span class="w-[50vw]">wwwwww i wwwwww</span>
     <template v-slot:tooltip> <span>top t contenttop toolip contenttop toolip contenttop toolip content</span>
     </template>
   </Tooltip>
 
   <Tooltip id="firstRight" side="right" borderColor="green" bgColor="green" class="h-fit w-fit bg-[green]">
-    <span class="">wwwwww i wwwwww</span>
+    <span class="w-[50vw]">wwwwww i wwwwww</span>
     <template v-slot:tooltip> <span>top t contenttop toolip contenttop toolip contenttop toolip content</span>
     </template>
   </Tooltip>
