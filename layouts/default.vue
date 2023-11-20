@@ -222,9 +222,10 @@
                   <ul class="text-sm px-3 pt-2">
                     <li v-for="workspace in Sites.list" :key="workspace.uuid">
                       <SvgLabeled
+                        @click="Sites.setCurrentSite(workspace)"
                         :label="workspace.website"
                         label_direction="ltr"
-                        :active="active_site === workspace.website"
+                        :active="Sites.current.uuid === workspace.uuid"
                       >
                         <svg
                           width="20"

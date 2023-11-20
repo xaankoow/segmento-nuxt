@@ -23,7 +23,7 @@ export default class ConfigStore {
         : data.workspaces;
     const SitesStore = useSitesStore();
     SitesStore.updateSitesData(parsedSites);
-    ConfigStore.set_current_site(data.workspaces[0] ?? null);
+    SitesStore.setCurrentSite(parsedSites[0]);
 
     const parsedUser: User =
       typeof data.user === "string" ? JSON.parse(data.user) : data.user;
@@ -77,7 +77,7 @@ export default class ConfigStore {
                 : data.workspaces;
             const SitesStore = useSitesStore();
             SitesStore.updateSitesData(parsedSites);
-            ConfigStore.set_current_site(data.workspaces[0] ?? null);
+            SitesStore.setCurrentSite(parsedSites[0]);
 
             const parsedUser: User =
               typeof data.user === "string" ? JSON.parse(data.user) : data.user;
@@ -117,16 +117,7 @@ export default class ConfigStore {
     return String(useCookie("token").value);
   }
 
-  public static set_current_site(current_site: any) {
-    useCookie("current_site").value = current_site;
-  }
-
-  public static current_site(): String {
-    return useCookie("current_site").value ?? "";
-  }
-
   public static logout() {
     this.set_token(null);
-    this.set_current_site(null);
   }
 }
