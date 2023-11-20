@@ -197,7 +197,6 @@ async function load_data(uuid) {
     .get("money-pages", { workspace: uuid })
     .then((res) => {
       data.value = res.data;
-      console.log(data.value);
     })
     .catch((err) => {
       console.error(err);
@@ -209,6 +208,10 @@ async function load_data(uuid) {
 watch(() => Sites.current, (newValue) => {
   load_data(newValue.uuid);
 });
+
+onMounted(() => {
+  load_data(Sites.current.uuid);
+})
 
 
 </script>

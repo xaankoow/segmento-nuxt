@@ -1,9 +1,9 @@
 // sites.ts
-import type Site from '~~/interfaces/Site'
+import type Site from "~~/interfaces/Site";
 
 // Define the Sites store state and actions
 export const useSitesStore = defineStore({
-  id: 'sites',
+  id: "sites",
   state: () => ({
     list: [] as Site[], // Initialize as an empty array
     current: {} as Site,
