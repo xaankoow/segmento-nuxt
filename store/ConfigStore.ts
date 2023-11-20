@@ -1,8 +1,8 @@
-import Limit from "~~/interfaces/Limit";
-import User from "~~/interfaces/User";
-import Plan from "~~/interfaces/Plan";
-import Site from "~~/interfaces/Site";
-import Wallet from "~~/interfaces/Wallet";
+import type Limit from "~~/interfaces/Limit";
+import type User from "~~/interfaces/User";
+import type Plan from "~~/interfaces/Plan";
+import type Site from "~~/interfaces/Site";
+import type Wallet from "~~/interfaces/Wallet";
 import Request from "~~/Api/Request";
 
 export default class ConfigStore {
@@ -23,6 +23,7 @@ export default class ConfigStore {
         : data.workspaces;
     const SitesStore = useSitesStore();
     SitesStore.updateSitesData(parsedSites);
+    ConfigStore.set_current_site(data.workspaces[0] ?? null);
 
     const parsedUser: User =
       typeof data.user === "string" ? JSON.parse(data.user) : data.user;
@@ -76,6 +77,7 @@ export default class ConfigStore {
                 : data.workspaces;
             const SitesStore = useSitesStore();
             SitesStore.updateSitesData(parsedSites);
+            ConfigStore.set_current_site(data.workspaces[0] ?? null);
 
             const parsedUser: User =
               typeof data.user === "string" ? JSON.parse(data.user) : data.user;
