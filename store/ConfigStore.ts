@@ -122,7 +122,7 @@ export default class ConfigStore {
   }
 
   public static current_site(): String {
-    return String(useCookie("current_site").value);
+    return useCookie("current_site").value ?? "";
   }
 
   public static logout() {
