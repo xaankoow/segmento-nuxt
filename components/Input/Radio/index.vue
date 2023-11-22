@@ -20,8 +20,8 @@ defineEmits(["update:modelValue"]);
       :name="name"
       :id="id"
       :value="value ?? id"
-      :checked="modelValue"
-      @change="$emit('update:modelValue', $event.target.checked)"
+      :checked="modelValue === value ?? id"
+      @change="$emit('update:modelValue', $event.target.value)"
     />
     <label
       class="w-full h-full relative flex flex-row items-center cursor-pointer"
@@ -29,10 +29,9 @@ defineEmits(["update:modelValue"]);
       :for="id"
     >
       <span
-        class="radio border-2 border-base-300 h-[18px] w-[18px] absolute flex items-center justify-center radio-blue"
+        class="radio border-2 border-base-300 h-[18px] w-[18px] absolute flex items-center justify-center"
         :class="dir == 'ltr' ? 'left-2' : 'right-2'"
       >
-        <span class="h-[10px] w-[10px] bg-white rounded-full"></span>
       </span>
       <slot></slot>
     </label>
@@ -41,10 +40,7 @@ defineEmits(["update:modelValue"]);
 
 <style scoped>
 input[type="radio"]:checked + label .radio {
-  background-color: #0a65cd;
-  border: none;
-}
-input[type="radio"]:not(:checked) + label .radio * {
-  opacity: 0;
+  border-color: #0a65cd;
+  border-width: 4px;
 }
 </style>
