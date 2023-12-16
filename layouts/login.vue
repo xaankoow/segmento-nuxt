@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex flex-col w-screen min-h-screen bg-gradient-to-bl from-[#1E2C5B] via-[#263B77] to-[#4F90C1] text-base-100 font-iranyekan">
-    <div class="flex lg:hidden flex-col text-2xl gap-3 w-full mt-24 items-center justify-center">
+    <div class="flex lg:hidden flex-col text-2xl gap-3 w-full h-full items-center justify-center absolute" dir="rtl">
       <h3 class="text-5xl font-bold">دستگاه نامعتبر</h3>
       <p class="w-96 text-center">به نظر می‌رسد که این سامانه برای دستگاه شما طراحی نشده است. لطفاً از رایانه
         خود برای ورود به سامانه استفاده کنید!</p>
