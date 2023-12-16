@@ -86,7 +86,6 @@ async function send_active_code_to_email() {
   if (ref_code !== null && ref_code.length > 5) {
     form.value.ref = ref_code
   }
-  console.log(ref_code)
 
   let response = await request.post("auth/register", form.value);
 
