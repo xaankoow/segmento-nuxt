@@ -2,33 +2,21 @@
     <div class="w-full h-full">
         <!-- Tabs -->
         <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
-            <TabItem to="/schema-builder/faq" :active="false">
-                FAQ page
-            </TabItem>
+            <TabItem to="/schema-builder/faq" :active="false"> FAQ page </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/how-to" :active="false">
-                How to
-            </TabItem>
+            <TabItem to="/schema-builder/how-to" :active="false"> How to </TabItem>
             <TabSeparator></TabSeparator>
             <TabItem to="/schema-builder/local-business" :active="false">
                 Local Business
             </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/product" :active="true">
-                Product
-            </TabItem>
+            <TabItem to="/schema-builder/product" :active="true"> Product </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/recipe" :active="false">
-                Recipe
-            </TabItem>
+            <TabItem to="/schema-builder/recipe" :active="false"> Recipe </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/video" :active="false">
-                video
-            </TabItem>
+            <TabItem to="/schema-builder/video" :active="false"> Video </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/website" :active="false">
-                Website
-            </TabItem>
+            <TabItem to="/schema-builder/website" :active="false"> Website </TabItem>
         </div>
         <div class="flex justify-start items-start gap-2 w-full h-[93%] p-2">
             <!-- _______________________________________ -->
@@ -36,12 +24,12 @@
             <!-- _______________________________________ -->
             <div class="w-1/2 h-full flex flex-col gap-2 align-start justify-start">
                 <!-- Product start -->
-                <div class="w-full ">
+                <div class="w-full">
                     <InputText placeholder="نام محصول" @input="changeProductName()" v-model="valuesProduct.name" />
                 </div>
-                <div class="w-full ">
-                    <InputURL placeholder="لینک تصویر" id="descriptionImageUrl" @input="changeProductImage()"
-                        v-model="valuesProduct.image" />
+                <div class="w-full">
+                    <InputURL dir="ltr" class="placeholder:text-right text-left" placeholder="لینک تصویر"
+                        id="descriptionImageUrl" @input="changeProductImage()" v-model="valuesProduct.image" />
                 </div>
                 <div class="w-full align-start">
                     <InputTextArea class="h-36" @input="changeProductDescription()" placeholder="توضیحات محصول"
@@ -50,22 +38,22 @@
                 <!-- Product end -->
                 <!-- _______________________________________ -->
                 <!-- brand start -->
-                <div class=" w-full flex gap-2">
-                    <div class="w-1/2 ">
+                <div class="w-full flex gap-2">
+                    <div class="w-1/2">
                         <InputURL placeholder="برند محصول" @input="changeBrandName()" v-model="valuesBrand.name" />
                     </div>
                     <!-- brand end -->
                     <!-- _______________________________________ -->
                     <!-- identification start -->
-                    <div class="w-1/2 ">
-                        <div class="w-full h-10 text-start align-center border border-base-400 rounded-[3px] ">
+                    <div class="w-1/2">
+                        <div class="w-full h-10 text-start align-center">
                             <DropdownFinalDropDown>
                                 <template v-slot:title>
                                     <span>ویژگی شناسایی</span>
                                 </template>
                                 <template v-slot:option>
                                     <div class="gap-2 grid grid-cols-2">
-                                        <InputCheckbox v-for="(element, index) in identifications" :key="index"
+                                        <InputCheckbox class="text-sm" v-for="(element, index) in identifications" :key="index"
                                             v-model="identifications[index].is_checked"
                                             @click="changeIdentification(element.name, index)" :id="element.name">
                                             {{ element.name }}
@@ -78,9 +66,10 @@
                 </div>
                 <div class="w-full gap-2 grid grid-cols-2"
                     v-if="identifications.filter((el) => el.is_checked == true).length > 0">
-                    <div class="w-full" v-for="(element, index) in identifications.filter((el) => el.is_checked == true)"
-                        :key="index">
-                        <InputText dir="ltr" :placeholder=element.name @input="changeIdentificationValue(element.name)"
+                    <div class="w-full" v-for="(element, index) in identifications.filter(
+                        (el) => el.is_checked == true
+                    )" :key="index">
+                        <InputText dir="ltr" :placeholder="element.name" @input="changeIdentificationValue(element.name)"
                             v-model="identificationValue[element.name]" />
                     </div>
                 </div>
@@ -89,31 +78,32 @@
                 <!-- offer start -->
                 <div class="w-full flex flex-col gap-2">
                     <div class="grid grid-cols-2 gap-2">
-                        <div class="w-full h-10 text-start align-center border border-base-400 rounded-[3px] ">
+                        <div class="w-full h-10 text-start align-center">
                             <DropdownFinalDropDown>
                                 <template v-slot:title>
-                                    <span> نوع تخفیف</span>
+                                    <span>نوع تخفیف</span>
                                 </template>
                                 <template v-slot:option>
-                                    <div class="gap-2">
-                                        <InputRadio @click="changeOffer('none')" id="none"
+                                    <div class="gap-2 flex flex-col w-full">
+                                        <InputRadio class="text-sm" @click="changeOffer('none')" id="none"
                                             v-model="offer.noOffer.is_checked" name="offer">بدون تخفیف</InputRadio>
-                                        <InputRadio @click="changeOffer('aggregateOffer')" id="aggregateOffer"
-                                            v-model="offer.aggregateOffer.is_checked" name="offer">تخفیف کلی </InputRadio>
-                                        <InputRadio @click="changeOffer('offer')" id="offer"
+                                        <InputRadio class="text-sm" @click="changeOffer('aggregateOffer')" id="aggregateOffer"
+                                            v-model="offer.aggregateOffer.is_checked" name="offer">تخفیف کلی
+                                        </InputRadio>
+                                        <InputRadio class="text-sm" @click="changeOffer('offer')" id="offer"
                                             v-model="offer.offer.is_checked" name="offer">تخفیف</InputRadio>
                                     </div>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
-                        <div class="w-full h-10 text-start align-center border border-base-400 rounded-[3px] ">
+                        <div class="w-full h-10 text-start align-center">
                             <DropdownFinalDropDown :disabled="Boolean(offer.noOffer.is_checked)">
                                 <template v-slot:title>
                                     {{ currency[jsonData.offers?.priceCurrency]?.title ?? "واحد پول" }}
                                 </template>
                                 <template v-slot:option>
                                     <div class="gap-2 grid grid-cols-2">
-                                        <InputRadio v-for="(element, index) in Object.keys(currency)" :key="index"
+                                        <InputRadio class="text-sm" v-for="(element, index) in Object.keys(currency)" :key="index"
                                             v-model="currency[element].is_checked" @click="changeAggregateCurrency(element)"
                                             :id="element" name="currency">{{ currency[element].title }}</InputRadio>
                                     </div>
@@ -122,7 +112,7 @@
                         </div>
                     </div>
                     <div v-if="aggregateOffer" class="w-full flex gap-2">
-                        <div class="w-1/2 ">
+                        <div class="w-1/2">
                             <InputURL class="text-left placeholder:text-right" dir="ltr" placeholder="لینک صفحه تخفیف"
                                 id="offerImageUrl" @input="changeAggregateOfferImage()"
                                 v-model="valuesAggregateOffer.url" />
@@ -157,7 +147,7 @@
                         </div>
                     </div>
                     <div v-if="normalOffer" class="w-full flex gap-2">
-                        <div class="w-1/2 h-10 text-start align-center border border-base-400 rounded-[3px] ">
+                        <div class="w-1/2 h-10 text-start align-center">
                             <DropdownFinalDropDown>
                                 <template v-slot:title>
                                     <span>موجودی</span>
@@ -171,7 +161,7 @@
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
-                        <div class="w-1/2 h-10 text-start align-center border border-base-400 rounded-[3px] ">
+                        <div class="w-1/2 h-10 text-start align-center">
                             <DropdownFinalDropDown>
                                 <template v-slot:title>
                                     <span>وضعیت کالا</span>
@@ -179,7 +169,8 @@
                                 <template v-slot:option>
                                     <InputRadio v-for="(element, index) in Object.keys(conditionStuff)" :key="index"
                                         v-model="conditionStuff[element].is_checked" @click="changeItemCondition(element)"
-                                        :id="element+'Condition'" name="stuff">{{ conditionStuff[element].title }}</InputRadio>
+                                        :id="element + 'Condition'" name="stuff">{{ conditionStuff[element].title }}
+                                    </InputRadio>
                                 </template>
                             </DropdownFinalDropDown>
                         </div>
@@ -225,10 +216,9 @@
                 <div class="w-full flex flex-col gap-2" v-if="reviewNumber > 0" v-for="(value, index) in valuesReview"
                     :key="index">
                     <div class="w-full flex items-center gap-2">
-                        <InputText class="w-full align-start" placeholder="عنوان بررسی"
-                            @input="changeReviewName(index)" v-model="valuesReview[index].name" />
-                        <button @click="deleteOneReview(index)"
-                            class="w-[20px] h-[20px] flex items-center justify-center rounded-[3px]-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                        <InputText class="w-full align-start" placeholder="عنوان بررسی" @input="changeReviewName(index)"
+                            v-model="valuesReview[index].name" />
+                        <button @click="deleteOneReview(index)" class="w-[20px] h-[20px] btn-danger-icon">
                             ✕
                         </button>
                     </div>
@@ -240,13 +230,15 @@
                         <div class="w-2/5 h-10 flex items-center gap-2">
                             <span class="text-sm">رتبه</span>
                             <InputNumber dir="ltr" class="w-full" id="totalTime" @input="changeReviewRating(index)"
-                                v-model="valuesReview[index].reviewRating.ratingValue"
-                                :min="valuesAggregateRating.worstRating ? valuesAggregateRating.worstRating : 0"
-                                :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0" />
+                                v-model="valuesReview[index].reviewRating.ratingValue" :min="valuesAggregateRating.worstRating
+                                    ? valuesAggregateRating.worstRating
+                                    : 0
+                                    " :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0
+        " />
                         </div>
                         <div class="w-3/5 h-10 flex items-center gap-2">
                             <span class="text-sm w-24">تاریخ انتشار</span>
-                            <InputDate dir="ltr" class="w-full" id="date" @change="changeDatePublished(index)"
+                            <InputDate placeholder="yyyy-mm-dd" dir="ltr" class="w-full" id="date" @change="changeDatePublished(index)"
                                 v-model="valuesReview[index].datePublished" />
                         </div>
                     </div>
@@ -256,8 +248,8 @@
                                 @input="changeAuthorName(index)" v-model="valuesReview[index].author.name" />
                         </div>
                         <div class="w-1/2">
-                            <InputText class="w-full align-start" placeholder="ناشر"
-                            @input="changePublisherName(index)" v-model="valuesPublisher[index].name" />
+                            <InputText class="w-full align-start" placeholder="ناشر" @input="changePublisherName(index)"
+                                v-model="valuesPublisher[index].name" />
                         </div>
                     </div>
                 </div>
@@ -274,10 +266,10 @@
             <!-- left part -->
             <!-- _______________________________________ -->
             <div class="w-1/2 flex flex-col gap-2">
-                <div class="flex gap-2 w-full">
-                    <button @click="deleteAll" class="btn-primary px-4">
+                <div class="flex gap-2 w-full h-10">
+                    <button @click="deleteAll" class="btn-primary px-4 h-10">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
+                            <mask id="mask0_162_227" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                                 width="24" height="24">
                                 <rect width="24" height="24" fill="#D9D9D9" />
                             </mask>
@@ -290,7 +282,7 @@
                         حذف
                     </button>
                     <form method="post" target="_blank" action="https://search.google.com/test/rich-results">
-                        <button class="btn-primary px-4" type="submit" id="validate_schema2" href="https://www.google.com"
+                        <button class="btn-primary px-4 h-10" type="submit" id="validate_schema2" href="https://www.google.com"
                             target="_blank">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -305,10 +297,11 @@
                             jsonData
                         )}</script>`" name="code_snippet" class="hidden"></textarea>
                     </form>
-                    <Copy class="btn-primary px-4"
-                        :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
+                    <Copy class="btn-primary px-4 h-10" :content="`<script type='application/ld+json'>${JSON.stringify(
+                        jsonData
+                    )}</script>`">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_164_21" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
+                            <mask id="mask0_164_21" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                                 width="24" height="24">
                                 <rect width="24" height="24" fill="#D9D9D9" />
                             </mask>
@@ -330,17 +323,15 @@
         </div>
     </div>
 </template>
-    
+
 <script setup>
-import { ref } from "vue"
-const jsonData = ref(
-    {
-        "@context": "https://schema.org/",
-        "@type": "Product",
-        "name": "",
-        "image": ""
-    }
-);
+import { ref } from "vue";
+const jsonData = ref({
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    name: "",
+    image: "",
+});
 function addElementToObject(object, newProperty, beforNewProperty) {
     let newObject = {};
     for (const property in object) {
@@ -352,97 +343,87 @@ function addElementToObject(object, newProperty, beforNewProperty) {
     return newObject;
 }
 // for copy button //
-const dataForCopy = ref("")
+const dataForCopy = ref("");
 onMounted(() => {
-    dataForCopy.value = document.getElementById("code").textContent
-})
+    dataForCopy.value = document.getElementById("code").textContent;
+});
 // for delete button //
 function deleteAll() {
-    jsonData.value =
-    {
+    jsonData.value = {
         "@context": "https://schema.org/",
         "@type": "Product",
-        "name": "",
-        "image": ""
+        name: "",
+        image: "",
     };
-    valuesProduct.value =
-    {
+    valuesProduct.value = {
         name: "",
         image: "",
         description: "",
     };
-    valuesBrand.value =
-    {
+    valuesBrand.value = {
         "@type": "Brand",
-        "name": ""
+        name: "",
     };
-    identificationValue.value =
-    {
+    identificationValue.value = {
         sku: "",
         gtin8: "",
         gtin13: "",
         gtin14: "",
-        mpn: ""
-    }
-    offer.value.aggregateOffer.is_checked = false
-    offer.value.offer.is_checked = false
-    offer.value.noOffer.is_checked = true
-    aggregateOffer.value = false
-    valuesAggregateOffer.value =
-    {
+        mpn: "",
+    };
+    offer.value.aggregateOffer.is_checked = false;
+    offer.value.offer.is_checked = false;
+    offer.value.noOffer.is_checked = true;
+    aggregateOffer.value = false;
+    valuesAggregateOffer.value = {
         "@type": "AggregateOffer",
-        "url": "",
-        "priceCurrency": "",
-        "lowPrice": "",
-    }
-    normalOffer.value = false
-    priceValidUntilValue.value = ""
-    valuesNormalOffer.value =
-    {
+        url: "",
+        priceCurrency: "",
+        lowPrice: "",
+    };
+    normalOffer.value = false;
+    priceValidUntilValue.value = "";
+    valuesNormalOffer.value = {
         "@type": "Offer",
-        "url": "",
-        "priceCurrency": "",
-        "price": "",
-    }
+        url: "",
+        priceCurrency: "",
+        price: "",
+    };
     for (let stuff in avalibleStuff.value) {
-        avalibleStuff.value[stuff].is_checked = false  
+        avalibleStuff.value[stuff].is_checked = false;
     }
     for (let condition in conditionStuff.value) {
-        conditionStuff.value[condition].is_checked = false  
+        conditionStuff.value[condition].is_checked = false;
     }
-    aggregateAllow.value = false
-    valuesAggregateRating.value =
-    {
+    aggregateAllow.value = false;
+    valuesAggregateRating.value = {
         "@type": "AggregateRating",
-        "ratingValue": "",
-        "ratingCount": "",
-        "bestRating": "",
-        "worstRating": ""
+        ratingValue: "",
+        ratingCount: "",
+        bestRating: "",
+        worstRating: "",
     };
-    readOnlyOk.value = false
-    reviewNumber.value = 0
-    valuesReview.value = [
-    ];
-    valuesPublisher.value = { "@type": "Organization", "name": "" }
+    readOnlyOk.value = false;
+    reviewNumber.value = 0;
+    valuesReview.value = [];
+    valuesPublisher.value = { "@type": "Organization", name: "" };
 }
 // for product //
-const valuesProduct = ref(
-    {
-        name: "",
-        image: "",
-        description: "",
-    }
-);
+const valuesProduct = ref({
+    name: "",
+    image: "",
+    description: "",
+});
 function changeProductName() {
-    jsonData.value.name = valuesProduct.value.name
+    jsonData.value.name = valuesProduct.value.name;
 }
 function changeProductImage() {
-    jsonData.value.image = valuesProduct.value.image
+    jsonData.value.image = valuesProduct.value.image;
 }
 function changeProductDescription() {
     const newJson = addElementToObject(jsonData.value, "description", "image");
-    jsonData.value = newJson
-    jsonData.value.description = valuesProduct.value.description
+    jsonData.value = newJson;
+    jsonData.value.description = valuesProduct.value.description;
 
     if (valuesProduct.value.description == "") {
         delete jsonData.value.description;
@@ -450,17 +431,15 @@ function changeProductDescription() {
 }
 
 // for brand
-const valuesBrand = ref(
-    {
-        "@type": "Brand",
-        "name": ""
-    },
-);
+const valuesBrand = ref({
+    "@type": "Brand",
+    name: "",
+});
 
 function changeBrandName() {
     const newJson = addElementToObject(jsonData.value, "brand", "description");
-    jsonData.value = newJson
-    jsonData.value.brand = valuesBrand.value
+    jsonData.value = newJson;
+    jsonData.value.brand = valuesBrand.value;
 
     if (jsonData.value.brand.name === "") {
         delete jsonData.value.brand;
@@ -473,125 +452,123 @@ const identificationValue = ref({
     gtin8: "",
     gtin13: "",
     gtin14: "",
-    mpn: ""
-})
+    mpn: "",
+});
 const identifications = ref([
     {
         name: "sku",
         is_checked: false,
-        value: "sku"
+        value: "sku",
     },
     {
         name: "gtin8",
         is_checked: false,
-        value: "gtin8"
+        value: "gtin8",
     },
     {
         name: "gtin13",
         is_checked: false,
-        value: "gtin13"
+        value: "gtin13",
     },
     {
         name: "gtin14",
         is_checked: false,
-        value: "gtin14"
+        value: "gtin14",
     },
     {
         name: "mpn",
         is_checked: false,
-        value: "mpn"
+        value: "mpn",
     },
 ]);
 function changeIdentification(el, index) {
     if (!identifications.value[index].is_checked) {
-        let newJson = []
+        let newJson = [];
         newJson = addElementToObject(jsonData.value, el, "image");
-        jsonData.value = newJson
-        jsonData.value[el] = ""
+        jsonData.value = newJson;
+        jsonData.value[el] = "";
     } else {
-        delete jsonData.value[el]
+        delete jsonData.value[el];
     }
 }
 function changeIdentificationValue(el) {
-    jsonData.value[el] = identificationValue.value[el]
+    jsonData.value[el] = identificationValue.value[el];
 }
 // for offer
 const offer = ref({
     aggregateOffer: {
         is_checked: false,
-        value: "aggregateOffer"
+        value: "aggregateOffer",
     },
     offer: {
         is_checked: false,
-        value: "offer"
+        value: "offer",
     },
     noOffer: {
         is_checked: true,
-        value: "noOffer"
+        value: "noOffer",
     },
 });
 function changeOffer(el) {
     if (el == "aggregateOffer") {
         for (let i in offer.value) {
             if (i == el) {
-                offer.value[i].is_checked = true
+                offer.value[i].is_checked = true;
             } else {
-                offer.value[i].is_checked = false
+                offer.value[i].is_checked = false;
             }
         }
-        aggregateOffer.value = true
-        normalOffer.value = false
-        let newJson = {}
+        aggregateOffer.value = true;
+        normalOffer.value = false;
+        let newJson = {};
         if (jsonData.value.brand) {
             newJson = addElementToObject(jsonData.value, "offers", "brand");
         } else {
             newJson = addElementToObject(jsonData.value, "offers", "image");
         }
-        jsonData.value = newJson
-        jsonData.value.offers = valuesAggregateOffer.value
+        jsonData.value = newJson;
+        jsonData.value.offers = valuesAggregateOffer.value;
     } else if (el == "offer") {
         for (let i in offer.value) {
             if (i == el) {
-                offer.value[i].is_checked = true
+                offer.value[i].is_checked = true;
             } else {
-                offer.value[i].is_checked = false
+                offer.value[i].is_checked = false;
             }
         }
-        normalOffer.value = true
-        aggregateOffer.value = false
-        let newJson = {}
+        normalOffer.value = true;
+        aggregateOffer.value = false;
+        let newJson = {};
         if (jsonData.value.brand) {
             newJson = addElementToObject(jsonData.value, "offers", "brand");
         } else {
             newJson = addElementToObject(jsonData.value, "offers", "image");
         }
-        jsonData.value = newJson
-        jsonData.value.offers = valuesNormalOffer.value
+        jsonData.value = newJson;
+        jsonData.value.offers = valuesNormalOffer.value;
     } else {
         for (let i in offer.value) {
             if (i == el) {
-                offer.value[i].is_checked = true
+                offer.value[i].is_checked = true;
             } else {
-                offer.value[i].is_checked = false
+                offer.value[i].is_checked = false;
             }
         }
-        normalOffer.value = false
-        aggregateOffer.value = false
+        normalOffer.value = false;
+        aggregateOffer.value = false;
         if (jsonData.value.offers) {
-            delete jsonData.value.offers
+            delete jsonData.value.offers;
         }
     }
 }
 // // aggregate
-const aggregateOffer = ref(false)
-const valuesAggregateOffer = ref(
-    {
-        "@type": "AggregateOffer",
-        "url": "",
-        "priceCurrency": "",
-        "lowPrice": "",
-    }
-)
+const aggregateOffer = ref(false);
+const valuesAggregateOffer = ref({
+    "@type": "AggregateOffer",
+    url: "",
+    priceCurrency: "",
+    lowPrice: "",
+});
 const currency = ref({
     IRR: {
         is_checked: false,
@@ -620,11 +597,11 @@ const currency = ref({
     },
 });
 function changeAggregateCurrency(el) {
-    valuesAggregateOffer.value.priceCurrency = el
-    jsonData.value.offers.priceCurrency = el
+    valuesAggregateOffer.value.priceCurrency = el;
+    jsonData.value.offers.priceCurrency = el;
 }
 function changeAggregateOfferImage() {
-    jsonData.value.offers.url = valuesAggregateOffer.value.url
+    jsonData.value.offers.url = valuesAggregateOffer.value.url;
 }
 function changeAggregateOfferCount() {
     jsonData.value.offers.offerCount = valuesAggregateOffer.value.offerCount;
@@ -633,195 +610,212 @@ function changeAggregateOfferCount() {
     }
 }
 function changeAggregateOfferLowPrice() {
-    jsonData.value.offers.lowPrice = valuesAggregateOffer.value.lowPrice
+    jsonData.value.offers.lowPrice = valuesAggregateOffer.value.lowPrice;
 }
 function changeAggregateOfferHighPrice() {
-    jsonData.value.offers.highPrice = valuesAggregateOffer.value.highPrice
+    jsonData.value.offers.highPrice = valuesAggregateOffer.value.highPrice;
     if (jsonData.value.offers.highPrice === "") {
         delete jsonData.value.offers.highPrice;
     }
 }
 // // normal
-const normalOffer = ref(false)
-const priceValidUntilValue = ref("")
-const valuesNormalOffer = ref(
-    {
-        "@type": "Offer",
-        "url": "",
-        "priceCurrency": "",
-        "price": "",
-    }
-)
+const normalOffer = ref(false);
+const priceValidUntilValue = ref("");
+const valuesNormalOffer = ref({
+    "@type": "Offer",
+    url: "",
+    priceCurrency: "",
+    price: "",
+});
 const avalibleStuff = ref({
     inStock: {
         is_checked: false,
         value: "inStock",
-        title: "موجود"
+        title: "موجود",
     },
     outOfStock: {
         is_checked: false,
         value: "outOfStock",
-        title: "ناموجود"
+        title: "ناموجود",
     },
     onlineOnly: {
         is_checked: false,
         value: "onlineOnly",
-        title: "غیرحضوری"
+        title: "غیرحضوری",
     },
     inStoreOnly: {
         is_checked: false,
         value: "inStoreOnly",
-        title: "حضوری"
+        title: "حضوری",
     },
     preOrder: {
         is_checked: false,
         value: "preOrder",
-        title: "پیش سفارش"
+        title: "پیش سفارش",
     },
     preSale: {
         is_checked: false,
         value: "preSale",
-        title: "پیش فروش"
+        title: "پیش فروش",
     },
     limitedAvailability: {
         is_checked: false,
         value: "limitedAvailability",
-        title: "در دسترس بودن محدود"
+        title: "در دسترس بودن محدود",
     },
     soldOut: {
         is_checked: false,
         value: "soldOut",
-        title: "فروخته شد"
+        title: "فروخته شد",
     },
     discontinued: {
         is_checked: false,
         value: "discontinued",
-        title: "متوقف شد"
+        title: "متوقف شد",
     },
     notSpecified: {
         is_checked: false,
         value: "notSpecified",
-        title: "مشخص نشده است"
+        title: "مشخص نشده است",
     },
 });
 const conditionStuff = ref({
     New: {
         is_checked: false,
         value: "New",
-        title: "جدید"
+        title: "جدید",
     },
     Used: {
         is_checked: false,
         value: "Used",
-        title: "استفاده شده"
+        title: "استفاده شده",
     },
     Refurbished: {
         is_checked: false,
         value: "Refurbished",
-        title: "مرمت شده"
+        title: "مرمت شده",
     },
     Damaged: {
         is_checked: false,
         value: "Damaged",
-        title: "آسیب دیده"
+        title: "آسیب دیده",
     },
     notSpecified: {
         is_checked: false,
         value: "notSpecified",
-        title: "مشخص نشده است"
+        title: "مشخص نشده است",
     },
-})
+});
 function changeAvailability(el) {
     if (valuesNormalOffer.value.availability) {
-        valuesNormalOffer.value.availability = `https://schema.org/${el}`
-        jsonData.value.offers.availability = `https://schema.org/${el}`
-    }else{
-        let newJson = {}
-        if(valuesNormalOffer.value.priceValidUntil){
-            newJson = addElementToObject(valuesNormalOffer.value, "availability", "priceValidUntil");
-            valuesNormalOffer.value = newJson
-            newJson = addElementToObject(jsonData.value.offers, "availability", "priceValidUntil");
-            jsonData.value.offers = newJson
-        }else{
+        valuesNormalOffer.value.availability = `https://schema.org/${el}`;
+        jsonData.value.offers.availability = `https://schema.org/${el}`;
+    } else {
+        let newJson = {};
+        if (valuesNormalOffer.value.priceValidUntil) {
+            newJson = addElementToObject(
+                valuesNormalOffer.value,
+                "availability",
+                "priceValidUntil"
+            );
+            valuesNormalOffer.value = newJson;
+            newJson = addElementToObject(
+                jsonData.value.offers,
+                "availability",
+                "priceValidUntil"
+            );
+            jsonData.value.offers = newJson;
+        } else {
             newJson = addElementToObject(valuesNormalOffer.value, "availability", "price");
-            valuesNormalOffer.value = newJson
+            valuesNormalOffer.value = newJson;
             newJson = addElementToObject(jsonData.value.offers, "availability", "price");
-            jsonData.value.offers = newJson
+            jsonData.value.offers = newJson;
         }
-        valuesNormalOffer.value.availability = `https://schema.org/${el}`
-        jsonData.value.offers.availability = `https://schema.org/${el}`
+        valuesNormalOffer.value.availability = `https://schema.org/${el}`;
+        jsonData.value.offers.availability = `https://schema.org/${el}`;
     }
     if (el == "notSpecified") {
-        delete jsonData.value.offers.availability
-        delete valuesNormalOffer.value.availability
+        delete jsonData.value.offers.availability;
+        delete valuesNormalOffer.value.availability;
     }
 }
 function changeItemCondition(el) {
     if (valuesNormalOffer.value.itemCondition) {
-        valuesNormalOffer.value.itemCondition = `https://schema.org/${el}`
-        jsonData.value.offers.itemCondition = `https://schema.org/${el}`
-    }else{
-        let newJson = {}
-        if(valuesNormalOffer.value.availability){
-            newJson = addElementToObject(valuesNormalOffer.value, "itemCondition", "availability");
-            valuesNormalOffer.value = newJson
-            newJson = addElementToObject(jsonData.value.offers, "itemCondition", "availability");
-            jsonData.value.offers = newJson
-            
-        }else if(valuesNormalOffer.value.priceValidUntil){
-            newJson = addElementToObject(valuesNormalOffer.value, "itemCondition", "priceValidUntil");
-            valuesNormalOffer.value = newJson
-            newJson = addElementToObject(jsonData.value.offers, "itemCondition", "priceValidUntil");
-            jsonData.value.offers = newJson
-        }else{
+        valuesNormalOffer.value.itemCondition = `https://schema.org/${el}`;
+        jsonData.value.offers.itemCondition = `https://schema.org/${el}`;
+    } else {
+        let newJson = {};
+        if (valuesNormalOffer.value.availability) {
+            newJson = addElementToObject(
+                valuesNormalOffer.value,
+                "itemCondition",
+                "availability"
+            );
+            valuesNormalOffer.value = newJson;
+            newJson = addElementToObject(
+                jsonData.value.offers,
+                "itemCondition",
+                "availability"
+            );
+            jsonData.value.offers = newJson;
+        } else if (valuesNormalOffer.value.priceValidUntil) {
+            newJson = addElementToObject(
+                valuesNormalOffer.value,
+                "itemCondition",
+                "priceValidUntil"
+            );
+            valuesNormalOffer.value = newJson;
+            newJson = addElementToObject(
+                jsonData.value.offers,
+                "itemCondition",
+                "priceValidUntil"
+            );
+            jsonData.value.offers = newJson;
+        } else {
             newJson = addElementToObject(valuesNormalOffer.value, "itemCondition", "price");
-            valuesNormalOffer.value = newJson
+            valuesNormalOffer.value = newJson;
             newJson = addElementToObject(jsonData.value.offers, "itemCondition", "price");
-            jsonData.value.offers = newJson
+            jsonData.value.offers = newJson;
         }
-        valuesNormalOffer.value.itemCondition = `https://schema.org/${el}`
-        jsonData.value.offers.itemCondition = `https://schema.org/${el}`
+        valuesNormalOffer.value.itemCondition = `https://schema.org/${el}`;
+        jsonData.value.offers.itemCondition = `https://schema.org/${el}`;
     }
     if (el == "notSpecified") {
-        delete jsonData.value.offers.itemCondition
-        delete valuesNormalOffer.value.itemCondition
+        delete jsonData.value.offers.itemCondition;
+        delete valuesNormalOffer.value.itemCondition;
     }
-
-    
 }
 function changeNormalOfferImage() {
-    jsonData.value.offers.url = valuesNormalOffer.value.url
+    jsonData.value.offers.url = valuesNormalOffer.value.url;
 }
 function changeNormalOfferPrice() {
-    jsonData.value.offers.price = valuesNormalOffer.value.price
+    jsonData.value.offers.price = valuesNormalOffer.value.price;
 }
 function changeNormalOfferDate() {
-    if(valuesNormalOffer.priceValidUntil){
-        jsonData.value.offer.priceValidUntil = valuesNormalOffer.value.priceValidUntil
-    }else{
-        let newJson = {}
+    if (valuesNormalOffer.priceValidUntil) {
+        jsonData.value.offer.priceValidUntil = valuesNormalOffer.value.priceValidUntil;
+    } else {
+        let newJson = {};
         newJson = addElementToObject(valuesNormalOffer.value, "priceValidUntil", "price");
-        valuesNormalOffer.value = newJson
-        valuesNormalOffer.value.priceValidUntil = priceValidUntilValue
+        valuesNormalOffer.value = newJson;
+        valuesNormalOffer.value.priceValidUntil = priceValidUntilValue;
         newJson = addElementToObject(jsonData.value.offers, "priceValidUntil", "price");
-        jsonData.value.offers =newJson
-        jsonData.value.offers.priceValidUntil = priceValidUntilValue
+        jsonData.value.offers = newJson;
+        jsonData.value.offers.priceValidUntil = priceValidUntilValue;
     }
 }
 // for aggregate rating
-const aggregateAllow = ref(false)
-const valuesAggregateRating = ref(
-    {
-        "@type": "AggregateRating",
-        "ratingValue": "",
-        "ratingCount": "",
-        "bestRating": "",
-        "worstRating": ""
-    },
-)
+const aggregateAllow = ref(false);
+const valuesAggregateRating = ref({
+    "@type": "AggregateRating",
+    ratingValue: "",
+    ratingCount: "",
+    bestRating: "",
+    worstRating: "",
+});
 function addAggregateRating() {
     if (!jsonData.value.aggregateRating) {
-        let newJson = {}
+        let newJson = {};
         if (jsonData.value.mpn) {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "mpn");
         } else if (jsonData.value.gtin14) {
@@ -837,75 +831,69 @@ function addAggregateRating() {
         } else {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "image");
         }
-        jsonData.value = newJson
-        jsonData.value.aggregateRating = valuesAggregateRating.value
+        jsonData.value = newJson;
+        jsonData.value.aggregateRating = valuesAggregateRating.value;
     }
 }
 function changeAggregateRating() {
-    addAggregateRating()
-    aggregateAllow.value = true
-    jsonData.value.aggregateRating.ratingValue = valuesAggregateRating.value.ratingValue
+    addAggregateRating();
+    aggregateAllow.value = true;
+    jsonData.value.aggregateRating.ratingValue = valuesAggregateRating.value.ratingValue;
     if (!valuesAggregateRating.value.ratingValue) {
-        delete jsonData.value.aggregateRating
+        delete jsonData.value.aggregateRating;
     }
 }
 function changeNumberOfRating() {
     if (jsonData.value.aggregateRating) {
-        addAggregateRating()
-        jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount
+        addAggregateRating();
+        jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount;
     }
 }
 function changeHighestRating() {
     if (jsonData.value.aggregateRating) {
-        addAggregateRating()
-        jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating
+        addAggregateRating();
+        jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating;
     }
 }
 function changeLowestRating() {
     if (jsonData.value.aggregateRating) {
-        addAggregateRating()
-        jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating
+        addAggregateRating();
+        jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating;
     }
 }
 // for review
-const readOnlyOk = ref(false)
-const reviewNumber = ref(0)
-const valuesReview = ref([
-]);
-const valuesPublisher = ref(
-    [
-        { "@type": "Organization", "name": "" }
-    ]
-)
+const readOnlyOk = ref(false);
+const reviewNumber = ref(0);
+const valuesReview = ref([]);
+const valuesPublisher = ref([{ "@type": "Organization", name: "" }]);
 function deleteOneReview(taskIndex) {
     if (reviewNumber.value > 1) {
-        reviewNumber.value--
-        valuesReview.value.splice(taskIndex, 1)
+        reviewNumber.value--;
+        valuesReview.value.splice(taskIndex, 1);
     } else {
-        reviewNumber.value--
-        jsonData.value.review.splice(taskIndex, 1)
-        delete jsonData.value.review
-        valuesReview.value.splice(taskIndex, 1)
+        reviewNumber.value--;
+        jsonData.value.review.splice(taskIndex, 1);
+        delete jsonData.value.review;
+        valuesReview.value.splice(taskIndex, 1);
     }
 }
 function addReview() {
-    reviewNumber.value++
-    valuesReview.value[reviewNumber.value - 1] =
-    {
+    reviewNumber.value++;
+    valuesReview.value[reviewNumber.value - 1] = {
         "@type": "Review",
-        "name": "",
-        "reviewBody": "",
-        "datePublished": "",
-        "reviewRating": {
+        name: "",
+        reviewBody: "",
+        datePublished: "",
+        reviewRating: {
             "@type": "Rating",
-            "ratingValue": "",
-            "bestRating": "",
-            "worstRating": ""
+            ratingValue: "",
+            bestRating: "",
+            worstRating: "",
         },
-        "author": { "@type": "Person", "name": "" },
-    }
-    valuesPublisher.value[reviewNumber.value-1] = { "@type": "Organization", "name": "" }
-    let newJson = {}
+        author: { "@type": "Person", name: "" },
+    };
+    valuesPublisher.value[reviewNumber.value - 1] = { "@type": "Organization", name: "" };
+    let newJson = {};
     if (!jsonData.value.review) {
         if (jsonData.value.aggregateRating) {
             newJson = addElementToObject(jsonData.value, "review", "aggregateRating");
@@ -924,55 +912,59 @@ function addReview() {
         } else {
             newJson = addElementToObject(jsonData.value, "review", "image");
         }
-        jsonData.value = newJson
-        jsonData.value.review = valuesReview.value
+        jsonData.value = newJson;
+        jsonData.value.review = valuesReview.value;
     } else {
-        jsonData.value.review[reviewNumber.value - 1] = valuesReview.value[reviewNumber.value - 1]
+        jsonData.value.review[reviewNumber.value - 1] =
+            valuesReview.value[reviewNumber.value - 1];
     }
 }
 function changeReviewName(taskIndex) {
-    jsonData.value.review[taskIndex].name = valuesReview.value[taskIndex].name
+    jsonData.value.review[taskIndex].name = valuesReview.value[taskIndex].name;
 }
 function changeReviewBody(taskIndex) {
-    jsonData.value.review[taskIndex].reviewBody = valuesReview.value[taskIndex].reviewBody
+    jsonData.value.review[taskIndex].reviewBody = valuesReview.value[taskIndex].reviewBody;
 }
 function changeReviewRating(taskIndex) {
     if (valuesReview.value[taskIndex].reviewRating.ratingValue) {
-        readOnlyOk.value = true
+        readOnlyOk.value = true;
     } else {
-        readOnlyOk.value = false
+        readOnlyOk.value = false;
     }
-    addAggregateRating()
-    jsonData.value.review[taskIndex].reviewRating.ratingValue = valuesReview.value[taskIndex].reviewRating.ratingValue
-    let sum = 0
-    let sumRatingNumber = 0
+    addAggregateRating();
+    jsonData.value.review[taskIndex].reviewRating.ratingValue =
+        valuesReview.value[taskIndex].reviewRating.ratingValue;
+    let sum = 0;
+    let sumRatingNumber = 0;
     for (let i = 0; i < valuesReview.value.length; i++) {
-        sum += Number(valuesReview.value[i].reviewRating.ratingValue)
+        sum += Number(valuesReview.value[i].reviewRating.ratingValue);
         if (valuesReview.value[i].reviewRating.ratingValue) {
-            sumRatingNumber++
+            sumRatingNumber++;
         }
     }
-    jsonData.value.aggregateRating.ratingValue = sum / sumRatingNumber
-    jsonData.value.aggregateRating.ratingCount = sumRatingNumber
-    valuesAggregateRating.value.ratingValue = sum / sumRatingNumber
-    valuesAggregateRating.value.ratingCount = sumRatingNumber
+    jsonData.value.aggregateRating.ratingValue = sum / sumRatingNumber;
+    jsonData.value.aggregateRating.ratingCount = sumRatingNumber;
+    valuesAggregateRating.value.ratingValue = sum / sumRatingNumber;
+    valuesAggregateRating.value.ratingCount = sumRatingNumber;
 }
 function changeDatePublished(taskIndex) {
-    jsonData.value.review[taskIndex].datePublished = valuesReview.value[taskIndex].datePublished
+    jsonData.value.review[taskIndex].datePublished =
+        valuesReview.value[taskIndex].datePublished;
 }
 function changeAuthorName(taskIndex) {
-    jsonData.value.review[taskIndex].author.name = valuesReview.value[taskIndex].author.name
+    jsonData.value.review[taskIndex].author.name =
+        valuesReview.value[taskIndex].author.name;
 }
 function changePublisherName(taskIndex) {
     if (!jsonData.value.review[taskIndex].publisher) {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value.review[taskIndex], "publisher", "author");
-        jsonData.value.review[taskIndex] = newJson
-        jsonData.value.review[taskIndex].publisher = valuesPublisher.value[taskIndex]
+        jsonData.value.review[taskIndex] = newJson;
+        jsonData.value.review[taskIndex].publisher = valuesPublisher.value[taskIndex];
     }
-    jsonData.value.review[taskIndex].publisher.name = valuesPublisher.value[taskIndex].name
-    if(valuesPublisher.value[taskIndex].name == ""){
-        delete jsonData.value.review[taskIndex].publisher
+    jsonData.value.review[taskIndex].publisher.name = valuesPublisher.value[taskIndex].name;
+    if (valuesPublisher.value[taskIndex].name == "") {
+        delete jsonData.value.review[taskIndex].publisher;
     }
 }
 </script>

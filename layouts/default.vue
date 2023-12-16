@@ -2,6 +2,36 @@
   <div
     class="flex flex-col w-full !h-screen bg-base-100 bg-gradient-to-b from-[#E9F3F6] to-[#F1F6F7] text-base-content font-iranyekan"
     style="direction: rtl; height: 100vh !important">
+    <WidgetsAddSite @reload="reload_store()" v-model="isPopupVisible"></WidgetsAddSite>
+
+    <!-- Header section -->
+    <NavbarTop :platform="cn.__(['layouts', 'default', 'header', 'platform'])"
+      :setting="cn.__(['layouts', 'default', 'header', 'profile'])" :profile="profile()"
+      class="shadow-md mx-auto h-[7vh] w-screen p-2">
+      <template v-slot:dashboard-icon>
+        <label tabindex="0"
+          class="flex my-auto cursor-pointer p-2 [&>svg]:fill-base-content hover:[&>svg]:fill-primary h-full items-center rounded-[3px]"
+          @click="show_hide_navbar()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_9_187)">
+              <path
+                d="M1 18H23C23.2652 18 23.5196 18.1054 23.7071 18.2929C23.8946 18.4804 24 18.7348 24 19C24 19.2652 23.8946 19.5196 23.7071 19.7071C23.5196 19.8946 23.2652 20 23 20H1C0.734784 20 0.48043 19.8946 0.292893 19.7071C0.105357 19.5196 0 19.2652 0 19C0 18.7348 0.105357 18.4804 0.292893 18.2929C0.48043 18.1054 0.734784 18 1 18Z" />
+              <path
+                d="M23 15H9C8.73478 15 8.48043 14.8946 8.29289 14.7071C8.10536 14.5196 8 14.2652 8 14C8 13.7348 8.10536 13.4804 8.29289 13.2929C8.48043 13.1054 8.73478 13 9 13H23C23.2652 13 23.5196 13.1054 23.7071 13.2929C23.8946 13.4804 24 13.7348 24 14C24 14.2652 23.8946 14.5196 23.7071 14.7071C23.5196 14.8946 23.2652 15 23 15Z" />
+              <path
+                d="M23 5H9C8.73478 5 8.48043 4.89464 8.29289 4.70711C8.10536 4.51957 8 4.26522 8 4C8 3.73478 8.10536 3.48043 8.29289 3.29289C8.48043 3.10536 8.73478 3 9 3H23C23.2652 3 23.5196 3.10536 23.7071 3.29289C23.8946 3.48043 24 3.73478 24 4C24 4.26522 23.8946 4.51957 23.7071 4.70711C23.5196 4.89464 23.2652 5 23 5Z" />
+              <path
+                d="M23 10H1C0.734784 10 0.48043 9.89464 0.292893 9.70711C0.105357 9.51957 0 9.26522 0 9C0 8.73478 0.105357 8.48043 0.292893 8.29289C0.48043 8.10536 0.734784 8 1 8H23C23.2652 8 23.5196 8.10536 23.7071 8.29289C23.8946 8.48043 24 8.73478 24 9C24 9.26522 23.8946 9.51957 23.7071 9.70711C23.5196 9.89464 23.2652 10 23 10Z" />
+            </g>
+            <defs>
+              <clipPath id="clip0_9_187">
+                <rect width="24" height="24" transform="matrix(1 0 0 -1 0 24)" />
+              </clipPath>
+            </defs>
+          </svg>
+        </label>
+      </template>
+    </NavbarTop>
     <div class="flex lg:hidden flex-col text-2xl gap-3 w-full mt-24 items-center justify-center">
       <h3 class="text-5xl font-bold">دستگاه نامعتبر</h3>
       <p class="w-96 text-center">به نظر می‌رسد که این سامانه برای دستگاه شما طراحی نشده است. لطفاً از رایانه
@@ -502,10 +532,8 @@ const Wallets = useWalletsStore();
 const isPopupVisible = ref(false);
 const cn = new Config();
 const department_section = "layouts/default/navbar/right/department";
-const workspaces = ref(null);
 const actived_navbar = ref("department");
 const active_section = ref("");
-const active_site = ref("");
 const selected_tools_section = ref("content-creation");
 const runtimeConfig = useRuntimeConfig();
 const DEV_ENV = runtimeConfig.public.DEV_ENV;
@@ -567,4 +595,19 @@ function change_active_accordion(accordion) {
     active_accordion.value = accordion;
   }
 }
+
+watch(() => route.path, () => {
+  change_active_section(route.path.split("/")[1]);
+  let departments = Object.keys(cn.by_route(`${department_section}`));
+  departments.splice(0, 2);
+  for (let i = 0; i < departments.length; i++) {
+    let department = departments[i]
+    if (Object.keys(cn.by_route(`${department_section}/${department}/fields`)).includes(route.path.split("/")[1])) {
+      active_accordion.value = department;
+      return true
+    }
+  }
+  active_accordion.value = "";
+});
+
 </script>

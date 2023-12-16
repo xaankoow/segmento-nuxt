@@ -94,7 +94,6 @@ async function requestToLogin() {
     if (!response.data.user.img) {
       response.data.user.img = "/images/profileDefaultImg.png";
     }
-
     email_box.classList.remove("border-b-2");
     password_box.classList.remove("border-b-2");
     email_box.classList.remove("border-b-error");
@@ -104,12 +103,26 @@ async function requestToLogin() {
     ConfigStore.init(response.data);
     navigateTo("/");
   } else {
-    // TODO : Message to user name or password is incorrect
-    email_box.classList.add("border-b-2");
-    email_box.classList.add("border-b-error");
-    password_box.classList.add("border-b-2");
-    password_box.classList.add("border-b-error");
-    error_happened.value = true;
+    if (response.status_code == 403 && response.errors.email === false) {
+      request
+        .post("auth/email/verify/resend", { email: form.value.email })
+        .then(() => {
+          return navigateTo({
+            path: "/auth/signup/verify",
+            query: { email: form.value.email },
+          });
+        })
+        .catch((response) => {
+          console.log(response);
+        });
+    } else {
+      // TODO : Message to user name or password is incorrect
+      email_box.classList.add("border-b-2");
+      email_box.classList.add("border-b-error");
+      password_box.classList.add("border-b-2");
+      password_box.classList.add("border-b-error");
+      error_happened.value = true;
+    }
   }
 }
 </script>

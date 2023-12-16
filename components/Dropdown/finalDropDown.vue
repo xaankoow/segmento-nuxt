@@ -1,7 +1,8 @@
 <template>
-  <div class="w-full h-full inline-block relative group">
+  <div class="w-full h-10 inline-block relative group rounded-[3px] border border-base-400 border-b-[2px]"
+    :class="!disabled ? 'hover:border-b-primary' : 'pointer-events-none'">
     <!-- header -->
-    <div class="h-full w-full flex justify-between px-2 items-center">
+    <div class="h-full w-full flex justify-between px-2 items-center cursor-default">
       <span class="text-sm" :class="disabled ? 'text-gray-400' : ''">
         <slot name="title"></slot>
       </span>

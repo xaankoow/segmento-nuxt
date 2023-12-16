@@ -2,33 +2,21 @@
     <div class="w-full h-full">
         <!-- Tabs -->
         <div class="flex flex-row items-center gap-3 px-2 h-[7%] bg-base-200">
-            <TabItem to="/schema-builder/faq" :active="false">
-                FAQ page
-            </TabItem>
+            <TabItem to="/schema-builder/faq" :active="false"> FAQ page </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/how-to" :active="false">
-                How to
-            </TabItem>
+            <TabItem to="/schema-builder/how-to" :active="false"> How to </TabItem>
             <TabSeparator></TabSeparator>
             <TabItem to="/schema-builder/local-business" :active="false">
                 Local Business
             </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/product" :active="false">
-                Product
-            </TabItem>
+            <TabItem to="/schema-builder/product" :active="false"> Product </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/recipe" :active="true">
-                Recipe
-            </TabItem>
+            <TabItem to="/schema-builder/recipe" :active="true"> Recipe </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/video" :active="false">
-                video
-            </TabItem>
+            <TabItem to="/schema-builder/video" :active="false"> Video </TabItem>
             <TabSeparator></TabSeparator>
-            <TabItem to="/schema-builder/website" :active="false">
-                Website
-            </TabItem>
+            <TabItem to="/schema-builder/website" :active="false"> Website </TabItem>
         </div>
         <div class="flex justify-start items-start gap-2 w-full h-[93%] p-2">
             <!-- _______________________________________ -->
@@ -52,10 +40,10 @@
 
                 <div v-for="(value, index) in imageNumber" :key="index">
                     <div class="w-full flex items-center gap-2">
-                        <InputURL class="w-full align-start" placeholder="آدرس تصویر " @input="changeimage(index)"
-                            v-model="values.image[index]" />
+                        <InputURL dir="ltr" class="w-full placeholder:text-right text-left" placeholder="آدرس تصویر "
+                            @input="changeimage(index)" v-model="values.image[index]" />
                         <button @click="deleteOneImage(index)" v-if="imageNumber > 1"
-                            class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                            class="w-[20px] h-[20px] btn-danger-icon">
                             ✕
                         </button>
                     </div>
@@ -70,12 +58,12 @@
 
                 <div class="w-full grid grid-cols-2 gap-2">
                     <div class="w-full">
-                        <InputURL class="w-full" placeholder="لینک ویدیو" @input="changecontentUrl()"
-                            v-model="valuesVideo.contentUrl" />
+                        <InputURL dir="ltr" class="placeholder:text-right text-left w-full" placeholder="لینک ویدیو"
+                            @input="changecontentUrl()" v-model="valuesVideo.contentUrl" />
                     </div>
                     <div class="w-full">
-                        <InputURL class="w-full" placeholder="آدرس درج embed" @input="changeEmberUrl()"
-                            v-model="valuesVideo.embedUrl" />
+                        <InputURL :dir="valuesVideo.embedUrl === '' ? 'rtl' : 'ltr'" class="placeholder:text-right text-left w-full" placeholder="آدرس درج embed"
+                            @input="changeEmberUrl()" v-model="valuesVideo.embedUrl" />
                     </div>
                     <div class="w-full">
                         <InputText class="w-full h-10" placeholder="نام سازنده" @input="changeAuthorName()"
@@ -103,15 +91,17 @@
                 </div>
                 <!-- food -->
                 <div class="w-full flex gap-2">
-                    <div class="w-1/2 h-10 text-start align-center border border-base-400 rounded-3px">
+                    <div class="w-1/2 h-10 text-start align-center">
                         <DropdownFinalDropDown>
                             <template v-slot:title>
                                 <span>نوع غذا</span>
                             </template>
                             <template v-slot:option>
-                                <InputRadio v-for="(element, index) in Object.keys(recipeCategory)" :key="index"
+                                <div class="gap-2 flex flex-col w-full">
+                                <InputRadio class="text-sm" v-for="(element, index) in Object.keys(recipeCategory)" :key="index"
                                     v-model="recipeCategory[element].is_checked" @click="changeRecipeCategory(element)"
                                     :id="element" name="currency">{{ recipeCategory[element].title }}</InputRadio>
+                                </div>
                             </template>
                         </DropdownFinalDropDown>
                     </div>
@@ -128,7 +118,7 @@
                     </div>
                 </div>
                 <!-- nutrition -->
-                <div class="w-full flex gap-2 ">
+                <div class="w-full flex gap-2">
                     <div class="w-[40%] h-10 flex items-center gap-2">
                         <span class="text-sm w-24">انداه وعده</span>
                         <InputText class="w-full align-start" @input="changeServingSize()"
@@ -146,14 +136,13 @@
                     </div>
                 </div>
                 <!-- Ingredient -->
-                <div class="w-full flex flex-col gap-2 ">
+                <div class="w-full flex flex-col gap-2">
                     <div class="w-full flex flex-col items-center gap-2" v-for="(value, index) in valuesIngredient"
                         :key="index">
                         <div class="w-full flex items-center gap-2">
                             <InputText class="w-full align-start" placeholder="ماده تشکیل دهنده "
                                 @input="changeIngredient(index)" v-model="valuesIngredient[index]" />
-                            <button @click="deleteOneIngredient(index)"
-                                class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                            <button @click="deleteOneIngredient(index)" class="w-[20px] h-[20px] btn-danger-icon">
                                 ✕
                             </button>
                         </div>
@@ -167,13 +156,12 @@
                     </button>
                 </div>
                 <!-- step -->
-                <div class="w-full flex flex-col gap-2 ">
+                <div class="w-full flex flex-col gap-2">
                     <div class="w-full flex flex-col gap-2" v-for="(value, index) in valuesStep" :key="index">
                         <div class="w-full flex items-center gap-2">
                             <InputText class="w-full align-start" placeholder="مرحله" @input="changeStepName(index)"
                                 v-model="valuesStep[index].name" />
-                            <button @click="deleteOneStep(index)"
-                                class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                            <button @click="deleteOneStep(index)" class="w-[20px] h-[20px] btn-danger-icon">
                                 ✕
                             </button>
                         </div>
@@ -183,11 +171,11 @@
                         </div>
                         <div class="w-full flex gap-2">
                             <div class="w-1/2">
-                                <InputURL class="w-full align-start" placeholder="لینک " @input="changeStepUrl(index)"
+                                <InputURL dir="ltr" class="placeholder:text-right text-left w-full" placeholder="لینک " @input="changeStepUrl(index)"
                                     v-model="valuesStep[index].url" />
                             </div>
                             <div class="w-1/2">
-                                <InputURL class="w-full align-start" placeholder="آدرس تصویر"
+                                <InputURL dir="ltr" class="placeholder:text-right text-left w-full" placeholder="آدرس تصویر"
                                     @input="changeStepImage(index)" v-model="valuesStep[index].image" />
                             </div>
                         </div>
@@ -204,22 +192,22 @@
                 <div class="w-full grid grid-cols-2 gap-2">
                     <div class="w-full h-10 flex items-center gap-2">
                         <span class="text-sm w-40">مجموع رتبه</span>
-                        <InputNumber class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"
+                        <InputNumber dir="ltr" class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"
                             id="totalTime" @input="changeAggregateRating()" v-model="valuesAggregateRating.ratingValue" />
                     </div>
                     <div class="w-full h-10 flex items-center gap-2">
                         <span class="text-sm w-40">تعداد رتبه</span>
-                        <InputNumber class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"
+                        <InputNumber dir="ltr" class="w-full" :readonly="readOnlyOk" :class="readOnlyOk ? 'text-gray-400' : ''"
                             id="price" @input="changeNumberOfRating()" v-model="valuesAggregateRating.ratingCount" />
                     </div>
                     <div class="w-full h-10 flex items-center gap-2">
                         <span class="text-sm w-40">بالاترین رتبه</span>
-                        <InputNumber class="w-full" id="totalTime" @input="changeHighestRating()"
+                        <InputNumber dir="ltr" class="w-full" id="totalTime" @input="changeHighestRating()"
                             v-model="valuesAggregateRating.bestRating" />
                     </div>
                     <div class="w-full h-10 flex items-center gap-2">
                         <span class="text-sm w-40">پایین ترین رتبه</span>
-                        <InputNumber class="w-full" id="price" @input="changeLowestRating()"
+                        <InputNumber dir="ltr" class="w-full" id="price" @input="changeLowestRating()"
                             v-model="valuesAggregateRating.worstRating" />
                     </div>
                 </div>
@@ -231,8 +219,7 @@
                     <div class="w-full flex items-center gap-2">
                         <InputText class="w-full align-start" placeholder="عنوان بررسی" @input="changeReviewName(index)"
                             v-model="valuesReview[index].name" />
-                        <button @click="deleteOneReview(index)"
-                            class="w-[20px] h-[20px] flex items-center justify-center rounded-sm bg-[#F35242]/10 text-[#D02121] font-bold text-sm text-center leading-[normal]">
+                        <button @click="deleteOneReview(index)" class="w-[20px] h-[20px] btn-danger-icon">
                             ✕
                         </button>
                     </div>
@@ -243,10 +230,12 @@
                     <div class="w-full flex gap-2">
                         <div class="w-[35%] h-10 flex items-center gap-2">
                             <span class="text-sm">رتبه</span>
-                            <InputNumber class="w-full" id="totalTime" @input="changeReviewRating(index)"
-                                v-model="valuesReview[index].reviewRating.ratingValue"
-                                :min="valuesAggregateRating.worstRating ? valuesAggregateRating.worstRating : 0"
-                                :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0" />
+                            <InputNumber dir="ltr" class="w-full" id="totalTime" @input="changeReviewRating(index)"
+                                v-model="valuesReview[index].reviewRating.ratingValue" :min="valuesAggregateRating.worstRating
+                                    ? valuesAggregateRating.worstRating
+                                    : 0
+                                    " :max="valuesAggregateRating.bestRating ? valuesAggregateRating.bestRating : 0
+        " />
                         </div>
                         <div class="w-[65%] h-10 flex items-center gap-2">
                             <span class="text-sm w-24">تاریخ انتشار</span>
@@ -278,10 +267,10 @@
             <!-- left part -->
             <!-- _______________________________________ -->
             <div class="w-1/2 flex flex-col gap-2">
-                <div class="flex gap-2 w-full">
-                    <button @click="deleteAll" class="btn-primary px-4">
+                <div class="flex gap-2 w-full h-10">
+                    <button @click="deleteAll" class="btn-primary px-4 h-10">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_162_227" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
+                            <mask id="mask0_162_227" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                                 width="24" height="24">
                                 <rect width="24" height="24" fill="#D9D9D9" />
                             </mask>
@@ -294,7 +283,7 @@
                         حذف
                     </button>
                     <form method="post" target="_blank" action="https://search.google.com/test/rich-results">
-                        <button class="btn-primary px-4" type="submit" id="validate_schema2" href="https://www.google.com"
+                        <button class="btn-primary px-4 h-10" type="submit" id="validate_schema2" href="https://www.google.com"
                             target="_blank">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -309,8 +298,9 @@
                             jsonData
                         )}</script>`" name="code_snippet" class="hidden"></textarea>
                     </form>
-                    <Copy class="btn-primary px-4"
-                        :content="`<script type='application/ld+json'>${JSON.stringify(jsonData)}</script>`">
+                    <Copy class="btn-primary px-4 h-10" :content="`<script type='application/ld+json'>${JSON.stringify(
+                        jsonData
+                    )}</script>`">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_164_21" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                                 width="24" height="24">
@@ -335,68 +325,62 @@
         </div>
     </div>
 </template>
-    
-<script setup>
-import { ref, onMounted } from "vue"
 
-const values = ref(
-    {
-        "@context": "https://schema.org/",
-        "@type": "Recipe",
-        "name": "",
-        "image": [],
-        "description": "",
-        "keywords": "",
-        "author": {
-            "@type": "Person",
-            "name": ""
-        },
-        "datePublished": "",
-        "prepTime": "",
-        "cookTime": "",
-        "totalTime": "",
-        "recipeCategory": "",
-        "recipeCuisine": "",
-        "recipeYield": "",
-        "nutrition": {
-            "@type": "NutritionInformation",
-            "servingSize": "",
-            "calories": "",
-            "fatContent": ""
-        }
-    }
-);
-const valuesVideo = ref(
-    {
-        "@type": "VideoObject",
-        "name": "",
-        "description": "",
-        "thumbnailUrl": "",
-        "contentUrl": "",
-        "embedUrl": ""
-    }
-)
-const jsonData = ref(
-    {
-        "@context": "https://schema.org/",
-        "@type": "Recipe",
-        "name": "",
-        "image": "",
-        "description": "",
-        "keywords": "",
-        "author": {
-            "@type": "Person",
-            "name": ""
-        },
-        "prepTime": "",
-        "cookTime": "",
-        "totalTime": "",
-        "nutrition": {
-            "@type": "NutritionInformation",
-            "calories": ""
-        }
-    }
-);
+<script setup>
+import { ref, onMounted } from "vue";
+
+const values = ref({
+    "@context": "https://schema.org/",
+    "@type": "Recipe",
+    name: "",
+    image: [],
+    description: "",
+    keywords: "",
+    author: {
+        "@type": "Person",
+        name: "",
+    },
+    datePublished: "",
+    prepTime: "",
+    cookTime: "",
+    totalTime: "",
+    recipeCategory: "",
+    recipeCuisine: "",
+    recipeYield: "",
+    nutrition: {
+        "@type": "NutritionInformation",
+        servingSize: "",
+        calories: "",
+        fatContent: "",
+    },
+});
+const valuesVideo = ref({
+    "@type": "VideoObject",
+    name: "",
+    description: "",
+    thumbnailUrl: "",
+    contentUrl: "",
+    embedUrl: "",
+});
+const jsonData = ref({
+    "@context": "https://schema.org/",
+    "@type": "Recipe",
+    name: "",
+    image: "",
+    description: "",
+    keywords: "",
+    author: {
+        "@type": "Person",
+        name: "",
+    },
+    prepTime: "",
+    cookTime: "",
+    totalTime: "",
+    nutrition: {
+        "@type": "NutritionInformation",
+        calories: "",
+    },
+});
 function addElementToObject(object, newProperty, beforNewProperty) {
     let newObject = {};
     for (const property in object) {
@@ -408,95 +392,86 @@ function addElementToObject(object, newProperty, beforNewProperty) {
     return newObject;
 }
 // for copy button //
-const dataForCopy = ref("")
+const dataForCopy = ref("");
 onMounted(() => {
-    dataForCopy.value = document.getElementById("code").textContent
-})
+    dataForCopy.value = document.getElementById("code").textContent;
+});
 // for delete button //
 function deleteAll() {
-    values.value =
-    {
+    values.value = {
         "@context": "https://schema.org/",
         "@type": "Recipe",
-        "name": "",
-        "image": [],
-        "description": "",
-        "keywords": "",
-        "author": {
+        name: "",
+        image: [],
+        description: "",
+        keywords: "",
+        author: {
             "@type": "Person",
-            "name": ""
+            name: "",
         },
-        "prepTime": "",
-        "cookTime": "",
-        "totalTime": "",
-        "recipeCategory": "",
-        "recipeCuisine": "",
-        "recipeYield": "",
-        "nutrition": {
+        prepTime: "",
+        cookTime: "",
+        totalTime: "",
+        recipeCategory: "",
+        recipeCuisine: "",
+        recipeYield: "",
+        nutrition: {
             "@type": "NutritionInformation",
-            "servingSize": "",
-            "calories": "",
-            "fatContent": ""
-        }
+            servingSize: "",
+            calories: "",
+            fatContent: "",
+        },
     };
-    valuesVideo.value =
-    {
+    valuesVideo.value = {
         "@type": "VideoObject",
-        "name": "",
-        "description": "",
-        "thumbnailUrl": "",
-        "uploadDate": "",
-        "contentUrl": "",
-        "embedUrl": ""
-    }
-    jsonData.value =
-    {
+        name: "",
+        description: "",
+        thumbnailUrl: "",
+        uploadDate: "",
+        contentUrl: "",
+        embedUrl: "",
+    };
+    jsonData.value = {
         "@context": "https://schema.org/",
         "@type": "Recipe",
-        "name": "",
-        "image": "",
-        "description": "",
-        "keywords": "",
-        "author": {
+        name: "",
+        image: "",
+        description: "",
+        keywords: "",
+        author: {
             "@type": "Person",
-            "name": ""
+            name: "",
         },
-        "datePublished": "",
-        "prepTime": "",
-        "cookTime": "",
-        "totalTime": "",
-        "nutrition": {
+        datePublished: "",
+        prepTime: "",
+        cookTime: "",
+        totalTime: "",
+        nutrition: {
             "@type": "NutritionInformation",
-            "calories": ""
-        }
+            calories: "",
+        },
     };
-    imageNumber.value = 1
-    ingredientNumber.value = 0
-    valuesIngredient.value = [
-
-    ]
-    stepNumber.value = 0
-    valuesStep.value = [
-
-    ]
-    aggregateAllow.value = false
-    valuesAggregateRating.value =
-    {
+    imageNumber.value = 1;
+    ingredientNumber.value = 0;
+    valuesIngredient.value = [];
+    stepNumber.value = 0;
+    valuesStep.value = [];
+    aggregateAllow.value = false;
+    (valuesAggregateRating.value = {
         "@type": "AggregateRating",
-        "ratingValue": "",
-        "ratingCount": "",
-        "bestRating": "",
-        "worstRating": ""
-    },
-        readOnlyOk.value = false
-    reviewNumber.value = 0
-    valuesReview.value = [
-    ];
-    valuesPublisher.value = { "@type": "Organization", "name": "" }
-    recipeCategory.value.appetizer.is_checked = false
-    recipeCategory.value.entree.is_checked = false
-    recipeCategory.value.dessert.is_checked = false
-    recipeCategory.value.notSpecified.is_checked = false
+        ratingValue: "",
+        ratingCount: "",
+        bestRating: "",
+        worstRating: "",
+    }),
+        (readOnlyOk.value = false);
+    reviewNumber.value = 0;
+    valuesReview.value = [];
+    valuesPublisher.value = { "@type": "Organization", name: "" };
+    recipeCategory.value.appetizer.is_checked = false;
+    recipeCategory.value.entree.is_checked = false;
+    recipeCategory.value.dessert.is_checked = false;
+    recipeCategory.value.notSpecified.is_checked = false;
 }
 // for details //
 // function deleteQuestions() {
@@ -523,39 +498,39 @@ function deleteAll() {
 // }
 // for  video//
 function changeName() {
-    jsonData.value.name = values.value.name
-    valuesVideo.value.name = values.value.name
+    jsonData.value.name = values.value.name;
+    valuesVideo.value.name = values.value.name;
 }
 function changeDescription() {
-    jsonData.value.description = values.value.description
-    valuesVideo.value.description = values.value.description
+    jsonData.value.description = values.value.description;
+    valuesVideo.value.description = values.value.description;
 }
 function changeKeywords() {
-    jsonData.value.keywords = values.value.keywords
+    jsonData.value.keywords = values.value.keywords;
 }
 // for image
-const imageNumber = ref(1)
+const imageNumber = ref(1);
 function addImage() {
-    imageNumber.value++
-    values.value.image[imageNumber.value - 1] = ""
-    jsonData.value.image = values.value.image
-    valuesVideo.value.thumbnailUrl = values.value.image
+    imageNumber.value++;
+    values.value.image[imageNumber.value - 1] = "";
+    jsonData.value.image = values.value.image;
+    valuesVideo.value.thumbnailUrl = values.value.image;
 }
 function changeimage(taskIndex) {
     if (imageNumber.value == 1) {
-        jsonData.value.image = values.value.image[0]
-        valuesVideo.value.image = values.value.image[0]
+        jsonData.value.image = values.value.image[0];
+        valuesVideo.value.image = values.value.image[0];
     } else {
-        jsonData.value.image[taskIndex] = values.value.image[taskIndex]
-        valuesVideo.value.thumbnailUrl[taskIndex] = values.value.image[taskIndex]
+        jsonData.value.image[taskIndex] = values.value.image[taskIndex];
+        valuesVideo.value.thumbnailUrl[taskIndex] = values.value.image[taskIndex];
     }
 }
 function deleteOneImage(taskIndex) {
     if (imageNumber.value > 1) {
-        imageNumber.value--
-        jsonData.value.image.splice(taskIndex, 1)
+        imageNumber.value--;
+        jsonData.value.image.splice(taskIndex, 1);
         if (jsonData.value.video) {
-            jsonData.value.video.thumbnailUrl.splice(taskIndex, 1)
+            jsonData.value.video.thumbnailUrl.splice(taskIndex, 1);
         }
         // values.value.splice(taskIndex, 1)
         // valuesVideo.value.splice(taskIndex, 1)
@@ -564,115 +539,117 @@ function deleteOneImage(taskIndex) {
 // for url
 function changecontentUrl() {
     if (!jsonData.value.video) {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value, "video", "nutrition");
-        jsonData.value = newJson
-        jsonData.value.video = valuesVideo.value
+        jsonData.value = newJson;
+        jsonData.value.video = valuesVideo.value;
     } else {
-        jsonData.value.video.contentUrl = valuesVideo.value.contentUrl
+        jsonData.value.video.contentUrl = valuesVideo.value.contentUrl;
     }
     if (valuesVideo.value.contentUrl == "" && valuesVideo.value.embedUrl == "") {
-        delete jsonData.value.video
+        delete jsonData.value.video;
     }
 }
 function changeEmberUrl() {
     if (!jsonData.value.video) {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value, "video", "nutrition");
-        jsonData.value = newJson
-        jsonData.value.video = valuesVideo.value
+        jsonData.value = newJson;
+        jsonData.value.video = valuesVideo.value;
     } else {
-        jsonData.value.video.embedUrl = valuesVideo.value.embedUrl
+        jsonData.value.video.embedUrl = valuesVideo.value.embedUrl;
     }
     if (valuesVideo.value.contentUrl == "" && valuesVideo.value.embedUrl == "") {
-        delete jsonData.value.video
+        delete jsonData.value.video;
     }
 }
 // for Author and date
 function changeAuthorName() {
-    jsonData.value.author.name = values.value.author.name
+    jsonData.value.author.name = values.value.author.name;
 }
 function changeDatePublished() {
     if (jsonData.value.datePublished) {
-        jsonData.value.datePublished = values.value.datePublished
-        valuesVideo.value.uploadDate = values.value.datePublished
+        jsonData.value.datePublished = values.value.datePublished;
+        valuesVideo.value.uploadDate = values.value.datePublished;
     } else {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value, "datePublished", "author");
-        jsonData.value = newJson
+        jsonData.value = newJson;
         newJson = addElementToObject(valuesVideo.value, "uploadDate", "thumbnailUrl");
-        jsonData.value.datePublished = values.value.datePublished
-        valuesVideo.value.uploadDate = values.value.datePublished
+        jsonData.value.datePublished = values.value.datePublished;
+        valuesVideo.value.uploadDate = values.value.datePublished;
     }
     if (values.value.datePublished == "") {
-        delete jsonData.value.datePublished
+        delete jsonData.value.datePublished;
     }
 }
 // time spending
 function changePrepTime() {
-    jsonData.value.prepTime = values.value.prepTime
+    jsonData.value.prepTime = values.value.prepTime;
     if (values.value.cookTime) {
-        values.value.totalTime = Number(values.value.cookTime) + Number(values.value.prepTime)
-        jsonData.value.totalTime = values.value.totalTime
+        values.value.totalTime =
+            Number(values.value.cookTime) + Number(values.value.prepTime);
+        jsonData.value.totalTime = values.value.totalTime;
     }
 }
 function changecookTime() {
-    jsonData.value.cookTime = values.value.cookTime
+    jsonData.value.cookTime = values.value.cookTime;
     if (values.value.prepTime) {
-        values.value.totalTime = Number(values.value.cookTime) + Number(values.value.prepTime)
-        jsonData.value.totalTime = values.value.totalTime
+        values.value.totalTime =
+            Number(values.value.cookTime) + Number(values.value.prepTime);
+        jsonData.value.totalTime = values.value.totalTime;
     }
 }
-//for food 
+//for food
 const recipeCategory = ref({
     appetizer: {
         is_checked: false,
         value: "appetizer",
-        title: "پیش غذا"
+        title: "پیش غذا",
     },
     entree: {
         is_checked: false,
         value: "entree",
-        title: "غذای اصلی"
+        title: "غذای اصلی",
     },
     dessert: {
         is_checked: false,
         value: "dessert",
-        title: "دسر"
+        title: "دسر",
     },
     notSpecified: {
         is_checked: false,
         value: "notSpecified",
-        title: "مشخص نشده است"
+        title: "مشخص نشده است",
     },
-})
+});
 function changeRecipeCategory(el) {
     if (!jsonData.value.recipeCategory) {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value, "recipeCategory", "totalTime");
-        jsonData.value = newJson
+        jsonData.value = newJson;
     }
-    values.value.recipeCategory = el
-    jsonData.value.recipeCategory = el
+    values.value.recipeCategory = el;
+    jsonData.value.recipeCategory = el;
     if (el == "notSpecified") {
-        delete jsonData.value.recipeCategory
+        delete jsonData.value.recipeCategory;
     }
 }
 function changeRecipeCuisine() {
     if (!jsonData.value.recipeCuisine) {
-        let newJson = {}
+        let newJson = {};
         if (jsonData.value.recipeCategory) {
             newJson = addElementToObject(jsonData.value, "recipeCuisine", "recipeCategory");
         } else {
             newJson = addElementToObject(jsonData.value, "recipeCuisine", "totalTime");
         }
-        jsonData.value = newJson
+        jsonData.value = newJson;
     }
-    jsonData.value.recipeCuisine = values.value.recipeCuisine
+    jsonData.value.recipeCuisine = values.value.recipeCuisine;
 }
 function changeRecipeYield() {
     if (!jsonData.value.recipeYield) {
-        let newJson = {}
+        let newJson = {};
         if (jsonData.value.recipeCuisine) {
             newJson = addElementToObject(jsonData.value, "recipeYield", "recipeCuisine");
         } else if (jsonData.value.recipeCategory) {
@@ -680,156 +657,151 @@ function changeRecipeYield() {
         } else {
             newJson = addElementToObject(jsonData.value, "recipeYield", "totalTime");
         }
-        jsonData.value = newJson
+        jsonData.value = newJson;
     }
-    jsonData.value.recipeYield = values.value.recipeYield
+    jsonData.value.recipeYield = values.value.recipeYield;
     if (values.value.recipeYield == "") {
-        delete jsonData.value.recipeYield
+        delete jsonData.value.recipeYield;
     }
 }
 // for nutrition
 function changeServingSize() {
     if (!jsonData.value.nutrition.servingSize) {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value.nutrition, "servingSize", "@type");
-        jsonData.value.nutrition = newJson
+        jsonData.value.nutrition = newJson;
     }
-    jsonData.value.nutrition.servingSize = values.value.nutrition.servingSize
+    jsonData.value.nutrition.servingSize = values.value.nutrition.servingSize;
     if (values.value.nutrition.servingSize == "") {
-        delete jsonData.value.nutrition.servingSize
+        delete jsonData.value.nutrition.servingSize;
     }
 }
 function changecalories() {
-    jsonData.value.nutrition.calories = values.value.nutrition.calories
+    jsonData.value.nutrition.calories = values.value.nutrition.calories;
 }
 function changeFatContent() {
     if (!jsonData.value.nutrition.fatContent) {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value.nutrition, "fatContent", "calories");
-        jsonData.value.nutrition = newJson
+        jsonData.value.nutrition = newJson;
     }
-    jsonData.value.nutrition.fatContent = values.value.nutrition.fatContent
+    jsonData.value.nutrition.fatContent = values.value.nutrition.fatContent;
     if (values.value.nutrition.fatContent == "") {
-        delete jsonData.value.nutrition.fatContent
+        delete jsonData.value.nutrition.fatContent;
     }
 }
 // for Ingredient
-const ingredientNumber = ref(0)
-const valuesIngredient = ref([
-
-]
-)
+const ingredientNumber = ref(0);
+const valuesIngredient = ref([]);
 function addIngredient() {
-    ingredientNumber.value++
-    valuesIngredient.value[ingredientNumber.value - 1] = ""
+    ingredientNumber.value++;
+    valuesIngredient.value[ingredientNumber.value - 1] = "";
     if (!jsonData.value.recipeIngredient) {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value, "recipeIngredient", "nutrition");
-        jsonData.value = newJson
+        jsonData.value = newJson;
     } else {
-        jsonData.value.recipeIngredient = valuesIngredient.value
+        jsonData.value.recipeIngredient = valuesIngredient.value;
     }
-
 }
 function deleteOneIngredient(taskIndex) {
     if (ingredientNumber.value > 1) {
-        ingredientNumber.value--
+        ingredientNumber.value--;
         // jsonData.value.recipeIngredient.splice(taskIndex, 1)
-        valuesIngredient.value.splice(taskIndex, 1)
+        valuesIngredient.value.splice(taskIndex, 1);
     } else {
-        ingredientNumber.value--
-        delete jsonData.value.recipeIngredient
+        ingredientNumber.value--;
+        delete jsonData.value.recipeIngredient;
         // jsonData.value.recipeIngredient.splice(taskIndex, 1)
-        valuesIngredient.value.splice(taskIndex, 1)
+        valuesIngredient.value.splice(taskIndex, 1);
     }
 }
 function changeIngredient(taskIndex) {
     if (ingredientNumber.value == 1) {
-        jsonData.value.recipeIngredient = valuesIngredient.value[0]
+        jsonData.value.recipeIngredient = valuesIngredient.value[0];
     } else {
-        jsonData.value.recipeIngredient[taskIndex] = valuesIngredient.value[taskIndex]
+        jsonData.value.recipeIngredient[taskIndex] = valuesIngredient.value[taskIndex];
     }
 }
 // for step
-const stepNumber = ref(0)
-const valuesStep = ref([
-
-]
-)
+const stepNumber = ref(0);
+const valuesStep = ref([]);
 function addStep() {
-    stepNumber.value++
-    valuesStep.value[stepNumber.value - 1] =
-    {
+    stepNumber.value++;
+    valuesStep.value[stepNumber.value - 1] = {
         "@type": "HowToStep",
-        "name": "",
-        "text": "",
-        "url": "",
-        "image": ""
-    }
+        name: "",
+        text: "",
+        url: "",
+        image: "",
+    };
     if (!jsonData.value.recipeInstructions) {
-        let newJson = {}
+        let newJson = {};
         if (jsonData.value.recipeIngredient) {
-            newJson = addElementToObject(jsonData.value, "recipeInstructions", "recipeIngredient");
+            newJson = addElementToObject(
+                jsonData.value,
+                "recipeInstructions",
+                "recipeIngredient"
+            );
         } else {
             newJson = addElementToObject(jsonData.value, "recipeInstructions", "nutrition");
         }
-        jsonData.value = newJson
+        jsonData.value = newJson;
     }
-    jsonData.value.recipeInstructions = valuesStep.value
+    jsonData.value.recipeInstructions = valuesStep.value;
 }
 function deleteOneStep(taskIndex) {
     if (stepNumber.value > 1) {
-        stepNumber.value--
-        valuesStep.value.splice(taskIndex, 1)
+        stepNumber.value--;
+        valuesStep.value.splice(taskIndex, 1);
     } else {
-        stepNumber.value--
-        jsonData.value.recipeInstructions.splice(taskIndex, 1)
-        delete jsonData.value.recipeInstructions
-        valuesStep.value.splice(taskIndex, 1)
+        stepNumber.value--;
+        jsonData.value.recipeInstructions.splice(taskIndex, 1);
+        delete jsonData.value.recipeInstructions;
+        valuesStep.value.splice(taskIndex, 1);
     }
 }
 function changeStepName(taskIndex) {
     if (stepNumber.value == 1) {
-        jsonData.value.recipeInstructions.name = valuesStep.value[0].name
+        jsonData.value.recipeInstructions.name = valuesStep.value[0].name;
     } else {
-        jsonData.value.recipeInstructions[taskIndex].name = valuesStep.value[taskIndex].name
+        jsonData.value.recipeInstructions[taskIndex].name = valuesStep.value[taskIndex].name;
     }
 }
 function changeStepText(taskIndex) {
     if (stepNumber.value == 1) {
-        jsonData.value.recipeInstructions.text = valuesStep.value[0].text
+        jsonData.value.recipeInstructions.text = valuesStep.value[0].text;
     } else {
-        jsonData.value.recipeInstructions[taskIndex].text = valuesStep.value[taskIndex].text
+        jsonData.value.recipeInstructions[taskIndex].text = valuesStep.value[taskIndex].text;
     }
 }
 function changeStepUrl(taskIndex) {
     if (stepNumber.value == 1) {
-        jsonData.value.recipeInstructions.url = valuesStep.value[0].url
+        jsonData.value.recipeInstructions.url = valuesStep.value[0].url;
     } else {
-        jsonData.value.recipeInstructions[taskIndex].url = valuesStep.value[taskIndex].url
+        jsonData.value.recipeInstructions[taskIndex].url = valuesStep.value[taskIndex].url;
     }
 }
 function changeStepImage(taskIndex) {
     if (stepNumber.value == 1) {
-        jsonData.value.recipeInstructions.image = valuesStep.value[0].image
+        jsonData.value.recipeInstructions.image = valuesStep.value[0].image;
     } else {
-        jsonData.value.recipeInstructions[taskIndex].image = valuesStep.value[taskIndex].image
+        jsonData.value.recipeInstructions[taskIndex].image =
+            valuesStep.value[taskIndex].image;
     }
 }
 // for aggregate rating
-const aggregateAllow = ref(false)
-const valuesAggregateRating = ref(
-    {
-        "@type": "AggregateRating",
-        "ratingValue": "",
-        "ratingCount": "",
-        "bestRating": "",
-        "worstRating": ""
-    },
-)
+const aggregateAllow = ref(false);
+const valuesAggregateRating = ref({
+    "@type": "AggregateRating",
+    ratingValue: "",
+    ratingCount: "",
+    bestRating: "",
+    worstRating: "",
+});
 function addAggregateRating() {
     if (!jsonData.value.aggregateRating) {
-        let newJson = {}
+        let newJson = {};
         if (jsonData.value.mpn) {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "mpn");
         } else if (jsonData.value.gtin14) {
@@ -845,75 +817,69 @@ function addAggregateRating() {
         } else {
             newJson = addElementToObject(jsonData.value, "aggregateRating", "image");
         }
-        jsonData.value = newJson
-        jsonData.value.aggregateRating = valuesAggregateRating.value
+        jsonData.value = newJson;
+        jsonData.value.aggregateRating = valuesAggregateRating.value;
     }
 }
 function changeAggregateRating() {
-    addAggregateRating()
-    aggregateAllow.value = true
-    jsonData.value.aggregateRating.ratingValue = valuesAggregateRating.value.ratingValue
+    addAggregateRating();
+    aggregateAllow.value = true;
+    jsonData.value.aggregateRating.ratingValue = valuesAggregateRating.value.ratingValue;
     if (!valuesAggregateRating.value.ratingValue) {
-        delete jsonData.value.aggregateRating
+        delete jsonData.value.aggregateRating;
     }
 }
 function changeNumberOfRating() {
     if (jsonData.value.aggregateRating) {
-        addAggregateRating()
-        jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount
+        addAggregateRating();
+        jsonData.value.aggregateRating.ratingCount = valuesAggregateRating.value.ratingCount;
     }
 }
 function changeHighestRating() {
     if (jsonData.value.aggregateRating) {
-        addAggregateRating()
-        jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating
+        addAggregateRating();
+        jsonData.value.aggregateRating.bestRating = valuesAggregateRating.value.bestRating;
     }
 }
 function changeLowestRating() {
     if (jsonData.value.aggregateRating) {
-        addAggregateRating()
-        jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating
+        addAggregateRating();
+        jsonData.value.aggregateRating.worstRating = valuesAggregateRating.value.worstRating;
     }
 }
 // for review
-const readOnlyOk = ref(false)
-const reviewNumber = ref(0)
-const valuesReview = ref([
-]);
-const valuesPublisher = ref(
-    [
-        { "@type": "Organization", "name": "" }
-    ]
-)
+const readOnlyOk = ref(false);
+const reviewNumber = ref(0);
+const valuesReview = ref([]);
+const valuesPublisher = ref([{ "@type": "Organization", name: "" }]);
 function deleteOneReview(taskIndex) {
     if (reviewNumber.value > 1) {
-        reviewNumber.value--
-        valuesReview.value.splice(taskIndex, 1)
+        reviewNumber.value--;
+        valuesReview.value.splice(taskIndex, 1);
     } else {
-        reviewNumber.value--
-        jsonData.value.review.splice(taskIndex, 1)
-        delete jsonData.value.review
-        valuesReview.value.splice(taskIndex, 1)
+        reviewNumber.value--;
+        jsonData.value.review.splice(taskIndex, 1);
+        delete jsonData.value.review;
+        valuesReview.value.splice(taskIndex, 1);
     }
 }
 function addReview() {
-    reviewNumber.value++
-    valuesReview.value[reviewNumber.value - 1] =
-    {
+    reviewNumber.value++;
+    valuesReview.value[reviewNumber.value - 1] = {
         "@type": "Review",
-        "name": "",
-        "reviewBody": "",
-        "datePublished": "",
-        "reviewRating": {
+        name: "",
+        reviewBody: "",
+        datePublished: "",
+        reviewRating: {
             "@type": "Rating",
-            "ratingValue": "",
-            "bestRating": "",
-            "worstRating": ""
+            ratingValue: "",
+            bestRating: "",
+            worstRating: "",
         },
-        "author": { "@type": "Person", "name": "" },
-    }
-    valuesPublisher.value[reviewNumber.value - 1] = { "@type": "Organization", "name": "" }
-    let newJson = {}
+        author: { "@type": "Person", name: "" },
+    };
+    valuesPublisher.value[reviewNumber.value - 1] = { "@type": "Organization", name: "" };
+    let newJson = {};
     if (!jsonData.value.review) {
         if (jsonData.value.aggregateRating) {
             newJson = addElementToObject(jsonData.value, "review", "aggregateRating");
@@ -922,55 +888,59 @@ function addReview() {
         } else {
             newJson = addElementToObject(jsonData.value, "review", "nutrition");
         }
-        jsonData.value = newJson
-        jsonData.value.review = valuesReview.value
+        jsonData.value = newJson;
+        jsonData.value.review = valuesReview.value;
     } else {
-        jsonData.value.review[reviewNumber.value - 1] = valuesReview.value[reviewNumber.value - 1]
+        jsonData.value.review[reviewNumber.value - 1] =
+            valuesReview.value[reviewNumber.value - 1];
     }
 }
 function changeReviewName(taskIndex) {
-    jsonData.value.review[taskIndex].name = valuesReview.value[taskIndex].name
+    jsonData.value.review[taskIndex].name = valuesReview.value[taskIndex].name;
 }
 function changeReviewBody(taskIndex) {
-    jsonData.value.review[taskIndex].reviewBody = valuesReview.value[taskIndex].reviewBody
+    jsonData.value.review[taskIndex].reviewBody = valuesReview.value[taskIndex].reviewBody;
 }
 function changeReviewRating(taskIndex) {
     if (valuesReview.value[taskIndex].reviewRating.ratingValue) {
-        readOnlyOk.value = true
+        readOnlyOk.value = true;
     } else {
-        readOnlyOk.value = false
+        readOnlyOk.value = false;
     }
-    addAggregateRating()
-    jsonData.value.review[taskIndex].reviewRating.ratingValue = valuesReview.value[taskIndex].reviewRating.ratingValue
-    let sum = 0
-    let sumRatingNumber = 0
+    addAggregateRating();
+    jsonData.value.review[taskIndex].reviewRating.ratingValue =
+        valuesReview.value[taskIndex].reviewRating.ratingValue;
+    let sum = 0;
+    let sumRatingNumber = 0;
     for (let i = 0; i < valuesReview.value.length; i++) {
-        sum += Number(valuesReview.value[i].reviewRating.ratingValue)
+        sum += Number(valuesReview.value[i].reviewRating.ratingValue);
         if (valuesReview.value[i].reviewRating.ratingValue) {
-            sumRatingNumber++
+            sumRatingNumber++;
         }
     }
-    jsonData.value.aggregateRating.ratingValue = sum / sumRatingNumber
-    jsonData.value.aggregateRating.ratingCount = sumRatingNumber
-    valuesAggregateRating.value.ratingValue = sum / sumRatingNumber
-    valuesAggregateRating.value.ratingCount = sumRatingNumber
+    jsonData.value.aggregateRating.ratingValue = sum / sumRatingNumber;
+    jsonData.value.aggregateRating.ratingCount = sumRatingNumber;
+    valuesAggregateRating.value.ratingValue = sum / sumRatingNumber;
+    valuesAggregateRating.value.ratingCount = sumRatingNumber;
 }
 function changeReviewDatePublished(taskIndex) {
-    jsonData.value.review[taskIndex].datePublished = valuesReview.value[taskIndex].datePublished
+    jsonData.value.review[taskIndex].datePublished =
+        valuesReview.value[taskIndex].datePublished;
 }
 function changeReviewAuthorName(taskIndex) {
-    jsonData.value.review[taskIndex].author.name = valuesReview.value[taskIndex].author.name
+    jsonData.value.review[taskIndex].author.name =
+        valuesReview.value[taskIndex].author.name;
 }
 function changePublisherName(taskIndex) {
     if (!jsonData.value.review[taskIndex].publisher) {
-        let newJson = {}
+        let newJson = {};
         newJson = addElementToObject(jsonData.value.review[taskIndex], "publisher", "author");
-        jsonData.value.review[taskIndex] = newJson
-        jsonData.value.review[taskIndex].publisher = valuesPublisher.value[taskIndex]
+        jsonData.value.review[taskIndex] = newJson;
+        jsonData.value.review[taskIndex].publisher = valuesPublisher.value[taskIndex];
     }
-    jsonData.value.review[taskIndex].publisher.name = valuesPublisher.value[taskIndex].name
+    jsonData.value.review[taskIndex].publisher.name = valuesPublisher.value[taskIndex].name;
     if (valuesPublisher.value[taskIndex].name == "") {
-        delete jsonData.value.review[taskIndex].publisher
+        delete jsonData.value.review[taskIndex].publisher;
     }
 }
 </script>
