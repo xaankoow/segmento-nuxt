@@ -78,13 +78,27 @@ const response_errors = ref({
   password_confirmation: false,
 });
 
+const form = ref({
+  name: "",
+  email: "",
+  password: "",
+  password_confirmation: "",
+  ref: null
+});
+
+let ref_code = useRoute().query.ref ?? null;
+if (ref_code !== null && ref_code.length > 5) {
+  useCookie("ref").value = ref_code
+  navigateTo("/auth/signup")
+  form.value.ref = ref_code
+} else {
+  ref_code = useCookie("ref").value ?? null
+  form.value.ref = ref_code
+}
+
 async function send_active_code_to_email() {
   if (!form_validation()) {
     return 0; // Do not continue;
-  }
-  let ref_code = useRoute().query.ref ?? null;
-  if (ref_code !== null && ref_code.length > 5) {
-    form.value.ref = ref_code
   }
 
   let response = await request.post("auth/register", form.value);
@@ -131,11 +145,5 @@ function form_validation() {
   return true;
 }
 
-const form = ref({
-  name: "",
-  email: "",
-  password: "",
-  password_confirmation: "",
-  ref: null
-});
+
 </script>
