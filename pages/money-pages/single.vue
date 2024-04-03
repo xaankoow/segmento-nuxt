@@ -221,76 +221,28 @@
           <div class="grid grid-cols-2 gap-4">
             <hr />
             <hr />
-            <div class="flex flex-row justify-between items-center">
-              <span class="flex flex-row items-center gap-4">
-                <span class="mask mask-square bg-amber-400 w-6 h-6">&nbsp;</span>
-                <span>انتظار کاربر برای تعامل (TtI)</span>
-              </span>
-              <span class="text-error text-sm">
-                <span v-if="!request.pending.value && data.timing?.total !== undefined">
-                  {{ Math.round(data.audits["interactive"].numericValue / 100) / 10 }}</span>
-                ثانیه
-              </span>
-            </div>
-            <div class="flex flex-row justify-between items-center">
-              <span class="flex flex-row items-center gap-4">
-                <span class="mask mask-triangle bg-error w-6 h-6">&nbsp;</span>
-                <span>انتظار برای اولین لود (FCP)</span>
-              </span>
-              <span class="text-error text-sm">
-                <span v-if="!request.pending.value && data.timing?.total !== undefined">
-                  {{ Math.round(data.audits["first-contentful-paint"].numericValue / 100) / 10 }}</span>
-                ثانیه
-              </span>
-            </div>
+            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="TTI"
+              :time="Math.round(data.audits['interactive'].numericValue / 100) / 10">انتظار کاربر برای تعامل (TtI)
+            </LighhouseShape>
+            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="FCP"
+              :time="Math.round(data.audits['first-contentful-paint'].numericValue / 100) / 10">انتظار برای اولین لود (FCP)
+            </LighhouseShape>
             <hr />
             <hr />
-            <div class="flex flex-row justify-between items-center">
-              <span class="flex flex-row items-center gap-4">
-                <span class="mask mask-circle bg-success w-6 h-6">&nbsp;</span>
-                <span>زمان برای شکل‌گیری کامل صفحه (TBT)</span>
-              </span>
-              <span class="text-error text-sm">
-                <span v-if="!request.pending.value && data.timing?.total !== undefined">
-                  {{ data.audits["total-blocking-time"].numericValue }}</span>
-                میلی‌ثانیه
-              </span>
-            </div>
-            <div class="flex flex-row justify-between items-center">
-              <span class="flex flex-row items-center gap-4">
-                <span class="mask mask-triangle bg-error w-6 h-6">&nbsp;</span>
-                <span>سرعت بصری‌سازی سایت (SI)</span>
-              </span>
-              <span class="text-error text-sm">
-                <span v-if="!request.pending.value && data.timing?.total !== undefined">
-                  {{ Math.round(data.audits["speed-index"].numericValue / 100) / 10 }}</span>
-                ثانیه
-              </span>
-            </div>
+            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="TBT"
+              :time="data.audits['total-blocking-time'].numericValue">زمان برای شکل‌گیری کامل صفحه (TBT)
+            </LighhouseShape>
+            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="SI"
+              :time="Math.round(data.audits['speed-index'].numericValue / 100) / 10">سرعت بصری‌سازی سایت (SI)
+            </LighhouseShape>
             <hr />
             <hr />
-            <div class="flex flex-row justify-between items-center">
-              <span class="flex flex-row items-center gap-4">
-                <span class="mask mask-square bg-amber-400 w-6 h-6">&nbsp;</span>
-                <span>ترتیب چیدمان عناصر (CLS)</span>
-              </span>
-              <span class="text-error text-sm">
-                <span v-if="!request.pending.value && data.timing?.total !== undefined">
-                  {{ Math.round(data.audits["cumulative-layout-shift"].numericValue / 100) / 10 }}</span>
-                ثانیه
-              </span>
-            </div>
-            <div class="flex flex-row justify-between items-center">
-              <span class="flex flex-row items-center gap-4">
-                <span class="mask mask-triangle bg-error w-6 h-6">&nbsp;</span>
-                <span>انتظار برای لود بزرگ‌ترین المان (LCP)</span>
-              </span>
-              <span class="text-error text-sm">
-                <span v-if="!request.pending.value && data.timing?.total !== undefined">
-                  {{ Math.round(data.audits["largest-contentful-paint"].numericValue / 100) / 10 }}</span>
-                ثانیه
-              </span>
-            </div>
+            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="CLS"
+              :time="Math.round(data.audits['cumulative-layout-shift'].numericValue / 100) / 10">ترتیب چیدمان عناصر (CLS)
+            </LighhouseShape>
+            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="LCP"
+              :time="Math.round(data.audits['largest-contentful-paint'].numericValue / 100) / 10">انتظار برای لود بزرگ‌ترین المان (LCP)
+            </LighhouseShape>
             <hr />
             <hr />
           </div>
@@ -391,8 +343,10 @@
             <span>{{
         config.by_route(`${current_page}/single/sections/page-speed/order`)
       }}</span>
-            <div class="flex flex-row items-center justify-evenly" v-if="!request.pending.value && data.audits !== undefined">
-              <div class="w-28 h-fit border rounded-sm" v-for="thumbnail in data.audits['screenshot-thumbnails'].details.items" :key="i">
+            <div class="flex flex-row items-center justify-evenly"
+              v-if="!request.pending.value && data.audits !== undefined">
+              <div class="w-28 h-fit border rounded-sm"
+                v-for="thumbnail in data.audits['screenshot-thumbnails'].details.items">
                 <img :src="thumbnail.data" />
               </div>
             </div>
