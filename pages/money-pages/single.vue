@@ -343,7 +343,7 @@
             <span>{{
         config.by_route(`${current_page}/single/sections/page-speed/order`)
       }}</span>
-            <div class="flex flex-row items-center justify-evenly"
+            <div class="flex flex-row items-center justify-evenly" dir="ltr"
               v-if="!request.pending.value && data.audits !== undefined">
               <div class="w-28 h-fit border rounded-sm"
                 v-for="thumbnail in data.audits['screenshot-thumbnails'].details.items">
