@@ -24,7 +24,6 @@ const props = defineProps({
 
 let green = {}, orange = {}, red = {};
 
-console.log(props)
 shape.value = shape_chooser(props.time)
 
 function shape_chooser(time) {
