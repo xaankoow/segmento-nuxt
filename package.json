@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.6.0",
-    "daisyui": "^3.1.0",
+    "daisyui": "^4.10.1",
     "nuxt": "^3.3.1",
     "postcss-nesting": "^12.0.1",
     "typescript": "^4.8.2",
