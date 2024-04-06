@@ -11,27 +11,24 @@
       <TabItem to="/money-pages" :active="true">
         {{ config.by_route(`${current_page}/tabs/list`) }}
       </TabItem>
-      <TabSeparator />
+      <!-- <TabSeparator />
       <TabItem>
         {{ config.by_route(`${current_page}/tabs/analytics`) }}
-      </TabItem>
+      </TabItem> -->
     </div>
 
     <!--  body -->
     <div class="w-full h-[93%]">
       <!-- text -->
-      <div class="w-full h-32 flex items-end justify-center">
+      <div class="w-full h-24 flex items-end justify-center">
         <div
-          class="w-[96%] h-[108px] rounded-lg border border-base-400 bg-base-200 flex items-center justify-center text-sm p-4">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
-          طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-          لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود
-          اپلیکیشنهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده،
-          شناخت فراوان جامعه و متخصصان را می طلبد،
+          class="w-[96%] h-[70px] rounded-lg border border-base-400 bg-base-200 flex items-center justify-center text-sm p-4">
+          صفحات پول‌ساز، بخش‌هایی از وبسایت هستند که به طور مستقیم یا غیرمستقیم به درآمد کسب و کار کمک می‌کنند، این
+          صفحات به صورت مستقیم به فروش محصولات یا خدمات شما می‌پردازند و مشتریان را به انجام خرید تشویق می‌کنند.
         </div>
       </div>
       <!-- add page -->
-      <div class="w-full h-16 flex items-end justify-between px-5">
+      <div class="w-full h-16 flex items-center justify-between px-5 mt-2">
         <p class="text-lg">لیست صفحات تجاری من</p>
         <button class="w-40 h-10 btn-primary" disabled>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,17 +58,13 @@
         <button class="w-[72px] h-10 btn-secondary">اعمال</button>
       </div>
       <!-- item -->
-      <div class="w-full max-h-[660px] h-fit px-5 flex items-center justify-center bg-white mt-7">
-        <div class="w-full h-full rounded-lg border border-base-400 overflow-hidden text-sm"
+      <div class="w-full max-h-[660px] h-fit px-5 flex items-center justify-center">
+        <div class="w-full h-full rounded-lg border border-base-400 overflow-y-auto text-sm"
           v-if="Boolean(Object.keys(data).length)">
           <!-- Guide bar -->
-          <table class="w-full h-auto bg-base-200 overflow-y-scroll" dir="rtl">
+          <table class="w-full h-auto bg-base-200 overflow-hidden" dir="rtl">
             <tr class="w-full h-[60px]">
-              <td class="h-[60px] w-[78px] text-center border-l border-base-400">
-                انتخاب
-              </td>
-              <td class="h-[60px] w-[49px] text-center border-l border-base-400">ردیف</td>
-              <td class="h-[60px] w-[246px] text-center border-l border-base-400">
+              <td class="h-[60px] w-[246px] max-w-[246px] text-center border-l border-base-400">
                 آدرس صفحات URLs
               </td>
               <td class="h-[60px] w-[197px] text-center border-l border-base-400">
@@ -83,21 +76,15 @@
               <td class="h-[60px] w-[197px] text-center border-l border-base-400">
                 وضعیت صفحه
               </td>
-              <td class="h-[60px] w-[76px] text-center border-base-400">جزییات</td>
+              <td class="h-[60px] w-[76px] text-center border-base-400">جزئیات</td>
             </tr>
           </table>
           <!-- Map on data -->
-          <div dir="ltr" class="w-full h-auto max-h-[600px] overflow-y-scroll">
+          <div dir="ltr" class="w-full h-auto max-h-[600px] overflow-hiden">
             <table class="w-full h-auto overflow-auto" dir="rtl">
               <tr v-for="(page, index) in data" :key="index" class="w-full h-[60px]">
-                <td class="h-[60px] w-[72px] text-center border-l border-base-400 border-b">
-                  <input class="w-[18px] h-[18px]" type="checkbox" />
-                </td>
-                <td class="h-[60px] w-[49px] text-center border-l border-base-400 border-b">
-                  {{ index + 1 }}
-                </td>
-                <td class="h-[60px] w-[246px] text-center border-l border-base-400 border-b" dir="ltr">
-                  {{ page.link }}
+                <td :title="page.link" class="h-[60px] w-[246px] max-w-[246px] text-center border-l border-base-400 border-b overflow-hidden" dir="ltr">
+                  <a :href="page.link" target="new">{{ show_url(page.link) }}</a>
                 </td>
                 <td class="h-[60px] w-[197px] text-center border-l border-base-400 border-b">
                   <div class="w-full h-full flex items-center justify-center" v-if="page.positions_avrage === null">
@@ -115,32 +102,32 @@
                     </button>
                   </div>
                   <div v-else>
-                    {{ page.positions_average === 0 ? "بدون رتبه" : page.positions_average === "" ? "بدون رتبه" :
-                      page.positions_average }}
+                    {{ page.positions_average === 0 ? "بدون رتبه" : page.positions_average === null ? "غیرفعال" :
+      page.positions_average }}
                   </div>
                 </td>
                 <td class="h-[60px] w-[147px] text-center border-l border-base-400 border-b" dir="ltr">
                   <span v-if="page.updated_at === null"> بدون دیتا </span>
                   <span v-else>
                     {{
-                      jalaliMoment(page.updated_at, "YYYY-MM-DD HH:mm:ss").format(
-                        "jYYYY/jMM/jDD"
-                      )
-                    }}
+      jalaliMoment(page.updated_at, "YYYY-MM-DD HH:mm:ss").format(
+        "jYYYY/jMM/jDD"
+      )
+    }}
                   </span>
                 </td>
                 <td class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6">
                   <p>{{ page.page_status }} درصد</p>
                   <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
                     <div class="h-[10px] rounded-xl" :style="{
-                      width: `${page.page_status}%`,
-                      backgroundColor:
-                        page.page_status <= 25
-                          ? '#F35242'
-                          : page.page_status <= 60
-                            ? '#FFCE47'
-                            : '#10CCAE',
-                    }"></div>
+      width: `${page.page_status}%`,
+      backgroundColor:
+        page.page_status <= 25
+          ? '#F35242'
+          : page.page_status <= 60
+            ? '#FFCE47'
+            : '#10CCAE',
+    }"></div>
                   </div>
                 </td>
                 <td class="h-[60px] w-[76px] text-center border-base-400 border-b">
@@ -193,6 +180,9 @@ const data = ref({});
 const Sites = useSitesStore();
 
 async function load_data(uuid) {
+  if (uuid == null) {
+    return
+  }
   let res = await request
     .get("money-pages", { workspace: uuid })
     .then((res) => {
@@ -203,6 +193,13 @@ async function load_data(uuid) {
     });
 }
 
+function show_url(url) {
+  let new_url = url.replace("https://", "").replace(/\/$/, '');
+  let slices = new_url.split("/")
+  let path = slices.slice(1).join("/")
+  return [slices[0], path.length > 15 ? `${path.slice(0, 12)}...` : path].join("/").replace(/\/$/, '');
+}
+
 // console.log(Sites.current)
 
 watch(() => Sites.current, (newValue) => {
@@ -210,7 +207,7 @@ watch(() => Sites.current, (newValue) => {
 });
 
 onMounted(() => {
-  load_data(Sites.current.uuid);
+  load_data(Sites?.current?.uuid ?? null);
 })
 
 
