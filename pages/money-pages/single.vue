@@ -26,8 +26,8 @@
       <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
         <!-- title -->
         <span class="p-3">{{
-      config.by_route(`${current_page}/single/sections/page-speed/title`)
-    }}</span>
+          config.by_route(`${current_page}/single/sections/page-speed/title`)
+        }}</span>
         <!-- the page detail -->
         <div class="flex flex-row items-center justify-evenly">
           <div class="w-36 h-36 flex items-center justify-center">
@@ -77,10 +77,10 @@
               <div class="flex flex-row gap-4 items-center">
                 <span class="mask mask-triangle w-6 h-6 bg-error">&nbsp;</span>
                 <span>{{
-      config.by_route(
-        `${current_page}/single/sections/page-speed/problems/high`
-      )
-    }}</span>
+                  config.by_route(
+                    `${current_page}/single/sections/page-speed/problems/high`
+                  )
+                }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
                 5 مورد
@@ -93,10 +93,10 @@
               <div class="flex flex-row gap-4 items-center">
                 <span class="mask mask-square w-6 h-6 bg-amber-400">&nbsp;</span>
                 <span>{{
-        config.by_route(
-          `${current_page}/single/sections/page-speed/problems/middle`
-        )
-      }}</span>
+                  config.by_route(
+                    `${current_page}/single/sections/page-speed/problems/middle`
+                  )
+                }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
                 5 مورد
@@ -109,10 +109,10 @@
               <div class="flex flex-row gap-4 items-center">
                 <span class="mask mask-circle w-6 h-6 bg-base-500">&nbsp;</span>
                 <span>{{
-        config.by_route(
-          `${current_page}/single/sections/page-speed/problems/low`
-        )
-      }}</span>
+                  config.by_route(
+                    `${current_page}/single/sections/page-speed/problems/low`
+                  )
+                }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
                 5 مورد
@@ -125,10 +125,10 @@
               <div class="flex flex-row gap-4 items-center">
                 <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
                 <span>{{
-        config.by_route(
-          `${current_page}/single/sections/page-speed/problems/solved`
-        )
-      }}</span>
+                  config.by_route(
+                    `${current_page}/single/sections/page-speed/problems/solved`
+                  )
+                }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
                 5 مورد
@@ -214,8 +214,8 @@
         <!-- criterion -->
         <div class="flex flex-col gap-2 px-4">
           <label>{{
-      config.by_route(`${current_page}/single/sections/page-speed/criterion`)
-    }}</label>
+            config.by_route(`${current_page}/single/sections/page-speed/criterion`)
+          }}</label>
 
           <!-- data analyze -->
           <div class="grid grid-cols-2 gap-4">
@@ -225,7 +225,8 @@
               :time="Math.round(data.audits['interactive'].numericValue / 100) / 10">انتظار کاربر برای تعامل (TtI)
             </LighhouseShape>
             <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="FCP"
-              :time="Math.round(data.audits['first-contentful-paint'].numericValue / 100) / 10">انتظار برای اولین لود (FCP)
+              :time="Math.round(data.audits['first-contentful-paint'].numericValue / 100) / 10">انتظار برای اولین لود
+              (FCP)
             </LighhouseShape>
             <hr />
             <hr />
@@ -238,111 +239,91 @@
             <hr />
             <hr />
             <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="CLS"
-              :time="Math.round(data.audits['cumulative-layout-shift'].numericValue / 100) / 10">ترتیب چیدمان عناصر (CLS)
+              :time="Math.round(data.audits['cumulative-layout-shift'].numericValue / 100) / 10">ترتیب چیدمان عناصر
+              (CLS)
             </LighhouseShape>
             <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="LCP"
-              :time="Math.round(data.audits['largest-contentful-paint'].numericValue / 100) / 10">انتظار برای لود بزرگ‌ترین المان (LCP)
+              :time="Math.round(data.audits['largest-contentful-paint'].numericValue / 100) / 10">انتظار برای لود
+              بزرگ‌ترین المان (LCP)
             </LighhouseShape>
             <hr />
             <hr />
           </div>
 
           <!-- radial analyze -->
-          <div class="flex flex-row justify-evenly my-4 items-center">
+          <div class="flex flex-row justify-evenly my-4 items-center"
+            v-if="!request.pending.value && data.categories !== undefined">
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask flex items-center justify-center">
-                <!-- TODO : Fix this line after update RadialProgress component  -->
-                <ProgressRadial :value="8" :remained="6" color="#0A65CD" bg="#0A65CD30" size="8rem" fontSize="24px"
-                  fontSizeText="10px" textColor="#000000" :sizeCircle="62"></ProgressRadial>
-
-                <!-- <svg
-                  width="120"
-                  height="120"
-                  viewBox="0 0 120 120"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="60" cy="60" r="60" fill="#F35242" fill-opacity="0.2" />
-                  <path
-                    d="M115.5 60C117.985 60 120.018 57.9822 119.831 55.5039C118.856 42.5163 113.674 30.1519 105.007 20.3213C96.3398 10.4906 84.7225 3.79964 71.9595 1.2039C69.5241 0.708587 67.2675 2.47195 66.956 4.93763C66.6445 7.40332 68.3974 9.63469 70.8261 10.1622C81.4146 12.4621 91.0386 18.0869 98.2557 26.2731C105.473 34.4593 109.847 44.7124 110.802 55.5056C111.021 57.9813 113.015 60 115.5 60Z"
-                    fill="#F35242"
-                  />
-                  <path
-                    d="M57.4703 71H40.6976V68.66L49.5503 58.8255C50.8703 57.3309 51.7758 56.12 52.2667 55.1927C52.7685 54.2545 53.0194 53.2891 53.0194 52.2964C53.0194 50.9655 52.6158 49.8745 51.8085 49.0236C51.0012 48.1618 49.9212 47.7309 48.5685 47.7309C46.9539 47.7309 45.6994 48.1891 44.8049 49.1055C43.9103 50.0218 43.463 51.3036 43.463 52.9509H40.2067C40.2067 50.5945 40.9649 48.6909 42.4812 47.24C43.9976 45.7782 46.0267 45.0473 48.5685 45.0473C50.9467 45.0473 52.8285 45.6745 54.2139 46.9291C55.5994 48.1727 56.2921 49.8309 56.2921 51.9036C56.2921 54.4236 54.683 57.4236 51.4649 60.9036L44.6249 68.3491H57.4703V71ZM65.6415 56.6164H68.0797C69.6179 56.5945 70.8233 56.1909 71.6961 55.4055C72.5797 54.62 73.0215 53.5618 73.0215 52.2309C73.0215 49.2309 71.527 47.7309 68.5379 47.7309C67.1306 47.7309 66.007 48.1345 65.167 48.9418C64.3379 49.7382 63.9233 50.7964 63.9233 52.1164H60.667C60.667 50.0873 61.4088 48.4018 62.8924 47.06C64.3761 45.7182 66.2579 45.0473 68.5379 45.0473C70.9488 45.0473 72.8415 45.6909 74.2161 46.9782C75.5906 48.2545 76.2779 50.0273 76.2779 52.2964C76.2779 53.4091 75.9179 54.4891 75.1979 55.5364C74.4779 56.5727 73.4961 57.3527 72.2524 57.8764C73.6597 58.3127 74.7452 59.0491 75.5088 60.0855C76.2724 61.1109 76.6542 62.3709 76.6542 63.8655C76.6542 66.1564 75.9015 67.9782 74.3961 69.3309C72.9015 70.6727 70.9542 71.3436 68.5542 71.3436C66.1542 71.3436 64.2015 70.6945 62.6961 69.3964C61.1906 68.0982 60.4379 66.38 60.4379 64.2418H63.7106C63.7106 65.5945 64.147 66.6745 65.0197 67.4818C65.9033 68.2891 67.0815 68.6927 68.5542 68.6927C70.1252 68.6927 71.3252 68.2836 72.1542 67.4655C72.9942 66.6473 73.4142 65.4691 73.4142 63.9309C73.4142 62.4473 72.9561 61.3073 72.0397 60.5109C71.1233 59.7145 69.8033 59.3 68.0797 59.2673H65.6415V56.6164Z"
-                    fill="#F35242"
-                  />
-                </svg> -->
+                <!-- TODO: Add real data to this -->
+                <ProgressRadial :valueProps="data.categories['performance'].score * 100"
+                  :strokeColor="data.categories['performance'].score * 100 < 50 ? '#f35242' : data.categories['performance'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
+                  :bgColor="data.categories['performance'].score * 100 < 50 ? 'bg-[#f3524220]' : data.categories['performance'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+                  sizeProps="120px" strokeWidth="10px">
+                  <span class="text-extrabold text-4xl">
+                    {{ Math.floor(data.categories['performance'].score * 100) }}
+                  </span>
+                </ProgressRadial>
               </span>
               <span>{{
-      config.by_route(`${current_page}/single/sections/page-speed/function`)
-    }}</span>
+                config.by_route(`${current_page}/single/sections/page-speed/function`)
+              }}</span>
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <!--
-                  <RadialProgress :value="80" />
-                -->
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="60" cy="60" r="60" fill="#FFCE47" fill-opacity="0.2" />
-                  <path
-                    d="M10.5754 85.248C8.36221 86.3786 7.47026 89.0999 8.76352 91.2222C13.4693 98.9446 19.8712 105.521 27.5061 110.44C36.4048 116.172 46.6619 119.449 57.2361 119.936C67.8103 120.424 78.3254 118.105 87.714 113.216C97.1025 108.327 105.031 101.04 110.693 92.0968C116.356 83.1533 119.552 72.8708 119.956 62.2931C120.361 51.7154 117.96 41.2189 112.997 31.869C108.034 22.519 100.685 14.6486 91.6977 9.05632C83.9865 4.25834 75.304 1.28394 66.3109 0.332796C63.8394 0.0714009 61.761 2.04146 61.6855 4.5256C61.61 7.00973 63.5672 9.06423 66.035 9.35831C73.4398 10.2407 80.5804 12.739 86.943 16.6979C94.5826 21.4513 100.829 28.1412 105.047 36.0886C109.266 44.036 111.307 52.9581 110.963 61.9491C110.619 70.9402 107.902 79.6803 103.089 87.2823C98.2759 94.8843 91.5372 101.078 83.5569 105.234C75.5765 109.39 66.6388 111.36 57.6507 110.946C48.6626 110.531 39.9441 107.746 32.3802 102.874C26.0805 98.8153 20.7685 93.4291 16.804 87.1129C15.4828 85.0079 12.7887 84.1174 10.5754 85.248Z"
-                    fill="#FFCE47" />
-                  <path
-                    d="M53.4612 45.3909V48.1564H52.8558C50.3249 48.2 48.3067 48.9473 46.8012 50.3982C45.3067 51.8491 44.4449 53.8945 44.2158 56.5345C45.5576 54.9855 47.3958 54.2109 49.7303 54.2109C51.9558 54.2109 53.7339 54.9964 55.0649 56.5673C56.3958 58.1382 57.0612 60.1673 57.0612 62.6545C57.0612 65.2836 56.3412 67.3891 54.9012 68.9709C53.4721 70.5527 51.5521 71.3436 49.1412 71.3436C46.6867 71.3436 44.6958 70.4055 43.1685 68.5291C41.6521 66.6527 40.8939 64.2309 40.8939 61.2636V60.02C40.8939 55.3073 41.8976 51.7073 43.9049 49.22C45.9121 46.7218 48.9012 45.4455 52.8721 45.3909H53.4612ZM49.1903 56.9273C48.0776 56.9273 47.0521 57.26 46.1139 57.9255C45.1758 58.5909 44.5267 59.4255 44.1667 60.4291V61.6236C44.1667 63.74 44.6412 65.4418 45.5903 66.7291C46.5394 68.0164 47.723 68.66 49.1412 68.66C50.603 68.66 51.7485 68.12 52.5776 67.04C53.4176 65.96 53.8376 64.5473 53.8376 62.8018C53.8376 61.0455 53.4121 59.6273 52.5612 58.5473C51.7212 57.4673 50.5976 56.9273 49.1903 56.9273ZM77.4397 47.24L66.8361 71H63.4324L73.987 48.0745H60.1433V45.4073H77.4397V47.24Z"
-                    fill="#FFCE47" />
-                </svg>
+                <!-- TODO: Add real data to this -->
+                <ProgressRadial :valueProps="data.categories['accessibility'].score * 100"
+                  :strokeColor="data.categories['accessibility'].score * 100 < 50 ? '#f35242' : data.categories['accessibility'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
+                  :bgColor="data.categories['accessibility'].score * 100 < 50 ? 'bg-[#f3524220]' : data.categories['accessibility'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+                  sizeProps="120px" strokeWidth="10px">
+                  <span class="text-extrabold text-4xl">
+                    {{ Math.floor(data.categories['accessibility'].score * 100) }}
+                  </span>
+                </ProgressRadial>
               </span>
               <span>{{
-        config.by_route(`${current_page}/single/sections/page-speed/available`)
-      }}</span>
+                config.by_route(`${current_page}/single/sections/page-speed/available`)
+              }}</span>
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <!-- 
-                <RadialProgress :value="80" />
-                -->
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="60" cy="60" r="60" fill="#10CCAE" fill-opacity="0.2" />
-                  <path
-                    d="M30.0473 13.2765C28.706 11.1843 25.9104 10.5623 23.9245 12.0566C13.7732 19.6947 6.27441 30.3871 2.5722 42.6205C-1.56592 56.2942 -0.68927 70.9958 5.04446 84.0809C10.7782 97.166 20.9927 107.776 33.8508 114.002C46.7088 120.228 61.3665 121.662 75.1875 118.046C89.0084 114.43 101.086 106.001 109.247 94.2751C117.408 82.5493 121.117 68.2964 119.707 54.0799C118.298 39.8634 111.862 26.6164 101.557 16.7216C92.3377 7.86906 80.5631 2.21945 67.9717 0.531849C65.5085 0.201704 63.3758 2.11307 63.2311 4.59413C63.0864 7.0752 64.9856 9.18342 67.4442 9.54614C77.8949 11.0879 87.6504 15.8455 95.3234 23.2134C104.082 31.624 109.553 42.8839 110.751 54.9679C111.949 67.0519 108.796 79.1669 101.86 89.1338C94.9227 99.1007 84.6572 106.265 72.9093 109.339C61.1616 112.413 48.7025 111.194 37.7732 105.902C26.8438 100.609 18.1615 91.5911 13.2878 80.4688C8.41412 69.3464 7.66897 56.8501 11.1864 45.2274C14.2677 35.0458 20.4429 26.1199 28.7993 19.6574C30.7653 18.137 31.3885 15.3688 30.0473 13.2765Z"
-                    fill="#10CCAE" />
-                  <path
-                    d="M53.1667 59.7418C52.4794 60.56 51.6612 61.2145 50.7121 61.7055C49.7739 62.1964 48.743 62.4418 47.6194 62.4418C46.1467 62.4418 44.8594 62.0818 43.7576 61.3618C42.6667 60.6309 41.8212 59.6055 41.2212 58.2855C40.6212 56.9655 40.3212 55.5091 40.3212 53.9164C40.3212 52.2036 40.6485 50.6655 41.303 49.3018C41.9576 47.9273 42.8794 46.8745 44.0685 46.1436C45.2685 45.4127 46.6649 45.0473 48.2576 45.0473C50.7885 45.0473 52.7794 45.9964 54.2303 47.8945C55.6921 49.7818 56.423 52.3618 56.423 55.6345V56.5836C56.423 61.5691 55.4358 65.2073 53.4612 67.4982C51.4976 69.7891 48.5303 70.9618 44.5594 71.0164H43.9376V68.2673H44.6249C47.3085 68.2236 49.3703 67.5255 50.8103 66.1727C52.2503 64.82 53.0358 62.6764 53.1667 59.7418ZM48.143 59.7418C49.2339 59.7418 50.2376 59.4091 51.1539 58.7436C52.0812 58.0782 52.7576 57.2545 53.183 56.2727V54.9636C53.183 52.8364 52.7194 51.1073 51.7921 49.7764C50.8649 48.4345 49.6921 47.7636 48.2739 47.7636C46.8449 47.7636 45.6939 48.3145 44.8212 49.4164C43.9594 50.5073 43.5285 51.9473 43.5285 53.7364C43.5285 55.4818 43.9485 56.9218 44.7885 58.0564C45.6285 59.18 46.7467 59.7418 48.143 59.7418ZM76.9652 60.0855C76.9652 63.8927 76.3106 66.7236 75.0015 68.5782C73.7033 70.4218 71.6742 71.3436 68.9142 71.3436C66.1761 71.3436 64.1524 70.4436 62.8433 68.6436C61.5342 66.8327 60.8579 64.1273 60.8142 60.5273V56.1745C60.8142 52.4218 61.4633 49.6291 62.7615 47.7964C64.0597 45.9636 66.0997 45.0473 68.8815 45.0473C71.6306 45.0473 73.6542 45.9309 74.9524 47.6982C76.2615 49.4655 76.9324 52.1873 76.9652 55.8636V60.0855ZM73.7088 55.6345C73.7088 52.8855 73.3215 50.8836 72.547 49.6291C71.7724 48.3636 70.5506 47.7309 68.8815 47.7309C67.2124 47.7309 65.9961 48.3582 65.2324 49.6127C64.4688 50.8673 64.0761 52.7927 64.0542 55.3891V60.5927C64.0542 63.3636 64.4524 65.4091 65.2488 66.7291C66.0561 68.0382 67.2779 68.6927 68.9142 68.6927C70.5179 68.6927 71.707 68.0764 72.4815 66.8436C73.267 65.6 73.6761 63.6418 73.7088 60.9691V55.6345Z"
-                    fill="#10CCAE" />
-                </svg>
+                <ProgressRadial :valueProps="data.categories['best-practices'].score * 100"
+                  :strokeColor="data.categories['best-practices'].score * 100 < 50 ? '#f35242' : data.categories['best-practices'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
+                  :bgColor="data.categories['best-practices'].score * 100 < 50 ? 'bg-[#f3524220]' : data.categories['best-practices'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+                  sizeProps="120px" strokeWidth="10px">
+                  <span class="text-extrabold text-4xl">
+                    {{ Math.floor(data.categories['best-practices'].score * 100) }}
+                  </span>
+                </ProgressRadial>
               </span>
               <span>{{
-        config.by_route(
-          `${current_page}/single/sections/page-speed/important_criterion`
-        )
-      }}</span>
+                config.by_route(
+                  `${current_page}/single/sections/page-speed/important_criterion`
+                )
+              }}</span>
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <!-- 
-                <RadialProgress :value="80" />
-                -->
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="60" cy="60" r="60" fill="#10CCAE" fill-opacity="0.2" />
-                  <path
-                    d="M49.5761 5.48769C49.1093 3.04664 46.7458 1.42948 44.3465 2.07779C30.9988 5.68453 19.2553 13.8092 11.168 25.1369C2.20603 37.6898 -1.57766 53.2117 0.602349 68.4805C2.78236 83.7493 10.7586 97.5922 22.8753 107.136C34.9921 116.679 50.3185 121.19 65.6731 119.731C81.0277 118.273 95.2309 110.958 105.334 99.3038C115.438 87.6501 120.666 72.5531 119.932 57.1469C119.199 41.7407 112.561 27.2086 101.396 16.5674C91.3205 6.96466 78.2574 1.19604 64.4694 0.166577C61.991 -0.0184674 59.9742 2.01472 59.9753 4.50001C59.9764 6.98529 61.9962 8.97847 64.4719 9.19631C75.9433 10.2057 86.7865 15.0763 95.1864 23.0823C104.676 32.1273 110.319 44.4796 110.942 57.5749C111.566 70.6702 107.122 83.5026 98.5343 93.4082C89.9463 103.314 77.8735 109.532 64.8221 110.772C51.7707 112.011 38.7433 108.177 28.444 100.065C18.1448 91.9534 11.365 80.1869 9.512 67.2084C7.65899 54.2299 10.8751 41.0363 18.4928 30.3664C25.2353 20.9223 34.9677 14.0975 46.044 10.9465C48.4344 10.2665 50.0429 7.92874 49.5761 5.48769Z"
-                    fill="#10CCAE" />
-                  <path
-                    d="M53.1667 59.7418C52.4794 60.56 51.6612 61.2145 50.7121 61.7055C49.7739 62.1964 48.743 62.4418 47.6194 62.4418C46.1467 62.4418 44.8594 62.0818 43.7576 61.3618C42.6667 60.6309 41.8212 59.6055 41.2212 58.2855C40.6212 56.9655 40.3212 55.5091 40.3212 53.9164C40.3212 52.2036 40.6485 50.6655 41.303 49.3018C41.9576 47.9273 42.8794 46.8745 44.0685 46.1436C45.2685 45.4127 46.6649 45.0473 48.2576 45.0473C50.7885 45.0473 52.7794 45.9964 54.2303 47.8945C55.6921 49.7818 56.423 52.3618 56.423 55.6345V56.5836C56.423 61.5691 55.4358 65.2073 53.4612 67.4982C51.4976 69.7891 48.5303 70.9618 44.5594 71.0164H43.9376V68.2673H44.6249C47.3085 68.2236 49.3703 67.5255 50.8103 66.1727C52.2503 64.82 53.0358 62.6764 53.1667 59.7418ZM48.143 59.7418C49.2339 59.7418 50.2376 59.4091 51.1539 58.7436C52.0812 58.0782 52.7576 57.2545 53.183 56.2727V54.9636C53.183 52.8364 52.7194 51.1073 51.7921 49.7764C50.8649 48.4345 49.6921 47.7636 48.2739 47.7636C46.8449 47.7636 45.6939 48.3145 44.8212 49.4164C43.9594 50.5073 43.5285 51.9473 43.5285 53.7364C43.5285 55.4818 43.9485 56.9218 44.7885 58.0564C45.6285 59.18 46.7467 59.7418 48.143 59.7418ZM62.4015 58.1709L63.7106 45.4073H76.8179V48.4182H66.4597L65.6906 55.3891C66.9452 54.6473 68.3688 54.2764 69.9615 54.2764C72.2961 54.2764 74.1452 55.0509 75.5088 56.6C76.8833 58.1382 77.5706 60.2218 77.5706 62.8509C77.5706 65.48 76.8561 67.5527 75.427 69.0691C74.0088 70.5855 72.0233 71.3436 69.4706 71.3436C67.2124 71.3436 65.3688 70.7218 63.9397 69.4782C62.5106 68.2236 61.6924 66.4891 61.4852 64.2745H64.5615C64.7688 65.7364 65.2924 66.8382 66.1324 67.58C66.9724 68.3218 68.0852 68.6927 69.4706 68.6927C70.987 68.6927 72.1761 68.18 73.0379 67.1545C73.8997 66.1182 74.3306 64.6945 74.3306 62.8836C74.3306 61.1709 73.8615 59.7964 72.9233 58.76C71.9961 57.7236 70.7579 57.2055 69.2088 57.2055C67.7906 57.2055 66.6779 57.5164 65.8706 58.1382L65.0033 58.8418L62.4015 58.1709Z"
-                    fill="#10CCAE" />
-                </svg>
+                <ProgressRadial :valueProps="data.categories['seo'].score * 100"
+                  :strokeColor="data.categories['seo'].score * 100 < 50 ? '#f35242' : data.categories['seo'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
+                  :bgColor="data.categories['seo'].score * 100 < 50 ? 'bg-[#f3524220]' : data.categories['seo'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+                  sizeProps="120px" strokeWidth="10px">
+                  <span class="text-extrabold text-4xl">
+                    {{ Math.floor(data.categories['seo'].score * 100) }}
+                  </span>
+                </ProgressRadial>
               </span>
               <span>{{
-        config.by_route(`${current_page}/single/sections/page-speed/seo`)
-      }}</span>
+                config.by_route(`${current_page}/single/sections/page-speed/seo`)
+              }}</span>
             </div>
           </div>
 
           <!-- load order -->
           <div class="flex flex-col gap-4">
             <span>{{
-        config.by_route(`${current_page}/single/sections/page-speed/order`)
-      }}</span>
+              config.by_route(`${current_page}/single/sections/page-speed/order`)
+            }}</span>
             <div class="flex flex-row items-center justify-evenly" dir="ltr"
               v-if="!request.pending.value && data.audits !== undefined">
               <div class="w-28 h-fit border rounded-sm"
