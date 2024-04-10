@@ -742,6 +742,7 @@ const technical_section = `${current_page}/single/sections/technical-analysis`;
 const chart_section = `${current_page}/single/sections/chart`;
 const filter_section = `${current_page}/single/sections/filter`;
 const table_section = `${current_page}/single/sections/table`;
+const Sites = useSitesStore();
 const data = ref({});
 const last_analysis = ref("");
 
@@ -768,6 +769,10 @@ async function load_data() {
       });
   }
 }
+
+watch(() => Sites.current, (newValue) => {
+  navigateTo("/money-pages");
+});
 
 onBeforeMount(() => {
   load_data();
