@@ -31,20 +31,20 @@
         <!-- the page detail -->
         <div class="flex flex-row items-center justify-evenly">
           <div class="w-36 h-36 flex items-center justify-center">
-            <!--
-               TODO : After update component we can use line blow 
-               
-               <RadialProgress :value="90" />
-            -->
-            <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="70" cy="70" r="70" fill="#10CCAE" fill-opacity="0.2" />
-              <path
-                d="M35.0551 15.4893C33.4903 13.0483 30.2288 12.3227 27.9119 14.066C16.0687 22.9772 7.32015 35.4516 3.0009 49.7239C-1.82691 65.6766 -0.804148 82.8284 5.88521 98.0944C12.5746 113.36 24.4915 125.738 39.4926 133.002C54.4936 140.266 71.5943 141.939 87.7187 137.72C103.843 133.501 117.933 123.668 127.454 109.988C136.975 96.3075 141.303 79.6791 139.658 63.0932C138.014 46.5073 130.505 31.0525 118.483 19.5085C107.727 9.18056 93.9903 2.58936 79.3004 0.62049C76.4266 0.235321 73.9384 2.46525 73.7696 5.35982C73.6008 8.2544 75.8165 10.714 78.6849 11.1372C90.8774 12.9359 102.259 18.4864 111.211 27.0822C121.429 36.8946 127.812 50.0312 129.21 64.1292C130.608 78.2273 126.929 92.3614 118.836 103.989C110.743 115.617 98.7667 123.976 85.0609 127.562C71.3551 131.148 56.8196 129.726 44.0687 123.552C31.3178 117.378 21.1884 106.856 15.5024 93.8802C9.81647 80.9042 8.94713 66.3251 13.0508 52.7653C16.6456 40.8867 23.8501 30.4732 33.5992 22.9336C35.8928 21.1598 36.6199 17.9303 35.0551 15.4893Z"
-                fill="#10CCAE" />
-              <path
-                d="M64.1667 69.7418C63.4794 70.56 62.6612 71.2145 61.7121 71.7055C60.7739 72.1964 59.743 72.4418 58.6194 72.4418C57.1467 72.4418 55.8594 72.0818 54.7576 71.3618C53.6667 70.6309 52.8212 69.6055 52.2212 68.2855C51.6212 66.9655 51.3212 65.5091 51.3212 63.9164C51.3212 62.2036 51.6485 60.6655 52.303 59.3018C52.9576 57.9273 53.8794 56.8745 55.0685 56.1436C56.2685 55.4127 57.6649 55.0473 59.2576 55.0473C61.7885 55.0473 63.7794 55.9964 65.2303 57.8945C66.6921 59.7818 67.423 62.3618 67.423 65.6345V66.5836C67.423 71.5691 66.4358 75.2073 64.4612 77.4982C62.4976 79.7891 59.5303 80.9618 55.5594 81.0164H54.9376V78.2673H55.6249C58.3085 78.2236 60.3703 77.5255 61.8103 76.1727C63.2503 74.82 64.0358 72.6764 64.1667 69.7418ZM59.143 69.7418C60.2339 69.7418 61.2376 69.4091 62.1539 68.7436C63.0812 68.0782 63.7576 67.2545 64.183 66.2727V64.9636C64.183 62.8364 63.7194 61.1073 62.7921 59.7764C61.8649 58.4345 60.6921 57.7636 59.2739 57.7636C57.8449 57.7636 56.6939 58.3145 55.8212 59.4164C54.9594 60.5073 54.5285 61.9473 54.5285 63.7364C54.5285 65.4818 54.9485 66.9218 55.7885 68.0564C56.6285 69.18 57.7467 69.7418 59.143 69.7418ZM87.9652 70.0855C87.9652 73.8927 87.3106 76.7236 86.0015 78.5782C84.7033 80.4218 82.6742 81.3436 79.9142 81.3436C77.1761 81.3436 75.1524 80.4436 73.8433 78.6436C72.5342 76.8327 71.8579 74.1273 71.8142 70.5273V66.1745C71.8142 62.4218 72.4633 59.6291 73.7615 57.7964C75.0597 55.9636 77.0997 55.0473 79.8815 55.0473C82.6306 55.0473 84.6542 55.9309 85.9524 57.6982C87.2615 59.4655 87.9324 62.1873 87.9652 65.8636V70.0855ZM84.7088 65.6345C84.7088 62.8855 84.3215 60.8836 83.547 59.6291C82.7724 58.3636 81.5506 57.7309 79.8815 57.7309C78.2124 57.7309 76.9961 58.3582 76.2324 59.6127C75.4688 60.8673 75.0761 62.7927 75.0542 65.3891V70.5927C75.0542 73.3636 75.4524 75.4091 76.2488 76.7291C77.0561 78.0382 78.2779 78.6927 79.9142 78.6927C81.5179 78.6927 82.707 78.0764 83.4815 76.8436C84.267 75.6 84.6761 73.6418 84.7088 70.9691V65.6345Z"
-                fill="#10CCAE" />
-            </svg>
+            <ProgressRadial
+              v-if="!request.pending.value && data.analytics !== undefined && data.analytics[0].ok == true"
+              :valueProps="data.analytics[0].page_status * 100"
+              :strokeColor="data.analytics[0].page_status * 100 < 50 ? '#f35242' : data.analytics[0].page_status * 100 < 90 ? '#fbbf24' : '#10ccae'"
+              :bgColor="data.analytics[0].page_status * 100 < 50 ? 'bg-[#f3524220]' : data.analytics[0].page_status * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+              sizeProps="130px" strokeWidth="11px">
+              <span class="text-extrabold text-5xl">
+                {{ Math.floor(data.analytics[0].page_status * 100) }}
+              </span>
+            </ProgressRadial>
+            <ProgressRadial v-else :valueProps="100" strokeColor="#d7d8da" bgColor="bg-gray-100" sizeProps="130px"
+              strokeWidth="11px">
+              <span class="text-extrabold text-5xl"> 0 </span>
+            </ProgressRadial>
           </div>
           <div class="flex flex-col justify-between h-full w-1/2 py-4">
             <div class="flex justify-start">
@@ -64,8 +64,8 @@
           </div>
           <ToolsSplitHorizontal class="h-full my-2" />
           <div class="border rounded-md h-fit w-64">
-            <div v-if="!request.pending.value && data.audits !== undefined">
-              <img :src="data.audits['final-screenshot'].details.data" />
+            <div v-if="!request.pending.value && data.lighthouse?.audits !== undefined">
+              <img :src="data.lighthouse.audits['final-screenshot'].details.data" />
             </div>
           </div>
         </div>
@@ -158,8 +158,8 @@
               </svg>
             </span>
             <span>
-              <span v-if="!request.pending.value && data.timing?.total !== undefined">
-                {{ Math.round(data.timing.total / 100) / 10 }}
+              <span v-if="!request.pending.value && data.lighthouse?.timing?.total !== undefined">
+                {{ Math.round(data.lighthouse.timing.total / 100) / 10 }}
               </span>
               ثانیه
             </span>
@@ -221,29 +221,33 @@
           <div class="grid grid-cols-2 gap-4">
             <hr />
             <hr />
-            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="TTI"
-              :time="Math.round(data.audits['interactive'].numericValue / 100) / 10">انتظار کاربر برای تعامل (TtI)
+            <LighhouseShape v-if="!request.pending.value && data.lighthouse?.timing?.total !== undefined" kind="TTI"
+              :time="Math.round(data.lighthouse.audits['interactive'].numericValue / 100) / 10">انتظار کاربر برای تعامل
+              (TtI)
             </LighhouseShape>
-            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="FCP"
-              :time="Math.round(data.audits['first-contentful-paint'].numericValue / 100) / 10">انتظار برای اولین لود
+            <LighhouseShape v-if="!request.pending.value && data.lighthouse?.timing?.total !== undefined" kind="FCP"
+              :time="Math.round(data.lighthouse.audits['first-contentful-paint'].numericValue / 100) / 10">انتظار برای
+              اولین لود
               (FCP)
             </LighhouseShape>
             <hr />
             <hr />
-            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="TBT"
-              :time="data.audits['total-blocking-time'].numericValue">زمان برای شکل‌گیری کامل صفحه (TBT)
+            <LighhouseShape v-if="!request.pending.value && data.lighthouse?.timing?.total !== undefined" kind="TBT"
+              :time="data.lighthouse.audits['total-blocking-time'].numericValue">زمان برای شکل‌گیری کامل صفحه (TBT)
             </LighhouseShape>
-            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="SI"
-              :time="Math.round(data.audits['speed-index'].numericValue / 100) / 10">سرعت بصری‌سازی سایت (SI)
+            <LighhouseShape v-if="!request.pending.value && data.lighthouse?.timing?.total !== undefined" kind="SI"
+              :time="Math.round(data.lighthouse.audits['speed-index'].numericValue / 100) / 10">سرعت بصری‌سازی سایت (SI)
             </LighhouseShape>
             <hr />
             <hr />
-            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="CLS"
-              :time="Math.round(data.audits['cumulative-layout-shift'].numericValue / 100) / 10">ترتیب چیدمان عناصر
+            <LighhouseShape v-if="!request.pending.value && data.lighthouse?.timing?.total !== undefined" kind="CLS"
+              :time="Math.round(data.lighthouse.audits['cumulative-layout-shift'].numericValue / 100) / 10">ترتیب چیدمان
+              عناصر
               (CLS)
             </LighhouseShape>
-            <LighhouseShape v-if="!request.pending.value && data.timing?.total !== undefined" kind="LCP"
-              :time="Math.round(data.audits['largest-contentful-paint'].numericValue / 100) / 10">انتظار برای لود
+            <LighhouseShape v-if="!request.pending.value && data.lighthouse?.timing?.total !== undefined" kind="LCP"
+              :time="Math.round(data.lighthouse.audits['largest-contentful-paint'].numericValue / 100) / 10">انتظار برای
+              لود
               بزرگ‌ترین المان (LCP)
             </LighhouseShape>
             <hr />
@@ -252,16 +256,15 @@
 
           <!-- radial analyze -->
           <div class="flex flex-row justify-evenly my-4 items-center"
-            v-if="!request.pending.value && data.categories !== undefined">
+            v-if="!request.pending.value && data.lighthouse?.categories !== undefined">
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask flex items-center justify-center">
-                <!-- TODO: Add real data to this -->
-                <ProgressRadial :valueProps="data.categories['performance'].score * 100"
-                  :strokeColor="data.categories['performance'].score * 100 < 50 ? '#f35242' : data.categories['performance'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
-                  :bgColor="data.categories['performance'].score * 100 < 50 ? 'bg-[#f3524220]' : data.categories['performance'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+                <ProgressRadial :valueProps="data.lighthouse.categories['performance'].score * 100"
+                  :strokeColor="data.lighthouse.categories['performance'].score * 100 < 50 ? '#f35242' : data.lighthouse.categories['performance'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
+                  :bgColor="data.lighthouse.categories['performance'].score * 100 < 50 ? 'bg-[#f3524220]' : data.lighthouse.categories['performance'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
                   sizeProps="120px" strokeWidth="10px">
                   <span class="text-extrabold text-4xl">
-                    {{ Math.floor(data.categories['performance'].score * 100) }}
+                    {{ Math.floor(data.lighthouse.categories['performance'].score * 100) }}
                   </span>
                 </ProgressRadial>
               </span>
@@ -271,13 +274,12 @@
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <!-- TODO: Add real data to this -->
-                <ProgressRadial :valueProps="data.categories['accessibility'].score * 100"
-                  :strokeColor="data.categories['accessibility'].score * 100 < 50 ? '#f35242' : data.categories['accessibility'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
-                  :bgColor="data.categories['accessibility'].score * 100 < 50 ? 'bg-[#f3524220]' : data.categories['accessibility'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+                <ProgressRadial :valueProps="data.lighthouse.categories['accessibility'].score * 100"
+                  :strokeColor="data.lighthouse.categories['accessibility'].score * 100 < 50 ? '#f35242' : data.lighthouse.categories['accessibility'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
+                  :bgColor="data.lighthouse.categories['accessibility'].score * 100 < 50 ? 'bg-[#f3524220]' : data.lighthouse.categories['accessibility'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
                   sizeProps="120px" strokeWidth="10px">
                   <span class="text-extrabold text-4xl">
-                    {{ Math.floor(data.categories['accessibility'].score * 100) }}
+                    {{ Math.floor(data.lighthouse.categories['accessibility'].score * 100) }}
                   </span>
                 </ProgressRadial>
               </span>
@@ -287,12 +289,12 @@
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <ProgressRadial :valueProps="data.categories['best-practices'].score * 100"
-                  :strokeColor="data.categories['best-practices'].score * 100 < 50 ? '#f35242' : data.categories['best-practices'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
-                  :bgColor="data.categories['best-practices'].score * 100 < 50 ? 'bg-[#f3524220]' : data.categories['best-practices'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+                <ProgressRadial :valueProps="data.lighthouse.categories['best-practices'].score * 100"
+                  :strokeColor="data.lighthouse.categories['best-practices'].score * 100 < 50 ? '#f35242' : data.lighthouse.categories['best-practices'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
+                  :bgColor="data.lighthouse.categories['best-practices'].score * 100 < 50 ? 'bg-[#f3524220]' : data.lighthouse.categories['best-practices'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
                   sizeProps="120px" strokeWidth="10px">
                   <span class="text-extrabold text-4xl">
-                    {{ Math.floor(data.categories['best-practices'].score * 100) }}
+                    {{ Math.floor(data.lighthouse.categories['best-practices'].score * 100) }}
                   </span>
                 </ProgressRadial>
               </span>
@@ -304,12 +306,12 @@
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <ProgressRadial :valueProps="data.categories['seo'].score * 100"
-                  :strokeColor="data.categories['seo'].score * 100 < 50 ? '#f35242' : data.categories['seo'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
-                  :bgColor="data.categories['seo'].score * 100 < 50 ? 'bg-[#f3524220]' : data.categories['seo'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+                <ProgressRadial :valueProps="data.lighthouse.categories['seo'].score * 100"
+                  :strokeColor="data.lighthouse.categories['seo'].score * 100 < 50 ? '#f35242' : data.lighthouse.categories['seo'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
+                  :bgColor="data.lighthouse.categories['seo'].score * 100 < 50 ? 'bg-[#f3524220]' : data.lighthouse.categories['seo'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
                   sizeProps="120px" strokeWidth="10px">
                   <span class="text-extrabold text-4xl">
-                    {{ Math.floor(data.categories['seo'].score * 100) }}
+                    {{ Math.floor(data.lighthouse.categories['seo'].score * 100) }}
                   </span>
                 </ProgressRadial>
               </span>
@@ -325,9 +327,9 @@
               config.by_route(`${current_page}/single/sections/page-speed/order`)
             }}</span>
             <div class="flex flex-row items-center justify-evenly" dir="ltr"
-              v-if="!request.pending.value && data.audits !== undefined">
+              v-if="!request.pending.value && data.lighthouse?.audits !== undefined">
               <div class="w-28 h-fit border rounded-sm"
-                v-for="thumbnail in data.audits['screenshot-thumbnails'].details.items">
+                v-for="thumbnail in data.lighthouse.audits['screenshot-thumbnails'].details.items">
                 <img :src="thumbnail.data" />
               </div>
             </div>
