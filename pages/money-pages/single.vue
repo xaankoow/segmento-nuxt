@@ -717,20 +717,33 @@
           </thead>
 
           <tbody class="text-sm">
-            <tr class="[&>td]:text-center [&>td]:p-4 items-baseline" v-for="i in 8" :key="i">
+            <tr class="[&>td]:text-center [&>td]:p-4 items-baseline" v-for="i in data.analytics" :key="i">
               <td>
                 <input type="checkbox" class="w-5 h-5" />
               </td>
-              <td>1402/11/25</td>
+              <!-- todo : change date to jalali -->
+              <td>
+                {{ i.update_time }}
+              </td>
               <td>کلمه کلیدی</td>
-              <td :class="i % 2 === 0 ? 'text-success' : 'text-amber-400'">8</td>
-              <td :class="i % 2 === 0 ? 'text-error' : 'text-success'">23</td>
-              <td :class="i % 2 === 0 ? 'text-amber-400' : 'text-error'">70</td>
-              <td :class="i % 4 === 0 ? 'text-success' : 'text-amber-400'">92</td>
-              <td :class="i % 3 === 0 ? 'text-success' : 'text-amber-400'">99</td>
+              <td :class="i.page_status != null && i.page_status % 2 === 0 ? 'text-success' : 'text-amber-400'">
+                {{ i.page_status  == null ? 'ندارد' : i.page_status }}
+              </td>
+              <td :class="i.performance != null && i.performance % 2 === 0 ? 'text-error' : 'text-success'">
+                {{ i.performance == null ? 'ندارد' : i.performance }}
+              </td>
+              <td :class="i.accessibility != null && i.accessibility % 2 === 0 ? 'text-amber-400' : 'text-error'">
+                {{ i.accessibility == null ? 'ندارد' : i.accessibility }}
+              </td>
+              <td :class="i.best_practice % 4 === 0 ? 'text-success' : 'text-amber-400'">
+                {{ i.best_practice == null ? 'ندارد' : i.best_practice }}
+              </td>
+              <td :class="i.seo % 3 === 0 ? 'text-success' : 'text-amber-400'">
+                {{ i.seo == null ? 'ندارد' : i.seo }}
+              </td>
               <td class="px-4">
                 <span class="flex rounded-full w-full h-1"
-                  :class="i % 3 !== 0 ? 'bg-success' : 'bg-error'">&nbsp;</span>
+                  :class="i.ok % 3 !== 0 ? 'bg-success' : 'bg-error'">&nbsp;</span>
               </td>
             </tr>
           </tbody>
@@ -773,8 +786,6 @@ async function load_data() {
           data.value = res.data;
           // last_analysis.value = Object.keys(data.value.analitics).at(0);
           // console.log(data.value);
-          console.log(data.value);
-
         } else {
           // navigateTo("/money-pages");
         }
