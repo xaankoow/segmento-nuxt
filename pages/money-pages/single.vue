@@ -721,30 +721,44 @@
               <td>
                 <input type="checkbox" class="w-5 h-5" />
               </td>
-              <!-- todo : change date to jalali -->
+              
               <td>
-                {{ i.update_time }}
+                {{ i.update_time == null ? 'ندارد' : dateChanger(i.update_time) }}
               </td>
               <td>کلمه کلیدی</td>
-              <td :class="i.page_status != null && i.page_status % 2 === 0 ? 'text-success' : 'text-amber-400'">
-                {{ i.page_status  == null ? 'ندارد' : i.page_status }}
+              <!-- <td :class="i.ok != null && i.ok % 2 === 0 ? 'text-success' : 'text-amber-400'">
+                ندارد
+              </td> -->
+              <td class="text-success">
+                ندارد
               </td>
               <td :class="i.performance != null && i.performance % 2 === 0 ? 'text-error' : 'text-success'">
-                {{ i.performance == null ? 'ندارد' : i.performance }}
+                {{ i.performance == null ? 'ندارد' : tableDataMaker(i.performance) }}
               </td>
               <td :class="i.accessibility != null && i.accessibility % 2 === 0 ? 'text-amber-400' : 'text-error'">
-                {{ i.accessibility == null ? 'ندارد' : i.accessibility }}
+                {{ i.accessibility == null ? 'ندارد' : tableDataMaker(i.accessibility) }}
               </td>
               <td :class="i.best_practice % 4 === 0 ? 'text-success' : 'text-amber-400'">
-                {{ i.best_practice == null ? 'ندارد' : i.best_practice }}
+                {{ i.best_practice == null ? 'ندارد' : tableDataMaker(i.best_practice) }}
               </td>
               <td :class="i.seo % 3 === 0 ? 'text-success' : 'text-amber-400'">
-                {{ i.seo == null ? 'ندارد' : i.seo }}
+                {{ i.seo == null ? 'ندارد' : tableDataMaker(i.seo) }}
               </td>
-              <td class="px-4">
-                <span class="flex rounded-full w-full h-1"
-                  :class="i.ok % 3 !== 0 ? 'bg-success' : 'bg-error'">&nbsp;</span>
-              </td>
+              <td class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6">
+                  <p>{{ i.page_status }} درصد</p>
+                  <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
+                    <div class="h-[10px] rounded-xl" :style="{
+                        width: `${i.page_status}%`,
+                        backgroundColor:
+                          i.page_status <= 25
+                            ? '#F35242'
+                            : i.page_status <= 60
+                            ? '#FFCE47'
+                            : '#10CCAE',
+                            }">
+                      </div>
+                  </div>
+                </td>
             </tr>
           </tbody>
         </table>
@@ -763,6 +777,7 @@
 <script setup>
 import Config from "~~/composables/Config";
 import Request from "~~/Api/Request";
+import moment from "jalali-moment";
 
 const route = useRoute();
 const request = new Request("v1");
@@ -774,6 +789,16 @@ const filter_section = `${current_page}/single/sections/filter`;
 const table_section = `${current_page}/single/sections/table`;
 const data = ref({});
 const last_analysis = ref("");
+
+
+const tableDataMaker = (data) => {
+  return parseInt(parseFloat(data)*100)
+}
+
+const dateChanger = (date) => {
+  date = date.split('T')
+  return moment(date[0], 'YYYY-MM-DD').locale('fa').format('YYYY/MM/DD')
+}
 
 async function load_data() {
   if (!route.query.page) {
