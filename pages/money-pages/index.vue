@@ -200,8 +200,6 @@ function show_url(url) {
   return [slices[0], path.length > 15 ? `${path.slice(0, 12)}...` : path].join("/").replace(/\/$/, '');
 }
 
-// console.log(Sites.current)
-
 watch(() => Sites.current, (newValue) => {
   load_data(newValue.uuid);
 });
