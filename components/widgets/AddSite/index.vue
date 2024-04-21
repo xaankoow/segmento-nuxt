@@ -39,7 +39,7 @@ const reset_popup = () => {
 };
 
 const domain_validation = () => {
-  let website = data.value.website.replace(/(www\.|https?:\/\/)/g, "");
+  let website = data.value.website.replace(/(https?:\/\/)/g, "");
   website = website.replace(/^\/|\/$/g, "");
   website = website.trim();
   website = website.split("/")[0];
