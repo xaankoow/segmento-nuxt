@@ -20,7 +20,7 @@
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col gap-4 p-2 w-full pt-2" :class="data === null ? 'h-full' : 'h-fit'">
+    <div class="flex flex-col gap-2 p-2 w-full pt-2" :class="data === null ? 'h-full' : 'h-fit'">
 
       <!-- speed page section -->
       <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
@@ -99,10 +99,10 @@
                 }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                5 مورد
+                6 مورد
               </span>
             </div>
-            <ProgressLinear :value="6 / 33 * 100" strokeColor="#fbbf24"/>
+            <ProgressLinear :value="6 / 33 * 100" strokeColor="#fbbf24" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -115,10 +115,10 @@
                 }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                5 مورد
+                9 مورد
               </span>
             </div>
-            <ProgressLinear :value="9 / 33 * 100" strokeColor="#7d7d7d"/>
+            <ProgressLinear :value="9 / 33 * 100" strokeColor="#7d7d7d" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -131,10 +131,10 @@
                 }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                5 مورد
+                11 مورد
               </span>
             </div>
-            <ProgressLinear :value="11 / 33 * 100" strokeColor="#10ccae"/>
+            <ProgressLinear :value="11 / 33 * 100" strokeColor="#10ccae" />
           </div>
         </div>
 
@@ -344,7 +344,7 @@
 
         <!-- content section -->
 
-        <div class="flex flex-col w-full gap-7 px-3">
+        <div class="flex flex-col w-full gap-4 px-3">
           <!-- this must designed as widget -->
           <div class="grid grid-cols-8 items-start gap-5 w-full">
             <!-- title -->
@@ -377,12 +377,14 @@
 
           <hr />
           <!-- this must designed as widget -->
-          <div class="grid grid-cols-8 items-start gap-5 w-full">
+          <Accordion class="flex flex-col" :class="true ? 'gap-2' : '!gap-0'" :isOpen="true">
+            <template v-slot:label>
+              <div class="flex flex-row items-center gap-4 col-span-2">
+                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span>{{ config.by_route(`${technical_section}/meta-description`) }}</span>
+              </div>
+            </template>
             <!-- title -->
-            <div class="flex flex-row items-center gap-4 col-span-2">
-              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
-              <span>{{ config.by_route(`${technical_section}/meta-description`) }}</span>
-            </div>
 
             <!-- description -->
             <div class="flex flex-col gap-2 font-thin col-span-5">
@@ -411,7 +413,7 @@
               توضیحات متا توسط موتورهای جست‌وجو برای شناسایی موضوع صفحه وب و ارائه نتایج
               جست‌وجوی مرتبط استفاده می شود.
             </p>
-          </div>
+          </Accordion>
 
           <hr />
 
