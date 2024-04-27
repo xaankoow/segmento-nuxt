@@ -86,7 +86,7 @@
                 5 مورد
               </span>
             </div>
-            <div class="h-2 w-full mx-auto bg-error rounded-lg"></div>
+            <ProgressLinear :value="5 / 33 * 100" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -102,7 +102,7 @@
                 5 مورد
               </span>
             </div>
-            <div class="h-2 w-full mx-auto bg-amber-400 rounded-lg"></div>
+            <ProgressLinear :value="6 / 33 * 100" strokeColor="#fbbf24"/>
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -118,7 +118,7 @@
                 5 مورد
               </span>
             </div>
-            <div class="h-2 w-full mx-auto bg-base-500 rounded-lg"></div>
+            <ProgressLinear :value="9 / 33 * 100" strokeColor="#7d7d7d"/>
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -134,7 +134,7 @@
                 5 مورد
               </span>
             </div>
-            <div class="h-2 w-full mx-auto bg-success rounded-lg"></div>
+            <ProgressLinear :value="11 / 33 * 100" strokeColor="#10ccae"/>
           </div>
         </div>
 
@@ -728,19 +728,9 @@
                 {{ i.seo == null ? 'ندارد' : tableDataMaker(i.seo) }}
               </td>
               <td class="w-[197px] text-[10px] text-end px-6" v-else>
-                <p class="text-end">{{ tableDataMaker(i.page_status) }} درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                  <div class="h-[10px] rounded-xl" :style="{
-                    width: `${tableDataMaker(i.page_status)}%`,
-                    backgroundColor:
-                      tableDataMaker(i.page_status) <= 25
-                        ? '#F35242'
-                        : tableDataMaker(i.page_status) <= 60
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                  }">
-                  </div>
-                </div>
+                <ProgressLinear :value="tableDataMaker(i.page_status)">
+                  {{ tableDataMaker(i.page_status) }} درصد
+                </ProgressLinear>
               </td>
             </tr>
           </tbody>
