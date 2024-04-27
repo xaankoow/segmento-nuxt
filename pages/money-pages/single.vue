@@ -20,7 +20,7 @@
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col w-full px-4 gap-5 mt-2 py-2 h-[93%]">
+    <div class="flex flex-col gap-4 p-2 w-full pt-2" :class="data === null ? 'h-full' : 'h-fit'">
 
       <!-- speed page section -->
       <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
@@ -33,15 +33,15 @@
           <div class="w-36 h-36 flex items-center justify-center">
             <ProgressRadial
               v-if="!request.pending.value && data.analytics !== undefined && data.analytics[0].ok == true"
-              :valueProps="data.analytics[0].page_status * 100"
+              :value="data.analytics[0].page_status * 100"
               :strokeColor="data.analytics[0].page_status * 100 < 50 ? '#f35242' : data.analytics[0].page_status * 100 < 90 ? '#fbbf24' : '#10ccae'"
               :bgColor="data.analytics[0].page_status * 100 < 50 ? 'bg-[#f3524220]' : data.analytics[0].page_status * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
-              sizeProps="130px" strokeWidth="11px">
+              size="130px" strokeWidth="11px">
               <span class="text-extrabold text-5xl">
                 {{ Math.floor(data.analytics[0].page_status * 100) }}
               </span>
             </ProgressRadial>
-            <ProgressRadial v-else :valueProps="100" strokeColor="#d7d8da" bgColor="bg-gray-100" sizeProps="130px"
+            <ProgressRadial v-else :value="100" strokeColor="#d7d8da" bgColor="bg-gray-100" size="130px"
               strokeWidth="11px">
               <span class="text-extrabold text-5xl"> 0 </span>
             </ProgressRadial>
@@ -259,10 +259,10 @@
             v-if="!request.pending.value && data.lighthouse?.categories !== undefined">
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask flex items-center justify-center">
-                <ProgressRadial :valueProps="data.lighthouse.categories['performance'].score * 100"
+                <ProgressRadial :value="data.lighthouse.categories['performance'].score * 100"
                   :strokeColor="data.lighthouse.categories['performance'].score * 100 < 50 ? '#f35242' : data.lighthouse.categories['performance'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
                   :bgColor="data.lighthouse.categories['performance'].score * 100 < 50 ? 'bg-[#f3524220]' : data.lighthouse.categories['performance'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
-                  sizeProps="120px" strokeWidth="10px">
+                  size="120px" strokeWidth="10px">
                   <span class="text-extrabold text-4xl">
                     {{ Math.floor(data.lighthouse.categories['performance'].score * 100) }}
                   </span>
@@ -274,10 +274,10 @@
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <ProgressRadial :valueProps="data.lighthouse.categories['accessibility'].score * 100"
+                <ProgressRadial :value="data.lighthouse.categories['accessibility'].score * 100"
                   :strokeColor="data.lighthouse.categories['accessibility'].score * 100 < 50 ? '#f35242' : data.lighthouse.categories['accessibility'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
                   :bgColor="data.lighthouse.categories['accessibility'].score * 100 < 50 ? 'bg-[#f3524220]' : data.lighthouse.categories['accessibility'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
-                  sizeProps="120px" strokeWidth="10px">
+                  size="120px" strokeWidth="10px">
                   <span class="text-extrabold text-4xl">
                     {{ Math.floor(data.lighthouse.categories['accessibility'].score * 100) }}
                   </span>
@@ -289,10 +289,10 @@
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <ProgressRadial :valueProps="data.lighthouse.categories['best-practices'].score * 100"
+                <ProgressRadial :value="data.lighthouse.categories['best-practices'].score * 100"
                   :strokeColor="data.lighthouse.categories['best-practices'].score * 100 < 50 ? '#f35242' : data.lighthouse.categories['best-practices'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
                   :bgColor="data.lighthouse.categories['best-practices'].score * 100 < 50 ? 'bg-[#f3524220]' : data.lighthouse.categories['best-practices'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
-                  sizeProps="120px" strokeWidth="10px">
+                  size="120px" strokeWidth="10px">
                   <span class="text-extrabold text-4xl">
                     {{ Math.floor(data.lighthouse.categories['best-practices'].score * 100) }}
                   </span>
@@ -306,10 +306,10 @@
             </div>
             <div class="flex flex-col items-center gap-4">
               <span class="w-32 h-32 mask mask-circle flex items-center justify-center">
-                <ProgressRadial :valueProps="data.lighthouse.categories['seo'].score * 100"
+                <ProgressRadial :value="data.lighthouse.categories['seo'].score * 100"
                   :strokeColor="data.lighthouse.categories['seo'].score * 100 < 50 ? '#f35242' : data.lighthouse.categories['seo'].score * 100 < 90 ? '#fbbf24' : '#10ccae'"
                   :bgColor="data.lighthouse.categories['seo'].score * 100 < 50 ? 'bg-[#f3524220]' : data.lighthouse.categories['seo'].score * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
-                  sizeProps="120px" strokeWidth="10px">
+                  size="120px" strokeWidth="10px">
                   <span class="text-extrabold text-4xl">
                     {{ Math.floor(data.lighthouse.categories['seo'].score * 100) }}
                   </span>
@@ -664,14 +664,11 @@
       </section>
 
       <!-- table section -->
-      <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
+      <section class="w-full border rounded-lg flex flex-col gap-5 pt-2">
         <!-- this is the row -->
         <table>
           <thead>
             <tr>
-              <th>
-                {{ config.by_route(`${table_section}/select`) }}
-              </th>
               <th>
                 {{ config.by_route(`${table_section}/updated_at`) }}
               </th>
@@ -700,59 +697,55 @@
           </thead>
 
           <tbody class="text-sm">
-            <tr class="[&>td]:text-center [&>td]:p-4 items-baseline" v-for="i in data.analytics" :key="i">
-              <td>
-                <input type="checkbox" class="w-5 h-5" />
-              </td>
-              
+            <tr class="[&>td]:text-center [&>td]:p-4 items-baseline h-16"
+              :class="index + 1 < data.analytics.length ? 'border-base-400 border-b' : ''"
+              v-for="(i, index) in data.analytics" :key="i">
               <td>
                 {{ i.update_time == null ? 'ندارد' : dateChanger(i.update_time) }}
               </td>
               <td>کلمه کلیدی</td>
-              <!-- <td :class="i.ok != null && i.ok % 2 === 0 ? 'text-success' : 'text-amber-400'">
-                ندارد
-              </td> -->
-              <td class="text-success">
+              <td class="text-primary-disable">
                 ندارد
               </td>
-              <td :class="i.performance != null && i.performance % 2 === 0 ? 'text-error' : 'text-success'">
+              <td
+                :class="i.performance == null ? 'text-primary-disable' : i.performance * 100 < 50 ? 'text-[#f35242]' : i.performance * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
                 {{ i.performance == null ? 'ندارد' : tableDataMaker(i.performance) }}
               </td>
-              <td :class="i.accessibility != null && i.accessibility % 2 === 0 ? 'text-amber-400' : 'text-error'">
+              <td
+                :class="i.accessibility == null ? 'text-primary-disable' : i.accessibility * 100 < 50 ? 'text-[#f35242]' : i.accessibility * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
                 {{ i.accessibility == null ? 'ندارد' : tableDataMaker(i.accessibility) }}
               </td>
-              <td :class="i.best_practice % 4 === 0 ? 'text-success' : 'text-amber-400'">
+              <td
+                :class="i.best_practice == null ? 'text-primary-disable' : i.best_practice * 100 < 50 ? 'text-[#f35242]' : i.best_practice * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
                 {{ i.best_practice == null ? 'ندارد' : tableDataMaker(i.best_practice) }}
               </td>
-              <td :class="i.seo % 3 === 0 ? 'text-success' : 'text-amber-400'">
+              <td
+                :class="i.seo == null ? 'text-primary-disable' : i.seo * 100 < 50 ? 'text-[#f35242]' : i.seo * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
                 {{ i.seo == null ? 'ندارد' : tableDataMaker(i.seo) }}
               </td>
-              <td class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6">
-                  <p>{{ i.page_status }} درصد</p>
-                  <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <div class="h-[10px] rounded-xl" :style="{
-                        width: `${i.page_status}%`,
-                        backgroundColor:
-                          i.page_status <= 25
-                            ? '#F35242'
-                            : i.page_status <= 60
-                            ? '#FFCE47'
-                            : '#10CCAE',
-                            }">
-                      </div>
+
+              <td class="text-primary-disable" v-if="i.performance == null">
+                {{ i.seo == null ? 'ندارد' : tableDataMaker(i.seo) }}
+              </td>
+              <td class="w-[197px] text-[10px] text-end px-6" v-else>
+                <p class="text-end">{{ tableDataMaker(i.page_status) }} درصد</p>
+                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
+                  <div class="h-[10px] rounded-xl" :style="{
+                    width: `${tableDataMaker(i.page_status)}%`,
+                    backgroundColor:
+                      tableDataMaker(i.page_status) <= 25
+                        ? '#F35242'
+                        : tableDataMaker(i.page_status) <= 60
+                          ? '#FFCE47'
+                          : '#10CCAE',
+                  }">
                   </div>
-                </td>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
       </section>
-
-      <!-- export button -->
-      <div class="flex flex-row items-center justify-end">
-        <button class="bg-primary/5 px-5 py-2 rounded-lg text-primary hover:bg-primary/10 transition-all duration-150">
-          {{ config.by_route(`${current_page}/export`) }}
-        </button>
-      </div>
     </div>
   </div>
 </template>
@@ -772,11 +765,10 @@ const filter_section = `${current_page}/single/sections/filter`;
 const table_section = `${current_page}/single/sections/table`;
 const Sites = useSitesStore();
 const data = ref({});
-const last_analysis = ref("");
 
 
 const tableDataMaker = (data) => {
-  return parseInt(parseFloat(data)*100)
+  return parseInt(parseFloat(data) * 100)
 }
 
 const dateChanger = (date) => {
@@ -793,10 +785,8 @@ async function load_data() {
       .then((res) => {
         if (res.ok) {
           data.value = res.data;
-          // last_analysis.value = Object.keys(data.value.analitics).at(0);
-          // console.log(data.value);
         } else {
-          // navigateTo("/money-pages");
+          navigateTo("/money-pages");
         }
       })
       .catch((err) => {

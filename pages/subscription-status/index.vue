@@ -56,7 +56,7 @@
             </p>
           </div>
           <div class="w-full h-36 px-4 flex flex-col items-center justify-center">
-            <ProgressRadial :valueProps="auth.remained_days / auth.full_time * 100" sizeProps="130px"
+            <ProgressRadial :value="auth.remained_days / auth.full_time * 100" size="130px"
               strokeWidth="10px">
               <span class="text-extrabold text-2xl">
                 {{ auth.remained_days }}
@@ -133,7 +133,7 @@
               </div>
             </div>
             <div class="w-[30%] h-full flex items-center justify-center">
-              <ProgressRadial :valueProps="limit.remained / limit.budget * 100" sizeProps="80px" strokeWidth="6px">
+              <ProgressRadial :value="limit.remained / limit.budget * 100" size="80px" strokeWidth="6px">
                 <span class="text-extrabold  text-2xl">
                   {{ limit.remained }}
                 </span>
