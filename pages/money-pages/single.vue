@@ -700,21 +700,48 @@
           </thead>
 
           <tbody class="text-sm">
-            <tr class="[&>td]:text-center [&>td]:p-4 items-baseline" v-for="i in 8" :key="i">
+            <tr class="[&>td]:text-center [&>td]:p-4 items-baseline" v-for="i in data.analytics" :key="i">
               <td>
                 <input type="checkbox" class="w-5 h-5" />
               </td>
-              <td>1402/11/25</td>
-              <td>کلمه کلیدی</td>
-              <td :class="i % 2 === 0 ? 'text-success' : 'text-amber-400'">8</td>
-              <td :class="i % 2 === 0 ? 'text-error' : 'text-success'">23</td>
-              <td :class="i % 2 === 0 ? 'text-amber-400' : 'text-error'">70</td>
-              <td :class="i % 4 === 0 ? 'text-success' : 'text-amber-400'">92</td>
-              <td :class="i % 3 === 0 ? 'text-success' : 'text-amber-400'">99</td>
-              <td class="px-4">
-                <span class="flex rounded-full w-full h-1"
-                  :class="i % 3 !== 0 ? 'bg-success' : 'bg-error'">&nbsp;</span>
+              
+              <td>
+                {{ i.update_time == null ? 'ندارد' : dateChanger(i.update_time) }}
               </td>
+              <td>کلمه کلیدی</td>
+              <!-- <td :class="i.ok != null && i.ok % 2 === 0 ? 'text-success' : 'text-amber-400'">
+                ندارد
+              </td> -->
+              <td class="text-success">
+                ندارد
+              </td>
+              <td :class="i.performance != null && i.performance % 2 === 0 ? 'text-error' : 'text-success'">
+                {{ i.performance == null ? 'ندارد' : tableDataMaker(i.performance) }}
+              </td>
+              <td :class="i.accessibility != null && i.accessibility % 2 === 0 ? 'text-amber-400' : 'text-error'">
+                {{ i.accessibility == null ? 'ندارد' : tableDataMaker(i.accessibility) }}
+              </td>
+              <td :class="i.best_practice % 4 === 0 ? 'text-success' : 'text-amber-400'">
+                {{ i.best_practice == null ? 'ندارد' : tableDataMaker(i.best_practice) }}
+              </td>
+              <td :class="i.seo % 3 === 0 ? 'text-success' : 'text-amber-400'">
+                {{ i.seo == null ? 'ندارد' : tableDataMaker(i.seo) }}
+              </td>
+              <td class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6">
+                  <p>{{ i.page_status }} درصد</p>
+                  <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
+                    <div class="h-[10px] rounded-xl" :style="{
+                        width: `${i.page_status}%`,
+                        backgroundColor:
+                          i.page_status <= 25
+                            ? '#F35242'
+                            : i.page_status <= 60
+                            ? '#FFCE47'
+                            : '#10CCAE',
+                            }">
+                      </div>
+                  </div>
+                </td>
             </tr>
           </tbody>
         </table>
@@ -733,6 +760,7 @@
 <script setup>
 import Config from "~~/composables/Config";
 import Request from "~~/Api/Request";
+import moment from "jalali-moment";
 
 const route = useRoute();
 const request = new Request("v1");
@@ -746,6 +774,16 @@ const Sites = useSitesStore();
 const data = ref({});
 const last_analysis = ref("");
 
+
+const tableDataMaker = (data) => {
+  return parseInt(parseFloat(data)*100)
+}
+
+const dateChanger = (date) => {
+  date = date.split('T')
+  return moment(date[0], 'YYYY-MM-DD').locale('fa').format('YYYY/MM/DD')
+}
+
 async function load_data() {
   if (!route.query.page) {
     navigateTo("/money-pages");
@@ -757,8 +795,6 @@ async function load_data() {
           data.value = res.data;
           // last_analysis.value = Object.keys(data.value.analitics).at(0);
           // console.log(data.value);
-          console.log(data.value);
-
         } else {
           // navigateTo("/money-pages");
         }
