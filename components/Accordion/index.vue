@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col" :class="isOpen ? 'gap-2' : '!gap-0'">
     <button
       class="flex flex-row items-center justify-between w-full py-2 group"
       @click="isOpen = !isOpen"
     >
-      <div class="font-semibold group-hover:text-primary">
+      <div class="group-hover:text-primary">
         <slot name="label"></slot>
       </div>
       <div
@@ -40,5 +40,4 @@ const props = defineProps({
     default: false,
   },
 });
-// defineEmits(["update"]);
 </script>

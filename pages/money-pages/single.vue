@@ -340,18 +340,17 @@
       <!-- technical analysis section -->
       <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
         <!-- title -->
-        <label class="p-3">{{ config.by_route(`${technical_section}/title`) }}</label>
-
-        <!-- content section -->
+        <label class="p-3 font-semibold">{{ config.by_route(`${technical_section}/title`) }}</label>
 
         <div class="flex flex-col w-full gap-4 px-3">
           <!-- this must designed as widget -->
-          <div class="grid grid-cols-8 items-start gap-5 w-full">
-            <!-- title -->
-            <div class="flex flex-row items-center gap-4 col-span-2">
-              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
-              <span>{{ config.by_route(`${technical_section}/tag-title`) }}</span>
-            </div>
+          <Accordion class="flex flex-col" :isOpen="true">
+            <template v-slot:label>
+              <div class="flex flex-row items-center gap-4 col-span-2">
+                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span>{{ config.by_route(`${technical_section}/tag-title`) }}</span>
+              </div>
+            </template>
             <!-- description -->
             <div class="flex flex-col col-span-5 gap-2 w-8/12 font-thin">
               <p>آنالیز کامل سایت - آنالیز سئو - بررسی سایت - بررسی سئو سایت</p>
@@ -373,11 +372,11 @@
               تگ عنوان عنصر HTML است که عنوان صفحه وب را مشخص می کند. تگ عنوان در بالای
               مرورگر شما، در نتایج جست‌وجو و همچنین در نوار نشانک ها نمایش داده می شود.
             </p>
-          </div>
+          </Accordion>
 
           <hr />
           <!-- this must designed as widget -->
-          <Accordion class="flex flex-col" :class="true ? 'gap-2' : '!gap-0'" :isOpen="true">
+          <Accordion class="flex flex-col">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
                 <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
@@ -418,13 +417,13 @@
           <hr />
 
           <!-- this must designed as widget -->
-          <div class="grid grid-cols-8 items-start gap-5 w-full">
-            <!-- title -->
-            <div class="flex flex-row items-center gap-4 col-span-2">
-              <span class="mask mask-triangle w-6 h-6 bg-error">&nbsp;</span>
-              <span>{{ config.by_route(`${technical_section}/headings`) }}</span>
-            </div>
-
+          <Accordion class="flex flex-col">
+            <template v-slot:label>
+              <div class="flex flex-row items-center gap-4 col-span-2">
+                <span class="mask mask-triangle w-6 h-6 bg-error">&nbsp;</span>
+                <span>{{ config.by_route(`${technical_section}/headings`) }}</span>
+              </div>
+            </template>
             <!-- description -->
             <div class="flex flex-col gap-5 col-span-5 font-thin">
               <p>فقط یک تگ h1 باید در صفحه وب وجود داشته باشد.</p>
@@ -512,19 +511,18 @@
               صفحه را توصیف می کند، در حالی که بقیه تگ ها موضوعات فرعی صفحه وب را توصیف می
               کنند.
             </p>
-          </div>
+          </Accordion>
 
           <hr />
 
-          <!-- this must designed as widget -->
-          <div class="grid grid-cols-8 items-start gap-5 w-full">
-            <!-- title -->
-            <div class="flex flex-row items-center gap-4 col-span-2">
-              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
-              <span>{{ config.by_route(`${technical_section}/content-keywords`) }}</span>
-            </div>
+          <Accordion class="flex flex-col">
+            <template v-slot:label>
+              <div class="flex flex-row items-center gap-4 col-span-2">
+                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span>{{ config.by_route(`${technical_section}/content-keywords`) }}</span>
+              </div>
+            </template>
 
-            <!-- description -->
             <div class="flex flex-col gap-2 font-thin col-span-5">
               <p>محتوا دارای کلمات کلیدی مرتبط است.</p>
               <div class="flex flex-row items-center gap-2">
@@ -554,7 +552,7 @@
               محتوای صفحه وب باید حاوی کلمات کلیدی مرتبط باشد که در عنوان صفحه وب نیز یافت
               می شود.
             </p>
-          </div>
+          </Accordion>
         </div>
       </section>
 
