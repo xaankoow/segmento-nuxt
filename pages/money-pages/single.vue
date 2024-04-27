@@ -57,7 +57,7 @@
               </p>
             </div>
             <div class="flex justify-end">
-              <a :href="data.link" class="text-primary" dir="ltr">
+              <a :href="data.link" class="text-primary" target="_blank" dir="ltr">
                 {{ data.link }}
               </a>
             </div>
