@@ -42,7 +42,8 @@
                                     "money-pages": "صفحات تجاری",
                                     "keyword-research": "تحقیق کلمه کلیدی",
                                     "google-suggest": "کلمات پیشنهادی گوگل",
-                                    "google-title-builder": "عنوان‌ساز گوگل"
+                                    "google-title-builder": "عنوان‌ساز گوگل",
+                                    "rank-tracker": "رتبه‌سنج"
                                 }
                             },
                             "technical-seo": {
@@ -136,6 +137,7 @@
                     }
                 },
                 "overview": {
+                    "title": "اپلیکیشن رتبه‌سنج (نمای کلی)",
                     "reports": "آمار و گزارش نسبی",
                     "show_reports": "نمایش آمار",
                     "header": {
@@ -186,6 +188,7 @@
                     }
                 },
                 "keyword": {
+                    "title": "ابزار رتبه‌سنج (کلمات کلیدی)",
                     "header": {
                         "button": "افزودن کلمه کلیدی"
                     },
@@ -207,6 +210,7 @@
                     }
                 },
                 "competitors": {
+                    "title": "اپلیکیشن رتبه‌سنج (رقبا)",
                     "header": {
                         "button": "افزودن رقیب",
                         "competitor_counter": "رقیب شماره [number]"
