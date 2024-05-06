@@ -20,12 +20,12 @@
     </div>
 
     <!-- page content -->
-    <div class="flex flex-col gap-4 p-2 w-full pt-2" :class="data === null ? 'h-full' : 'h-fit'">
+    <div class="flex flex-col gap-2 p-2 w-full pt-2" :class="data === null ? 'h-full' : 'h-fit'">
 
       <!-- speed page section -->
       <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
         <!-- title -->
-        <span class="p-3">{{
+        <span class="p-3 font-semibold">{{
           config.by_route(`${current_page}/single/sections/page-speed/title`)
         }}</span>
         <!-- the page detail -->
@@ -86,7 +86,7 @@
                 5 مورد
               </span>
             </div>
-            <div class="h-2 w-full mx-auto bg-error rounded-lg"></div>
+            <ProgressLinear :value="5 / 33 * 100" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -99,10 +99,10 @@
                 }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                5 مورد
+                6 مورد
               </span>
             </div>
-            <div class="h-2 w-full mx-auto bg-amber-400 rounded-lg"></div>
+            <ProgressLinear :value="6 / 33 * 100" strokeColor="#fbbf24" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -115,10 +115,10 @@
                 }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                5 مورد
+                9 مورد
               </span>
             </div>
-            <div class="h-2 w-full mx-auto bg-base-500 rounded-lg"></div>
+            <ProgressLinear :value="9 / 33 * 100" strokeColor="#7d7d7d" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -131,10 +131,10 @@
                 }}</span>
               </div>
               <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                5 مورد
+                11 مورد
               </span>
             </div>
-            <div class="h-2 w-full mx-auto bg-success rounded-lg"></div>
+            <ProgressLinear :value="11 / 33 * 100" strokeColor="#10ccae" />
           </div>
         </div>
 
@@ -213,7 +213,7 @@
         <hr class="mx-4 border-base-300 h-[2px]" />
         <!-- criterion -->
         <div class="flex flex-col gap-2 px-4">
-          <label>{{
+          <label class="font-semibold">{{
             config.by_route(`${current_page}/single/sections/page-speed/criterion`)
           }}</label>
 
@@ -338,20 +338,19 @@
       </section>
 
       <!-- technical analysis section -->
-      <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
+      <section class="w-full border rounded-lg flex flex-col">
         <!-- title -->
-        <label class="p-3">{{ config.by_route(`${technical_section}/title`) }}</label>
+        <label class="p-4 font-semibold">{{ config.by_route(`${technical_section}/title`) }}</label>
 
-        <!-- content section -->
-
-        <div class="flex flex-col w-full gap-7 px-3">
+        <div class="flex flex-col w-full px-3">
           <!-- this must designed as widget -->
-          <div class="grid grid-cols-8 items-start gap-5 w-full">
-            <!-- title -->
-            <div class="flex flex-row items-center gap-4 col-span-2">
-              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
-              <span>{{ config.by_route(`${technical_section}/tag-title`) }}</span>
-            </div>
+          <Accordion class="flex flex-col pb-4" :isOpen="true">
+            <template v-slot:label>
+              <div class="flex flex-row items-center gap-4 col-span-2">
+                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span>{{ config.by_route(`${technical_section}/tag-title`) }}</span>
+              </div>
+            </template>
             <!-- description -->
             <div class="flex flex-col col-span-5 gap-2 w-8/12 font-thin">
               <p>آنالیز کامل سایت - آنالیز سئو - بررسی سایت - بررسی سئو سایت</p>
@@ -360,29 +359,23 @@
                 <span>255 حرف</span>
               </span>
             </div>
-            <!-- spinner -->
-            <span class="h-full flex items-center justify-end">
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
-                  fill="#002145" />
-              </svg>
-            </span>
             <!-- paragraph -->
             <p class="text-base-500 col-span-8 mx-auto w-10/12">
               تگ عنوان عنصر HTML است که عنوان صفحه وب را مشخص می کند. تگ عنوان در بالای
               مرورگر شما، در نتایج جست‌وجو و همچنین در نوار نشانک ها نمایش داده می شود.
             </p>
-          </div>
+          </Accordion>
 
           <hr />
           <!-- this must designed as widget -->
-          <div class="grid grid-cols-8 items-start gap-5 w-full">
+          <Accordion class="flex flex-col py-4">
+            <template v-slot:label>
+              <div class="flex flex-row items-center gap-4 col-span-2">
+                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span>{{ config.by_route(`${technical_section}/meta-description`) }}</span>
+              </div>
+            </template>
             <!-- title -->
-            <div class="flex flex-row items-center gap-4 col-span-2">
-              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
-              <span>{{ config.by_route(`${technical_section}/meta-description`) }}</span>
-            </div>
 
             <!-- description -->
             <div class="flex flex-col gap-2 font-thin col-span-5">
@@ -397,32 +390,24 @@
               </span>
             </div>
 
-            <!-- spinner -->
-            <span class="h-full flex items-center justify-end">
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
-                  fill="#002145" />
-              </svg>
-            </span>
             <!-- paragraph -->
             <p class="text-base-500 col-span-8 w-10/12 mx-auto">
               توضیحات متا یک تگ HTML است که خلاصه ای کوتاه و دقیق از صفحه وب ارائه می دهد.
               توضیحات متا توسط موتورهای جست‌وجو برای شناسایی موضوع صفحه وب و ارائه نتایج
               جست‌وجوی مرتبط استفاده می شود.
             </p>
-          </div>
+          </Accordion>
 
           <hr />
 
           <!-- this must designed as widget -->
-          <div class="grid grid-cols-8 items-start gap-5 w-full">
-            <!-- title -->
-            <div class="flex flex-row items-center gap-4 col-span-2">
-              <span class="mask mask-triangle w-6 h-6 bg-error">&nbsp;</span>
-              <span>{{ config.by_route(`${technical_section}/headings`) }}</span>
-            </div>
-
+          <Accordion class="flex flex-col py-4">
+            <template v-slot:label>
+              <div class="flex flex-row items-center gap-4 col-span-2">
+                <span class="mask mask-triangle w-6 h-6 bg-error">&nbsp;</span>
+                <span>{{ config.by_route(`${technical_section}/headings`) }}</span>
+              </div>
+            </template>
             <!-- description -->
             <div class="flex flex-col gap-5 col-span-5 font-thin">
               <p>فقط یک تگ h1 باید در صفحه وب وجود داشته باشد.</p>
@@ -495,14 +480,6 @@
               </div>
             </div>
 
-            <!-- spinner -->
-            <span class="h-full flex items-center justify-end">
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
-                  fill="#002145" />
-              </svg>
-            </span>
 
             <!-- paragraph -->
             <p class="text-base-500 col-span-8 mx-auto w-10/12">
@@ -510,19 +487,18 @@
               صفحه را توصیف می کند، در حالی که بقیه تگ ها موضوعات فرعی صفحه وب را توصیف می
               کنند.
             </p>
-          </div>
+          </Accordion>
 
           <hr />
 
-          <!-- this must designed as widget -->
-          <div class="grid grid-cols-8 items-start gap-5 w-full">
-            <!-- title -->
-            <div class="flex flex-row items-center gap-4 col-span-2">
-              <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
-              <span>{{ config.by_route(`${technical_section}/content-keywords`) }}</span>
-            </div>
+          <Accordion class="flex flex-col py-4">
+            <template v-slot:label>
+              <div class="flex flex-row items-center gap-4 col-span-2">
+                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span>{{ config.by_route(`${technical_section}/content-keywords`) }}</span>
+              </div>
+            </template>
 
-            <!-- description -->
             <div class="flex flex-col gap-2 font-thin col-span-5">
               <p>محتوا دارای کلمات کلیدی مرتبط است.</p>
               <div class="flex flex-row items-center gap-2">
@@ -539,20 +515,12 @@
               </div>
             </div>
 
-            <!-- spinner -->
-            <span class="h-full flex items-center justify-end">
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
-                  fill="#002145" />
-              </svg>
-            </span>
             <!-- paragraph -->
             <p class="text-base-500 col-span-8 w-10/12 mx-auto">
               محتوای صفحه وب باید حاوی کلمات کلیدی مرتبط باشد که در عنوان صفحه وب نیز یافت
               می شود.
             </p>
-          </div>
+          </Accordion>
         </div>
       </section>
 
@@ -728,19 +696,9 @@
                 {{ i.seo == null ? 'ندارد' : tableDataMaker(i.seo) }}
               </td>
               <td class="w-[197px] text-[10px] text-end px-6" v-else>
-                <p class="text-end">{{ tableDataMaker(i.page_status) }} درصد</p>
-                <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                  <div class="h-[10px] rounded-xl" :style="{
-                    width: `${tableDataMaker(i.page_status)}%`,
-                    backgroundColor:
-                      tableDataMaker(i.page_status) <= 25
-                        ? '#F35242'
-                        : tableDataMaker(i.page_status) <= 60
-                          ? '#FFCE47'
-                          : '#10CCAE',
-                  }">
-                  </div>
-                </div>
+                <ProgressLinear :value="tableDataMaker(i.page_status)">
+                  {{ tableDataMaker(i.page_status) }} درصد
+                </ProgressLinear>
               </td>
             </tr>
           </tbody>

@@ -83,7 +83,9 @@
           <div dir="ltr" class="w-full h-auto max-h-[600px] overflow-hiden">
             <table class="w-full h-auto overflow-auto" dir="rtl">
               <tr v-for="(page, index) in data" :key="index" class="w-full h-[60px]">
-                <td :title="page.link" class="h-[60px] w-[246px] max-w-[246px] text-center border-l border-base-400 border-b overflow-hidden" dir="ltr">
+                <td :title="page.link"
+                  class="h-[60px] w-[246px] max-w-[246px] text-center border-l border-base-400 border-b overflow-hidden"
+                  dir="ltr">
                   <a :href="page.link" target="new">{{ show_url(page.link) }}</a>
                 </td>
                 <td class="h-[60px] w-[197px] text-center border-l border-base-400 border-b">
@@ -103,32 +105,23 @@
                   </div>
                   <div v-else>
                     {{ page.positions_average === 0 ? "بدون رتبه" : page.positions_average === null ? "غیرفعال" :
-      page.positions_average }}
+                      page.positions_average }}
                   </div>
                 </td>
                 <td class="h-[60px] w-[147px] text-center border-l border-base-400 border-b" dir="ltr">
                   <span v-if="page.updated_at === null"> بدون دیتا </span>
                   <span v-else>
                     {{
-      jalaliMoment(page.updated_at, "YYYY-MM-DD HH:mm:ss").format(
-        "jYYYY/jMM/jDD"
-      )
-    }}
+                      jalaliMoment(page.updated_at, "YYYY-MM-DD HH:mm:ss").format(
+                    "jYYYY/jMM/jDD"
+                    )
+                    }}
                   </span>
                 </td>
                 <td class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6">
-                  <p>{{ page.page_status }} درصد</p>
-                  <div class="w-[100%] h-[10px] rounded-xl bg-base-400">
-                    <div class="h-[10px] rounded-xl" :style="{
-      width: `${page.page_status}%`,
-      backgroundColor:
-        page.page_status <= 25
-          ? '#F35242'
-          : page.page_status <= 60
-            ? '#FFCE47'
-            : '#10CCAE',
-    }"></div>
-                  </div>
+                  <ProgressLinear :value="page.page_status">
+                  {{ page.page_status }} درصد
+                  </ProgressLinear>
                 </td>
                 <td class="h-[60px] w-[76px] text-center border-base-400 border-b">
                   <div class="w-full h-full flex items-center justify-center">
