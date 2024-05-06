@@ -25,7 +25,7 @@
       <!-- speed page section -->
       <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
         <!-- title -->
-        <span class="p-3">{{
+        <span class="p-3 font-semibold">{{
           config.by_route(`${current_page}/single/sections/page-speed/title`)
         }}</span>
         <!-- the page detail -->
@@ -213,7 +213,7 @@
         <hr class="mx-4 border-base-300 h-[2px]" />
         <!-- criterion -->
         <div class="flex flex-col gap-2 px-4">
-          <label>{{
+          <label class="font-semibold">{{
             config.by_route(`${current_page}/single/sections/page-speed/criterion`)
           }}</label>
 
@@ -338,13 +338,13 @@
       </section>
 
       <!-- technical analysis section -->
-      <section class="w-full border rounded-lg flex flex-col gap-5 pt-2 pb-4">
+      <section class="w-full border rounded-lg flex flex-col">
         <!-- title -->
-        <label class="p-3 font-semibold">{{ config.by_route(`${technical_section}/title`) }}</label>
+        <label class="p-4 font-semibold">{{ config.by_route(`${technical_section}/title`) }}</label>
 
-        <div class="flex flex-col w-full gap-4 px-3">
+        <div class="flex flex-col w-full px-3">
           <!-- this must designed as widget -->
-          <Accordion class="flex flex-col" :isOpen="true">
+          <Accordion class="flex flex-col pb-4" :isOpen="true">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
                 <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
@@ -359,14 +359,6 @@
                 <span>255 حرف</span>
               </span>
             </div>
-            <!-- spinner -->
-            <span class="h-full flex items-center justify-end">
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
-                  fill="#002145" />
-              </svg>
-            </span>
             <!-- paragraph -->
             <p class="text-base-500 col-span-8 mx-auto w-10/12">
               تگ عنوان عنصر HTML است که عنوان صفحه وب را مشخص می کند. تگ عنوان در بالای
@@ -376,7 +368,7 @@
 
           <hr />
           <!-- this must designed as widget -->
-          <Accordion class="flex flex-col">
+          <Accordion class="flex flex-col py-4">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
                 <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
@@ -398,14 +390,6 @@
               </span>
             </div>
 
-            <!-- spinner -->
-            <span class="h-full flex items-center justify-end">
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
-                  fill="#002145" />
-              </svg>
-            </span>
             <!-- paragraph -->
             <p class="text-base-500 col-span-8 w-10/12 mx-auto">
               توضیحات متا یک تگ HTML است که خلاصه ای کوتاه و دقیق از صفحه وب ارائه می دهد.
@@ -417,7 +401,7 @@
           <hr />
 
           <!-- this must designed as widget -->
-          <Accordion class="flex flex-col">
+          <Accordion class="flex flex-col py-4">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
                 <span class="mask mask-triangle w-6 h-6 bg-error">&nbsp;</span>
@@ -496,14 +480,6 @@
               </div>
             </div>
 
-            <!-- spinner -->
-            <span class="h-full flex items-center justify-end">
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
-                  fill="#002145" />
-              </svg>
-            </span>
 
             <!-- paragraph -->
             <p class="text-base-500 col-span-8 mx-auto w-10/12">
@@ -515,7 +491,7 @@
 
           <hr />
 
-          <Accordion class="flex flex-col">
+          <Accordion class="flex flex-col py-4">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
                 <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
@@ -539,14 +515,6 @@
               </div>
             </div>
 
-            <!-- spinner -->
-            <span class="h-full flex items-center justify-end">
-              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.925 2.65156L10.625 10.9766C10.5417 11.0599 10.4457 11.1222 10.337 11.1636C10.229 11.2056 10.1167 11.2266 10 11.2266C9.88333 11.2266 9.77067 11.2056 9.662 11.1636C9.554 11.1222 9.45833 11.0599 9.375 10.9766L1.05 2.65156C0.85 2.45156 0.75 2.21823 0.75 1.95156C0.75 1.6849 0.858333 1.44323 1.075 1.22656C1.25833 1.02656 1.48733 0.926563 1.762 0.926563C2.03733 0.926563 2.275 1.02656 2.475 1.22656L10 8.77656L17.55 1.22656C17.7333 1.04323 17.9583 0.951562 18.225 0.951562C18.4917 0.951562 18.725 1.05156 18.925 1.25156C19.125 1.45156 19.225 1.6849 19.225 1.95156C19.225 2.21823 19.125 2.45156 18.925 2.65156Z"
-                  fill="#002145" />
-              </svg>
-            </span>
             <!-- paragraph -->
             <p class="text-base-500 col-span-8 w-10/12 mx-auto">
               محتوای صفحه وب باید حاوی کلمات کلیدی مرتبط باشد که در عنوان صفحه وب نیز یافت
