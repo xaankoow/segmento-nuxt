@@ -512,9 +512,9 @@
                         },
                         "technical-analysis": {
                             "title": "تحلیل تکنیکال",
-                            "tag-title": " (Tag Title) عنوان سایت",
-                            "meta-description": " (Meta Description) توضیحات سایت",
-                            "headings": "(Headings) عناوین",
+                            "tag-title": "عنوان سایت (Tag Title)",
+                            "meta-description": "توضیحات سایت (Meta Description)",
+                            "headings": "عناوین (Headings)",
                             "content-keywords": "کلمات کلیدی هدف (Content keywords)"
                         },
                         "chart": {

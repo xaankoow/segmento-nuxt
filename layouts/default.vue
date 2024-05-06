@@ -130,7 +130,7 @@
             <!-- temperory comented, when the code get done, we'll uncomment it. TODO: uncomment this section when the code was ready to use. -->
             <template v-slot:sites>
               <div class="flex flex-col gap-4" :class="active_accordion === 'sites' ? 'py-2' : 'pt-2'">
-                <Accordion class="flex flex-col" :class="active_accordion === 'sites' ? 'gap-2' : '!gap-0'"
+                <AccordionLayout class="flex flex-col" :class="active_accordion === 'sites' ? 'gap-2' : '!gap-0'"
                   :isOpen="active_accordion === 'sites'" @update="change_active_accordion('sites')">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/site/title`)">
@@ -162,7 +162,7 @@
                       </SvgLabeled>
                     </li>
                   </ul>
-                </Accordion>
+                </AccordionLayout>
                 <!-- <li class="mt-2" @click="change_active_section('workspace_management')">
                     <SvgLabeled
                       :label="cn.by_route(`${department_section}/site/manage`)"
@@ -190,7 +190,7 @@
             <template v-slot:accordion>
               <div class="gap-2 flex flex-col">
                 <!-- Seo Section -->
-                <Accordion :isOpen="active_accordion === 'seo'" @update="change_active_accordion('seo')">
+                <AccordionLayout :isOpen="active_accordion === 'seo'" @update="change_active_accordion('seo')">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/seo/title`)">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -274,10 +274,10 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
-                </Accordion>
+                </AccordionLayout>
 
                 <!-- Content Creation Section -->
-                <Accordion :isOpen="active_accordion === 'content-creation'"
+                <AccordionLayout :isOpen="active_accordion === 'content-creation'"
                   @update="change_active_accordion('content-creation')">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/content-creation/title`)">
@@ -346,10 +346,10 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
-                </Accordion>
+                </AccordionLayout>
 
                 <!-- Technical Seo Secion -->
-                <Accordion :isOpen="active_accordion === 'technical-seo'"
+                <AccordionLayout :isOpen="active_accordion === 'technical-seo'"
                   @update="change_active_accordion('technical-seo')">
                   <template v-slot:label>
                     <SvgLabeled :label="cn.by_route(`${department_section}/technical-seo/title`)">
@@ -436,7 +436,7 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
-                </Accordion>
+                </AccordionLayout>
               </div>
             </template>
             <template v-slot:message>
