@@ -654,14 +654,15 @@
         </div>
 
         <!-- the chart -->
-        <div>
+        <ClientOnly>
           <ChartLine :series="series" />
-        </div>
+        </ClientOnly>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+import Vue3PersianDatetimePicker from "vue3-persian-datetime-picker";
 import Config from "../../composables/Config";
 
 const date = ref("1402/03/25");
