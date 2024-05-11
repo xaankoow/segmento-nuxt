@@ -8,7 +8,7 @@
         </span>
         <span :class="shape.color" class="text-sm">
             <span>
-                {{ time }}
+                {{ kind == "TBT" ? Math.round(time * 100) / 100 : time }}
             </span>
             {{ kind == "TBT" ? "میلی‌ثانیه" : "ثانیه" }}
         </span>

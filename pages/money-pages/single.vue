@@ -32,13 +32,13 @@
         <div class="flex flex-row items-center justify-evenly">
           <div class="w-36 h-36 flex items-center justify-center">
             <ProgressRadial
-              v-if="!request.pending.value && data.analytics !== undefined && data.analytics[0].ok == true"
-              :value="data.analytics[0].page_status * 100"
-              :strokeColor="data.analytics[0].page_status * 100 < 50 ? '#f35242' : data.analytics[0].page_status * 100 < 90 ? '#fbbf24' : '#10ccae'"
-              :bgColor="data.analytics[0].page_status * 100 < 50 ? 'bg-[#f3524220]' : data.analytics[0].page_status * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
+              v-if="!request.pending.value && data.analytics !== undefined && data.analytics[0].lighthouse.ok == true"
+              :value="data.analytics[0].lighthouse.page_status * 100"
+              :strokeColor="data.analytics[0].lighthouse.page_status * 100 < 50 ? '#f35242' : data.analytics[0].lighthouse.page_status * 100 < 90 ? '#fbbf24' : '#10ccae'"
+              :bgColor="data.analytics[0].lighthouse.page_status * 100 < 50 ? 'bg-[#f3524220]' : data.analytics[0].lighthouse.page_status * 100 < 90 ? 'bg-[#fbbf2420]' : 'bg-[#10ccae20]'"
               size="130px" strokeWidth="11px">
               <span class="text-extrabold text-5xl">
-                {{ Math.floor(data.analytics[0].page_status * 100) }}
+                {{ Math.floor(data.analytics[0].lighthouse.page_status * 100) }}
               </span>
             </ProgressRadial>
             <ProgressRadial v-else :value="100" strokeColor="#d7d8da" bgColor="bg-gray-100" size="130px"
@@ -48,12 +48,19 @@
           </div>
           <div class="flex flex-col justify-between h-full w-1/2 py-4">
             <div class="flex justify-start">
-              <span class="text-xl">شرکت زانکو نویان Xaankoo Noyan</span>
+              <span class="text-xl" v-if="!request.pending.value && data.technical_analysis !== undefined">
+                {{ data.technical_analysis.analysis.seo.title.value ?? "عنوان ندارد" }}
+              </span>
+              <span v-else>
+                ندارد
+              </span>
             </div>
             <div class="flex justify-start">
-              <p class="font-thin text-base-500">
-                شرکت زانکو نویان Xaankoo Noyan - ارائه محصولات نوآور برای افزایش بهره‌وری
-                شرکت‌ها، کارکنان و تیم‌ها
+              <p class="font-thin text-base-500" v-if="!request.pending.value && data.technical_analysis !== undefined">
+                {{ data.technical_analysis.analysis.seo.meta_description.value ?? "توضیحات ندارد" }}
+              </p>
+              <p v-else>
+                ندارد
               </p>
             </div>
             <div class="flex justify-end">
@@ -82,11 +89,17 @@
                   )
                 }}</span>
               </div>
-              <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                5 مورد
+              <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white"
+                v-if="!request.pending.value && data.technical_analysis !== undefined">
+                {{ data.technical_analysis.high_issues }} مورد
+              </span>
+              <span v-else>
+                بدون دیتا
               </span>
             </div>
-            <ProgressLinear :value="5 / 33 * 100" />
+            <ProgressLinear v-if="!request.pending.value && data.technical_analysis !== undefined"
+              :value="data.technical_analysis.high_issues / 33 * 100" />
+            <ProgressLinear v-else :value="0" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -98,11 +111,17 @@
                   )
                 }}</span>
               </div>
-              <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                6 مورد
+              <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white"
+                v-if="!request.pending.value && data.technical_analysis !== undefined">
+                {{ data.technical_analysis.medium_issues }} مورد
+              </span>
+              <span v-else>
+                بدون دیتا
               </span>
             </div>
-            <ProgressLinear :value="6 / 33 * 100" strokeColor="#fbbf24" />
+            <ProgressLinear v-if="!request.pending.value && data.technical_analysis !== undefined" strokeColor="#fbbf24"
+              :value="data.technical_analysis.medium_issues / 33 * 100" />
+            <ProgressLinear v-else :value="0" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -114,11 +133,17 @@
                   )
                 }}</span>
               </div>
-              <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                9 مورد
+              <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white"
+                v-if="!request.pending.value && data.technical_analysis !== undefined">
+                {{ data.technical_analysis.low_issues }} مورد
+              </span>
+              <span v-else>
+                بدون دیتا
               </span>
             </div>
-            <ProgressLinear :value="9 / 33 * 100" strokeColor="#7d7d7d" />
+            <ProgressLinear v-if="!request.pending.value && data.technical_analysis !== undefined" strokeColor="#7d7d7d"
+              :value="data.technical_analysis.low_issues / 33 * 100" />
+            <ProgressLinear v-else :value="0" />
           </div>
           <div class="flex flex-col gap-2 justify-evenly rounded-lg w-full">
             <div class="flex flex-row items-center justify-between">
@@ -130,11 +155,17 @@
                   )
                 }}</span>
               </div>
-              <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white">
-                11 مورد
+              <span class="rounded-full w-20 bg-base-400 flex items-center justify-center text-white"
+                v-if="!request.pending.value && data.technical_analysis !== undefined">
+                {{ data.technical_analysis.passed }} مورد
+              </span>
+              <span v-else>
+                بدون دیتا
               </span>
             </div>
-            <ProgressLinear :value="11 / 33 * 100" strokeColor="#10ccae" />
+            <ProgressLinear v-if="!request.pending.value && data.technical_analysis !== undefined" strokeColor="#10ccae"
+              :value="data.technical_analysis.passed / 33 * 100" />
+            <ProgressLinear v-else :value="0" />
           </div>
         </div>
 
@@ -157,11 +188,14 @@
                   fill="white" />
               </svg>
             </span>
-            <span>
-              <span v-if="!request.pending.value && data.lighthouse?.timing?.total !== undefined">
-                {{ Math.round(data.lighthouse.timing.total / 100) / 10 }}
+            <span v-if="!request.pending.value && data.technical_analysis !== undefined">
+              <span>
+                {{ Math.round(data.technical_analysis.analysis.performance.load_time.value * 100) / 100 }}
               </span>
               ثانیه
+            </span>
+            <span v-else>
+              بدون دیتا
             </span>
           </span>
           <span class="flex flex-row items-center gap-4">
@@ -179,7 +213,12 @@
                 </defs>
               </svg>
             </span>
-            <span> 38.72 کیلوبایت </span>
+            <span v-if="!request.pending.value && data.technical_analysis !== undefined">
+              {{ Math.round(data.technical_analysis.analysis.performance.page_size.value / 10) / 100 }} کیلوبایت
+            </span>
+            <span v-else>
+              بدون دیتا
+            </span>
           </span>
           <span class="flex flex-row items-center gap-4">
             <span class="rounded-sm bg-base-350 flex items-center justify-center p-2">
@@ -196,7 +235,17 @@
                 </defs>
               </svg>
             </span>
-            <span> 64 منبع </span>
+            <span v-if="!request.pending.value && data.technical_analysis !== undefined">
+              {{
+                Object.values(data.technical_analysis.analysis.performance.http_requests.value ?? []).reduce(
+                  (sum, innerArray) => sum + innerArray.length,
+                  0
+                )
+              }} منبع
+            </span>
+            <span v-else>
+              بدون دیتا
+            </span>
           </span>
           <span class="flex flex-row items-center gap-4">
             <span class="rounded-sm bg-base-350 flex items-center justify-center p-2">
@@ -206,7 +255,12 @@
                   fill="white" />
               </svg>
             </span>
-            <span> امن </span>
+            <span v-if="!request.pending.value && data.technical_analysis !== undefined">
+              {{ !data.technical_analysis.analysis.security.https_encryption.passed ? "امن" : "ناامن" }}
+            </span>
+            <span v-else>
+              بدون دیتا
+            </span>
           </span>
         </div>
 
@@ -342,25 +396,26 @@
         <!-- title -->
         <label class="p-4 font-semibold">{{ config.by_route(`${technical_section}/title`) }}</label>
 
-        <div class="flex flex-col w-full px-3">
+        <div class="flex flex-col w-full px-3" v-if="!request.pending.value && data.technical_analysis !== undefined">
           <!-- this must designed as widget -->
           <Accordion class="flex flex-col pb-4" :isOpen="true">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
-                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span class="mask mask-triangle w-6 h-6"
+                  :class="data.technical_analysis.analysis.seo.title.passed ? 'bg-success' : 'bg-error'">&nbsp;</span>
                 <span>{{ config.by_route(`${technical_section}/tag-title`) }}</span>
               </div>
             </template>
             <!-- description -->
-            <div class="flex flex-col col-span-5 gap-2 w-8/12 font-thin">
-              <p>آنالیز کامل سایت - آنالیز سئو - بررسی سایت - بررسی سئو سایت</p>
-              <span class="flex flex-row items-center gap-5">
+            <div class="flex flex-col gap-2 w-8/12">
+              <p> {{ data.technical_analysis.analysis.seo.title.value ?? "بدون عنوان" }} </p>
+              <span class="flex flex-row items-center gap-2">
                 <label class="font-semibold">طول: </label>
-                <span>255 حرف</span>
+                <span>{{ data.technical_analysis.analysis.seo.title.value?.length ?? 0 }} حرف</span>
               </span>
             </div>
             <!-- paragraph -->
-            <p class="text-base-500 col-span-8 mx-auto w-10/12">
+            <p class="text-base-500">
               تگ عنوان عنصر HTML است که عنوان صفحه وب را مشخص می کند. تگ عنوان در بالای
               مرورگر شما، در نتایج جست‌وجو و همچنین در نوار نشانک ها نمایش داده می شود.
             </p>
@@ -371,27 +426,24 @@
           <Accordion class="flex flex-col py-4">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
-                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span class="mask mask-triangle w-6 h-6"
+                  :class="data.technical_analysis.analysis.seo.meta_description.passed ? 'bg-success' : 'bg-error'">&nbsp;</span>
                 <span>{{ config.by_route(`${technical_section}/meta-description`) }}</span>
               </div>
             </template>
             <!-- title -->
 
             <!-- description -->
-            <div class="flex flex-col gap-2 font-thin col-span-5">
-              <p>
-                چکاپ تولز یک سایت جامع برای آنالیز سئو و سرعت سایت شما می باشد که با بیش
-                از 60 اپلیکیشن مختلف سایت شما را بررسی میکند و نیاز اصلی هر وبمستر می باشد
-                .
-              </p>
-              <span class="flex flex-row items-center gap-5">
+            <div class="flex flex-col gap-2">
+              <p> {{ data.technical_analysis.analysis.seo.meta_description.value ?? "بدون توضیحات" }} </p>
+              <span class="flex flex-row items-center gap-2">
                 <label class="font-semibold">طول: </label>
-                <span>255 حرف</span>
+                <span>{{ data.technical_analysis.analysis.seo.meta_description.value?.length ?? 0 }} حرف</span>
               </span>
             </div>
 
             <!-- paragraph -->
-            <p class="text-base-500 col-span-8 w-10/12 mx-auto">
+            <p class="text-base-500">
               توضیحات متا یک تگ HTML است که خلاصه ای کوتاه و دقیق از صفحه وب ارائه می دهد.
               توضیحات متا توسط موتورهای جست‌وجو برای شناسایی موضوع صفحه وب و ارائه نتایج
               جست‌وجوی مرتبط استفاده می شود.
@@ -404,85 +456,34 @@
           <Accordion class="flex flex-col py-4">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
-                <span class="mask mask-triangle w-6 h-6 bg-error">&nbsp;</span>
+                <span class="mask mask-triangle w-6 h-6"
+                  :class="data.technical_analysis.analysis.seo.headings.passed ? 'bg-success' : 'bg-error'">&nbsp;</span>
                 <span>{{ config.by_route(`${technical_section}/headings`) }}</span>
               </div>
             </template>
-            <!-- description -->
-            <div class="flex flex-col gap-5 col-span-5 font-thin">
+            <div class="flex flex-col gap-4">
               <p>فقط یک تگ h1 باید در صفحه وب وجود داشته باشد.</p>
 
               <!-- table  -->
-              <div class="border rounded-sm flex flex-col w-10/12">
-                <div class="flex flex-row items-center justify-between px-3 py-2">
-                  <!-- tag -->
-                  <span>h1</span>
-
-                  <span class="flex flex-row items-center gap-2">
-                    <span class="bg-base-350 text-base-500 rounded-full px-3 py-1 text-sm">9 مورد</span>
-                    <span>
-                      <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M0.796355 5.94739L5.63802 1.09115C5.68663 1.04253 5.74263 1.00617 5.80602 0.982062C5.86902 0.957562 5.93455 0.945312 6.0026 0.945312C6.07066 0.945312 6.13638 0.957562 6.19977 0.982062C6.26277 1.00617 6.31858 1.04253 6.36719 1.09115L11.2234 5.9474C11.3401 6.06406 11.3984 6.20017 11.3984 6.35573C11.3984 6.51128 11.3352 6.65226 11.2089 6.77865C11.1019 6.89531 10.9683 6.95365 10.8081 6.95365C10.6475 6.95365 10.5089 6.89531 10.3922 6.77865L6.0026 2.37448L1.59844 6.77865C1.49149 6.88559 1.36024 6.93906 1.20469 6.93906C1.04913 6.93906 0.913022 6.88073 0.796355 6.76406C0.679688 6.64739 0.621354 6.51128 0.621354 6.35573C0.621354 6.20017 0.679688 6.06406 0.796355 5.94739Z"
-                          fill="#002145" />
-                      </svg>
-                    </span>
-                  </span>
-                </div>
-                <hr />
-                <div class="flex flex-row items-center justify-between px-3 py-2">
-                  <!-- tag -->
-                  <span>h1</span>
-
-                  <span class="flex flex-row items-center gap-2">
-                    <span class="bg-base-350 text-base-500 rounded-full px-3 py-1 text-sm">9 مورد</span>
-                    <span>
-                      <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M0.796355 5.94739L5.63802 1.09115C5.68663 1.04253 5.74263 1.00617 5.80602 0.982062C5.86902 0.957562 5.93455 0.945312 6.0026 0.945312C6.07066 0.945312 6.13638 0.957562 6.19977 0.982062C6.26277 1.00617 6.31858 1.04253 6.36719 1.09115L11.2234 5.9474C11.3401 6.06406 11.3984 6.20017 11.3984 6.35573C11.3984 6.51128 11.3352 6.65226 11.2089 6.77865C11.1019 6.89531 10.9683 6.95365 10.8081 6.95365C10.6475 6.95365 10.5089 6.89531 10.3922 6.77865L6.0026 2.37448L1.59844 6.77865C1.49149 6.88559 1.36024 6.93906 1.20469 6.93906C1.04913 6.93906 0.913022 6.88073 0.796355 6.76406C0.679688 6.64739 0.621354 6.51128 0.621354 6.35573C0.621354 6.20017 0.679688 6.06406 0.796355 5.94739Z"
-                          fill="#002145" />
-                      </svg>
-                    </span>
-                  </span>
-                </div>
-                <hr />
-                <div class="flex flex-row items-center justify-between px-3 py-2">
-                  <!-- tag -->
-                  <span>h1</span>
-
-                  <span class="flex flex-row items-center gap-2">
-                    <span class="bg-base-350 text-base-500 rounded-full px-3 py-1 text-sm">9 مورد</span>
-                    <span>
-                      <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M0.796355 5.94739L5.63802 1.09115C5.68663 1.04253 5.74263 1.00617 5.80602 0.982062C5.86902 0.957562 5.93455 0.945312 6.0026 0.945312C6.07066 0.945312 6.13638 0.957562 6.19977 0.982062C6.26277 1.00617 6.31858 1.04253 6.36719 1.09115L11.2234 5.9474C11.3401 6.06406 11.3984 6.20017 11.3984 6.35573C11.3984 6.51128 11.3352 6.65226 11.2089 6.77865C11.1019 6.89531 10.9683 6.95365 10.8081 6.95365C10.6475 6.95365 10.5089 6.89531 10.3922 6.77865L6.0026 2.37448L1.59844 6.77865C1.49149 6.88559 1.36024 6.93906 1.20469 6.93906C1.04913 6.93906 0.913022 6.88073 0.796355 6.76406C0.679688 6.64739 0.621354 6.51128 0.621354 6.35573C0.621354 6.20017 0.679688 6.06406 0.796355 5.94739Z"
-                          fill="#002145" />
-                      </svg>
-                    </span>
-                  </span>
-                </div>
-                <hr />
-                <div class="flex flex-row items-center justify-between px-3 py-2">
-                  <!-- tag -->
-                  <span>h1</span>
-
-                  <span class="flex flex-row items-center gap-2">
-                    <span class="bg-base-350 text-base-500 rounded-full px-3 py-1 text-sm">9 مورد</span>
-                    <span>
-                      <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M0.796355 5.94739L5.63802 1.09115C5.68663 1.04253 5.74263 1.00617 5.80602 0.982062C5.86902 0.957562 5.93455 0.945312 6.0026 0.945312C6.07066 0.945312 6.13638 0.957562 6.19977 0.982062C6.26277 1.00617 6.31858 1.04253 6.36719 1.09115L11.2234 5.9474C11.3401 6.06406 11.3984 6.20017 11.3984 6.35573C11.3984 6.51128 11.3352 6.65226 11.2089 6.77865C11.1019 6.89531 10.9683 6.95365 10.8081 6.95365C10.6475 6.95365 10.5089 6.89531 10.3922 6.77865L6.0026 2.37448L1.59844 6.77865C1.49149 6.88559 1.36024 6.93906 1.20469 6.93906C1.04913 6.93906 0.913022 6.88073 0.796355 6.76406C0.679688 6.64739 0.621354 6.51128 0.621354 6.35573C0.621354 6.20017 0.679688 6.06406 0.796355 5.94739Z"
-                          fill="#002145" />
-                      </svg>
-                    </span>
-                  </span>
-                </div>
+              <div class="border rounded-sm flex flex-col w-full"
+                v-if="data.technical_analysis.analysis.seo.headings.passed">
+                <Accordion class="flex flex-col py-2 px-4 border-b"
+                  v-for="(headingItems, heading) in data.technical_analysis.analysis.seo.headings.value">
+                  <template v-slot:label>
+                    <div class="flex flex-row items-center gap-4">
+                      <span>{{ heading }}</span>
+                    </div>
+                  </template>
+                  <div v-for="(headingItem, itemIndex) in headingItems">{{ itemIndex + 1 }}. {{ headingItem }}</div>
+                </Accordion>
+              </div>
+              <div v-else>
+                هیچ تگ عنوانی در این سایت وجود ندارد.
               </div>
             </div>
 
-
             <!-- paragraph -->
-            <p class="text-base-500 col-span-8 mx-auto w-10/12">
+            <p class="text-base-500 mt-4">
               تگ h نشان دهنده سرفصل های صفحه وب است. تگ h1 مهمترین تگ h است و موضوع اصلی
               صفحه را توصیف می کند، در حالی که بقیه تگ ها موضوعات فرعی صفحه وب را توصیف می
               کنند.
@@ -494,33 +495,33 @@
           <Accordion class="flex flex-col py-4">
             <template v-slot:label>
               <div class="flex flex-row items-center gap-4 col-span-2">
-                <span class="mask mask-triangle w-6 h-6 bg-success">&nbsp;</span>
+                <span class="mask mask-triangle w-6 h-6"
+                  :class="data.technical_analysis.analysis.seo.content_keywords.passed ? 'bg-success' : 'bg-error'">&nbsp;</span>
                 <span>{{ config.by_route(`${technical_section}/content-keywords`) }}</span>
               </div>
             </template>
 
-            <div class="flex flex-col gap-2 font-thin col-span-5">
-              <p>محتوا دارای کلمات کلیدی مرتبط است.</p>
-              <div class="flex flex-row items-center gap-2">
-                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20"> سئو </span>
-                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20">
-                  آموزش سئو
-                </span>
-                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20">
-                  سگمنتو
-                </span>
-                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20">
-                  آموزش سئو مشهد
+            <div class="flex flex-col gap-2">
+              <p v-if="data.technical_analysis.analysis.seo.content_keywords.passed">محتوا دارای کلمات کلیدی مرتبط است.</p>
+              <p v-else>محتوا شامل کلمات کلیدی نمی‌باشد.</p>
+              <div class="flex flex-row items-center gap-2"
+                v-if="data.technical_analysis.analysis.seo.content_keywords.passed">
+                <span class="rounded-lg px-3 py-2 text-primary bg-primary/20"
+                  v-for="word in data.technical_analysis.analysis.seo.content_keywords.value">
+                  {{ word }}
                 </span>
               </div>
             </div>
 
             <!-- paragraph -->
-            <p class="text-base-500 col-span-8 w-10/12 mx-auto">
+            <p class="text-base-500">
               محتوای صفحه وب باید حاوی کلمات کلیدی مرتبط باشد که در عنوان صفحه وب نیز یافت
-              می شود.
+              می‌شود.
             </p>
           </Accordion>
+        </div>
+        <div v-else>
+          بدون دیتا
         </div>
       </section>
 
@@ -669,35 +670,35 @@
               :class="index + 1 < data.analytics.length ? 'border-base-400 border-b' : ''"
               v-for="(i, index) in data.analytics" :key="i">
               <td>
-                {{ i.update_time == null ? 'ندارد' : dateChanger(i.update_time) }}
+                {{ i.created_at == null ? 'ندارد' : dateChanger(i.created_at) }}
               </td>
               <td>کلمه کلیدی</td>
               <td class="text-primary-disable">
                 ندارد
               </td>
               <td
-                :class="i.performance == null ? 'text-primary-disable' : i.performance * 100 < 50 ? 'text-[#f35242]' : i.performance * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
-                {{ i.performance == null ? 'ندارد' : tableDataMaker(i.performance) }}
+                :class="i.lighthouse.performance == null ? 'text-primary-disable' : i.lighthouse.performance * 100 < 50 ? 'text-[#f35242]' : i.lighthouse.performance * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
+                {{ i.lighthouse.performance == null ? 'ندارد' : tableDataMaker(i.lighthouse.performance) }}
               </td>
               <td
-                :class="i.accessibility == null ? 'text-primary-disable' : i.accessibility * 100 < 50 ? 'text-[#f35242]' : i.accessibility * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
-                {{ i.accessibility == null ? 'ندارد' : tableDataMaker(i.accessibility) }}
+                :class="i.lighthouse.accessibility == null ? 'text-primary-disable' : i.lighthouse.accessibility * 100 < 50 ? 'text-[#f35242]' : i.lighthouse.accessibility * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
+                {{ i.lighthouse.accessibility == null ? 'ندارد' : tableDataMaker(i.lighthouse.accessibility) }}
               </td>
               <td
-                :class="i.best_practice == null ? 'text-primary-disable' : i.best_practice * 100 < 50 ? 'text-[#f35242]' : i.best_practice * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
-                {{ i.best_practice == null ? 'ندارد' : tableDataMaker(i.best_practice) }}
+                :class="i.lighthouse.best_practice == null ? 'text-primary-disable' : i.lighthouse.best_practice * 100 < 50 ? 'text-[#f35242]' : i.lighthouse.best_practice * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
+                {{ i.lighthouse.best_practice == null ? 'ندارد' : tableDataMaker(i.lighthouse.best_practice) }}
               </td>
               <td
-                :class="i.seo == null ? 'text-primary-disable' : i.seo * 100 < 50 ? 'text-[#f35242]' : i.seo * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
-                {{ i.seo == null ? 'ندارد' : tableDataMaker(i.seo) }}
+                :class="i.lighthouse.seo == null ? 'text-primary-disable' : i.lighthouse.seo * 100 < 50 ? 'text-[#f35242]' : i.lighthouse.seo * 100 < 90 ? 'text-[#fbbf24]' : 'text-[#10ccae]'">
+                {{ i.lighthouse.seo == null ? 'ندارد' : tableDataMaker(i.lighthouse.seo) }}
               </td>
 
-              <td class="text-primary-disable" v-if="i.performance == null">
-                {{ i.seo == null ? 'ندارد' : tableDataMaker(i.seo) }}
+              <td class="text-primary-disable" v-if="i.lighthouse.page_status == null">
+                ندارد
               </td>
               <td class="w-[197px] text-[10px] text-end px-6" v-else>
-                <ProgressLinear :value="tableDataMaker(i.page_status)">
-                  {{ tableDataMaker(i.page_status) }} درصد
+                <ProgressLinear :value="tableDataMaker(i.lighthouse.page_status)">
+                  {{ tableDataMaker(i.lighthouse.page_status) }} درصد
                 </ProgressLinear>
               </td>
             </tr>
@@ -743,6 +744,7 @@ async function load_data() {
       .then((res) => {
         if (res.ok) {
           data.value = res.data;
+          console.log(data.value);
         } else {
           navigateTo("/money-pages");
         }
