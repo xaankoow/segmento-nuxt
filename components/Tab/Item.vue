@@ -12,7 +12,7 @@
         <slot> </slot>
       </span>
     </div>
-    <hr class="w-2/5 mx-auto" :class="active ? 'border-primary' : 'border-transparent'" />
+    <hr class="w-3/5 mx-auto mt-1 h-[2px] rounded-full" :class="active ? 'border-primary bg-primary' : 'border-transparent'" />
   </NuxtLink>
 </template>
 
