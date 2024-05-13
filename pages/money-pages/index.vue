@@ -120,7 +120,7 @@
                 </td>
                 <td class="h-[60px] w-[197px] text-[10px] text-end border-l border-base-400 border-b px-6">
                   <ProgressLinear :value="page.page_status">
-                  {{ page.page_status }} درصد
+                    {{ Math.round(page.page_status * 100) / 100 }} درصد
                   </ProgressLinear>
                 </td>
                 <td class="h-[60px] w-[76px] text-center border-base-400 border-b">

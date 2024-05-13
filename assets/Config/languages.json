@@ -36,10 +36,15 @@
                                     "idea-generator": "ایده ساز"
                                 }
                             },
+                            "income": {
+                                "title": "درآمد سایت",
+                                "fields": {
+                                    "money-pages": "صفحات تجاری"
+                                }
+                            },
                             "seo": {
                                 "title": "سئو",
                                 "fields": {
-                                    "money-pages": "صفحات تجاری",
                                     "keyword-research": "تحقیق کلمه کلیدی",
                                     "google-suggest": "کلمات پیشنهادی گوگل",
                                     "google-title-builder": "عنوان‌ساز گوگل",

@@ -189,13 +189,14 @@
             <!-- accordion -->
             <template v-slot:accordion>
               <div class="gap-2 flex flex-col">
-                <!-- Seo Section -->
-                <AccordionLayout :isOpen="active_accordion === 'seo'" @update="change_active_accordion('seo')">
+                <!-- Site Income Section -->
+                <AccordionLayout :isOpen="active_accordion === 'income'" @update="change_active_accordion('income')">
                   <template v-slot:label>
-                    <SvgLabeled :label="cn.by_route(`${department_section}/seo/title`)">
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <SvgLabeled :label="cn.by_route(`${department_section}/income/title`)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                        class="bi bi-currency-dollar" viewBox="0 0 18 18">
                         <path
-                          d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z" />
+                          d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z" />
                       </svg>
                     </SvgLabeled>
                   </template>
@@ -203,8 +204,8 @@
 
                   <div class="flex flex-col gap-3" v-if="DEV_ENV">
                     <NuxtLink to="/money-pages">
-                      <SvgLabeled :label="cn.by_route(`${department_section}/seo/fields/money-pages`)"
-                        :active="active_section === 'money-pages'" @click="change_active_section('money-pages')">
+                      <SvgLabeled :label="cn.by_route(`${department_section}/income/fields/money-pages`)
+                        " :active="active_section === 'money-pages'" @click="change_active_section('money-pages')">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_5618_18723)">
                             <path
@@ -227,6 +228,19 @@
                       </SvgLabeled>
                     </NuxtLink>
                   </div>
+                </AccordionLayout>
+
+                <!-- Seo Section -->
+                <AccordionLayout :isOpen="active_accordion === 'seo'" @update="change_active_accordion('seo')">
+                  <template v-slot:label>
+                    <SvgLabeled :label="cn.by_route(`${department_section}/seo/title`)">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z" />
+                      </svg>
+                    </SvgLabeled>
+                  </template>
+                  <!-- Content -->
                   <div class="flex flex-col gap-3">
                     <NuxtLink to="/keyword-research">
                       <SvgLabeled :label="cn.by_route(`${department_section}/seo/fields/keyword-research`)
