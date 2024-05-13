@@ -53,6 +53,10 @@
   .alphabet {
     @apply rounded-md flex items-center justify-center w-10 h-10;
   }
+
+  .cube {
+    @apply w-7 h-7 rounded-sm
+  }
 }
 
 /* width */
