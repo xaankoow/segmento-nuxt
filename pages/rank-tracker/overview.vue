@@ -739,19 +739,11 @@
             <!-- charts -->
             <div class="flex flex-row items-center gap-2 mt-2">
               <!-- all to word -->
-              <CardHelp class="flex flex-col h-96 items-center border rounded-md w-1/5" tooltip="This is tooltoip">
+              <CardHelp class="flex flex-col h-[22rem] items-center border rounded-md w-1/5" tooltip="This is tooltoip"
+                :title="config.__(
+                  `${current_page}/footer/charts/proportion-all-to-words/title`.split(
+                    '/'))">
                 <div class="flex flex-col gap-3">
-                  <!-- header -->
-                  <div class="flex flex-col w-full">
-                    <span class="flex flex-row items-center justify-center text-lg w-full">{{
-                      config.__(
-                        `${current_page}/footer/charts/proportion-all-to-words/title`.split(
-                          "/"
-                        )
-                      )
-                    }}
-                    </span>
-                  </div>
                   <!-- chart -->
                   <div class="relative flex flex-col items-center justify-center">
                     <ClientOnly>
@@ -781,19 +773,13 @@
               </CardHelp>
 
               <!-- Growth and decline chart -->
-              <CardHelp class="flex flex-col h-96 items-center border rounded-md w-1/5" tooltip="This is tooltoip">
+              <CardHelp class="flex flex-col h-[22rem] items-center border rounded-md w-1/5" tooltip="This is tooltoip"
+                :title="config.__(
+                  `${current_page}/footer/charts/proportion-all-to-progress/title`.split(
+                    '/'
+                  )
+                )">
                 <div class="flex flex-col gap-3">
-                  <!-- header -->
-                  <div class="flex flex-col w-full">
-                    <span class="flex flex-row items-center justify-center text-lg w-full">{{
-                      config.__(
-                        `${current_page}/footer/charts/proportion-all-to-progress/title`.split(
-                          "/"
-                        )
-                      )
-                    }}
-                    </span>
-                  </div>
                   <!-- chart -->
                   <div class="relative flex flex-col items-center justify-center">
                     <ClientOnly>
@@ -823,19 +809,13 @@
                 </div>
               </CardHelp>
               <!-- all to fall -->
-              <CardHelp class="flex flex-col h-96 items-center border rounded-md w-1/5" tooltip="This is tooltoip">
+              <CardHelp class="flex flex-col h-[22rem] items-center border rounded-md w-1/5" tooltip="This is tooltoip"
+                :title="config.__(
+                  `${current_page}/footer/charts/proportion-all-to-fall/title`.split(
+                    '/'
+                  )
+                )">
                 <div class="flex flex-col gap-3">
-                  <!-- header -->
-                  <div class="flex flex-col w-full">
-                    <span class="flex flex-row items-center justify-center text-lg w-full">{{
-                      config.__(
-                        `${current_page}/footer/charts/proportion-all-to-fall/title`.split(
-                          "/"
-                        )
-                      )
-                    }}
-                    </span>
-                  </div>
                   <!-- chart -->
                   <div class="relative flex flex-col items-center justify-center">
                     <ClientOnly>
@@ -866,19 +846,13 @@
               </CardHelp>
 
               <!-- chart count progress -->
-              <CardHelp class="flex flex-col h-96 items-center border rounded-md w-1/5" tooltip="This is tooltoip">
+              <CardHelp class="flex flex-col h-[22rem] items-center border rounded-md w-1/5" tooltip="This is tooltoip"
+                :title="config.__(
+                  `${current_page}/footer/charts/chart-count-progress/title`.split(
+                    '/'
+                  )
+                )">
                 <div class="flex flex-col gap-3">
-                  <!-- header -->
-                  <div class="flex flex-col w-full">
-                    <span class="flex flex-row items-center justify-center text-lg w-full">{{
-                      config.__(
-                        `${current_page}/footer/charts/chart-count-progress/title`.split(
-                          "/"
-                        )
-                      )
-                    }}
-                    </span>
-                  </div>
                   <!-- chart -->
                   <div class="relative flex flex-col items-center justify-center">
                     <ClientOnly>
@@ -905,19 +879,11 @@
               </CardHelp>
 
               <!-- chart progress -->
-              <CardHelp class="flex flex-col h-96 items-center border rounded-md w-1/5" tooltip="This is tooltoip">
+              <CardHelp class="flex flex-col h-[22rem] items-center border rounded-md w-1/5" tooltip="This is tooltoip"
+                :title="config.__(
+                  `${current_page}/footer/charts/chart-progress/title`.split(
+                    '/'))">
                 <div class="flex flex-col gap-3">
-                  <!-- header -->
-                  <div class="flex flex-col w-full">
-                    <span class="flex flex-row items-center justify-center text-lg w-full">{{
-                      config.__(
-                        `${current_page}/footer/charts/chart-progress/title`.split(
-                          "/"
-                        )
-                      )
-                    }}
-                    </span>
-                  </div>
                   <!-- chart -->
                   <div class="relative flex flex-col items-center justify-center">
                     <ClientOnly>
@@ -939,7 +905,6 @@
                       <span>نمونه 2</span>
                     </div>
                   </div>
-
                 </div>
               </CardHelp>
             </div>
