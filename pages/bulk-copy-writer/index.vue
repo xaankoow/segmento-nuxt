@@ -90,7 +90,7 @@
                 {{ subjectValue }} برای <b>{{ phrase.keyword }}</b>
               </div>
               <div class="absolute top-8 right-5 w-fit">
-                <CopyArray v-if="DEV_ENV" :content="phrase.content" class="btn-secondary">
+                <CopyArray :content="phrase.content" class="btn-secondary">
                   <svg
                     width="17"
                     height="20"
@@ -111,7 +111,6 @@
           <CopyArray
             class="btn-primary"
             :content="copy_all_content(results)"
-            v-if="DEV_ENV"
           >
             <svg
               width="17"

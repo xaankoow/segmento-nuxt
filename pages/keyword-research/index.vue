@@ -13,10 +13,6 @@
       <TabItem to="/keyword-research" :active="true">
         {{ config.by_route(`${current_page}/search/title`) }}
       </TabItem>
-      <!-- <TabSeparator /> -->
-      <!-- <TabItem :active="false">
-        {{ config.by_route(`${current_page}/my-lists`) }}
-      </TabItem> -->
     </div>
 
     <!-- page content -->
@@ -110,9 +106,6 @@
           >
             <div class="flex items-center">
               <span class="w-12 flex justify-center">
-                {{ config.by_route(`${current_page}/table/select`) }}
-              </span>
-              <span class="w-12 flex justify-center">
                 {{ config.by_route(`${current_page}/table/row`) }}
               </span>
               <span class="w-fit">
@@ -120,18 +113,20 @@
               </span>
             </div>
 
-            <!-- TODO: uncomment this section when copy all get ready to use. -->
-            <!-- <button class="w-28 p-1 rounded-lg btn-secondary" disabled>
-              <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <CopyArray :content="copy_all_content(data)" class="btn-secondary" v-if="data !== null">
+              <svg
+                width="17"
+                height="20"
+                viewBox="0 0 17 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
-                  d="M6.27812 15.7998C5.76146 15.7998 5.32812 15.6248 4.97812 15.2748C4.62812 14.9248 4.45312 14.4998 4.45312 13.9998V2.6248C4.45312 2.10814 4.62812 1.6748 4.97812 1.3248C5.32812 0.974805 5.76146 0.799805 6.27812 0.799805H14.6281C15.1281 0.799805 15.5575 0.978805 15.9161 1.3368C16.2741 1.69547 16.4531 2.1248 16.4531 2.6248V13.9998C16.4531 14.4998 16.2741 14.9248 15.9161 15.2748C15.5575 15.6248 15.1281 15.7998 14.6281 15.7998H6.27812ZM6.27812 14.2998H14.6281C14.7281 14.2998 14.8075 14.2705 14.8661 14.2118C14.9241 14.1538 14.9531 14.0831 14.9531 13.9998V2.6248C14.9531 2.5248 14.9241 2.44547 14.8661 2.3868C14.8075 2.3288 14.7281 2.2998 14.6281 2.2998H6.27812C6.17812 2.2998 6.09913 2.3288 6.04113 2.3868C5.98246 2.44547 5.95312 2.5248 5.95312 2.6248V13.9998C5.95312 14.0831 5.98246 14.1538 6.04113 14.2118C6.09913 14.2705 6.17812 14.2998 6.27812 14.2998ZM2.75312 19.2998C2.25312 19.2998 1.82812 19.1248 1.47812 18.7748C1.12812 18.4248 0.953125 17.9998 0.953125 17.4998V5.5498C0.953125 5.3498 1.02379 5.17481 1.16513 5.02481C1.30713 4.8748 1.48646 4.7998 1.70312 4.7998C1.90312 4.7998 2.07812 4.8748 2.22812 5.02481C2.37812 5.17481 2.45312 5.3498 2.45312 5.5498V17.4998C2.45312 17.5831 2.48213 17.6538 2.54013 17.7118C2.59879 17.7705 2.66979 17.7998 2.75312 17.7998H11.7031C11.9031 17.7998 12.0781 17.8748 12.2281 18.0248C12.3781 18.1748 12.4531 18.3498 12.4531 18.5498C12.4531 18.7665 12.3781 18.9455 12.2281 19.0868C12.0781 19.2288 11.9031 19.2998 11.7031 19.2998H2.75312Z"
-                  fill="#FFFFFF" />
+                  d="M6.27812 15.8008C5.76146 15.8008 5.32812 15.6258 4.97812 15.2758C4.62812 14.9258 4.45312 14.5008 4.45312 14.0008V2.62578C4.45312 2.10911 4.62812 1.67578 4.97812 1.32578C5.32812 0.975781 5.76146 0.800781 6.27812 0.800781H14.6281C15.1281 0.800781 15.5575 0.979781 15.9161 1.33778C16.2741 1.69645 16.4531 2.12578 16.4531 2.62578V14.0008C16.4531 14.5008 16.2741 14.9258 15.9161 15.2758C15.5575 15.6258 15.1281 15.8008 14.6281 15.8008H6.27812ZM6.27812 14.3008H14.6281C14.7281 14.3008 14.8075 14.2714 14.8661 14.2128C14.9241 14.1548 14.9531 14.0841 14.9531 14.0008V2.62578C14.9531 2.52578 14.9241 2.44645 14.8661 2.38778C14.8075 2.32978 14.7281 2.30078 14.6281 2.30078H6.27812C6.17812 2.30078 6.09913 2.32978 6.04113 2.38778C5.98246 2.44645 5.95312 2.52578 5.95312 2.62578V14.0008C5.95312 14.0841 5.98246 14.1548 6.04113 14.2128C6.09913 14.2714 6.17812 14.3008 6.27812 14.3008ZM2.75312 19.3008C2.25312 19.3008 1.82812 19.1258 1.47812 18.7758C1.12812 18.4258 0.953125 18.0008 0.953125 17.5008V5.55078C0.953125 5.35078 1.02379 5.17578 1.16513 5.02578C1.30713 4.87578 1.48646 4.80078 1.70312 4.80078C1.90312 4.80078 2.07812 4.87578 2.22812 5.02578C2.37812 5.17578 2.45312 5.35078 2.45312 5.55078V17.5008C2.45312 17.5841 2.48213 17.6548 2.54013 17.7128C2.59879 17.7714 2.66979 17.8008 2.75312 17.8008H11.7031C11.9031 17.8008 12.0781 17.8758 12.2281 18.0258C12.3781 18.1758 12.4531 18.3508 12.4531 18.5508C12.4531 18.7674 12.3781 18.9464 12.2281 19.0878C12.0781 19.2298 11.9031 19.3008 11.7031 19.3008H2.75312Z"
+                />
               </svg>
-
-              <span>{{
-                config.by_route(`${current_page}/table/buttons/copy`)
-              }}</span>
-            </button> -->
+              {{ config.by_route(`${current_page}/table/buttons/copy`) }}
+            </CopyArray>
           </div>
 
           <!-- when we haven't content this div will show -->
@@ -160,8 +155,8 @@
           <div class="flex flex-col pl-2" v-else>
             <!-- this must be component -->
             <div
-              v-for="(item, index) in data"
-              :key="index"
+              v-for="(item, letter) in data"
+              :key="letter"
               :class="item.length <= 0 ? 'hidden' : ''"
               class="flex flex-col px-2 text-sm"
             >
@@ -171,7 +166,17 @@
                   <span
                     class="w-8 bg-gray-200 text-base-content rounded-[3px] flex justify-center"
                   >
-                    {{ index }}
+                    {{ letter }}
+                  </span>
+                </span>
+                <hr class="w-[1%] border-gray-200" />
+                <span class="flex justify-center cursor-pointer">
+                  <span
+                    class="w-20 bg-gray-200 text-base-content rounded-[3px] flex justify-center"
+                  >
+                  <CopyArray :content="item">
+                    کپی کلمات
+                  </CopyArray>
                   </span>
                 </span>
                 <hr class="w-full border-gray-200" />
@@ -181,23 +186,32 @@
               <div class="flex flex-col">
                 <!-- row -->
                 <div
-                  v-for="(letter, index) in item"
+                  v-for="(word, index) in item"
                   :key="index"
                   class="flex flex-row items-center py-2"
                   :class="
                     Number(index) + 1 !== item.length ? 'border-b border-gray-100' : ''
                   "
                 >
-                  <span class="w-12 h-fit flex justify-center items-center">
-                    <label class="flex justify-center items-center">
-                      <input type="checkbox" class="w-5 h-5" />
-                    </label>
-                  </span>
                   <span class="w-12 flex justify-center items-center">
                     {{ Number(index) + 1 }}
                   </span>
-                  <span class="w-fit flex justify-center items-center pr-3.5">
-                    {{ letter }}
+                  <span class="w-fit flex justify-center items-center pr-3.5 group">
+                    <Copy :content="word" class="[&>svg]:fill-secondary-text flex flex-row gap-2">
+                        <span v-html="word"></span>
+                        <svg
+                        class="hidden group-hover:block"
+                        width="12"
+                        height="14"
+                        viewBox="0 0 17 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        >
+                        <path
+                            d="M6.27812 15.8008C5.76146 15.8008 5.32812 15.6258 4.97812 15.2758C4.62812 14.9258 4.45312 14.5008 4.45312 14.0008V2.62578C4.45312 2.10911 4.62812 1.67578 4.97812 1.32578C5.32812 0.975781 5.76146 0.800781 6.27812 0.800781H14.6281C15.1281 0.800781 15.5575 0.979781 15.9161 1.33778C16.2741 1.69645 16.4531 2.12578 16.4531 2.62578V14.0008C16.4531 14.5008 16.2741 14.9258 15.9161 15.2758C15.5575 15.6258 15.1281 15.8008 14.6281 15.8008H6.27812ZM6.27812 14.3008H14.6281C14.7281 14.3008 14.8075 14.2714 14.8661 14.2128C14.9241 14.1548 14.9531 14.0841 14.9531 14.0008V2.62578C14.9531 2.52578 14.9241 2.44645 14.8661 2.38778C14.8075 2.32978 14.7281 2.30078 14.6281 2.30078H6.27812C6.17812 2.30078 6.09913 2.32978 6.04113 2.38778C5.98246 2.44645 5.95312 2.52578 5.95312 2.62578V14.0008C5.95312 14.0841 5.98246 14.1548 6.04113 14.2128C6.09913 14.2714 6.17812 14.3008 6.27812 14.3008ZM2.75312 19.3008C2.25312 19.3008 1.82812 19.1258 1.47812 18.7758C1.12812 18.4258 0.953125 18.0008 0.953125 17.5008V5.55078C0.953125 5.35078 1.02379 5.17578 1.16513 5.02578C1.30713 4.87578 1.48646 4.80078 1.70312 4.80078C1.90312 4.80078 2.07812 4.87578 2.22812 5.02578C2.37812 5.17578 2.45312 5.35078 2.45312 5.55078V17.5008C2.45312 17.5841 2.48213 17.6548 2.54013 17.7128C2.59879 17.7714 2.66979 17.8008 2.75312 17.8008H11.7031C11.9031 17.8008 12.0781 17.8758 12.2281 18.0258C12.3781 18.1758 12.4531 18.3508 12.4531 18.5508C12.4531 18.7674 12.3781 18.9464 12.2281 19.0878C12.0781 19.2298 11.9031 19.3008 11.7031 19.3008H2.75312Z"
+                        />
+                        </svg>
+                    </Copy>
                   </span>
                 </div>
               </div>
@@ -208,19 +222,6 @@
         <!-- options -->
         <div class="flex justify-center w-[35%] h-[200vh]" v-if="data !== null">
           <div class="flex flex-col gap-4 items-center w-full">
-            <!-- drop down disabled -->
-            <!-- <div class="flex flex-row items-center w-full bg-base-400 text-base-500 justify-between rounded-[3px]">
-              <span class="w-10/12 px-3 py-2">{{
-                config.by_route(`${current_page}/search/word`)
-              }}</span>
-              <span class="w-2/12 border-r border-r-base-500 flex flex-row items-center justify-center h-full">
-                <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M1.075 9.29961L9.375 0.974609C9.45833 0.891276 9.55433 0.828943 9.663 0.78761C9.771 0.74561 9.88333 0.724609 10 0.724609C10.1167 0.724609 10.2293 0.74561 10.338 0.78761C10.446 0.828943 10.5417 0.891276 10.625 0.974609L18.95 9.29961C19.15 9.49961 19.25 9.73294 19.25 9.99961C19.25 10.2663 19.1417 10.5079 18.925 10.7246C18.7417 10.9246 18.5127 11.0246 18.238 11.0246C17.9627 11.0246 17.725 10.9246 17.525 10.7246L10 3.17461L2.45 10.7246C2.26667 10.9079 2.04167 10.9996 1.775 10.9996C1.50833 10.9996 1.275 10.8996 1.075 10.6996C0.875 10.4996 0.775 10.2663 0.775 9.99961C0.775 9.73294 0.875 9.49961 1.075 9.29961Z"
-                    fill="#7D7D7D" />
-                </svg>
-              </span>
-            </div> -->
 
             <div class="flex flex-row justify-center items-center w-full">
               {{ config.by_route(`${current_page}/search/alphabet`) }}
@@ -303,6 +304,14 @@ function update_list_by_alphabet(item, id) {
     };
     toggle_active_alphabet(id);
   }
+}
+
+function copy_all_content(results) {
+  let content = [];
+  Object.keys(results).forEach((letter) => {
+    content.push(letter, ...results[letter], "");
+  });
+  return content;
 }
 
 async function search_keywords_request() {
