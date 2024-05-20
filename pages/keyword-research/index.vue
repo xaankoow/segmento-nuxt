@@ -324,7 +324,7 @@ function update_list_by_alphabet(item, id) {
 function copy_all_content(results) {
   let content = [];
   Object.keys(results).forEach((letter) => {
-    content.push(letter, ...results[letter], "");
+    content.push(`${letter}:`, ...results[letter], "");
   });
   return content;
 }

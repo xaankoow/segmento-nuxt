@@ -18,7 +18,7 @@
             </div>
             <div class="w-full h-full flex relative flex-col">
                 <div class="h-[40px] flex flex-row items-center text-base-content group" v-for="word in words" :key="word">
-                    <Copy :content="decodeHtml(word)" class="[&>svg]:fill-secondary-text flex flex-row gap-2">
+                    <Copy :content="decodeHtml(word)" class="[&>svg]:fill-secondary-text flex flex-row items-center gap-2">
                         <span v-html="word"></span>
                         <svg
                         class="hidden group-hover:block"
