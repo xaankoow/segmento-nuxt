@@ -197,12 +197,12 @@
                   <span class="w-12 flex justify-center items-center">
                     {{ Number(index) + 1 }}
                   </span>
-                  <span class="w-fit flex justify-center items-center pr-3.5 group">
-                    <Copy :content="word" class="[&>svg]:fill-secondary-text flex flex-row gap-2">
+                  <span class="w-fit flex justify-center items-center pr-3.5 group gap-2">
+                    <Copy :content="word" class="[&>svg]:fill-secondary-text flex flex-row gap-2 items-center">
                         <span v-html="word"></span>
                         <svg
                         class="hidden group-hover:block"
-                        width="12"
+                        width="14"
                         height="14"
                         viewBox="0 0 17 20"
                         fill="none"
@@ -213,6 +213,20 @@
                         />
                         </svg>
                     </Copy>
+                    <svg
+                      class="hidden group-hover:block fill-secondary-text cursor-pointer"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      @click="search_keywords_request(word)"
+                    >
+                      <path
+                        d="M16.0234 17.05L10.2484 11.3C9.74844 11.7167 9.17344 12.0417 8.52344 12.275C7.87344 12.5083 7.20677 12.625 6.52344 12.625C4.80677 12.625 3.35677 12.0333 2.17344 10.85C0.990104 9.66667 0.398438 8.21667 0.398438 6.5C0.398438 4.8 0.990104 3.354 2.17344 2.162C3.35677 0.970667 4.80677 0.375 6.52344 0.375C8.22344 0.375 9.6651 0.966667 10.8484 2.15C12.0318 3.33333 12.6234 4.78333 12.6234 6.5C12.6234 7.21667 12.5068 7.9 12.2734 8.55C12.0401 9.2 11.7234 9.76667 11.3234 10.25L17.0984 16.025C17.2318 16.1583 17.2984 16.325 17.2984 16.525C17.2984 16.725 17.2234 16.9 17.0734 17.05C16.9234 17.2 16.7444 17.275 16.5364 17.275C16.3278 17.275 16.1568 17.2 16.0234 17.05ZM6.52344 11.125C7.80677 11.125 8.89444 10.675 9.78644 9.775C10.6778 8.875 11.1234 7.78333 11.1234 6.5C11.1234 5.21667 10.6778 4.125 9.78644 3.225C8.89444 2.325 7.80677 1.875 6.52344 1.875C5.22344 1.875 4.12777 2.325 3.23644 3.225C2.34444 4.125 1.89844 5.21667 1.89844 6.5C1.89844 7.78333 2.34444 8.875 3.23644 9.775C4.12777 10.675 5.22344 11.125 6.52344 11.125Z"
+                      />
+                    </svg>
+
                   </span>
                 </div>
               </div>
@@ -315,7 +329,10 @@ function copy_all_content(results) {
   return content;
 }
 
-async function search_keywords_request() {
+async function search_keywords_request(kw = null) {
+  if (kw) {
+    form.value.keyword = kw
+  }
   let res = await request.get("keyword-research/generate", form.value);
 
   if (res.ok) {
