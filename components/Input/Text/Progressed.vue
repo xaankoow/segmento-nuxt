@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col items-start h-10 !text-right">
     <InputText
+      :title="title"
+      :autocomplete="autocomplete"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       type="text"
@@ -27,5 +29,7 @@ defineProps({
   use_color: { type: String, default: "bg-red-500" },
   placeholder: { type: String },
   id: { type: String },
+  autocomplete: { type: String, default: null},
+  title: { type: String, default: null}
 });
 </script>
