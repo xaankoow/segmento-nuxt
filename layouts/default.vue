@@ -201,6 +201,7 @@
                     </SvgLabeled>
                   </template>
                   <!-- Content -->
+
                   <div class="flex flex-col gap-3" v-if="DEV_ENV">
                     <NuxtLink to="/money-pages">
                       <SvgLabeled :label="cn.by_route(`${department_section}/income/fields/money-pages`)
@@ -216,6 +217,14 @@
                             </clipPath>
                           </defs>
                         </svg>
+                      </SvgLabeled>
+                    </NuxtLink>
+                  </div>
+                  <div class="flex flex-col gap-3" v-if="DEV_ENV">
+                    <NuxtLink to="/rank-tracker/overview">
+                      <SvgLabeled :label="cn.by_route(`${department_section}/seo/fields/rank-tracker`)"
+                        :active="active_section === 'rank-tracker'" @click="change_active_section('rank-tracker')">
+                        <SvgRankTracker />
                       </SvgLabeled>
                     </NuxtLink>
                   </div>

@@ -25,8 +25,8 @@
       </div>
     </button>
     <div
-      class="overflow-hidden transition-all text-sm duration-100 px-3 flex flex-col gap-2"
-      :class="!isOpen ? 'h-0' : 'h-fit'"
+      class="text-sm transition-all duration-100 px-3 flex flex-col gap-2"
+      :class="isOpen ? 'h-fit' : 'h-0 overflow-clip'"
     >
       <slot></slot>
     </div>
