@@ -91,6 +91,7 @@ defineEmits(["update:modelValue"]);
                   {{ modelValue.website }}/
                 </span>
                 <InputText
+                  autocomplete="path"
                   v-model="modelValue.money_pages[money_pages_index].slug"
                   placeholder="shop/shoes"
                   type="text"

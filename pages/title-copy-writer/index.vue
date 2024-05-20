@@ -13,6 +13,7 @@
     >
       <div class="w-full flex items-center justify-center flex-col gap-2">
         <InputText
+          autocomplete="keyword"
           type="text"
           placeholder="درج کلمه کلیدی"
           v-model="form.keyword"

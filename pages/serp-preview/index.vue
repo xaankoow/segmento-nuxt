@@ -8,6 +8,7 @@
           </label>
           <div class="w-full flex flex-col items-end">
             <InputText
+              autocomplete="brand"
               v-model="site.brand"
               placeholder="سگمنتو"
               type="text"
@@ -20,18 +21,12 @@
           <label class="text-sm">آدرس وبسایت (URL)</label>
           <div class="flex justify-between h-10 gap-2">
             <InputText
+              autocomplete="url"
               v-model="site.url"
               placeholder="https://segmento.ir/hi"
               type="text"
               class="w-full ltr"
             />
-            <!-- <button
-              class="btn-primary rounded-[3px] text-sm w-1/5 h-full"
-              :disabled="site.url.length === 0 || true"
-              @click="receive_from_google(site.url)"
-            >
-              دریافت
-            </button> -->
           </div>
         </div>
         <div class="title gap-1 flex flex-col">
@@ -40,6 +35,7 @@
             <span class="ltr">({{ site.title.length }}/63)</span>
           </label>
           <InputTextProgressed
+            autocomplete="title"
             v-model="site.title"
             placeholder="پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو"
             class="w-full"

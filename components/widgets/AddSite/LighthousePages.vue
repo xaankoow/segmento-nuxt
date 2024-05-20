@@ -110,6 +110,7 @@ defineEmits(["update:modelValue"]);
                   {{ modelValue.website }}/
                 </span>
                 <InputText
+                  autocomplete="path"
                   v-model="modelValue.lighthouse_pages[lighthouse_page_index].slug"
                   placeholder="blog/door-opening"
                   type="text"

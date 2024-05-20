@@ -13,10 +13,6 @@
       <TabItem to="/idea-generator" :active="true">
         {{ config.by_route(`${current_page}/search/title`) }}
       </TabItem>
-      <!-- <TabSeparator />
-      <TabItem :active="false">
-        {{ config.by_route(`${current_page}/my-list`) }}
-      </TabItem> -->
     </div>
 
     <!-- page content -->
@@ -32,6 +28,7 @@
         <div class="flex items-center w-full justify-between gap-2 h-10">
           <div class="custom_input_box w-[95%] text-base-500">
             <InputText
+              autocomplete="keyword"
               v-model="form.keyword"
               type="text"
               @focus="search_class.focus()"

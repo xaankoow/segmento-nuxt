@@ -28,6 +28,7 @@
         <div class="flex flex-row items-center w-full justify-between gap-2 h-10">
           <div class="custom_input_box w-[65%] text-base-500">
             <InputText
+              autocomplete="keyword"
               v-model="form.keyword"
               type="text"
               @focus="search_class.focus()"

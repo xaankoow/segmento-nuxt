@@ -61,6 +61,7 @@ defineEmits(["update:modelValue"]);
             {{ modelValue.website }}/
           </span>
           <InputTextMarked
+            autocomplete="path"
             v-model="modelValue.pages[index].slug"
             placeholder="pricing"
             type="text"
@@ -117,6 +118,7 @@ defineEmits(["update:modelValue"]);
             />
           </svg>
           <InputTextMarked
+            autocomplete="keyword"
             v-model="modelValue.pages[index].keywords[keyword_index]"
             placeholder="کتاب"
             type="text"
