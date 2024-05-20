@@ -7,15 +7,13 @@
   >
     <ToolsLoading class="w-32 h-32" />
   </div>
-  <!-- ____________________________________
-  part 1 (key word)
-  _________________________________________ -->
   <div class="w-full min-h-full h-full rounded-[3px] p-2">
     <div
       class="w-full h-full text-base-400 text-sm flex flex-col items-center justify-start gap-2"
     >
       <div class="w-full flex items-center justify-center flex-col gap-2">
         <InputText
+          autocomplete="keyword"
           type="text"
           placeholder="درج کلمه کلیدی"
           v-model="form.keyword"
@@ -25,9 +23,6 @@
           {{ config.by_route(`${current_page}/buttons/create`) }}
         </button>
       </div>
-      <!-- ____________________________________
-      part 2 empty section
-      _________________________________________ -->
       <div
         v-if="!showDetailAgreement"
         class="w-full h-full bg-base-200 rounded-[3px] border border-base-400 flex flex-col items-center justify-center gap-3 p-10"
@@ -48,10 +43,6 @@
           {{ config.by_route(`${current_page}/sentences/no-data`) }}
         </p>
       </div>
-      <!-- ____________________________________
-      part 3 (show details)
-      چارت نمایش اطلاعات (بصورت استاتیک)
-      _________________________________________ -->
       <div class="h-fit w-full pb-2" v-if="showDetailAgreement">
         <div
           class="w-full h-auto bg-white py-5 mb-2 rounded-[3px] border border-base-400 flex items-center justify-center"
@@ -79,7 +70,7 @@
             >
               موضوعات متفرقه برای <b>{{ current_keyword }}</b>
             </div>
-            <div class="absolute top-8 right-5 w-fit" v-if="DEV_ENV">
+            <div class="absolute top-8 right-5 w-fit">
               <CopyArray :content="phrase.content" class="btn-secondary">
                 <svg
                   width="17"
@@ -101,7 +92,6 @@
         <CopyArray
           class="btn-primary"
           :content="copy_all_content(results)"
-          v-if="DEV_ENV"
         >
           <svg
             width="17"

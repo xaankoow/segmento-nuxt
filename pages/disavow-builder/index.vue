@@ -77,7 +77,7 @@
         </button>
       </div>
     </div>
-    <div class="flex flex-row w-full p-2">
+    <div class="flex flex-row w-full justify-around p-2">
       <div class="w-1/3 p-2 pl-4 h-full">
         <div class="flex flex-col p-2 rounded-[5px] bg-base-250 h-full">
           <div class="w-full flex flex-row h-1/2 items-center justify-around">
@@ -98,30 +98,6 @@
               {{ config.by_route(`constants/website`) }}
             </span>
           </div>
-        </div>
-      </div>
-      <div class="w-1/3 p-2">
-        <div class="flex flex-col p-2 rounded-[5px] h-full items-center justify-around">
-          <span class="flex items-center justify-center h-1/2">
-            {{ config.by_route(`${current_page}/boxes/click-to-save`) }}
-          </span>
-          <span class="flex items-center justify-center h-1/2">
-            <button class="btn-primary gap-3" disabled>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8 11.25C7.88333 11.25 7.771 11.2293 7.663 11.188C7.55433 11.146 7.45833 11.075 7.375 10.975L4.25 7.875C4.11667 7.74167 4.05 7.56667 4.05 7.35C4.05 7.13333 4.11667 6.95833 4.25 6.825C4.4 6.675 4.579 6.59567 4.787 6.587C4.99567 6.579 5.175 6.65 5.325 6.8L7.25 8.725V1.075C7.25 0.858333 7.321 0.679 7.463 0.537C7.60433 0.395667 7.78333 0.325 8 0.325C8.21667 0.325 8.396 0.395667 8.538 0.537C8.67933 0.679 8.75 0.858333 8.75 1.075V8.725L10.675 6.8C10.8083 6.66667 10.9833 6.6 11.2 6.6C11.4167 6.6 11.6 6.675 11.75 6.825C11.8833 6.95833 11.95 7.129 11.95 7.337C11.95 7.54567 11.8833 7.725 11.75 7.875L8.625 10.975C8.54167 11.075 8.446 11.146 8.338 11.188C8.22933 11.2293 8.11667 11.25 8 11.25ZM2.3 15.5C1.8 15.5 1.375 15.325 1.025 14.975C0.675 14.625 0.5 14.2 0.5 13.7V11.75C0.5 11.5333 0.571 11.354 0.713 11.212C0.854333 11.0707 1.03333 11 1.25 11C1.46667 11 1.64567 11.0707 1.787 11.212C1.929 11.354 2 11.5333 2 11.75V13.7C2 13.7667 2.03333 13.8333 2.1 13.9C2.16667 13.9667 2.23333 14 2.3 14H13.7C13.7667 14 13.8333 13.9667 13.9 13.9C13.9667 13.8333 14 13.7667 14 13.7V11.75C14 11.5333 14.0707 11.354 14.212 11.212C14.354 11.0707 14.5333 11 14.75 11C14.9667 11 15.146 11.0707 15.288 11.212C15.4293 11.354 15.5 11.5333 15.5 11.75V13.7C15.5 14.2 15.325 14.625 14.975 14.975C14.625 15.325 14.2 15.5 13.7 15.5H2.3Z"
-                  fill="white"
-                />
-              </svg>
-              {{ config.by_route(`${current_page}/buttons/save`) }}
-            </button>
-          </span>
         </div>
       </div>
       <div class="w-1/3 p-2">

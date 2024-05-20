@@ -28,6 +28,7 @@ defineEmits(["update:modelValue"]);
       <label class="text-sm">آدرس وبسایت شما:</label>
       <div class="flex justify-between h-10 gap-2 w-full">
         <InputText
+          autocomplete="url"
           v-model="modelValue.website"
           placeholder="segmento.ir"
           type="text"
@@ -46,6 +47,7 @@ defineEmits(["update:modelValue"]);
         :key="index"
       >
         <InputTextMarked
+          autocomplete="keyword"
           v-model="modelValue.pages[0].keywords[index]"
           placeholder="کتاب"
           type="text"

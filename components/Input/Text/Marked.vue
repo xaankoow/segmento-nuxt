@@ -2,6 +2,8 @@
   <div class="flex flex-col items-start justify-center h-10" :dir="dir">
     <div class="relative h-10 w-full">
       <InputText
+        :title="title"
+        :autocomplete="autocomplete"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         @focus="is_focused = true"
@@ -33,6 +35,8 @@ defineProps({
   dir: { type: String, default: "rtl" },
   input_class: { type: String, default: "" },
   input_style: { type: String, default: "" },
+  autocomplete: { type: String, default: null},
+  title: { type: String, default: null}
 });
 const is_focused = ref(false);
 </script>
