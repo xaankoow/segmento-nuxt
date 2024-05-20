@@ -87,7 +87,7 @@ defineEmits(["update:modelValue"]);
                     fill-opacity="0.1"
                   />
                 </svg>
-                <span ref="domain_element" class="absolute left-[10%]">
+                <span ref="domain_element" class="absolute left-[37px]">
                   {{ modelValue.website }}/
                 </span>
                 <InputText
