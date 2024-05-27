@@ -106,10 +106,11 @@ defineEmits(["update:modelValue"]);
                     fill-opacity="0.1"
                   />
                 </svg>
-                <span ref="domain_element" class="absolute left-[10%]">
+                <span ref="domain_element" class="absolute left-[37px]">
                   {{ modelValue.website }}/
                 </span>
                 <InputText
+                  autocomplete="path"
                   v-model="modelValue.lighthouse_pages[lighthouse_page_index].slug"
                   placeholder="blog/door-opening"
                   type="text"
