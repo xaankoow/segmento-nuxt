@@ -27,10 +27,10 @@ const options = {
   },
   stroke: {
     curve: "smooth",
-    width: 2, // اضافه کردن عرض لاین‌ها به مقدار دلخواه (اینجا مثلاً 2)
+    width: 1, // اضافه کردن عرض لاین‌ها به مقدار دلخواه (اینجا مثلاً 2)
   },
   markers: {
-    size: 4,
+    size: 2,
     colors: ["#063468"], // تغییر رنگ مارکر‌ها به مشکی
     strokeColors: ["transparent"],
   },
@@ -57,7 +57,17 @@ const options = {
     },
   },
   grid: {
-    show: false,
+    show: true,
+    xaxis: {
+        lines: {
+            show: true
+        }
+    },   
+    yaxis: {
+        lines: {
+            show: false
+        }
+    }, 
   },
   dataLabels: {
     enabled: false,
