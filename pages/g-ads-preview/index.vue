@@ -9,14 +9,14 @@
               برند (Brand)
             </label>
             <div class="w-full flex flex-col items-end">
-              <InputText v-model="site.brand" placeholder="سگمنتو" type="text" :class="`w-full text-right`" />
+              <InputText autocomplete="brand" v-model="site.brand" placeholder="سگمنتو" type="text" :class="`w-full text-right`" />
             </div>
           </div>
 
           <div class="gap-1 flex flex-col">
             <label class="text-sm flow-root text-[#041e49]">آدرس وب‌سایت (Final URL)</label>
             <div class="flex justify-between h-10 gap-2">
-              <InputText v-model="site.url" placeholder="https://segmento.ir/hi" type="text" class="w-full ltr" />
+              <InputText autocomplete="url" v-model="site.url" placeholder="https://segmento.ir/hi" type="text" class="w-full ltr" />
             </div>
           </div>
           <div class="gap-1 flex flex-col">
@@ -25,6 +25,7 @@
               <span class="ltr">({{ site.title.one.length }}/30)</span>
             </label>
             <InputTextProgressed v-model="site.title.one"
+              autocomplete="title"
               placeholder="پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو" class="w-full"
               :used="(site.title.one.length / 30) * 100" :use_color="input_quality(site.title.one.length, 'title')" />
           </div>
@@ -34,6 +35,7 @@
               <span class="ltr">({{ site.title.two.length }}/30)</span>
             </label>
             <InputTextProgressed v-model="site.title.two"
+              autocomplete="title"
               placeholder="پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو" class="w-full"
               :used="(site.title.two.length / 30) * 100" :use_color="input_quality(site.title.two.length, 'title')" />
           </div>
@@ -43,6 +45,7 @@
               <span class="ltr">({{ site.title.three.length }}/30)</span>
             </label>
             <InputTextProgressed v-model="site.title.three"
+              autocomplete="title"
               placeholder="پلتفرم سگمنتو؛ ابزار سئو و کسب ترافیک از گوگل • سگمنتو" class="w-full"
               :used="(site.title.three.length / 30) * 100" :use_color="input_quality(site.title.three.length, 'title')" />
           </div>
@@ -51,9 +54,9 @@
               مسیر سایت (Path)
             </label>
             <div class="flex justify-between gap-3 align-center" dir="ltr">
-              <InputText v-model="site.path.one" :class="`w-full text-left`" maxlength="69" />
+              <InputText autocomplete="path" v-model="site.path.one" :class="`w-full text-left`" maxlength="69" />
               <span class="bg-[#D9D9D9] p-2 px-4 rounded-[5px] text-[14px] flex items-end">/</span>
-              <InputText v-model="site.path.two" :class="`w-full text-left`" maxlength="69" />
+              <InputText autocomplete="path" v-model="site.path.two" :class="`w-full text-left`" maxlength="69" />
             </div>
           </div>
           <div class="Desc text-base-content gap-1 flex flex-col">

@@ -740,7 +740,7 @@ async function load_data() {
     navigateTo("/money-pages");
   } else {
     let res = await request
-      .get("money-pages/single", { page: route.query.page })
+      .get("money-pages/full-show", { page: route.query.page })
       .then((res) => {
         if (res.ok) {
           data.value = res.data;

@@ -34,7 +34,7 @@ defineEmits(["update:modelValue"]);
     >
       <div class="w-1/2 flex flex-col gap-2 px-2" dir="ltr" v-if="index !== 0">
         <div
-          class="flex flex-row gap-2 items-center relative"
+          class="flex flex-row gap-2 items-center justify-between w-full relative"
           dir="ltr"
           v-if="index !== 0"
         >
@@ -57,14 +57,15 @@ defineEmits(["update:modelValue"]);
               fill-opacity="0.1"
             />
           </svg>
-          <span ref="domain_element" class="absolute left-[10%] z-10">
+          <span ref="domain_element" class="absolute left-[37px] z-10">
             {{ modelValue.website }}/
           </span>
           <InputTextMarked
+            autocomplete="path"
             v-model="modelValue.pages[index].slug"
             placeholder="pricing"
             type="text"
-            class="w-full"
+            class="!w-[92%]"
             :input_style="`padding-left: ${
               Boolean(domain_element[0]) ? domain_element[0].offsetWidth + 6 : 18
             }px;`"
@@ -117,6 +118,7 @@ defineEmits(["update:modelValue"]);
             />
           </svg>
           <InputTextMarked
+            autocomplete="keyword"
             v-model="modelValue.pages[index].keywords[keyword_index]"
             placeholder="کتاب"
             type="text"
